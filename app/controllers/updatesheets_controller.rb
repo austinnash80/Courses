@@ -1,10 +1,11 @@
 class UpdatesheetsController < ApplicationController
   before_action :set_updatesheet, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction #Sortable column headers
 
   # GET /updatesheets
   # GET /updatesheets.json
   def index
-    @updatesheets = Updatesheet.all
+    @updatesheets = Updatesheet.order(sort_column + " " + sort_direction)
   end
 
   # GET /updatesheets/1
@@ -70,5 +71,14 @@ class UpdatesheetsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def updatesheet_params
       params.require(:updatesheet).permit(:pes_number, :pes_version, :date_received, :update_course, :note_approval, :text_complete, :exam_complete, :course_listed, :date_listed, :role, :rolep, :irs_number, :proofed, :proofed_note, :datasheet_id, :seq_number, :seq_version, :seq_title, :extra_string, :extra_integer, :extra_boolean)
+    end
+
+    #sortable column headers - set the default
+    def sort_column
+      params[:sort] || 'date_received' || 'seq_number'
+    end
+
+    def sort_direction
+      params[:direction] || 'desc'
     end
 end

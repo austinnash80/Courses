@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :seq_version %>
-    <%= form.number_field :seq_version, id: :datasheet_seq_version %>
+    <%= form.text_field :seq_version, id: :datasheet_seq_version %>
   </div>
 
   <div class="field">
@@ -77,7 +77,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :pes_listed %>
+    <%= form.label :pes_listed, "PES Dropped Course - check if not listed by pes" %>
     <%= form.check_box :pes_listed, id: :datasheet_pes_listed %>
   </div>
 

@@ -4,17 +4,43 @@
 <h1>Course Updates</h1>
 </div>
 
+<!-- could push all into an array and check if they are all the sam -->
+
+<% @status_check = [] %>
+<% @updatesheets.each do |updatesheet| %>
+  <% if updatesheet.course_listed == true && updatesheet.text_complete == true && updatesheet.exam_complete == true && updatesheet.proofed == true %>
+    <% @status_check.push(1) %>
+  <% elsif %>
+    <% @status_check.push(2) %>
+  <% end %>
+<% end %>
+
+<!-- Status is pushed into an array done =1 not_done =2 ex: [1,2,1] => work needs to be done-->
+<!-- <%# if @status_check.itself.uniq.length == 1 %> -->
+
+<% if (@status_check.inject(0, :+)) == (@status_check.length) %>
+<h3 class="green_text"> Courses are up to date </h2>
+<%elsif %>
+<h3 class="red_text"> Work needs to be done </h2>
+<%end%>
+
+<!-- Seach bar -->
+</br>
+<div class="row col-md-3">
+<input class="form-control" id="myInput" type="text" placeholder="Search Datasheet">
+</div>
+
 <table class="table table-hover">
   <thead>
     <tr>
 
       <th>Status</th>
-      <th>SEQ</th> <!--can sort now -->
+      <th><%= sortable 'seq_number', 'Seq' %></th> <!--can sort now -->
       <th>V</th>
       <th>Title</th>
-      <th>PES</th>
+      <th><%= sortable 'pes_number', 'PES' %></th>
       <th>V</th>
-      <th>Received</th>
+      <th><%= sortable 'date_received', 'Recieved' %></th> <!--sortable column header -->
       <!-- <th>Update course</th> -->
       <th>Hold</th> <!--This is used as = <th>Extra boolean</th> -->
       <!-- <th>Note approval</th> -->
@@ -34,7 +60,7 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody id="myTable">
     <% @updatesheets.each do |updatesheet| %>
       <tr>
         <% if updatesheet.extra_boolean == true %> <!-- Exrtra boolean = Hold -->
@@ -48,28 +74,58 @@
         <% end %>
         <td><%= updatesheet.seq_number %></td>
         <td><%= updatesheet.seq_version %></td>
-        <td><%= updatesheet.seq_title %></td>
+        <td><%= updatesheet.datasheet.seq_title.truncate_words(4) %></td>
         <td><%= updatesheet.pes_number %></td>
         <td><%= updatesheet.pes_version %></td>
-        <td><%= updatesheet.date_received %></td>
+        <td><%= updatesheet.date_received.strftime('%m/%d/%y') %></td>
         <!-- <td><%= updatesheet.update_course %></td> -->
-        <td><%= updatesheet.extra_boolean %></td>
+        <!-- <td><%= updatesheet.extra_boolean %></td> -->
         <!-- <td><%= updatesheet.note_approval %></td> -->
-        <td><%= updatesheet.text_complete %></td>
-        <td><%= updatesheet.exam_complete %></td>
+        <% if updatesheet.note_approval.empty? || updatesheet.extra_boolean == false %>
+          <td class="green_text">Go</td>
+        <% elsif %>
+          <td class="yellow_text"><%= link_to 'VIEW', updatesheet %></td>
+        <% end %>
+        <!-- <td><%= updatesheet.text_complete %></td> -->
+        <% if updatesheet.text_complete == true %>
+          <td class="green_text">Done</td>
+          <% elsif updatesheet.text_complete == false %>
+          <td class="red_text">No</td>
+        <% end %>
+        <!-- <td><%= updatesheet.exam_complete %></td> -->
+        <% if updatesheet.exam_complete == true %>
+          <td class="green_text">Done</td>
+          <% elsif updatesheet.exam_complete == false %>
+          <td class="red_text">No</td>
+        <% end %>
         <!-- <td><%= updatesheet.course_listed %></td> -->
-        <td><%= updatesheet.date_listed %></td>
+        <!-- <td><%= updatesheet.date_listed %></td> -->
+        <% if updatesheet.course_listed == true %>
+          <td><%= updatesheet.date_listed.strftime('%m/%d/%y') %></td>
+          <% elsif updatesheet.course_listed == false %>
+          <td></td>
+        <% end %>
         <td><%= updatesheet.role %></td>
         <td><%= updatesheet.rolep %></td>
         <td><%= updatesheet.irs_number %></td>
-        <td><%= updatesheet.proofed %></td>
-        <td><%= updatesheet.proofed_note %></td>
+        <!-- <td><%= updatesheet.proofed %></td> -->
+        <% if updatesheet.proofed == true %>
+          <td class="green_text"><strong>Yes</strong></td>
+          <% elsif %>
+          <td class="red_text"><strong>No</strong></td>
+          <% end %>
+        <!-- <td><%= updatesheet.proofed_note %></td> -->
+        <% if updatesheet.proofed_note.empty? %>
+          <td></td>
+        <% elsif %>
+          <td><strong><%= link_to 'View', updatesheet %></strong></td>
+        <% end %>
         <!-- <td><%= updatesheet.datasheet_id %></td> -->
         <!-- <td><%= updatesheet.extra_string %></td> -->
         <!-- <td><%= updatesheet.extra_integer %></td> -->
-        <td><%= link_to 'Show', updatesheet %></td>
+        <td><%= link_to 'Details', updatesheet %></td>
         <td><%= link_to 'Edit', edit_updatesheet_path(updatesheet) %></td>
-        <td><%= link_to 'Destroy', updatesheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Remove', updatesheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
