@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :updatesheets
   resources :datasheets do
     collection {post :import}

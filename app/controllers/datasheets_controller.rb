@@ -1,4 +1,5 @@
 class DatasheetsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_datasheet, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction #sortable header columns
 
