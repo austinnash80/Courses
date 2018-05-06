@@ -1,0 +1,80 @@
+<p id="notice"><%= notice %></p>
+
+<div class="jumbotron text-center">
+<h1>Course Updates</h1>
+</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+
+      <th>Status</th>
+      <th>SEQ</th> <!--can sort now -->
+      <th>V</th>
+      <th>Title</th>
+      <th>PES</th>
+      <th>V</th>
+      <th>Received</th>
+      <!-- <th>Update course</th> -->
+      <th>Hold</th> <!--This is used as = <th>Extra boolean</th> -->
+      <!-- <th>Note approval</th> -->
+      <th>Text</th>
+      <th>Exam</th>
+      <!-- <th>Course listed</th> -->
+      <th>Listed</th>
+      <th>Role</th>
+      <th>Rolep</th>
+      <th>IRS</th>
+      <th>Proofed</th>
+      <th>Note</th>
+      <!-- <th>Datasheet</th> -->
+      <!-- <th>Extra string</th> -->
+      <!-- <th>Extra integer</th> -->
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @updatesheets.each do |updatesheet| %>
+      <tr>
+        <% if updatesheet.extra_boolean == true %> <!-- Exrtra boolean = Hold -->
+            <td class="yellow_text">On Hold</td>
+        <% elsif updatesheet.course_listed == true && updatesheet.text_complete == true && updatesheet.exam_complete == true && updatesheet.proofed == true%>
+            <td class="green_text">Done</td>
+        <% elsif updatesheet.course_listed == true && updatesheet.text_complete == true && updatesheet.exam_complete == true %>
+            <td><span class="green_text">Listed</span> - <span class="red_text">Not Proofed</span></td>
+        <% elsif %>
+            <td class="red_text">Inprogess</td>
+        <% end %>
+        <td><%= updatesheet.seq_number %></td>
+        <td><%= updatesheet.seq_version %></td>
+        <td><%= updatesheet.seq_title %></td>
+        <td><%= updatesheet.pes_number %></td>
+        <td><%= updatesheet.pes_version %></td>
+        <td><%= updatesheet.date_received %></td>
+        <!-- <td><%= updatesheet.update_course %></td> -->
+        <td><%= updatesheet.extra_boolean %></td>
+        <!-- <td><%= updatesheet.note_approval %></td> -->
+        <td><%= updatesheet.text_complete %></td>
+        <td><%= updatesheet.exam_complete %></td>
+        <!-- <td><%= updatesheet.course_listed %></td> -->
+        <td><%= updatesheet.date_listed %></td>
+        <td><%= updatesheet.role %></td>
+        <td><%= updatesheet.rolep %></td>
+        <td><%= updatesheet.irs_number %></td>
+        <td><%= updatesheet.proofed %></td>
+        <td><%= updatesheet.proofed_note %></td>
+        <!-- <td><%= updatesheet.datasheet_id %></td> -->
+        <!-- <td><%= updatesheet.extra_string %></td> -->
+        <!-- <td><%= updatesheet.extra_integer %></td> -->
+        <td><%= link_to 'Show', updatesheet %></td>
+        <td><%= link_to 'Edit', edit_updatesheet_path(updatesheet) %></td>
+        <td><%= link_to 'Destroy', updatesheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<p> To add course update -> <%= link_to 'Course Data Sheet -> Select Add Update', datasheets_path %> </p>
+<!-- <%= link_to 'New Updatesheet', new_updatesheet_path %> -->

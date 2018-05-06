@@ -1,0 +1,122 @@
+<%= form_with(model: updatesheet, local: true) do |form| %>
+  <% if updatesheet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(updatesheet.errors.count, "error") %> prohibited this updatesheet from being saved:</h2>
+
+      <ul>
+      <% updatesheet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :pes_number %>
+    <%= form.number_field :pes_number, id: :updatesheet_pes_number, value: params[:pes_number] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pes_version %>
+    <%= form.text_field :pes_version, id: :updatesheet_pes_version, value: params[:pes_version] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_received %>
+    <%= form.date_select :date_received, id: :updatesheet_date_received %>
+  </div>
+
+  <div class="field">
+    <%= form.label :update_course %>
+    <%= form.check_box :update_course, id: :updatesheet_update_course %>
+  </div>
+
+  <div class="field">
+    <%= form.label :note_approval %>
+    <%= form.text_area :note_approval, id: :updatesheet_note_approval %>
+  </div>
+
+  <div class="field">
+    <%= form.label :text_complete %>
+    <%= form.check_box :text_complete, id: :updatesheet_text_complete %>
+  </div>
+
+  <div class="field">
+    <%= form.label :exam_complete %>
+    <%= form.check_box :exam_complete, id: :updatesheet_exam_complete %>
+  </div>
+
+  <div class="field">
+    <%= form.label :course_listed %>
+    <%= form.check_box :course_listed, id: :updatesheet_course_listed %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_listed %>
+    <%= form.date_select :date_listed, id: :updatesheet_date_listed %>
+  </div>
+
+  <div class="field">
+    <%= form.label :role %>
+    <%= form.text_field :role, id: :updatesheet_role %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rolep %>
+    <%= form.text_field :rolep, id: :updatesheet_rolep %>
+  </div>
+
+  <div class="field">
+    <%= form.label :irs_number %>
+    <%= form.text_field :irs_number, id: :updatesheet_irs_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :proofed %>
+    <%= form.check_box :proofed, id: :updatesheet_proofed %>
+  </div>
+
+  <div class="field">
+    <%= form.label :proofed_note %>
+    <%= form.text_area :proofed_note, id: :updatesheet_proofed_note %>
+  </div>
+
+  <div class="field">
+    <%= form.label :datasheet_id %>
+    <%= form.number_field :datasheet_id, id: :updatesheet_datasheet_id, value:params[:datasheet_id], class: 'display_none' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seq_number, class: 'display_none' %>
+    <%= form.number_field :seq_number, id: :updatesheet_seq_number, value: params[:seq_number], class: 'display_none' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seq_version, class: 'display_none' %>
+    <%= form.text_field :seq_version, id: :updatesheet_seq_version, value: params[:seq_version].next, class: 'display_none' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seq_title, class: 'display_none' %>
+    <%= form.text_field :seq_title, id: :updatesheet_seq_title, value: params[:seq_title], class: 'display_none' %>
+  </div>
+
+  <!-- <div class="field">
+    <%= form.label :extra_string %>
+    <%= form.text_field :extra_string, id: :updatesheet_extra_string %>
+  </div> -->
+
+  <!-- <div class="field">
+    <%= form.label :extra_integer %>
+    <%= form.number_field :extra_integer, id: :updatesheet_extra_integer %>
+  </div> -->
+
+  <!-- <div class="field">
+    <%= form.label :extra_boolean %>
+    <%= form.check_box :extra_boolean, id: :updatesheet_extra_boolean %>
+  </div> -->
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

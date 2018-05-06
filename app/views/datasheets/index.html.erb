@@ -1,0 +1,70 @@
+<p id="notice"><%= notice %></p>
+
+<div class="jumbotron text-center">
+  <h1>Datasheet</h1>
+</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Seq</th>
+      <th>V</th>
+      <th>Title</th>
+      <th>Hours</th>
+      <th>Category</th>
+      <th>Pub date</th>
+      <!-- <th>Seq update</th> -->
+      <!-- <th>Seq original list</th> -->
+      <!-- <th>Active</th> -->
+      <!-- <th>Drop date</th> -->
+      <!-- <th>Drop reason</th> -->
+      <th>Pes</th>
+      <th>V</th>
+      <th>Pes listed</th>
+      <th>Approvals</th>
+      <!-- <th>Has approval</th> -->
+      <!-- <th>Approval info</th> -->
+      <th>Notes</th>
+      <!-- <th>Extra note</th> -->
+      <!-- <th>Extra boolean</th> -->
+      <!-- <th>Extra integer</th> -->
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @datasheets.each do |datasheet| %>
+      <tr>
+        <td><%= datasheet.seq_number %></td>
+        <td><%= datasheet.seq_version %></td>
+        <td><%= datasheet.seq_title %></td>
+        <td><%= datasheet.hours %></td>
+        <td><%= datasheet.category %></td>
+        <td><%= datasheet.pub_date %></td>
+        <!-- <td><%= datasheet.seq_update %></td> -->
+        <!-- <td><%= datasheet.seq_original_list %></td> -->
+        <!-- <td><%= datasheet.active %></td> -->
+        <!-- <td><%= datasheet.drop_date %></td> -->
+        <!-- <td><%= datasheet.drop_reason %></td> -->
+        <td><%= datasheet.pes_number %></td>
+        <td><%= datasheet.pes_version %></td>
+        <td><%= datasheet.pes_listed %></td>
+        <td><%= datasheet.needs_approval %></td>
+        <!-- <td><%= datasheet.has_approval %></td> -->
+        <!-- <td><%= datasheet.approval_info %></td> -->
+        <td><%= datasheet.course_note %></td>
+        <!-- <td><%= datasheet.extra_note %></td> -->
+        <!-- <td><%= datasheet.extra_boolean %></td> -->
+        <!-- <td><%= datasheet.extra_integer %></td> -->
+        <td><%= link_to 'New Update', new_updatesheet_path(:datasheet_id => datasheet, :pes_number => datasheet.pes_number, :seq_version => datasheet.seq_version, :pes_version => datasheet.pes_version, :seq_number => datasheet.seq_number, :seq_title => datasheet.seq_title) %></td>
+        <td><%= link_to 'Show', datasheet %></td>
+        <td><%= link_to 'Edit', edit_datasheet_path(datasheet) %></td>
+        <td><%= link_to 'Remove', datasheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Datasheet', new_datasheet_path %>
