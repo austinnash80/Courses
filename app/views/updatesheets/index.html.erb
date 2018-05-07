@@ -21,7 +21,7 @@
 <% if (@status_check.inject(0, :+)) == (@status_check.length) %>
 <h3 class="green_text"> Courses are up to date </h3>
 <%elsif %>
-<h3 class="red_text"> There is in progess work </h3>
+<h3 class="red_text"> There is In-Progess work </h3>
 <%end%>
 
 <!-- Seach bar -->
@@ -70,7 +70,7 @@
         <% elsif updatesheet.course_listed == true && updatesheet.text_complete == true && updatesheet.exam_complete == true %>
             <td><span class="green_text">Listed</span> - <span class="red_text">Not Proofed</span></td>
         <% elsif %>
-            <td class="red_text">In Progess</td>
+            <td class="red_text">In-Progess</td>
         <% end %>
         <td><%= updatesheet.seq_number %></td>
         <td><%= updatesheet.seq_version %></td>

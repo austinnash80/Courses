@@ -1,6 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<div class="jumbotron text-center">
+  <h1><%= @datasheet.seq_number %><%= @datasheet.seq_version %></h1>
+  <p>  <%= @datasheet.seq_title %></p>
+</div>
+
+<h4><%= link_to 'Back to Datasheet', datasheets_path %> | <%= link_to 'Edit', edit_datasheet_path(@datasheet) %></h4>
+</br>
+<!-- <p>
   <strong>Seq number:</strong>
   <%= @datasheet.seq_number %>
 </p>
@@ -8,17 +15,17 @@
 <p>
   <strong>Seq version:</strong>
   <%= @datasheet.seq_version %>
-</p>
+</p> -->
 
 <p>
   <strong>Category:</strong>
   <%= @datasheet.category %>
 </p>
 
-<p>
+<!-- <p>
   <strong>Seq title:</strong>
   <%= @datasheet.seq_title %>
-</p>
+</p> -->
 
 <p>
   <strong>Hours:</strong>
@@ -65,10 +72,10 @@
   <%= @datasheet.pes_version %>
 </p>
 
-<p>
+<!-- <p>
   <strong>Pes listed:</strong>
   <%= @datasheet.pes_listed %>
-</p>
+</p> -->
 
 <p>
   <strong>Needs approval:</strong>
@@ -104,6 +111,3 @@
   <strong>Extra integer:</strong>
   <%= @datasheet.extra_integer %>
 </p>
-
-<%= link_to 'Edit', edit_datasheet_path(@datasheet) %> |
-<%= link_to 'Back', datasheets_path %>
