@@ -2,6 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.default { //remove default styleing
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.title-text {
+  font-family: 'Varela Round', sans-serif;
+  text-align: center;
+}
+
+.length {
+  min-height: 350px
+}
+
 .display_none {
   display: none;
 }

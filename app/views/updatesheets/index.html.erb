@@ -143,15 +143,15 @@
         <% elsif updatesheet.course_listed == true && updatesheet.proofed == false %>
           <td><%= updatesheet.date_listed.strftime('%m/%d/%y') %> <br> <span class="bold_text">Not Proofed</span></td>
         <% elsif updatesheet.text_complete == false && updatesheet.exam_complete == false %>
-          <td class="bold_text">Needs Text <br> Needs Exam</td>
+          <td class="">Needs Text <br> Needs Exam</td>
         <% elsif updatesheet.text_complete == true && updatesheet.exam_complete == false %>
-          <td class="bold_text">Needs Exam</td>
+          <td class="">Needs Exam</td>
         <% elsif updatesheet.text_complete == false && updatesheet.exam_complete == true %>
-          <td class="bold_text">Needs Text Conversion</td>
+          <td class="">Needs Text Conversion</td>
         <% elsif updatesheet.text_complete == true && updatesheet.exam_complete == true %>
-          <td class="bold_text">Not Listed</td>
+          <td class="">Not Listed</td>
         <% elsif updatesheet.text_complete == true && updatesheet.exam_complete == true %>
-          <td class="bold_text">Not Listed</td>
+          <td class="">Not Listed</td>
         <% end %>
         <td><%= updatesheet.role %></td>
         <td><%= updatesheet.rolep %></td>
@@ -171,8 +171,8 @@
         <!-- <td><%= updatesheet.datasheet_id %></td> -->
         <!-- <td><%= updatesheet.extra_string %></td> -->
         <!-- <td><%= updatesheet.extra_integer %></td> -->
+        <td><%= link_to 'Update', edit_updatesheet_path(updatesheet), class: 'bold_text' %></td>
         <td><%= link_to 'Details', updatesheet %></td>
-        <td><%= link_to 'Edit', edit_updatesheet_path(updatesheet) %></td>
         <td><%= link_to 'Remove', updatesheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
