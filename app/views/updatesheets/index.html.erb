@@ -19,9 +19,9 @@
 <!-- <%# if @status_check.itself.uniq.length == 1 %> -->
 
 <% if (@status_check.inject(0, :+)) == (@status_check.length) %>
-<h3 class="green_text"> Courses are up to date </h3>
+<h3 class="green_text">Up To Date </h3>
 <%elsif %>
-<h3 class="red_text"> There is In-Progess work </h3>
+<h3 class="red_text">In-Progess work </h3>
 <%end%>
 
 <!-- Seach bar -->
@@ -34,24 +34,26 @@
   <thead>
     <tr>
 
-      <th>Status</th>
-      <th><%= sortable 'seq_number', 'Seq' %></th> <!--can sort now -->
-      <th>V</th>
-      <th>Title</th>
-      <th><%= sortable 'pes_number', '#' %></th>
-      <th>V</th>
-      <th><%= sortable 'date_received', 'Recieved' %></th> <!--sortable column header -->
+      <!-- <th>Stsatus</th> -->
+      <!-- <th>Status</th> -->
+      <th class="text-center"><%= sortable 'seq_number', 'Course' %></th> <!--can sort now -->
+      <th>v</th>
+      <th style="width: 18%">Title</th>
+      <th class="text-center"><%= sortable 'pes_number', 'PES' %></th>
+      <th>v</th>
+      <th class="text-center">Status Bar</th>
+      <!-- <th><%= sortable 'date_received', 'Recieved' %></th> sortable column header -->
       <!-- <th>Update course</th> -->
-      <th>Hold</th> <!--This is used as = <th>Extra boolean</th> -->
+      <!--<th>Hold</th> This is used as = <th>Extra boolean</th> -->
       <!-- <th>Note approval</th> -->
-      <th>Text</th>
-      <th>Exam</th>
+      <!-- <th>Text</th> -->
+      <!-- <th>Exam</th> -->
       <!-- <th>Course listed</th> -->
       <th>Listed</th>
       <th>Role</th>
       <th>Rolep</th>
       <th>IRS</th>
-      <th>Proofed</th>
+      <!-- <th>Proofed</th> -->
       <th>Note</th>
       <!-- <th>Datasheet</th> -->
       <!-- <th>Extra string</th> -->
@@ -62,58 +64,104 @@
 
   <tbody id="myTable">
     <% @updatesheets.each do |updatesheet| %>
+    <% if updatesheet.course_listed == false || updatesheet.text_complete == false || updatesheet.exam_complete == false %>
+      <tr class="bg-danger">
+    <% elsif updatesheet.course_listed == true && updatesheet.text_complete == true && updatesheet.exam_complete == true && updatesheet.proofed == false %>
+      <tr class="bg-warning">
+    <% elsif %>
       <tr>
-        <% if updatesheet.extra_boolean == true %> <!-- Exrtra boolean = Hold -->
-            <td class="yellow_text">On Hold</td>
+    <% end %>
+        <!-- Exrtra boolean = Hold -->
+         <!-- <% if updatesheet.extra_boolean == true %>
+            <td>
+              <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" style="width:100%">Hold</div>
+            </td>
         <% elsif updatesheet.course_listed == true && updatesheet.text_complete == true && updatesheet.exam_complete == true && updatesheet.proofed == true%>
             <td class="green_text">Done</td>
         <% elsif updatesheet.course_listed == true && updatesheet.text_complete == true && updatesheet.exam_complete == true %>
             <td><span class="green_text">Listed</span> - <span class="red_text">Not Proofed</span></td>
         <% elsif %>
             <td class="red_text">In-Progess</td>
-        <% end %>
-        <td><%= updatesheet.seq_number %></td>
+        <% end %> -->
+
+        <td class="text-center"><%= updatesheet.seq_number %></td>
         <td><%= updatesheet.seq_version %></td>
-        <td><%= updatesheet.datasheet.seq_title.truncate_words(4) %></td>
-        <td><%= updatesheet.pes_number %></td>
+        <td><%= updatesheet.datasheet.seq_title %></td> <!-- .truncate_words(3) -->
+        <td class="text-center"><%= updatesheet.pes_number %></td>
         <td><%= updatesheet.pes_version %></td>
-        <td><%= updatesheet.date_received.strftime('%m/%d/%y') %></td>
+
+        <td>
+          <div class="progress">
+            <% if updatesheet.extra_boolean == true %>
+            <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar"
+            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">On Hold</div>
+              <% end %>
+            <% if updatesheet.course_listed == true && updatesheet.text_complete == true && updatesheet.exam_complete == true && updatesheet.proofed == true %>
+            <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">Done</div>
+              <% end %>
+            <% if updatesheet.text_complete == true %>
+              <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:25%"></div>
+                <% end %>
+            <% if updatesheet.exam_complete == true %>
+              <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:25%"></div>
+                <% end %>
+            <% if updatesheet.proofed == true %>
+              <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:25%"></div>
+                <% end %>
+            <% if updatesheet.course_listed == true %>
+              <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:25%"></div>
+            <% end %>
+          </div>
+        </td>
+
+        <!-- <td><%= updatesheet.date_received.strftime('%m/%d/%y') %></td> -->
         <!-- <td><%= updatesheet.update_course %></td> -->
         <!-- <td><%= updatesheet.extra_boolean %></td> -->
         <!-- <td><%= updatesheet.note_approval %></td> -->
-        <% if updatesheet.note_approval.empty? || updatesheet.extra_boolean == false %>
+        <!-- <% if updatesheet.note_approval.empty? || updatesheet.extra_boolean == false %>
           <td class="green_text">Go</td>
         <% elsif %>
           <td class="yellow_text"><%= link_to 'VIEW', updatesheet %></td>
-        <% end %>
+        <% end %> -->
         <!-- <td><%= updatesheet.text_complete %></td> -->
-        <% if updatesheet.text_complete == true %>
+        <!-- <% if updatesheet.text_complete == true %>
           <td class="green_text">Done</td>
           <% elsif updatesheet.text_complete == false %>
           <td class="red_text">No</td>
-        <% end %>
+        <% end %> -->
         <!-- <td><%= updatesheet.exam_complete %></td> -->
-        <% if updatesheet.exam_complete == true %>
+        <!-- <% if updatesheet.exam_complete == true %>
           <td class="green_text">Done</td>
           <% elsif updatesheet.exam_complete == false %>
           <td class="red_text">No</td>
-        <% end %>
+        <% end %> -->
         <!-- <td><%= updatesheet.course_listed %></td> -->
         <!-- <td><%= updatesheet.date_listed %></td> -->
-        <% if updatesheet.course_listed == true %>
+        <% if updatesheet.course_listed == true && updatesheet.proofed == true%>
           <td><%= updatesheet.date_listed.strftime('%m/%d/%y') %></td>
-          <% elsif updatesheet.course_listed == false %>
-          <td></td>
+        <% elsif updatesheet.course_listed == true && updatesheet.proofed == false %>
+          <td><%= updatesheet.date_listed.strftime('%m/%d/%y') %> <br> <span class="bold_text">Not Proofed</span></td>
+        <% elsif updatesheet.text_complete == false && updatesheet.exam_complete == false %>
+          <td class="bold_text">Needs Text <br> Needs Exam</td>
+        <% elsif updatesheet.text_complete == true && updatesheet.exam_complete == false %>
+          <td class="bold_text">Needs Exam</td>
+        <% elsif updatesheet.text_complete == false && updatesheet.exam_complete == true %>
+          <td class="bold_text">Needs Text Conversion</td>
+        <% elsif updatesheet.text_complete == true && updatesheet.exam_complete == true %>
+          <td class="bold_text">Not Listed</td>
+        <% elsif updatesheet.text_complete == true && updatesheet.exam_complete == true %>
+          <td class="bold_text">Not Listed</td>
         <% end %>
         <td><%= updatesheet.role %></td>
         <td><%= updatesheet.rolep %></td>
         <td><%= updatesheet.irs_number %></td>
         <!-- <td><%= updatesheet.proofed %></td> -->
-        <% if updatesheet.proofed == true %>
+        <!-- <% if updatesheet.proofed == true %>
           <td class="green_text"><strong>Yes</strong></td>
           <% elsif %>
           <td class="red_text"><strong>No</strong></td>
-          <% end %>
+          <% end %> -->
         <!-- <td><%= updatesheet.proofed_note %></td> -->
         <% if updatesheet.proofed_note.empty? %>
           <td></td>

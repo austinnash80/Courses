@@ -11,19 +11,25 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :pes_number, "P number" %>
-    <%= form.number_field :pes_number, id: :updatesheet_pes_number %>
+
+  <div class="form-group">
+    <%= form.label :pes_number, "PES number", class: 'control-label' %>
+    <%= form.number_field :pes_number, id: :updatesheet_pes_number, class: 'form-control' %>
   </div>
 
   <div class="field">
-    <%= form.label :pes_version, "P version" %>
+    <%= form.label :pes_version, "PES version" %>
     <%= form.text_field :pes_version, id: :updatesheet_pes_version %>
   </div>
 
   <div class="field">
     <%= form.label :date_received %>
     <%= form.date_select :date_received, id: :updatesheet_date_received %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_boolean, 'On Hold' %>
+    <%= form.check_box :extra_boolean, id: :updatesheet_extra_boolean %>
   </div>
 
   <div class="field">
@@ -109,11 +115,6 @@
   <div class="field">
     <%= form.label :extra_integer %>
     <%= form.number_field :extra_integer, id: :updatesheet_extra_integer %>
-  </div>
-
-  <div class="field">
-    <%= form.label :extra_boolean %>
-    <%= form.check_box :extra_boolean, id: :updatesheet_extra_boolean %>
   </div>
 
   <div class="actions">
