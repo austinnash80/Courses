@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SequoiaCourses</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Lora|Varela+Round|Alfa+Slab+One" rel="stylesheet">
+  </head>
+
+  <body>
+
+
+    <% user_signed_in? && current_user.email == 'austin@sequoiacpe.com' ? @name = 'Austin' : '' %>
+    <% user_signed_in? && current_user.email == 'michael@sequoiacpe.com' ? @name = 'Michael' : '' %>
+    <% user_signed_in? && current_user.email == 'kyle@sequoiacpe.com' ? @name = 'Kyle' : '' %>
+    <% user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' ? @name = 'Ashley' : '' %>
+
+
+    <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Sequoia CPE</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="/datasheets">DataSheet</a></li>
+        <li><a href="/updatesheets">UpdateSheet</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <!-- <li><%= @name %></li> -->
+          <li><%= link_to @name, edit_user_registration_path %></li>
+          <li><%= link_to 'Log Out', destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to 'sign up', new_user_registration_path %></li>
+          <li><%= link_to 'log in', new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+
+    <%= yield %>
+  <script>
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    }); //Doc Ready end
+  </script>
+  </body>
+</html>
