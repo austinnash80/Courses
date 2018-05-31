@@ -1,4 +1,4 @@
-<%= form_with(model: updatesheet, local: true) do |form| %>
+<%= form_for @updatesheet do |form| %>
   <% if updatesheet.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(updatesheet.errors.count, "error") %> prohibited this updatesheet from being saved:</h2>

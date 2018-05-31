@@ -7,11 +7,16 @@
 <!-- could push all into an array and check if they are all the sam -->
 
 <% @status_check = [] %>
+<% @hold_check = [] %>
 <% @updatesheets.each do |updatesheet| %>
-  <% if updatesheet.course_listed == true && updatesheet.text_complete == true && updatesheet.exam_complete == true && updatesheet.proofed == true %>
+  <% if updatesheet.extra_boolean == true %>
+   <!-- For courses on hold, dont show in progess -->
+    <% @status_check.push(1) %>
+    <% @hold_check.push(1) %>
+  <% elsif updatesheet.course_listed == true && updatesheet.text_complete == true && updatesheet.exam_complete == true && updatesheet.proofed == true %>
     <% @status_check.push(1) %>
   <% elsif %>
-    <% @status_check.push(2) %>
+    <% @status_check.push(0) %>
   <% end %>
 <% end %>
 
@@ -21,8 +26,14 @@
 <% if (@status_check.inject(0, :+)) == (@status_check.length) %>
 <h3 class="green_text">Up To Date </h3>
 <%elsif %>
-<h3 class="red_text">In-Progess work </h3>
+<h3 class="red_text"> <%= (@status_check.length) - (@status_check.inject(0, :+)) %> In-Progress</h3>
 <%end%>
+
+<% if @hold_check.inject(0, :+) == 0 %>
+<% elsif %>
+  <h4><%= @hold_check.inject(0, :+) %> On Hold </h4>
+<% end %>
+
 
 <!-- Seach bar -->
 </br>
@@ -65,7 +76,9 @@
   <tbody id="myTable">
     <% @updatesheets.each do |updatesheet| %>
 
-    <% if updatesheet.course_listed == false || updatesheet.text_complete == false || updatesheet.exam_complete == false %>
+    <% if updatesheet.extra_boolean == true %>
+      <tr>
+    <% elsif updatesheet.course_listed == false || updatesheet.text_complete == false || updatesheet.exam_complete == false %>
       <tr class="bg-danger">
     <% elsif updatesheet.course_listed == true && updatesheet.text_complete == true && updatesheet.exam_complete == true && updatesheet.proofed == false %>
       <tr class="bg-warning">
@@ -80,8 +93,7 @@
         aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">On Hold</div>
           <% end %>
         <% if updatesheet.course_listed == true && updatesheet.text_complete == true && updatesheet.exam_complete == true && updatesheet.proofed == true %>
-        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
-        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">Done</div>
+        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">Done</div>
           <% end %>
         <% if updatesheet.text_complete == true %>
           <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:25%"></div>
@@ -165,7 +177,7 @@
         <!-- <td><%= updatesheet.course_listed %></td> -->
         <!-- <td><%= updatesheet.date_listed %></td> -->
 
-        <!-- <% if updatesheet.course_listed == true && updatesheet.proofed == true%>
+        <% if updatesheet.course_listed == true && updatesheet.proofed == true%>
           <td><%= updatesheet.date_listed.strftime('%m/%d/%y') %></td>
         <% elsif updatesheet.course_listed == true && updatesheet.proofed == false %>
           <td><%= updatesheet.date_listed.strftime('%m/%d/%y') %> <br> <span class="bold_text">Not Proofed</span></td>
@@ -179,31 +191,7 @@
           <td class="">Not Listed</td>
         <% elsif updatesheet.text_complete == true && updatesheet.exam_complete == true %>
           <td class="">Not Listed</td>
-        <% end %> -->
-
-
-<!-- Test modal for form and inprogess work -->
-<td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">form</button></td>
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">
-
-          <%= updatesheet.seq_number %><%= updatesheet.seq_version %> - <%= updatesheet.seq_title %>
-
-        </h4>
-      </div>
-      <div class="modal-body">
-        <h4> Course Notes/Proofer Notes: <h4>
-        <p><%= render 'form', updatesheet: @updatesheet %></p>
-      </div>
-  </div>
-</div>
-</div>
-
-<!-- End -->
+        <% end %>
 
 
         <td><%= updatesheet.role %></td>
@@ -220,23 +208,26 @@
           <td></td>
         <% elsif %>
           <!-- <td><strong><%= link_to 'View', updatesheet %></strong></td> -->
-          <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">View Note</button></td>
+          <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" data-remote="false">View Note</button></td>
             <div class="modal fade" id="myModal" role="dialog">
               <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <div id="modal-fields">
                   <h4 class="modal-title">
 
                     <%= updatesheet.seq_number %><%= updatesheet.seq_version %> - <%= updatesheet.seq_title %>
 
                   </h4>
                 </div>
+                </div>
                 <% if updatesheet.note_approval.empty? %>
                 <% elsif %>
                 <div class="modal-body">
                   <h4> Approval Notes: <h4>
-                  <p><%= updatesheet.proofed_note %></p>
+                  <p><%= updatesheet.note_approval %></p>
+                    <%#= render 'modal_form', updatesheet: @updatesheet %>
                 </div>
                 <% end %>
 
@@ -257,7 +248,7 @@
         <!-- <td><%= updatesheet.extra_string %></td> -->
         <!-- <td><%= updatesheet.extra_integer %></td> -->
         <td><%= link_to 'Update', edit_updatesheet_path(updatesheet), class: 'bold_text' %></td>
-        <td><%= link_to 'Details', updatesheet %></td>
+        <!-- <td><%= link_to 'Details', updatesheet %></td> -->
         <td><%= link_to 'Remove', updatesheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

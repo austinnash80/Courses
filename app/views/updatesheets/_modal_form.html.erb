@@ -1,0 +1,21 @@
+<%= form_with(model: updatesheet, local: true) do |form| %>
+
+<!-- Check Boxes -->
+
+  <div class="form-group row">
+    <%= form.label :text_complete, 'Text Done', class: 'col-sm-5 col-form-label' %>
+    <%= form.check_box :text_complete, id: :updatesheet_text_complete, class: "" %>
+  </div>
+
+  <div class="form-group row">
+    <%= form.label :exam_complete, 'Exam Done', class: 'col-sm-5 col-form-label' %>
+    <%= form.check_box :exam_complete, id: :updatesheet_exam_complete, class: '' %>
+  </div>
+
+<!-- End Check boxes -->
+
+  <div class="actions">
+    <%= form.submit 'Submit', class: 'btn btn-primary' %>
+  </div>
+
+<% end %>

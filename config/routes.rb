@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  # get 'updatesheets/:id/', to: redirect("/updatesheets")
   resources :updatesheets
   resources :datasheets do
     collection {post :import}

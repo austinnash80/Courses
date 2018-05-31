@@ -44,7 +44,7 @@ class UpdatesheetsController < ApplicationController
   def update
     respond_to do |format|
       if @updatesheet.update(updatesheet_params)
-        format.html { redirect_to @updatesheet, notice: 'Updatesheet was successfully updated.' }
+        format.html { redirect_to '/updatesheets' , notice: 'Updatesheet was successfully updated.' }
         format.json { render :show, status: :ok, location: @updatesheet }
       else
         format.html { render :edit }
@@ -72,6 +72,7 @@ class UpdatesheetsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def updatesheet_params
       params.require(:updatesheet).permit(:pes_number, :pes_version, :date_received, :update_course, :note_approval, :text_complete, :exam_complete, :course_listed, :date_listed, :role, :rolep, :irs_number, :proofed, :proofed_note, :datasheet_id, :seq_number, :seq_version, :seq_title, :extra_string, :extra_integer, :extra_boolean)
+
     end
 
     #sortable column headers - set the default
