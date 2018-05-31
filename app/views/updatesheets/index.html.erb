@@ -204,7 +204,7 @@
           <td class="red_text"><strong>No</strong></td>
           <% end %> -->
         <!-- <td><%= updatesheet.proofed_note %></td> -->
-        <% if updatesheet.proofed_note.empty? || updatesheet.note_approval.empty?%>
+        <% if updatesheet.note_approval.empty? && updatesheet.proofed_note.empty? %>
           <td></td>
         <% elsif %>
           <!-- <td><strong><%= link_to 'View', updatesheet %></strong></td> -->
