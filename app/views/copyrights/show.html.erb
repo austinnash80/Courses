@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<div><%= link_to 'Back to List', copyrights_path, class: 'btn btn-primary' %></div>
+</br>
+
+<p>
+  <strong>Seq number:</strong>
+  <%= @copyright.seq_number %>
+</p>
+
+<p>
+  <strong>Publisher:</strong>
+  <%= @copyright.publisher %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @copyright.author %>
+</p>
+
+<p>
+  <strong>Book:</strong>
+  <%= @copyright.book %>
+</p>
+
+<p>
+  <strong>Cpdate:</strong>
+  <%= @copyright.cpdate %>
+</p>
+
+<%= link_to 'Edit', edit_copyright_path(@copyright) %>

@@ -124,7 +124,8 @@
 
         <td class="text-center"><%= updatesheet.seq_number %></td>
         <td><%= updatesheet.seq_version %></td>
-        <td><%= updatesheet.datasheet.seq_title %></td> <!-- .truncate_words(3) -->
+        <td><%= updatesheet.datasheet.seq_title %></td>
+        <!-- .truncate_words(3) -->
         <td class="text-center"><%= updatesheet.pes_number %></td>
         <td><%= updatesheet.pes_version %></td>
 
@@ -237,11 +238,11 @@
                   <h4> Course Notes/Proofer Notes: <h4>
                   <p><%= updatesheet.proofed_note %></p>
                 </div>
+
                 <% end %>
             </div>
           </div>
         </div>
-
         <% end %>
 
         <!-- <td><%= updatesheet.datasheet_id %></td> -->

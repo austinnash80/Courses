@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Course Copyright/Author Info</h1>
+
+<br>
+  <!-- Search Bar -->
+<br>
+<div class="row col-md-3">
+<div>
+<input class="form-control" id="myInput" type="text" placeholder="Search Datasheet">
+</div>
+<br>
+<div>
+<%= link_to 'Add New', new_copyright_path, class: 'btn btn-primary' %>
+</div>
+</div>
+  <!-- Search Bar -->
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Course</th>
+      <th>Publisher</th>
+      <th>Author</th>
+      <th>Book Title</th>
+      <th>CR Date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody id="myTable">
+    <% @copyrights.each do |copyright| %>
+      <tr>
+        <td><%= copyright.seq_number %></td>
+        <td><%= copyright.publisher %></td>
+        <td><%= copyright.author %></td>
+        <td><%= copyright.book %></td>
+        <td><%= copyright.cpdate %></td>
+        <!-- <td><%= link_to 'Show', copyright %></td> -->
+        <td><%= link_to 'Edit', edit_copyright_path(copyright) %></td>
+        <td><%= link_to 'Remove', copyright, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,5 +1,7 @@
 class Datasheet < ApplicationRecord
+  self.primary_key = 'seq_number'
   has_many :Updatesheets
+  has_one :Copyrights
 
   def self.to_csv # Export to csv function
     attributes = %w{seq_number seq_version category seq_title hours pub_date seq_update seq_original_list active drop_date drop_reason pes_listed pes_number pes_version needs_approval has_approval approval_info course_note extra_note}

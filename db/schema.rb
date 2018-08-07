@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180506125849) do
+ActiveRecord::Schema.define(version: 20180807194913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "copyrights", force: :cascade do |t|
+    t.integer "seq_number"
+    t.string "publisher"
+    t.string "author"
+    t.integer "cpdate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "book"
+  end
 
   create_table "datasheets", force: :cascade do |t|
     t.integer "seq_number"
