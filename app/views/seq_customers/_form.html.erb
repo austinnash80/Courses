@@ -1,0 +1,97 @@
+<%= form_with(model: seq_customer, local: true) do |form| %>
+  <% if seq_customer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(seq_customer.errors.count, "error") %> prohibited this seq_customer from being saved:</h2>
+
+      <ul>
+      <% seq_customer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :order_id %>
+    <%= form.number_field :order_id, id: :seq_customer_order_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :uid %>
+    <%= form.number_field :uid, id: :seq_customer_uid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :purchase %>
+    <%= form.date_select :purchase, id: :seq_customer_purchase %>
+  </div>
+
+  <div class="field">
+    <%= form.label :product_1 %>
+    <%= form.text_field :product_1, id: :seq_customer_product_1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :product_2 %>
+    <%= form.text_field :product_2, id: :seq_customer_product_2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :designation %>
+    <%= form.text_field :designation, id: :seq_customer_designation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fname %>
+    <%= form.text_field :fname, id: :seq_customer_fname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lname %>
+    <%= form.text_field :lname, id: :seq_customer_lname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :street_1 %>
+    <%= form.text_field :street_1, id: :seq_customer_street_1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :street_2 %>
+    <%= form.text_field :street_2, id: :seq_customer_street_2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city, id: :seq_customer_city %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state, id: :seq_customer_state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :zip %>
+    <%= form.text_field :zip, id: :seq_customer_zip %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, id: :seq_customer_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price_2 %>
+    <%= form.number_field :price_2, id: :seq_customer_price_2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lic_num %>
+    <%= form.text_field :lic_num, id: :seq_customer_lic_num %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

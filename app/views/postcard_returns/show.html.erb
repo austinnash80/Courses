@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @postcard_return.company %>
+</p>
+
+<p>
+  <strong>Postmark:</strong>
+  <%= @postcard_return.postmark %>
+</p>
+
+<p>
+  <strong>Postcard:</strong>
+  <%= @postcard_return.postcard %>
+</p>
+
+<p>
+  <strong>Uid:</strong>
+  <%= @postcard_return.uid %>
+</p>
+
+<p>
+  <strong>Reason:</strong>
+  <%= @postcard_return.reason %>
+</p>
+
+<%= link_to 'Edit', edit_postcard_return_path(@postcard_return) %> |
+<%= link_to 'Back', postcard_returns_path %>

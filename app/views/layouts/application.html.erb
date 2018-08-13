@@ -27,6 +27,9 @@
         <li><a href="/datasheets">DataSheet</a></li>
         <li><a href="/updatesheets">UpdateSheet</a></li>
         <li><a href="/copyrights">Copyright</a></li>
+        <li><%= link_to 'Seq Customers', seq_customers_path %></li>
+        <li><%= link_to 'Postcards', postcard_returns_path %></li>
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>

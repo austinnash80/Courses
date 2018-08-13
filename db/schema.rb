@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180807194913) do
+ActiveRecord::Schema.define(version: 20180809225048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,37 @@ ActiveRecord::Schema.define(version: 20180807194913) do
     t.text "extra_note"
     t.boolean "extra_boolean"
     t.integer "extra_integer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "postcard_returns", force: :cascade do |t|
+    t.string "company"
+    t.date "postmark"
+    t.string "postcard"
+    t.integer "uid"
+    t.string "reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "seq_customers", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "uid"
+    t.date "purchase"
+    t.string "product_1"
+    t.string "product_2"
+    t.string "designation"
+    t.string "fname"
+    t.string "lname"
+    t.string "street_1"
+    t.string "street_2"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "email"
+    t.integer "price_2"
+    t.string "lic_num"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

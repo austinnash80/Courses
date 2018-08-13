@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<div class="jumbotron text-center">
+  <h1>Postcard Returns</h1>
+</div>
+
+<div class="row">
+<div class="col-md-3">
+  <input class="form-control" id="myInput" type="text" placeholder="Search Datasheet">
+</div>
+</div>
+</br>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Uid</th>
+      <th>Postcard</th>
+      <th>Postmark</th>
+      <th>Reason</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody id="myTable">
+    <% @postcard_returns.each do |postcard_return| %>
+      <tr>
+        <td><%= postcard_return.company %></td>
+        <td><%= postcard_return.uid %></td>
+        <td><%= postcard_return.postcard %></td>
+        <td><%= postcard_return.postmark %></td>
+        <td><%= postcard_return.reason %></td>
+        <td><%= link_to 'Show', postcard_return %></td>
+        <td><%= link_to 'Edit', edit_postcard_return_path(postcard_return) %></td>
+        <td><%= link_to 'Destroy', postcard_return, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Postcard Return', new_postcard_return_path %>
