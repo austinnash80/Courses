@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :date_fields
+  resources :pes_courses
   resources :postcard_returns
   resources :seq_customers do
     collection {post :import}

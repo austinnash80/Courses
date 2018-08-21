@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pes number:</strong>
+  <%= @pes_course.pes_number %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @pes_course.category %>
+</p>
+
+<p>
+  <strong>Tag:</strong>
+  <%= @pes_course.tag %>
+</p>
+
+<p>
+  <strong>Hours:</strong>
+  <%= @pes_course.hours %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @pes_course.title %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @pes_course.active %>
+</p>
+
+<%= link_to 'Edit', edit_pes_course_path(@pes_course) %> |
+<%= link_to 'Back', pes_courses_path %>

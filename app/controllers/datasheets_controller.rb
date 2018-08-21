@@ -71,7 +71,6 @@ class DatasheetsController < ApplicationController
   def import #Uploading CSV function
     Datasheet.import(params[:file])
     redirect_to datasheets_path, notice: "Upload Complete"
-
   end
 
   private

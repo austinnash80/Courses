@@ -5,6 +5,7 @@ class SeqCustomersController < ApplicationController
   # GET /seq_customers.json
   def index
     @seq_customers = SeqCustomer.last(15)
+    #@seq_customers = SeqCustomer.all
   end
 
   # GET /seq_customers/1

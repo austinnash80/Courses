@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Date Fields</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date1</th>
+      <th>Date2</th>
+      <th>Date3</th>
+      <th>Date4</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @date_fields.each do |date_field| %>
+      <tr>
+        <td><%= date_field.date1 %></td>
+        <td><%= date_field.date2 %></td>
+        <td><%= date_field.date3 %></td>
+        <td><%= date_field.date4 %></td>
+        <td><%= link_to 'Show', date_field %></td>
+        <td><%= link_to 'Edit', edit_date_field_path(date_field) %></td>
+        <td><%= link_to 'Destroy', date_field, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Date Field', new_date_field_path %>

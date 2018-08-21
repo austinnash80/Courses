@@ -1,0 +1,2 @@
+class DateField < ApplicationRecord
+end
