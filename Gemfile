@@ -60,3 +60,15 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'smarter_csv'
 
 gem 'rails_12factor', group: :production
+
+gem "chartkick" #graphs
+
+gem "groupdate" #makes dates easier for chartkick
+
+gem 'activerecord-import' #has not worked - should make imports faster
+
+gem 'remotipart', github: 'mshibuya/remotipart' #part of the rails admin below - tutorial = https://codepany.com/blog/rails-5-user-accounts-with-3-types-of-roles-devise-rails_admin-cancancan/
+
+gem 'rails_admin', '>= 1.0.0.rc' #to create an admin users - tutorial above
+
+gem 'cancancan' #restrict access to some parts of app for users with specific roles

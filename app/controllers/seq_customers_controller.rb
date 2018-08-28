@@ -5,7 +5,23 @@ class SeqCustomersController < ApplicationController
   # GET /seq_customers.json
   def index
     @seq_customers = SeqCustomer.last(15)
-    #@seq_customers = SeqCustomer.all
+    # @seq_customers = SeqCustomer.where(:order_id => 1000111)
+    @seq_customers_all = SeqCustomer.all
+
+    @total = []
+    @seq_customers_all.each do |i|
+      @total.push(i['Uid'])
+    end
+    @totalL = @total.length
+
+    @date_ary = []
+    @seq_customers_all.each do |i|
+      @date_ary.push(i['purchase'])
+    end
+    # @recent_date = @date_ary.max
+
+
+
   end
 
   # GET /seq_customers/1
@@ -62,8 +78,14 @@ class SeqCustomersController < ApplicationController
     end
   end
 
+  def remove_all
+    SeqCustomer.delete_all
+    flash[:notice] = "You have removed all results!"
+    redirect_to seq_customers_path
+  end
+
   def import
-    SeqCustomer.import(params[:file])
+    SeqCustomer.my_import(params[:file])
     redirect_to seq_customers_path, notice: "Upload Complete"
   end
 

@@ -1,0 +1,23 @@
+<h1>Sequoia#dash</h1>
+<p>Find me in app/views/sequoia/dash.html.erb</p>
+<%#= @pur_date %>
+<!-- <%= column_chart SeqCustomer.where(designation: 'EA').group(:designation).count %> -->
+<%= column_chart SeqCustomer.where(:purchase => 1.week.ago..Time.now.yesterday).group(:purchase).sum(:price_2),
+    prefix: "$", thousands: ",", xtitle: "Day", ytitle: "Sales", id: "Total Chart", width: "700px", dowload: true, title: "All Sales" %>
+<%= column_chart SeqCustomer.where(:purchase => 1.week.ago..Time.now.yesterday, designation: "CPA").group(:purchase).sum(:price_2),
+    prefix: "$", thousands: ",", xtitle: "Day", ytitle: "Sales", id: "CPA Chart", width: "700px", dowload: true, title: "CPA Sales" %>
+<%= column_chart SeqCustomer.where(:purchase => 1.week.ago..Time.now.yesterday, designation: "EA").group(:purchase).sum(:price_2),
+    prefix: "$", thousands: ",", xtitle: "Day", ytitle: "Sales", id: "EA Chart", width: "700px", dowload: true, title: "EA Sales" %>
+
+<%= pie_chart SeqCustomer.where(:purchase => 1.week.ago..Time.now.yesterday).group(:designation).sum(:price_2),
+    prefix: "$", thousands: ",", xtitle: "Day", ytitle: "Sales", id: "pie Chart", width: "700px", dowload: true, title: "EA Sales" %>
+
+
+<%#= column_chart SeqCustomer.where(:purchase => 1.week.ago..Time.now, designation: 'EA').group(:purchase).count %>
+<%#= area_chart SeqCustomer.where(:purchase => 1.week.ago..Time.now).group(:purchase).count %>
+<%#= column_chart @barG, prefix: "$", thousands: "," %>
+
+<%#= @CPA_1 %>
+<%= @cpa_1a %>
+<%= @ea_1a %>
+<%= pie_chart @pie_1, prefix: "$", thousands: ",", library: { pieSliceText: "value" } %>

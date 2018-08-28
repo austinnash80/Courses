@@ -11,6 +11,29 @@
 <% end %>
 </br>
 
+<%#= link_to 'Destroy', @seq_customers_all_delete, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to "Remove All", remove_all_seq_customers_path, :method => :get %>
+
+<div class="row">
+<div class="col-md-3">
+  <input class="form-control" id="myInput" type="text" placeholder="Search Datasheet">
+</div>
+</div>
+
+
+<h4>Total Records: <%= number_with_delimiter(@totalL, :delimiter => ',') %></h4>
+
+<h4>Most Recent:
+<% if @recent_date == Date.today %>
+  Today - <%= @recent_date %>
+<% elsif @recent_date == Date.today - 1 %>
+  Yesterday - <%= @recent_date %>
+<% elsif %>
+  <%= @recent_date %> - Out of date
+<% end %>
+</h4>
+
+
 <table>
   <thead>
     <tr>
@@ -34,15 +57,42 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody id="myTable">
     <% @seq_customers.each do |seq_customer| %>
       <tr>
         <td><%= seq_customer.order_id %></td>
         <td><%= seq_customer.uid %></td>
-        <td><%= seq_customer.purchase %></td>
+        <td><%= seq_customer.purchase%></td>
         <td><%= seq_customer.product_1 %></td>
         <td><%= seq_customer.product_2 %></td>
-        <td><%= seq_customer.designation %></td>
+        <!-- <td><%= seq_customer.designation %></td> -->
+        <% if seq_customer.product_1 === "1-Year CPA Membership Discounted Re-Activation" ||  seq_customer.product_1 === "1-Year CPA Membership Re-Activation" ||
+              seq_customer.product_1 === "1-Year CPA Membership Renewal" ||  seq_customer.product_1 === "1-Year CPA Membership Renewal (Auto-Renew)" ||
+              seq_customer.product_1 === "Unlimited CPA CPE Membership" || seq_customer.product_1 === "Unlimited CPA CPE Membership (Auto-Renew)" %>
+                <td>CPA</td>
+        <% elsif seq_customer.product_1 === "1-Year EA Membership Discounted Re-Activation" ||  seq_customer.product_1 === "1-Year EA Membership Re-Activation" ||
+              seq_customer.product_1 === "1-Year EA Membership Renewal"||  seq_customer.product_1 === "1-Year EA Membership Renewal (Auto-Renew)" ||
+              seq_customer.product_1 === "Unlimited EA CPE Membership" ||  seq_customer.product_1 === "Unlimited EA Membership (Auto-Renew)" %>
+                <td>EA</td>
+        <% elsif seq_customer.product_1 === "15-hour AFTR-Exempt Package" ||  seq_customer.product_1 === "18-hour AFTR Package" ||
+              seq_customer.product_1 === "CE 100 - 11hr. AFTR Package" ||  seq_customer.product_1 === "CE 200 - 8hr. AFTR-Exempt Package" %>
+                <td>AFSP</td>
+        <% elsif seq_customer.product_1[0] === "9" || seq_customer.product_1[0] === "E" %>
+                <td>Ethics</td>
+        <% elsif %>
+                <td></td>
+
+        <% end %>
+        <!-- <td> <%= if seq_customer.product_1 === "Unlimited EA Membership (Auto-Renew)" ? "CPA" :
+              seq_customer.product_1 == "1-Year CPA Membership Re-Activation" ? "CPA" :
+              seq_customer.product_1 == "1-Year CPA Membership Renewal" ? "CPA" :
+              seq_customer.product_1 == "1-Year CPA Membership Renewal (Auto-Renew)" ? "CPA" :
+              seq_customer.product_1 == "1-Year EA Membership Discounted Re-Activation" ? "EA" :
+              seq_customer.product_1 == "1-Year EA Membership Re-Activation" ? "EA" :
+              seq_customer.product_1 == "1-Year EA Membership Renewal" ? "EA" :
+              seq_customer.product_1 == "1-Year EA Membership Renewal (Auto-Renew)" ? "EA" : "NO"
+            end %> </td> -->
+
         <td><%= seq_customer.fname %></td>
         <td><%= seq_customer.lname %></td>
         <td><%= seq_customer.street_1 %></td>

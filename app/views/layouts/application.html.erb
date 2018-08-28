@@ -3,8 +3,8 @@
   <head>
     <title>SequoiaCourses</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css?family=Lora|Varela+Round|Alfa+Slab+One" rel="stylesheet">
   </head>
@@ -30,6 +30,7 @@
         <li><%= link_to 'Seq Customers', seq_customers_path %></li>
         <li><%= link_to 'Postcards', postcard_returns_path %></li>
         <li><%= link_to 'PES Courses', pes_courses_path %></li>
+        <li><%= link_to 'Seq Dash', sequoia_dash_path %></li>
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
