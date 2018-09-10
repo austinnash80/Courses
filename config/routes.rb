@@ -1,15 +1,19 @@
 Rails.application.routes.draw do
+  resources :mailings
+  resources :tasks
+  # resources :sequoia_customers
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'sequoia/dash'
 
   resources :date_fields
   resources :pes_courses
   resources :postcard_returns
-  resources :seq_customers do
+  get 'sequoia_customers/index'
+  get 'sequoia_customers/import' => 'sequoia_customers#my_import'
+  resources :sequoia_customers do
     collection {post :import}
     collection do
       get 'remove_all'
-    
     end
   end
   get 'empire/dash'

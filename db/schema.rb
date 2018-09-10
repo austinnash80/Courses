@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180822202947) do
+ActiveRecord::Schema.define(version: 20180907182005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,39 @@ ActiveRecord::Schema.define(version: 20180822202947) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "mailings", force: :cascade do |t|
+    t.string "name"
+    t.date "drop"
+    t.date "date_extra"
+    t.string "who"
+    t.string "what"
+    t.integer "quantity_sent"
+    t.integer "group_1"
+    t.integer "group_2"
+    t.integer "group_3"
+    t.integer "group_4"
+    t.integer "group_5"
+    t.string "data_name"
+    t.string "art_name"
+    t.string "msi_note"
+    t.text "note_1"
+    t.text "note_2"
+    t.string "note_3"
+    t.boolean "complete"
+    t.boolean "boolean_1"
+    t.integer "integer_1"
+    t.decimal "cost_service"
+    t.decimal "cost_print"
+    t.decimal "cost_postage"
+    t.string "note_4"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "msi_art_file_name"
+    t.string "msi_art_content_type"
+    t.integer "msi_art_file_size"
+    t.datetime "msi_art_updated_at"
+  end
+
   create_table "pes_courses", force: :cascade do |t|
     t.integer "pes_number"
     t.string "category"
@@ -98,6 +131,47 @@ ActiveRecord::Schema.define(version: 20180822202947) do
     t.string "email"
     t.integer "price_2"
     t.string "lic_num"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sequoia_customers", force: :cascade do |t|
+    t.integer "unique_id"
+    t.integer "order_id"
+    t.integer "uid"
+    t.date "purchase_date"
+    t.string "product"
+    t.string "who"
+    t.string "what"
+    t.string "hours"
+    t.integer "price"
+    t.string "fname"
+    t.string "lname"
+    t.string "street_1"
+    t.string "street_2"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "email"
+    t.string "lic_num"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "title"
+    t.string "note"
+    t.boolean "due"
+    t.date "due_date"
+    t.boolean "done"
+    t.boolean "important"
+    t.boolean "type_one"
+    t.boolean "type_two"
+    t.boolean "type_three"
+    t.boolean "extra_boolean"
+    t.string "extra_string"
+    t.integer "extra_integer"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

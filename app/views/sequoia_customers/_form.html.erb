@@ -1,0 +1,112 @@
+<%= form_with(model: sequoia_customer, local: true) do |form| %>
+  <% if sequoia_customer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(sequoia_customer.errors.count, "error") %> prohibited this sequoia_customer from being saved:</h2>
+
+      <ul>
+      <% sequoia_customer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :unique_id %>
+    <%= form.number_field :unique_id, id: :sequoia_customer_unique_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :order_id %>
+    <%= form.number_field :order_id, id: :sequoia_customer_order_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :uid %>
+    <%= form.number_field :uid, id: :sequoia_customer_uid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :purchase_date %>
+    <%= form.date_select :purchase_date, id: :sequoia_customer_purchase_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :product %>
+    <%= form.text_field :product, id: :sequoia_customer_product %>
+  </div>
+
+  <div class="field">
+    <%= form.label :who %>
+    <%= form.text_field :who, id: :sequoia_customer_who %>
+  </div>
+
+  <div class="field">
+    <%= form.label :what %>
+    <%= form.text_field :what, id: :sequoia_customer_what %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hours %>
+    <%= form.text_field :hours, id: :sequoia_customer_hours %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price, id: :sequoia_customer_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fname %>
+    <%= form.text_field :fname, id: :sequoia_customer_fname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lname %>
+    <%= form.text_field :lname, id: :sequoia_customer_lname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :street_1 %>
+    <%= form.text_field :street_1, id: :sequoia_customer_street_1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :street_2 %>
+    <%= form.text_field :street_2, id: :sequoia_customer_street_2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city, id: :sequoia_customer_city %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state, id: :sequoia_customer_state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state, id: :sequoia_customer_state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :zip %>
+    <%= form.text_field :zip, id: :sequoia_customer_zip %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, id: :sequoia_customer_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lic_num %>
+    <%= form.text_field :lic_num, id: :sequoia_customer_lic_num %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,74 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @task.title %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @task.note %>
+</p>
+
+<p>
+  <strong>Due:</strong>
+  <%= @task.due %>
+</p>
+
+<p>
+  <strong>Due date:</strong>
+  <%= @task.due_date %>
+</p>
+
+<p>
+  <strong>Done:</strong>
+  <%= @task.done %>
+</p>
+
+<p>
+  <strong>Important:</strong>
+  <%= @task.important %>
+</p>
+
+<p>
+  <strong>Type one:</strong>
+  <%= @task.type_one %>
+</p>
+
+<p>
+  <strong>Type two:</strong>
+  <%= @task.type_two %>
+</p>
+
+<p>
+  <strong>Type three:</strong>
+  <%= @task.type_three %>
+</p>
+
+<p>
+  <strong>Extra boolean:</strong>
+  <%= @task.extra_boolean %>
+</p>
+
+<p>
+  <strong>Extra string:</strong>
+  <%= @task.extra_string %>
+</p>
+
+<p>
+  <strong>Extra integer:</strong>
+  <%= @task.extra_integer %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @task.user_id %>
+</p>
+
+<!-- <p>
+  <strong>Doc:</strong>
+  <%#= @task.doc %>
+</p> -->
+
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Back', tasks_path %>

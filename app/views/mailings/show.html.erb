@@ -1,0 +1,127 @@
+<p id="notice"><%= notice %></p>
+
+<%#= image_tag @mailing.msi_art.url(:square) %>
+<%= @mailing.msi_art.url %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @mailing.name %>
+</p>
+
+<p>
+  <strong>Drop:</strong>
+  <%= @mailing.drop %>
+</p>
+
+<p>
+  <strong>Date extra:</strong>
+  <%= @mailing.date_extra %>
+</p>
+
+<p>
+  <strong>Who:</strong>
+  <%= @mailing.who %>
+</p>
+
+<p>
+  <strong>What:</strong>
+  <%= @mailing.what %>
+</p>
+
+<p>
+  <strong>Quantity sent:</strong>
+  <%= @mailing.quantity_sent %>
+</p>
+
+<p>
+  <strong>Group 1:</strong>
+  <%= @mailing.group_1 %>
+</p>
+
+<p>
+  <strong>Group 2:</strong>
+  <%= @mailing.group_2 %>
+</p>
+
+<p>
+  <strong>Group 3:</strong>
+  <%= @mailing.group_3 %>
+</p>
+
+<p>
+  <strong>Group 4:</strong>
+  <%= @mailing.group_4 %>
+</p>
+
+<p>
+  <strong>Group 5:</strong>
+  <%= @mailing.group_5 %>
+</p>
+
+<p>
+  <strong>Data name:</strong>
+  <%= @mailing.data_name %>
+</p>
+
+<p>
+  <strong>Art name:</strong>
+  <%= @mailing.art_name %>
+</p>
+
+<p>
+  <strong>Msi note:</strong>
+  <%= @mailing.msi_note %>
+</p>
+
+<p>
+  <strong>Note 1:</strong>
+  <%= @mailing.note_1 %>
+</p>
+
+<p>
+  <strong>Note 2:</strong>
+  <%= @mailing.note_2 %>
+</p>
+
+<p>
+  <strong>Note 3:</strong>
+  <%= @mailing.note_3 %>
+</p>
+
+<p>
+  <strong>Complete:</strong>
+  <%= @mailing.complete %>
+</p>
+
+<p>
+  <strong>Boolean 1:</strong>
+  <%= @mailing.boolean_1 %>
+</p>
+
+<p>
+  <strong>Integer 1:</strong>
+  <%= @mailing.integer_1 %>
+</p>
+
+<p>
+  <strong>Cost service:</strong>
+  <%= @mailing.cost_service %>
+</p>
+
+<p>
+  <strong>Cost print:</strong>
+  <%= @mailing.cost_print %>
+</p>
+
+<p>
+  <strong>Cost postage:</strong>
+  <%= @mailing.cost_postage %>
+</p>
+
+<p>
+  <strong>Note 4:</strong>
+  <%= @mailing.note_4 %>
+</p>
+
+<%= link_to 'Edit', edit_mailing_path(@mailing) %> |
+<%= link_to 'Back', mailings_path %>

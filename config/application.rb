@@ -27,5 +27,7 @@ module SequoiaCourses
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    # config.middleware.use PDFKit::Middleware, :print_media_type => true
+    config.paperclip_defaults = { s3_host_name: "s3.#{ENV['AWS_REGION']}.amazonaws.com", } #try without
   end
 end

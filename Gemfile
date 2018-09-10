@@ -72,3 +72,13 @@ gem 'remotipart', github: 'mshibuya/remotipart' #part of the rails admin below -
 gem 'rails_admin', '>= 1.0.0.rc' #to create an admin users - tutorial above
 
 gem 'cancancan' #restrict access to some parts of app for users with specific roles
+
+gem 'vuejs-rails'
+
+gem "figaro" #for aws - may not have been needed
+
+gem "paperclip" #upload images
+
+# gem 'aws-sdk', '~> 2.3' # file storage
+
+gem 'aws-sdk-s3'

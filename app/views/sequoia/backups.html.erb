@@ -1,0 +1,143 @@
+<!-- Daily -->
+
+  <h2> Yesterday <%#= 1.day.ago.strftime('%A') %> (<%= 1.day.ago.strftime('%-m/%-d') %>):  Sales <%= number_to_currency(@yesterday_all.sum, :precision => 0) %></h2>
+
+  <% @t1.each do |key, value| %>
+    <% if key[0] == 1.day.ago.strftime('%a') %>
+    <h4><%= key[1] %>: <%= number_to_currency(value, :precision => 0) %></h4>
+  <% end %>
+  <% end %>
+  </br>
+  <!-- <%= @t2 %> -->
+  <% @t2.each do |key, value| %>
+    <% if key[0] == 1.day.ago.strftime('%a') && key[1] != 'AFSP' %>
+    <h4> <%= key[1] %>: <%= number_to_currency(value, :precision => 0) %></h4>
+  <% end %>
+  <% end %>
+
+  <%#= column_chart SequoiaCustomer.where(:purchase_date => 1.week.ago..Time.now.yesterday).group_by_day(:purchase_date, format: '%a, %-d').sum(:price),
+      prefix: "$", thousands: ",", xtitle: "Day", ytitle: "Sales", id: "Total Chart", width: "700px", download: true, title: "All Sales" %>
+
+<!-- End Daily -->
+
+</br>
+
+<!-- Last Monthly -->
+
+  <% @t4.each do |key, value| %>
+    <% if key == 1.month.ago.strftime('%B') %>
+      <h2> <%= key %> Sales: <%= number_to_currency(value, :precision => 0) %></h2>
+    <% end %>
+  <% end %>
+
+  <% @t3.each do |key, value| %>
+    <% if key[0] == 1.month.ago.strftime('%B') %>
+      <h4> <%= key[1] %>: <%= number_to_currency(value, :precision => 0) %></h4>
+    <% end %>
+  <% end %>
+
+</br>
+  <% @t5.each do |key, value| %>
+    <% if key[0] == 1.month.ago.strftime('%B') && key[1] != 'AFSP' %>
+      <h4> <%= key[1] %>: <%= number_to_currency(value, :precision => 0) %></h4>
+    <% end %>
+  <% end %>
+
+<!-- End Last Monthly -->
+
+<!-- Month to date -->
+
+<% @t4.each do |key, value| %>
+  <% if key == 0.month.ago.strftime('%B') %>
+    <h2> <%= key %> To Date (<%= 1.day.ago.strftime('%-m/%-d') %>): <%= number_to_currency(value, :precision => 0) %></h2>
+  <% end %>
+<% end %>
+
+<% @t3.each do |key, value| %>
+  <% if key[0] == 0.month.ago.strftime('%B') %>
+    <h4> <%= key[1] %>: <%= number_to_currency(value, :precision => 0) %></h4>
+  <% end %>
+<% end %>
+
+</br>
+  <% @t5.each do |key, value| %>
+    <% if key[0] == 0.month.ago.strftime('%B') && key[1] != 'AFSP' %>
+      <h4> <%= key[1] %>: <%= number_to_currency(value, :precision => 0) %></h4>
+    <% end %>
+  <% end %>
+
+<%#= column_chart SequoiaCustomer.where(:purchase_date => 12.month.ago..Time.now.yesterday).group_by_month(:purchase_date, week_start: :mon, current: false, format: '%b %y').sum(:price),
+    prefix: "$", thousands: ",", xtitle: '', ytitle: "", id: "week chart", width: "1000px", download: true, title: "Monthly Comparison" %>
+
+</br>
+
+<!-- Yearly -->
+
+  <h4>All Time Sales: <%= number_to_currency(@t7, :precision => 0) %> </h4>
+
+  <% @t.each do |key, value| %>
+    <h4><%= key %>: <%= number_to_currency(value, :precision => 0) %></h4>
+  <% end %>
+
+  <% @t6.each do |key, value| %>
+    <% if key[0] == 1.year.ago.strftime('%Y') %>
+      <h4><%= key[1] %>: <%= number_to_currency(value, :precision => 0) %></h4>
+    <% end %>
+  <% end %>
+
+<%#= column_chart SequoiaCustomer.group_by_year(:purchase_date, format: '%Y').sum(:price),
+    prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "Year chart", width: "1000px", download: true, title: "Yearly Comparison" %>
+<!-- <%#= SequoiaCustomer.group_by_year(:purchase_date, current: false, format: '%Y').sum(:price) %> -->
+
+<% @t6.each do |key, value| %>
+  <%# if key[0] == 1.year.ago.strftime('%Y') %>
+    <h4><%= key %>: <%= number_to_currency(value, :precision => 0) %></h4>
+  <%# end %>
+<% end %>
+
+<%#= column_chart SequoiaCustomer.group(:what).sum(:price),
+    prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "All Time pie Chart - what", width: "700px", dowload: true, title: "All Time Breakdown" %>
+
+</br>
+
+<%#= pie_chart SequoiaCustomer.group(:who).sum(:price),
+    prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "All Time pie Chart - who", width: "700px", dowload: true, title: "All Time Breakdown" %>
+
+<!-- <%= @t1 %> -->
+
+<%#= SequoiaCustomer.group_by_day(:purchase_date, last: 2 - 1, format: ('%a')).group(:who).sum(:price) %>
+</br>
+<%#= SequoiaCustomer.group_by_day(:purchase_date, last: 2, format: ('%a')).group(:who).sum(:price) %>
+
+
+
+<!-- <%= column_chart SequoiaCustomer.where(:purchase_date => 1.week.ago..Time.now.yesterday).group(:who).sum(:price),
+    prefix: "$", thousands: ",", xtitle: "Day", ytitle: "Sales", id: "CPA Chart", width: "700px", download: true, title: "CPA Sales" %> -->
+<%#= column_chart SequoiaCustomer.where(:purchase_date => 1.week.ago..Time.now.yesterday, who: "EA").group(:who).sum(:price),
+    prefix: "$", thousands: ",", xtitle: "Day", ytitle: "Sales", id: "EA Chart", width: "700px", dowload: true, title: "EA Sales" %>
+
+
+<%#= column_chart SeqCustomer.where(:purchase => 1.week.ago..Time.now, designation: 'EA').group(:purchase).count %>
+<%#= area_chart SeqCustomer.where(:purchase => 1.week.ago..Time.now).group(:purchase).count %>
+<%#= column_chart @barG, prefix: "$", thousands: "," %>
+
+<!-- <h3>All Time Sales</h3>
+Total: <%= @total_all_time.sum %></br>
+CPA: <%= @CPA_all_time.sum %></br>
+EA: <%= @EA_all_time.sum %></br>
+AFSP: <%= @AFSP_all_time.sum %></br> -->
+<%#= pie_chart SequoiaCustomer.group(:who).sum(:price), prefix: "$", thousands: ",", library: { pieSliceText: "value" } %>
+
+<!-- <h2>Yesterday</h2>
+<h3>Sales</h3>
+Total: <%= number_to_currency(@yesterday_all.sum, :precision => 0) %></br>
+CPA: <%= number_to_currency(@yesterday_cpa.sum, :precision => 0) %></br>
+EA: <%= number_to_currency(@yesterday_ea.sum, :precision => 0) %></br>
+AFSP: <%= number_to_currency(@yesterday_afsp.sum, :presence => 0) %></br>
+<h3>Types</h3>
+New CPAs: <%= @what_new_cpa.count %></br>
+Renewal CPAs: <%= @what_renew_cpa.count %></br>
+New EAs: <%= @what_new_ea.count %></br>
+Renewal EAs: <%= @what_renew_ea.count %></br>
+Ethics: <%= @what_ethics.count %></br>
+AFSP: <%= @what_afsp.count %></br> -->

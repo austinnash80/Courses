@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tasks</h1>
+
+<div class="row">
+<div class="col-md-3">
+  <input class="form-control" id="myInput" type="text" placeholder="Search Datasheet">
+</div>
+</div>
+</br>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Note</th>
+      <th>Due</th>
+      <th>Due date</th>
+      <th>Done</th>
+      <th>Important</th>
+      <th>Type one</th>
+      <th>Type two</th>
+      <th>Type three</th>
+      <th>Extra boolean</th>
+      <th>Extra string</th>
+      <th>Extra integer</th>
+      <th>User</th>
+      <!-- <th>Doc</th> -->
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody id="myTable">
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.note %></td>
+        <td><%= task.due %></td>
+        <td><%= task.due_date %></td>
+        <td><%= task.done %></td>
+        <td><%= task.important %></td>
+        <td><%= task.type_one %></td>
+        <td><%= task.type_two %></td>
+        <td><%= task.type_three %></td>
+        <td><%= task.extra_boolean %></td>
+        <td><%= task.extra_string %></td>
+        <td><%= task.extra_integer %></td>
+        <td><%= task.user_id %></td>
+        <!-- <td><%#= task.doc %></td> -->
+        <td><%= link_to 'Show', task %></td>
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Task', new_task_path %>

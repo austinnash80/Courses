@@ -1,0 +1,86 @@
+<p id="notice"><%= notice %></p>
+
+<div class="jumbotron text-center">
+  <h1>Sequoia Customers</h1>
+</div>
+
+<h3>Upload CSV File</h3>
+  <%= form_tag import_sequoia_customers_path, multipart: true do %>
+  <%= file_field_tag :file %>
+</br>
+  <%= submit_tag 'Upload', class: 'btn btn-primary' %>
+<% end %>
+</br>
+
+<%= link_to "Remove All", remove_all_sequoia_customers_path, :method => :get %>
+
+<h4>Total Records: <%= number_with_delimiter(@totalL, :delimiter => ',') %></h4>
+
+<h4>Most Recent:
+  <% if @recent_date == Date.today %>
+    Today - <%= @recent_date %>
+  <% elsif @recent_date == Date.today - 1 %>
+    Yesterday - <%= @recent_date %>
+  <% elsif %>
+    <%= @recent_date %> - Out of date
+  <% end %>
+</h4>
+
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Unique</th>
+      <th>Order</th>
+      <th>Uid</th>
+      <th>Purchase date</th>
+      <th>Product</th>
+      <th>Who</th>
+      <th>what</th>
+      <th>Hours</th>
+      <th>Price</th>
+      <th>Fname</th>
+      <th>Lname</th>
+      <th>Street 1</th>
+      <th>Street 2</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+      <th>Email</th>
+      <th>Lic num</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sequoia_customers.each do |sequoia_customer| %>
+      <tr>
+        <td><%= sequoia_customer.unique_id %></td>
+        <td><%= sequoia_customer.order_id %></td>
+        <td><%= sequoia_customer.uid %></td>
+        <td><%= sequoia_customer.purchase_date %></td>
+        <td><%= sequoia_customer.product %></td>
+        <td><%= sequoia_customer.who %></td>
+        <td><%= sequoia_customer.what %></td>
+        <td><%= sequoia_customer.hours %></td>
+        <td><%= sequoia_customer.price %></td>
+        <td><%= sequoia_customer.fname %></td>
+        <td><%= sequoia_customer.lname %></td>
+        <td><%= sequoia_customer.street_1 %></td>
+        <td><%= sequoia_customer.street_2 %></td>
+        <td><%= sequoia_customer.city %></td>
+        <td><%= sequoia_customer.state %></td>
+        <td><%= sequoia_customer.zip %></td>
+        <td><%= sequoia_customer.email %></td>
+        <td><%= sequoia_customer.lic_num %></td>
+        <td><%= link_to 'Show', sequoia_customer %></td>
+        <td><%= link_to 'Edit', edit_sequoia_customer_path(sequoia_customer) %></td>
+        <td><%= link_to 'Destroy', sequoia_customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sequoia Customer', new_sequoia_customer_path %>

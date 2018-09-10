@@ -1,23 +1,282 @@
-<h1>Sequoia#dash</h1>
-<p>Find me in app/views/sequoia/dash.html.erb</p>
-<%#= @pur_date %>
-<!-- <%= column_chart SeqCustomer.where(designation: 'EA').group(:designation).count %> -->
-<%= column_chart SeqCustomer.where(:purchase => 1.week.ago..Time.now.yesterday).group(:purchase).sum(:price_2),
-    prefix: "$", thousands: ",", xtitle: "Day", ytitle: "Sales", id: "Total Chart", width: "700px", dowload: true, title: "All Sales" %>
-<%= column_chart SeqCustomer.where(:purchase => 1.week.ago..Time.now.yesterday, designation: "CPA").group(:purchase).sum(:price_2),
-    prefix: "$", thousands: ",", xtitle: "Day", ytitle: "Sales", id: "CPA Chart", width: "700px", dowload: true, title: "CPA Sales" %>
-<%= column_chart SeqCustomer.where(:purchase => 1.week.ago..Time.now.yesterday, designation: "EA").group(:purchase).sum(:price_2),
-    prefix: "$", thousands: ",", xtitle: "Day", ytitle: "Sales", id: "EA Chart", width: "700px", dowload: true, title: "EA Sales" %>
-
-<%= pie_chart SeqCustomer.where(:purchase => 1.week.ago..Time.now.yesterday).group(:designation).sum(:price_2),
-    prefix: "$", thousands: ",", xtitle: "Day", ytitle: "Sales", id: "pie Chart", width: "700px", dowload: true, title: "EA Sales" %>
 
 
-<%#= column_chart SeqCustomer.where(:purchase => 1.week.ago..Time.now, designation: 'EA').group(:purchase).count %>
-<%#= area_chart SeqCustomer.where(:purchase => 1.week.ago..Time.now).group(:purchase).count %>
-<%#= column_chart @barG, prefix: "$", thousands: "," %>
+<body class= 'body-home'>
 
-<%#= @CPA_1 %>
-<%= @cpa_1a %>
-<%= @ea_1a %>
-<%= pie_chart @pie_1, prefix: "$", thousands: ",", library: { pieSliceText: "value" } %>
+  <% if user_signed_in? && current_user.id == 2 %>
+    <h1>Austin Dashboard</h1>
+
+<div class="col-sm-3">
+<div class="well">
+  <h2 class="text-center">MSI Mailings</h2>
+  <!-- Start Tab Headers -->
+      <ul class="nav nav-tabs">
+           <li class="active"><a data-toggle="tab" href="#upcomming">Upcomming</a></li>
+           <li><a data-toggle="tab" href="#past">Past</a></li>
+      </ul>
+      </br>
+  <!-- End Tab Headers -->
+
+  <!-- Start Tabs - mailings -->
+      <div class="tab-content">
+  <!-- Start Tab One -->
+        <div id="upcomming" class="tab-pane fade in active">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Mailing</th>
+                <th>Who</th>
+                <th>Due</th>
+                <th>Art</th>
+                <!-- <th>Data</th> -->
+                <!-- <th colspan="3"></th> -->
+              </tr>
+            </thead>
+          <tbody>
+          <% @mailings.each do |mailing| %>
+            <% if mailing.complete == false %>
+            <tr>
+              <td><%= mailing.name %> </td>
+              <td><%= mailing.who %> </td>
+              <td><%= (mailing.drop - 8).strftime('%a %-m/%-d') %> </td>
+              <% if mailing.boolean_1 == true %>
+                <td><%= link_to '', mailing, class: 'glyphicon glyphicon-ok-circle green gi-2x' %></td>
+              <% elsif %>
+                <td><%= link_to '', mailing, class: 'glyphicon glyphicon-remove-circle red gi-2x' %></td>
+              <% end %>
+              <!-- <td><%= mailing.data_name %> </td> -->
+              <td><%= link_to 'View', mailing %></td>
+               <!-- <td><%= link_to 'Edit', edit_mailing_path(mailing) %></td> -->
+            </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+        </div>
+  <!-- End Tab one -->
+  <!-- Start Tab Two -->
+        <div id="past" class="tab-pane fade in">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Mailing</th>
+                <th>Who</th>
+                <th>Land</th>
+                <th>Sent</th>
+                <th>Cost</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @mailings.each do |mailing| %>
+                <% if user_signed_in? && mailing.complete == true %>
+                <tr>
+                  <td><%= mailing.name %></td>
+                  <td><%= mailing.who %></td>
+                  <td><%= (mailing.drop + 10).strftime('%-m/%-d') %></td>
+                  <td><%= number_with_delimiter(mailing.quantity_sent, :precision => 0, :delimiter => ',') %></td>
+                  <td><%= number_to_currency((mailing.cost_service) + (mailing.cost_postage) + (mailing.cost_print), :precision => 0) %></td>
+                  <td><%= link_to 'View', mailing %></td>
+                  <!-- <td><%= link_to 'Edit', edit_mailing_path(mailing) %></td> -->
+                </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+<!-- End Tab Three -->
+    </div>
+<!-- End Tab Section - Mailings -->
+  </div>
+<!-- End Mailings Section -->
+
+
+
+
+<!-- Start Tab Section -->
+  <div class="well">
+    <h2 class="text-center">Tasks</h2>
+    <h4 class="text-center"><%= link_to 'Add New Task', new_task_path, class: "btn btn-primary" %></h4>
+  </br>
+<!-- Start Tab Headers -->
+    <ul class="nav nav-tabs">
+         <li class="active"><a data-toggle="tab" href="#in-progress">In Progress</a></li>
+         <li><a data-toggle="tab" href="#future">Future Task</a></li>
+         <li><a data-toggle="tab" href="#done">Completed</a></li>
+    </ul>
+    </br>
+<!-- End Tab Headers -->
+<!-- Start Tabs - Tasks -->
+    <div class="tab-content">
+<!-- Start Tab One -->
+      <div id="in-progress" class="tab-pane fade in active">
+        <!-- <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Mailing</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+        <tbody> -->
+          <% @tasks.each do |task| %>
+            <% if user_signed_in? && task.user_id == current_user.id && task.type_one == true %>
+                <tr>
+                  <td><%= task.title %> <%= link_to 'View', task, class: "btn btn-default" %> <td><%= link_to 'Edit', edit_task_path(task), class: "btn btn-default" %></td>
+                </tr>
+            <% end %>
+          <% end %>
+        <!-- </tbody>
+      </table> -->
+      </div>
+<!-- End Tab one -->
+<!-- Start Tab Two -->
+    <div id="future" class="tab-pane fade in">
+      <% @tasks.each do |task| %>
+        <% if user_signed_in? && task.user_id == current_user.id && task.type_two == true %>
+        <tr>
+          <td><%= task.title %> <%= link_to 'View', task, class: "btn btn-default" %> <td><%= link_to 'Edit', edit_task_path(task), class: "btn btn-default" %></td>
+        </tr>
+        <% end %>
+      <% end %>
+    </div>
+<!-- End Tab Two -->
+<!-- Start Tab three -->
+    <div id="done" class="tab-pane fade in">
+    <% @tasks.each do |task| %>
+      <% if user_signed_in? && task.user_id == current_user.id && task.done == true %>
+      <tr>
+        <td><%= task.title %> <%= link_to 'View', task, class: "btn btn-default" %> <td><%= link_to 'Edit', edit_task_path(task), class: "btn btn-default" %></td>
+      </tr>
+      <% end %>
+    <% end %>
+    </div>
+<!-- End Tab Three -->
+  </div>
+<!-- End Tab Section - Tasks -->
+</div>
+<!-- End Task Section -->
+</div>
+
+<div class="col-sm-6 length right-square well">
+  <ul class="nav nav-tabs">
+    <%# if user_signed_in? && current_user.superadmin_role? %>
+       <li class="active"><a data-toggle="tab" href="#total-sales">Daily</a></li>
+       <li><a data-toggle="tab" href="#month-sales">Monthly</a></li>
+    <%# end %>
+       <li><a data-toggle="tab" href="#pie-sales">Yearly</a></li>
+  </ul>
+<!-- Tab Content -->
+
+  <!-- First Tab -->
+
+  <div class="tab-content">
+    <div id="total-sales" class="tab-pane fade in active">
+     <h2 class="text-center"> Yesterday <%#= 1.day.ago.strftime('%A') %> (<%= 1.day.ago.strftime('%-m/%-d') %>):  Sales <%= number_to_currency(@yesterday_all.sum, :precision => 0) %></h2>
+   </br>
+   </br>
+     <div class="col-sm-6 length">
+       <% @t1.each do |key, value| %>
+         <% if key[0] == 1.day.ago.strftime('%a') %>
+           <h4><%= key[1] %>: <%= number_to_currency(value, :precision => 0) %><h4>
+         <% end %>
+       <% end %>
+       <!-- </br> -->
+       -----------
+       <!-- <%= @t2 %> -->
+       <% @t2.each do |key, value| %>
+         <% if key[0] == 1.day.ago.strftime('%a') && key[1] != 'AFSP' %>
+           <h4> <%= key[1] %>: <%= number_to_currency(value, :precision => 0) %></h4>
+         <% end %>
+       <% end %>
+      </div>
+      <div class="col-sm-6 length right-square">
+       <%= column_chart SequoiaCustomer.where(:purchase_date => 1.week.ago..Time.now.yesterday).group_by_day(:purchase_date, format: '%a, %-d').sum(:price),
+           prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "Day", width: "400px", height: "250px", download: true, title: "" %>
+
+      </div>
+    </div>
+
+  <!-- End First Tab -->
+  <!-- Second Tab -->
+
+    <div id="month-sales" class="tab-pane fade active">
+  </br>
+      <%= column_chart SequoiaCustomer.where(:purchase_date => 12.month.ago..Time.now).group_by_month(:purchase_date, week_start: :mon, format: '%b %y').sum(:price),
+          prefix: "$", thousands: ",", xtitle: '', ytitle: "", id: "Month", width: "750px", download: true, title: "" %>
+
+      <div class="col-sm-6 length right-square">
+      <% @t4.each do |key, value| %>
+        <% if key == 1.month.ago.strftime('%B') %>
+          <h2> <%= key %> Sales: <%= number_to_currency(value, :precision => 0) %></h2>
+        <% end %>
+      <% end %>
+
+      <% @t3.each do |key, value| %>
+        <% if key[0] == 1.month.ago.strftime('%B') %>
+          <h4> <%= key[1] %>: <%= number_to_currency(value, :precision => 0) %></h4>
+        <% end %>
+      <% end %>
+
+    </br>
+      <% @t5.each do |key, value| %>
+        <% if key[0] == 1.month.ago.strftime('%B') && key[1] != 'AFSP' %>
+          <h4> <%= key[1] %>: <%= number_to_currency(value, :precision => 0) %></h4>
+        <% end %>
+      <% end %>
+      </div>
+    <div class="col-sm-6 length right-square">
+      <% @t4.each do |key, value| %>
+        <% if key == 0.month.ago.strftime('%B') %>
+          <h2> <%= key %> To Date (<%= 1.day.ago.strftime('%-m/%-d') %>): <%= number_to_currency(value, :precision => 0) %></h2>
+        <% end %>
+      <% end %>
+
+      <% @t3.each do |key, value| %>
+        <% if key[0] == 0.month.ago.strftime('%B') %>
+          <h4> <%= key[1] %>: <%= number_to_currency(value, :precision => 0) %></h4>
+        <% end %>
+      <% end %>
+
+      </br>
+        <% @t5.each do |key, value| %>
+          <% if key[0] == 0.month.ago.strftime('%B') && key[1] != 'AFSP' %>
+            <h4> <%= key[1] %>: <%= number_to_currency(value, :precision => 0) %></h4>
+          <% end %>
+        <% end %>
+    </div>
+    </div>
+  <!-- Third Tab -->
+    <div id="pie-sales" class="tab-pane fade active">
+      <h2 class="text-center">All Time Sales: <%= number_to_currency(@t7, :precision => 0) %> </h2>
+      <!-- <h2 class="text-center">Year To Date: <%= number_to_currency(@t7, :precision => 0) %> </h2> -->
+      <% @t6.each do |key, value| %>
+        <% if key[0] == 0.year.ago.strftime('%Y') %>
+          <h2 class="text-center">Year To Date: <%= number_to_currency(value, :precision => 0) %></h2>
+        <% end %>
+      <% end %>
+
+
+      <%= column_chart SequoiaCustomer.group_by_year(:purchase_date, format: '%Y').sum(:price),
+          prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "Year", width: "800px", height: "250px", download: true, title: "" %>
+
+        <div class="col-sm-6 length right-square">
+          <%= pie_chart SequoiaCustomer.group(:what).sum(:price),
+              prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "All Time - what", width: "400px", dowload: true, title: "" %>
+        </div>
+
+        <div class="col-sm-6 length right-square">
+          <%= pie_chart SequoiaCustomer.group(:who).sum(:price),
+              prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "All Time - who", width: "400px", dowload: true, title: "" %>
+        </div>
+
+    </div>
+  </div>
+<!-- End Tab Content -->
+</div>
+<div class="col-sm-3">
+  <div class="well">
+  </div>
+  <div class="well">
+  </div>
+</div>
+<% end %>
+</body>
