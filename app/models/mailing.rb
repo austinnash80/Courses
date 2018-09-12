@@ -1,8 +1,12 @@
 class Mailing < ApplicationRecord
 
-  has_attached_file :msi_art,
-                      :url =>':s3_domain_url', # Upload to AWS folder, having permission issues
-                      :path => "/:basename.:extension"
+# For Production - AWS Upload
+  # has_attached_file :msi_art,
+  #                     :url =>':s3_domain_url', # Upload to AWS folder, having permission issues
+  #                     :path => "/:basename.:extension"
+
+# For Local Host
+  has_attached_file :msi_art
 
   # Validate the attached image is image/jpg, image/png, etc
   # validates_attachment_content_type :msi_art, :content_type => /\Aimage\/.*\Z/

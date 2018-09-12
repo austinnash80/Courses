@@ -1,7 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<%#= image_tag @mailing.msi_art.url(:square) %>
-<%= @mailing.msi_art.url %>
+<!-- <%= image_tag @mailing.msi_art.url %>
+<%= @mailing.msi_art.url %> -->
+
+<iframe src=<%= @mailing.msi_art.url %> width="500" height="580" style="border: none;"> </iframe>
+
 
 <p>
   <strong>Name:</strong>
