@@ -6,7 +6,7 @@ class SequoiaCustomer < ApplicationRecord
   # validates :unique_id, :presence => true, :uniqueness => true
 
   def self.my_import(file)
-    batch,batch_size = [], 1_000
+    batch,batch_size = [], 5_000
     CSV.foreach(file.path, headers: true, header_converters: :symbol, :encoding => 'utf-8') do |row|
       batch << SequoiaCustomer.new(row.to_hash)
       if batch.size >= batch_size
