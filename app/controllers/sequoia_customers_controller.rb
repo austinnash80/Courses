@@ -9,16 +9,16 @@ class SequoiaCustomersController < ApplicationController
 
     @total = []
 
-    # @sequoia_customers_all.each do |i|
-    #   @total.push(i['Uid'])
-    # end
-    # @totalL = @total.length
-    #
-    # @date_ary = []
-    # @sequoia_customers_all.each do |i|
-    #   @date_ary.push(i['purchase_date'])
-    # end
-    # @recent_date = @date_ary.max
+    @sequoia_customers_all.each do |i|
+      @total.push(i['Uid'])
+    end
+    @totalL = @total.length
+
+    @date_ary = []
+    @sequoia_customers_all.each do |i|
+      @date_ary.push(i['purchase_date'])
+    end
+    @recent_date = @date_ary.max
   end
 
   # GET /sequoia_customers/1
