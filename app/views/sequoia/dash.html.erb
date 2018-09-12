@@ -120,7 +120,7 @@
           <% @tasks.each do |task| %>
             <% if user_signed_in? && task.user_id == current_user.id && task.type_one == true %>
                 <tr>
-                  <td><%= task.title %> <%= link_to 'View', task, class: "btn btn-default" %> <td><%= link_to 'Edit', edit_task_path(task), class: "btn btn-default" %></td>
+                  <td><%= link_to task.title, task %> | <%= link_to 'Edit', edit_task_path(task) %></td>
                 </tr>
             <% end %>
           <% end %>
@@ -133,7 +133,7 @@
       <% @tasks.each do |task| %>
         <% if user_signed_in? && task.user_id == current_user.id && task.type_two == true %>
         <tr>
-          <td><%= task.title %> <%= link_to 'View', task, class: "btn btn-default" %> <td><%= link_to 'Edit', edit_task_path(task), class: "btn btn-default" %></td>
+          <td><%= link_to task.title, task %> | <%= link_to 'Edit', edit_task_path(task) %></td>
         </tr>
         <% end %>
       <% end %>
@@ -144,7 +144,7 @@
     <% @tasks.each do |task| %>
       <% if user_signed_in? && task.user_id == current_user.id && task.done == true %>
       <tr>
-        <td><%= task.title %> <%= link_to 'View', task, class: "btn btn-default" %> <td><%= link_to 'Edit', edit_task_path(task), class: "btn btn-default" %></td>
+        <td><%= link_to task.title, task %> | <%= link_to 'Edit', edit_task_path(task) %></td>
       </tr>
       <% end %>
     <% end %>
@@ -159,7 +159,7 @@
 <div class="col-sm-6 length right-square well">
   <ul class="nav nav-tabs">
     <%# if user_signed_in? && current_user.superadmin_role? %>
-       <li class="active"><a data-toggle="tab" href="#total-sales">Daily</a></li>
+       <li class=""><a data-toggle="tab" href="#total-sales">Daily</a></li>
        <li><a data-toggle="tab" href="#month-sales">Monthly</a></li>
     <%# end %>
        <li><a data-toggle="tab" href="#pie-sales">Yearly</a></li>
@@ -191,14 +191,13 @@
       <div class="col-sm-6 length right-square">
        <%= column_chart SequoiaCustomer.where(:purchase_date => 1.week.ago..Time.now.yesterday).group_by_day(:purchase_date, format: '%a, %-d').sum(:price),
            prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "Day", width: "400px", height: "250px", download: true, title: "" %>
-
       </div>
     </div>
 
   <!-- End First Tab -->
   <!-- Second Tab -->
 
-    <div id="month-sales" class="tab-pane fade active">
+    <div id="month-sales" class="tab-pane fade">
   </br>
       <%= column_chart SequoiaCustomer.where(:purchase_date => 12.month.ago..Time.now).group_by_month(:purchase_date, week_start: :mon, format: '%b %y').sum(:price),
           prefix: "$", thousands: ",", xtitle: '', ytitle: "", id: "Month", width: "750px", download: true, title: "" %>
@@ -245,7 +244,7 @@
     </div>
     </div>
   <!-- Third Tab -->
-    <div id="pie-sales" class="tab-pane fade active">
+    <div id="pie-sales" class="tab-pane fade">
       <h2 class="text-center">All Time Sales: <%= number_to_currency(@t7, :precision => 0) %> </h2>
       <!-- <h2 class="text-center">Year To Date: <%= number_to_currency(@t7, :precision => 0) %> </h2> -->
       <% @t6.each do |key, value| %>
@@ -274,8 +273,48 @@
 </div>
 <div class="col-sm-3">
   <div class="well">
+<!-- Tabs Start -->
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+      <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+    </ul>
+<!-- Tab 1 Start -->
+    <div class="tab-content">
+      <div id="home" class="tab-pane fade in active">
+        <h3>HOME</h3>
+        <p>Some content.</p>
+      </div>
+<!-- Tab 1 end -->
+<!-- Tab 2 start -->
+      <div id="menu1" class="tab-pane fade">
+        <h3>Menu 1</h3>
+        <p>Some content in menu 1.</p>
+      </div>
+<!-- Tab 2 end -->
+    </div>
+<!-- Tabs End -->
   </div>
   <div class="well">
+<!-- Tabs Start -->
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+      <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+    </ul>
+<!-- Tab 1 Start -->
+    <div class="tab-content">
+      <div id="home" class="tab-pane fade in active">
+        <h3>HOME</h3>
+        <p>Some content.</p>
+      </div>
+<!-- Tab 1 end -->
+<!-- Tab 2 start -->
+      <div id="menu1" class="tab-pane fade">
+        <h3>Menu 1</h3>
+        <p>Some content in menu 1.</p>
+      </div>
+<!-- Tab 2 end -->
+    </div>
+<!-- Tabs End -->
   </div>
 </div>
 <% end %>

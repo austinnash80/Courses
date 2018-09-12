@@ -15,5 +15,4 @@
 //= require bootstrap-sprockets
 //= require Chart.bundle
 //= require chartkick
-//= require vue
 //= require_tree .
