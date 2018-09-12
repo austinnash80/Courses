@@ -3,6 +3,7 @@ class Mailing < ApplicationRecord
 # For Production - AWS Upload
   has_attached_file :msi_art,
                       :url =>":s3_path_url", # Upload to AWS folder, having permission issues
+                      :s3_region =>"us-east-2", # Upload to AWS folder, having permission issues
                       :path => "/:basename.:extension"
 
 # For Local Host
