@@ -2,6 +2,14 @@
 
 <h1>Mailings</h1>
 
+<h3>Upload CSV File</h3>
+  <%= form_tag import_mailings_path, multipart: true do %>
+  <%= file_field_tag :file %>
+</br>
+  <%= submit_tag 'Upload', class: 'btn btn-primary' %>
+<% end %>
+</br>
+
 <div class="row">
 <div class="col-md-3">
   <input class="form-control" id="myInput" type="text" placeholder="Search Datasheet">
@@ -13,7 +21,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Drop</th>
+      <th><%= sortable 'Drop' %></th>
       <th>Date extra</th>
       <th>Who</th>
       <th>What</th>
@@ -63,9 +71,9 @@
         <td><%= mailing.complete %></td>
         <td><%= mailing.boolean_1 %></td>
         <td><%= mailing.integer_1 %></td>
-        <td><%= mailing.cost_service %></td>
-        <td><%= mailing.cost_print %></td>
-        <td><%= mailing.cost_postage %></td>
+        <td><%= number_to_currency(mailing.cost_service) %></td>
+        <td><%= number_to_currency(mailing.cost_print) %></td>
+        <td><%= number_to_currency(mailing.cost_postage) %></td>
         <td><%= mailing.note_4 %></td>
         <td><%= link_to 'Show', mailing %></td>
         <td><%= link_to 'Edit', edit_mailing_path(mailing) %></td>
@@ -77,4 +85,5 @@
 
 <br>
 
-<%= link_to 'New Mailing', new_mailing_path %>
+<%= link_to 'New Mailing', new_mailing_path %> |
+<%= link_to "Remove All", remove_all_mailings_path, :method => :get %>

@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :mailings
+  resources :mailings do
+    collection {post :import}
+    collection do
+      get 'remove_all'
+    end
+  end
   resources :tasks
   # resources :sequoia_customers
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
