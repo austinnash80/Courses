@@ -4,6 +4,9 @@ class Mailing < ApplicationRecord
   has_attached_file :msi_art,
                           :url =>':s3_domain_url',
                           :path => "/:basename.:extension"
+  has_attached_file :msi_data,
+                          :url =>':s3_domain_url',
+                          :path => "/:basename.:extension"
 
 # For Local Host
   # has_attached_file :msi_art
