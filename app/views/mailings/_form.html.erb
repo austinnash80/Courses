@@ -76,6 +76,11 @@ CITY STATE ZIP</p><br/>
   </div>
 
   <div class="field">
+    <%= form.label :boolean_1, 'Standard Monthly States' %>
+    <%= form.check_box :boolean_1, id: :mailing_boolean_1 %>
+  </div>
+
+  <div class="field">
     <%= form.label :note_1, 'Mailing States' %>
     <%= form.text_area :note_1, id: :mailing_note_1 %>
   </div>

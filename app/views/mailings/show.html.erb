@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <!-- <%= image_tag @mailing.msi_art.url %> -->
-<%= @mailing.msi_invoice.url %>
+<!-- <%= @mailing.msi_invoice.url %> -->
 <div class="display-none">
 <div class="well text-center">
   <h1><%= @mailing.name %> - <%= @mailing.who %></h1>
@@ -135,7 +135,11 @@
     <h3><a class="btn btn-default" target="_blank" href="<%= @mailing.people_report %>"><i class="glyphicon glyphicon-download-alt" ></i> Full Report</a></h3>
       <p>
         <strong>States Included:</strong>
-          <%= @mailing.note_1 %>
+          <% if @mailing.boolean_1 == true %>
+            CA, TX, MD, AZ, NM
+          <% elsif %>
+            <%= @mailing.note_1 %>
+          <% end %>
       </p>
 
       <p>
