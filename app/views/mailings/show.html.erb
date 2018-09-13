@@ -20,7 +20,7 @@
     <a class="btn btn-primary" target="_blank" href="<%= @mailing.msi_art %>"><i class="glyphicon glyphicon-download-alt" ></i> Art</a>
     <a class="btn btn-primary" target="_blank" href="<%= @mailing.msi_data %>"><i class="glyphicon glyphicon-download-alt" ></i> Data</a>
     <%= link_to raw('<i class="glyphicon glyphicon-download-alt" ></i> Schedule'), mailing_path(@mailing, :format => 'pdf'), class: 'btn btn-primary', target: '_blank'%>
-    <a class="btn btn-primary" target="_blank" href="<%= @mailing.msi_art %>"><i class="glyphicon glyphicon-download-alt" ></i> Invoice</a>
+    <a class="btn btn-primary" target="_blank" href="<%= @mailing.msi_invoice %>"><i class="glyphicon glyphicon-download-alt" ></i> Invoice</a>
   </div>
 </br>
 </br>
