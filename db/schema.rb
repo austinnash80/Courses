@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180907182005) do
+ActiveRecord::Schema.define(version: 20180913160738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,10 @@ ActiveRecord::Schema.define(version: 20180907182005) do
     t.string "msi_art_content_type"
     t.integer "msi_art_file_size"
     t.datetime "msi_art_updated_at"
+    t.string "msi_data_file_name"
+    t.string "msi_data_content_type"
+    t.integer "msi_data_file_size"
+    t.datetime "msi_data_updated_at"
   end
 
   create_table "pes_courses", force: :cascade do |t|
