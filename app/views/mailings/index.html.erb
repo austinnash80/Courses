@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Mailings</h1>
-
+<% if user_signed_in? && current_user.email == 'austin@sequoiacpe.com' %>
 <h3>Upload CSV File</h3>
   <%= form_tag import_mailings_path, multipart: true do %>
   <%= file_field_tag :file %>
@@ -105,3 +105,4 @@
 
 <%= link_to 'New Mailing', new_mailing_path %> |
 <%= link_to "Remove All", remove_all_mailings_path, :method => :get %>
+<% end %>
