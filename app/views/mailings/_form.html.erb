@@ -22,11 +22,6 @@
   </div>
 
   <div class="field">
-    <%= form.label :date_extra %>
-    <%= form.date_select :date_extra, id: :mailing_date_extra %>
-  </div>
-
-  <div class="field">
     <%= form.label :who %>
     <%= form.text_field :who, id: :mailing_who %>
   </div>
@@ -42,28 +37,18 @@
   </div>
 
   <div class="field">
-    <%= form.label :group_1 %>
+    <%= form.label :group_1, 'Mail Group 1' %>
     <%= form.number_field :group_1, id: :mailing_group_1 %>
   </div>
 
   <div class="field">
-    <%= form.label :group_2 %>
+    <%= form.label :group_2, "Mail Group 2" %>
     <%= form.number_field :group_2, id: :mailing_group_2 %>
   </div>
 
   <div class="field">
-    <%= form.label :group_3 %>
+    <%= form.label :group_3, "Mail Group 3" %>
     <%= form.number_field :group_3, id: :mailing_group_3 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :group_4 %>
-    <%= form.number_field :group_4, id: :mailing_group_4 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :group_5 %>
-    <%= form.number_field :group_5, id: :mailing_group_5 %>
   </div>
 
   <div class="field">
@@ -78,36 +63,40 @@
 
   <div class="field">
     <%= form.label :msi_note %>
-    <%= form.text_field :msi_note, id: :mailing_msi_note %>
+    <%= form.text_field :msi_note, id: :mailing_msi_note, value: '<h3>Note:</h3>
+
+The COMPANY name field needs to be 35 characters long.<br/>
+The mailer needs to be formatted for 5 lines. The AUXADD field and ADDRESS field need to be 40 characters long. The AUXADD field is blank in most records. In those records that have data in the AUXADD field, the field should go below the COMPANY NAME field and above the ADDRESS field.</p>
+<p>Example:<br/>
+FNAME MI LNAME SUF COMPANY NAME AUXADD<br/>
+ADDRESS<br/>
+CITY STATE ZIP</p><br/>
+<p>Deleting records – Delete all records in all files that do not code a 9 digit zip code. Keep any records where the only address error is an incorrect or missing suite number.</p><br/>
+<p>Please call Austin Nash with any questions 916-412-0556. Thanks for your help</p>' %>
   </div>
 
   <div class="field">
-    <%= form.label :note_1 %>
+    <%= form.label :note_1, 'Mailing States' %>
     <%= form.text_area :note_1, id: :mailing_note_1 %>
   </div>
 
   <div class="field">
-    <%= form.label :note_2 %>
+    <%= form.label :note_2, 'Mailing Notes' %>
     <%= form.text_area :note_2, id: :mailing_note_2 %>
   </div>
 
   <div class="field">
-    <%= form.label :note_3 %>
+    <%= form.label :note_3, 'Extra Mailing Notes' %>
     <%= form.text_field :note_3, id: :mailing_note_3 %>
   </div>
 
   <div class="field">
-    <%= form.label :complete %>
+    <%= form.label :complete, "All materials sent" %>
     <%= form.check_box :complete, id: :mailing_complete %>
   </div>
 
   <div class="field">
-    <%= form.label :boolean_1 %>
-    <%= form.check_box :boolean_1, id: :mailing_boolean_1 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :integer_1 %>
+    <%= form.label :integer_1, 'Initial File Quanity' %>
     <%= form.number_field :integer_1, id: :mailing_integer_1 %>
   </div>
 
@@ -127,11 +116,6 @@
   </div>
 
   <div class="field">
-    <%= form.label :note_4 %>
-    <%= form.text_field :note_4, id: :mailing_note_4 %>
-  </div>
-
-  <div class="field">
     <%= form.label :msi_art %>
     <%= form.file_field :msi_art, id: :mailing_msi_art %>
   </div>
@@ -139,4 +123,31 @@
   <div class="actions">
     <%= form.submit %>
   </div>
+
+<!-- Extras -->
+  <!-- Date  <div class="field">
+          <%= form.label :date_extra %>
+          <%= form.date_select :date_extra, id: :mailing_date_extra %>
+        </div> -->
+
+
+  <!-- integer <div class="field">
+            <%= form.label :group_4 %>
+            <%= form.number_field :group_4, id: :mailing_group_4 %>
+          </div> -->
+
+  <!-- integer <div class="field">
+            <%= form.label :group_5 %>
+            <%= form.number_field :group_5, id: :mailing_group_5 %>
+          </div> -->
+
+<!-- Boolean   <div class="field">
+            <%= form.label :boolean_1 %>
+            <%= form.check_box :boolean_1, id: :mailing_boolean_1 %>
+          </div> -->
+
+<!-- String   <div class="field">
+          <%= form.label :note_4 %>
+          <%= form.text_field :note_4, id: :mailing_note_4 %>
+        </div> -->
 <% end %>

@@ -83,4 +83,8 @@ gem "paperclip" #upload images
 
 gem 'aws-sdk-s3'
 
+gem 'pdfkit' # generate pdfs
+
+gem 'wkhtmltopdf-binary' #need for pdfkit gem
+
 gem 'derailed', group: :development

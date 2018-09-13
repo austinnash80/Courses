@@ -24,3 +24,18 @@
 .gi-5x{
   font-size: 5em;
 }
+
+@media screen {
+
+  .print-only {
+    display: none;
+  }
+}
+
+@media print {
+
+  .display-none {
+    display: none;
+  }
+
+}

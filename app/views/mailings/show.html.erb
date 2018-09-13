@@ -1,131 +1,196 @@
 <p id="notice"><%= notice %></p>
 
 <!-- <%= image_tag @mailing.msi_art.url %> -->
-<%= @mailing.msi_art.url %>
+<!-- <%= @mailing.msi_art.url %> -->
+<div class="display-none">
+<div class="well text-center">
+  <h1><%= @mailing.name %> - <%= @mailing.who %></h1>
+  <h2>Delivered: <%= (@mailing.drop + 10).strftime('%-m/%-d/%Y') %><h2>
+    <!-- <%= link_to 'Mailing Index', mailings_path %> -->
+</div>
+
+<% if @mailing.complete == true %>
+  <h4 class="text-center green_text">This mailing is complete</h4>
+<% elsif %>
+  <h4 class="text-center red_text">This mailing is in-progress</h4>
+<% end %>
+
+<div class="col-sm-4">
+  <div class="btn-group display-none">
+    <a class="btn btn-primary" target="_blank" href="<%= @mailing.msi_art %>"><i class="glyphicon glyphicon-download-alt" ></i> Art</a>
+    <a class="btn btn-primary" target="_blank" href="<%= @mailing.msi_art %>"><i class="glyphicon glyphicon-download-alt" ></i> Data</a>
+    <%= link_to raw('<i class="glyphicon glyphicon-download-alt" ></i> Schedule'), mailing_path(@mailing, :format => 'pdf'), class: 'btn btn-primary', target: '_blank'%>
+    <a class="btn btn-primary" target="_blank" href="<%= @mailing.msi_art %>"><i class="glyphicon glyphicon-download-alt" ></i> Invoice</a>
+  </div>
+</br>
+</br>
+<iframe src=<%= @mailing.msi_art.url %> width="575" height="650" style="border: none;"> </iframe>
+</br>
+<h4><%= link_to 'Edit Mailing', edit_mailing_path(@mailing) %> |
+<%= link_to 'Mailing Index', mailings_path %></h4>
+</div>
 
 
-<iframe src=<%= @mailing.msi_art.url %> width="500" height="580" style="border: none;"> </iframe>
 
-
-<p>
+<!-- <p>
   <strong>Name:</strong>
   <%= @mailing.name %>
-</p>
-
+</p> -->
+<div class="col-sm-4">
+  <div class="well">
+    <h2 class="text-center">Mailing</h2>
 <p>
-  <strong>Drop:</strong>
-  <%= @mailing.drop %>
+  <strong>Drop Date:</strong>
+  <%= @mailing.drop.strftime('%-m/%-d/%y') %>
 </p>
-
 <p>
-  <strong>Date extra:</strong>
-  <%= @mailing.date_extra %>
-</p>
-
-<p>
-  <strong>Who:</strong>
-  <%= @mailing.who %>
-</p>
-
-<p>
-  <strong>What:</strong>
-  <%= @mailing.what %>
+  <strong>Mail House:</strong>
+  MSI
 </p>
 
 <p>
   <strong>Quantity sent:</strong>
-  <%= @mailing.quantity_sent %>
+  <%= number_with_delimiter(@mailing.quantity_sent, :delimiter => ',') %>
 </p>
 
 <p>
-  <strong>Group 1:</strong>
-  <%= @mailing.group_1 %>
+  <strong>Sent To:</strong>
+  <%= @mailing.who %>
 </p>
 
 <p>
-  <strong>Group 2:</strong>
-  <%= @mailing.group_2 %>
+  <strong>Type:</strong>
+  <%= @mailing.what %>
 </p>
-
 <p>
-  <strong>Group 3:</strong>
-  <%= @mailing.group_3 %>
-</p>
-
-<p>
-  <strong>Group 4:</strong>
-  <%= @mailing.group_4 %>
-</p>
-
-<p>
-  <strong>Group 5:</strong>
-  <%= @mailing.group_5 %>
-</p>
-
-<p>
-  <strong>Data name:</strong>
+  <strong>Data:</strong>
   <%= @mailing.data_name %>
 </p>
 
 <p>
-  <strong>Art name:</strong>
+  <strong>Art:</strong>
   <%= @mailing.art_name %>
 </p>
+</div>
 
-<p>
-  <strong>Msi note:</strong>
-  <%= @mailing.msi_note %>
-</p>
+<div class="well">
+  <h2 class="text-center">Cost</h2>
 
-<p>
-  <strong>Note 1:</strong>
-  <%= @mailing.note_1 %>
-</p>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#total">Total Cost</a></li>
+    <li><a data-toggle="tab" href="#unit">Unit Cost</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="total" class="tab-pane fade in active">
+    </br>
+      <p>
+        <strong>Total Cost:</strong>
+        <%= number_to_currency((@mailing.cost_postage + @mailing.cost_print + @mailing.cost_service), precision: 0) %>
+      </p>
 
-<p>
-  <strong>Note 2:</strong>
-  <%= @mailing.note_2 %>
-</p>
+      <p>
+        <strong>Service:</strong>
+        <%= number_to_currency(@mailing.cost_service, precision: 0) %>
+      </p>
 
-<p>
-  <strong>Note 3:</strong>
-  <%= @mailing.note_3 %>
-</p>
+      <p>
+        <strong>Print:</strong>
+        <%= number_to_currency(@mailing.cost_print, precision: 0) %>
+      </p>
 
-<p>
-  <strong>Complete:</strong>
-  <%= @mailing.complete %>
-</p>
+      <p>
+        <strong>Postage:</strong>
+        <%= number_to_currency(@mailing.cost_postage, precision: 0) %>
+      </p>
+    </div>
 
-<p>
-  <strong>Boolean 1:</strong>
-  <%= @mailing.boolean_1 %>
-</p>
+      <div id="unit" class="tab-pane fade">
+      </br>
+        <p>
+          <strong>Total Cost:</strong>
+          <%= number_to_currency(((@mailing.cost_postage + @mailing.cost_print + @mailing.cost_service) / @mailing.quantity_sent), precision: 3) %>
+        </p>
 
-<p>
-  <strong>Integer 1:</strong>
-  <%= @mailing.integer_1 %>
-</p>
+        <p>
+          <strong>Service Cost:</strong>
+          <%= number_to_currency((@mailing.cost_service / @mailing.quantity_sent), precision: 3) %>
+        </p>
 
-<p>
-  <strong>Cost service:</strong>
-  <%= @mailing.cost_service %>
-</p>
+        <p>
+          <strong>Print Cost:</strong>
+          <%= number_to_currency((@mailing.cost_print / @mailing.quantity_sent), precision: 3) %>
+        </p>
 
-<p>
-  <strong>Cost print:</strong>
-  <%= @mailing.cost_print %>
-</p>
+        <p>
+          <strong>Postage Cost:</strong>
+          <%= number_to_currency((@mailing.cost_postage / @mailing.quantity_sent), precision: 3) %>
+        </p>
+      </div>
+    </div>
 
-<p>
-  <strong>Cost postage:</strong>
-  <%= @mailing.cost_postage %>
-</p>
+</div>
 
-<p>
-  <strong>Note 4:</strong>
-  <%= @mailing.note_4 %>
-</p>
+  <div class="well">
+    <h2 class="text-center">People</h2>
+    <h3><a class="btn btn-default" target="_blank" href="<%= @mailing.msi_art %>"><i class="glyphicon glyphicon-download-alt" ></i> Full Report</a></h3>
+      <p>
+        <strong>States Included:</strong>
+          <%= @mailing.note_1 %>
+      </p>
 
-<%= link_to 'Edit', edit_mailing_path(@mailing) %> |
-<%= link_to 'Back', mailings_path %>
+      <p>
+        <strong>States Expirations:</strong>
+          <%= @mailing.group_1 %>, <%= @mailing.group_2 %>, <%= @mailing.group_3 %>
+      </p>
+
+  </div>
+</div>
+
+<div class="col-sm-4">
+  <div class="well">
+    <h2 class="text-center">Notes</h2>
+      <% if @mailing.note_2.nil? %>
+      <% elsif %>
+        <%= @mailing.note_2 %>
+      <% end %>
+  </div>
+
+  <div class="well">
+    <h2 class="text-center">Results</h2>
+  </div>
+</div>
+</div>
+
+<div class="print-only">
+  <h4 class="text-right"><%= Date.today.strftime('%-m/%-d/%y') %></h4>
+  <h1 class="text-center">Sequoia CPE Mailing Schedule</h1>
+  <h2 class="text-center"><%= @mailing.name %> - <%= @mailing.who %></h2></br>
+  <h4 class="text-center">Drop Date: <%= @mailing.drop.strftime('%-m/%-d/%y') %> </h4>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+      <!-- <th><strong >Mail:</strong></th> -->
+        <th><strong>Title:</strong></th>
+        <th><strong>Drop Date:</strong></th>
+        <th><strong>Quantity:</strong></th>
+        <th><strong>Art File:</strong></th>
+        <th><strong>Data File:</strong></th>
+    </thead>
+
+    </tbody>
+        <td><%= @mailing.name %></td>
+        <td><%= @mailing.drop.strftime('%m/%d/%y') %></td>
+        <td><%= number_with_delimiter(@mailing.integer_1) %></td>
+        <!-- Art File Name -->
+        <% if @mailing.msi_art_file_name.to_s.empty? %>
+          <td><i class="glyphicon glyphicon-file table-icons-red display-none"></i> Empty</td>
+        <% elsif %>
+          <td><i class="glyphicon glyphicon-file table-icons-green display-none"></i> <%= @mailing.msi_art_file_name%></td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+  </br>
+  <p><%= @mailing.msi_note.html_safe %></p>
+</div>

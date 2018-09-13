@@ -22,28 +22,28 @@
     <tr>
       <th>Name</th>
       <th><%= sortable 'Drop' %></th>
-      <th>Date extra</th>
+      <!-- <th>Date extra</th> -->
       <th>Who</th>
       <th>What</th>
       <th>Quantity sent</th>
       <th>Group 1</th>
       <th>Group 2</th>
       <th>Group 3</th>
-      <th>Group 4</th>
-      <th>Group 5</th>
+      <!-- <th>Group 4</th>
+      <th>Group 5</th> -->
       <th>Data name</th>
       <th>Art name</th>
-      <th>Msi note</th>
-      <th>Note 1</th>
-      <th>Note 2</th>
-      <th>Note 3</th>
+      <!-- <th>Msi note</th> -->
+      <th>States</th>
+      <th>Mail Notes</th>
+      <th>Addtion Note</th>
       <th>Complete</th>
-      <th>Boolean 1</th>
-      <th>Integer 1</th>
+      <!-- <th>Boolean 1</th> -->
+      <th>Initial Quantity</th>
       <th>Cost service</th>
       <th>Cost print</th>
       <th>Cost postage</th>
-      <th>Note 4</th>
+      <!-- <th>Note 4</th> -->
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -51,31 +51,30 @@
   <tbody id="myTable">
     <% @mailings.each do |mailing| %>
       <tr>
-        <td><%= mailing.name %></td>
+        <td><strong><%= link_to mailing.name, mailing %></strong></td>
         <td><%= mailing.drop %></td>
-        <td><%= mailing.date_extra %></td>
+        <!-- <td><%= mailing.date_extra %></td> -->
         <td><%= mailing.who %></td>
         <td><%= mailing.what %></td>
-        <td><%= mailing.quantity_sent %></td>
+        <td><%= number_with_delimiter(mailing.quantity_sent, delimiter: ',') %></td>
         <td><%= mailing.group_1 %></td>
         <td><%= mailing.group_2 %></td>
         <td><%= mailing.group_3 %></td>
-        <td><%= mailing.group_4 %></td>
-        <td><%= mailing.group_5 %></td>
+        <!-- <td><%= mailing.group_4 %></td>
+        <td><%= mailing.group_5 %></td> -->
         <td><%= mailing.data_name %></td>
         <td><%= mailing.art_name %></td>
-        <td><%= mailing.msi_note %></td>
+        <!-- <td><%= mailing.msi_note %></td> -->
         <td><%= mailing.note_1 %></td>
         <td><%= mailing.note_2 %></td>
         <td><%= mailing.note_3 %></td>
         <td><%= mailing.complete %></td>
-        <td><%= mailing.boolean_1 %></td>
+        <!-- <td><%= mailing.boolean_1 %></td> -->
         <td><%= mailing.integer_1 %></td>
         <td><%= number_to_currency(mailing.cost_service) %></td>
         <td><%= number_to_currency(mailing.cost_print) %></td>
         <td><%= number_to_currency(mailing.cost_postage) %></td>
-        <td><%= mailing.note_4 %></td>
-        <td><%= link_to 'Show', mailing %></td>
+        <!-- <td><%= mailing.note_4 %></td> -->
         <td><%= link_to 'Edit', edit_mailing_path(mailing) %></td>
         <td><%= link_to 'Destroy', mailing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
