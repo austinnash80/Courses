@@ -118,7 +118,7 @@ class SequoiaController < ApplicationController
 @tasks = Task.all
 
 # --- Mailing Section ----
-@mailings = Mailing.all.order(:drop)
+@mailings = Mailing.all.order(:drop).reverse_order
 
 # @total_cost = (@mailing.cost_postage + @mailing.cost_print + @mailing.cost_service)
 # @unit_total_cost = @total_cost / @mailing.quantity_sent
@@ -146,7 +146,9 @@ class SequoiaController < ApplicationController
        @ytd_cost.push(mailing['cost_postage'])
        @ytd_cost.push(mailing['cost_service'])
      end
-   @ytd_drops.push(mailing['name'])
+     if mailing.complete == true
+       @ytd_drops.push(mailing['name'])
+     end
      if mailing.quantity_sent.nil?
      elsif
        @ytd_quanity.push(mailing['quantity_sent'])
