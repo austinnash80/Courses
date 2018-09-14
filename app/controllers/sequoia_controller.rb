@@ -118,7 +118,7 @@ class SequoiaController < ApplicationController
 @tasks = Task.all
 
 # --- Mailing Section ----
-@mailings = Mailing.all
+@mailings = Mailing.all.order(:drop)
 
 # @total_cost = (@mailing.cost_postage + @mailing.cost_print + @mailing.cost_service)
 # @unit_total_cost = @total_cost / @mailing.quantity_sent

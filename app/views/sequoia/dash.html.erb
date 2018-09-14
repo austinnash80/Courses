@@ -33,7 +33,7 @@
               </tr>
             </thead>
           <tbody>
-          <% @mailings.each do |mailing| %>
+          <% @mailings.reverse_each do |mailing| %>
             <% if mailing.complete == false %>
             <tr>
               <td><%= mailing.name %> </td>
