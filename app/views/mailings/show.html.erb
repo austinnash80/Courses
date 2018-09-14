@@ -85,17 +85,29 @@
     </br>
       <p>
         <strong>Total Cost:</strong>
-        <%= number_to_currency((@mailing.cost_service + @mailing.cost_print + @mailing.cost_postage), precision: 0) %>
+        <% if @mailing.cost_print.nil? || @mailing.cost_postage.nil? || @mailing.cost_service.nil? %>
+          n/a
+        <% elsif %>
+          <%= number_to_currency((@mailing.cost_service + @mailing.cost_print + @mailing.cost_postage), precision: 0) %>
+        <% end %>
       </p>
 
       <p>
         <strong>Service:</strong>
-        <%= number_to_currency(@mailing.cost_service, precision: 0) %>
+        <% if @mailing.cost_service.nil? %>
+          n/a
+        <% elsif %>
+          <%= number_to_currency(@mailing.cost_service, precision: 0) %>
+        <% end %>
       </p>
 
       <p>
         <strong>Print:</strong>
-        <%= number_to_currency(@mailing.cost_print, precision: 0) %>
+        <% if @mailing.cost_print.nil? %>
+          n/a
+        <% elsif %>
+          <%= number_to_currency(@mailing.cost_print, precision: 0) %>
+        <% end %>
       </p>
 
       <p>
@@ -108,22 +120,38 @@
       </br>
         <p>
           <strong>Total Cost:</strong>
-          <%= number_to_currency(((@mailing.cost_service + @mailing.cost_print + @mailing.cost_postage)/@mailing.quantity_sent), precision: 3) %>
+          <% if @mailing.cost_print.nil? || @mailing.cost_postage.nil? || @mailing.cost_service.nil? || @mailing.quantity_sent.nil? %>
+            n/a
+          <% elsif %>
+            <%= number_to_currency(((@mailing.cost_service + @mailing.cost_print + @mailing.cost_postage) / @mailing.quantity_sent), precision: 0) %>
+          <% end %>
         </p>
 
         <p>
           <strong>Service Cost:</strong>
-          <%= number_to_currency((@mailing.cost_service/@mailing.quantity_sent), precision: 3) %>
+          <% if @mailing.cost_service.nil? || @mailing.quantity_sent.nil? %>
+            n/a
+          <% elsif %>
+            <%= number_to_currency((@mailing.cost_service/@mailing.quantity_sent), precision: 3) %>
+          <% end %>
         </p>
 
         <p>
           <strong>Print Cost:</strong>
-          <%= number_to_currency((@mailing.cost_print/@mailing.quantity_sent), precision: 3) %>
+          <% if @mailing.cost_print.nil? || @mailing.quantity_sent.nil? %>
+            n/a
+          <% elsif %>
+            <%= number_to_currency((@mailing.cost_print/@mailing.quantity_sent), precision: 3) %>
+          <% end %>
         </p>
 
         <p>
           <strong>Postage Cost:</strong>
-          <%= number_to_currency((@mailing.cost_postage/@mailing.quantity_sent), precision: 3) %>
+          <% if @mailing.cost_print.nil? || @mailing.quantity_sent.nil? %>
+            n/a
+          <% elsif %>
+            <%= number_to_currency((@mailing.cost_postage/@mailing.quantity_sent), precision: 3) %>
+          <% end %>
         </p>
       </div>
     </div>

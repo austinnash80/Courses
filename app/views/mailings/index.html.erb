@@ -89,7 +89,11 @@
 
         <!-- <td><%= mailing.boolean_1 %></td> -->
         <!-- <td><%= mailing.integer_1 %></td> -->
-        <td><%= number_to_currency(mailing.cost_postage + mailing.cost_print + mailing.cost_service) %></td>
+        <% if mailing.cost_print.nil? || mailing.cost_postage.nil? || mailing.cost_service.nil?%>
+          <td></td>
+        <% elsif %>
+          <td><%= number_to_currency(mailing.cost_postage + mailing.cost_print + mailing.cost_service) %></td>
+        <% end %>
         <!-- <td><%= number_to_currency(mailing.cost_service) %></td>
         <td><%= number_to_currency(mailing.cost_print) %></td>
         <td><%= number_to_currency(mailing.cost_postage) %></td> -->
