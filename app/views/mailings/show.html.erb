@@ -85,7 +85,7 @@
     </br>
       <p>
         <strong>Total Cost:</strong>
-        <%= number_to_currency((@total_cost), precision: 0) %>
+        <%= number_to_currency((@mailing.cost_service + @mailing.cost_print + @mailing.cost_postage), precision: 0) %>
       </p>
 
       <p>
@@ -108,22 +108,22 @@
       </br>
         <p>
           <strong>Total Cost:</strong>
-          <%= number_to_currency(@unit_total_cost, precision: 3) %>
+          <%= number_to_currency(((@mailing.cost_service + @mailing.cost_print + @mailing.cost_postage)/@mailing.quantity_sent), precision: 3) %>
         </p>
 
         <p>
           <strong>Service Cost:</strong>
-          <%= number_to_currency(@unit_service_cost, precision: 3) %>
+          <%= number_to_currency((@mailing.cost_service/@mailing.quantity_sent), precision: 3) %>
         </p>
 
         <p>
           <strong>Print Cost:</strong>
-          <%= number_to_currency(@unit_print_cost, precision: 3) %>
+          <%= number_to_currency((@mailing.cost_print/@mailing.quantity_sent), precision: 3) %>
         </p>
 
         <p>
           <strong>Postage Cost:</strong>
-          <%= number_to_currency(@unit_postage_cost, precision: 3) %>
+          <%= number_to_currency((@mailing.cost_postage/@mailing.quantity_sent), precision: 3) %>
         </p>
       </div>
     </div>

@@ -120,11 +120,11 @@ class SequoiaController < ApplicationController
 # --- Mailing Section ----
 @mailings = Mailing.all
 
-@total_cost = (@mailing.cost_postage + @mailing.cost_print + @mailing.cost_service)
-@unit_total_cost = @total_cost / @mailing.quantity_sent
-@unit_service_cost = @mailing.cost_service / @mailing.quantity_sent
-@unit_print_cost = @mailing.cost_print / @mailing.quantity_sent
-@unit_postage_cost = @mailing.cost_postage / @mailing.quantity_sent
+# @total_cost = (@mailing.cost_postage + @mailing.cost_print + @mailing.cost_service)
+# @unit_total_cost = @total_cost / @mailing.quantity_sent
+# @unit_service_cost = @mailing.cost_service / @mailing.quantity_sent
+# @unit_print_cost = @mailing.cost_print / @mailing.quantity_sent
+# @unit_postage_cost = @mailing.cost_postage / @mailing.quantity_sent
 
 @ytd_drops = []
 @ytd_quanity = []

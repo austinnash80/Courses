@@ -6,13 +6,17 @@ class MailingsController < ApplicationController
   # GET /mailings.json
   def index
     @mailings = Mailing.order(sort_column + " " + sort_direction)
-    # @mailings = Mailing.all
-    # @total_cost = (@mailing.cost_postage + @mailing.cost_print + @mailing.cost_service)
   end
 
   # GET /mailings/1
   # GET /mailings/1.json
   def show
+    # @mailing = Mailing.all
+    # @total_cost = @mailing.cost_print + @mailing.cost_postage + @mailing.cost_service
+    # @unit_total_cost = @total_cost / @mailing.quantity_sent
+    # @unit_service_cost = @mailing.cost_service / @mailing.quantity_sent
+    # @unit_print_cost = @mailing.cost_print / @mailing.quantity_sent
+    # @unit_postage_cost = @mailing.cost_postage / @mailing.quantity_sent
   end
 
   # GET /mailings/new
