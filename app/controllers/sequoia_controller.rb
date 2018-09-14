@@ -120,6 +120,39 @@ class SequoiaController < ApplicationController
 # --- Mailing Section ----
 @mailings = Mailing.all
 
+@ytd_drops = []
+@ytd_quanity = []
+@ytd_cost = []
+
+@last_year_drops = []
+@last_year_quanity = []
+@last_year_cost = []
+
+@all_time_drops = []
+@all_time_quanity = []
+@all_time_cost = []
+
+@mailings.each do |mailing|
+  if mailing.drop.strftime('%Y') == Date.today.year.to_s
+   @ytd_cost.push(mailing['cost_print'])
+   @ytd_cost.push(mailing['cost_postage'])
+   @ytd_cost.push(mailing['cost_service'])
+   @ytd_drops.push(mailing['name'])
+   @ytd_quanity.push(mailing['quantity_sent'])
+  end
+  if mailing.drop.strftime('%Y') == (Date.today.year - 1).to_s
+    @last_year_cost.push(mailing['cost_print'])
+    @last_year_cost.push(mailing['cost_postage'])
+    @last_year_cost.push(mailing['cost_service'])
+    @last_year_drops.push(mailing['name'])
+    @last_year_quanity.push(mailing['quantity_sent'])
+    end
+    @all_time_cost.push(mailing['cost_print'])
+    @all_time_cost.push(mailing['cost_postage'])
+    @all_time_cost.push(mailing['cost_service'])
+    @all_time_drops.push(mailing['name'])
+    @all_time_quanity.push(mailing['quantity_sent'])
 end
 
+end
 end

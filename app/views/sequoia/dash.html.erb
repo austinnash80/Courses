@@ -12,6 +12,7 @@
       <ul class="nav nav-tabs">
            <li class="active"><a data-toggle="tab" href="#upcomming">Upcomming</a></li>
            <li><a data-toggle="tab" href="#past">Past</a></li>
+           <li><a data-toggle="tab" href="#data">Data</a></li>
       </ul>
       </br>
   <!-- End Tab Headers -->
@@ -38,10 +39,10 @@
               <td><%= mailing.name %> </td>
               <td><%= mailing.who %> </td>
               <td><%= (mailing.drop - 8).strftime('%a %-m/%-d') %> </td>
-              <% if mailing.boolean_1 == true %>
-                <td><%= link_to '', mailing, class: 'glyphicon glyphicon-ok-circle green gi-2x' %></td>
-              <% elsif %>
+              <% if mailing.msi_art.url =~/missing/ %>
                 <td><%= link_to '', mailing, class: 'glyphicon glyphicon-remove-circle red gi-2x' %></td>
+              <% elsif %>
+                <td><%= link_to '', mailing, class: 'glyphicon glyphicon-ok-circle green gi-2x' %></td>
               <% end %>
               <!-- <td><%= mailing.data_name %> </td> -->
               <td><%= link_to 'View', mailing %></td>
@@ -52,8 +53,8 @@
           </tbody>
         </table>
         </div>
-  <!-- End Tab one -->
-  <!-- Start Tab Two -->
+<!-- End Tab one -->
+<!-- Start Tab Two -->
         <div id="past" class="tab-pane fade in">
           <table class="table table-hover">
             <thead>
@@ -68,7 +69,7 @@
 
             <tbody>
               <% @mailings.each do |mailing| %>
-                <% if user_signed_in? && mailing.complete == true %>
+                <% if user_signed_in? && mailing.complete == true && mailing.drop > 12.month.ago..Time.now %>
                 <tr>
                   <td><%= mailing.name %></td>
                   <td><%= mailing.who %></td>
@@ -83,6 +84,44 @@
             </tbody>
           </table>
         </div>
+<!-- End Tab Two -->
+<!-- Start Tab Three -->
+    <div id="data" class="tab-pane fade in">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Drops</th>
+            <th>Quanity</th>
+            <th>Cost</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td><strong>YTD</strong></td>
+              <td><%= @ytd_drops.count %></td>
+              <td><%= number_with_delimiter(@ytd_quanity.sum, :delimiter => ',') %></td>
+              <td><%= number_to_currency(@ytd_cost.sum, :precision => 0) %></td>
+              <td>Details</td>
+            </tr>
+            <tr>
+              <td><strong><%= Date.today.year - 1 %></strong></td>
+              <td><%= @last_year_drops.count %></td>
+              <td><%= number_with_delimiter(@last_year_quanity.sum, :delimiter => ',') %></td>
+              <td><%= number_to_currency(@last_year_cost.sum, :precision => 0) %></td>
+              <td>Details</td>
+            </tr>
+            <tr>
+              <td><strong>All</strong></td>
+              <td><%= @all_time_drops.count %></td>
+              <td><%= number_with_delimiter(@all_time_quanity.sum, :delimiter => ',') %></td>
+              <td><%= number_to_currency(@all_time_cost.sum, :precision => 0) %></td>
+              <td>Details</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
 <!-- End Tab Three -->
     </div>
 <!-- End Tab Section - Mailings -->
