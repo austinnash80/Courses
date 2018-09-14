@@ -89,7 +89,7 @@
 
         <!-- <td><%= mailing.boolean_1 %></td> -->
         <!-- <td><%= mailing.integer_1 %></td> -->
-        <td><%= number_to_currency((mailing.cost_service + mailing.cost_print + mailing.cost_postage)) %></td>
+        <td><%= number_to_currency(mailing.cost_postage + mailing.cost_service + mailing.cost_print) %></td>
         <!-- <td><%= number_to_currency(mailing.cost_service) %></td>
         <td><%= number_to_currency(mailing.cost_print) %></td>
         <td><%= number_to_currency(mailing.cost_postage) %></td> -->

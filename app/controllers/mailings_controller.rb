@@ -6,6 +6,8 @@ class MailingsController < ApplicationController
   # GET /mailings.json
   def index
     @mailings = Mailing.order(sort_column + " " + sort_direction)
+    # @mailings = Mailing.all
+    # @total_cost = (@mailing.cost_postage + @mailing.cost_print + @mailing.cost_service)
   end
 
   # GET /mailings/1
@@ -81,7 +83,7 @@ class MailingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mailing_params
-      params.require(:mailing).permit(:name, :drop, :date_extra, :who, :what, :quantity_sent, :group_1, :group_2, :group_3, :group_4, :group_5, :data_name, :art_name, :msi_note, :note_1, :note_2, :note_3, :complete, :boolean_1, :integer_1, :cost_service, :cost_print, :msi_art, :msi_data, :msi_invoice, :people_report, :note_4)
+      params.require(:mailing).permit(:name, :drop, :date_extra, :who, :what, :quantity_sent, :group_1, :group_2, :group_3, :group_4, :group_5, :data_name, :art_name, :msi_note, :note_1, :note_2, :note_3, :complete, :boolean_1, :integer_1, :cost_service, :cost_postage, :cost_print, :msi_art, :msi_data, :msi_invoice, :people_report, :note_4)
     end
 
     def sort_column
