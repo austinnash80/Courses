@@ -147,7 +147,10 @@ class SequoiaController < ApplicationController
        @ytd_cost.push(mailing['cost_service'])
      end
    @ytd_drops.push(mailing['name'])
-   @ytd_quanity.push(mailing['quantity_sent'])
+     if mailing.quantity_sent.nil?
+     elsif
+       @ytd_quanity.push(mailing['quantity_sent'])
+    end
   end
   if mailing.drop.strftime('%Y') == (Date.today.year - 1).to_s
     if mailing.cost_print.nil? || mailing.cost_postage.nil? || mailing.cost_service.nil?
@@ -157,7 +160,10 @@ class SequoiaController < ApplicationController
       @last_year_cost.push(mailing['cost_service'])
     end
     @last_year_drops.push(mailing['name'])
-    @last_year_quanity.push(mailing['quantity_sent'])
+      if mailing.quantity_sent.nil?
+      elsif
+        @last_year_quanity.push(mailing['quantity_sent'])
+      end
     end
     if mailing.cost_print.nil? || mailing.cost_postage.nil? || mailing.cost_service.nil?
     elsif
@@ -166,7 +172,10 @@ class SequoiaController < ApplicationController
       @all_time_cost.push(mailing['cost_service'])
     end
     @all_time_drops.push(mailing['name'])
-    @all_time_quanity.push(mailing['quantity_sent'])
+      if mailing.quantity_sent.nil?
+      elsif
+        @all_time_quanity.push(mailing['quantity_sent'])
+      end
 end
 
 end
