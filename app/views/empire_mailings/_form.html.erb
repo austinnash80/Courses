@@ -1,0 +1,122 @@
+<%= form_with(model: empire_mailing, local: true) do |form| %>
+  <% if empire_mailing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(empire_mailing.errors.count, "error") %> prohibited this empire_mailing from being saved:</h2>
+
+      <ul>
+      <% empire_mailing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :empire_mailing_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :drop %>
+    <%= form.date_select :drop, id: :empire_mailing_drop %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_extra %>
+    <%= form.date_select :date_extra, id: :empire_mailing_date_extra %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state, id: :empire_mailing_state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :what %>
+    <%= form.text_field :what, id: :empire_mailing_what %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quanity_est %>
+    <%= form.number_field :quanity_est, id: :empire_mailing_quanity_est %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quanity_sent %>
+    <%= form.number_field :quanity_sent, id: :empire_mailing_quanity_sent %>
+  </div>
+
+  <div class="field">
+    <%= form.label :group_1 %>
+    <%= form.text_field :group_1, id: :empire_mailing_group_1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :group_2 %>
+    <%= form.text_field :group_2, id: :empire_mailing_group_2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :group_3 %>
+    <%= form.text_field :group_3, id: :empire_mailing_group_3 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :data_name %>
+    <%= form.text_field :data_name, id: :empire_mailing_data_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :art_name %>
+    <%= form.text_field :art_name, id: :empire_mailing_art_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :msi_note %>
+    <%= form.text_area :msi_note, id: :empire_mailing_msi_note %>
+  </div>
+
+  <div class="field">
+    <%= form.label :note_1 %>
+    <%= form.text_area :note_1, id: :empire_mailing_note_1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :note_2 %>
+    <%= form.text_area :note_2, id: :empire_mailing_note_2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :complete %>
+    <%= form.check_box :complete, id: :empire_mailing_complete %>
+  </div>
+
+  <div class="field">
+    <%= form.label :boolean_1 %>
+    <%= form.check_box :boolean_1, id: :empire_mailing_boolean_1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :integer_extra %>
+    <%= form.number_field :integer_extra, id: :empire_mailing_integer_extra %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cost_service %>
+    <%= form.text_field :cost_service, id: :empire_mailing_cost_service %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cost_print %>
+    <%= form.text_field :cost_print, id: :empire_mailing_cost_print %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cost_postage %>
+    <%= form.text_field :cost_postage, id: :empire_mailing_cost_postage %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

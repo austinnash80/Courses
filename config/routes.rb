@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :empire_mailings
   resources :mailings do
     collection {post :import}
     collection do

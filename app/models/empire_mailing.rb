@@ -1,0 +1,2 @@
+class EmpireMailing < ApplicationRecord
+end

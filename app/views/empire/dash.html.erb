@@ -1,5 +1,264 @@
-<h1>Empire#dash</h1>
-<p>Find me in app/views/empire/dash.html.erb</p>
+<body class= 'body-empire-home'>
 
-<%= link_to('Empire RC Mailjet', 'https://app.mailjet.com/contacts/lists/edit/7yAC', target: :_blank) %>
-<%= link_to('sample', copyrights_path)%>
+<h1 class="text-center">Empire Dashboard</h1>
+<% if user_signed_in? && current_user.superadmin_role? %>
+
+<%#= link_to('Empire RC Mailjet', 'https://app.mailjet.com/contacts/lists/edit/7yAC', target: :_blank) %>
+<%#= link_to('sample', copyrights_path)%>
+
+
+
+<!-- START 1 -->
+
+    <div class="col-sm-4">
+      <div class="well">
+        <h2 class="text-center"> Direct Mail (MSI)</h2>
+    <!-- Tabs Start -->
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#tab1-1-1">Upcomming</a></li>
+          <li><a data-toggle="tab" href="#tab1-1-2">Past</a></li>
+          <li><a data-toggle="tab" href="#tab1-1-3">Data</a></li>
+        </ul>
+    <!-- Tab 1 Start -->
+        <div class="tab-content">
+          <div id="tab1-1-1" class="tab-pane fade in active">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Due</th>
+                  <th>Name</th>
+                  <th>State</th>
+                  <th>Note</th>
+                  <th>~Size</th>
+                  <th>~Cost</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+            <tbody>
+              <% @empire_mailings.each do |empire_mailing| %>
+              <% if empire_mailing.complete == false %>
+                <tr>
+                  <td> <%= (empire_mailing.drop - 10).strftime('%-m/%-d/%y') %> </td>
+                  <td> <%= link_to empire_mailing.name, empire_mailing %> </td>
+                  <td> <%= empire_mailing.state %> </td>
+                  <td> <%= empire_mailing.note_1 %> </td>
+                  <td> <%= number_with_delimiter(empire_mailing.quanity_est, :delimiter => ',') %> </td>
+                  <% if empire_mailing.quanity_est.nil? %>
+                  <% elsif %>
+                    <td> <%= number_to_currency((empire_mailing.quanity_est * 35)/100, :precision => 0) %> </td>
+                  <% end %>
+                  <td> <%= empire_mailing.complete %> </td>
+                </tr>
+              <% end %>
+              <% end %>
+            </tbody>
+          </table>
+          </div>
+    <!-- Tab 1 end -->
+    <!-- Tab 2 start -->
+          <div id="tab1-1-2" class="tab-pane fade">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Drop</th>
+                  <th>Name</th>
+                  <th>State</th>
+                  <th>Note</th>
+                  <th>Size</th>
+                  <th>Cost</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+            <tbody>
+              <% @empire_mailings.each do |empire_mailing| %>
+              <% if empire_mailing.complete == true %>
+                <tr>
+                  <td> <%= empire_mailing.drop.strftime('%-m/%-d/%y') %> </td>
+                  <td> <%= link_to empire_mailing.name, empire_mailing %> </td>
+                  <td> <%= empire_mailing.state %> </td>
+                  <td> <%= empire_mailing.note_1 %> </td>
+                  <td> <%= number_with_delimiter(empire_mailing.quanity_sent, :delimiter => ',') %> </td>
+                  <% if empire_mailing.quanity_est.nil? %>
+                  <% elsif %>
+                    <td> <%= number_to_currency((empire_mailing.quanity_est * 35)/100, :precision => 0) %> </td>
+                  <% end %>
+                  <td> <%= empire_mailing.complete %> </td>
+                </tr>
+              <% end %>
+              <% end %>
+            </tbody>
+          </table>
+          </div>
+    <!-- Tab 2 end -->
+    <!-- Tab 3 start -->
+          <div id="tab1-1-3" class="tab-pane fade">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Drops</th>
+                  <th>Quanity</th>
+                  <th>Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    <td><strong>YTD</strong></td>
+                    <td><%= @ytd_drops.count %></td>
+                    <td><%= number_with_delimiter(@ytd_quanity.sum, :delimiter => ',') %></td>
+                    <td><%= number_to_currency(@ytd_cost.sum, :precision => 0) %></td>
+                  </tr>
+                <% @empire_mailings.each do |empire_mailing| %>
+                <% if empire_mailing.complete == true && empire_mailing.drop.strftime('%Y') == Date.today.year.to_s %>
+                  <tr>
+                    <td> <%= empire_mailing.state %> </td>
+                    <td> <%= empire_mailing.quanity_sent %> </td>
+                  </tr>
+                <% end %>
+                <% end %>
+
+<%#= @ytd_states = (1..6).group_by { |i| i%3 } %>
+<%= @ytd_states %> </br>
+<%= @t %> </br>
+<!-- <%#= @ytd_states.keys %> = <%#= @ytd_states.values.sum %> </br> -->
+
+              </tbody>
+            </table>
+          </div>
+    <!-- Tab 3 end -->
+        </div>
+    <!-- Tabs End -->
+      </div>
+      <div class="well">
+    <!-- Tabs Start -->
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#home1-2">Home</a></li>
+          <li><a data-toggle="tab" href="#menu1-2">Menu 1</a></li>
+        </ul>
+    <!-- Tab 1 Start -->
+        <div class="tab-content">
+          <div id="home1-2" class="tab-pane fade in active">
+            <h3>HOME</h3>
+            <p>Some content.</p>
+          </div>
+    <!-- Tab 1 end -->
+    <!-- Tab 2 start -->
+          <div id="menu1-2" class="tab-pane fade">
+            <h3>Menu 1</h3>
+            <p>Some content in menu 1.</p>
+          </div>
+    <!-- Tab 2 end -->
+        </div>
+    <!-- Tabs End -->
+      </div>
+    </div>
+
+<!-- END 1 -->
+
+
+<!-- START 2 -->
+
+    <div class="col-sm-4">
+      <div class="well">
+    <!-- Tabs Start -->
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#home2-1">Home</a></li>
+          <li><a data-toggle="tab" href="#menu2-1">Menu 1</a></li>
+        </ul>
+    <!-- Tab 1 Start -->
+        <div class="tab-content">
+          <div id="home2-1" class="tab-pane fade in active">
+            <h3>HOME</h3>
+            <p>Some content.</p>
+          </div>
+    <!-- Tab 1 end -->
+    <!-- Tab 2 start -->
+          <div id="menu2-1" class="tab-pane fade">
+            <h3>Menu 1</h3>
+            <p>Some content in menu 1.</p>
+          </div>
+    <!-- Tab 2 end -->
+        </div>
+    <!-- Tabs End -->
+      </div>
+      <div class="well">
+    <!-- Tabs Start -->
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#home2-2">Home</a></li>
+          <li><a data-toggle="tab" href="#menu2-2">Menu 1</a></li>
+        </ul>
+    <!-- Tab 1 Start -->
+        <div class="tab-content">
+          <div id="home2-2" class="tab-pane fade in active">
+            <h3>HOME</h3>
+            <p>Some content.</p>
+          </div>
+    <!-- Tab 1 end -->
+    <!-- Tab 2 start -->
+          <div id="menu2-2" class="tab-pane fade">
+            <h3>Menu 1</h3>
+            <p>Some content in menu 1.</p>
+          </div>
+    <!-- Tab 2 end -->
+        </div>
+    <!-- Tabs End -->
+      </div>
+    </div>
+
+<!-- END 2 -->
+
+
+<!-- START 3 -->
+
+    <div class="col-sm-4">
+      <div class="well">
+    <!-- Tabs Start -->
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#home3-1">Home</a></li>
+          <li><a data-toggle="tab" href="#menu3-1">Menu 1</a></li>
+        </ul>
+    <!-- Tab 1 Start -->
+        <div class="tab-content">
+          <div id="home3-1" class="tab-pane fade in active">
+            <h3>HOME</h3>
+            <p>Some content.</p>
+          </div>
+    <!-- Tab 1 end -->
+    <!-- Tab 2 start -->
+          <div id="menu3-1" class="tab-pane fade">
+            <h3>Menu 1</h3>
+            <p>Some content in menu 1.</p>
+          </div>
+    <!-- Tab 2 end -->
+        </div>
+    <!-- Tabs End -->
+      </div>
+      <div class="well">
+    <!-- Tabs Start -->
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#home3-2">Home</a></li>
+          <li><a data-toggle="tab" href="#menu3-2">Menu 1</a></li>
+        </ul>
+    <!-- Tab 1 Start -->
+        <div class="tab-content">
+          <div id="home3-2" class="tab-pane fade in active">
+            <h3>HOME</h3>
+            <p>Some content.</p>
+          </div>
+    <!-- Tab 1 end -->
+    <!-- Tab 2 start -->
+          <div id="menu3-2" class="tab-pane fade">
+            <h3>Menu 1</h3>
+            <p>Some content in menu 1.</p>
+          </div>
+    <!-- Tab 2 end -->
+        </div>
+    <!-- Tabs End -->
+      </div>
+    </div>
+
+<!-- END 3 -->
+
+
+<% end %>
+</body>

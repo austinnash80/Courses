@@ -1,0 +1,74 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Empire Mailings</h1>
+
+<div class="row">
+<div class="col-md-3">
+  <input class="form-control" id="myInput" type="text" placeholder="Search Datasheet">
+</div>
+</div>
+</br>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Drop</th>
+      <th>Date extra</th>
+      <th>State</th>
+      <th>What</th>
+      <th>Quanity est</th>
+      <th>Quanity sent</th>
+      <th>Group 1</th>
+      <th>Group 2</th>
+      <th>Group 3</th>
+      <th>Data name</th>
+      <th>Art name</th>
+      <th>Msi note</th>
+      <th>Note 1</th>
+      <th>Note 2</th>
+      <th>Complete</th>
+      <th>Boolean 1</th>
+      <th>Integer extra</th>
+      <th>Cost service</th>
+      <th>Cost print</th>
+      <th>Cost postage</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody id="myTable">
+    <% @empire_mailings.each do |empire_mailing| %>
+      <tr>
+        <td><%= empire_mailing.name %></td>
+        <td><%= empire_mailing.drop %></td>
+        <td><%= empire_mailing.date_extra %></td>
+        <td><%= empire_mailing.state %></td>
+        <td><%= empire_mailing.what %></td>
+        <td><%= empire_mailing.quanity_est %></td>
+        <td><%= empire_mailing.quanity_sent %></td>
+        <td><%= empire_mailing.group_1 %></td>
+        <td><%= empire_mailing.group_2 %></td>
+        <td><%= empire_mailing.group_3 %></td>
+        <td><%= empire_mailing.data_name %></td>
+        <td><%= empire_mailing.art_name %></td>
+        <td><%= empire_mailing.msi_note %></td>
+        <td><%= empire_mailing.note_1 %></td>
+        <td><%= empire_mailing.note_2 %></td>
+        <td><%= empire_mailing.complete %></td>
+        <td><%= empire_mailing.boolean_1 %></td>
+        <td><%= empire_mailing.integer_extra %></td>
+        <td><%= empire_mailing.cost_service %></td>
+        <td><%= empire_mailing.cost_print %></td>
+        <td><%= empire_mailing.cost_postage %></td>
+        <td><%= link_to 'Show', empire_mailing %></td>
+        <td><%= link_to 'Edit', edit_empire_mailing_path(empire_mailing) %></td>
+        <td><%= link_to 'Destroy', empire_mailing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Empire Mailing', new_empire_mailing_path %>

@@ -94,7 +94,6 @@
             <th>Drops</th>
             <th>Quanity</th>
             <th>Cost</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -103,21 +102,18 @@
               <td><%= @ytd_drops.count %></td>
               <td><%= number_with_delimiter(@ytd_quanity.sum, :delimiter => ',') %></td>
               <td><%= number_to_currency(@ytd_cost.sum, :precision => 0) %></td>
-              <td>Details</td>
             </tr>
             <tr>
               <td><strong><%= Date.today.year - 1 %></strong></td>
               <td><%= @last_year_drops.count %></td>
               <td><%= number_with_delimiter(@last_year_quanity.sum, :delimiter => ',') %></td>
               <td><%= number_to_currency(@last_year_cost.sum, :precision => 0) %></td>
-              <td>Details</td>
             </tr>
             <tr>
               <td><strong>All</strong></td>
               <td><%= @all_time_drops.count %></td>
               <td><%= number_with_delimiter(@all_time_quanity.sum, :delimiter => ',') %></td>
               <td><%= number_to_currency(@all_time_cost.sum, :precision => 0) %></td>
-              <td>Details</td>
             </tr>
         </tbody>
       </table>
@@ -314,12 +310,12 @@
   <div class="well">
 <!-- Tabs Start -->
     <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+      <li class="active"><a data-toggle="tab" href="#home1">Home</a></li>
       <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
     </ul>
 <!-- Tab 1 Start -->
     <div class="tab-content">
-      <div id="home" class="tab-pane fade in active">
+      <div id="home1" class="tab-pane fade in active">
         <h3>HOME</h3>
         <p>Some content.</p>
       </div>
@@ -336,18 +332,18 @@
   <div class="well">
 <!-- Tabs Start -->
     <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-      <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+      <li class="active"><a data-toggle="tab" href="#home2">Home</a></li>
+      <li><a data-toggle="tab" href="#menu2">Menu 1</a></li>
     </ul>
 <!-- Tab 1 Start -->
     <div class="tab-content">
-      <div id="home" class="tab-pane fade in active">
+      <div id="home2" class="tab-pane fade in active">
         <h3>HOME</h3>
         <p>Some content.</p>
       </div>
 <!-- Tab 1 end -->
 <!-- Tab 2 start -->
-      <div id="menu1" class="tab-pane fade">
+      <div id="menu2" class="tab-pane fade">
         <h3>Menu 1</h3>
         <p>Some content in menu 1.</p>
       </div>
