@@ -2,12 +2,56 @@
 
 <body class= 'body-home'>
 
+<% if user_signed_in? && current_user.superadmin_role?%>
+
+  <div class="dropdown header-size pull-right">
+      <button class="button-none" type="button" data-toggle="dropdown"><span class="off-white glyphicon glyphicon-option-vertical gi-2x"></span></button>
+      <ul class="dropdown-menu">
+        <% if current_user.email == 'austin@sequoiacpe.com' %>
+          <li><%= link_to 'Austin Dashboard', sequoia_dash_path %></li>
+          <li><%= link_to 'Ashley Dashboard', sequoia_dash_ashley_path %></li>
+        <% end %>
+        <li class="dropdown-header">Courses</li>
+          <li><%= link_to 'Course Datasheet', datasheets_path %></li>
+          <li><%= link_to 'Course Updatesheet', updatesheets_path %></li>
+          <li><%= link_to 'Copyrights', copyrights_path %></li>
+          <li><%= link_to 'PES Courses', pes_courses_path %></li>
+        <li class="divider"></li>
+        <li class="dropdown-header">Marketing</li>
+            <li><%= link_to 'Postcards Returns', postcard_returns_path %></li>
+            <li><%= link_to 'Postcard Mailings', postcard_mailings_path %></li>
+            <li><%= link_to 'Postcard inventory', inventories_path %></li>
+            <!-- <li><a tabindex="-1"href="/mail_items">Mail contents</a></li> -->
+        <li class="divider"></li>
+        <li class="dropdown-header">Empire</li>
+            <li><%= link_to 'Empire Mailing', empire_mailings_path %></li>
+        <li class="divider"></li>
+        <li class="dropdown-header">Other</li>
+          <li><%= link_to 'Texas Royalties', tx_royalties_path %></li>
+
+        <% if user_signed_in? && current_user.superadmin_role? %>
+        <li class="divider"></li>
+            <li><a href="/admin">Admin</a></li>
+            <li><%= link_to 'Log Out', destroy_user_session_path, method: :delete %></li>
+        <% elsif user_signed_in? %>
+        <li class="divider"></li>
+            <li><%= link_to 'Log Out', destroy_user_session_path, method: :delete %></li>
+        <% elsif %>
+        <li class="divider"></li>
+            <li><a href="/users/sign_in">Log in</a></li>
+        <% end %>
+          </ul>
+    </div>
+
   <% if user_signed_in? && current_user.email == 'austin@sequoiacpe.com' %>
-    <h1>Austin Dashboard</h1>
+    <h1 class="off-white text-center">Austin Dashboard</h1>
+    <h3 class="off-white text-center"><%= Time.now.strftime('%A %-b %-d, %Y') %></h3>
+  <% end %>
+
+</br>
 
 <div class="col-lg-4">
 <div class="well">
-  day of week = <%= @day_of_week %>
   <h2 class="text-center">MSI Mailings</h2>
   <!-- Start Tab Headers -->
       <ul class="nav nav-tabs">
@@ -275,8 +319,6 @@
             </tr>
           </tbody>
         </table>
-        <%= @next_due %>
-        <%= Time.now.strftime('%-m/%-d/%y') %> < <%= (@next_due.min.to_date + 5).strftime('%-m/%-d/%y') %>
       </div>
 <!-- Tab 1 end -->
 <!-- Tab 2 start -->

@@ -7,88 +7,41 @@ class SequoiaController < ApplicationController
   end
 
   def dash
+    sales
     postcard_schedule #must be above postcard_inventory
     postcard_inventory # must be below postcard_schedule
     course_update_status
     tx_royalties
+    task
+    msi_mailing
+  end
 
+private
 
-
+def sales
     @seq_customers_all = SequoiaCustomer.all
-    # @pur_date = @seq_customers_all.purchase.strftime('%a, %-d')
-        # collumn sales chart - Start
 
-        # @seq_customers_all.each do |i|
-        #   i['purchase'] > 1.day.ago..Time.now.yesterday ? (
-
-          @cpa_1 = []
-          @ea_1 = []
-          @ethics_1 = []
-          @afsp_1 = []
-
-          # @seq_customers_all.each do |i|
-          #   i['purchase_date'] > 1.week.ago..Time.now.yesterday ? (
-          #     i['product_1'] == "1-Year CPA Membership Discounted Re-Activation" || i['product_1'] == "1-Year CPA Membership Re-Activation" ||
-          #     i['product_1'] == "1-Year CPA Membership Renewal" || i['product_1'] == "1-Year CPA Membership Renewal (Auto-Renew)" ||
-          #     i['product_1'] == "Unlimited CPA CPE Membership" || i['product_1'] == "Unlimited CPA CPE Membership (Auto-Renew)" ? @cpa_1.push("CPA") : ''
-          #     i['product_1'] == "1-Year EA Membership Discounted Re-Activation" || i['product_1'] == "1-Year EA Membership Re-Activation" ||
-          #     i['product_1'] == "1-Year EA Membership Renewal" || i['product_1'] == "1-Year EA Membership Renewal (Auto-Renew)" ||
-          #     i['product_1'] == "Unlimited EA CPE Membership" || i['product_1'] == "Unlimited EA Membership (Auto-Renew)" ? @ea_1.push("EA") : ''
-          #     i['product_1'] == "15-hour AFTR-Exempt Package" || i['product_1'] == "18-hour AFTR Package" ||
-          #     i['product_1'] == "CE 100 - 11hr. AFTR Package" || i['product_1'] == "CE 200 - 8hr. AFTR-Exempt Package" ? @afsp_1.push("AFSP") : ''
-          #     i['product_1'][0] == "9" || i['product_1'][0] == "E" ? @ethics_1.push("Ethics") : ''
-          # ) : ''
-          # end
-          # @cpa_1a = []
-          # @ea_1a = []
-          # @ethics_1a = []
-          # @afsp_1a = []
-          #
-          #   @cpa_1a.push(@cpa_1.first, (@cpa_1.length * 149))
-          #   @ea_1a.push(@ea_1.first, @ea_1.length * 99)
-          #   @ethics_1a.push(@ethics_1.first, @ethics_1.length * 65.5)
-          #   @afsp_1a.push(@afsp_1.first, @afsp_1.length * 55)
-          #
-          #   @pie_1 = []
-          #   @pie_1.push(@cpa_1a, @ea_1a, @ethics_1a, @afsp_1a)
-      # collumn sales chart - Start
-
-      @CPA_all_time = []
-      @EA_all_time = []
-      @AFSP_all_time = []
-      @total_all_time = []
       @seq_customers_all.each do |i|
-        i['who'] == 'CPA' ? @CPA_all_time.push(i['price']) : ''
-        i['who'] == 'EA' ? @EA_all_time.push(i['price']) : ''
-        i['who'] == 'AFSP' ? @AFSP_all_time.push(i['price']) : ''
-        @total_all_time.push(i['price'])
+        i['who'] == 'CPA' ? @CPA_all_time = Array.new.push(i['price']) : ''
+        i['who'] == 'EA' ? @EA_all_time = Array.new.push.push(i['price']) : ''
+        i['who'] == 'AFSP' ? @AFSP_all_time = Array.new.push.push(i['price']) : ''
+        @total_all_time = Array.new.push.push(i['price'])
       end
 
       @yesterday_all = []
-      @yesterday_cpa = []
-      @yesterday_ea = []
-      @yesterday_afsp = []
+      # @yesterday_cpa = []
+      # @yesterday_ea = []
+      # @yesterday_afsp = []
 
 
       @seq_customers_all.each do |i|
-        # i['purchase_date'].group_by_day() ? (
         i['purchase_date'] > 2.day.ago..Time.now ? i['purchase_date'] < 1.day.ago..Time.now ? (
-        # i['purchase_date'] >= 2.day.ago..Time.now.yesterday ? i['purchase_date'] < Time.now.yesterday ? (
-          i['who'] == 'CPA' ? @yesterday_cpa.push(i['price']) : ''
-          i['who'] == 'EA' ? @yesterday_ea.push(i['price']) : ''
-          i['who'] == 'AFSP' ? @yesterday_afsp.push(i['price']) : ''
+          i['who'] == 'CPA' ? @yesterday_cpa = Array.new.push(i['price']) : ''
+          i['who'] == 'EA' ? @yesterday_ea = Array.new.push(i['price']) : ''
+          i['who'] == 'AFSP' ? @yesterday_afsp = Array.new.push(i['price']) : ''
           @yesterday_all.push(i['price'])
         ) : '' : ''
       end
-
-      # Last Monthly
-
-      @month_all = []
-      # @seq_customers_all.each do |i|
-      #   i['purchase_date'] > 2.month.ago..Time.now ? i['purchase_date'] < 1.month.ago..Time.now ? (
-      #     @month_all.push(i['price'])
-      #   ) : '' : ''
-      # end
 
       @what_new_cpa = []
       @what_new_ea = []
@@ -172,37 +125,14 @@ class SequoiaController < ApplicationController
         key[1] == "Membership-Renewal" && key[0] == 1.month.ago.strftime('%B') ? @mem_renewal3.push(value) : ''
         key[1] == "Ethics" && key[0] == 1.month.ago.strftime('%B') ? @ethics3.push(value) : ''
     end
+  end
 
-
-    #     if key[1] == "CPA"
-    #       @cpa1.push(value)
-    #       number_to_currency(@cpa1.first, :precision => 0)
-    #     end
-    #     if key[1] == "EA"
-    #       @ea1.push(value)
-    #     end
-    #     <% if key[1] == "AFSP" %>
-    #       <% @afsp1.push(value) %>
-    #       <td> <%= number_to_currency(@afsp1.first, :precision => 0) %> </td>
-    #     <% end %>
-    #   <% end %>
-    # <% end %>
-
-    # @d = 2.day.ago..Time.now
-    # # @d = 1.day.ago.strftime('%Y-%m-%d')
-    # @d1 = 1.day.ago..Time.now
-
-    # --- Task Section ----
+  def task
     @tasks = Task.all
+  end
 
-    # --- Mailing Section ----
+  def msi_mailing
     @mailings = Mailing.all.order(:drop).reverse_order
-
-    # @total_cost = (@mailing.cost_postage + @mailing.cost_print + @mailing.cost_service)
-    # @unit_total_cost = @total_cost / @mailing.quantity_sent
-    # @unit_service_cost = @mailing.cost_service / @mailing.quantity_sent
-    # @unit_print_cost = @mailing.cost_print / @mailing.quantity_sent
-    # @unit_postage_cost = @mailing.cost_postage / @mailing.quantity_sent
 
     @ytd_drops = []
     @ytd_quanity = []
@@ -235,14 +165,14 @@ class SequoiaController < ApplicationController
       if mailing.drop.strftime('%Y') == (Date.today.year - 1).to_s
         if mailing.cost_print.nil? || mailing.cost_postage.nil? || mailing.cost_service.nil?
         elsif
-          @last_year_cost.push(mailing['cost_print'])
+          @last_year_cost = Array.new.push(mailing['cost_print'])
           @last_year_cost.push(mailing['cost_postage'])
           @last_year_cost.push(mailing['cost_service'])
         end
-        @last_year_drops.push(mailing['name'])
+        @last_year_drops = Array.new.push(mailing['name'])
           if mailing.quantity_sent.nil?
           elsif
-            @last_year_quanity.push(mailing['quantity_sent'])
+            @last_year_quanity = Array.new.push(mailing['quantity_sent'])
           end
         end
         if mailing.cost_print.nil? || mailing.cost_postage.nil? || mailing.cost_service.nil?
@@ -257,7 +187,7 @@ class SequoiaController < ApplicationController
             @all_time_quanity.push(mailing['quantity_sent'])
           end
     end
-end#End of Dash
+end
 
 def course_update_status
     @updatesheets = Updatesheet.all
@@ -283,8 +213,7 @@ def tx_royalties
     end
 end
 
-private
-  def postcard_schedule
+def postcard_schedule
     @day_of_week = Time.now.strftime('%a')
     @postcard_mailings = PostcardMailing.all
   #Postcard Due Dates
