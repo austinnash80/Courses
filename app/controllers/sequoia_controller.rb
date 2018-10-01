@@ -244,18 +244,18 @@ def postcard_schedule
         end
       end
   # Sequoia
-      @day_of_week == 'Wen' && @most_recent_postcart_mailing_sequoia.max <= Date.today - 1 ? @out_of_date_sequoia = 'True' :
-      @day_of_week == 'Thu' && @most_recent_postcart_mailing_sequoia.max <= Date.today - 2 ? @out_of_date_sequoia = 'True' :
-      @day_of_week == 'Fri' && @most_recent_postcart_mailing_sequoia.max <= Date.today - 3 ? @out_of_date_sequoia = 'True' :
-      @day_of_week == 'Mon' && @most_recent_postcart_mailing_sequoia.max <= Date.today - 3 ? @out_of_date_sequoia = 'True' :
-      @day_of_week == 'Tue' && @most_recent_postcart_mailing_sequoia.max <= Date.today - 4 ? @out_of_date_sequoia = 'True' : @out_of_date_sequoia = 'False'
+      @day_of_week == 'Wen' && @most_recent_postcart_mailing_sequoia.max < Date.today - 1 ? @out_of_date_sequoia = 'True' :
+      @day_of_week == 'Thu' && @most_recent_postcart_mailing_sequoia.max < Date.today - 2 ? @out_of_date_sequoia = 'True' :
+      @day_of_week == 'Fri' && @most_recent_postcart_mailing_sequoia.max < Date.today - 3 ? @out_of_date_sequoia = 'True' :
+      @day_of_week == 'Mon' && @most_recent_postcart_mailing_sequoia.max < Date.today - 3 ? @out_of_date_sequoia = 'True' :
+      @day_of_week == 'Tue' && @most_recent_postcart_mailing_sequoia.max < Date.today - 4 ? @out_of_date_sequoia = 'True' : @out_of_date_sequoia = 'False'
 
   # Empire
-      @day_of_week == 'Thu' && @most_recent_postcart_mailing_empire.max <= Date.today - 1 ? @out_of_date_empire = 'True' :
-      @day_of_week == 'Fri' && @most_recent_postcart_mailing_empire.max <= Date.today - 2 ? @out_of_date_empire = 'True' :
-      @day_of_week == 'Mon' && @most_recent_postcart_mailing_empire.max <= Date.today - 5 ? @out_of_date_empire = 'True' :
-      @day_of_week == 'Tue' && @most_recent_postcart_mailing_empire.max <= Date.today - 6 ? @out_of_date_empire = 'True' :
-      @day_of_week == 'Wen' && @most_recent_postcart_mailing_empire.max <= Date.today - 7 ? @out_of_date_empire = 'True' : @out_of_date_empire = 'False'
+      @day_of_week == 'Thu' && @most_recent_postcart_mailing_empire.max < Date.today - 1 ? @out_of_date_empire = 'True' :
+      @day_of_week == 'Fri' && @most_recent_postcart_mailing_empire.max < Date.today - 2 ? @out_of_date_empire = 'True' :
+      @day_of_week == 'Mon' && @most_recent_postcart_mailing_empire.max < Date.today - 5 ? @out_of_date_empire = 'True' :
+      @day_of_week == 'Tue' && @most_recent_postcart_mailing_empire.max < Date.today - 6 ? @out_of_date_empire = 'True' :
+      @day_of_week == 'Wen' && @most_recent_postcart_mailing_empire.max < Date.today - 7 ? @out_of_date_empire = 'True' : @out_of_date_empire = 'False'
 
   end
 
