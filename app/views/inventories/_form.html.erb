@@ -1,0 +1,62 @@
+<%= form_with(model: inventory, local: true) do |form| %>
+  <% if inventory.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(inventory.errors.count, "error") %> prohibited this inventory from being saved:</h2>
+
+      <ul>
+      <% inventory.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :company %>
+    <%= form.select :company,['Sequoia', 'Empire'], id: :inventory_company %>
+  </div>
+
+  <div class="field">
+    <%= form.label :version %>
+    <%= form.select :version, ['CPA NM', 'CPA RC', 'EA NM', 'EA RC', 'Empire RC', 'Other'], id: :inventory_version %>
+  </div>
+
+  <div class="field">
+    <%= form.label :number %>
+    <%= form.number_field :number, id: :inventory_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :order %>
+    <%= form.date_select :order, id: :inventory_order %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cost %>
+    <%= form.number_field :cost, id: :inventory_cost %>
+  </div>
+
+  <div class="field">
+    <%= form.label :note %>
+    <%= form.text_area :note, id: :inventory_note %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_s %>
+    <%= form.text_field :extra_s, id: :inventory_extra_s %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_i %>
+    <%= form.number_field :extra_i, id: :inventory_extra_i %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_b %>
+    <%= form.check_box :extra_b, id: :inventory_extra_b %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

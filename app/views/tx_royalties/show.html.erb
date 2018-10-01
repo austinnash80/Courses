@@ -1,0 +1,213 @@
+<p id="notice"><%= notice %></p>
+
+<!-- Start Letter -->
+<div class="print-only">
+  <div class="container">
+    <div class="clearfix">
+      <div class="box">
+        <%= image_tag("logos/Logo.web.gif", width: '175px') %>
+    </div>
+
+    <div class="box">
+      <p></p>
+    </div>
+
+    <div class="box">
+      <p class="text-right">
+        <%= Time.now.strftime('%B %-d, %Y') %></br></br>
+        Sequoia CPE </br>
+        600 B st. Ste 300</br>
+        San Diego, CA 92101</br>
+      </p>
+    </div>
+  </div>
+</div>
+
+</br>
+</br>
+<p>
+  Allison M. Mclead, LL.M., CPA</br>
+  1155 Union Circle</br>
+  #307796</br>
+  Denton, TX 76203</br>
+</p>
+</br>
+<h3 class="text-center">
+  <strong>Ethical Dilemmas for Texas CPAs</strong>
+</h3>
+<h3 class="text-center">
+  Royalties for Q<%= @tx_royalty.extra_i %> <%= @tx_royalty.end_date.strftime('%Y') %>
+</h3>
+</br></br>
+<p>
+  Dear Allison,
+</p>
+
+<p>
+  Included is a check and sales print out for all courses sold this past quarter ending <%= @tx_royalty.end_date.strftime('%B %d, %Y') %>. <%= @tx_royalty.sold %> courses were sold for a total of <%= number_to_currency(@tx_royalty.sold * @tx_royalty.cost) %>. Royalties of <%= number_to_percentage(@tx_royalty.percentage) %> come out to <strong><%= number_to_currency((@tx_royalty.sold * @tx_royalty.cost) * @tx_royalty.percentage) %></strong>.
+</p>
+</br>
+<p>
+  Hope all is well
+</p>
+</br>
+<p>
+  Austin Nash
+</p>
+</br>
+</br>
+<p>
+  Sequoia CPE</br>
+   Austin@SequoiaCPE.com
+ </p>
+ <!-- END Letter -->
+
+ <!-- Page Break -->
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+<!-- Page Break -->
+
+<!-- Start Invoice -->
+ <h2 class="text-center"><strong>Sequoia CPE</strong></h2>
+ <h3 class="text-center">Q<%= @tx_royalty.extra_i %> <%= @tx_royalty.end_date.strftime('%Y') %></h3>
+</br>
+ <div class="clearfix">
+   <div class="box">
+ <p>
+   Sequoia CPE</br>
+   600 B st. Ste 300</br>
+   San Diego, CA 92101</br>
+ </p>
+</br>
+
+<p>
+  Allison M. Mclead, LL.M., CPA</br>
+  1155 Union Circle</br>
+  #307796</br>
+  Denton, TX 76203</br>
+</p>
+</div>
+
+<div class="box">
+  <p></p>
+</div>
+
+<div class="box">
+ <p>
+  <%= Time.now.strftime('%B %-d, %Y') %></br>
+ </p>
+</br>
+<p>
+  Royalties for: Ethical Dilemmas for Texas CPAs
+</p>
+
+<p>
+  Courses purchased between <%= @tx_royalty.start_date.strftime('%B %-d, %Y') %> and <%= @tx_royalty.end_date.strftime('%B %-d, %Y') %>
+</p>
+
+<p>
+  <strong>Status: Check Attached</strong>
+</p>
+
+</div>
+</div>
+
+</br>
+</br>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Sold</th>
+      <th>Course Title</th>
+      <th>Unit Price</th>
+      <th>Total Sales</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @tx_royalty.sold %></td>
+      <td><%= @tx_royalty.extra_s %></td>
+      <td><%= number_to_currency(@tx_royalty.cost) %></td>
+      <td><%= number_to_currency(@tx_royalty.sold * @tx_royalty.cost) %></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><%= number_to_percentage((@tx_royalty.percentage * 100), :precision => 0 ) %> of Total Sales:</td>
+      <td></td>
+      <td><strong><%= number_to_currency((@tx_royalty.sold * @tx_royalty.cost) * @tx_royalty.percentage) %></strong></td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+<!-- End Invoice -->
+
+<!-- End PDFs -->
+
+<div class="display-none">
+<div class="jumbotron">
+  <h2 class="text-center">
+    <%= @tx_royalty.extra_s %>
+  </h2>
+  <h3 class="text-center">
+    Royalties for <%= @tx_royalty.quarter %>
+  </h3>
+</div>
+
+
+
+<!-- Buttons -->
+<div class="btn-group display-none">
+  <!-- <a class="btn btn-primary" target="_blank" href="#"><i class="glyphicon glyphicon-download-alt" ></i> Art</a> -->
+  <a class="btn btn-primary" target="_blank" href="#"><i class="glyphicon glyphicon-download-alt" ></i> Sales Report </a>
+  <%= link_to raw('<i class="glyphicon glyphicon-download-alt" ></i> Letter/Invoice'), tx_royalty_path(@tx_royalty, :format => 'pdf'), class: 'btn btn-primary', target: '_blank'%>
+  <!-- <a class="btn btn-primary" target="_blank" href="#"><i class="glyphicon glyphicon-download-alt" ></i> Invoice</a> -->
+</div>
+<!-- end Button -->
+
+</br>
+</br>
+<p>
+  <strong><%= @tx_royalty.start_date.strftime('%B %-d,%Y') %> - <%= @tx_royalty.end_date.strftime('%B %-d,%Y') %></strong>
+</p>
+
+<p>
+  <strong>Courses Sold:</strong>
+  <%= @tx_royalty.sold %>
+</p>
+
+<p>
+  <strong>Unit Cost:</strong>
+  <%= @tx_royalty.cost %>
+</p>
+
+<p>
+  <strong>Royalty Percentage:</strong>
+  <%= number_to_percentage((@tx_royalty.percentage * 100), :precision => 0) %>
+</p>
+
+<% if @tx_royalty.sent == true %>
+  <p>
+    <strong>Status:</strong> <span class="green">Sent</span>
+  </p>
+<% elsif %>
+  <p>
+    <strong>Status:</strong> <span class="red">Not Sent</span>
+  </p>
+<% end %>
+
+
+<%= link_to 'Edit', edit_tx_royalty_path(@tx_royalty) %> |
+<%= link_to 'Back', tx_royalties_path %>
+</div>

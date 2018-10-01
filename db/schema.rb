@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180919175850) do
+ActiveRecord::Schema.define(version: 20180928210116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,20 @@ ActiveRecord::Schema.define(version: 20180919175850) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "inventories", force: :cascade do |t|
+    t.string "company"
+    t.string "version"
+    t.integer "number"
+    t.text "note"
+    t.string "extra_s"
+    t.integer "extra_i"
+    t.boolean "extra_b"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "order"
+    t.decimal "cost"
+  end
+
   create_table "mail_items", force: :cascade do |t|
     t.integer "mail_id"
     t.string "title"
@@ -131,6 +145,20 @@ ActiveRecord::Schema.define(version: 20180919175850) do
     t.integer "group_30"
     t.integer "group_60"
     t.integer "group_90"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "mailing_postcards", force: :cascade do |t|
+    t.string "company"
+    t.string "version"
+    t.boolean "sent"
+    t.date "date_sent"
+    t.integer "number_sent"
+    t.text "note"
+    t.integer "extra_i"
+    t.boolean "extra_b"
+    t.string "extra_s"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -213,6 +241,20 @@ ActiveRecord::Schema.define(version: 20180919175850) do
     t.string "tag"
   end
 
+  create_table "postcard_mailings", force: :cascade do |t|
+    t.string "company"
+    t.string "version"
+    t.boolean "sent"
+    t.date "date_sent"
+    t.integer "number_sent"
+    t.text "note"
+    t.integer "extra_i"
+    t.boolean "extra_b"
+    t.string "extra_s"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "postcard_returns", force: :cascade do |t|
     t.string "company"
     t.date "postmark"
@@ -260,6 +302,35 @@ ActiveRecord::Schema.define(version: 20180919175850) do
     t.string "extra_string"
     t.integer "extra_integer"
     t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "texas_royalties", force: :cascade do |t|
+    t.string "quarter"
+    t.integer "sold"
+    t.decimal "cost"
+    t.decimal "percentage"
+    t.boolean "sent"
+    t.integer "extra_i"
+    t.boolean "extra_b"
+    t.string "extra_s"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tx_royalties", force: :cascade do |t|
+    t.string "quarter"
+    t.date "start_date"
+    t.date "end_date"
+    t.date "sent_date"
+    t.integer "sold"
+    t.decimal "cost"
+    t.decimal "percentage"
+    t.boolean "sent"
+    t.integer "extra_i"
+    t.boolean "extra_b"
+    t.string "extra_s"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,0 +1,60 @@
+// Place all the styles related to the TxRoyalties controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.blue {
+    color: blue;
+}
+.green {
+    color: green;
+}
+.red {
+    color: red;
+}
+.sequoia {
+    color: #21495b;
+}
+
+.gi-2x{
+  font-size: 2em;
+}
+.gi-3x{
+  font-size: 3em;
+}
+.gi-4x{
+  font-size: 4em;
+}
+.gi-5x{
+  font-size: 5em;
+}
+
+@media screen {
+
+  .print-only {
+    display: none;
+  }
+}
+
+@media print {
+
+  .display-none {
+    display: none;
+  }
+
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.box {
+    float: left;
+    width: 33%;
+    // padding: 50px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}

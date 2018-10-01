@@ -1,0 +1,2 @@
+module TxRoyaltiesHelper
+end

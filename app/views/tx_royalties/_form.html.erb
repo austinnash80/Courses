@@ -1,0 +1,72 @@
+<%= form_with(model: tx_royalty, local: true) do |form| %>
+  <% if tx_royalty.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tx_royalty.errors.count, "error") %> prohibited this tx_royalty from being saved:</h2>
+
+      <ul>
+      <% tx_royalty.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :quarter %>
+    <%= form.text_field :quarter, id: :tx_royalty_quarter %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_date %>
+    <%= form.date_select :start_date, id: :tx_royalty_start_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_date %>
+    <%= form.date_select :end_date, id: :tx_royalty_end_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sent_date %>
+    <%= form.date_select :sent_date, id: :tx_royalty_sent_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sold %>
+    <%= form.number_field :sold, id: :tx_royalty_sold, value: 0 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cost %>
+    <%= form.text_field :cost, id: :tx_royalty_cost, value: 65.50 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :percentage %>
+    <%= form.text_field :percentage, id: :tx_royalty_percentage, value: 0.25 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sent %>
+    <%= form.check_box :sent, id: :tx_royalty_sent %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_i %>
+    <%= form.number_field :extra_i, id: :tx_royalty_extra_i %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_b %>
+    <%= form.check_box :extra_b, id: :tx_royalty_extra_b %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_s %>
+    <%= form.text_field :extra_s, id: :tx_royalty_extra_s, value: "9245 - Ethical Dilemmas for Texas CPAs" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :inventories
+  resources :postcard_mailings
+  resources :tx_royalties
   resources :empire_mailings
   resources :mailings do
     collection {post :import}
@@ -10,6 +13,7 @@ Rails.application.routes.draw do
   # resources :sequoia_customers
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'sequoia/dash'
+  get 'sequoia/dash_ashley'
 
   resources :date_fields
   resources :pes_courses

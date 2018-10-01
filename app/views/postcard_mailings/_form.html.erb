@@ -1,0 +1,62 @@
+<%= form_with(model: postcard_mailing, local: true) do |form| %>
+  <% if postcard_mailing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(postcard_mailing.errors.count, "error") %> prohibited this postcard_mailing from being saved:</h2>
+
+      <ul>
+      <% postcard_mailing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :company %>
+    <%= form.select :company, ['Sequoia','Empire'], id: :postcard_mailing_company %>
+  </div>
+
+  <div class="field">
+    <%= form.label :version %>
+    <%= form.select :version, ['CPA NM', 'CPA RC', 'EA NM', 'EA RC', 'Empire RC', 'Other'], id: :postcard_mailing_version %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sent %>
+    <%= form.check_box :sent, id: :postcard_mailing_sent %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_sent %>
+    <%= form.date_select :date_sent, id: :postcard_mailing_date_sent %>
+  </div>
+
+  <div class="field">
+    <%= form.label :number_sent %>
+    <%= form.number_field :number_sent, id: :postcard_mailing_number_sent %>
+  </div>
+
+  <div class="field">
+    <%= form.label :note %>
+    <%= form.text_area :note, id: :postcard_mailing_note %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_i %>
+    <%= form.number_field :extra_i, id: :postcard_mailing_extra_i %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_b %>
+    <%= form.check_box :extra_b, id: :postcard_mailing_extra_b %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_s %>
+    <%= form.text_field :extra_s, id: :postcard_mailing_extra_s %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

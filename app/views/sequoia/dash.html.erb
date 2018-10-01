@@ -5,8 +5,9 @@
   <% if user_signed_in? && current_user.email == 'austin@sequoiacpe.com' %>
     <h1>Austin Dashboard</h1>
 
-<div class="col-sm-3">
+<div class="col-lg-4">
 <div class="well">
+  day of week = <%= @day_of_week %>
   <h2 class="text-center">MSI Mailings</h2>
   <!-- Start Tab Headers -->
       <ul class="nav nav-tabs">
@@ -191,139 +192,164 @@
 <!-- End Task Section -->
 </div>
 
-<div class="col-sm-6 length right-square well">
-  <ul class="nav nav-tabs">
-    <%# if user_signed_in? && current_user.superadmin_role? %>
-       <li class=""><a data-toggle="tab" href="#total-sales">Daily</a></li>
-       <li><a data-toggle="tab" href="#month-sales">Monthly</a></li>
-    <%# end %>
-       <li><a data-toggle="tab" href="#pie-sales">Yearly</a></li>
-  </ul>
-<!-- Tab Content -->
 
-  <!-- First Tab -->
-
-  <div class="tab-content">
-    <div id="total-sales" class="tab-pane fade in active">
-     <h2 class="text-center"> Yesterday <%#= 1.day.ago.strftime('%A') %> (<%= 1.day.ago.strftime('%-m/%-d') %>):  Sales <%= number_to_currency(@yesterday_all.sum, :precision => 0) %></h2>
-   </br>
-   </br>
-     <div class="col-sm-6 length">
-       <% @t1.each do |key, value| %>
-         <% if key[0] == 1.day.ago.strftime('%a') %>
-           <h4><%= key[1] %>: <%= number_to_currency(value, :precision => 0) %><h4>
-         <% end %>
-       <% end %>
-       <!-- </br> -->
-       -----------
-       <!-- <%= @t2 %> -->
-       <% @t2.each do |key, value| %>
-         <% if key[0] == 1.day.ago.strftime('%a') && key[1] != 'AFSP' %>
-           <h4> <%= key[1] %>: <%= number_to_currency(value, :precision => 0) %></h4>
-         <% end %>
-       <% end %>
-      </div>
-      <div class="col-sm-6 length right-square">
-       <%= column_chart SequoiaCustomer.where(:purchase_date => 1.week.ago..Time.now.yesterday).group_by_day(:purchase_date, format: '%a, %-d').sum(:price),
-           prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "Day", width: "400px", height: "250px", download: true, title: "" %>
-      </div>
-    </div>
-
-  <!-- End First Tab -->
-  <!-- Second Tab -->
-
-    <div id="month-sales" class="tab-pane fade">
-  </br>
-      <%= column_chart SequoiaCustomer.where(:purchase_date => 12.month.ago..Time.now).group_by_month(:purchase_date, week_start: :mon, format: '%b %y').sum(:price),
-          prefix: "$", thousands: ",", xtitle: '', ytitle: "", id: "Month", width: "750px", download: true, title: "" %>
-
-      <div class="col-sm-6 length right-square">
-      <% @t4.each do |key, value| %>
-        <% if key == 1.month.ago.strftime('%B') %>
-          <h2> <%= key %> Sales: <%= number_to_currency(value, :precision => 0) %></h2>
-        <% end %>
-      <% end %>
-
-      <% @t3.each do |key, value| %>
-        <% if key[0] == 1.month.ago.strftime('%B') %>
-          <h4> <%= key[1] %>: <%= number_to_currency(value, :precision => 0) %></h4>
-        <% end %>
-      <% end %>
-
-    </br>
-      <% @t5.each do |key, value| %>
-        <% if key[0] == 1.month.ago.strftime('%B') && key[1] != 'AFSP' %>
-          <h4> <%= key[1] %>: <%= number_to_currency(value, :precision => 0) %></h4>
-        <% end %>
-      <% end %>
-      </div>
-    <div class="col-sm-6 length right-square">
-      <% @t4.each do |key, value| %>
-        <% if key == 0.month.ago.strftime('%B') %>
-          <h2> <%= key %> To Date (<%= 1.day.ago.strftime('%-m/%-d') %>): <%= number_to_currency(value, :precision => 0) %></h2>
-        <% end %>
-      <% end %>
-
-      <% @t3.each do |key, value| %>
-        <% if key[0] == 0.month.ago.strftime('%B') %>
-          <h4> <%= key[1] %>: <%= number_to_currency(value, :precision => 0) %></h4>
-        <% end %>
-      <% end %>
-
-      </br>
-        <% @t5.each do |key, value| %>
-          <% if key[0] == 0.month.ago.strftime('%B') && key[1] != 'AFSP' %>
-            <h4> <%= key[1] %>: <%= number_to_currency(value, :precision => 0) %></h4>
-          <% end %>
-        <% end %>
-    </div>
-    </div>
-  <!-- Third Tab -->
-    <div id="pie-sales" class="tab-pane fade">
-      <h2 class="text-center">All Time Sales: <%= number_to_currency(@t7, :precision => 0) %> </h2>
-      <!-- <h2 class="text-center">Year To Date: <%= number_to_currency(@t7, :precision => 0) %> </h2> -->
-      <% @t6.each do |key, value| %>
-        <% if key[0] == 0.year.ago.strftime('%Y') %>
-          <h2 class="text-center">Year To Date: <%= number_to_currency(value, :precision => 0) %></h2>
-        <% end %>
-      <% end %>
-
-
-      <%= column_chart SequoiaCustomer.group_by_year(:purchase_date, format: '%Y').sum(:price),
-          prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "Year", width: "800px", height: "250px", download: true, title: "" %>
-
-        <div class="col-sm-6 length right-square">
-          <%= pie_chart SequoiaCustomer.group(:what).sum(:price),
-              prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "All Time - what", width: "400px", dowload: true, title: "" %>
-        </div>
-
-        <div class="col-sm-6 length right-square">
-          <%= pie_chart SequoiaCustomer.group(:who).sum(:price),
-              prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "All Time - who", width: "400px", dowload: true, title: "" %>
-        </div>
-
-    </div>
-  </div>
-<!-- End Tab Content -->
-</div>
-<div class="col-sm-3">
+<div class="col-lg-4">
   <div class="well">
 <!-- Tabs Start -->
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" href="#home1">Home</a></li>
-      <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+      <li><a data-toggle="tab" href="#menu1">Postcard Inventory</a></li>
     </ul>
 <!-- Tab 1 Start -->
     <div class="tab-content">
       <div id="home1" class="tab-pane fade in active">
         <h3>HOME</h3>
-        <p>Some content.</p>
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Task </th>
+              <th>Status </th>
+              <th>Note </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Course Updating</td>
+              <% if @course_update_status.sum == 0 %>
+                <td class="green">Nothing in-progress</td>
+                <td> <%= link_to 'Add Update', datasheets_path %></td>
+              <% elsif %>
+                <td class="red">Not Complete</td>
+                <td><%= link_to @course_update_status.sum, updatesheets_path %> <%= link_to 'in-progress', updatesheets_path %> | <%= link_to 'Add Update', datasheets_path %></td>
+              <% end %>
+            </tr>
+            <tr>
+              <td>MSI Mailing</td>
+              <% @mailings.reverse_each do |mailing| %>
+              <% if mailing.complete == false %>
+                <% if (mailing.drop - 8).strftime('%-m/%-d/%y') > Time.now.strftime('%-m/%-d/%y') %>
+                  <td class="red">Mailing Due Now</td>
+                  <% break %>
+                <% elsif %>
+                  <td> Mailing due in <%= ((mailing.drop - 8).to_date - Time.now.to_date).to_i %> Days</td>
+                  <% break %>
+
+                <% end %>
+              <% end %>
+              <% end %>
+              <% @mailings.reverse_each do |mailing| %>
+              <% if mailing.complete == false %>
+                <%# if mailing.msi_art.url =~/missing/ && (mailing.drop - 8).to_date > (Time.now - 60).to_date && mailing.complete == false %>
+                <% if mailing.msi_art.url =~/missing/ && (mailing.drop - 8) < (Time.now - 10) %>
+                  <td class="red">Behind on art</td>
+                  <% break %>
+                <% elsif %>
+                  <td class="green">Art up-to-date</td>
+                  <% break %>
+                <% end%>
+              <% end%>
+              <% end%>
+              <!-- <td><%= link_to 'View Mailings', mailings_path %></td> -->
+
+            </tr>
+            <tr>
+              <td>Postcard Inventory</td>
+              <% if @remaining_inventory.min >= 500%>
+                <td class="green">Good</td>
+                <td><a data-toggle="tab" href="#menu1">Inventory</a></td>
+              <% elsif %>
+                <td class="red">Low</td>
+                <td> <strong><a data-toggle="tab" href="#menu1">Check Inventory</a></strong> </td>
+              <% end %>
+            </tr>
+
+            <tr>
+              <td>Texas Royalties Check </td>
+              <% if Time.now.strftime('%-m/%-d/%y') > (@next_due.min.to_date + 5).strftime('%-m/%-d/%y') %>
+                <td class="red">Over Due (<%= (@next_due.min.to_date + 5).strftime('%-m/%-d/%y') %>)</td>
+              <% elsif %>
+                <td>Due: <%= (@next_due.min.to_date + 5).strftime('%-m/%-d/%y') %></td>
+              <% end %>
+              <td><%= link_to 'Materials', tx_royalties_path %></td>
+            </tr>
+          </tbody>
+        </table>
+        <%= @next_due %>
+        <%= Time.now.strftime('%-m/%-d/%y') %> < <%= (@next_due.min.to_date + 5).strftime('%-m/%-d/%y') %>
       </div>
 <!-- Tab 1 end -->
 <!-- Tab 2 start -->
       <div id="menu1" class="tab-pane fade">
-        <h3>Menu 1</h3>
-        <p>Some content in menu 1.</p>
+        <h3>Postcard Inventory</h3>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Version</th>
+              <th>Order Date</th>
+              <th>Order Amount</th>
+              <th>Remaining</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sequoia</td>
+              <td>CPA NM</td>
+              <td><%= @date_sequoia_cpa_nm.max.strftime('%-m/%-d/%y') %></td>
+              <td><%= @number_sequoia_cpa_nm[0] %></td>
+              <% if (@inventory_sequoia_cpa_nm.sum - @used_sequoia_cpa_nm.sum) < 500 %>
+                <td class="red"><%= @inventory_sequoia_cpa_nm.sum - @used_sequoia_cpa_nm.sum %></td>
+              <% elsif %>
+                <td><%= @inventory_sequoia_cpa_nm.sum - @used_sequoia_cpa_nm.sum %></td>
+              <% end %>
+            </tr>
+            <tr>
+              <td>Sequoia</td>
+              <td>CPA RC</td>
+              <td><%= @date_sequoia_cpa_rc.max.strftime('%-m/%-d/%y') %></td>
+              <td><%= @number_sequoia_cpa_rc[0] %></td>
+              <% if (@inventory_sequoia_cpa_rc.sum - @used_sequoia_cpa_rc.sum) < 500 %>
+                <td class="red"><%= @inventory_sequoia_cpa_rc.sum - @used_sequoia_cpa_rc.sum %></td>
+              <% elsif %>
+                <td><%= @inventory_sequoia_cpa_rc.sum - @used_sequoia_cpa_rc.sum %></td>
+              <% end %>
+            </tr>
+            <tr>
+              <td>Sequoia</td>
+              <td>EA NM</td>
+              <td><%= @date_sequoia_ea_nm.max.strftime('%-m/%-d/%y') %></td>
+              <td><%= @number_sequoia_ea_nm[0] %></td>
+              <% if (@inventory_sequoia_ea_nm.sum - @used_sequoia_ea_nm.sum) < 500 %>
+                <td class="red"><%= @inventory_sequoia_ea_nm.sum - @used_sequoia_ea_nm.sum %></td>
+              <% elsif %>
+                <td><%= @inventory_sequoia_ea_nm.sum - @used_sequoia_ea_nm.sum %></td>
+              <% end %>
+            </tr>
+            <tr>
+              <td>Sequoia</td>
+              <td>EA RC</td>
+              <td><%= @date_sequoia_ea_rc.max.strftime('%-m/%-d/%y') %></td>
+              <td><%= @number_sequoia_ea_rc[0] %></td>
+              <% if (@inventory_sequoia_ea_rc.sum - @used_sequoia_ea_rc.sum) < 500 %>
+                <td class="red"><%= @inventory_sequoia_ea_rc.sum - @used_sequoia_ea_rc.sum %></td>
+              <% elsif %>
+                <td><%= @inventory_sequoia_ea_rc.sum - @used_sequoia_ea_rc.sum %></td>
+              <% end %>
+            </tr>
+            <tr>
+              <td>Empire</td>
+              <td>General RC</td>
+              <td><%= @date_empire_rc.max.strftime('%-m/%-d/%y') %></td>
+              <td><%= @number_empire_rc[0] %></td>
+              <% if (@inventory_empire_rc.sum - @used_empire_rc.sum) < 500 %>
+                <td class="red"><%= @inventory_empire_rc.sum - @used_empire_rc.sum %></td>
+              <% elsif %>
+                <td><%= @inventory_empire_rc.sum - @used_empire_rc.sum %></td>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
       </div>
 <!-- Tab 2 end -->
     </div>
@@ -352,5 +378,195 @@
 <!-- Tabs End -->
   </div>
 </div>
+
+<div class="col-lg-4 length right-square well">
+  <ul class="nav nav-tabs">
+    <%# if user_signed_in? && current_user.superadmin_role? %>
+       <li class=""><a data-toggle="tab" href="#total-sales">Daily</a></li>
+       <li><a data-toggle="tab" href="#month-sales">Monthly</a></li>
+    <%# end %>
+       <li><a data-toggle="tab" href="#yearly-sales">Yearly</a></li>
+  </ul>
+<!-- Tab Content -->
+
+  <!-- First Tab -->
+
+  <div class="tab-content">
+    <div id="total-sales" class="tab-pane fade in active">
+      <h3 class="text-center"> Sequoia Sales: <%= number_to_currency(@yesterday_all.sum, :precision => 0) %> </h3>
+     <h4 class="text-center"><%= 1.day.ago.strftime('%A, %-m/%-d') %></h4>
+     <div class="col-lg-6">
+       <!-- <%= @cpa1 %>
+       <%= @t2 %> -->
+     </br>
+       <table class="table ">
+         <thead>
+           <tr>
+             <th class="text-center" style="width: 33%">CPA </th>
+             <th class="text-center" style="width: 33%">EA </th>
+             <th class="text-center" style="width: 33%">AFSP </th>
+           </tr>
+         </thead>
+         <tbody>
+          <tr>
+            <td class="text-center"> <%= number_to_currency(@cpa1.first, :precision => 0) %> </td>
+            <td class="text-center"> <%= number_to_currency(@ea1.first, :precision => 0) %> </td>
+            <td class="text-center"> <%= number_to_currency(@afsp1.first, :precision => 0) %> </td>
+           </tr>
+         </tbody>
+         <thead>
+           <tr>
+             <th class="text-center" style="width: 33%">New</th>
+             <th class="text-center" style="width: 33%">Return</th>
+             <th class="text-center" style="width: 33%">Ethics</th>
+           </tr>
+         </thead>
+         <tbody>
+          <tr>
+            <td class="text-center"> <%= number_to_currency(@mem_first1.first, :precision => 0) %> </td>
+            <td class="text-center"> <%= number_to_currency(@mem_renewal1.first, :precision => 0) %> </td>
+            <td class="text-center"> <%= number_to_currency(@ethics1.first, :precision => 0) %> </td>
+           </tr>
+         </tbody>
+       </table>
+
+
+      </div>
+      <br>
+      <div class="col-lg-6">
+       <%= column_chart SequoiaCustomer.where(:purchase_date => 1.week.ago..Time.now.yesterday).group_by_day(:purchase_date, format: '%a, %-d').sum(:price),
+           prefix: "$", thousands: ",", xtitle: "", ytitle: "", height: '175px', id: "Day", download: true, title: "" %>
+      </div>
+    </div>
+
+  <!-- End First Tab -->
+  <!-- Second Tab -->
+
+<div id="month-sales" class="tab-pane fade">
+  <!-- Start Top Left Column -->
+  <div class="row">
+    <!-- <div class="col-lg-1">
+    </div> -->
+    <div class="col-lg-5">
+    </br>
+    <!-- <h4 class="text-center"> <%= 0.month.ago.strftime('%B') %>: <%= number_to_currency(@mtd_total.sum, :precision => 0) %> </h4> -->
+      <table class="table ">
+        <thead>
+          <tr>
+            <th class="text-center"> <%= 0.month.ago.strftime('%B') %>:</th>
+            <th class="text-center"> <%= number_to_currency(@mtd_total.sum, :precision => 0) %> <th>
+          </tr>
+          <tr>
+            <th class="text-center" style="width: 33%">CPA </th>
+            <th class="text-center" style="width: 33%">EA </th>
+            <th class="text-center" style="width: 33%">AFSP </th>
+          </tr>
+        </thead>
+        <tbody>
+         <tr>
+           <td class="text-center"> <%= number_to_currency(@cpa2.first, :precision => 0) %> </td>
+           <td class="text-center"> <%= number_to_currency(@ea2.first, :precision => 0) %> </td>
+           <td class="text-center"> <%= number_to_currency(@afsp2.first, :precision => 0) %> </td>
+          </tr>
+        </tbody>
+        <thead>
+          <tr>
+            <th class="text-center" style="width: 33%">New</th>
+            <th class="text-center" style="width: 33%">Return</th>
+            <th class="text-center" style="width: 33%">Ethics</th>
+          </tr>
+        </thead>
+        <tbody>
+         <tr>
+           <td class="text-center"> <%= number_to_currency(@mem_first2.first, :precision => 0) %> </td>
+           <td class="text-center"> <%= number_to_currency(@mem_renewal2.first, :precision => 0) %> </td>
+           <td class="text-center"> <%= number_to_currency(@ethics2.first, :precision => 0) %> </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  <div class="col-lg-1">
+  </div>
+  <div class="col-lg-5">
+  </br>
+    <!-- <h4 class="text-center"> <%= 1.month.ago.strftime('%B') %>: <%= number_to_currency(@last_month_total.sum, :precision => 0) %> </h4> -->
+      <table class="table ">
+        <thead>
+          <tr>
+            <th class="text-center"> <%= 1.month.ago.strftime('%B') %>:</th>
+            <th class="text-center"> <%= number_to_currency(@last_month_total.sum, :precision => 0) %> <th>
+          </tr>
+          <tr>
+            <th class="text-center" style="width: 33%">CPA </th>
+            <th class="text-center" style="width: 33%">EA </th>
+            <th class="text-center" style="width: 33%">AFSP </th>
+          </tr>
+        </thead>
+        <tbody>
+         <tr>
+           <td class="text-center"> <%= number_to_currency(@cpa3.first, :precision => 0) %> </td>
+           <td class="text-center"> <%= number_to_currency(@ea3.first, :precision => 0) %> </td>
+           <td class="text-center"> <%= number_to_currency(@afsp3.first, :precision => 0) %> </td>
+          </tr>
+        </tbody>
+        <thead>
+          <tr>
+            <th class="text-center" style="width: 33%">New</th>
+            <th class="text-center" style="width: 33%">Return</th>
+            <th class="text-center" style="width: 33%">Ethics</th>
+          </tr>
+        </thead>
+        <tbody>
+         <tr>
+           <td class="text-center"> <%= number_to_currency(@mem_first3.first, :precision => 0) %> </td>
+           <td class="text-center"> <%= number_to_currency(@mem_renewal3.first, :precision => 0) %> </td>
+           <td class="text-center"> <%= number_to_currency(@ethics3.first, :precision => 0) %> </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>
+
+<!-- <div class="col-lg-1">
+</div> -->
+<div class="col-lg-10">
+  <%= column_chart SequoiaCustomer.where(:purchase_date => 12.month.ago..Time.now).group_by_month(:purchase_date, week_start: :mon, format: '%b %y').sum(:price),
+      prefix: "$", thousands: ",", xtitle: '', ytitle: "", id: "Month", download: true, title: "" %>
+</div>
+</div>
+
+
+  <!-- Third Tab -->
+    <div id="yearly-sales" class="tab-pane fade">
+      <h2 class="text-center">All Time Sales: <%= number_to_currency(@t7, :precision => 0) %> </h2>
+      <!-- <h2 class="text-center">Year To Date: <%= number_to_currency(@t7, :precision => 0) %> </h2> -->
+      <% @t6.each do |key, value| %>
+        <% if key[0] == 0.year.ago.strftime('%Y') %>
+          <h2 class="text-center">Year To Date: <%= number_to_currency(value, :precision => 0) %></h2>
+        <% end %>
+      <% end %>
+
+      <%= column_chart SequoiaCustomer.group_by_year(:purchase_date, format: '%Y').sum(:price),
+          prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "Year", height: "250px", download: true, title: "" %>
+    <div class="col-lg-5">
+        <div class="">
+          <%= pie_chart SequoiaCustomer.group(:what).sum(:price),
+              prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "All Time - what", width: "250px", dowload: true, title: "" %>
+        </div>
+      </div>
+    <div class="col-lg-1">
+    </div>
+    <div class="col-lg-5">
+        <div class="">
+          <%= pie_chart SequoiaCustomer.group(:who).sum(:price),
+              prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "All Time - who", width: "250px", dowload: true, title: "" %>
+        </div>
+    </div>
+    </div>
+
+</div>
+</div>
+
+
 <% end %>
 </body>

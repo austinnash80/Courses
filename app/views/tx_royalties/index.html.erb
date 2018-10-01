@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tx Royalties</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Quarter Start</th>
+      <th>Quarter End</th>
+      <th>Due Date</th>
+      <th>Course Title</th>
+      <th>Courses Sold</th>
+      <th>Unit Cost</th>
+      <th>Royalty</th>
+      <th>Status</th>
+      <!-- <th>Quarter</th> -->
+      <!-- <th>Extra b</th> -->
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tx_royalties.each do |tx_royalty| %>
+      <tr>
+        <td><%= tx_royalty.quarter %></td>
+        <td><%= tx_royalty.start_date.strftime('%-m/%-d/%Y') %></td>
+        <td><%= tx_royalty.end_date.strftime('%-m/%-d/%Y') %></td>
+        <td><%= tx_royalty.sent_date.strftime('%-m/%-d/%Y') %></td>
+        <td><%= tx_royalty.extra_s %></td>
+        <td><%= tx_royalty.sold %></td>
+        <td><%= number_to_currency(tx_royalty.cost) %></td>
+        <td><%= number_to_percentage((tx_royalty.percentage * 100), :precision => 0) %></td>
+        <% if tx_royalty.sent == true %>
+          <td class="green"><strong>Sent</strong></td>
+        <% elsif %>
+          <td class="red"><strong>Not Sent</strong></td>
+        <% end %>
+        <!-- <td><%= tx_royalty.extra_i %></td> -->
+        <!-- <td><%= tx_royalty.extra_b %></td> -->
+        <td><%= link_to 'Show', tx_royalty %></td>
+        <td><%= link_to 'Edit', edit_tx_royalty_path(tx_royalty) %></td>
+        <td><%= link_to 'Destroy', tx_royalty, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tx Royalty', new_tx_royalty_path %>
