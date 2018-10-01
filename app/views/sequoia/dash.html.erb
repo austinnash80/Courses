@@ -270,7 +270,13 @@
             </tr>
             <tr>
               <td>MSI Mailing</td>
-              <% @mailings.reverse_each do |mailing| %>
+              <% if (@next_msi_mailing.min - 8).strftime('%-m/%-d/%y') > Time.now.strftime('%-m/%-d/%y') %>
+                <td class="red">Mailing Due Now</td>
+              <% elsif %>
+                <td> Mailing due in <%= ((@next_msi_mailing.min - 8).to_date - Time.now.to_date).to_i %> Days</td>
+              <% end %>
+
+              <!-- <% @mailings.reverse_each do |mailing| %>
               <% if mailing.complete == false %>
                 <% if (mailing.drop - 8).strftime('%-m/%-d/%y') > Time.now.strftime('%-m/%-d/%y') %>
                   <td class="red">Mailing Due Now</td>
@@ -281,7 +287,7 @@
 
                 <% end %>
               <% end %>
-              <% end %>
+              <% end %> -->
               <% @mailings.reverse_each do |mailing| %>
               <% if mailing.complete == false %>
                 <%# if mailing.msi_art.url =~/missing/ && (mailing.drop - 8).to_date > (Time.now - 60).to_date && mailing.complete == false %>

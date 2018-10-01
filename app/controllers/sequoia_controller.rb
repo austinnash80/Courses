@@ -146,7 +146,12 @@ def sales
     @all_time_quanity = []
     @all_time_cost = []
 
+    @next_msi_mailing = []
+
     @mailings.each do |mailing|
+      if mailing.complete == false
+        @next_msi_mailing.push(mailing['drop'])
+      end
       if mailing.drop.strftime('%Y') == Date.today.year.to_s
         if mailing.cost_print.nil? || mailing.cost_postage.nil? || mailing.cost_service.nil?
         elsif
