@@ -148,6 +148,8 @@ def sales
 
     @next_msi_mailing = []
 
+    @art_missing = []
+
     @mailings.each do |mailing|
       if mailing.complete == false
         @next_msi_mailing.push(mailing['drop'])
@@ -191,6 +193,10 @@ def sales
           elsif
             @all_time_quanity.push(mailing['quantity_sent'])
           end
+
+        if mailing.complete == false && mailing.msi_art.url =~/missing/
+          @art_missing.push(mailing['drop'])
+        end
     end
 end
 

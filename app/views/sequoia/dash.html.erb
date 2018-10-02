@@ -294,8 +294,8 @@
                 <td><%= link_to @course_update_status.sum, updatesheets_path %> <%= link_to 'in-progress', updatesheets_path %> | <%= link_to 'Add Update', datasheets_path %></td>
               <% end %>
             </tr>
+            <%= (Date.today) %> > <%= @art_missing.min - 18 %>
             <tr>
-              <%= (@next_msi_mailing.min - 8).strftime('%-m/%-d/%y') %> > <%= Time.now.strftime('%-m/%-d/%y') %>
               <td>MSI Mailing</td>
               <% if (@next_msi_mailing.min - 8).strftime('%-m/%-d/%y') > Time.now.strftime('%-m/%-d/%y') %>
                 <td class="red">Mailing Due Now</td>
@@ -303,17 +303,10 @@
                 <td> Mailing due in <%= ((@next_msi_mailing.min - 8).to_date - Time.now.to_date).to_i %> Days</td>
               <% end %>
 
-              <% @mailings.reverse_each do |mailing| %>
-              <% if mailing.complete == false %>
-                <%# if mailing.msi_art.url =~/missing/ && (mailing.drop - 8).to_date > (Time.now - 60).to_date && mailing.complete == false %>
-                <% if mailing.msi_art.url =~/missing/ && (mailing.drop - 8) < (Time.now - 10) %>
-                  <td class="red">Behind on art</td>
-                  <% break %>
-                <% elsif %>
-                  <td class="green">Art up-to-date</td>
-                  <% break %>
-                <% end%>
-              <% end%>
+              <% if (Date.today) > (@art_missing.min - 18) %>
+                <td class="red">Behind on art</td>
+              <% elsif %>
+                <td class="">No art due yet </td>
               <% end%>
               <!-- <td><%= link_to 'View Mailings', mailings_path %></td> -->
 
