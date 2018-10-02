@@ -30,6 +30,7 @@
         <li class="divider"></li>
         <li class="dropdown-header">Other</li>
           <li><%= link_to 'Texas Royalties', tx_royalties_path %></li>
+          <li><%= link_to 'Tasks', tasks_path %></li>
 
         <% if user_signed_in? && current_user.superadmin_role? %>
         <li class="divider"></li>
@@ -103,6 +104,9 @@
 <!-- End Tab one -->
 <!-- Start Tab Two -->
         <div id="past" class="tab-pane fade in">
+          <%= link_to 'View All Mailings', mailings_path %>
+        </br>
+        </br>
           <table class="table table-hover">
             <thead>
               <tr>
@@ -191,32 +195,52 @@
     <div class="tab-content">
 <!-- Start Tab One -->
       <div id="in-progress" class="tab-pane fade in active">
-        <!-- <table class="table table-hover">
+        <% @tasks.each do |task| %>
+          <% if user_signed_in? && task.user_id == current_user.id && task.type_one == true && task.done == false %>
+        <table class="table table-bordered">
           <thead>
             <tr>
-              <th>Mailing</th>
-              <th colspan="3"></th>
+              <th>Title</th>
+              <th>Note</th>
+              <th>Due Date</th>
+              <th> </th>
             </tr>
           </thead>
-        <tbody> -->
-          <% @tasks.each do |task| %>
-            <% if user_signed_in? && task.user_id == current_user.id && task.type_one == true %>
-                <tr>
-                  <td><%= link_to task.title, task %> | <%= link_to 'Edit', edit_task_path(task) %></td>
-                </tr>
-            <% end %>
-          <% end %>
+          <tbody>
+            <tr>
+              <td><strong><%= link_to task.title, task %></strong></td>
+              <td><%= task.note.truncate_words(20) %>
+              <td><%= task.due_date.nil? ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
+              <td><%= link_to 'Edit', edit_task_path(task) %></td>
+            </tr>
+          </tbody>
+        </table>
+
         <!-- </tbody>
       </table> -->
       </div>
 <!-- End Tab one -->
 <!-- Start Tab Two -->
     <div id="future" class="tab-pane fade in">
-      <% @tasks.each do |task| %>
-        <% if user_signed_in? && task.user_id == current_user.id && task.type_two == true %>
-        <tr>
-          <td><%= link_to task.title, task %> | <%= link_to 'Edit', edit_task_path(task) %></td>
-        </tr>
+        <% elsif user_signed_in? && task.user_id == current_user.id && task.type_two == true && task.done == false && task.type_two == false %>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Note</th>
+              <th>Due Date</th>
+              <th> </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong><%= link_to task.title, task %></strong></td>
+              <td><%= task.note.truncate_words(20) %>
+              <td><%= task.due_date.nil? ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
+              <td><%= link_to 'Edit', edit_task_path(task) %></td>
+            </tr>
+          </tbody>
+        </table>
         <% end %>
       <% end %>
     </div>
@@ -271,8 +295,9 @@
               <% end %>
             </tr>
             <tr>
+              <%= (@next_msi_mailing.min - 8).strftime('%-m/%-d/%y') %> > <%= Time.now.strftime('%-m/%-d/%y') %>
               <td>MSI Mailing</td>
-              <% if (@next_msi_mailing.min - 8).strftime('%-m/%-d/%y') < Time.now.strftime('%-m/%-d/%y') %>
+              <% if (@next_msi_mailing.min - 8).strftime('%-m/%-d/%y') > Time.now.strftime('%-m/%-d/%y') %>
                 <td class="red">Mailing Due Now</td>
               <% elsif %>
                 <td> Mailing due in <%= ((@next_msi_mailing.min - 8).to_date - Time.now.to_date).to_i %> Days</td>
