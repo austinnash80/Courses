@@ -284,6 +284,15 @@
             </tr>
           </thead>
           <tbody>
+            <% @tasks.each do |task| %>
+              <% if task.done == false && task.due == true && task.type_one == true && Date.today >= (task.due_date - 5) && task.user_id == current_user.id %>
+            <tr>
+              <td><%= task.title.truncate_words(4) %></td>
+              <td><strong> Due: <%= task.due_date.strftime('%A') %></strong></td>
+              <Td> <%= link_to 'View Task', task %></td>
+            </tr>
+            <% end %>
+            <% end %>
             <tr>
               <td>Course Updating</td>
               <% if @course_update_status.sum == 0 %>
@@ -306,7 +315,6 @@
               <% elsif %>
                 <td class="">No art due yet (<%= ((@art_missing.min - 18) - Date.today).to_i %> Days) </td>
               <% end%>
-
             </tr>
             <tr>
               <td>Postcard Inventory</td>
