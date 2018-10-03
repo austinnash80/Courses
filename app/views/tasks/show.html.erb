@@ -117,6 +117,8 @@
   <div class="btn-group">
     <a class="btn btn-primary" target="_blank" href="<%= @task.task_doc_2 %>"><i class="glyphicon glyphicon-download-alt" ></i> Document 2</a>
   </div></br>
+  <% if @task.task_doc_2.url =~/xlsx/ %>
+  <% elsif %>
     <iframe src= <%= @task.task_doc_2.url %> width="100%" height="300px" style="border: none;"> </iframe>
   <% end %>
   </div>
