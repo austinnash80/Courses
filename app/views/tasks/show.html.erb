@@ -53,6 +53,16 @@
               , <%= @task.user_5 %>
           <% end %>
         </h4>
+        <h4>
+          <strong>Files:</strong>
+          <% if @task.task_doc_1.url =~/missing/ && @task.task_doc_1.url =~/missing/ %>
+            No Documents </h4>
+          <% elsif @task.task_doc_1.url !=~/missing/ && @task.task_doc_1.url =~/missing/ %>
+            1 Document Uploaded </h4>
+          <% elsif @task.task_doc_1.url !=~/missing/ && @task.task_doc_1.url !=~/missing/ %>
+            2 Document Uploaded </h4>
+          <% end %>
+
 
         </br>
           <%= link_to 'Edit Task', edit_task_path(@task), class: ' btn btn-default' %>
@@ -99,7 +109,6 @@
       </div>
 
   <div class="col-lg-6">
-    <%= @task.task_doc_2.url %>
   <% if @task.task_doc_1.url =~/missing/ %>
     <h4>
       No documents have been added to this task
