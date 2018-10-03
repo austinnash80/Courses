@@ -4,6 +4,8 @@ class SequoiaController < ApplicationController
     postcard_schedule
     postcard_inventory
     course_update_status
+    name
+    task
   end
 
   def dash
@@ -14,6 +16,7 @@ class SequoiaController < ApplicationController
     tx_royalties
     task
     msi_mailing
+    name
   end
 
 private
@@ -129,6 +132,8 @@ def sales
 
   def task
     @tasks = Task.all
+
+
   end
 
   def msi_mailing
@@ -312,5 +317,14 @@ def postcard_schedule
   @remaining_inventory = Array.new.push(@remaining_inventory_sequoia_cpa_nm, @remaining_inventory_sequoia_cpa_rc, @remaining_inventory_sequoia_ea_nm, @remaining_inventory_sequoia_ea_rc, @remaining_inventory_empire_rc)
 
 end
+
+  def name
+    user_signed_in? && current_user.email == 'austin@sequoiacpe.com' ? @name = 'Austin' : ''
+    user_signed_in? && current_user.email == 'michael@sequoiacpe.com' ? @name = 'Michael' : ''
+    user_signed_in? && current_user.email == 'kyle@sequoiacpe.com' ? @name = 'Kyle' : ''
+    user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' ? @name = 'Ashley' : ''
+
+    @user_task = 'task.user_1'
+  end
 
 end

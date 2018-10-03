@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180928210116) do
+ActiveRecord::Schema.define(version: 20181003210041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -304,6 +304,25 @@ ActiveRecord::Schema.define(version: 20180928210116) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "update_note"
+    t.string "user_1"
+    t.string "user_2"
+    t.string "user_3"
+    t.string "user_4"
+    t.string "user_5"
+    t.string "user_6"
+    t.string "user_7"
+    t.text "additional_note_2"
+    t.text "additional_note_3"
+    t.boolean "no_due_date"
+    t.string "task_doc_1_file_name"
+    t.string "task_doc_1_content_type"
+    t.integer "task_doc_1_file_size"
+    t.datetime "task_doc_1_updated_at"
+    t.string "task_doc_2_file_name"
+    t.string "task_doc_2_content_type"
+    t.integer "task_doc_2_file_size"
+    t.datetime "task_doc_2_updated_at"
   end
 
   create_table "texas_royalties", force: :cascade do |t|

@@ -21,6 +21,10 @@ class TasksController < ApplicationController
   def edit
   end
 
+  # GET /tasks/1/edit
+  def update_status
+  end
+
   # POST /tasks
   # POST /tasks.json
   def create
@@ -69,6 +73,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:title, :note, :due, :due_date, :done, :important, :type_one, :type_two, :type_three, :extra_boolean, :extra_string, :extra_integer, :user_id)
+      params.require(:task).permit(:title, :note, :due, :due_date, :done, :important, :type_one, :type_two, :type_three, :extra_boolean, :extra_string, :extra_integer, :user_id, :update_note, :user_1, :user_2, :user_3, :user_4, :user_5, :user_6, :user_7, :additional_note_2, :additional_note_3, :no_due_date, :task_doc_1, :task_doc_2)
     end
 end

@@ -1,74 +1,134 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @task.title %>
-</p>
+<!-- <div class="container">
+  <div class="row"> -->
+    <div class="col-lg-8">
+      <div class="well">
+      <div class="well">
+        <% if @task.done == true %>
+          <h4 class="green"> Task has been completed</h4>
+        <% end %>
+        <h2> <strong>Name:</strong> <%= @task.title %></h2>
+        <h4> <strong>Due:</strong>
+          <% if @task.no_due_date == true %>
+            No Due Date </h4>
+          <% elsif @task.due == true && @task.done == true %>
+            <%= @task.due_date.strftime('%a, %-m/%-d/%Y') %></h4>
+          <% elsif @task.due == true && @task.done == false %>
+            <% if (Date.today - @task.due_date).to_i < 0 %>
+              <%= (@task.due_date - Date.today).to_i %> Days | <%= @task.due_date.strftime('%a, %-m/%-d/%Y') %></h4>
+            <% elsif (Date.today - @task.due_date).to_i == 0 %>
+              <span class="red">Due Today</span> | <%= @task.due_date.strftime('%a, %-m/%-d/%Y') %></h4>
+            <% elsif (Date.today - @task.due_date).to_i > 0 %>
+              <span class="red">Past Due</span> | <%= @task.due_date.strftime('%a, %-m/%-d/%Y') %></h4>
+            <% end %>
+          <% end %>
+        <h4> <strong>Status:</strong>
+          <% if @task.type_one == true && @task.done == false %>
+              Current Task </h4>
+            <% elsif @task.type_two == true && @task.done == false %>
+              Future Task </h4>
+            <% elsif @task.done == true %>
+              Complete </h4>
+          <% end %>
+        <h4>
+          <strong>Task For:</strong>
+          <% if @task.user_1 != 'N/A' %>
+              <%= @task.user_1 %>
+          <% end %>
 
-<p>
-  <strong>Note:</strong>
-  <%= @task.note %>
-</p>
+          <% if @task.user_2 != 'N/A'  %>
+               , <%= @task.user_2 %>
+          <% end %>
 
-<p>
-  <strong>Due:</strong>
-  <%= @task.due %>
-</p>
+          <% if @task.user_3 != 'N/A'  %>
+              , <%= @task.user_3 %>
+          <% end %>
 
-<p>
-  <strong>Due date:</strong>
-  <%= @task.due_date %>
-</p>
+          <% if @task.user_4 != 'N/A'  %>
+              , <%= @task.user_4 %>
+          <% end %>
 
-<p>
-  <strong>Done:</strong>
-  <%= @task.done %>
-</p>
+          <% if @task.user_5 != 'N/A'  %>
+              , <%= @task.user_5 %>
+          <% end %>
+        </h4>
 
-<p>
-  <strong>Important:</strong>
-  <%= @task.important %>
-</p>
+        </br>
+          <%= link_to 'Edit Task', edit_task_path(@task), class: ' btn btn-default' %>
+      </div>
 
-<p>
-  <strong>Type one:</strong>
-  <%= @task.type_one %>
-</p>
+    <!-- </div> -->
+        <div class="well">
+          <h2><strong>Task:</strong></h2>
+           <h4><%= @task.note %></h4>
+         </br>
+         <% if @task.update_note.empty? %>
+           <%= render 'form_additional_note', task: @task %>
+          <% elsif %>
+           <h4><strong>Update Note:</strong></h4>
+           <h4><%= @task.update_note %></h4>
+          <% end %>
+        </br>
+         <!-- </br> -->
+         <% if @task.update_note.empty? == false && @task.additional_note_2.empty? %>
+           <%= render 'form_additional_note_2', task: @task %>
+           <!-- <h4><%= @task.additional_note_2 %></h4> -->
+          <% elsif @task.update_note.empty? == false %>
+           <h4><strong>Update Note:</strong></h4>
+           <h4><%= @task.additional_note_2 %></h4>
+          <% end %>
+        </br>
 
-<p>
-  <strong>Type two:</strong>
-  <%= @task.type_two %>
-</p>
+         <% if @task.update_note.empty? == false && @task.additional_note_2.empty? == false && @task.additional_note_3.empty? %>
+           <%= render 'form_additional_note_3', task: @task %>
+          <% elsif @task.additional_note_2.empty? == false %>
+           <h4><strong>Update Note:</strong></h4>
+           <h4><%= @task.additional_note_3 %></h4>
+          <% end %>
+        </br>
+        <%= link_to 'Edit Task', edit_task_path(@task), class: ' btn btn-default' %>
 
-<p>
-  <strong>Type three:</strong>
-  <%= @task.type_three %>
-</p>
+        <div class="btn-group">
+          <a class="btn btn-primary" target="_blank" href="#"><i class="glyphicon glyphicon-download-alt" ></i> Document 1</a>
+          <a class="btn btn-primary" target="_blank" href="#"><i class="glyphicon glyphicon-download-alt" ></i> Document 2</a>
+          <%#= link_to raw('<i class="glyphicon glyphicon-download-alt" ></i> Schedule'), mailing_path(@mailing, :format => 'pdf'), class: 'btn btn-primary', target: '_blank'%>
+          <!-- <a class="btn btn-primary" target="_blank" href="#"><i class="glyphicon glyphicon-download-alt" ></i> Invoice</a> -->
+        </div>
+        </div>
+      </div>
 
-<p>
-  <strong>Extra boolean:</strong>
-  <%= @task.extra_boolean %>
-</p>
+  </div>
 
-<p>
-  <strong>Extra string:</strong>
-  <%= @task.extra_string %>
-</p>
+  <iframe src= <%= @task.task_doc_1.url %> width="100%" height="500px" style="border: none;"> </iframe>
 
-<p>
-  <strong>Extra integer:</strong>
-  <%= @task.extra_integer %>
-</p>
 
-<p>
-  <strong>User:</strong>
-  <%= @task.user_id %>
-</p>
+  <div class="col-lg-4">
+    <!-- <div class="row"> -->
+      <div class="well">
+        <h2 class="text-center"><strong>Change Task Status</strong></h2>
+      </br>
+        <!-- <div class="row"> -->
+        <div class="well">
+            <%= render 'form_status', task: @task %>
+          </div>
+          <div class="well ">
+            <%= render 'form_due_date', task: @task %>
+          </div>
+          <!-- <div class="well col-lg-4 length">
+            <%= render 'form_add_people', task: @task %>
+          </div> -->
+        <!-- <%= link_to 'Edit Task', edit_task_path(@task), class: ' btn btn-primary' %> -->
+        <!-- <%= link_to 'Update Status', edit_task_path(@task), class: ' btn btn-primary' %> -->
+        <!-- <%= link_to 'Add People To Task', edit_task_path(@task), class: ' btn btn-primary' %> -->
+        <!-- <p>""</p> -->
 
-<!-- <p>
-  <strong>Doc:</strong>
-  <%#= @task.doc %>
-</p> -->
-
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+    <!-- </div> -->
+      <div class="well">
+        <h2 class="text-center"><strong>Task Documents:</strong></h2>
+         <h4>No Docs for this task</h4>
+         <%= link_to 'Upload Docs', edit_task_path(@task), class: ' btn btn-default' %>
+       </br>
+      </div>
+    </div>
+  </div>

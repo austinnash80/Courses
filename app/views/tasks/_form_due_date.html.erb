@@ -1,0 +1,36 @@
+<%= form_with(model: task, local: true) do |form| %>
+  <% if task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+      <% task.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+</br>
+  <div class="row">
+      <div class="field col-lg-3">
+        <%= form.label :due, 'Due Date:' %>
+        <%= form.check_box :due, id: :task_due %>
+      </div>
+
+      <div class="field col-lg-6">
+        <%= form.label :due_date, 'Task Due Date' %>
+        <%= form.date_select :due_date, id: :task_due_date %>
+      </div>
+<!-- </br> -->
+        <div class="actions">
+          <%= form.submit class: 'btn btn-primary' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field col-lg-3">
+          <%= form.label :no_due_date, 'No Due Date:' %>
+          <%= form.check_box :no_due_date, id: :task_no_due_date %>
+        </div>
+      </div>
+
+    <% end %>

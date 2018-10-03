@@ -1,0 +1,43 @@
+<%= form_with(model: task, local: true) do |form| %>
+  <% if task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+      <% task.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+      <div class="field col-lg-2">
+        <%= form.label :extra_string, 'Task For:' %>
+        <%= form.select :extra_string, ['N/A', 'Austin - 1', 'Michael - 2', 'Ashley - 3', 'Kyle - 4', 'hamdo - 5' ], id: :task_extra_string %>
+      </div>
+      <div class="field col-lg-2">
+        <%= form.label :extra_string, 'Task For:' %>
+        <%= form.select :extra_string, ['N/A', 'Austin - 1', 'Michael - 2', 'Ashley - 3', 'Kyle - 4', 'hamdo - 5' ], id: :task_extra_string %>
+      </div>
+      <div class="field col-lg-2">
+        <%= form.label :extra_string, 'Task For:' %>
+        <%= form.select :extra_string, ['N/A', 'Austin - 1', 'Michael - 2', 'Ashley - 3', 'Kyle - 4', 'hamdo - 5' ], id: :task_extra_string %>
+      </div>
+      <div class="field col-lg-2">
+        <%= form.label :extra_string, 'Task For:' %>
+        <%= form.select :extra_string, ['N/A', 'Austin - 1', 'Michael - 2', 'Ashley - 3', 'Kyle - 4', 'hamdo - 5' ], id: :task_extra_string %>
+      </div>
+      <div class="field col-lg-2">
+        <%= form.label :extra_string, 'Task For:' %>
+        <%= form.select :extra_string, ['N/A', 'Austin - 1', 'Michael - 2', 'Ashley - 3', 'Kyle - 4', 'hamdo - 5' ], id: :task_extra_string %>
+      </div>
+      <div class="field col-lg-2">
+        <%= form.label :extra_string, 'Task For:' %>
+        <%= form.select :extra_string, ['N/A', 'Austin - 1', 'Michael - 2', 'Ashley - 3', 'Kyle - 4', 'hamdo - 5' ], id: :task_extra_string %>
+      </div>
+
+        <div class="actions">
+          <%= form.submit class: 'btn btn-primary' %>
+        </div>
+
+    <% end %>
