@@ -89,27 +89,33 @@
         </br>
         <%= link_to 'Edit Task', edit_task_path(@task), class: ' btn btn-default' %>
 
-        <div class="btn-group">
+        <!-- <div class="btn-group">
           <a class="btn btn-primary" target="_blank" href="#"><i class="glyphicon glyphicon-download-alt" ></i> Document 1</a>
-          <a class="btn btn-primary" target="_blank" href="#"><i class="glyphicon glyphicon-download-alt" ></i> Document 2</a>
+          <a class="btn btn-primary" target="_blank" href="#"><i class="glyphicon glyphicon-download-alt" ></i> Document 2</a> -->
           <%#= link_to raw('<i class="glyphicon glyphicon-download-alt" ></i> Schedule'), mailing_path(@mailing, :format => 'pdf'), class: 'btn btn-primary', target: '_blank'%>
           <!-- <a class="btn btn-primary" target="_blank" href="#"><i class="glyphicon glyphicon-download-alt" ></i> Invoice</a> -->
-        </div>
+        <!-- </div> -->
         </div>
       </div>
 
-  <div class="col-lg-10">
+  <div class="col-lg-8">
   <% if @task.task_doc_1.url =~/missing/ %>
     <h4>
       No documents have been added to this task
     </h4>
   <% elsif %>
-    <iframe src= <%= @task.task_doc_1.url %> width="100%" height="500px" style="border: none;"> </iframe>
+  <div class="btn-group">
+    <a class="btn btn-primary" target="_blank" href="<%= @task.task_doc_1 %>"><i class="glyphicon glyphicon-download-alt" ></i> Document 1</a>
+  </div>
+    <iframe src= <%= @task.task_doc_1.url %> width="100%" height="250px" style="border: none;"> </iframe>
   <% end %>
   </br>
   <% if @task.task_doc_2.url =~/missing/ %>
   <% elsif %>
-    <iframe src= <%= @task.task_doc_2.url %> width="100%" height="500px" style="border: none;"> </iframe>
+  <div class="btn-group">
+    <a class="btn btn-primary" target="_blank" href="<%= @task.task_doc_2 %>"><i class="glyphicon glyphicon-download-alt" ></i> Document 2</a>
+  </div>
+    <iframe src= <%= @task.task_doc_2.url %> width="100%" height="250px" style="border: none;"> </iframe>
   <% end %>
   </div>
 
