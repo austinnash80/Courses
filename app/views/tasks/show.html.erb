@@ -98,7 +98,7 @@
         </div>
       </div>
 
-  <div class="col-lg-8">
+  <div class="col-lg-6">
   <% if @task.task_doc_1.url =~/missing/ %>
     <h4>
       No documents have been added to this task
@@ -106,20 +106,22 @@
   <% elsif %>
   <div class="btn-group">
     <a class="btn btn-primary" target="_blank" href="<%= @task.task_doc_1 %>"><i class="glyphicon glyphicon-download-alt" ></i> Document 1</a>
-  </div>
-    <iframe src= <%= @task.task_doc_1.url %> width="100%" height="250px" style="border: none;"> </iframe>
+  </div></br>
+    <iframe src= <%= @task.task_doc_1.url %> width="100%" height="300px" style="border: none;"> </iframe>
   <% end %>
-  </br>
+</div>
+<div class="col-lg-6">
   <% if @task.task_doc_2.url =~/missing/ %>
   <% elsif %>
   <div class="btn-group">
     <a class="btn btn-primary" target="_blank" href="<%= @task.task_doc_2 %>"><i class="glyphicon glyphicon-download-alt" ></i> Document 2</a>
-  </div>
-    <iframe src= <%= @task.task_doc_2.url %> width="100%" height="250px" style="border: none;"> </iframe>
+  </div></br>
+    <iframe src= <%= @task.task_doc_2.url %> width="100%" height="300px" style="border: none;"> </iframe>
   <% end %>
   </div>
 
   </div>
+</br>
 
 
   <div class="col-lg-4">
