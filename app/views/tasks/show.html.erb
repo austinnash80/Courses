@@ -98,9 +98,22 @@
         </div>
       </div>
 
+  <div class="col-lg-10">
+  <% if @task.task_doc_1.url =~/missing/ %>
+    <h4>
+      No documents have been added to this task
+    </h4>
+  <% elsif %>
+    <iframe src= <%= @task.task_doc_1.url %> width="100%" height="500px" style="border: none;"> </iframe>
+  <% end %>
+  </br>
+  <% if @task.task_doc_2.url =~/missing/ %>
+  <% elsif %>
+    <iframe src= <%= @task.task_doc_2.url %> width="100%" height="500px" style="border: none;"> </iframe>
+  <% end %>
   </div>
 
-  <iframe src= <%= @task.task_doc_1.url %> width="100%" height="500px" style="border: none;"> </iframe>
+  </div>
 
 
   <div class="col-lg-4">
@@ -126,8 +139,9 @@
     <!-- </div> -->
       <div class="well">
         <h2 class="text-center"><strong>Task Documents:</strong></h2>
-         <h4>No Docs for this task</h4>
-         <%= link_to 'Upload Docs', edit_task_path(@task), class: ' btn btn-default' %>
+         <!-- <h4>No Docs for this task</h4>  -->
+         <%= render 'form_docs', task: @task %>
+         <!-- <%= link_to 'Upload Docs', edit_task_path(@task), class: ' btn btn-default' %> -->
        </br>
       </div>
     </div>
