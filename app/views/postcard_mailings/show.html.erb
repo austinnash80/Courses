@@ -1,27 +1,15 @@
 <p id="notice"><%= notice %></p>
+</br>
+<h3> Mailing added for <strong><%=@postcard_mailing.company %> <%= @postcard_mailing.version %></strong></h3>
+</br>
 
 <p>
-  <strong>Company:</strong>
-  <%= @postcard_mailing.company %>
-</p>
-
-<p>
-  <strong>Version:</strong>
-  <%= @postcard_mailing.version %>
-</p>
-
-<p>
-  <strong>Sent:</strong>
-  <%= @postcard_mailing.sent %>
-</p>
-
-<p>
-  <strong>Date sent:</strong>
+  <strong>Sent On:</strong>
   <%= @postcard_mailing.date_sent %>
 </p>
 
 <p>
-  <strong>Number sent:</strong>
+  <strong>Number Sent:</strong>
   <%= @postcard_mailing.number_sent %>
 </p>
 
@@ -30,7 +18,7 @@
   <%= @postcard_mailing.note %>
 </p>
 
-<p>
+<!-- <p>
   <strong>Extra i:</strong>
   <%= @postcard_mailing.extra_i %>
 </p>
@@ -43,7 +31,8 @@
 <p>
   <strong>Extra s:</strong>
   <%= @postcard_mailing.extra_s %>
-</p>
+</p> -->
 
-<%= link_to 'Edit', edit_postcard_mailing_path(@postcard_mailing) %> |
-<%= link_to 'Back', postcard_mailings_path %>
+<%= link_to 'Edit Entry', edit_postcard_mailing_path(@postcard_mailing) %> |
+<%= link_to 'Add Another Entry', new_postcard_mailing_path %> |
+<%= link_to 'Postcard Index', postcard_mailings_path %>

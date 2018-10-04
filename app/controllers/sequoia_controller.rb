@@ -242,24 +242,25 @@ def postcard_schedule
   #Postcard Due Dates
 
   #Postcard overdue
-    @most_recent_postcart_mailing_sequoia = []
     @most_recent_postcart_mailing_empire = []
 
 
       @postcard_mailings.each do |postcard_mailings|
-        if postcard_mailings['company'] == 'Sequoia'
-          @most_recent_postcart_mailing_sequoia.push(postcard_mailings['date_sent'])
+        postcard_mailings['company'] == 'Sequoia' && postcard_mailings['version'] == 'CPA NM' ? @seq_cpa_nm = Array.new.push(postcard_mailings['date_sent']) : ''
+        postcard_mailings['company'] == 'Sequoia' && postcard_mailings['version'] == 'CPA RC' ? @seq_cpa_rc = Array.new.push(postcard_mailings['date_sent']) : ''
+        postcard_mailings['company'] == 'Sequoia' && postcard_mailings['version'] == 'EA NM' ? @seq_ea_nm = Array.new.push(postcard_mailings['date_sent']) : ''
+        postcard_mailings['company'] == 'Sequoia' && postcard_mailings['version'] == 'EA RC' ? @seq_ea_rc = Array.new.push(postcard_mailings['date_sent']) : ''
+        postcard_mailings['company'] == 'Empire' && postcard_mailings['version'] == 'Empire RC' ? @most_recent_postcart_mailing_empire.push(postcard_mailings['date_sent']) : ''
         end
-        if postcard_mailings['company'] == 'Empire'
-          @most_recent_postcart_mailing_empire.push(postcard_mailings['date_sent'])
-        end
-      end
+
+      @most_recent_postcart_mailing_sequoia = [@seq_cpa_nm.max, @seq_cpa_rc.max, @seq_ea_nm.max, @seq_ea_rc.max]
+
   # Sequoia
-      @day_of_week == 'Wen' && @most_recent_postcart_mailing_sequoia.max < Date.today - 1 ? @out_of_date_sequoia = 'True' :
-      @day_of_week == 'Thu' && @most_recent_postcart_mailing_sequoia.max < Date.today - 2 ? @out_of_date_sequoia = 'True' :
-      @day_of_week == 'Fri' && @most_recent_postcart_mailing_sequoia.max < Date.today - 3 ? @out_of_date_sequoia = 'True' :
-      @day_of_week == 'Mon' && @most_recent_postcart_mailing_sequoia.max < Date.today - 3 ? @out_of_date_sequoia = 'True' :
-      @day_of_week == 'Tue' && @most_recent_postcart_mailing_sequoia.max < Date.today - 4 ? @out_of_date_sequoia = 'True' : @out_of_date_sequoia = 'False'
+      @day_of_week == 'Wen' && @most_recent_postcart_mailing_sequoia.min < Date.today - 1 ? @out_of_date_sequoia = 'True' :
+      @day_of_week == 'Thu' && @most_recent_postcart_mailing_sequoia.min < Date.today - 2 ? @out_of_date_sequoia = 'True' :
+      @day_of_week == 'Fri' && @most_recent_postcart_mailing_sequoia.min < Date.today - 3 ? @out_of_date_sequoia = 'True' :
+      @day_of_week == 'Mon' && @most_recent_postcart_mailing_sequoia.min < Date.today - 3 ? @out_of_date_sequoia = 'True' :
+      @day_of_week == 'Tue' && @most_recent_postcart_mailing_sequoia.min < Date.today - 4 ? @out_of_date_sequoia = 'True' : @out_of_date_sequoia = 'False'
 
   # Empire
       @day_of_week == 'Thu' && @most_recent_postcart_mailing_empire.max < Date.today - 1 ? @out_of_date_empire = 'True' :
@@ -274,7 +275,6 @@ def postcard_schedule
   @inventories = Inventory.all
 
   @postcard_inventory = Inventory.group(:company).group(:version).group(:order).sum(:number)
-
 
   @inventories.each do |inventory|
      inventory['company'] == 'Sequoia' && inventory['version'] == 'CPA NM' ? @date_sequoia_cpa_nm = Array.new.push(inventory['order']) : ''

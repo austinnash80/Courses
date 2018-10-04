@@ -2,6 +2,7 @@
 
 <body class= 'body-home'>
 
+
 <% if user_signed_in? && current_user.superadmin_role?%>
 
   <div class="dropdown header-size pull-right">
@@ -471,7 +472,7 @@
 <div class="col-lg-4 length right-square well">
   <ul class="nav nav-tabs">
     <%# if user_signed_in? && current_user.superadmin_role? %>
-       <li class=""><a data-toggle="tab" href="#total-sales">Daily</a></li>
+       <li class=""><a data-toggle="tab" href="#daily-sales">Daily</a></li>
        <li><a data-toggle="tab" href="#month-sales">Monthly</a></li>
     <%# end %>
        <li><a data-toggle="tab" href="#yearly-sales">Yearly</a></li>
@@ -481,7 +482,7 @@
   <!-- First Tab -->
 
   <div class="tab-content">
-    <div id="total-sales" class="tab-pane fade in active">
+    <div id="daily-sales" class="tab-pane fade in active">
       <h3 class="text-center"> Sequoia Sales: <%= number_to_currency(@yesterday_all.sum, :precision => 0) %> </h3>
      <h4 class="text-center"><%= 1.day.ago.strftime('%A, %-m/%-d') %></h4>
      <div class="col-lg-6">
