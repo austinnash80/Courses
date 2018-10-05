@@ -19,6 +19,13 @@
 
 <div class="col-sm-4">
   <div class="btn-group display-none">
+  <%= link_to 'Edit Mailing', edit_mailing_path(@mailing), class: 'btn btn-default' %>
+  <%= link_to 'Mailing Index', mailings_path, class: 'btn btn-default' %></h4>
+</div>
+</br>
+</br>
+
+  <div class="btn-group display-none">
     <a class="btn btn-primary" target="_blank" href="<%= @mailing.msi_art %>"><i class="glyphicon glyphicon-download-alt" ></i> Art</a>
     <a class="btn btn-primary" target="_blank" href="<%= @mailing.msi_data %>"><i class="glyphicon glyphicon-download-alt" ></i> Data</a>
     <%= link_to raw('<i class="glyphicon glyphicon-download-alt" ></i> Schedule'), mailing_path(@mailing, :format => 'pdf'), class: 'btn btn-primary', target: '_blank'%>
@@ -26,10 +33,28 @@
   </div>
 </br>
 </br>
+<p>
+  <% if @mailing.msi_art.url =~/missing/ %>
+    <span class="red">No Art,</span>
+  <% elsif %>
+    <span class="green">Has Art,</span>
+  <% end %>
+  <% if @mailing.msi_data.url =~/missing/ %>
+    <span class="red">No Data,</span>
+  <% elsif %>
+    <span class="green">Has Data,</span>
+  <% end %>
+  <% if @mailing.msi_invoice.url =~/missing/ %>
+    <span class="red">No Invoice</span>
+  <% elsif %>
+    <span class="green">Has Invoice</span>
+  <% end %>
+</p>
+
+
+</br>
 <iframe src= <%= @mailing.msi_art.url %> width="100%" height="500px" style="border: none;"> </iframe>
 </br>
-<h4><%= link_to 'Edit Mailing', edit_mailing_path(@mailing) %> |
-<%= link_to 'Mailing Index', mailings_path %></h4>
 </div>
 
 
@@ -82,7 +107,7 @@
 
 
 <%= render 'form_mailing_info', mailing: @mailing %>
-<%= link_to 'Edit Mailing', edit_mailing_path(@mailing), class: 'btn btn-default' %>
+<!-- <%= link_to 'Edit Mailing', edit_mailing_path(@mailing), class: 'btn btn-default' %> -->
 
 </div>
 
@@ -225,9 +250,25 @@
 
   <div class="well">
     <h2 class="text-center">Notes</h2>
-      <% if @mailing.note_2.nil? %>
-      <% elsif %>
+      <% if @mailing.note_2.empty? %>
+        <%= render 'form_notes', mailing: @mailing %>
+      <% elsif @mailing.note_2.empty? == false && @mailing.note_3.empty? %>
+      <p>
+        <strong>Mailing Note:</strong>
         <%= @mailing.note_2 %>
+      </p>
+        <%= render 'form_notes', mailing: @mailing %>
+      <% elsif @mailing.note_2.empty? == false && @mailing.note_3.empty? == false %>
+      <p>
+        <strong>Mailing Note:</strong>
+        <%= @mailing.note_2 %>
+      </p>
+
+      <p>
+        <strong>Mailing Note:</strong>
+        <%= @mailing.note_3 %>
+      </p>
+
       <% end %>
   </div>
 
