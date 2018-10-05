@@ -64,6 +64,11 @@
     <%= form.check_box :sent, id: :tx_royalty_sent %>
   </div>
 
+  <div class="field">
+    <%= form.label :sales_report, 'Upload Sales Report' %>
+    <%= form.file_field :sales_report, id: :tx_royalty_sales_report %>
+  </div>
+
   <!-- <div class="field">
     <%= form.label :extra_b %>
     <%= form.check_box :extra_b, id: :tx_royalty_extra_b %>

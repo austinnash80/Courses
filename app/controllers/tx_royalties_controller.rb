@@ -69,6 +69,6 @@ class TxRoyaltiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tx_royalty_params
-      params.require(:tx_royalty).permit(:quarter, :start_date, :end_date, :sent_date, :sold, :cost, :percentage, :sent, :extra_i, :extra_b, :extra_s)
+      params.require(:tx_royalty).permit(:quarter, :start_date, :end_date, :sent_date, :sold, :cost, :percentage, :sent, :extra_i, :extra_b, :extra_s, :sales_report)
     end
 end

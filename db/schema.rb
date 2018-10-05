@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181005171211) do
+ActiveRecord::Schema.define(version: 20181005235113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -354,6 +354,10 @@ ActiveRecord::Schema.define(version: 20181005171211) do
     t.string "extra_s"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "sales_report_file_name"
+    t.string "sales_report_content_type"
+    t.integer "sales_report_file_size"
+    t.datetime "sales_report_updated_at"
   end
 
   create_table "updatesheets", force: :cascade do |t|
