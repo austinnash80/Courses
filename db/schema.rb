@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181003210041) do
+ActiveRecord::Schema.define(version: 20181005171211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -206,6 +206,8 @@ ActiveRecord::Schema.define(version: 20181003210041) do
     t.string "people_report_content_type"
     t.integer "people_report_file_size"
     t.datetime "people_report_updated_at"
+    t.integer "estimate_quanity"
+    t.decimal "estimate_cost"
   end
 
   create_table "notes", force: :cascade do |t|

@@ -1,0 +1,82 @@
+<%= form_with(model: mailing, local: true) do |form| %>
+  <% if mailing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mailing.errors.count, "error") %> prohibited this mailing from being saved:</h2>
+
+      <ul>
+      <% mailing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :mailing_name %>
+  </div> -->
+
+  <!-- <div class="field">
+    <%= form.label :drop %>
+    <%= form.date_select :drop, id: :mailing_drop %>
+  </div> -->
+
+  <!-- <div class="field">
+    <%= form.label :who %>
+    <%= form.text_field :who, id: :mailing_who %>
+  </div>
+
+  <div class="field">
+    <%= form.label :what %>
+    <%= form.text_field :what, id: :mailing_what %>
+  </div> -->
+<% if @mailing.art_name.empty? %>
+  <div class="field">
+    <%= form.label :art_name %>
+    <%= form.text_field :art_name, id: :mailing_art_name %>
+  </div>
+<% end %>
+
+<% if @mailing.data_name.empty? %>
+  <div class="field">
+    <%= form.label :data_name %>
+    <%= form.text_field :data_name, id: :mailing_data_name %>
+  </div>
+<% end %>
+
+<% if @mailing.integer_1.nil? %>
+  <div class="field">
+    <%= form.label :integer_1, 'Initial File Quanity' %>
+    <%= form.number_field :integer_1, id: :mailing_integer_1 %>
+  </div>
+<% end %>
+
+<% if @mailing.boolean_1 == false %>
+  <div class="field">
+    <%= form.label :boolean_1, "All materials sent (b1)" %>
+    <%= form.check_box :boolean_1, id: :boolean_1 %>
+  </div>
+<% end %>
+
+<% if @mailing.quantity_sent.nil? %>
+  <div class="field">
+    <%= form.label :quantity_sent %>
+    <%= form.number_field :quantity_sent, id: :mailing_quantity_sent %>
+  </div>
+<% end %>
+
+<% if @mailing.complete == false %>
+  <div class="field">
+     <%= form.label :complete, 'Completed (invoice paid)' %>
+     <%= form.check_box :complete, id: :mailing_complete %>
+  </div>
+<% end %>
+
+<% if @mailing.complete == true && @mailing.quantity_sent.nil? == false && @mailing.boolean_1 == true && @mailing.integer_1.nil? == false && @mailing.data_name.empty? == false && @mailing.art_name.empty? == false %>
+<% elsif %>
+  <div class="actions">
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<% end %>

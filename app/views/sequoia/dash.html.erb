@@ -75,7 +75,8 @@
               <tr>
                 <th>Mailing</th>
                 <th>Who</th>
-                <th>Due</th>
+                <th>MSI Due</th>
+                <th>Drop</th>
                 <th>Art</th>
                 <!-- <th>Data</th> -->
                 <!-- <th colspan="3"></th> -->
@@ -85,16 +86,17 @@
           <% @mailings.reverse_each do |mailing| %>
             <% if mailing.complete == false %>
             <tr>
-              <td><%= mailing.name %> </td>
+              <td><strong><%= link_to mailing.name, mailing %></strong> </td>
               <td><%= mailing.who %> </td>
               <td><%= (mailing.drop - 8).strftime('%a %-m/%-d') %> </td>
+              <td><%= (mailing.drop).strftime('%-m/%-d') %> </td>
               <% if mailing.msi_art.url =~/missing/ %>
                 <td><%= link_to '', mailing, class: 'glyphicon glyphicon-remove-circle red gi-2x' %></td>
               <% elsif %>
                 <td><%= link_to '', mailing, class: 'glyphicon glyphicon-ok-circle green gi-2x' %></td>
               <% end %>
               <!-- <td><%= mailing.data_name %> </td> -->
-              <td><%= link_to 'View', mailing %></td>
+              <!-- <td><%= link_to 'View', mailing %></td> -->
                <!-- <td><%= link_to 'Edit', edit_mailing_path(mailing) %></td> -->
             </tr>
             <% end %>
@@ -114,6 +116,7 @@
                 <th>Mailing</th>
                 <th>Who</th>
                 <th>Land</th>
+                <th>Droped</th>
                 <th>Sent</th>
                 <th>Cost</th>
               </tr>
@@ -123,13 +126,12 @@
               <% @mailings.each do |mailing| %>
                 <% if user_signed_in? && mailing.complete == true && mailing.drop > 12.month.ago..Time.now %>
                 <tr>
-                  <td><%= mailing.name %></td>
+                  <td><strong><%= link_to mailing.name, mailing %></strong></td>
                   <td><%= mailing.who %></td>
                   <td><%= (mailing.drop + 10).strftime('%-m/%-d') %></td>
+                  <td><%= (mailing.drop).strftime('%-m/%-d') %> </td>
                   <td><%= number_with_delimiter(mailing.quantity_sent, :precision => 0, :delimiter => ',') %></td>
                   <td><%= number_to_currency((mailing.cost_service) + (mailing.cost_postage) + (mailing.cost_print), :precision => 0) %></td>
-                  <td><%= link_to 'View', mailing %></td>
-                  <!-- <td><%= link_to 'Edit', edit_mailing_path(mailing) %></td> -->
                 </tr>
                 <% end %>
               <% end %>

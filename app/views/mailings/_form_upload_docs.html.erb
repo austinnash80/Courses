@@ -1,0 +1,36 @@
+<%= form_with(model: mailing, local: true) do |form| %>
+  <% if mailing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mailing.errors.count, "error") %> prohibited this mailing from being saved:</h2>
+
+      <ul>
+      <% mailing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :msi_art %>
+    <%= form.file_field :msi_art, id: :mailing_msi_art %>
+  </div>
+
+  <div class="field">
+    <%= form.label :msi_data %>
+    <%= form.file_field :msi_data, id: :mailing_msi_data %>
+  </div>
+  <div class="field">
+    <%= form.label :msi_invoice %>
+    <%= form.file_field :msi_invoice, id: :mailing_msi_invoice %>
+  </div>
+  <div class="field">
+    <%= form.label :people_report %>
+    <%= form.file_field :people_report, id: :mailing_people_report %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+
+<% end %>

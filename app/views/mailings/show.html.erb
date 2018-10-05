@@ -11,6 +11,8 @@
 
 <% if @mailing.complete == true %>
   <h4 class="text-center green_text">This mailing is complete</h4>
+<% elsif @mailing.complete == false && @mailing.boolean_1 == true %>
+  <h4 class="text-center green_text">Materials have been sent (waiting for invoice)</h4>
 <% elsif %>
   <h4 class="text-center red_text">This mailing is in-progress</h4>
 <% end %>
@@ -48,11 +50,12 @@
   MSI
 </p>
 
-<p>
-  <strong>Quantity sent:</strong>
-  <%= number_with_delimiter(@mailing.quantity_sent, :delimiter => ',') %>
-</p>
-
+<% if @mailing.quantity_sent.nil?  == false %>
+  <p>
+    <strong>Quantity sent:</strong>
+    <%= number_with_delimiter(@mailing.quantity_sent, :delimiter => ',') %>
+  </p>
+<% end %>
 <p>
   <strong>Sent To:</strong>
   <%= @mailing.who %>
@@ -62,15 +65,25 @@
   <strong>Type:</strong>
   <%= @mailing.what %>
 </p>
-<p>
-  <strong>Data:</strong>
-  <%= @mailing.data_name %>
-</p>
 
-<p>
-  <strong>Art:</strong>
-  <%= @mailing.art_name %>
-</p>
+<% if @mailing.data_name.empty?  == false %>
+  <p>
+    <strong>Data:</strong>
+    <%= @mailing.data_name %>
+  </p>
+<% end %>
+
+<% if @mailing.art_name.empty? == false %>
+  <p>
+    <strong>Art:</strong>
+    <%= @mailing.art_name %>
+  </p>
+<% end %>
+
+
+<%= render 'form_mailing_info', mailing: @mailing %>
+<%= link_to 'Edit Mailing', edit_mailing_path(@mailing), class: 'btn btn-default' %>
+
 </div>
 
 <div class="well">
@@ -79,10 +92,13 @@
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#total">Total Cost</a></li>
     <li><a data-toggle="tab" href="#unit">Unit Cost</a></li>
+    <li><a data-toggle="tab" href="#data">Enter Data</a></li>
   </ul>
   <div class="tab-content">
     <div id="total" class="tab-pane fade in active">
     </br>
+    <% if @mailing.boolean_1 == true %>
+    <!-- Completed == true -->
       <p>
         <strong>Total Cost:</strong>
         <% if @mailing.cost_print.nil? || @mailing.cost_postage.nil? || @mailing.cost_service.nil? %>
@@ -113,7 +129,29 @@
       <p>
         <strong>Postage:</strong>
         <%= number_to_currency(@mailing.cost_postage, precision: 0) %>
-      </p>
+          </p>
+    <% elsif @mailing.boolean_1 == false %>
+          <!-- Completed == true -->
+        <p class="text-center green"> Mailing is not complete</br>These are estimated costs</p>
+
+        <p>
+          <strong>Esitmated Quanity:</strong>
+          <% if @mailing.estimate_quanity.nil? %>
+            n/a
+          <% elsif %>
+            <%= number_with_delimiter(@mailing.estimate_quanity, delimiter: ',') %>
+          <% end %>
+        </p>
+
+        <p>
+          <strong>Esitmated Cost:</strong>
+          <% if @mailing.estimate_quanity.nil? || @mailing.estimate_cost.nil? %>
+            n/a
+          <% elsif %>
+            <%= number_to_currency((@mailing.estimate_quanity * @mailing.estimate_cost), precision: 0) %>
+          <% end %>
+        </p>
+    <% end %>
     </div>
 
       <div id="unit" class="tab-pane fade">
@@ -154,6 +192,12 @@
           <% end %>
         </p>
       </div>
+
+      <div id="data" class="tab-pane fade">
+      </br>
+        <%= render 'form_cost_data', mailing: @mailing %>
+    </div>
+
     </div>
 
 </div>
@@ -179,6 +223,11 @@
 </div>
 
 <div class="col-sm-4">
+  <div class="well">
+    <h2 class="text-center">Document Uploading</h2>
+      <%= render 'form_upload_docs', mailing: @mailing %>
+  </div>
+
   <div class="well">
     <h2 class="text-center">Notes</h2>
       <% if @mailing.note_2.nil? %>
@@ -215,10 +264,11 @@
         <td><%= @mailing.drop.strftime('%m/%d/%y') %></td>
         <td><%= number_with_delimiter(@mailing.integer_1) %></td>
         <!-- Art File Name -->
-        <% if @mailing.msi_art_file_name.to_s.empty? %>
-          <td><i class="glyphicon glyphicon-file table-icons-red display-none"></i> Empty</td>
-        <% elsif %>
-          <td><i class="glyphicon glyphicon-file table-icons-green display-none"></i> <%= @mailing.msi_art_file_name%></td>
+        <% if @mailing.art_name.empty? == false %>
+        <td> <%= @mailing.art_name %></td>
+        <% end %>
+        <% if @mailing.data_name.empty? == false %>
+        <td> <%= @mailing.data_name %></td>
         <% end %>
       </tr>
     </tbody>

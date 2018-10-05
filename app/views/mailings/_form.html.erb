@@ -32,6 +32,16 @@
   </div>
 
   <div class="field">
+    <%= form.label :estimate_cost %>
+    <%= form.text_field :estimate_cost, id: :mailing_estimate_cost %>
+  </div>
+
+  <div class="field">
+    <%= form.label :estimate_quanity %>
+    <%= form.number_field :estimate_quanity, id: :mailing_estimate_quanity %>
+  </div>
+
+  <div class="field">
     <%= form.label :quantity_sent %>
     <%= form.number_field :quantity_sent, id: :mailing_quantity_sent %>
   </div>
@@ -96,12 +106,17 @@ CITY STATE ZIP</p><br/>
   </div>
 
   <div class="field">
-    <%= form.label :complete, "All materials sent" %>
+    <%= form.label :complete, "Completed (b1)" %>
     <%= form.check_box :complete, id: :mailing_complete %>
   </div>
 
   <div class="field">
-    <%= form.label :integer_1, 'Initial File Quanity' %>
+     <%= form.label :boolean_1, 'Materials have been sent' %>
+     <%= form.check_box :boolean_1, id: :mailing_boolean_1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :integer_1, 'Estimate Quanity' %>
     <%= form.number_field :integer_1, id: :mailing_integer_1 %>
   </div>
 
@@ -157,11 +172,6 @@ CITY STATE ZIP</p><br/>
   <!-- integer <div class="field">
             <%= form.label :group_5 %>
             <%= form.number_field :group_5, id: :mailing_group_5 %>
-          </div> -->
-
-<!-- Boolean   <div class="field">
-            <%= form.label :boolean_1 %>
-            <%= form.check_box :boolean_1, id: :mailing_boolean_1 %>
           </div> -->
 
 <!-- String   <div class="field">

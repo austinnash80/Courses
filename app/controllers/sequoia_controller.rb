@@ -177,16 +177,16 @@ def sales
       if mailing.drop.strftime('%Y') == (Date.today.year - 1).to_s
         if mailing.cost_print.nil? || mailing.cost_postage.nil? || mailing.cost_service.nil?
         elsif
-          @last_year_cost = Array.new.push(mailing['cost_print'])
+          @last_year_cost.push(mailing['cost_print'])
           @last_year_cost.push(mailing['cost_postage'])
           @last_year_cost.push(mailing['cost_service'])
         end
         @last_year_drops = Array.new.push(mailing['name'])
-          if mailing.quantity_sent.nil?
-          elsif
-            @last_year_quanity = Array.new.push(mailing['quantity_sent'])
-          end
+        if mailing.quantity_sent.nil?
+        elsif
+          @last_year_quanity = Array.new.push(mailing['quantity_sent'])
         end
+      end
         if mailing.cost_print.nil? || mailing.cost_postage.nil? || mailing.cost_service.nil?
         elsif
           @all_time_cost.push(mailing['cost_print'])
@@ -235,7 +235,7 @@ def postcard_schedule
   #Postcard Due Dates
       @day_of_week == 'Sat' || @day_of_week == 'Sun' || @day_of_week == 'Mon' ? @due_sequoia_1 = "Tuesday" :
       @day_of_week == 'Tue' || @day_of_week == 'Fri' ? @due_sequoia_1 = "Due Today" :
-      @day_of_week == 'Wen' || @day_of_week == 'Thu' ? @due_sequoia_1 = "Friday" : ''
+      @day_of_week == 'Wen' || @day_of_week == 'Thu' ? @due_sequoia_1 = "Due Friday" : ''
 
       @day_of_week == 'Mon' || @day_of_week == 'Tue' || @day_of_week == 'Thu' || @day_of_week == 'Fri' ? @due_empire_1 = "Due Wen" :
       @day_of_week == 'Wen' ? @due_empire_1 = "Due Today" : ''
@@ -251,7 +251,7 @@ def postcard_schedule
         postcard_mailings['company'] == 'Sequoia' && postcard_mailings['version'] == 'EA NM' ? @seq_ea_nm = Array.new.push(postcard_mailings['date_sent']) : ''
         postcard_mailings['company'] == 'Sequoia' && postcard_mailings['version'] == 'EA RC' ? @seq_ea_rc = Array.new.push(postcard_mailings['date_sent']) : ''
         postcard_mailings['company'] == 'Empire' && postcard_mailings['version'] == 'Empire RC' ? @most_recent_postcart_mailing_empire.push(postcard_mailings['date_sent']) : ''
-        end
+      end
 
       @most_recent_postcart_mailing_sequoia = [@seq_cpa_nm.max, @seq_cpa_rc.max, @seq_ea_nm.max, @seq_ea_rc.max]
 
