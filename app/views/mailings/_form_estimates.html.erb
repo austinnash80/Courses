@@ -1,0 +1,29 @@
+<%= form_with(model: mailing, local: true) do |form| %>
+  <% if mailing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mailing.errors.count, "error") %> prohibited this mailing from being saved:</h2>
+
+      <ul>
+      <% mailing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :estimate_quanity, 'Estimate Quantity' %>
+    <%= form.text_field :estimate_quanity, id: :mailing_estimate_quanity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :estimate_cost, 'Estimate Unit Cost' %>
+    <%= form.number_field :estimate_cost, id: :mailing_estimate_cost, value: '0.35' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+
+
+<% end %>

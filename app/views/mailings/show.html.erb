@@ -92,7 +92,7 @@
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#total">Total Cost</a></li>
     <li><a data-toggle="tab" href="#unit">Unit Cost</a></li>
-    <li><a data-toggle="tab" href="#data">Enter Data</a></li>
+    <li><a data-toggle="tab" href="#data">Enter Final Costs</a></li>
   </ul>
   <div class="tab-content">
     <div id="total" class="tab-pane fade in active">
@@ -134,20 +134,15 @@
           <!-- Completed == true -->
         <p class="text-center green"> Mailing is not complete</br>These are estimated costs</p>
 
+      <% if @mailing.estimate_quanity.nil? || @mailing.estimate_cost.nil? %>
+          <%= render 'form_estimates', mailing: @mailing %>
+          <% elsif %>
         <p>
           <strong>Esitmated Quanity:</strong>
-          <% if @mailing.estimate_quanity.nil? %>
-            n/a
-          <% elsif %>
             <%= number_with_delimiter(@mailing.estimate_quanity, delimiter: ',') %>
-          <% end %>
         </p>
-
         <p>
           <strong>Esitmated Cost:</strong>
-          <% if @mailing.estimate_quanity.nil? || @mailing.estimate_cost.nil? %>
-            n/a
-          <% elsif %>
             <%= number_to_currency((@mailing.estimate_quanity * @mailing.estimate_cost), precision: 0) %>
           <% end %>
         </p>
