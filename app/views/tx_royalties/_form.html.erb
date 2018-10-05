@@ -12,8 +12,13 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :quarter %>
+    <%= form.label :quarter, 'Name (2018 Q1)' %>
     <%= form.text_field :quarter, id: :tx_royalty_quarter %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_i, 'Quarter' %>
+    <%= form.select :extra_i, ['1', '2', '3', '4'], id: :tx_royalty_extra_i %>
   </div>
 
   <div class="field">
@@ -31,10 +36,18 @@
     <%= form.date_select :sent_date, id: :tx_royalty_sent_date %>
   </div>
 
+<% if @tx_royalty.sold.nil? %>
   <div class="field">
     <%= form.label :sold %>
     <%= form.number_field :sold, id: :tx_royalty_sold, value: 0 %>
   </div>
+<% elsif %>
+  <div class="field">
+    <%= form.label :sold %>
+    <%= form.number_field :sold, id: :tx_royalty_sold %>
+  </div>
+<% end %>
+
 
   <div class="field">
     <%= form.label :cost %>
@@ -51,12 +64,7 @@
     <%= form.check_box :sent, id: :tx_royalty_sent %>
   </div>
 
-  <div class="field">
-    <%= form.label :extra_i %>
-    <%= form.number_field :extra_i, id: :tx_royalty_extra_i %>
-  </div>
-
-  <div class="field">
+  <!-- <div class="field">
     <%= form.label :extra_b %>
     <%= form.check_box :extra_b, id: :tx_royalty_extra_b %>
   </div>
@@ -64,7 +72,7 @@
   <div class="field">
     <%= form.label :extra_s %>
     <%= form.text_field :extra_s, id: :tx_royalty_extra_s, value: "9245 - Ethical Dilemmas for Texas CPAs" %>
-  </div>
+  </div> -->
 
   <div class="actions">
     <%= form.submit %>
