@@ -52,7 +52,7 @@
 
 <% if @mailing.quantity_sent.nil?  == false %>
   <p>
-    <strong>Quantity sent:</strong>
+    <strong>Final Quantity:</strong>
     <%= number_with_delimiter(@mailing.quantity_sent, :delimiter => ',') %>
   </p>
 <% end %>

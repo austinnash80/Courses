@@ -60,7 +60,7 @@
 
 <% if @mailing.quantity_sent.nil? %>
   <div class="field">
-    <%= form.label :quantity_sent %>
+    <%= form.label :quantity_sent, 'Final Quanity' %>
     <%= form.number_field :quantity_sent, id: :mailing_quantity_sent %>
   </div>
 <% end %>
