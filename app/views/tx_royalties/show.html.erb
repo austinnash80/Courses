@@ -170,7 +170,7 @@
 <!-- Buttons -->
 <div class="btn-group display-none">
   <!-- <a class="btn btn-primary" target="_blank" href="#"><i class="glyphicon glyphicon-download-alt" ></i> Art</a> -->
-  <a class="btn btn-primary" target="_blank" href="#"><i class="glyphicon glyphicon-download-alt" ></i> Sales Report </a>
+  <a class="btn btn-primary" target="_blank" href="<%= @tx_royalty.sales_report %>"><i class="glyphicon glyphicon-download-alt" ></i> Sales Report </a>
   <%= link_to raw('<i class="glyphicon glyphicon-download-alt" ></i> Letter/Invoice'), tx_royalty_path(@tx_royalty, :format => 'pdf'), class: 'btn btn-primary', target: '_blank'%>
   <!-- <a class="btn btn-primary" target="_blank" href="#"><i class="glyphicon glyphicon-download-alt" ></i> Invoice</a> -->
 </div>
