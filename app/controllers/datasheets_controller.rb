@@ -12,6 +12,7 @@ class DatasheetsController < ApplicationController
       format.html
       format.csv { send_data @datasheets.to_csv, filename: "datasheet-#{Date.today}.csv" }
     end
+    course_counter
   end
 
   # GET /datasheets/1
@@ -73,6 +74,13 @@ class DatasheetsController < ApplicationController
     redirect_to datasheets_path, notice: "Upload Complete"
   end
 
+  def course_counter
+
+    @datasheets.each do |datasheet|
+      datasheet.active == true && datasheet.seq_number < 9000 ? @active_courses = Array.new.push(datasheet['pub_date']) : ''
+      datasheet.active == true && datasheet.seq_number >= 9000 ? @active_courses_ethics = Array.new.push(datasheet['pub_date']) : ''
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_datasheet

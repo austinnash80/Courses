@@ -17,18 +17,18 @@
   </div>
 
   <div class="field">
-    <%= form.label :campaign_name %>
+    <%= form.label :campaign_name, 'Campaign' %>
     <%= form.text_field :campaign_name, id: :email_campaign_campaign_name %>
   </div>
 
   <div class="field">
-    <%= form.label :delivery_service %>
-    <%= form.select :delivery_service, ['Mailjet'], id: :email_campaign_delivery_service %>
+    <%= form.label :delivery_service, 'Delivery Service' %>
+    <%= form.select :delivery_service, ['Mailjet', 'Other'], id: :email_campaign_delivery_service %>
   </div>
 
   <div class="field">
     <%= form.label :list_name %>
-    <%= form.select :list_name, ['RC Empire'], id: :email_campaign_list_name %>
+    <%= form.select :list_name, ['RC Empire', 'Other'], id: :email_campaign_list_name %>
   </div>
 
   <div class="field">
