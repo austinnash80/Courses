@@ -7,6 +7,7 @@ class DatasheetsController < ApplicationController
   # GET /datasheets.json
   def index
     @datasheets = Datasheet.order(sort_column + " " + sort_direction) #sortable header columns
+    @datasheet_all = Datasheet.all
 
     respond_to do |format|
       format.html
@@ -76,9 +77,12 @@ class DatasheetsController < ApplicationController
 
   def course_counter
 
-    @datasheets.each do |datasheet|
-      datasheet.active == true && datasheet.seq_number < 9000 ? @active_courses = Array.new.push(datasheet['pub_date']) : ''
-      datasheet.active == true && datasheet.seq_number >= 9000 ? @active_courses_ethics = Array.new.push(datasheet['pub_date']) : ''
+    @active_courses = []
+    @active_courses_ethics = []
+
+    @datasheet_all.each do |datasheet|
+      datasheet.active == true && datasheet.seq_number < 9000 ? @active_courses.push(datasheet['seq_number']) : ''
+      datasheet.active == true && datasheet.seq_number >= 9000 ? @active_courses_ethics.push(datasheet['seq_number']) : ''
     end
   end
   private
