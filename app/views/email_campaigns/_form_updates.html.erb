@@ -1,0 +1,59 @@
+<%= form_with(model: email_campaign, local: true) do |form| %>
+  <% if email_campaign.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(email_campaign.errors.count, "error") %> prohibited this email_campaign from being saved:</h2>
+
+      <ul>
+      <% email_campaign.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :emails_sent %>
+    <%= form.number_field :emails_sent, id: :email_campaign_emails_sent, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :delivered %>
+    <%= form.number_field :delivered, id: :email_campaign_delivered, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :opened %>
+    <%= form.number_field :opened, id: :email_campaign_opened, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :clicked %>
+    <%= form.number_field :clicked, id: :email_campaign_clicked, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :blocked %>
+    <%= form.number_field :blocked, id: :email_campaign_blocked, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bounce %>
+    <%= form.number_field :bounce, id: :email_campaign_bounce, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :spam %>
+    <%= form.number_field :spam, id: :email_campaign_spam, class: 'form-control' %>
+  </div>
+
+  <div class="display-none">
+    <div class="field">
+      <%= form.label :update_stats %>
+      <%= form.date_select :update_stats, id: :email_update_stats %>
+    </div>
+  </div>
+</br>
+  <div class="actions">
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

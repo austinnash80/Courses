@@ -1,0 +1,132 @@
+<%= form_with(model: email_campaign, local: true) do |form| %>
+  <% if email_campaign.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(email_campaign.errors.count, "error") %> prohibited this email_campaign from being saved:</h2>
+
+      <ul>
+      <% email_campaign.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :company %>
+    <%= form.select :company, ['Empire', 'Sequoia'], id: :email_campaign_company %>
+  </div>
+
+  <div class="field">
+    <%= form.label :campaign_name %>
+    <%= form.text_field :campaign_name, id: :email_campaign_campaign_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :delivery_service %>
+    <%= form.select :delivery_service, ['Mailjet'], id: :email_campaign_delivery_service %>
+  </div>
+
+  <div class="field">
+    <%= form.label :list_name %>
+    <%= form.select :list_name, ['RC Empire'], id: :email_campaign_list_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :segment %>
+    <%= form.select :segment, ['Empire RC - 1', 'Empire RC - 2', 'Empire RC - 3', 'Empire RC - 4', 'Empire RC - 5', 'Empire RC - 6', 'Empire RC - 6', 'Empire RC - 7',], id: :email_campaign_segment %>
+  </div>
+
+  <div class="field">
+    <%= form.label :segment_range %>
+    <%= form.text_field :segment_range, id: :email_campaign_segment_range %>
+  </div>
+
+  <div class="field">
+    <%= form.label :segment_note %>
+    <%= form.text_field :segment_note, id: :email_campaign_segment_note %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_date %>
+    <%= form.date_select :start_date, id: :email_campaign_start_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_date %>
+    <%= form.date_select :end_date, id: :email_campaign_end_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active, id: :email_campaign_active %>
+  </div>
+
+  <div class="field">
+    <%= form.label :inactive %>
+    <%= form.check_box :inactive, id: :email_campaign_inactive %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tagline %>
+    <%= form.text_field :tagline, id: :email_campaign_tagline %>
+  </div>
+
+  <div class="field">
+    <%= form.label :emails_sent %>
+    <%= form.number_field :emails_sent, id: :email_campaign_emails_sent %>
+  </div>
+
+  <div class="field">
+    <%= form.label :delivered %>
+    <%= form.number_field :delivered, id: :email_campaign_delivered %>
+  </div>
+
+  <div class="field">
+    <%= form.label :opened %>
+    <%= form.number_field :opened, id: :email_campaign_opened %>
+  </div>
+
+  <div class="field">
+    <%= form.label :clicked %>
+    <%= form.number_field :clicked, id: :email_campaign_clicked %>
+  </div>
+
+  <div class="field">
+    <%= form.label :blocked %>
+    <%= form.number_field :blocked, id: :email_campaign_blocked %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bounce %>
+    <%= form.number_field :bounce, id: :email_campaign_bounce %>
+  </div>
+
+  <div class="field">
+    <%= form.label :spam %>
+    <%= form.number_field :spam, id: :email_campaign_spam %>
+  </div>
+
+  <div class="field">
+    <%= form.label :update_stats %>
+    <%= form.date_select :update_stats, id: :email_campaign_update_stats %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_s %>
+    <%= form.text_field :extra_s, id: :email_campaign_extra_s %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_b %>
+    <%= form.check_box :extra_b, id: :email_campaign_extra_b %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_i %>
+    <%= form.number_field :extra_i, id: :email_campaign_extra_i %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

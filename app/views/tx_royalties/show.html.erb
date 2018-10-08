@@ -197,6 +197,16 @@
   <%= number_to_percentage((@tx_royalty.percentage * 100), :precision => 0) %>
 </p>
 
+<% if @tx_royalty.sales_report.url =~/missing/ %>
+  <p>
+    <strong>Sales Report:</strong> <span class="red">Not Attached</span>
+  </p>
+<% elsif %>
+  <p>
+      <strong>Sales Report:</strong> <span class="green">Attached</span>
+  </p>
+<% end %>
+
 <% if @tx_royalty.sent == true %>
   <p>
     <strong>Status:</strong> <span class="green">Sent</span>

@@ -1,0 +1,2 @@
+class EmailCampaign < ApplicationRecord
+end

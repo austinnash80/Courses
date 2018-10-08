@@ -1,0 +1,185 @@
+<p id="notice"><%= notice %></p>
+
+<div class="col-lg-2">
+  <div class="well">
+    <h2 class="text-center"> Update </h2>
+    <p class="text-center">
+      Last Update:
+      <%= @email_campaign.update_stats %>
+    </p>
+</br>
+  <div class="well">
+      <%= render 'form_updates', email_campaign: @email_campaign %>
+  </div>
+  </div>
+  </div>
+
+<div class="col-lg-10">
+  <div class="well">
+    <h2 class="text-center"> <%= @email_campaign.company %> - <%= @email_campaign.campaign_name %></h2>
+  </br>
+<div class="well">
+
+    <% if @email_campaign.active == true %>
+      <p>
+        <strong>Status:</strong> <span class="green">Active</span>
+      </p>
+      <p>
+        <strong>Campaign Start date:</strong>
+        <%= @email_campaign.start_date.strftime('%-m/%-d/%Y') %>
+      </p>
+    <% elsif @email_campaign.inactive == true %>
+      <p>
+        <strong>Status:</strong> Inactive
+      </p>
+      <p>
+        <strong>Ran From:</strong> <%= @email_campaign.start_date.strftime('%-m/%-d/%Y') %> - <%= @email_campaign.end_date.strftime('%-m/%-d/%Y') %>
+      </p>
+    <% end %>
+  </p>
+</br>
+<p>
+  <strong>Delivery service:</strong>
+  <%= @email_campaign.delivery_service %>
+</p>
+<p>
+  <strong>Campaign name:</strong>
+  <%= @email_campaign.campaign_name %>
+</p>
+<p>
+  <strong>List name:</strong>
+  <%= @email_campaign.list_name %>
+</p>
+<p>
+  <strong>Segment:</strong>
+  <%= @email_campaign.segment %>
+</p>
+<p>
+  <strong>Segment note:</strong>
+  <%= @email_campaign.segment_note %>
+</p>
+<p>
+  <strong>Tagline:</strong>
+  <%= @email_campaign.tagline %>
+</p>
+
+</div>
+
+<%= link_to 'Edit Campaign Details', edit_email_campaign_path(@email_campaign), class: 'btn btn-default' %>
+<%= link_to 'Campaign Index', email_campaigns_path, class: 'btn btn-default' %>
+
+</div>
+</div>
+
+<!-- <p>
+  <strong>Company:</strong>
+  <%= @email_campaign.company %>
+</p>
+
+<p>
+  <strong>Campaign name:</strong>
+  <%= @email_campaign.campaign_name %>
+</p>
+
+<p>
+  <strong>Delivery service:</strong>
+  <%= @email_campaign.delivery_service %>
+</p>
+
+<p>
+  <strong>List name:</strong>
+  <%= @email_campaign.list_name %>
+</p>
+
+<p>
+  <strong>Segment:</strong>
+  <%= @email_campaign.segment %>
+</p>
+
+<p>
+  <strong>Segment range:</strong>
+  <%= @email_campaign.segment_range %>
+</p>
+
+<p>
+  <strong>Segment note:</strong>
+  <%= @email_campaign.segment_note %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @email_campaign.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @email_campaign.end_date %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @email_campaign.active %>
+</p>
+
+<p>
+  <strong>Inactive:</strong>
+  <%= @email_campaign.inactive %>
+</p>
+
+<p>
+  <strong>Tagline:</strong>
+  <%= @email_campaign.tagline %>
+</p>
+
+<p>
+  <strong>Emails sent:</strong>
+  <%= @email_campaign.emails_sent %>
+</p>
+
+<p>
+  <strong>Delivered:</strong>
+  <%= @email_campaign.delivered %>
+</p>
+
+<p>
+  <strong>Opened:</strong>
+  <%= @email_campaign.opened %>
+</p>
+
+<p>
+  <strong>Clicked:</strong>
+  <%= @email_campaign.clicked %>
+</p>
+
+<p>
+  <strong>Blocked:</strong>
+  <%= @email_campaign.blocked %>
+</p>
+
+<p>
+  <strong>Bounce:</strong>
+  <%= @email_campaign.bounce %>
+</p>
+
+<p>
+  <strong>Spam:</strong>
+  <%= @email_campaign.spam %>
+</p>
+
+<p>
+  <strong>Extra s:</strong>
+  <%= @email_campaign.extra_s %>
+</p>
+
+<p>
+  <strong>Extra b:</strong>
+  <%= @email_campaign.extra_b %>
+</p>
+
+<p>
+  <strong>Extra i:</strong>
+  <%= @email_campaign.extra_i %>
+</p> -->
+
+<!-- <%= link_to 'Edit', edit_email_campaign_path(@email_campaign) %> |
+<%= link_to 'Back', email_campaigns_path %> -->

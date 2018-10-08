@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :email_campaigns
   resources :inventories
   resources :postcard_mailings
   resources :tx_royalties
