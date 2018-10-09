@@ -26,6 +26,7 @@
         <li class="divider"></li>
         <li class="dropdown-header">Other</li>
           <li><%= link_to 'Texas Royalties', tx_royalties_path %></li>
+          <li><%= link_to 'Email Stats', email_campaigns_path %></li>
 
         <% if user_signed_in? && current_user.superadmin_role?%>
         <li class="divider"></li>
@@ -94,12 +95,32 @@
           <table class="table table-bordered">
             <thead>
               <tr>
-                <th><a target="_blank" href="https://app.mailjet.com/contacts/lists/edit/7yAC">Empire Return Customer Email Link</a></th>
+                <th colspan="2">Email Campaigns </th>
+                <th colspan="2"><a target="_blank" href="https://app.mailjet.com/contacts/lists/edit/7yAC">Empire Return Customer Email Link</a></th>
+              </tr>
+              <tr>
+                <th>Company</th>
+                <th>Active Campaigns</th>
+                <th>Send / Update</th>
+                <th>Last Stats Update</th>
               </tr>
             </thead>
             <tbody>
+              <% @email_campaigns.each do |email_campaign| %>
               <tr>
+                <% if email_campaign.active == true %>
+                <td> <%= email_campaign.company %></td>
+                <td> <%= email_campaign.campaign_name %> </td>
+                <td class="green"><strong> Every Wed </strong></td>
+                  <% if (Date.today - 7) > email_campaign.update_stats %>
+                    <td><strong><%= link_to email_campaign.update_stats.strftime('%-m/%-d/%y'), email_campaign, class: 'red' %> <%= link_to '- Update', email_campaign, class: 'red' %></strong></td>
+                  <% elsif %>
+                    <td><strong><%= link_to email_campaign.update_stats.strftime('%-m/%-d/%y'), email_campaign %> <%= link_to '- Update', email_campaign %></strong></td>
+                  <% end %>
+
+                <% end %>
               </tr>
+              <% end %>
             </tbody>
           </table>
 

@@ -6,6 +6,7 @@ class SequoiaController < ApplicationController
     course_update_status
     name
     task
+    email_campaign
   end
 
   def dash
@@ -325,6 +326,10 @@ end
     user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' ? @name = 'Ashley' : ''
 
     @user_task = 'task.user_1'
+  end
+
+  def email_campaign
+    @email_campaigns = EmailCampaign.all
   end
 
 end
