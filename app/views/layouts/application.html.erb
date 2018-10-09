@@ -74,9 +74,7 @@
       <% end %>
     </div>
     <div class="box image-center text-center">
-      <% if user_signed_in? && current_user.superadmin_role? && current_user.email = 'Austin@SequoiaCPE.com' %>
         <%= image_tag("logos/seq_empire_logo_white.png", width: '400px') %>
-      <% end %>
     </div>
 <% end %>
 
@@ -97,7 +95,7 @@
             <li><%= link_to 'Ashley Dashboard', sequoia_dash_ashley_path %></li>
           <li class="divider"></li>
         <% elsif user_signed_in? && current_user.supervisor_role == true %>
-          <li class="dropdown-header">Dashboards</li>
+          <li class="dropdown-header"><strong>My Dashboards</strong></li>
             <li><%= link_to 'Michael Dashboard', sequoia_dash_path %></li>
             <li><%= link_to 'Hamdo Dashboard', sequoia_dash_path %></li>
             <li><%= link_to 'Ashley Dashboard', sequoia_dash_ashley_path %></li>
@@ -125,9 +123,9 @@
         <li class="dropdown-header">Other</li>
           <li><%= link_to 'Texas Royalties', tx_royalties_path %></li>
           <li><%= link_to 'Email Stats', email_campaigns_path %></li>
-        <li class="divider"></li>
 
         <% if user_signed_in? && current_user.superadmin_role? %>
+          <li class="divider"></li>
           <li class="dropdown-header">Admin</li>
             <li><%= link_to 'MSI Mailing Index', mailings_path %></li>
               <li><%= link_to 'Empire MSI', empire_mailings_path %></li>

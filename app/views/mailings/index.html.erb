@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Mailings</h1>
+<div class="well jumbotron text-center">
+  <h1>Mailings</h1>
+</div>
+
 <% if user_signed_in? && current_user.email == 'austin@sequoiacpe.com' %>
 <h3>Upload CSV File</h3>
   <%= form_tag import_mailings_path, multipart: true do %>
