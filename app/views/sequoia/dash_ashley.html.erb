@@ -92,38 +92,6 @@
             </tbody>
           </table>
 
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th colspan="2">Email Campaigns </th>
-                <th colspan="2"><a target="_blank" href="https://app.mailjet.com/contacts/lists/edit/7yAC">Empire Return Customer Email Link</a></th>
-              </tr>
-              <tr>
-                <th>Company</th>
-                <th>Active Campaigns</th>
-                <th>Send / Update</th>
-                <th>Last Stats Update</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @email_campaigns.each do |email_campaign| %>
-              <tr>
-                <% if email_campaign.active == true %>
-                <td> <%= email_campaign.company %></td>
-                <td> <%= email_campaign.campaign_name %> </td>
-                <td class="green"><strong> Every Wed </strong></td>
-                  <% if (Date.today - 7) > email_campaign.update_stats %>
-                    <td><strong><%= link_to email_campaign.update_stats.strftime('%-m/%-d/%y'), email_campaign, class: 'red' %> <%= link_to '- Update', email_campaign, class: 'red' %></strong></td>
-                  <% elsif %>
-                    <td><strong><%= link_to email_campaign.update_stats.strftime('%-m/%-d/%y'), email_campaign %> <%= link_to '- Update', email_campaign %></strong></td>
-                  <% end %>
-
-                <% end %>
-              </tr>
-              <% end %>
-            </tbody>
-          </table>
-
         </div>
   <!-- Tab 1 end -->
   <!-- Tab 2 start -->
@@ -203,119 +171,43 @@
   <!-- Tabs End -->
     </div>
 
-      <div class="well">
-        <h2 class="text-center">Tasks</h2>
-        <h4 class="text-center"><%= link_to 'Add New Task', new_task_path, class: "btn btn-primary" %></h4>
-        <% if @name == 'Austin' %>
-          <p class="text-center green">
-            Only displaying task for singed in user</br>
-            Not per dashboard user
-          </p>
-        <% end %>
-      </br>
-    <!-- Start Tab Headers -->
-        <ul class="nav nav-tabs">
-             <li class="active"><a data-toggle="tab" href="#in-progress">In Progress</a></li>
-             <li><a data-toggle="tab" href="#future">Future Task</a></li>
-             <li><a data-toggle="tab" href="#done">Completed</a></li>
-        </ul>
-        </br>
-    <!-- End Tab Headers -->
-    <!-- Start Tabs - Tasks -->
-        <div class="tab-content">
-    <!-- Start Tab One -->
-          <div id="in-progress" class="tab-pane fade in active">
+    <div class="well">
+      <h3 class="text-center">Email Campaigns</h3>
 
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Note</th>
-                  <th>Due Date</th>
-                  <th> </th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @tasks.each do |task| %>
-                <% if task.user_1 == @name || task.user_2 == @name || task.user_3 == @name || task.user_4 == @name || task.user_5 == @name %>
-                  <% if task.type_one == true && task.done == false %>
-                  <%# if user_signed_in? && task.user_id == current_user.id && task.type_one == true && task.done == false %>
-                    <tr>
-                      <td><strong><%= link_to task.title, task %></strong></td>
-                      <td><%= task.note.truncate_words(20) %>
-                      <td><%= task.due_date.nil? ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
-                      <td><%= link_to 'Edit', edit_task_path(task) %></td>
-                    </tr>
-                    <% end %>
-                  <% end %>
-                <% end %>
-              </tbody>
-            </table>
-
-            <!-- </tbody>
-          </table> -->
-          </div>
-    <!-- End Tab one -->
-    <!-- Start Tab Two -->
-        <div id="future" class="tab-pane fade in">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Note</th>
-                  <th>Due Date</th>
-                  <th> </th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @tasks.each do |task| %>
-                  <% if task.user_1 == @name || task.user_2 == @name || task.user_3 == @name || task.user_4 == @name || task.user_5 == @name %>
-                    <% if task.type_two == true && task.done == false && task.type_one == false %>
-                    <tr>
-                      <td><strong><%= link_to task.title, task %></strong></td>
-                      <td><%= task.note.truncate_words(20) %>
-                      <td><%= task.due_date.nil? ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
-                      <td><%= link_to 'Edit', edit_task_path(task) %></td>
-                    </tr>
-                    <% end %>
-                  <% end %>
-                <% end %>
-              </tbody>
-            </table>
-        </div>
-    <!-- End Tab Two -->
-    <!-- Start Tab three -->
-        <div id="done" class="tab-pane fade in">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Note</th>
-                <th>Due Date</th>
-                <th> </th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @tasks.each do |task| %>
-                <% if task.user_1 == @name || task.user_2 == @name || task.user_3 == @name || task.user_4 == @name || task.user_5 == @name %>
-                  <% if task.done == true %>
-                <tr>
-                  <td><strong><%= link_to task.title, task %></strong></td>
-                  <td><%= task.note.truncate_words(20) %>
-                  <td><%= task.due_date.nil? ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
-                  <td><%= link_to 'Edit', edit_task_path(task) %></td>
-                </tr>
-                  <% end %>
-                <% end %>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-    <!-- End Tab Three -->
+      <div class="well text-center">
+        <a target="_blank" href="https://app.mailjet.com/contacts/lists/edit/7yAC"><strong>Empire RC List Append</strong></a>
+        | <a target="_blank" href="https://app.mailjet.com/workflow"><strong>Mailjet Campaign Data</strong></a>
       </div>
-    <!-- End Tab Section - Tasks -->
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Active Campaigns</th>
+            <th>Send / Update</th>
+            <th>Last Stats Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @email_campaigns.each do |email_campaign| %>
+          <tr>
+            <% if email_campaign.active == true %>
+            <td> <%= email_campaign.company %></td>
+            <td> <%= email_campaign.campaign_name %> </td>
+            <td class="green"><strong> Every Wed </strong></td>
+              <% if (Date.today - 7) > email_campaign.update_stats %>
+                <td><strong><%= link_to email_campaign.update_stats.strftime('%-m/%-d/%y'), email_campaign, class: 'red' %> <%= link_to '- Update', email_campaign, class: 'red' %></strong></td>
+              <% elsif %>
+                <td><strong><%= link_to email_campaign.update_stats.strftime('%-m/%-d/%y'), email_campaign %> <%= link_to '- Update', email_campaign %></strong></td>
+              <% end %>
+
+            <% end %>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+
     </div>
-    <!-- End Task Section -->
 
   </div>
 <!-- End Left Pannel -->
@@ -366,8 +258,28 @@
     </div>
 
     <div class="well">
-      <h3>HOME</h3>
-      <p>Some content.</p>
+      <h3>Links</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Note</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Returned Postcards</td>
+            <td>Add as received</td>
+            <td><%= link_to 'Add New', new_postcard_return_path %></td>
+          </tr>
+          <tr>
+            <td>Course Copyrights</td>
+            <td>For Every New Course Add Publisher and Copyright</td>
+            <td><%= link_to 'Add Copyright', new_copyright_path %></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
   </div>
@@ -375,6 +287,121 @@
 
 <!-- Start Right Pannel -->
   <div class="col-lg-4">
+
+    <div class="well">
+      <h2 class="text-center">Tasks</h2>
+      <h4 class="text-center"><%= link_to 'Add New Task', new_task_path, class: "btn btn-primary" %></h4>
+      <% if @name == 'Austin' %>
+        <p class="text-center green">
+          Only displaying task for singed in user</br>
+          Not per dashboard user
+        </p>
+      <% end %>
+    </br>
+  <!-- Start Tab Headers -->
+      <ul class="nav nav-tabs">
+           <li class="active"><a data-toggle="tab" href="#in-progress">In Progress</a></li>
+           <li><a data-toggle="tab" href="#future">Future Task</a></li>
+           <li><a data-toggle="tab" href="#done">Completed</a></li>
+      </ul>
+      </br>
+  <!-- End Tab Headers -->
+  <!-- Start Tabs - Tasks -->
+      <div class="tab-content">
+  <!-- Start Tab One -->
+        <div id="in-progress" class="tab-pane fade in active">
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Note</th>
+                <th>Due Date</th>
+                <th> </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @tasks.each do |task| %>
+              <% if task.user_1 == @name || task.user_2 == @name || task.user_3 == @name || task.user_4 == @name || task.user_5 == @name %>
+                <% if task.type_one == true && task.done == false %>
+                <%# if user_signed_in? && task.user_id == current_user.id && task.type_one == true && task.done == false %>
+                  <tr>
+                    <td><strong><%= link_to task.title, task %></strong></td>
+                    <td><%= task.note.truncate_words(20) %>
+                    <td><%= task.due_date.nil? ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
+                    <td><%= link_to 'Edit', edit_task_path(task) %></td>
+                  </tr>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+
+          <!-- </tbody>
+        </table> -->
+        </div>
+  <!-- End Tab one -->
+  <!-- Start Tab Two -->
+      <div id="future" class="tab-pane fade in">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Note</th>
+                <th>Due Date</th>
+                <th> </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @tasks.each do |task| %>
+                <% if task.user_1 == @name || task.user_2 == @name || task.user_3 == @name || task.user_4 == @name || task.user_5 == @name %>
+                  <% if task.type_two == true && task.done == false && task.type_one == false %>
+                  <tr>
+                    <td><strong><%= link_to task.title, task %></strong></td>
+                    <td><%= task.note.truncate_words(20) %>
+                    <td><%= task.due_date.nil? ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
+                    <td><%= link_to 'Edit', edit_task_path(task) %></td>
+                  </tr>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+      </div>
+  <!-- End Tab Two -->
+  <!-- Start Tab three -->
+      <div id="done" class="tab-pane fade in">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Note</th>
+              <th>Due Date</th>
+              <th> </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @tasks.each do |task| %>
+              <% if task.user_1 == @name || task.user_2 == @name || task.user_3 == @name || task.user_4 == @name || task.user_5 == @name %>
+                <% if task.done == true %>
+              <tr>
+                <td><strong><%= link_to task.title, task %></strong></td>
+                <td><%= task.note.truncate_words(20) %>
+                <td><%= task.due_date.nil? ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
+                <td><%= link_to 'Edit', edit_task_path(task) %></td>
+              </tr>
+                <% end %>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+  <!-- End Tab Three -->
+    </div>
+  <!-- End Tab Section - Tasks -->
+  </div>
+  <!-- End Task Section -->
+
     <div class="well">
   <!-- Tabs Start -->
       <ul class="nav nav-tabs">
@@ -396,11 +423,6 @@
   <!-- Tab 2 end -->
       </div>
   <!-- Tabs End -->
-    </div>
-
-    <div class="well">
-      <h3>HOME</h3>
-      <p>Some content.</p>
     </div>
 
   </div>
