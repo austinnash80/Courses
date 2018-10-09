@@ -95,17 +95,17 @@
             <li><%= link_to 'Ashley Dashboard', sequoia_dash_ashley_path %></li>
           <li class="divider"></li>
         <% elsif user_signed_in? && current_user.supervisor_role == true %>
-          <li class="dropdown-header"><strong>My Dashboards</strong></li>
+          <li class="dropdown-header">Dashboards</li>
             <li><%= link_to 'Michael Dashboard', sequoia_dash_path %></li>
             <li><%= link_to 'Hamdo Dashboard', sequoia_dash_path %></li>
             <li><%= link_to 'Ashley Dashboard', sequoia_dash_ashley_path %></li>
           <li class="divider"></li>
         <% elsif user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' %>
-          <li><%= link_to 'Dashboard', sequoia_dash_ashley_path %></li>
+          <li><strong><%= link_to 'My Dashboard', sequoia_dash_ashley_path %></strong></li>
         <% elsif user_signed_in? && current_user.email == 'hamdo@sequoiacpe.com' %>
-          <li><%= link_to 'Dashboard', sequoia_dash_ashley_path %></li>
+          <li><strong><%= link_to 'My Dashboard', sequoia_dash_ashley_path %></strong></li>
         <% end %>
-<!-- End Dashboards     -->
+<!-- End Dashboards -->
         <li class="dropdown-header">Courses</li>
           <li><%= link_to 'Course Datasheet', datasheets_path %></li>
           <li><%= link_to 'Course Updatesheet', updatesheets_path %></li>
@@ -118,18 +118,17 @@
         <li class="dropdown-header">Marketing</li>
             <li><%= link_to 'Postcards Returns', postcard_returns_path %></li>
             <li><%= link_to 'Postcard Mailings', postcard_mailings_path %></li>
-            <li><%= link_to 'Postcard inventory', inventories_path %></li>
+            <li><%= link_to 'Postcard Inventory', inventories_path %></li>
         <li class="divider"></li>
         <li class="dropdown-header">Other</li>
           <li><%= link_to 'Texas Royalties', tx_royalties_path %></li>
           <li><%= link_to 'Email Stats', email_campaigns_path %></li>
-
         <% if user_signed_in? && current_user.superadmin_role? %>
-          <li class="divider"></li>
-          <li class="dropdown-header">Admin</li>
-            <li><%= link_to 'MSI Mailing Index', mailings_path %></li>
-              <li><%= link_to 'Empire MSI', empire_mailings_path %></li>
-            <li><a href="/admin">Admin Panel</a></li>
+        <li class="divider"></li>
+        <li class="dropdown-header">Admin</li>
+          <li><%= link_to 'MSI Mailing Index', mailings_path %></li>
+            <li><%= link_to 'Empire MSI', empire_mailings_path %></li>
+          <li><a href="/admin">Admin Panel</a></li>
         <% end %>
 
         <li class="divider"></li>
