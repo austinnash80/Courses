@@ -65,14 +65,16 @@
 <div class="container-fluid">
   <div class="clearfix">
     <div class="col-lg-4">
-      <% if current_user.superadmin_role? && current_user.email = 'Austin@SequoiaCPE.com' %>
+      <% if user_signed_in? && current_user.superadmin_role? && current_user.email = 'Austin@SequoiaCPE.com' %>
         <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_path, class: 'button-none'%></strong>
-      <% elsif current_user.superadmin_role? && current_user.email = 'Ashley@SequoiaCPE.com'%>
+      <% elsif user_signed_in? && current_user.email = 'Ashley@SequoiaCPE.com'%>
         <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_ashley_path, class: 'button-none'%></strong>
+      <% elsif %>
+      <h1> Dashboard </h1>
       <% end %>
     </div>
     <div class="box image-center text-center">
-      <% if current_user.superadmin_role? && current_user.email = 'Austin@SequoiaCPE.com' %>
+      <% if user_signed_in? && current_user.superadmin_role? && current_user.email = 'Austin@SequoiaCPE.com' %>
         <%= image_tag("logos/seq_empire_logo_white.png", width: '400px') %>
       <% end %>
     </div>
@@ -86,7 +88,7 @@
     <% end %>
       <ul class="dropdown-menu">
 <!-- Dashboards -->
-        <% if current_user.superadmin_role == true %>
+        <% if user_signed_in? && current_user.superadmin_role == true %>
           <li class="dropdown-header">Dashboards</li>
             <li><%= link_to 'Austin Dashboard', sequoia_dash_path %></li>
             <li><%= link_to 'Kyle Dashboard', sequoia_dash_path %></li>
@@ -94,15 +96,15 @@
             <li><%= link_to 'Hamdo Dashboard', sequoia_dash_path %></li>
             <li><%= link_to 'Ashley Dashboard', sequoia_dash_ashley_path %></li>
           <li class="divider"></li>
-        <% elsif current_user.supervisor_role == true %>
+        <% elsif user_signed_in? && current_user.supervisor_role == true %>
           <li class="dropdown-header">Dashboards</li>
             <li><%= link_to 'Michael Dashboard', sequoia_dash_path %></li>
             <li><%= link_to 'Hamdo Dashboard', sequoia_dash_path %></li>
             <li><%= link_to 'Ashley Dashboard', sequoia_dash_ashley_path %></li>
           <li class="divider"></li>
-        <% elsif current_user.email == 'ashley@sequoiacpe.com' %>
+        <% elsif user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' %>
           <li><%= link_to 'Dashboard', sequoia_dash_ashley_path %></li>
-        <% elsif current_user.email == 'hamdo@sequoiacpe.com' %>
+        <% elsif user_signed_in? && current_user.email == 'hamdo@sequoiacpe.com' %>
           <li><%= link_to 'Dashboard', sequoia_dash_ashley_path %></li>
         <% end %>
 <!-- End Dashboards     -->
@@ -125,7 +127,7 @@
           <li><%= link_to 'Email Stats', email_campaigns_path %></li>
         <li class="divider"></li>
 
-        <% if current_user.superadmin_role? %>
+        <% if user_signed_in? && current_user.superadmin_role? %>
           <li class="dropdown-header">Admin</li>
             <li><%= link_to 'MSI Mailing Index', mailings_path %></li>
               <li><%= link_to 'Empire MSI', empire_mailings_path %></li>
