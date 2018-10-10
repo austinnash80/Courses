@@ -49,7 +49,7 @@
   <div class="display-none">
     <div class="field">
       <%= form.label :update_stats %>
-      <%= form.date_select :update_stats, id: :email_update_stats %>
+      <%= form.date_field :update_stats, id: :email_update_stats, :value => Date.today %>
     </div>
   </div>
 </br>
