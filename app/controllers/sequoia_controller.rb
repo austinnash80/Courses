@@ -231,33 +231,37 @@ def tx_royalties
 end
 
 def postcard_schedule
-    @day_of_week = Time.now.strftime('%a')
+    @day_of_week = Date.today.strftime('%a')
     @postcard_mailings = PostcardMailing.all
   #Postcard Due Dates
       @day_of_week == 'Sat' || @day_of_week == 'Sun' || @day_of_week == 'Mon' ? @due_sequoia_1 = "Tuesday" :
       @day_of_week == 'Tue' || @day_of_week == 'Fri' ? @due_sequoia_1 = "Due Today" :
-      @day_of_week == 'Wen' || @day_of_week == 'Thu' ? @due_sequoia_1 = "Due Friday" : ''
+      @day_of_week == 'Wed' || @day_of_week == 'Thu' ? @due_sequoia_1 = "Due Friday" : ''
 
-      @day_of_week == 'Mon' || @day_of_week == 'Tue' || @day_of_week == 'Thu' || @day_of_week == 'Fri' ? @due_empire_1 = "Due Wen" :
-      @day_of_week == 'Wen' ? @due_empire_1 = "Due Today" : ''
+      @day_of_week == 'Mon' || @day_of_week == 'Tue' || @day_of_week == 'Thu' || @day_of_week == 'Fri' ? @due_empire_1 = "Due Wed" :
+      @day_of_week == 'Wed' ? @due_empire_1 = "Due Today" : ''
   #Postcard Due Dates
 
   #Postcard overdue
+
+    @seq_cpa_nm = []
+    @seq_cpa_rc = []
+    @seq_ea_nm = []
+    @seq_ea_rc = []
     @most_recent_postcart_mailing_empire = []
 
-
       @postcard_mailings.each do |postcard_mailings|
-        postcard_mailings['company'] == 'Sequoia' && postcard_mailings['version'] == 'CPA NM' ? @seq_cpa_nm = Array.new.push(postcard_mailings['date_sent']) : ''
-        postcard_mailings['company'] == 'Sequoia' && postcard_mailings['version'] == 'CPA RC' ? @seq_cpa_rc = Array.new.push(postcard_mailings['date_sent']) : ''
-        postcard_mailings['company'] == 'Sequoia' && postcard_mailings['version'] == 'EA NM' ? @seq_ea_nm = Array.new.push(postcard_mailings['date_sent']) : ''
-        postcard_mailings['company'] == 'Sequoia' && postcard_mailings['version'] == 'EA RC' ? @seq_ea_rc = Array.new.push(postcard_mailings['date_sent']) : ''
+        postcard_mailings['company'] == 'Sequoia' && postcard_mailings['version'] == 'CPA NM' ? @seq_cpa_nm.push(postcard_mailings['date_sent']) : ''
+        postcard_mailings['company'] == 'Sequoia' && postcard_mailings['version'] == 'CPA RC' ? @seq_cpa_rc.push(postcard_mailings['date_sent']) : ''
+        postcard_mailings['company'] == 'Sequoia' && postcard_mailings['version'] == 'EA NM' ? @seq_ea_nm.push(postcard_mailings['date_sent']) : ''
+        postcard_mailings['company'] == 'Sequoia' && postcard_mailings['version'] == 'EA RC' ? @seq_ea_rc.push(postcard_mailings['date_sent']) : ''
         postcard_mailings['company'] == 'Empire' && postcard_mailings['version'] == 'Empire RC' ? @most_recent_postcart_mailing_empire.push(postcard_mailings['date_sent']) : ''
       end
 
       @most_recent_postcart_mailing_sequoia = [@seq_cpa_nm.max, @seq_cpa_rc.max, @seq_ea_nm.max, @seq_ea_rc.max]
 
   # Sequoia
-      @day_of_week == 'Wen' && @most_recent_postcart_mailing_sequoia.min < Date.today - 1 ? @out_of_date_sequoia = 'True' :
+      @day_of_week == 'Wed' && @most_recent_postcart_mailing_sequoia.min < Date.today - 1 ? @out_of_date_sequoia = 'True' :
       @day_of_week == 'Thu' && @most_recent_postcart_mailing_sequoia.min < Date.today - 2 ? @out_of_date_sequoia = 'True' :
       @day_of_week == 'Fri' && @most_recent_postcart_mailing_sequoia.min < Date.today - 3 ? @out_of_date_sequoia = 'True' :
       @day_of_week == 'Mon' && @most_recent_postcart_mailing_sequoia.min < Date.today - 3 ? @out_of_date_sequoia = 'True' :
@@ -268,7 +272,7 @@ def postcard_schedule
       @day_of_week == 'Fri' && @most_recent_postcart_mailing_empire.max < Date.today - 2 ? @out_of_date_empire = 'True' :
       @day_of_week == 'Mon' && @most_recent_postcart_mailing_empire.max < Date.today - 5 ? @out_of_date_empire = 'True' :
       @day_of_week == 'Tue' && @most_recent_postcart_mailing_empire.max < Date.today - 6 ? @out_of_date_empire = 'True' :
-      @day_of_week == 'Wen' && @most_recent_postcart_mailing_empire.max < Date.today - 7 ? @out_of_date_empire = 'True' : @out_of_date_empire = 'False'
+      @day_of_week == 'Wed' && @most_recent_postcart_mailing_empire.max < Date.today - 7 ? @out_of_date_empire = 'True' : @out_of_date_empire = 'False'
 
   end
 
@@ -277,47 +281,71 @@ def postcard_schedule
 
   @postcard_inventory = Inventory.group(:company).group(:version).group(:order).sum(:number)
 
-  @inventories.each do |inventory|
-     inventory['company'] == 'Sequoia' && inventory['version'] == 'CPA NM' ? @date_sequoia_cpa_nm = Array.new.push(inventory['order']) : ''
-     inventory['company'] == 'Sequoia' && inventory['version'] == 'CPA RC' ? @date_sequoia_cpa_rc = Array.new.push(inventory['order']) : ''
-     inventory['company'] == 'Sequoia' && inventory['version'] == 'EA NM' ? @date_sequoia_ea_nm = Array.new.push(inventory['order']) : ''
-     inventory['company'] == 'Sequoia' && inventory['version'] == 'EA RC' ? @date_sequoia_ea_rc = Array.new.push(inventory['order']) : ''
-     inventory['company'] == 'Empire' && inventory['version'] == 'Empire RC' ? @date_empire_rc = Array.new.push(inventory['order']) : ''
+  @date_sequoia_cpa_nm = []
+  @date_sequoia_cpa_rc = []
+  @date_sequoia_ea_nm = []
+  @date_sequoia_ea_rc = []
+  @date_empire_rc = []
+
+    @inventories.each do |inventory|
+       inventory['company'] == 'Sequoia' && inventory['version'] == 'CPA NM' ? @date_sequoia_cpa_nm.push(inventory['order']) : ''
+       inventory['company'] == 'Sequoia' && inventory['version'] == 'CPA RC' ? @date_sequoia_cpa_rc.push(inventory['order']) : ''
+       inventory['company'] == 'Sequoia' && inventory['version'] == 'EA NM' ? @date_sequoia_ea_nm.push(inventory['order']) : ''
+       inventory['company'] == 'Sequoia' && inventory['version'] == 'EA RC' ? @date_sequoia_ea_rc.push(inventory['order']) : ''
+       inventory['company'] == 'Empire' && inventory['version'] == 'Empire RC' ? @date_empire_rc.push(inventory['order']) : ''
+    end
+
+  @used_sequoia_cpa_nm = []
+  @used_sequoia_cpa_rc = []
+  @used_sequoia_ea_nm = []
+  @used_sequoia_ea_rc = []
+  @used_empire_rc = []
+
+    @postcard_mailings.each do |sent|
+       sent['company'] == 'Sequoia' && sent['version'] == 'CPA NM' ? @used_sequoia_cpa_nm.push(sent['number_sent']) : ''
+       sent['company'] == 'Sequoia' && sent['version'] == 'CPA RC' ? @used_sequoia_cpa_rc.push(sent['number_sent']) : ''
+       sent['company'] == 'Sequoia' && sent['version'] == 'EA NM' ? @used_sequoia_ea_nm.push(sent['number_sent']) : ''
+       sent['company'] == 'Sequoia' && sent['version'] == 'EA RC' ? @used_sequoia_ea_rc.push(sent['number_sent']) : ''
+       sent['company'] == 'Empire' && sent['version'] == 'Empire RC' ? @used_empire_rc.push(sent['number_sent']) : ''
+    end
+
+  @inventory_sequoia_cpa_nm = []
+  @inventory_sequoia_cpa_rc = []
+  @inventory_sequoia_ea_nm = []
+  @inventory_sequoia_ea_rc = []
+  @inventory_empire_rc = []
+
+    @inventories.each do |inventory|
+      inventory['company'] == 'Sequoia' && inventory['version'] == 'CPA NM' ? @inventory_sequoia_cpa_nm.push(inventory['number']) : ''
+      inventory['company'] == 'Sequoia' && inventory['version'] == 'CPA RC' ? @inventory_sequoia_cpa_rc.push(inventory['number']) : ''
+      inventory['company'] == 'Sequoia' && inventory['version'] == 'EA NM' ? @inventory_sequoia_ea_nm.push(inventory['number']) : ''
+      inventory['company'] == 'Sequoia' && inventory['version'] == 'EA RC' ? @inventory_sequoia_ea_rc.push(inventory['number']) : ''
+      inventory['company'] == 'Empire' && inventory['version'] == 'Empire RC' ? @inventory_empire_rc.push(inventory['number']) : ''
+    end
+
+  @number_sequoia_cpa_nm = []
+  @number_sequoia_cpa_rc = []
+  @number_sequoia_ea_nm = []
+  @number_sequoia_ea_rc = []
+  @number_empire_rc = []
+
+    @inventories.each do |inventory|
+      inventory['company'] == "Sequoia" && inventory['version'] == "CPA NM" && inventory['order'] == @date_sequoia_cpa_nm.max ? @number_sequoia_cpa_nm.push(inventory['number']) : ''
+      inventory['company'] == "Sequoia" && inventory['version'] == "CPA RC" && inventory['order'] == @date_sequoia_cpa_rc.max ? @number_sequoia_cpa_rc.push(inventory['number']) : ''
+      inventory['company'] == "Sequoia" && inventory['version'] == "EA NM" && inventory['order'] == @date_sequoia_ea_nm.max ? @number_sequoia_ea_nm.push(inventory['number']) : ''
+      inventory['company'] == "Sequoia" && inventory['version'] == "EA RC" && inventory['order'] == @date_sequoia_ea_rc.max ? @number_sequoia_ea_rc.push(inventory['number']) : ''
+      inventory['company'] == "Empire" && inventory['version'] == "Empire RC" && inventory['order'] == @date_empire_rc.max ? @number_empire_rc.push(inventory['number']) : ''
+    end
+
+    @remaining_inventory_sequoia_cpa_nm = (@inventory_sequoia_cpa_nm.sum - @used_sequoia_cpa_nm.sum)
+    @remaining_inventory_sequoia_cpa_rc = (@inventory_sequoia_cpa_rc.sum - @used_sequoia_cpa_rc.sum)
+    @remaining_inventory_sequoia_ea_nm = (@inventory_sequoia_ea_nm.sum - @used_sequoia_ea_nm.sum)
+    @remaining_inventory_sequoia_ea_rc = (@inventory_sequoia_ea_rc.sum - @used_sequoia_ea_rc.sum)
+    @remaining_inventory_empire_rc = (@inventory_empire_rc.sum - @used_empire_rc.sum)
+
+    @remaining_inventory = Array.new.push(@remaining_inventory_sequoia_cpa_nm, @remaining_inventory_sequoia_cpa_rc, @remaining_inventory_sequoia_ea_nm, @remaining_inventory_sequoia_ea_rc, @remaining_inventory_empire_rc)
+
   end
-
-  @postcard_mailings.each do |sent|
-     sent['company'] == 'Sequoia' && sent['version'] == 'CPA NM' ? @used_sequoia_cpa_nm = Array.new.push(sent['number_sent']) : ''
-     sent['company'] == 'Sequoia' && sent['version'] == 'CPA RC' ? @used_sequoia_cpa_rc = Array.new.push(sent['number_sent']) : ''
-     sent['company'] == 'Sequoia' && sent['version'] == 'EA NM' ? @used_sequoia_ea_nm = Array.new.push(sent['number_sent']) : ''
-     sent['company'] == 'Sequoia' && sent['version'] == 'EA RC' ? @used_sequoia_ea_rc = Array.new.push(sent['number_sent']) : ''
-     sent['company'] == 'Empire' && sent['version'] == 'Empire RC' ? @used_empire_rc = Array.new.push(sent['number_sent']) : ''
-  end
-
-  @inventories.each do |inventory|
-    inventory['company'] == 'Sequoia' && inventory['version'] == 'CPA NM' ? @inventory_sequoia_cpa_nm = Array.new.push(inventory['number']) : ''
-    inventory['company'] == 'Sequoia' && inventory['version'] == 'CPA RC' ? @inventory_sequoia_cpa_rc = Array.new.push(inventory['number']) : ''
-    inventory['company'] == 'Sequoia' && inventory['version'] == 'EA NM' ? @inventory_sequoia_ea_nm = Array.new.push(inventory['number']) : ''
-    inventory['company'] == 'Sequoia' && inventory['version'] == 'EA RC' ? @inventory_sequoia_ea_rc = Array.new.push(inventory['number']) : ''
-    inventory['company'] == 'Empire' && inventory['version'] == 'Empire RC' ? @inventory_empire_rc = Array.new.push(inventory['number']) : ''
-  end
-
-  @inventories.each do |inventory|
-    inventory['company'] == "Sequoia" && inventory['version'] == "CPA NM" && inventory['order'] == @date_sequoia_cpa_nm.max ? @number_sequoia_cpa_nm = Array.new.push(inventory['number']) : ''
-    inventory['company'] == "Sequoia" && inventory['version'] == "CPA RC" && inventory['order'] == @date_sequoia_cpa_rc.max ? @number_sequoia_cpa_rc = Array.new.push(inventory['number']) : ''
-    inventory['company'] == "Sequoia" && inventory['version'] == "EA NM" && inventory['order'] == @date_sequoia_ea_nm.max ? @number_sequoia_ea_nm = Array.new.push(inventory['number']) : ''
-    inventory['company'] == "Sequoia" && inventory['version'] == "EA RC" && inventory['order'] == @date_sequoia_ea_rc.max ? @number_sequoia_ea_rc = Array.new.push(inventory['number']) : ''
-    inventory['company'] == "Empire" && inventory['version'] == "Empire RC" && inventory['order'] == @date_empire_rc.max ? @number_empire_rc = Array.new.push(inventory['number']) : ''
-  end
-
-  @remaining_inventory_sequoia_cpa_nm = (@inventory_sequoia_cpa_nm.sum - @used_sequoia_cpa_nm.sum)
-  @remaining_inventory_sequoia_cpa_rc = (@inventory_sequoia_cpa_rc.sum - @used_sequoia_cpa_rc.sum)
-  @remaining_inventory_sequoia_ea_nm = (@inventory_sequoia_ea_nm.sum - @used_sequoia_ea_nm.sum)
-  @remaining_inventory_sequoia_ea_rc = (@inventory_sequoia_ea_rc.sum - @used_sequoia_ea_rc.sum)
-  @remaining_inventory_empire_rc = (@inventory_empire_rc.sum - @used_empire_rc.sum)
-
-  @remaining_inventory = Array.new.push(@remaining_inventory_sequoia_cpa_nm, @remaining_inventory_sequoia_cpa_rc, @remaining_inventory_sequoia_ea_nm, @remaining_inventory_sequoia_ea_rc, @remaining_inventory_empire_rc)
-
-end
 
   def name
     user_signed_in? && current_user.email == 'austin@sequoiacpe.com' ? @name = 'Austin' : ''
