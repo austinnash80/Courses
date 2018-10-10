@@ -101,7 +101,7 @@
             <li><%= link_to 'Ashley Dashboard', sequoia_dash_ashley_path %></li>
           <li class="divider"></li>
         <% elsif user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' %>
-          <li><strong><%= link_to 'My Dashboard', sequoia_dash_ashley_path %></strong></li>
+          <li><%= link_to 'My Dashboard', sequoia_dash_ashley_path %></li>
         <% elsif user_signed_in? && current_user.email == 'hamdo@sequoiacpe.com' %>
           <li><strong><%= link_to 'My Dashboard', sequoia_dash_ashley_path %></strong></li>
         <% end %>
