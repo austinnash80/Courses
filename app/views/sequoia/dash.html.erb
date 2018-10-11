@@ -488,53 +488,86 @@
 </div>
     </div>
 
+<!-- Start Month -->
     <div class="well">
-
-      Date.today: <%= @date_today %></br>
-
-
       <h3 class="text-center"> Sequoia MTD: <%= number_to_currency(@total_mtd, :precision => 0) %> </h3>
        <h4 class="text-center"><%= Date.today.strftime('%B %Y') %></h4>
-<div class="row">
-</br>
-  <div class=" col-lg-5">
-  </br>
-  <!-- <h5 class="text-center">Yesterday Breakdown</h5> -->
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th class="text-center" style="width: 33%">CPA </th>
-            <th class="text-center" style="width: 33%">EA </th>
-            <th class="text-center" style="width: 33%">AFSP </th>
-          </tr>
-        </thead>
-        <tbody>
-         <tr class="text-center">
-           <td> <%= number_to_currency(@cpa_mtd, :precision => 0) %> </td>
-           <td> <%= number_to_currency(@ea_mtd, :precision => 0) %> </td>
-           <td> <%= number_to_currency(@afsp_mtd, :precision => 0) %> </td>
-          </tr>
-        <!-- </tbody>
-        <thead> -->
-          <tr>
-            <th class="text-center">New</th>
-            <th class="text-center">Return</th>
-            <th class="text-center">Ethics</th>
-          </tr>
-        <!-- </thead>
-        <tbody> -->
-         <tr class="text-center">
-           <td> <%= number_to_currency(@new_mem_mtd, :precision => 0) %> </td>
-           <td> <%= number_to_currency(@return_mem_mtd, :precision => 0) %> </td>
-           <td> <%= number_to_currency(@cpa_ethics_mtd, :precision => 0) %> </td>
-          </tr>
-        </tbody>
-      </table>
-  </div>
-  <div class="well col-lg-7">
-    <%= column_chart @column_chart_mtd, prefix: "$", thousands: ",", xtitle: "", ytitle: "", height: '', id: "Month", download: true, title: "" %>
-  </div>
-</div>
+        <div class="row">
+        </br>
+          <div class=" col-lg-5">
+          </br>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th class="text-center" style="width: 33%">CPA </th>
+                    <th class="text-center" style="width: 33%">EA </th>
+                    <th class="text-center" style="width: 33%">AFSP </th>
+                  </tr>
+                </thead>
+                <tbody>
+                 <tr class="text-center">
+                   <td> <%= number_to_currency(@cpa_mtd, :precision => 0) %> </td>
+                   <td> <%= number_to_currency(@ea_mtd, :precision => 0) %> </td>
+                   <td> <%= number_to_currency(@afsp_mtd, :precision => 0) %> </td>
+                  </tr>
+                  <tr>
+                    <th class="text-center">New</th>
+                    <th class="text-center">Return</th>
+                    <th class="text-center">Ethics</th>
+                  </tr>
+                 <tr class="text-center">
+                   <td> <%= number_to_currency(@new_mem_mtd, :precision => 0) %> </td>
+                   <td> <%= number_to_currency(@return_mem_mtd, :precision => 0) %> </td>
+                   <td> <%= number_to_currency(@cpa_ethics_mtd, :precision => 0) %> </td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        <div class="well col-lg-7">
+          <%= column_chart @column_chart_mtd, prefix: "$", thousands: ",", xtitle: "", ytitle: "", height: '', id: "Month", download: true, title: "" %>
+        </div>
+      </div>
+    </div>
+
+<!-- Start Year -->
+    <div class="well">
+      <h3 class="text-center"> Sequoia YTD: <%= number_to_currency(@total_ytd, :precision => 0) %> </h3>
+       <h4 class="text-center"><%= Date.today.strftime('%Y') %></h4>
+        <div class="row">
+        </br>
+          <div class=" col-lg-6">
+          </br>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th class="text-center" style="width: 33%">CPA </th>
+                    <th class="text-center" style="width: 33%">EA </th>
+                    <th class="text-center" style="width: 33%">AFSP </th>
+                  </tr>
+                </thead>
+                <tbody>
+                 <tr class="text-center">
+                   <td> <%= number_to_currency(@cpa_ytd, :precision => 0) %> </td>
+                   <td> <%= number_to_currency(@ea_ytd, :precision => 0) %> </td>
+                   <td> <%= number_to_currency(@afsp_ytd, :precision => 0) %> </td>
+                  </tr>
+                  <tr>
+                    <th class="text-center">New</th>
+                    <th class="text-center">Return</th>
+                    <th class="text-center">Ethics</th>
+                  </tr>
+                 <tr class="text-center">
+                   <td> <%= number_to_currency(@new_mem_ytd, :precision => 0) %> </td>
+                   <td> <%= number_to_currency(@return_mem_ytd, :precision => 0) %> </td>
+                   <td> <%= number_to_currency(@cpa_ethics_ytd, :precision => 0) %> </td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        <div class="well col-lg-6">
+          <%= column_chart @column_chart_ytd, prefix: "$", thousands: ",", xtitle: "", ytitle: "", height: '', id: "Year", download: true, title: "" %>
+        </div>
+      </div>
     </div>
 
   </div>
