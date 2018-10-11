@@ -440,25 +440,13 @@
   </div>
 </div>
 
-<div class="col-lg-4 length right-square well">
-  <ul class="nav nav-tabs">
-    <%# if user_signed_in? && current_user.superadmin_role? %>
-       <li class=""><a data-toggle="tab" href="#daily-sales">Daily</a></li>
-       <li><a data-toggle="tab" href="#month-sales">Monthly</a></li>
-    <%# end %>
-       <li><a data-toggle="tab" href="#yearly-sales">Yearly</a></li>
-  </ul>
-<!-- Tab Content -->
+<div class="col-lg-4">
+  <div class="well">
 
-  <!-- First Tab -->
-
-  <div class="tab-content">
-    <div id="daily-sales" class="tab-pane fade in active">
-      <h3 class="text-center"> Sequoia Sales: <%= number_to_currency(@yesterday_all.sum, :precision => 0) %> </h3>
+    <h3 class="text-center"> Sequoia Sales: <%= number_to_currency(@yesterday_all.sum, :precision => 0) %> </h3>
      <h4 class="text-center"><%= 1.day.ago.strftime('%A, %-m/%-d') %></h4>
+     <div class="row">
      <div class="col-lg-6">
-       <!-- <%= @cpa1 %>
-       <%= @t2 %> -->
      </br>
        <table class="table ">
          <thead>
@@ -494,139 +482,20 @@
 
       </div>
       <br>
-      <div class="col-lg-6">
-       <%= column_chart SequoiaCustomer.where(:purchase_date => 1.week.ago..Time.now.yesterday).group_by_day(:purchase_date, format: '%a, %-d').sum(:price),
+      <!-- <div class="col-lg-6">
+       <%#= column_chart SequoiaCustomer.where(:purchase_date => 1.week.ago..Time.now.yesterday).group_by_day(:purchase_date, format: '%a, %-d').sum(:price),
            prefix: "$", thousands: ",", xtitle: "", ytitle: "", height: '175px', id: "Day", download: true, title: "" %>
-      </div>
+      </div> -->
+    </div>
     </div>
 
-  <!-- End First Tab -->
-  <!-- Second Tab -->
-
-<div id="month-sales" class="tab-pane fade">
-  <!-- Start Top Left Column -->
-  <div class="row">
-    <!-- <div class="col-lg-1">
-    </div> -->
-    <div class="col-lg-5">
-    </br>
-    <!-- <h4 class="text-center"> <%= 0.month.ago.strftime('%B') %>: <%= number_to_currency(@mtd_total.sum, :precision => 0) %> </h4> -->
-      <table class="table ">
-        <thead>
-          <tr>
-            <th class="text-center"> <%= 0.month.ago.strftime('%B') %>:</th>
-            <th class="text-center"> <%= number_to_currency(@mtd_total.sum, :precision => 0) %> <th>
-          </tr>
-          <tr>
-            <th class="text-center" style="width: 33%">CPA </th>
-            <th class="text-center" style="width: 33%">EA </th>
-            <th class="text-center" style="width: 33%">AFSP </th>
-          </tr>
-        </thead>
-        <tbody>
-         <tr>
-           <td class="text-center"> <%= number_to_currency(@cpa2.first, :precision => 0) %> </td>
-           <td class="text-center"> <%= number_to_currency(@ea2.first, :precision => 0) %> </td>
-           <td class="text-center"> <%= number_to_currency(@afsp2.first, :precision => 0) %> </td>
-          </tr>
-        </tbody>
-        <thead>
-          <tr>
-            <th class="text-center" style="width: 33%">New</th>
-            <th class="text-center" style="width: 33%">Return</th>
-            <th class="text-center" style="width: 33%">Ethics</th>
-          </tr>
-        </thead>
-        <tbody>
-         <tr>
-           <td class="text-center"> <%= number_to_currency(@mem_first2.first, :precision => 0) %> </td>
-           <td class="text-center"> <%= number_to_currency(@mem_renewal2.first, :precision => 0) %> </td>
-           <td class="text-center"> <%= number_to_currency(@ethics2.first, :precision => 0) %> </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="well">
+      <h1>Home</h1>
+    </div>
   </div>
-  <div class="col-lg-1">
-  </div>
-  <div class="col-lg-5">
-  </br>
-    <!-- <h4 class="text-center"> <%= 1.month.ago.strftime('%B') %>: <%= number_to_currency(@last_month_total.sum, :precision => 0) %> </h4> -->
-      <table class="table ">
-        <thead>
-          <tr>
-            <th class="text-center"> <%= 1.month.ago.strftime('%B') %>:</th>
-            <th class="text-center"> <%= number_to_currency(@last_month_total.sum, :precision => 0) %> <th>
-          </tr>
-          <tr>
-            <th class="text-center" style="width: 33%">CPA </th>
-            <th class="text-center" style="width: 33%">EA </th>
-            <th class="text-center" style="width: 33%">AFSP </th>
-          </tr>
-        </thead>
-        <tbody>
-         <tr>
-           <td class="text-center"> <%= number_to_currency(@cpa3.first, :precision => 0) %> </td>
-           <td class="text-center"> <%= number_to_currency(@ea3.first, :precision => 0) %> </td>
-           <td class="text-center"> <%= number_to_currency(@afsp3.first, :precision => 0) %> </td>
-          </tr>
-        </tbody>
-        <thead>
-          <tr>
-            <th class="text-center" style="width: 33%">New</th>
-            <th class="text-center" style="width: 33%">Return</th>
-            <th class="text-center" style="width: 33%">Ethics</th>
-          </tr>
-        </thead>
-        <tbody>
-         <tr>
-           <td class="text-center"> <%= number_to_currency(@mem_first3.first, :precision => 0) %> </td>
-           <td class="text-center"> <%= number_to_currency(@mem_renewal3.first, :precision => 0) %> </td>
-           <td class="text-center"> <%= number_to_currency(@ethics3.first, :precision => 0) %> </td>
-          </tr>
-        </tbody>
-      </table>
-  </div>
-</div>
-
-<!-- <div class="col-lg-1">
-</div> -->
-<div class="col-lg-10">
-  <%= column_chart SequoiaCustomer.where(:purchase_date => 12.month.ago..Time.now).group_by_month(:purchase_date, week_start: :mon, format: '%b %y').sum(:price),
-      prefix: "$", thousands: ",", xtitle: '', ytitle: "", id: "Month", download: true, title: "" %>
-</div>
-</div>
 
 
-  <!-- Third Tab -->
-    <div id="yearly-sales" class="tab-pane fade">
-      <h2 class="text-center">All Time Sales: <%= number_to_currency(@t7, :precision => 0) %> </h2>
-      <!-- <h2 class="text-center">Year To Date: <%= number_to_currency(@t7, :precision => 0) %> </h2> -->
-      <% @t6.each do |key, value| %>
-        <% if key[0] == 0.year.ago.strftime('%Y') %>
-          <h2 class="text-center">Year To Date: <%= number_to_currency(value, :precision => 0) %></h2>
-        <% end %>
-      <% end %>
 
-      <%= column_chart SequoiaCustomer.group_by_year(:purchase_date, format: '%Y').sum(:price),
-          prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "Year", height: "250px", download: true, title: "" %>
-    <div class="col-lg-5">
-        <div class="">
-          <%= pie_chart SequoiaCustomer.group(:what).sum(:price),
-              prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "All Time - what", width: "250px", dowload: true, title: "" %>
-        </div>
-      </div>
-    <div class="col-lg-1">
-    </div>
-    <div class="col-lg-5">
-        <div class="">
-          <%= pie_chart SequoiaCustomer.group(:who).sum(:price),
-              prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "All Time - who", width: "250px", dowload: true, title: "" %>
-        </div>
-    </div>
-    </div>
-
-</div>
-</div>
 
 
 <% end %>

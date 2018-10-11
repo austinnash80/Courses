@@ -196,10 +196,10 @@
               <tr>
                 <td>Course Updating</td>
                 <% if @course_update_status.sum == 0 %>
-                  <td class="green">No Updates</td>
+                  <td class="green"><strong>No Updates</strong></td>
                   <td> <%= link_to 'View Updates', updatesheets_path %></td>
                 <% elsif %>
-                  <td class="red"><%= "Updates (#{@course_update_status.sum})" %></td>
+                  <td class="red"><strong><%= "Updates (#{@course_update_status.sum})" %></strong></td>
                   <td><%= link_to 'View Updates', updatesheets_path %></td>
                 <% end %>
               </tr>
