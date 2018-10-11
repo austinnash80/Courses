@@ -209,12 +209,18 @@ end
 def course_update_status
     @updatesheets = Updatesheet.all
     @course_update_status = []
+    @course_update_status_proofing = []
 
     @updatesheets.each do |updatesheet|
-      if updatesheet.course_listed == true && updatesheet.text_complete == true && updatesheet.exam_complete == true && updatesheet.proofed == true
+      if updatesheet.course_listed == true && updatesheet.text_complete == true && updatesheet.exam_complete == true
         @course_update_status.push(0)
       elsif
         @course_update_status.push(1)
+      end
+      if updatesheet.course_listed == true && updatesheet.text_complete == true && updatesheet.exam_complete == true && updatesheet.proofed == false
+        @course_update_status_proofing.push(1)
+      elsif
+        @course_update_status_proofing.push(0)
       end
     end
 end
