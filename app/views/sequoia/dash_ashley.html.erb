@@ -196,11 +196,11 @@
               <tr>
                 <td>Course Updating</td>
                 <% if @course_update_status.sum == 0 %>
-                  <td class="glyphicon glyphicon-ok-circle green gi-2x"> Good</td>
-                  <td> <%= link_to 'Course Updates', updatesheets_path %></td>
+                  <td class="green">No Updates</td>
+                  <td> <%= link_to 'View Updates', updatesheets_path %></td>
                 <% elsif %>
-                  <td class="red">Not Complete</td>
-                  <td><%= link_to "#{@course_update_status.sum} Course", updatesheets_path %></td>
+                  <td class="red"><%= "Updates (#{@course_update_status.sum})" %></td>
+                  <td><%= link_to 'View Updates', updatesheets_path %></td>
                 <% end %>
               </tr>
             </tbody>
