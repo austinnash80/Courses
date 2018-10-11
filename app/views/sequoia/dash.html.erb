@@ -441,7 +441,7 @@
 </div>
 
 <div class="col-lg-4">
-  <div class="well">
+  <!-- <div class="well">
 
     <h3 class="text-center"> Sequoia Sales: <%= number_to_currency(@yesterday_all.sum, :precision => 0) %> </h3>
      <h4 class="text-center"><%= 1.day.ago.strftime('%A, %-m/%-d') %></h4>
@@ -482,12 +482,12 @@
 
       </div>
       <br>
-      <!-- <div class="col-lg-6">
+      <div class="col-lg-6">
        <%#= column_chart SequoiaCustomer.where(:purchase_date => 1.week.ago..Time.now.yesterday).group_by_day(:purchase_date, format: '%a, %-d').sum(:price),
            prefix: "$", thousands: ",", xtitle: "", ytitle: "", height: '175px', id: "Day", download: true, title: "" %>
-      </div> -->
+      </div>
     </div>
-    </div>
+    </div> -->
 
     <div class="well">
       <!-- <h1>Home</h1>
@@ -497,7 +497,7 @@
       Time.now: <%= @time_now %></br> -->
 
       <h3 class="text-center"> Sequoia Sales: <%= number_to_currency(@total_yesterday, :precision => 0) %> </h3>
-       <h4 class="text-center"><%= 1.day.ago.strftime('%A, %-m/%-d') %></h4>
+       <h4 class="text-center"><%= 3.day.ago.strftime('%A, %-m/%-d') %></h4>
 <div class="row">
 </br>
   <div class=" col-lg-5">
