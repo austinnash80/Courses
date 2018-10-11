@@ -22,10 +22,27 @@ class SequoiaController < ApplicationController
 
 private
 
+# def test
+#   SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => '2018-09-25').where(:what => 'Ethics')
+# end
+
 def sales
     @seq_customers_all = SequoiaCustomer.all
+    @date_today = Date.today - 1
+    @time_now = Time.now
+      @total_yesterday = SequoiaCustomer.where(:purchase_date => Date.today - 1 ).pluck(:price).sum
+      @cpa_yesterday = SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => Date.today - 1 ).pluck(:price).sum
+      @cpa_yesterday_ethics = SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => Date.today - 1 ).where(:what => 'Ethics').pluck(:price).sum
+      @ea_yesterday = SequoiaCustomer.where(:who => 'EA').where(:purchase_date => Date.today - 1 ).pluck(:price).sum
+      @afsp_yesterday = SequoiaCustomer.where(:who => 'AFSP').where(:purchase_date => Date.today - 1 ).where(:what => 'AFSP').pluck(:price).sum
+      @new_mem = SequoiaCustomer.where(:purchase_date => Date.today - 1 ).where(:what => 'Membership-First').pluck(:price).sum
+      @return_mem = SequoiaCustomer.where(:purchase_date => Date.today - 1 ).where(:what => 'Membership-Renewal').pluck(:price).sum
 
+      @column_chart_yesterday = SequoiaCustomer.where(:purchase_date => Date.today - 8..Date.today - 1).group_by_day(:purchase_date, format: '%a, %-d').sum(:price)
+      # @test = SequoiaCustomer.where(:who => 'CPA').pluck(:purchase_date)
+    # @cpa_purchases = SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => (Date.today - 2))
       @seq_customers_all.each do |i|
+        @cpa_purchases = SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => (Date.today - 2))
         i['who'] == 'CPA' ? @CPA_all_time = Array.new.push(i['price']) : ''
         i['who'] == 'EA' ? @EA_all_time = Array.new.push.push(i['price']) : ''
         i['who'] == 'AFSP' ? @AFSP_all_time = Array.new.push.push(i['price']) : ''
