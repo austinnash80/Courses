@@ -14,16 +14,16 @@
 
 <%= link_to "Remove All", remove_all_sequoia_customers_path, :method => :get %>
 
-<h4>Total Records: <%= number_with_delimiter(@totalL, :delimiter => ',') %></h4>
+<h4>Total Records: <%= number_with_delimiter(@total_records, :delimiter => ',') %></h4>
 
-<h4>Most Recent:
-  <% if @recent_date == Date.today %>
+<h4>Most Recent: <%= @newest_record %>
+  <!-- <% if @recent_date == Date.today %>
     Today - <%= @recent_date %>
   <% elsif @recent_date == Date.today - 1 %>
     Yesterday - <%= @recent_date %>
   <% elsif %>
     <%= @recent_date %> - Out of date
-  <% end %>
+  <% end %> -->
 </h4>
 
 

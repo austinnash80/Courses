@@ -9,6 +9,8 @@ class SequoiaCustomersController < ApplicationController
 
     @total = []
 
+    @total_records = SequoiaCustomer.count(:uid)
+    @newest_record = SequoiaCustomer.pluck(:purchase_date).max
     # @sequoia_customers_all.each do |i|
     #   @total.push(i['Uid'])
     # end
