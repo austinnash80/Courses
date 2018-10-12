@@ -1,0 +1,144 @@
+<body class= ''>
+
+<% if user_signed_in? && current_user.superadmin_role? %>
+
+<h1 class="well jumbotron text-center">Sequoia Sales Report</h1>
+
+<%#= number_to_percentage((@two / @one) *0.01) %>
+<%#= @month_over_month1 %> <%#= @month_over_month2 %>
+<!-- key: <%= @key %> -->
+<%= (Date.today - 365).strftime('%Y') %>
+This year: <%= @value_this_year[0] %>
+Last year: <%= @value_last_year[0] %>
+answer: <%= @value_this_year[0] / @value_last_year[0] %>
+<!-- <%= @month_over_month1 %> -->
+<div class="well right-square well-white col-lg-3">
+  <div class="well">
+    <h3 class="text-center">Day Sales</h3></br>
+    <input class="form-control" id="myInputDay" type="text" placeholder="Search">
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Day</th>
+        <th>Sales</th>
+      </tr>
+    </thead>
+    <tbody id="myListDay">
+      <% @day_sales.each do |day, sales| %>
+      <tr>
+        <td><%= day.strftime('%-m/%-d/%y') %></td>
+        <td><%= day.strftime('%a') %></td>
+        <td><%= number_to_currency(sales, :precision => 0) %> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="right-square left-square well well-white col-lg-3">
+  <div class="well">
+    <h3 class="text-center">Month Sales</h3></br>
+    <input class="form-control" id="myInputMonth" type="text" placeholder="Search">
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>Year</th>
+        <th>Sales</th>
+        <th>Sales</th>
+      </tr>
+    </thead>
+    <tbody id="myListMonth">
+      <% @month_sales.each do |month, sales| %>
+      <tr>
+        <td><%= month.strftime('%B') %></td>
+        <td><%= month.strftime('%Y') %></td>
+        <td><%= number_to_currency(sales, :precision => 0) %> </td>
+        <td><%= month - 365 %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="well left-square well-white col-lg-3">
+  <div class="well">
+    <h3 class="text-center">Year Sales</h3></br>
+    <input class="form-control" id="myInputYear" type="text" placeholder="Search">
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Sales</th>
+      </tr>
+    </thead>
+    <tbody id="myListYear">
+      <% @year_sales.each do |month, sales| %>
+      <tr>
+        <td><%= month.strftime('%Y') %></td>
+        <td><%= number_to_currency(sales, :precision => 0) %> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="well left-square well-white col-lg-3">
+  <div class="well">
+    <h3 class="text-center">Year Sales</h3></br>
+    <input class="form-control" id="myInputYear" type="text" placeholder="Search">
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Sales</th>
+      </tr>
+    </thead>
+    <tbody id="myListYear">
+      <tr>
+        <td>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+<script>
+$(document).ready(function(){
+  $("#myInputDay").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myListDay tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+$(document).ready(function(){
+  $("#myInputMonth").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myListMonth tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+$(document).ready(function(){
+  $("#myInputYear").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myListYear tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+<% end %> <!-- End of superadmin_role only -->
+</body>

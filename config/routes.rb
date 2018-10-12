@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :date_fields
   resources :pes_courses
   resources :postcard_returns
+  get 'sales_report/sequoia_sales'
   get 'sequoia_customers/index'
   get 'sequoia_customers/import' => 'sequoia_customers#my_import'
   resources :sequoia_customers do

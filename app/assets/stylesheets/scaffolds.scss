@@ -90,3 +90,13 @@ label {
 .menu-center {
   padding: 20px;
 }
+
+.right-square {
+  border-top-right-radius: 0px;
+  // border-bottom-right-radius: 0px
+}
+
+.left-square {
+  border-top-left-radius: 0px;
+  // border-bottom-left-radius: 0px
+}

@@ -32,13 +32,13 @@ def sales
     # @test = SequoiaCustomer.purchase_date
 
 # Yesterday Sales
-      @total_yesterday = SequoiaCustomer.where(:purchase_date => Date.today - 3 ).pluck(:price).sum
-      @cpa_yesterday = SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => Date.today - 3 ).pluck(:price).sum
-      @cpa_yesterday_ethics = SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => Date.today - 3 ).where(:what => 'Ethics').pluck(:price).sum
-      @ea_yesterday = SequoiaCustomer.where(:who => 'EA').where(:purchase_date => Date.today - 3 ).pluck(:price).sum
-      @afsp_yesterday = SequoiaCustomer.where(:who => 'AFSP').where(:purchase_date => Date.today - 3 ).where(:what => 'AFSP').pluck(:price).sum
-      @new_mem = SequoiaCustomer.where(:purchase_date => Date.today - 3 ).where(:what => 'Membership-First').pluck(:price).sum
-      @return_mem = SequoiaCustomer.where(:purchase_date => Date.today - 3 ).where(:what => 'Membership-Renewal').pluck(:price).sum
+      @total_yesterday = SequoiaCustomer.where(:purchase_date => Date.today - 1 ).pluck(:price).sum
+      @cpa_yesterday = SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => Date.today - 1 ).pluck(:price).sum
+      @cpa_yesterday_ethics = SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => Date.today - 1 ).where(:what => 'Ethics').pluck(:price).sum
+      @ea_yesterday = SequoiaCustomer.where(:who => 'EA').where(:purchase_date => Date.today - 1 ).pluck(:price).sum
+      @afsp_yesterday = SequoiaCustomer.where(:who => 'AFSP').where(:purchase_date => Date.today - 1 ).where(:what => 'AFSP').pluck(:price).sum
+      @new_mem = SequoiaCustomer.where(:purchase_date => Date.today - 1 ).where(:what => 'Membership-First').pluck(:price).sum
+      @return_mem = SequoiaCustomer.where(:purchase_date => Date.today - 1 ).where(:what => 'Membership-Renewal').pluck(:price).sum
       @column_chart_yesterday = SequoiaCustomer.where(:purchase_date => Date.today - 8..Date.today - 1).group_by_day(:purchase_date, format: '%a, %-d').sum(:price)
 # End Yesterday sales
 
