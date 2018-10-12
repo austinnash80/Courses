@@ -4,7 +4,7 @@ class SequoiaCustomersController < ApplicationController
   # GET /sequoia_customers
   # GET /sequoia_customers.json
   def index
-    @sequoia_customers = SequoiaCustomer.order(:purchase_date).last(25)
+    @sequoia_customers = SequoiaCustomer.order(:purchase_date => :desc).first(25)
     @sequoia_customers_all = SequoiaCustomer.all
 
     @total = []
