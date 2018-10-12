@@ -4,7 +4,7 @@
 
   <% if user_signed_in? && current_user.email == 'austin@sequoiacpe.com' %>
     <h1 class="off-white text-center">Austin Dashboard</h1>
-    <h3 class="off-white text-center"><%= Time.now.strftime('%A %-b %-d, %Y') %></h3>
+    <h3 class="off-white text-center"><%= Date.today.strftime('%A %-b %-d, %Y') %></h3>
   <% end %>
 
 </br>
