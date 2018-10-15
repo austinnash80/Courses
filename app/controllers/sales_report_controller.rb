@@ -4,6 +4,7 @@ class SalesReportController < ApplicationController
     @sequoia_customers_all = SequoiaCustomer.all
 
     @day_sales = SequoiaCustomer.group_by_day(:purchase_date).sum(:price)
+    @week_sales = SequoiaCustomer.group_by_week(:purchase_date, week_start: :mon).sum(:price)
     @month_sales = SequoiaCustomer.group_by_month(:purchase_date).sum(:price)
     @year_sales = SequoiaCustomer.group_by_year(:purchase_date).sum(:price)
 
