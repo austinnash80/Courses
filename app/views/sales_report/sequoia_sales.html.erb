@@ -118,9 +118,13 @@ Day Breakdown: <%#= @day_breakdown %></br>
     <li class="active"><a data-toggle="tab" href="#menu2">Graphs</a></li>
     <!-- <li><a data-toggle="tab" href="#menu2">Graphs</a></li> -->
   </ul>
-<%= pie_chart @year_pie_chart_who, prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "All Time - who", width: "", dowload: true, title: "Purchased By" %>
-<%= pie_chart @year_pie_chart_what, prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "All Time - what", width: "", dowload: true, title: "Purchased What" %>
-<!-- </div> -->
+</br>
+  <div class="well ">
+    <%= pie_chart @year_pie_chart_who, prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "All Time - who", width: "", dowload: true, title: "Purchased By", library: {pieSliceText: 'value'} %>
+  </div>
+  <div class="well ">
+    <%= pie_chart @year_pie_chart_what, prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "All Time - what", width: "", dowload: true, title: "Purchased What" %>
+  </div>
 </div>
 </div>
 </div>
