@@ -448,7 +448,7 @@
        <h4 class="text-center"><%= 1.day.ago.strftime('%A, %-m/%-d') %></h4>
 <div class="row">
 </br>
-  <div class=" col-lg-5">
+  <div class=" col-lg-6">
   </br>
   <!-- <h5 class="text-center">Yesterday Breakdown</h5> -->
       <table class="table table-bordered">
@@ -484,7 +484,7 @@
   </div>
   <!-- <div class="col-lg-2">
   </div> -->
-  <div class="well col-lg-7">
+  <div class="well col-lg-6">
     <%= column_chart @column_chart_yesterday, prefix: "$", thousands: ",", xtitle: "", ytitle: "", height: '', id: "Day", download: true, title: "" %>
   </div>
 </div>
@@ -498,7 +498,7 @@
        <h4 class="text-center"><%= Date.today.strftime('%B %Y') %></h4>
         <div class="row">
         </br>
-          <div class="col-lg-5">
+          <div class="col-lg-6">
           </br>
               <table class="table table-bordered">
                 <thead>
@@ -527,7 +527,7 @@
                 </tbody>
               </table>
           </div>
-        <div class="well col-lg-7">
+        <div class="well col-lg-6">
           <%= column_chart @column_chart_mtd, prefix: "$", thousands: ",", xtitle: "", ytitle: "", height: '', id: "Month", download: true, title: "" %>
         </div>
       </div>
@@ -539,7 +539,7 @@
        <h4 class="text-center"><%= Date.today.strftime('%Y') %></h4>
         <div class="row">
         </br>
-          <div class=" col-lg-5">
+          <div class=" col-lg-6">
           </br>
               <table class="table table-bordered">
                 <thead>
@@ -568,7 +568,7 @@
                 </tbody>
               </table>
           </div>
-        <div class="well col-lg-7">
+        <div class="well col-lg-6">
           <%= column_chart @column_chart_ytd, prefix: "$", thousands: ",", xtitle: "", ytitle: "", height: '', id: "Year", download: true, title: "" %>
         </div>
       </div>

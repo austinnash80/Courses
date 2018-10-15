@@ -8,25 +8,33 @@ class SalesReportController < ApplicationController
     @month_sales = SequoiaCustomer.group_by_month(:purchase_date).sum(:price)
     @year_sales = SequoiaCustomer.group_by_year(:purchase_date).sum(:price)
 
-    @month_over_month1 = SequoiaCustomer.group_by_month(:purchase_date).sum(:price)
-    @month_over_month2 = SequoiaCustomer.group_by_month(:purchase_date, format: '%m/%y').where(:purchase_date => (Date.today.beginning_of_month - 365)..(Date.today - 365)).sum(:price)
+    # @day_breakdown = SequoiaCustomer.where(:purchase_date => '2018-10-15').pluck(:price, :who, :purchase_date)
+
+    @year_pie_chart_who = SequoiaCustomer.group(:who).sum(:price)
+    @year_pie_chart_what = SequoiaCustomer.group(:what).sum(:price)
+
+    # @month_over_month1 = SequoiaCustomer.group_by_month(:purchase_date).sum(:price)
+    # @month_over_month2 = SequoiaCustomer.group_by_month(:purchase_date, format: '%m/%y').where(:purchase_date => (Date.today.beginning_of_month - 365)..(Date.today - 365)).sum(:price)
+
+
+
 
 # @key = []
-@value_this_year = []
-@value_last_year = []
-    @month_over_month1.each do |key, value|
-       # @key.push(key)
-      if key.strftime('%Y') == Date.today.strftime('%Y')
-       @value_this_year.push(value)
-      end
-      if key.strftime('%Y') == (Date.today - 365).strftime('%Y')
-       @value_last_year.push(value)
-      end
-    end
-
-    @month_over_month2.each do |key, value|
-       @two = value
-    end
+# @value_this_year = []
+# @value_last_year = []
+#     @month_over_month1.each do |key, value|
+#        # @key.push(key)
+#       if key.strftime('%Y') == Date.today.strftime('%Y')
+#        @value_this_year.push(value)
+#       end
+#       if key.strftime('%Y') == (Date.today - 365).strftime('%Y')
+#        @value_last_year.push(value)
+#       end
+#     end
+#
+#     @month_over_month2.each do |key, value|
+#        @two = value
+#     end
 
   end
 end

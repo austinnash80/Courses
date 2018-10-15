@@ -4,14 +4,13 @@
 
 <h1 class="well jumbotron text-center">Sequoia Sales Report</h1>
 
-<%#= number_to_percentage((@two / @one) *0.01) %>
-<%#= @month_over_month1 %> <%#= @month_over_month2 %>
-<!-- key: <%= @key %> -->
-<!-- <%= (Date.today - 365).strftime('%Y') %>
-This year: <%= @value_this_year[0] %>
-Last year: <%= @value_last_year[0] %>
-answer: <%= @value_this_year[0] / @value_last_year[0] %> -->
-<div class="well right-square well-white col-lg-3">
+ <div class="row">
+Day Breakdown: <%#= @day_breakdown %></br>
+<!-- <%#= @day_breakdown.keys.select { |key| @day_breakdown[key] == @day_breakdown[key] } %> -->
+</div>
+<div class="well col-lg-1">
+</div>
+<div class="well right-square well-white col-lg-2">
   <div class="well">
     <h3 class="text-center">Day Sales</h3></br>
     <input class="form-control" id="myInputDay" type="text" placeholder="Search">
@@ -22,7 +21,6 @@ answer: <%= @value_this_year[0] / @value_last_year[0] %> -->
         <th>Date</th>
         <th>Day</th>
         <th>Sales</th>
-        <th>Sales</th>
       </tr>
     </thead>
     <tbody id="myListDay">
@@ -31,66 +29,13 @@ answer: <%= @value_this_year[0] / @value_last_year[0] %> -->
         <td><%= day.strftime('%-m/%-d/%y') %></td>
         <td><%= day.strftime('%a') %></td>
         <td><%= number_to_currency(sales, :precision => 0) %> </td>
-      <% end %>
-      <% @day_sales.reverse_each do |day, sales| %>
-        <td><%= day.strftime('%-m/%-d/%y') %></td>
       </tr>
       <% end %>
     </tbody>
   </table>
 </div>
 
-<div class="right-square left-square well well-white col-lg-3">
-  <div class="well">
-    <h3 class="text-center">Month Sales</h3></br>
-    <input class="form-control" id="myInputMonth" type="text" placeholder="Search">
-  </div>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Month</th>
-        <th>Year</th>
-        <th>Sales</th>
-        <th>Sales</th>
-      </tr>
-    </thead>
-    <tbody id="myListMonth">
-      <% @month_sales.reverse_each do |month, sales| %>
-      <tr>
-        <td><%= month.strftime('%B') %></td>
-        <td><%= month.strftime('%Y') %></td>
-        <td><%= number_to_currency(sales, :precision => 0) %> </td>
-        <td><%= month - 365 %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-
-<div class="well left-square well-white col-lg-3">
-  <div class="well">
-    <h3 class="text-center">Year Sales</h3></br>
-    <input class="form-control" id="myInputYear" type="text" placeholder="Search">
-  </div>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Sales</th>
-      </tr>
-    </thead>
-    <tbody id="myListYear">
-      <% @year_sales.reverse_each do |month, sales| %>
-      <tr>
-        <td><%= month.strftime('%Y') %></td>
-        <td><%= number_to_currency(sales, :precision => 0) %> </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-
-<div class="well left-square well-white col-lg-3">
+<div class="well left-square right-square well-white col-lg-2">
   <div class="well">
     <h3 class="text-center">Week Sales</h3></br>
     <input class="form-control" id="myInputWeek" type="text" placeholder="Search">
@@ -98,7 +43,7 @@ answer: <%= @value_this_year[0] / @value_last_year[0] %> -->
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>Date</th>
+        <th>Week</th>
         <th>Sales</th>
       </tr>
     </thead>
@@ -113,8 +58,72 @@ answer: <%= @value_this_year[0] / @value_last_year[0] %> -->
   </table>
 </div>
 
+<div class="right-square left-square well well-white col-lg-2">
+  <div class="well">
+    <h3 class="text-center">Month Sales</h3></br>
+    <input class="form-control" id="myInputMonth" type="text" placeholder="Search">
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>Year</th>
+        <th>Sales</th>
+      </tr>
+    </thead>
+    <tbody id="myListMonth">
+      <% @month_sales.reverse_each do |month, sales| %>
+      <tr>
+        <td><%= month.strftime('%B') %></td>
+        <td><%= month.strftime('%Y') %></td>
+        <td><%= number_to_currency(sales, :precision => 0) %> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
+<div class="well left-square well-white col-lg-2">
 
+<div class="tab-content">
+  <div id="home2" class="tab-pane fade in active">
+    <div class="well">
+      <h3 class="text-center">Year Sales</h3></br>
+      <input class="form-control" id="myInputYear" type="text" placeholder="Search">
+    </div>
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#home2">Data</a></li>
+      <li><a data-toggle="tab" href="#menu2">Graphs</a></li>
+    </ul>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>Sales</th>
+      </tr>
+    </thead>
+    <tbody id="myListYear">
+      <% @year_sales.reverse_each do |year, sales| %>
+      <tr>
+        <td><%= year %></td>
+        <td><%= number_to_currency(sales, :precision => 0) %> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div id="menu2" class="tab-pane fade in">
+  <ul class="nav nav-tabs">
+    <li><a data-toggle="tab" href="#home2">Data</a></li>
+    <li class="active"><a data-toggle="tab" href="#menu2">Graphs</a></li>
+    <!-- <li><a data-toggle="tab" href="#menu2">Graphs</a></li> -->
+  </ul>
+<%= pie_chart @year_pie_chart_who, prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "All Time - who", width: "", dowload: true, title: "Purchased By" %>
+<%= pie_chart @year_pie_chart_what, prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "All Time - what", width: "", dowload: true, title: "Purchased What" %>
+<!-- </div> -->
+</div>
+</div>
+</div>
 
 <script>
 $(document).ready(function(){
