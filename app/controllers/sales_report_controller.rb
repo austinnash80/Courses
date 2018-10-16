@@ -10,6 +10,7 @@ class SalesReportController < ApplicationController
 
     # @day_breakdown = SequoiaCustomer.where(:purchase_date => '2018-10-15').pluck(:price, :who, :purchase_date)
 
+    # @year_pie_chart_who_test = SequoiaCustomer.group(:who).sum(:price)
     @year_pie_chart_who = SequoiaCustomer.group(:who).sum(:price)
     @year_pie_chart_what = SequoiaCustomer.group(:what).sum(:price)
 

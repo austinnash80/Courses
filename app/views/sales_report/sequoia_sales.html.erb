@@ -2,6 +2,7 @@
 
 <% if user_signed_in? && current_user.superadmin_role? %>
 
+<%#= @year_pie_chart_who_test %>
 <h1 class="well jumbotron text-center">Sequoia Sales Report</h1>
 
 <div class="well right-square well-white col-lg-3">
@@ -99,7 +100,7 @@
     <tbody id="myListYear">
       <% @year_sales.reverse_each do |year, sales| %>
       <tr>
-        <td><%= year %></td>
+        <td><%= year.strftime('%Y') %></td>
         <td><%= number_to_currency(sales, :precision => 0) %> </td>
       </tr>
       <% end %>
@@ -113,10 +114,10 @@
     <!-- <li><a data-toggle="tab" href="#menu2">Graphs</a></li> -->
   </ul>
 </br>
-  <div class="well ">
+  <div class="well">
     <%= pie_chart @year_pie_chart_who, prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "All Time - who", width: "", dowload: true, title: "Purchased By", library: {pieSliceText: 'value'} %>
   </div>
-  <div class="well ">
+  <div class="well">
     <%= pie_chart @year_pie_chart_what, prefix: "$", thousands: ",", xtitle: "", ytitle: "", id: "All Time - what", width: "", dowload: true, title: "Purchased What" %>
   </div>
 </div>
