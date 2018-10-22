@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-     path = case current_user.email
+     path = case user_signed_in? && current_user.email
      when 'austin@sequoiacpe.com'
          sequoia_dash_path
        when 'ashley@sequoiacpe.com'
