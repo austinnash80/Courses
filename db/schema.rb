@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181008185159) do
+ActiveRecord::Schema.define(version: 20181016225729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,23 @@ ActiveRecord::Schema.define(version: 20181008185159) do
     t.decimal "cost_service"
     t.decimal "cost_print"
     t.decimal "cost_postage"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "exam_results", force: :cascade do |t|
+    t.date "week_s"
+    t.date "week_e"
+    t.integer "course_number"
+    t.string "course_version"
+    t.string "course_title"
+    t.string "who"
+    t.decimal "score_avg"
+    t.decimal "rating"
+    t.integer "taken"
+    t.integer "exta_i"
+    t.string "extra_s"
+    t.boolean "extra_b"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

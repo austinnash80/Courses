@@ -1,0 +1,302 @@
+
+<div class="jumbotron well text-center">
+  <h1> Sequoia Exam Reports </h1>
+</div>
+<div class="row">
+  <div class="well well-white col-lg-3">
+    <div class="text-center well">
+      <h3>Past Week<h3>
+        <h4> <%= (@start_of_week - 7).strftime('%-m/%-d') %> - <%= (@start_of_week -1).strftime('%-m/%-d')%></h4>
+      <input class="form-control" id="myInputWeek" type="text" placeholder="Search">
+    </div>
+
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#weekCPA">CPA</a></li>
+        <li><a data-toggle="tab" href="#weekEA">EA</a></li>
+        <li><a data-toggle="tab" href="#weekStats">Stats</a></li>
+      </ul>
+
+      <div class="tab-content">
+
+        <div id="weekCPA" class="tab-pane fade in active">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Exam</th>
+                <th>Title</th>
+                <!-- <th>Cat</th> -->
+                <th>Taken</th>
+                <th>Score</th>
+                <th>Rating</th>
+              </tr>
+            </thead>
+            <tbody id="myListWeek">
+              <% @sequoia_exams_all.each do |exam| %>
+              <% if exam.who == 'CPA' && exam.week_s == @start_of_week - 7 %>
+              <tr>
+                <td><%= exam.course_number %></td>
+                <td><%= exam.course_title.truncate(35)  %></td>
+                <!-- <% if exam.course_number >=1000 && exam.course_number < 2000 %>
+                  <td>Aud</td>
+                <% elsif exam.course_number >=2000 && exam.course_number < 3000 %>
+                  <td> Acct </td>
+                <% elsif exam.course_number >=3000 && exam.course_number < 4000 %>
+                  <td> Tax </td>
+                <% elsif exam.course_number >=4000 && exam.course_number < 9000 %>
+                  <td> Bus </td>
+                <% elsif exam.course_number >=9000 && exam.course_number < 10000%>
+                  <td> Ethics </td>
+                <% end %> -->
+                <td class="text-center"><%= exam.taken %></td>
+                <td class="text-center"><%= number_to_percentage((exam.score_avg), precision: 0) %></td>
+                <% if exam.rating.nil? %>
+                  <td class="text-center">-</td>
+                <% elsif %>
+                  <td class="text-center"><%= number_with_precision(exam.rating, precision: 1) %></td>
+                <% end %>
+              </tr>
+              <% end %>
+              <% end %>
+            </tbody>
+          </table>
+
+      </div>
+
+      <div id="weekEA" class="tab-pane fade in">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Exam</th>
+              <th>Title</th>
+              <th>Taken</th>
+              <th>Score</th>
+              <th>Rating</th>
+            </tr>
+          </thead>
+          <tbody id="myListWeek">
+            <% @sequoia_exams_all.each do |exam| %>
+            <% if exam.week_s == @start_of_week - 7 %>
+            <% if exam.who == 'EA' && exam.course_number >= 3000 && exam.course_number < 4000 || exam.course_number >= 9000 && exam.course_number <= 9030 %>
+            <tr>
+              <td><%= exam.course_number %></td>
+              <td><%= exam.course_title.truncate_words(5)  %></td>
+              <td class="text-center"><%= exam.taken %></td>
+              <td class="text-center"><%= number_to_percentage((exam.score_avg), precision: 0) %></td>
+              <% if exam.rating.nil? %>
+                <td class="text-center">-</td>
+              <% elsif %>
+                <td class="text-center"><%= number_with_precision(exam.rating, precision: 1) %></td>
+              <% end %>
+            </tr>
+            <% end %>
+            <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="weekStats" class="tab-pane fade in">
+      </br>
+        <table class="table table-bordered">
+          <thead>
+            <!-- <tr>
+              <th>CPA</th>
+            </tr> -->
+            <tr>
+              <th></th>
+              <th class="text-center">Courses</th>
+              <th class="text-center">Exams</th>
+              <th class="text-center">Score</th>
+              <th class="text-center">Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-center">
+              <td><strong>CPA</strong></td>
+              <td><%= @week_courses_cpa %></td>
+              <td><%= @week_exams_cpa %></td>
+              <td><%= number_to_percentage((@week_score_cpa.sum  /  @week_exams_cpa), precision: 1) %></td>
+              <% if @week_courses_rated_cpa.sum != 0 %>
+                <td><%= number_with_precision((@week_rating_cpa.sum  /  ( @week_courses_rated_cpa.sum )), precision: 2) %></td>
+              <% elsif %>
+                <td>-</td>
+              <% end %>
+
+
+
+            </tr>
+            <tr class="text-center">
+              <td><strong>EA</strong></td>
+              <td><%= @week_courses_ea %></td>
+              <td><%= @week_exams_ea %></td>
+              <td><%= number_to_percentage((@week_score_ea.sum / @week_exams_ea), precision: 1) %></td>
+              <td><%= number_with_precision((@week_rating_ea.sum  /  ( @week_courses_rated_ea.sum )), precision: 2) %></td>
+            </tr>
+            <tr class="text-center">
+              <td><strong>Total</strong></td>
+              <td><strong><%= @week_courses_cpa + @week_courses_ea %></strong></td>
+              <td><strong><%= @week_exams_cpa + @week_exams_ea %></strong></td>
+              <td><strong><%= number_to_percentage(@week_score_all.sum / (@week_exams_cpa + @week_exams_ea), precision: 1) %></strong></td>
+              <td><strong><%= number_with_precision((@week_rating_all.sum  /  ( @week_courses_rated_all.sum )), precision: 2) %></strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div> <!-- Tab Content -->
+</div> <!-- Well close -->
+
+  <div class="well well-white col-lg-3">
+    <div class="text-center well">
+      <h3>Past Month<h3>
+        <h4> <%= (@start_of_month).strftime('%-m/%-d') %> - 1.month - <%= (@end_of_month - 1.month).strftime('%-m/%-d')%></h4>
+      <input class="form-control" id="myInputMonth" type="text" placeholder="Search">
+    </div>
+
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#monthCPA">CPA</a></li>
+      <li><a data-toggle="tab" href="#monthEA">EA</a></li>
+      <li><a data-toggle="tab" href="#monthStats">Stats</a></li>
+    </ul>
+
+    <div class="tab-content">
+
+      <div id="monthCPA" class="tab-pane fade in active">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Exam</th>
+              <th>Title</th>
+              <th>Taken</th>
+              <th>Score</th>
+              <th>Rating</th>
+            </tr>
+          </thead>
+          <tbody id="myListMonth">
+            <% @sequoia_exams_all.each do |exam| %>
+            <% if exam.who == 'CPA' && exam.extra_s == 'Month'%>
+            <tr>
+              <td><%= exam.course_number %></td>
+              <td><%= exam.course_title.truncate(35)  %></td>
+              <td class="text-center"><%= exam.taken %></td>
+              <td class="text-center"><%= number_to_percentage((exam.score_avg), precision: 0) %></td>
+              <% if exam.rating.nil? %>
+                <td class="text-center">-</td>
+              <% elsif %>
+                <td class="text-center"><%= number_with_precision(exam.rating, precision: 1) %></td>
+              <% end %>
+            </tr>
+            <% end %>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
+
+    <div id="monthEA" class="tab-pane fade in">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Exam</th>
+            <th>Title</th>
+            <th>Taken</th>
+            <th>Score</th>
+            <th>Rating</th>
+          </tr>
+        </thead>
+        <tbody id="myListMonth">
+          <% @sequoia_exams_all.each do |exam| %>
+          <% if exam.who == 'EA' && exam.extra_s == 'Month'%>
+          <tr>
+            <td><%= exam.course_number %></td>
+            <td><%= exam.course_title.truncate(35)  %></td>
+            <td class="text-center"><%= exam.taken %></td>
+            <td class="text-center"><%= number_to_percentage((exam.score_avg), precision: 0) %></td>
+            <% if exam.rating.nil? %>
+              <td class="text-center">-</td>
+            <% elsif %>
+              <td class="text-center"><%= number_with_precision(exam.rating, precision: 1) %></td>
+            <% end %>
+          </tr>
+          <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+      <div id="monthStats" class="tab-pane fade in">
+      </br>
+        <table class="table table-bordered">
+          <thead>
+            <!-- <tr>
+              <th>CPA</th>
+            </tr> -->
+            <tr>
+              <th></th>
+              <th class="text-center">Courses</th>
+              <th class="text-center">Exams</th>
+              <th class="text-center">Score</th>
+              <th class="text-center">Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-center">
+              <td><strong>CPA</strong></td>
+              <td><%= @month_courses_cpa %></td>
+              <td><%= @month_exams_cpa %></td>
+              <td><%= number_to_percentage((@month_score_cpa.sum  /  @month_exams_cpa), precision: 1) %></td>
+              <% if @month_courses_rated_cpa.sum != 0 %>
+                <td><%= number_with_precision((@month_rating_cpa.sum  /  ( @month_courses_rated_cpa.sum )), precision: 2) %></td>
+              <% elsif %>
+                <td>-</td>
+              <% end %>
+
+
+
+            </tr>
+            <tr class="text-center">
+              <td><strong>EA</strong></td>
+              <td><%= @month_courses_ea %></td>
+              <td><%= @month_exams_ea %></td>
+              <td><%= number_to_percentage((@month_score_ea.sum / @month_exams_ea), precision: 1) %></td>
+              <td><%= number_with_precision((@month_rating_ea.sum  /  ( @month_courses_rated_ea.sum )), precision: 2) %></td>
+            </tr>
+            <tr class="text-center">
+              <td><strong>Total</strong></td>
+              <td><strong><%= @month_courses_cpa + @month_courses_ea %></strong></td>
+              <td><strong><%= @month_exams_cpa + @month_exams_ea %></strong></td>
+              <td><strong><%= number_to_percentage(@month_score_all.sum / (@month_exams_cpa + @month_exams_ea), precision: 1) %></strong></td>
+              <td><strong><%= number_with_precision((@month_rating_all.sum  /  ( @month_courses_rated_all.sum )), precision: 2) %></strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      </div> <!-- Tab Content -->
+
+  </div> <!-- Well Close -->
+
+  <div class="well well-white col-lg-3">
+    <div class="text-center well">
+      <h3>Past Year<h3>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function(){
+  $("#myInputWeek").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myListWeek tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+$(document).ready(function(){
+  $("#myInputMonth").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myListMonth tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>

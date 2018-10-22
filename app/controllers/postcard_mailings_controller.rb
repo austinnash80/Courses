@@ -4,7 +4,7 @@ class PostcardMailingsController < ApplicationController
   # GET /postcard_mailings
   # GET /postcard_mailings.json
   def index
-    @postcard_mailings = PostcardMailing.all
+    @postcard_mailings = PostcardMailing.order(:date_sent => 'desc').all
   end
 
   # GET /postcard_mailings/1

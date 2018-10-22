@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  # get 'exam_results/index'
+  # get 'exam_results/import' => 'exam_results#my_import'
+  resources :exam_results do
+    collection {post :import}
+    collection do
+      get 'remove_all'
+    end
+  end
+  get 'exam_results/index0'
   resources :email_campaigns
   resources :inventories
   resources :postcard_mailings
@@ -20,6 +29,7 @@ Rails.application.routes.draw do
   resources :pes_courses
   resources :postcard_returns
   get 'sales_report/sequoia_sales'
+  get 'sales_report/sequoia_exams'
   get 'sequoia_customers/index'
   get 'sequoia_customers/import' => 'sequoia_customers#my_import'
   resources :sequoia_customers do

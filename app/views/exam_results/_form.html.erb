@@ -1,0 +1,77 @@
+<%= form_with(model: exam_result, local: true) do |form| %>
+  <% if exam_result.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(exam_result.errors.count, "error") %> prohibited this exam_result from being saved:</h2>
+
+      <ul>
+      <% exam_result.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :week_s %>
+    <%= form.date_select :week_s, id: :exam_result_week_s %>
+  </div>
+
+  <div class="field">
+    <%= form.label :week_e %>
+    <%= form.date_select :week_e, id: :exam_result_week_e %>
+  </div>
+
+  <div class="field">
+    <%= form.label :course_number %>
+    <%= form.number_field :course_number, id: :exam_result_course_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :course_version %>
+    <%= form.text_field :course_version, id: :exam_result_course_version %>
+  </div>
+
+  <div class="field">
+    <%= form.label :course_title %>
+    <%= form.text_field :course_title, id: :exam_result_course_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :who %>
+    <%= form.text_field :who, id: :exam_result_who %>
+  </div>
+
+  <div class="field">
+    <%= form.label :score_avg %>
+    <%= form.text_field :score_avg, id: :exam_result_score_avg %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rating %>
+    <%= form.text_field :rating, id: :exam_result_rating %>
+  </div>
+
+  <div class="field">
+    <%= form.label :taken %>
+    <%= form.number_field :taken, id: :exam_result_taken %>
+  </div>
+
+  <div class="field">
+    <%= form.label :exta_i %>
+    <%= form.number_field :exta_i, id: :exam_result_exta_i %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_s %>
+    <%= form.text_field :extra_s, id: :exam_result_extra_s %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_b %>
+    <%= form.check_box :extra_b, id: :exam_result_extra_b %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

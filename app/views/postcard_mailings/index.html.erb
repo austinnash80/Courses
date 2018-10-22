@@ -13,9 +13,9 @@
       <th>Date sent</th>
       <th>Number sent</th>
       <th>Note</th>
-      <th>Extra i</th>
+      <!-- <th>Extra i</th>
       <th>Extra b</th>
-      <th>Extra s</th>
+      <th>Extra s</th> -->
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -29,9 +29,9 @@
         <td><%= postcard_mailing.date_sent %></td>
         <td><%= postcard_mailing.number_sent %></td>
         <td><%= postcard_mailing.note %></td>
-        <td><%= postcard_mailing.extra_i %></td>
+        <!-- <td><%= postcard_mailing.extra_i %></td>
         <td><%= postcard_mailing.extra_b %></td>
-        <td><%= postcard_mailing.extra_s %></td>
+        <td><%= postcard_mailing.extra_s %></td> -->
         <td><%= link_to 'Show', postcard_mailing %></td>
         <td><%= link_to 'Edit', edit_postcard_mailing_path(postcard_mailing) %></td>
         <td><%= link_to 'Destroy', postcard_mailing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
