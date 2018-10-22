@@ -199,8 +199,8 @@
                   <td class="green"><strong>No Updates</strong></td>
                   <td> <%= link_to 'View Updates', updatesheets_path %></td>
                 <% elsif %>
-                  <td class="red"><strong><%= "Updates (#{@course_update_status.sum})" %></strong></td>
-                  <td><%= link_to 'View Updates', updatesheets_path %></td>
+                  <td class="red"><strong><%= link_to "Updates (#{@course_update_status.sum})", updatesheets_path, class: 'button-none' %></strong></td>
+                  <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
                 <% end %>
               </tr>
             </tbody>
