@@ -196,7 +196,7 @@ def sales
     @art_missing = []
 
     @mailings.each do |mailing|
-      if mailing.complete == false
+      if mailing.boolean_1 == false
         @next_msi_mailing.push(mailing['drop'])
       end
       if mailing.drop.strftime('%Y') == Date.today.year.to_s
