@@ -48,10 +48,10 @@
                   <td> Ethics </td>
                 <% end %> -->
                 <td class="text-center"><%= exam.taken %></td>
-                <td class="text-center"><%= number_to_percentage((exam.score_avg), precision: 0) %></td>
-                <% if exam.rating.nil? %>
-                  <td class="text-center">-</td>
-                <% elsif %>
+                <% unless exam.score_avg.nil %>
+                  <td class="text-center"><%= number_to_percentage((exam.score_avg), precision: 0) %></td>
+                <% end %>
+                <% unless exam.rating.nil %>
                   <td class="text-center"><%= number_with_precision(exam.rating, precision: 1) %></td>
                 <% end %>
               </tr>
@@ -81,10 +81,10 @@
               <td><%= exam.course_number %></td>
               <td><%= exam.course_title.truncate_words(5)  %></td>
               <td class="text-center"><%= exam.taken %></td>
-              <td class="text-center"><%= number_to_percentage((exam.score_avg), precision: 0) %></td>
-              <% if exam.rating.nil? %>
-                <td class="text-center">-</td>
-              <% elsif %>
+              <% unless exam.score_avg.nil %>
+                <td class="text-center"><%= number_to_percentage((exam.score_avg), precision: 0) %></td>
+              <% end %>
+              <% unless exam.rating.nil %>
                 <td class="text-center"><%= number_with_precision(exam.rating, precision: 1) %></td>
               <% end %>
             </tr>
