@@ -48,6 +48,13 @@ Rails.application.routes.draw do
   resources :datasheets do
     collection {post :import}
   end
-  root :to => "datasheets#index"
+
+  root :to => 'home#index'
+
+  # user_signed_in? && current_user.email == 'austin@sequoiacpe.com' ? root :to => "sequoia#dash" : ''
+  # user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' ? root :to => "sequoia#dash_ashley" : ''
+  # user_signed_in? && current_user.email == 'kyle@sequoiacpe.com' ? root :to => "datasheets#index" : ''
+  # user_signed_in? && current_user.email == 'micheal@sequoiacpe.com' ? root :to => "datasheets#index" : ''
+  # root :to => "datasheets#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
