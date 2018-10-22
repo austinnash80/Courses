@@ -251,7 +251,7 @@ def course_update_status
     @course_update_status_proofing = []
 
     @updatesheets.each do |updatesheet|
-      if updatesheet.course_listed == true && updatesheet.text_complete == true && updatesheet.exam_complete == true
+      if updatesheet.course_listed == true && updatesheet.text_complete == true && updatesheet.exam_complete == true || updatesheet.extra_boolean == true
         @course_update_status.push(0)
       elsif
         @course_update_status.push(1)
