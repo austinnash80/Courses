@@ -304,6 +304,7 @@
               <% end %>
             </tr>
             <tr>
+              <%= @next_msi_mailing.min %>
               <td>MSI Mailing</td>
               <% if (Date.today) > (@next_msi_mailing.min - 8) %>
                 <td class="red">Mailing Due Now</td>
