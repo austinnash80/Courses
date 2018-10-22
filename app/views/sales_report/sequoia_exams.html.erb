@@ -115,7 +115,11 @@
               <td><strong>CPA</strong></td>
               <td><%= @week_courses_cpa %></td>
               <td><%= @week_exams_cpa %></td>
-              <td><%= number_to_percentage((@week_score_cpa.sum  /  @week_exams_cpa), precision: 1) %></td>
+              <% if @week_score_cpa.sum != 0 %>
+                <td><%= number_to_percentage((@week_score_cpa.sum  /  @week_exams_cpa), precision: 1) %></td>
+              <% elsif %>
+                <td></td>
+              <% end %>
               <% if @week_courses_rated_cpa.sum != 0 %>
                 <td><%= number_with_precision((@week_rating_cpa.sum  /  ( @week_courses_rated_cpa.sum )), precision: 2) %></td>
               <% elsif %>
@@ -129,15 +133,32 @@
               <td><strong>EA</strong></td>
               <td><%= @week_courses_ea %></td>
               <td><%= @week_exams_ea %></td>
-              <td><%= number_to_percentage((@week_score_ea.sum / @week_exams_ea), precision: 1) %></td>
-              <td><%= number_with_precision((@week_rating_ea.sum  /  ( @week_courses_rated_ea.sum )), precision: 2) %></td>
+              <% if @week_score_ea.sum != 0 %>
+                <td><%= number_to_percentage((@week_score_ea.sum  /  @week_exams_ea), precision: 1) %></td>
+              <% elsif %>
+                <td></td>
+              <% end %>
+              <% if @week_courses_rated_ea.sum != 0 %>
+                <td><%= number_with_precision((@week_rating_ea.sum  /  @week_courses_rated_ea.sum), precision: 2) %></td>
+              <% elsif %>
+                <td></td>
+              <% end %>
             </tr>
             <tr class="text-center">
               <td><strong>Total</strong></td>
               <td><strong><%= @week_courses_cpa + @week_courses_ea %></strong></td>
               <td><strong><%= @week_exams_cpa + @week_exams_ea %></strong></td>
+              <% if @week_score_all.sum != 0 %>
               <td><strong><%= number_to_percentage(@week_score_all.sum / (@week_exams_cpa + @week_exams_ea), precision: 1) %></strong></td>
+              <% elsif %>
+                <td></td>
+              <% end %>
+              <% if @week_rating_all.sum != 0 %>
               <td><strong><%= number_with_precision((@week_rating_all.sum  /  ( @week_courses_rated_all.sum )), precision: 2) %></strong></td>
+              <% elsif %>
+                <td></td>
+              <% end %>
+
             </tr>
           </tbody>
         </table>
