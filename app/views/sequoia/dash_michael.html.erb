@@ -71,7 +71,7 @@
           <div class="tab-content">
             <div id="cpa_exam" class="tab-pane fade in active">
 
-          <%= bar_chart @bar_chart_cpa_month, height: '1750px' %>
+          <%= bar_chart @bar_chart_cpa_month, height: '2000px' %>
 
         </div>
   <!-- Tab 1 end -->
@@ -292,7 +292,7 @@
                   <tr>
                     <td><strong><%= link_to task.title, task %></strong></td>
                     <td><%= task.note.truncate_words(20) %>
-                    <td><%= task.due_date.nil? ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
+                    <td><%= task.no_due_date == true ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
                     <td><%= link_to 'Edit', edit_task_path(task) %></td>
                   </tr>
                   <% end %>
@@ -320,7 +320,7 @@
                   <tr>
                     <td><strong><%= link_to task.title, task %></strong></td>
                     <td><%= task.note.truncate_words(20) %>
-                    <td><%= task.due_date.nil? ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
+                    <td><%= task.no_due_date == true ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
                     <td><%= link_to 'Edit', edit_task_path(task) %></td>
                   </tr>
                   <% end %>
@@ -349,7 +349,7 @@
               <tr>
                 <td><strong><%= link_to task.title, task %></strong></td>
                 <td><%= task.note.truncate_words(20) %>
-                <td><%= task.due_date.nil? ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
+                <td><%= task.no_due_date == true ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
                 <td><%= link_to 'Edit', edit_task_path(task) %></td>
               </tr>
                 <% end %>
