@@ -13,55 +13,11 @@
   </head>
 
   <body>
-
-
+    
     <% user_signed_in? && current_user.email == 'austin@sequoiacpe.com' ? @name = 'Austin' : '' %>
     <% user_signed_in? && current_user.email == 'michael@sequoiacpe.com' ? @name = 'Michael' : '' %>
     <% user_signed_in? && current_user.email == 'kyle@sequoiacpe.com' ? @name = 'Kyle' : '' %>
     <% user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' ? @name = 'Ashley' : '' %>
-
-<!-- <% unless controller_name == "sequoia" %>
-    <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-
-        <% if user_signed_in? && current_user.superadmin_role? %>
-          <%= link_to 'Sequoia CPE', sequoia_dash_path, class: "navbar-brand" %>
-        <% elsif user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' %>
-          <%= link_to 'Sequoia CPE', sequoia_dash_ashley_path %>
-        <% end %>
-
-      </div>
-      <ul class="nav navbar-nav">
-        <li><%= link_to 'Course Datasheet', datasheets_path %></li>
-        <li><%= link_to 'Course Updatesheet', updatesheets_path %></li>
-        <li><%= link_to 'Copyrights', copyrights_path %></li>
-        <li><%= link_to 'Seq Customers', sequoia_customers_path %></li>
-        <li><%= link_to 'Postcards', postcard_returns_path %></li>
-        <li><%= link_to 'PES Courses', pes_courses_path %></li>
-        <li><%= link_to 'Postcard Mailings', postcard_mailings_path %></li>
-        <li><%= link_to 'Postcard inventory', inventories_path %></li>
-
-        <li><%= link_to 'Task', tasks_path %></li>
-      <% if user_signed_in? && current_user.superadmin_role? %>
-        <li><%= link_to 'Mailing', mailings_path %></li>
-        <li><%= link_to 'Empire Mailing', empire_mailings_path %></li>
-        <li><%= link_to 'Texas Royalties', tx_royalties_path %></li>
-        <li><%= link_to 'Eamil Campaign', email_campaigns_path %></li>
-      <% end %>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <% if user_signed_in? %>
-          <li><%= link_to @name, edit_user_registration_path %></li>
-          <li><%= link_to 'Log Out', destroy_user_session_path, method: :delete %></li>
-        <% else %>
-          <li><%= link_to 'sign up', new_user_registration_path %></li>
-          <li><%= link_to 'log in', new_user_session_path %></li>
-        <% end %>
-      </ul>
-    </div>
-  </nav>
-  <% end %> -->
 
 <% unless controller_name == "sequoia" %>
 <nav class="navbar navbar-inverse">
@@ -70,8 +26,10 @@
     <div class="col-lg-4">
       <% if user_signed_in? && current_user.superadmin_role? && current_user.email = 'Austin@SequoiaCPE.com' %>
         <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_path, class: 'button-none'%></strong>
-      <% elsif user_signed_in? && current_user.email = 'Ashley@SequoiaCPE.com'%>
+      <% elsif user_signed_in? && @name = 'Ashley'%>
         <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_ashley_path, class: 'button-none'%></strong>
+      <% elsif user_signed_in? && @name = 'Michael'%>
+        <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_michael_path, class: 'button-none'%></strong>
       <% elsif %>
       <h1> Dashboard </h1>
       <% end %>
@@ -99,7 +57,7 @@
           <li class="divider"></li>
         <% elsif user_signed_in? && current_user.supervisor_role == true %>
           <li class="dropdown-header">Dashboards</li>
-            <li><%= link_to 'Michael Dashboard', sequoia_dash_path %></li>
+            <li><%= link_to 'Michael Dashboard', sequoia_dash_michael_path %></li>
             <li><%= link_to 'Hamdo Dashboard', sequoia_dash_path %></li>
             <li><%= link_to 'Ashley Dashboard', sequoia_dash_ashley_path %></li>
           <li class="divider"></li>
