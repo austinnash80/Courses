@@ -205,6 +205,8 @@ def sales
 
     @next_msi_mailing_date_cpa = Mailing.where('drop > ?', Date.today - 10).where(:who => 'CPA').pluck(:drop).min
     @last_msi_mailing_date_cpa = Mailing.where('drop < ?', Date.today - 10).where(:complete => true).where(:who => 'CPA').pluck(:drop).max
+    @next_msi_mailing_date_ea = Mailing.where('drop > ?', Date.today - 10).where(:who => 'EA').pluck(:drop).min
+    @last_msi_mailing_date_ea = Mailing.where('drop < ?', Date.today - 10).where(:complete => true).where(:who => 'EA').pluck(:drop).max
 
     @most_recent_msi_drop = []
 

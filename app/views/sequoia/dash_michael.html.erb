@@ -150,14 +150,31 @@
                 <td>
                   <% @mailings.each do |mailing| %>
                     <% if @last_msi_mailing_date_cpa == mailing.drop && mailing.who == 'CPA' %>
-                    Last: <%= (mailing.drop + 10).strftime('%-m/%-d/%y')%> | (<%= number_with_delimiter(mailing.quantity_sent, delimiter: ',') %>)
+                    Last: <%= link_to "#{(mailing.drop + 10).strftime('%-m/%-d/%y')} (#{number_with_delimiter(mailing.quantity_sent, delimiter: ',')})", mailing  %>
                     <% end %>
                   <% end %>
                 </td>
                 <td>
                   <% @mailings.each do |mailing| %>
                     <% if @next_msi_mailing_date_cpa == mailing.drop && mailing.who == 'CPA' %>
-                    Next: <%= (mailing.drop + 10 ).strftime('%-m/%-d/%y')%> | (<%= number_with_delimiter(mailing.estimate_quanity, delimiter: ',') %>)
+                    Next: <%= link_to "#{(mailing.drop + 10).strftime('%-m/%-d/%y')} (#{number_with_delimiter(mailing.estimate_quanity, delimiter: ',')})", mailing  %>
+                    <% end %>
+                  <% end %>
+                  </td>
+              </tr>
+              <tr>
+                <td>Direct Mail EA</td>
+                <td>
+                  <% @mailings.each do |mailing| %>
+                    <% if @last_msi_mailing_date_ea == mailing.drop && mailing.who == 'EA' %>
+                    Last: <%= link_to "#{(mailing.drop + 10).strftime('%-m/%-d/%y')} (#{number_with_delimiter(mailing.quantity_sent, delimiter: ',')})", mailing  %>
+                    <% end %>
+                  <% end %>
+                </td>
+                <td>
+                  <% @mailings.each do |mailing| %>
+                    <% if @next_msi_mailing_date_ea == mailing.drop && mailing.who == 'EA' %>
+                    Next: <%= link_to "#{(mailing.drop + 10).strftime('%-m/%-d/%y')} (#{number_with_delimiter(mailing.estimate_quanity, delimiter: ',')})", mailing  %>
                     <% end %>
                   <% end %>
                   </td>
