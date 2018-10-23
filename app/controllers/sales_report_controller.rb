@@ -16,13 +16,15 @@ class SalesReportController < ApplicationController
     @start_of_week = Date.today.beginning_of_week
     @start_of_month = Date.today.beginning_of_month
     # - 1.month
-
     @end_of_month = Date.today.end_of_month
     @sequoia_exams_all = ExamResult.order(:course_number).all
 
     @exams_total = @sequoia_exams_all.pluck(:taken).sum
 
-    
+    @bar_chart_cpa_month = @sequoia_exams_all.where(:extra_s => 'Month').where(:who => 'CPA').where(:week_s => @start_of_month).where('course_number < ?', 9000).where('course_number >= ?', 1000).group(:course_number).sum(:taken)
+
+
+
     # @exams_4weeks_cpa = ExamResult.group(:course_number).group(:who).where(:week_s => @start_of_week - 28..@start_of_week).order(:course_number).sum(:taken)
     @week_courses_cpa = @sequoia_exams_all.where(:who => 'CPA').where(:week_s => @start_of_week - 7..@start_of_week).pluck(:course_number).count
     @week_courses_ea = @sequoia_exams_all.where(:who => 'EA').where(:week_s => @start_of_week - 7..@start_of_week).pluck(:course_number).count

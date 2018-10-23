@@ -13,7 +13,7 @@
   </head>
 
   <body>
-    
+
     <% user_signed_in? && current_user.email == 'austin@sequoiacpe.com' ? @name = 'Austin' : '' %>
     <% user_signed_in? && current_user.email == 'michael@sequoiacpe.com' ? @name = 'Michael' : '' %>
     <% user_signed_in? && current_user.email == 'kyle@sequoiacpe.com' ? @name = 'Kyle' : '' %>
@@ -80,6 +80,10 @@
             <li><%= link_to 'Postcards Returns', postcard_returns_path %></li>
             <li><%= link_to 'Postcard Mailings', postcard_mailings_path %></li>
             <li><%= link_to 'Postcard Inventory', inventories_path %></li>
+        <li class="divider"></li>
+        <li class="dropdown-header">Exams</li>
+          <li><%= link_to 'Exam Index', exam_results_path %></li>
+          <li><%= link_to 'Exam Stats', sales_report_sequoia_exams_path %></li>
         <li class="divider"></li>
         <li class="dropdown-header">Other</li>
           <li><%= link_to 'Texas Royalties', tx_royalties_path %></li>

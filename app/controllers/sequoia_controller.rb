@@ -17,6 +17,7 @@ class SequoiaController < ApplicationController
     task
     email_campaign
     msi_mailing
+    sequoia_exams
   end
 
   def dash
@@ -431,6 +432,50 @@ def postcard_schedule
       end
       end
 
+  end
+
+  def sequoia_exams
+    @start_of_month = Date.today.beginning_of_month
+
+    @end_of_month = Date.today.end_of_month
+    @sequoia_exams_all = ExamResult.order(:course_number).all
+
+    @exams_total = @sequoia_exams_all.pluck(:taken).sum
+
+    @bar_chart_cpa_month = @sequoia_exams_all.where(:extra_s => 'Month').where(:who => 'CPA').where(:week_s => @start_of_month).where('course_number < ?', 9000).where('course_number >= ?', 1000).group(:course_number).sum(:taken)
+    @bar_chart_ea_month = @sequoia_exams_all.where(:extra_s => 'Month').where(:who => 'EA').where(:week_s => @start_of_month).where('course_number < ?', 4000).where('course_number >= ?', 3000).group(:course_number).sum(:taken)
+
+    @month_courses_cpa = @sequoia_exams_all.where(:extra_s => 'Month').where(:who => 'CPA').where(:week_s => @start_of_month).pluck(:course_number).count
+    @month_courses_ea = @sequoia_exams_all.where(:extra_s => 'Month').where(:who => 'EA').where(:week_s => @start_of_month).pluck(:course_number).count
+    @month_exams_cpa = @sequoia_exams_all.where(:extra_s => 'Month').where(:who => 'CPA').where(:week_s => @start_of_month).pluck(:taken).sum
+    @month_exams_ea = @sequoia_exams_all.where(:extra_s => 'Month').where(:who => 'EA').where(:week_s => @start_of_month).pluck(:taken).sum
+
+      @month_score_cpa = []
+      @month_score_ea = []
+      @month_score_all = []
+      @month_rating_cpa = []
+      @month_courses_rated_cpa = []
+      @month_rating_ea = []
+      @month_courses_rated_ea = []
+      @month_rating_all = []
+      @month_courses_rated_all = []
+
+      @sequoia_exams_all.each do |i|
+        # Start Month
+        i['extra_s'] == 'Month' && i['who'] == 'CPA' && i['week_s'] == (@start_of_month) ? @month_score_cpa.push(i['score_avg'] * i['taken']) : ''
+        i['extra_s'] == 'Month' && i['who'] == 'EA' && i['week_s'] == (@start_of_month) ? @month_score_ea.push(i['score_avg'] * i['taken']) : ''
+        i['extra_s'] == 'Month' && i['week_s'] == (@start_of_month) ? @month_score_all.push(i['score_avg'] * i['taken']) : ''
+        if i['rating'].nil?
+        elsif
+          i['extra_s'] == 'Month' && i['who'] == 'CPA' && i['week_s'] == (@start_of_month) ? @month_rating_cpa.push(i['rating'] * i['taken']) : ''
+          i['extra_s'] == 'Month' && i['who'] == 'CPA' && i['week_s'] == (@start_of_month) ? @month_courses_rated_cpa.push(i['taken']) : ''
+          i['extra_s'] == 'Month' && i['who'] == 'EA' && i['week_s'] == (@start_of_month) ? @month_rating_ea.push(i['rating'] * i['taken']) : ''
+          i['extra_s'] == 'Month' && i['who'] == 'EA' && i['week_s'] == (@start_of_month) ? @month_courses_rated_ea.push(i['taken']) : ''
+          i['extra_s'] == 'Month' && i['week_s'] == (@start_of_month) ? @month_rating_all.push(i['rating'] * i['taken']) : ''
+          i['extra_s'] == 'Month' && i['week_s'] == (@start_of_month) ? @month_courses_rated_all.push(i['taken']) : ''
+        end
+        # End month
+      end
   end
 
 end
