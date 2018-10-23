@@ -1,0 +1,349 @@
+<body class= 'body-home'>
+
+    <% if current_user.email == 'michael@sequoiacpe.com' || current_user.email == 'austin@sequoiacpe.com'%>
+      <h1 class="text-center off-white">Michael Dashboard</h1>
+      <h3 class="off-white text-center"><%= Time.now.strftime('%A %-b %-d, %Y') %></h3>
+
+</br>
+<!-- *** Start Left Pannel *** -->
+<div class="row">
+  <div class="col-lg-4">
+
+  <!-- ** L1 ** -->
+    <div class="well">
+      <h3 class="text-center">Sequoia Exams</h3>
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home1">One</a></li>
+        <li><a data-toggle="tab" href="#menu1">Two</a></li>
+      </ul>
+    </br>
+    </br>
+    <!-- * Tab 1 Start * -->
+      <div class="tab-content">
+        <div id="home1" class="tab-pane fade in active">
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>One</th>
+                <th>two</th>
+                <th>Three</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+  <!-- Tab 1 end -->
+  <!-- * Tab 2 start * -->
+        <div id="menu1" class="tab-pane fade">
+          <table class="table table-bordered">
+
+            <thead>
+              <tr>
+                <th>One</th>
+                <th>One</th>
+                <th>One</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+    <!-- Tab 2 end -->
+      </div>
+    <!-- Tabs End -->
+    </div>
+  <!-- ** L1 End ** -->
+
+  <!-- ** L2 ** -->
+    <div class="well">
+      <h3 class="text-center">Home</h3>
+        <p>
+          content
+        </p>
+    </div>
+  <!-- ** L2 END  ** -->
+  </div>
+<!-- *** END Left Pannel *** -->
+
+<!-- *** START Center Pannel *** -->
+  <div class="col-lg-4">
+  <!-- ** START C1 ** -->
+    <div class="well">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home2">Home</a></li>
+        <li><a data-toggle="tab" href="#menu2">Menu 1</a></li>
+      </ul>
+      <!-- * Tab 1 Start * -->
+      <div class="tab-content">
+        <div id="home2" class="tab-pane fade in active">
+          <h3>HOME</h3>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Status</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Course Updating</td>
+                <% if @course_update_status.sum == 0 %>
+                  <td class="green"><strong>Up-to-date</strong></td>
+                  <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
+                <% elsif %>
+                  <td class="red"><strong><%= link_to "In-progress (#{@course_update_status.sum})", updatesheets_path, class: 'button-none' %></strong></td>
+                  <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
+                <% end %>
+              </tr>
+              <tr>
+                <td>Course Proofing</td>
+                <% if @course_update_status_proofing.sum == 0 %>
+                  <td class="green"><strong>Up-to-date</strong></td>
+                  <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
+                <% elsif %>
+                  <td class="red"><strong><%= link_to "In-progress (#{@course_update_status_proofing.sum})", updatesheets_path, class: 'button-none' %></strong></td>
+                  <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
+                <% end %>
+              </tr>
+              <tr>
+                <td>Sequoia Postcards</td>
+                <% if @out_of_date_sequoia == 'True' %>
+                  <td><strong class="red">Behind</strong></td>
+                <% elsif %>
+                  <td class="green"><strong>Up-to-date</strong></td>
+                <% end %>
+                <td><%= link_to 'Postcard Index', postcard_mailings_path %></td>
+              </tr>
+
+              <tr>
+                <td>Empire Emails Stats</td>
+                  <% if (Date.today - 7) > @last_updated_stats.min %>
+                    <td class="red"><strong>Behind</strong></td>
+                  <% elsif %>
+                    <td class="green"><strong>Up-to-date</strong></td>
+                  <% end %>
+                <td><%= link_to 'Campaign Index', email_campaigns_path %></td>
+              </tr>
+              <tr>
+                <td>Direct Mail CPA</td>
+                <td>
+                  <% @mailings.each do |mailing| %>
+                    <% if @last_msi_mailing_date_cpa == mailing.drop && mailing.who == 'CPA' %>
+                    Last: <%= (mailing.drop + 10).strftime('%-m/%-d/%y')%> | (<%= number_with_delimiter(mailing.quantity_sent, delimiter: ',') %>)
+                    <% end %>
+                  <% end %>
+                </td>
+                <td>
+                  <% @mailings.each do |mailing| %>
+                    <% if @next_msi_mailing_date_cpa == mailing.drop && mailing.who == 'CPA' %>
+                    Next: <%= (mailing.drop + 10 ).strftime('%-m/%-d/%y')%> | (<%= number_with_delimiter(mailing.estimate_quanity, delimiter: ',') %>)
+                    <% end %>
+                  <% end %>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+          Array:<%= @next_msi_mailing_quanity %>
+        </div>
+  <!-- Tab 1 end -->
+  <!-- * Tab 2 start * -->
+        <div id="menu2" class="tab-pane fade">
+          <h3>Menu 1</h3>
+          <p>Some content in menu 1.</p>
+        </div>
+  <!-- Tab 2 end -->
+      </div>
+  <!-- Tabs End -->
+    </div>
+<!-- ** END C1 ** -->
+
+<!-- ** START C2 ** -->
+    <div class="well">
+      <h3>Home</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>One</th>
+            <th>Two</th>
+            <th>Three</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  <!-- ** END C2 -->
+  </div>
+<!-- *** End Center Pannel *** -->
+
+<!-- *** START Right Pannel *** -->
+  <div class="col-lg-4">
+  <!-- ** START R1 (Task) ** -->
+    <div class="well">
+      <h2 class="text-center">Tasks</h2>
+      <h4 class="text-center"><%= link_to 'Add New Task', new_task_path, class: "btn btn-primary" %></h4>
+      <% if @name == 'Austin' %>
+        <!-- <p class="text-center green">
+          Only displaying task for singed in user</br>
+          Not per dashboard user
+        </p> -->
+      <% end %>
+    </br>
+  <!-- Start Tab Headers -->
+      <ul class="nav nav-tabs">
+           <li class="active"><a data-toggle="tab" href="#in-progress">In Progress</a></li>
+           <li><a data-toggle="tab" href="#future">Future Task</a></li>
+           <li><a data-toggle="tab" href="#done">Completed</a></li>
+      </ul>
+      </br>
+  <!-- End Tab Headers -->
+  <!-- Start Tabs - Tasks -->
+      <div class="tab-content">
+  <!-- * Start Tab One * -->
+        <div id="in-progress" class="tab-pane fade in active">
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Note</th>
+                <th>Due Date</th>
+                <th> </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @tasks.each do |task| %>
+              <% if task.user_1 == @name || task.user_2 == @name || task.user_3 == @name || task.user_4 == @name || task.user_5 == @name %>
+                <% if task.type_one == true && task.done == false %>
+                <%# if user_signed_in? && task.user_id == current_user.id && task.type_one == true && task.done == false %>
+                  <tr>
+                    <td><strong><%= link_to task.title, task %></strong></td>
+                    <td><%= task.note.truncate_words(20) %>
+                    <td><%= task.due_date.nil? ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
+                    <td><%= link_to 'Edit', edit_task_path(task) %></td>
+                  </tr>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+  <!-- * End Tab one * -->
+  <!-- * Start Tab Two * -->
+      <div id="future" class="tab-pane fade in">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Note</th>
+                <th>Due Date</th>
+                <th> </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @tasks.each do |task| %>
+                <% if task.user_1 == @name || task.user_2 == @name || task.user_3 == @name || task.user_4 == @name || task.user_5 == @name %>
+                  <% if task.type_two == true && task.done == false && task.type_one == false %>
+                  <tr>
+                    <td><strong><%= link_to task.title, task %></strong></td>
+                    <td><%= task.note.truncate_words(20) %>
+                    <td><%= task.due_date.nil? ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
+                    <td><%= link_to 'Edit', edit_task_path(task) %></td>
+                  </tr>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+      </div>
+  <!-- * End Tab Two * -->
+
+  <!-- * Start Tab Three * -->
+      <div id="done" class="tab-pane fade in">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Note</th>
+              <th>Due Date</th>
+              <th> </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @tasks.each do |task| %>
+              <% if task.user_1 == @name || task.user_2 == @name || task.user_3 == @name || task.user_4 == @name || task.user_5 == @name %>
+                <% if task.done == true %>
+              <tr>
+                <td><strong><%= link_to task.title, task %></strong></td>
+                <td><%= task.note.truncate_words(20) %>
+                <td><%= task.due_date.nil? ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
+                <td><%= link_to 'Edit', edit_task_path(task) %></td>
+              </tr>
+                <% end %>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <!-- * End Tab Three * -->
+    </div>
+    <!-- End Tab Section - Tasks -->
+  </div>
+  <!-- ** END C1 (Task) ** -->
+
+  <!-- ** START C2 ** -->
+    <div class="well">
+    <!-- Tabs Start -->
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home3">Home</a></li>
+        <li><a data-toggle="tab" href="#menu3">Menu 1</a></li>
+      </ul>
+    <!-- Tab 1 Start -->
+      <div class="tab-content">
+        <div id="home3" class="tab-pane fade in active">
+          <h3>HOME</h3>
+          <p>Some content.</p>
+        </div>
+    <!-- Tab 1 end -->
+    <!-- Tab 2 start -->
+        <div id="menu3" class="tab-pane fade">
+          <h3>Menu 1</h3>
+          <p>Some content in menu 1.</p>
+        </div>
+  <!-- Tab 2 end -->
+      </div>
+  <!-- Tabs End -->
+    </div>
+  <!-- ** END C2 ** -->
+  </div>
+<!-- *** End Right Pannel *** -->
+
+  </div>
+  <% end %>
+</body>

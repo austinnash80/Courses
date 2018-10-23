@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'sequoia/dash'
   get 'sequoia/dash_ashley'
+  get 'sequoia/dash_michael'
 
   resources :date_fields
   resources :pes_courses

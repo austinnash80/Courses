@@ -9,6 +9,16 @@ class SequoiaController < ApplicationController
     email_campaign
   end
 
+  def dash_michael
+    postcard_schedule
+    postcard_inventory
+    course_update_status
+    name
+    task
+    email_campaign
+    msi_mailing
+  end
+
   def dash
     sales
     postcard_schedule #must be above postcard_inventory
@@ -193,11 +203,19 @@ def sales
 
     @next_msi_mailing = []
 
+    @next_msi_mailing_date_cpa = Mailing.where('drop > ?', Date.today - 10).where(:who => 'CPA').pluck(:drop).min
+    @last_msi_mailing_date_cpa = Mailing.where('drop < ?', Date.today - 10).where(:complete => true).where(:who => 'CPA').pluck(:drop).max
+
+    @most_recent_msi_drop = []
+
     @art_missing = []
 
     @mailings.each do |mailing|
       if mailing.boolean_1 == false
         @next_msi_mailing.push(mailing['drop'])
+      end
+      if mailing.complete == true && mailing.drop < Date.today
+        @most_recent_msi_drop.push(mailing['drop'])
       end
       if mailing.drop.strftime('%Y') == Date.today.year.to_s
         if mailing.cost_print.nil? || mailing.cost_postage.nil? || mailing.cost_service.nil?
@@ -403,6 +421,14 @@ def postcard_schedule
 
   def email_campaign
     @email_campaigns = EmailCampaign.all
+
+@last_updated_stats = []
+    @email_campaigns.each do |email_campaign|
+      if email_campaign.company == 'Empire' && email_campaign.active == true
+        @last_updated_stats.push(email_campaign['update_stats'])
+      end
+      end
+
   end
 
 end
