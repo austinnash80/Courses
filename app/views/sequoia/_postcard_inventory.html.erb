@@ -1,0 +1,69 @@
+<h3>Postcard Inventory</h3>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Version</th>
+      <th>Order Date</th>
+      <th>Order Amount</th>
+      <th>Remaining</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sequoia</td>
+      <td>CPA NM</td>
+      <td><%= @date_sequoia_cpa_nm.max.strftime('%-m/%-d/%y') %></td>
+      <td><%= @number_sequoia_cpa_nm[0] %></td>
+      <% if (@inventory_sequoia_cpa_nm.sum - @used_sequoia_cpa_nm.sum) < 500 %>
+        <td class="red"><%= @inventory_sequoia_cpa_nm.sum - @used_sequoia_cpa_nm.sum %></td>
+      <% elsif %>
+        <td><%= @inventory_sequoia_cpa_nm.sum - @used_sequoia_cpa_nm.sum %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>Sequoia</td>
+      <td>CPA RC</td>
+      <td><%= @date_sequoia_cpa_rc.max.strftime('%-m/%-d/%y') %></td>
+      <td><%= @number_sequoia_cpa_rc[0] %></td>
+      <% if (@inventory_sequoia_cpa_rc.sum - @used_sequoia_cpa_rc.sum) < 500 %>
+        <td class="red"><%= @inventory_sequoia_cpa_rc.sum - @used_sequoia_cpa_rc.sum %></td>
+      <% elsif %>
+        <td><%= @inventory_sequoia_cpa_rc.sum - @used_sequoia_cpa_rc.sum %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>Sequoia</td>
+      <td>EA NM</td>
+      <td><%= @date_sequoia_ea_nm.max.strftime('%-m/%-d/%y') %></td>
+      <td><%= @number_sequoia_ea_nm[0] %></td>
+      <% if (@inventory_sequoia_ea_nm.sum - @used_sequoia_ea_nm.sum) < 500 %>
+        <td class="red"><%= @inventory_sequoia_ea_nm.sum - @used_sequoia_ea_nm.sum %></td>
+      <% elsif %>
+        <td><%= @inventory_sequoia_ea_nm.sum - @used_sequoia_ea_nm.sum %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>Sequoia</td>
+      <td>EA RC</td>
+      <td><%= @date_sequoia_ea_rc.max.strftime('%-m/%-d/%y') %></td>
+      <td><%= @number_sequoia_ea_rc[0] %></td>
+      <% if (@inventory_sequoia_ea_rc.sum - @used_sequoia_ea_rc.sum) < 500 %>
+        <td class="red"><%= @inventory_sequoia_ea_rc.sum - @used_sequoia_ea_rc.sum %></td>
+      <% elsif %>
+        <td><%= @inventory_sequoia_ea_rc.sum - @used_sequoia_ea_rc.sum %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>Empire</td>
+      <td>General RC</td>
+      <td><%= @date_empire_rc.max.strftime('%-m/%-d/%y') %></td>
+      <td><%= @number_empire_rc[0] %></td>
+      <% if (@inventory_empire_rc.sum - @used_empire_rc.sum) < 500 %>
+        <td class="red"><%= @inventory_empire_rc.sum - @used_empire_rc.sum %></td>
+      <% elsif %>
+        <td><%= @inventory_empire_rc.sum - @used_empire_rc.sum %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>

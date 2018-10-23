@@ -9,238 +9,88 @@
 
 </br>
 
-<!-- START LEFT COLUMN -->
+<!-- ** START LEFT COLUMN ** -->
 <div class="col-lg-4">
     <div class="well">
         <%= render(:partial => 'msi_mailing') %>
     </div>
-
     <div class="well">
         <%= render(:partial => 'task') %>
     </div>
 </div>
 <!-- END LEFT COLUMN -->
 
-
+<!-- ** START CENTER COLUMN ** -->
 <div class="col-lg-4">
-  <div class="well">
-<!-- Tabs Start -->
-    <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" href="#home1">Home</a></li>
-      <li><a data-toggle="tab" href="#menu1">Postcard Inventory</a></li>
-    </ul>
-<!-- Tab 1 Start -->
-    <div class="tab-content">
-      <div id="home1" class="tab-pane fade in active">
-        <h3>HOME</h3>
-
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Task </th>
-              <th>Status </th>
-              <th>Note </th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @tasks.each do |task| %>
-            <% if task.user_1 == @name || task.user_2 == @name || task.user_3 == @name || task.user_4 == @name || task.user_5 == @name %>
-              <% if task.done == false && task.due == true && task.type_one == true && Date.today >= (task.due_date - 5) %>
-            <tr>
-              <td><%= task.title.truncate_words(4) %></td>
-              <% if Date.today > task.due_date %>
-                <td><strong> Past Due: <%= task.due_date.strftime('%-m/%-d') %></strong></td>
-              <% elsif %>
-                <td><strong> Due: <%= task.due_date.strftime('%a (%-m/%-d)') %></strong></td>
-              <% end %>
-              <Td> <%= link_to 'View Task', task %></td>
-            </tr>
-              <% end %>
-            <% end %>
-            <% end %>
-            <tr>
-              <td>Course Updating</td>
-              <% if @course_update_status.sum == 0 && @course_update_status_proofing.sum == 0 %>
-                <td class="green">Nothing in-progress</td>
-                <td> <%= link_to 'Add Update', datasheets_path %></td>
-              <% elsif @course_update_status.sum == 0 && @course_update_status_proofing.sum != 0 %>
-                <td>Proofing Needed</td>
-                <td><%= link_to @course_update_status_proofing.sum, updatesheets_path %> <%= link_to 'Not Proofed', updatesheets_path %> | <%= link_to 'Add Update', datasheets_path %></td>
-              <% elsif @course_update_status.sum != 0 && @course_update_status_proofing.sum == 0%>
-                <td class="red"><%= @course_update_status.sum %> In-progress</td>
-                <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Add Update', datasheets_path %></td>
-              <% elsif @course_update_status.sum != 0 && @course_update_status_proofing.sum != 0%>
-                <td class="red"><%= @course_update_status.sum %> In-progress | <%= @course_update_status_proofing.sum %> Proofing</td>
-                <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Add Update', datasheets_path %></td>
-              <% end %>
-            </tr>
-            <tr>
-              <td>MSI Mailing</td>
-              <% if (Date.today) > (@next_msi_mailing.min - 8) %>
-                <td class="red">Mailing Due Now</td>
-              <% elsif %>
-                <td> Mailing due in <%= ((@next_msi_mailing.min - 8) - Date.today).to_i %> Days</td>
-              <% end %>
-              <% if (Date.today) > (@art_missing.min - 18) %>
-                <td class="red">Behind on art</td>
-              <% elsif %>
-                <td class="">No art due yet (<%= ((@art_missing.min - 18) - Date.today).to_i %> Days) </td>
-              <% end%>
-            </tr>
-            <tr>
-              <td>Postcard Inventory</td>
-              <% if @remaining_inventory.min >= 500%>
-                <td class="green">Good</td>
-                <td><a data-toggle="tab" href="#menu1">Inventory</a></td>
-              <% elsif %>
-                <td class="red">Low</td>
-                <td> <strong><a data-toggle="tab" href="#menu1">Check Inventory</a></strong> </td>
-              <% end %>
-            </tr>
-
-            <tr>
-              <td>Texas Royalties Check </td>
-              <% if Date.today > (@next_due.min.to_date + 5) %>
-                <td class="red">Over Due (<%= (@next_due.min.to_date + 5).strftime('%-m/%-d/%y') %>)</td>
-              <% elsif %>
-                <td>Due: <%= (@next_due.min.to_date + 5).strftime('%-m/%-d/%y') %></td>
-              <% end %>
-              <td><%= link_to 'Materials', tx_royalties_path %></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-<!-- Tab 1 end -->
-<!-- Tab 2 start -->
-      <div id="menu1" class="tab-pane fade">
-        <h3>Postcard Inventory</h3>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Company</th>
-              <th>Version</th>
-              <th>Order Date</th>
-              <th>Order Amount</th>
-              <th>Remaining</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Sequoia</td>
-              <td>CPA NM</td>
-              <td><%= @date_sequoia_cpa_nm.max.strftime('%-m/%-d/%y') %></td>
-              <td><%= @number_sequoia_cpa_nm[0] %></td>
-              <% if (@inventory_sequoia_cpa_nm.sum - @used_sequoia_cpa_nm.sum) < 500 %>
-                <td class="red"><%= @inventory_sequoia_cpa_nm.sum - @used_sequoia_cpa_nm.sum %></td>
-              <% elsif %>
-                <td><%= @inventory_sequoia_cpa_nm.sum - @used_sequoia_cpa_nm.sum %></td>
-              <% end %>
-            </tr>
-            <tr>
-              <td>Sequoia</td>
-              <td>CPA RC</td>
-              <td><%= @date_sequoia_cpa_rc.max.strftime('%-m/%-d/%y') %></td>
-              <td><%= @number_sequoia_cpa_rc[0] %></td>
-              <% if (@inventory_sequoia_cpa_rc.sum - @used_sequoia_cpa_rc.sum) < 500 %>
-                <td class="red"><%= @inventory_sequoia_cpa_rc.sum - @used_sequoia_cpa_rc.sum %></td>
-              <% elsif %>
-                <td><%= @inventory_sequoia_cpa_rc.sum - @used_sequoia_cpa_rc.sum %></td>
-              <% end %>
-            </tr>
-            <tr>
-              <td>Sequoia</td>
-              <td>EA NM</td>
-              <td><%= @date_sequoia_ea_nm.max.strftime('%-m/%-d/%y') %></td>
-              <td><%= @number_sequoia_ea_nm[0] %></td>
-              <% if (@inventory_sequoia_ea_nm.sum - @used_sequoia_ea_nm.sum) < 500 %>
-                <td class="red"><%= @inventory_sequoia_ea_nm.sum - @used_sequoia_ea_nm.sum %></td>
-              <% elsif %>
-                <td><%= @inventory_sequoia_ea_nm.sum - @used_sequoia_ea_nm.sum %></td>
-              <% end %>
-            </tr>
-            <tr>
-              <td>Sequoia</td>
-              <td>EA RC</td>
-              <td><%= @date_sequoia_ea_rc.max.strftime('%-m/%-d/%y') %></td>
-              <td><%= @number_sequoia_ea_rc[0] %></td>
-              <% if (@inventory_sequoia_ea_rc.sum - @used_sequoia_ea_rc.sum) < 500 %>
-                <td class="red"><%= @inventory_sequoia_ea_rc.sum - @used_sequoia_ea_rc.sum %></td>
-              <% elsif %>
-                <td><%= @inventory_sequoia_ea_rc.sum - @used_sequoia_ea_rc.sum %></td>
-              <% end %>
-            </tr>
-            <tr>
-              <td>Empire</td>
-              <td>General RC</td>
-              <td><%= @date_empire_rc.max.strftime('%-m/%-d/%y') %></td>
-              <td><%= @number_empire_rc[0] %></td>
-              <% if (@inventory_empire_rc.sum - @used_empire_rc.sum) < 500 %>
-                <td class="red"><%= @inventory_empire_rc.sum - @used_empire_rc.sum %></td>
-              <% elsif %>
-                <td><%= @inventory_empire_rc.sum - @used_empire_rc.sum %></td>
-              <% end %>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-<!-- Tab 2 end -->
-    </div>
-<!-- Tabs End -->
-  </div>
-  <div class="well">
-<!-- Tabs Start -->
-    <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" href="#home2">Home</a></li>
-      <li><a data-toggle="tab" href="#menu2">Menu 1</a></li>
-    </ul>
-<!-- Tab 1 Start -->
-    <div class="tab-content">
-      <div id="home2" class="tab-pane fade in active">
-        <h3>HOME</h3>
-        <p>Some content.</p>
-      </div>
-<!-- Tab 1 end -->
-<!-- Tab 2 start -->
-      <div id="menu2" class="tab-pane fade">
-        <h3>Menu 1</h3>
-        <p>Some content in menu 1.</p>
-      </div>
-<!-- Tab 2 end -->
-    </div>
-<!-- Tabs End -->
-  </div>
-</div>
-
-<div class="col-lg-4">
+  <!-- * start C1 * -->
     <div class="well">
-        <%= render(:partial => 'sales_day') %>
-    </div>
-
-    <div class="well">
-
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#sales_month">Month</a></li>
-        <li><a data-toggle="tab" href="#sales_year">Year</a></li>
+        <li class="active"><a data-toggle="tab" href="#home_austin">Home</a></li>
+        <li><a data-toggle="tab" href="#postcard_inventory">Postcard Inventory</a></li>
       </ul>
 
       <div class="tab-content">
-        <div id="sales_month" class="tab-pane fade in active">
-          <%= render(:partial => 'sales_month') %>
+        <div id="home_austin" class="tab-pane fade in active">
+            <%= render(:partial => 'home_austin') %>
         </div>
-        <div id="sales_year" class="tab-pane fade">
-          <%= render(:partial => 'sales_year') %>
+
+        <div id="postcard_inventory" class="tab-pane fade">
+            <%= render(:partial => 'postcard_inventory') %>
         </div>
       </div>
-
     </div>
+  <!-- end C1 -->
 
-    <!-- <div class="well">
-      <%= render(:partial => 'sales_year') %>
-    </div> -->
+  <!-- * start C2 * -->
+    <div class="well">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home2">Home</a></li>
+        <li><a data-toggle="tab" href="#menu2">Menu 1</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="home2" class="tab-pane fade in active">
+          <h3>HOME</h3>
+          <p>Some content.</p>
+        </div>
+
+        <div id="menu2" class="tab-pane fade">
+          <h3>Menu 1</h3>
+          <p>Some content in menu 1.</p>
+        </div>
+      </div>
+    </div>
+  <!-- end C2 -->
 </div>
+<!--  END CENTER COLUMN *** -->
+
+<!-- ** START RIGHT COLUMN ** -->
+  <div class="col-lg-4">
+    <!-- * start R1 * -->
+      <div class="well">
+          <%= render(:partial => 'sales_day') %>
+      </div>
+    <!-- * start R2 -->
+      <div class="well">
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#sales_month">Month</a></li>
+          <li><a data-toggle="tab" href="#sales_year">Year</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div id="sales_month" class="tab-pane fade in active">
+            <%= render(:partial => 'sales_month') %>
+          </div>
+
+          <div id="sales_year" class="tab-pane fade">
+            <%= render(:partial => 'sales_year') %>
+          </div>
+        </div>
+
+      </div>
+    <!-- end R2 -->
+  </div>
+<!-- *** END RIGHT COLUMN *** -->
 
 <% end %>
-
-
 
 </body>

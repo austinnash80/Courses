@@ -1,0 +1,77 @@
+<h3>HOME</h3>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Task </th>
+      <th>Status </th>
+      <th>Note </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+    <% if task.user_1 == @name || task.user_2 == @name || task.user_3 == @name || task.user_4 == @name || task.user_5 == @name %>
+      <% if task.done == false && task.due == true && task.type_one == true && Date.today >= (task.due_date - 5) %>
+    <tr>
+      <td><%= task.title.truncate_words(4) %></td>
+      <% if Date.today > task.due_date %>
+        <td><strong> Past Due: <%= task.due_date.strftime('%-m/%-d') %></strong></td>
+      <% elsif %>
+        <td><strong> Due: <%= task.due_date.strftime('%a (%-m/%-d)') %></strong></td>
+      <% end %>
+      <Td> <%= link_to 'View Task', task %></td>
+    </tr>
+      <% end %>
+    <% end %>
+    <% end %>
+    <tr>
+      <td>Course Updating</td>
+      <% if @course_update_status.sum == 0 && @course_update_status_proofing.sum == 0 %>
+        <td class="green">Nothing in-progress</td>
+        <td> <%= link_to 'Add Update', datasheets_path %></td>
+      <% elsif @course_update_status.sum == 0 && @course_update_status_proofing.sum != 0 %>
+        <td>Proofing Needed</td>
+        <td><%= link_to @course_update_status_proofing.sum, updatesheets_path %> <%= link_to 'Not Proofed', updatesheets_path %> | <%= link_to 'Add Update', datasheets_path %></td>
+      <% elsif @course_update_status.sum != 0 && @course_update_status_proofing.sum == 0%>
+        <td class="red"><%= @course_update_status.sum %> In-progress</td>
+        <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Add Update', datasheets_path %></td>
+      <% elsif @course_update_status.sum != 0 && @course_update_status_proofing.sum != 0%>
+        <td class="red"><%= @course_update_status.sum %> In-progress | <%= @course_update_status_proofing.sum %> Proofing</td>
+        <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Add Update', datasheets_path %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>MSI Mailing</td>
+      <% if (Date.today) > (@next_msi_mailing.min - 8) %>
+        <td class="red">Mailing Due Now</td>
+      <% elsif %>
+        <td> Mailing due in <%= ((@next_msi_mailing.min - 8) - Date.today).to_i %> Days</td>
+      <% end %>
+      <% if (Date.today) > (@art_missing.min - 18) %>
+        <td class="red">Behind on art</td>
+      <% elsif %>
+        <td class="">No art due yet (<%= ((@art_missing.min - 18) - Date.today).to_i %> Days) </td>
+      <% end%>
+    </tr>
+    <tr>
+      <td>Postcard Inventory</td>
+      <% if @remaining_inventory.min >= 500%>
+        <td class="green">Good</td>
+        <td><a data-toggle="tab" href="#menu1">Inventory</a></td>
+      <% elsif %>
+        <td class="red">Low</td>
+        <td> <strong><a data-toggle="tab" href="#menu1">Check Inventory</a></strong> </td>
+      <% end %>
+    </tr>
+
+    <tr>
+      <td>Texas Royalties Check </td>
+      <% if Date.today > (@next_due.min.to_date + 5) %>
+        <td class="red">Over Due (<%= (@next_due.min.to_date + 5).strftime('%-m/%-d/%y') %>)</td>
+      <% elsif %>
+        <td>Due: <%= (@next_due.min.to_date + 5).strftime('%-m/%-d/%y') %></td>
+      <% end %>
+      <td><%= link_to 'Materials', tx_royalties_path %></td>
+    </tr>
+  </tbody>
+</table>
