@@ -1,11 +1,11 @@
 <h3 class="text-center"> Sequoia YTD: <%= number_to_currency(@total_ytd, :precision => 0) %> </h3>
- <h4 class="text-center"><%= Date.today.strftime('%Y') %></h4>
   <div class="row">
   </br>
     <div class=" col-lg-6">
-    </br>
         <table class="table table-bordered">
           <thead>
+            <caption class="text-center"><%= Date.today.strftime('%Y') %> YTD Breakdown</caption>
+
             <tr>
               <th class="text-center" style="width: 33%">CPA </th>
               <th class="text-center" style="width: 33%">EA </th>
@@ -30,9 +30,38 @@
             </tr>
           </tbody>
         </table>
+
+        <table class="table table-bordered">
+          <thead>
+            <caption class="text-center"><%= Date.today.last_year.strftime('%Y') %> Breakdown</caption>
+
+            <tr>
+              <th class="text-center" style="width: 33%">CPA </th>
+              <th class="text-center" style="width: 33%">EA </th>
+              <th class="text-center" style="width: 33%">AFSP </th>
+            </tr>
+          </thead>
+          <tbody>
+           <tr class="text-center">
+             <td> <%= number_to_currency(@sales_last_year_cpa, :precision => 0) %> </td>
+             <td> <%= number_to_currency(@sales_last_year_ea, :precision => 0) %> </td>
+             <td> <%= number_to_currency(@sales_last_year_afsp, :precision => 0) %> </td>
+            </tr>
+            <tr>
+              <th class="text-center">New</th>
+              <th class="text-center">Return</th>
+              <th class="text-center">Ethics</th>
+            </tr>
+           <tr class="text-center">
+             <td> <%= number_to_currency(@sales_last_year_new_mem, :precision => 0) %> </td>
+             <td> <%= number_to_currency(@sales_last_year_return_mem, :precision => 0) %> </td>
+             <td> <%= number_to_currency(@sales_last_year_cpa_ethics, :precision => 0) %> </td>
+            </tr>
+          </tbody>
+        </table>
     </div>
   <div class="well col-lg-6">
-    <%= bar_chart @column_chart_ytd, thousands: "," %>
+    <%= bar_chart @column_chart_ytd, prefix: "$", thousands: ",", download: true%>
   </div>
 </div>
 </div>

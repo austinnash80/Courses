@@ -74,6 +74,16 @@ def sales
       @return_mem_ytd = SequoiaCustomer.where(:purchase_date => Date.today.beginning_of_year..Date.today ).where(:what => 'Membership-Renewal').pluck(:price).sum
       @column_chart_ytd = SequoiaCustomer.group_by_year(:purchase_date, format: '%Y').sum(:price)
 # End YTD Sales
+
+# Start Last Year sales
+      @sales_last_year_total = SequoiaCustomer.where(:purchase_date => Date.today.last_year.beginning_of_year..Date.today.last_year.end_of_year ).pluck(:price).sum
+      @sales_last_year_cpa = SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => Date.today.last_year.beginning_of_year..Date.today.last_year.end_of_year).pluck(:price).sum
+      @sales_last_year_cpa_ethics = SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => Date.today.last_year.beginning_of_year..Date.today.last_year.end_of_year).where(:what => 'Ethics').pluck(:price).sum
+      @sales_last_year_ea = SequoiaCustomer.where(:who => 'EA').where(:purchase_date => Date.today.last_year.beginning_of_year..Date.today.last_year.end_of_year).pluck(:price).sum
+      @sales_last_year_afsp = SequoiaCustomer.where(:who => 'AFSP').where(:purchase_date => Date.today.last_year.beginning_of_year..Date.today.last_year.end_of_year).where(:what => 'AFSP').pluck(:price).sum
+      @sales_last_year_new_mem = SequoiaCustomer.where(:purchase_date => Date.today.last_year.beginning_of_year..Date.today.last_year.end_of_year ).where(:what => 'Membership-First').pluck(:price).sum
+      @sales_last_year_return_mem = SequoiaCustomer.where(:purchase_date => Date.today.last_year.beginning_of_year..Date.today.last_year.end_of_year ).where(:what => 'Membership-Renewal').pluck(:price).sum
+# End Last Year Sales
     #   @seq_customers_all.each do |i|
     #     @cpa_purchases = SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => (Date.today - 2))
     #     i['who'] == 'CPA' ? @CPA_all_time = Array.new.push(i['price']) : ''
