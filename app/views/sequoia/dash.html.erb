@@ -9,246 +9,17 @@
 
 </br>
 
+<!-- START LEFT COLUMN -->
 <div class="col-lg-4">
-<div class="well">
-  <h2 class="text-center">MSI Mailings</h2>
-  <!-- Start Tab Headers -->
-      <ul class="nav nav-tabs">
-           <li class="active"><a data-toggle="tab" href="#upcomming">Upcomming</a></li>
-           <li><a data-toggle="tab" href="#past">Past</a></li>
-           <li><a data-toggle="tab" href="#data">Data</a></li>
-      </ul>
-      </br>
-  <!-- End Tab Headers -->
-
-  <!-- Start Tabs - mailings -->
-      <div class="tab-content">
-  <!-- Start Tab One -->
-        <div id="upcomming" class="tab-pane fade in active">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>Mailing</th>
-                <th>Who</th>
-                <th>MSI Due</th>
-                <th>Drop</th>
-                <th>~Q</th>
-                <th>~$</th>
-                <th>Art</th>
-                <!-- <th>Data</th> -->
-                <!-- <th colspan="3"></th> -->
-              </tr>
-            </thead>
-          <tbody>
-          <% @mailings.reverse_each do |mailing| %>
-            <% if mailing.complete == false %>
-            <tr>
-              <td><strong><%= link_to mailing.name, mailing %></strong> </td>
-              <td><%= mailing.who %> </td>
-              <td><%= (mailing.drop - 8).strftime('%a %-m/%-d') %> </td>
-              <td><%= (mailing.drop).strftime('%-m/%-d') %> </td>
-              <td><%= number_with_delimiter(mailing.estimate_quanity, delimiter: ',') %></td>
-              <td><%= number_to_currency((mailing.estimate_cost * mailing.estimate_quanity), precision: 0) %></td>
-              <% if mailing.msi_art.url =~/missing/ %>
-                <td><%= link_to '', mailing, class: 'glyphicon glyphicon-remove-circle red gi-2x' %></td>
-              <% elsif %>
-                <td><%= link_to '', mailing, class: 'glyphicon glyphicon-ok-circle green gi-2x' %></td>
-              <% end %>
-              <!-- <td><%= mailing.data_name %> </td> -->
-              <!-- <td><%= link_to 'View', mailing %></td> -->
-               <!-- <td><%= link_to 'Edit', edit_mailing_path(mailing) %></td> -->
-            </tr>
-            <% end %>
-          <% end %>
-          </tbody>
-        </table>
-        </div>
-<!-- End Tab one -->
-<!-- Start Tab Two -->
-        <div id="past" class="tab-pane fade in">
-          <%= link_to 'View All Mailings', mailings_path %>
-        </br>
-        </br>
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>Mailing</th>
-                <th>Who</th>
-                <th>Land</th>
-                <th>Droped</th>
-                <th>Sent</th>
-                <th>Cost</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <% @mailings.each do |mailing| %>
-                <% if user_signed_in? && mailing.complete == true && mailing.drop > 12.month.ago..Time.now %>
-                <tr>
-                  <td><strong><%= link_to mailing.name, mailing %></strong></td>
-                  <td><%= mailing.who %></td>
-                  <td><%= (mailing.drop + 10).strftime('%-m/%-d') %></td>
-                  <td><%= (mailing.drop).strftime('%-m/%-d') %> </td>
-                  <td><%= number_with_delimiter(mailing.quantity_sent, :precision => 0, :delimiter => ',') %></td>
-                  <td><%= number_to_currency((mailing.cost_service) + (mailing.cost_postage) + (mailing.cost_print), :precision => 0) %></td>
-                </tr>
-                <% end %>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-<!-- End Tab Two -->
-<!-- Start Tab Three -->
-    <div id="data" class="tab-pane fade in">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Drops</th>
-            <th>Quanity</th>
-            <th>Cost</th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr>
-              <td><strong>YTD</strong></td>
-              <td><%= @ytd_drops.count %></td>
-              <td><%= number_with_delimiter(@ytd_quanity.sum, :delimiter => ',') %></td>
-              <td><%= number_to_currency(@ytd_cost.sum, :precision => 0) %></td>
-            </tr>
-            <tr>
-              <td><strong><%= Date.today.year - 1 %></strong></td>
-              <td><%= @last_year_drops.count %></td>
-              <td><%= number_with_delimiter(@last_year_quanity.sum, :delimiter => ',') %></td>
-              <td><%= number_to_currency(@last_year_cost.sum, :precision => 0) %></td>
-            </tr>
-            <tr>
-              <td><strong>All</strong></td>
-              <td><%= @all_time_drops.count %></td>
-              <td><%= number_with_delimiter(@all_time_quanity.sum, :delimiter => ',') %></td>
-              <td><%= number_to_currency(@all_time_cost.sum, :precision => 0) %></td>
-            </tr>
-        </tbody>
-      </table>
+    <div class="well">
+        <%= render(:partial => 'msi_mailing') %>
     </div>
-<!-- End Tab Three -->
+
+    <div class="well">
+        <%= render(:partial => 'task') %>
     </div>
-<!-- End Tab Section - Mailings -->
-  </div>
-<!-- End Mailings Section -->
-
-
-
-
-<!-- Start Tab Section -->
-  <div class="well">
-    <h2 class="text-center">Tasks</h2>
-    <h4 class="text-center"><%= link_to 'Add New Task', new_task_path, class: "btn btn-primary" %></h4>
-  </br>
-<!-- Start Tab Headers -->
-    <ul class="nav nav-tabs">
-         <li class="active"><a data-toggle="tab" href="#in-progress">In Progress</a></li>
-         <li><a data-toggle="tab" href="#future">Future Task</a></li>
-         <li><a data-toggle="tab" href="#done">Completed</a></li>
-    </ul>
-    </br>
-<!-- End Tab Headers -->
-<!-- Start Tabs - Tasks -->
-    <div class="tab-content">
-<!-- Start Tab One -->
-      <div id="in-progress" class="tab-pane fade in active">
-
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Note</th>
-              <th>Due Date</th>
-              <!-- <th> </th> -->
-            </tr>
-          </thead>
-          <tbody>
-            <% @tasks.each do |task| %>
-            <% if task.user_1 == @name || task.user_2 == @name || task.user_3 == @name || task.user_4 == @name || task.user_5 == @name %>
-              <% if task.type_one == true && task.done == false %>
-              <%# if user_signed_in? && task.user_id == current_user.id && task.type_one == true && task.done == false %>
-                <tr>
-                  <td><strong><%= link_to task.title, task %></strong></td>
-                  <td><%= task.note.truncate_words(20) %>
-                  <td><%= task.no_due_date == true ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
-                  <!-- <td><%= link_to 'Edit', edit_task_path(task) %></td> -->
-                </tr>
-                <% end %>
-              <% end %>
-            <% end %>
-          </tbody>
-        </table>
-
-        <!-- </tbody>
-      </table> -->
-      </div>
-<!-- End Tab one -->
-<!-- Start Tab Two -->
-    <div id="future" class="tab-pane fade in">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Note</th>
-              <th>Due Date</th>
-              <th> </th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @tasks.each do |task| %>
-              <% if task.user_1 == @name || task.user_2 == @name || task.user_3 == @name || task.user_4 == @name || task.user_5 == @name %>
-                <% if task.type_two == true && task.done == false && task.type_one == false %>
-                <tr>
-                  <td><strong><%= link_to task.title, task %></strong></td>
-                  <td><%= task.note.truncate_words(20) %>
-                  <td><%= task.no_due_date == true ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
-                  <td><%= link_to 'Edit', edit_task_path(task) %></td>
-                </tr>
-                <% end %>
-              <% end %>
-            <% end %>
-          </tbody>
-        </table>
-    </div>
-<!-- End Tab Two -->
-<!-- Start Tab three -->
-    <div id="done" class="tab-pane fade in">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Note</th>
-            <th>Due Date</th>
-            <th> </th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @tasks.each do |task| %>
-            <% if task.user_1 == @name || task.user_2 == @name || task.user_3 == @name || task.user_4 == @name || task.user_5 == @name %>
-              <% if task.done == true %>
-            <tr>
-              <td><strong><%= link_to task.title, task %></strong></td>
-              <td><%= task.note.truncate_words(20) %>
-              <td><%= task.no_due_date == true ? '' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
-              <td><%= link_to 'Edit', edit_task_path(task) %></td>
-            </tr>
-              <% end %>
-            <% end %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-<!-- End Tab Three -->
-  </div>
-<!-- End Tab Section - Tasks -->
 </div>
-<!-- End Task Section -->
-</div>
+<!-- END LEFT COLUMN -->
 
 
 <div class="col-lg-4">
@@ -443,61 +214,12 @@
 <div class="col-lg-4">
 
     <div class="well">
-
-      <h3 class="text-center"> Sequoia Sales: <%= number_to_currency(@total_yesterday, :precision => 0) %> </h3>
-       <h4 class="text-center"><%= 1.day.ago.strftime('%A, %-m/%-d') %></h4>
-<div class="row">
-</br>
-  <div class=" col-lg-6">
-  </br>
-  <!-- <h5 class="text-center">Yesterday Breakdown</h5> -->
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th class="text-center" style="width: 33%">CPA </th>
-            <th class="text-center" style="width: 33%">EA </th>
-            <th class="text-center" style="width: 33%">AFSP </th>
-          </tr>
-        </thead>
-        <tbody>
-         <tr class="text-center">
-           <td> <%= number_to_currency(@cpa_yesterday, :precision => 0) %> </td>
-           <td> <%= number_to_currency(@ea_yesterday, :precision => 0) %> </td>
-           <td> <%= number_to_currency(@afsp_yesterday, :precision => 0) %> </td>
-          </tr>
-        <!-- </tbody>
-        <thead> -->
-          <tr>
-            <th class="text-center">New</th>
-            <th class="text-center">Return</th>
-            <th class="text-center">Ethics</th>
-          </tr>
-        <!-- </thead>
-        <tbody> -->
-         <tr class="text-center">
-           <td> <%= number_to_currency(@new_mem, :precision => 0) %> </td>
-           <td> <%= number_to_currency(@return_mem, :precision => 0) %> </td>
-           <td> <%= number_to_currency(@cpa_yesterday_ethics, :precision => 0) %> </td>
-          </tr>
-        </tbody>
-      </table>
-  </div>
-  <!-- <div class="col-lg-2">
-  </div> -->
-  <div class="well col-lg-6">
-    <%= column_chart @column_chart_yesterday, prefix: "$", thousands: ",", xtitle: "", ytitle: "", height: '', id: "Day", download: true, title: "" %>
-  </div>
-</div>
-
-<%= link_to 'Complete Sales Data', sales_report_sequoia_sales_path, class: 'btn btn-default' %>
+        <%= render(:partial => 'sales_day') %>
     </div>
+
 
 <!-- Start Month -->
     <div class="well">
-      <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#monthmenu">Months</a></li>
-        <li><a data-toggle="tab" href="#yearmenu">Years</a></li>
-      </ul>
 
       <div class="tab-content">
 
@@ -626,10 +348,6 @@
     </div>
 
   </div>
-
-
-
-
 
 <% end %>
 

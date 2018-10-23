@@ -1,0 +1,46 @@
+<h3 class="text-center"> Sequoia Sales: <%= number_to_currency(@total_yesterday, :precision => 0) %> </h3>
+ <h4 class="text-center"><%= 1.day.ago.strftime('%A, %-m/%-d') %></h4>
+<div class="row">
+</br>
+<div class=" col-lg-6">
+</br>
+<!-- <h5 class="text-center">Yesterday Breakdown</h5> -->
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th class="text-center" style="width: 33%">CPA </th>
+      <th class="text-center" style="width: 33%">EA </th>
+      <th class="text-center" style="width: 33%">AFSP </th>
+    </tr>
+  </thead>
+  <tbody>
+   <tr class="text-center">
+     <td> <%= number_to_currency(@cpa_yesterday, :precision => 0) %> </td>
+     <td> <%= number_to_currency(@ea_yesterday, :precision => 0) %> </td>
+     <td> <%= number_to_currency(@afsp_yesterday, :precision => 0) %> </td>
+    </tr>
+  <!-- </tbody>
+  <thead> -->
+    <tr>
+      <th class="text-center">New</th>
+      <th class="text-center">Return</th>
+      <th class="text-center">Ethics</th>
+    </tr>
+  <!-- </thead>
+  <tbody> -->
+   <tr class="text-center">
+     <td> <%= number_to_currency(@new_mem, :precision => 0) %> </td>
+     <td> <%= number_to_currency(@return_mem, :precision => 0) %> </td>
+     <td> <%= number_to_currency(@cpa_yesterday_ethics, :precision => 0) %> </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- <div class="col-lg-2">
+</div> -->
+<div class="well col-lg-6">
+<%= column_chart @column_chart_yesterday, prefix: "$", thousands: ",", xtitle: "", ytitle: "", height: '', id: "Day", download: true, title: "" %>
+</div>
+
+  <%= link_to 'Complete Sales Data', sales_report_sequoia_sales_path, class: 'btn btn-default' %>
+</div>
