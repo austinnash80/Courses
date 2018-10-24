@@ -1,0 +1,73 @@
+<h3 class="text-center">Sequoia Courses</h3>
+
+<!-- <h4 class="text-center"><%= Date.today.strftime('%B %Y') %></h4> -->
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <caption class="text-center">Courses taken this month</caption>
+          <th></th>
+          <th class="text-center">Courses</th>
+          <th class="text-center">Exams</th>
+          <th class="text-center">Score</th>
+          <th class="text-center">Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="text-center">
+          <td><strong>CPA</strong></td>
+          <td><%= @month_courses_cpa %></td>
+          <td><%= @month_exams_cpa %></td>
+          <% if @month_exams_cpa != 0 %>
+            <td><%= number_to_percentage((@month_score_cpa.sum  /  @month_exams_cpa), precision: 1) %></td>
+          <% elsif %>
+            <td>-</td>
+          <% end %>
+          <% if @month_courses_rated_cpa.sum != 0 %>
+            <td><%= number_with_precision((@month_rating_cpa.sum  /  ( @month_courses_rated_cpa.sum )), precision: 2) %></td>
+          <% elsif %>
+            <td>-</td>
+          <% end %>
+
+
+
+        </tr>
+        <tr class="text-center">
+          <td><strong>EA</strong></td>
+          <td><%= @month_courses_ea %></td>
+          <td><%= @month_exams_ea %></td>
+          <td><%= number_to_percentage((@month_score_ea.sum / @month_exams_ea), precision: 1) %></td>
+          <td><%= number_with_precision((@month_rating_ea.sum  /  ( @month_courses_rated_ea.sum )), precision: 2) %></td>
+        </tr>
+        <tr class="text-center">
+          <td><strong>Total</strong></td>
+          <td><strong><%= @month_courses_cpa + @month_courses_ea %></strong></td>
+          <td><strong><%= @month_exams_cpa + @month_exams_ea %></strong></td>
+          <td><strong><%= number_to_percentage(@month_score_all.sum / (@month_exams_cpa + @month_exams_ea), precision: 1) %></strong></td>
+          <td><strong><%= number_with_precision((@month_rating_all.sum  /  ( @month_courses_rated_all.sum )), precision: 2) %></strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#cpa_exam">CPA</a></li>
+      <li><a data-toggle="tab" href="#ea_exam">EA</a></li>
+    </ul>
+  <!-- </br> -->
+  </br>
+  <!-- * Tab 1 Start * -->
+    <div class="tab-content">
+      <div id="cpa_exam" class="tab-pane fade in active">
+
+    <%= bar_chart @bar_chart_cpa_month, height: '2000px' %>
+
+  </div>
+<!-- Tab 1 end -->
+<!-- * Tab 2 start * -->
+
+
+  <div id="ea_exam" class="tab-pane fade">
+    <%= bar_chart @bar_chart_ea_month, height: '1000px' %>
+
+  </div>
+<!-- Tab 2 end -->
+</div>

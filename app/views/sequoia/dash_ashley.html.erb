@@ -5,253 +5,32 @@
       <h3 class="off-white text-center"><%= Time.now.strftime('%A %-b %-d, %Y') %></h3>
 
 </br>
-<!-- Start Left Pannel -->
 <div class="row">
+<!-- *** START Left Pannel *** -->
   <div class="col-lg-4">
     <div class="well">
-      <h3 class="text-center">Postcard Mailings</h3>
-  <!-- Tabs Start -->
-      <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#home1">Schedule</a></li>
-        <li><a data-toggle="tab" href="#menu1">Inventory</a></li>
-      </ul>
-    </br>
-    </br>
-  <!-- Tab 1 Start -->
-      <div class="tab-content">
-        <div id="home1" class="tab-pane fade in active">
-
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Type</th>
-                <th>Status</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Sequoia Postcard Groups</td>
-                <% if @out_of_date_sequoia == 'True' %>
-                  <td><strong class="red">Out of Date </strong> - <%= link_to 'View', postcard_mailings_path %></td>
-                <% elsif %>
-                  <td class="green"><strong><%= @due_sequoia_1 %></strong></td>
-                <% end %>
-                <td><strong><%= link_to 'Add', new_postcard_mailing_path %></strong></td>
-              </tr>
-              <tr>
-                <td>Empire General Postcards</td>
-                <% if @out_of_date_empire == 'True' %>
-                  <td><strong class="red">Out of Date </strong> - <%= link_to 'View', postcard_mailings_path %></td>
-                <% elsif %>
-                  <td class="green"><strong><%= @due_empire_1 %></strong></td>
-                <% end %>
-                <td><strong><%= link_to 'Add', new_postcard_mailing_path %></strong></td>
-              </tr>
-            </tbody>
-          </table>
-
-        </div>
-  <!-- Tab 1 end -->
-  <!-- Tab 2 start -->
-        <div id="menu1" class="tab-pane fade">
-          <table class="table table-bordered">
-
-            <thead>
-              <tr>
-                <th>Company</th>
-                <th>Version</th>
-                <th>Last Order</th>
-                <th>Order Amount</th>
-                <th>Remaining</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Sequoia</td>
-                <td>CPA NM</td>
-                <td><%= @date_sequoia_cpa_nm.max.strftime('%-m/%-d/%y') %></td>
-                <td><%= @number_sequoia_cpa_nm[0] %></td>
-                <% if @remaining_inventory_sequoia_cpa_nm < 500 %>
-                  <td class="red"><%= @remaining_inventory_sequoia_cpa_nm %></td>
-                <% elsif %>
-                  <td><%= @remaining_inventory_sequoia_cpa_nm %></td>
-                <% end %>
-              </tr>
-              <tr>
-                <td>Sequoia</td>
-                <td>CPA RC</td>
-                <td><%= @date_sequoia_cpa_rc.max.strftime('%-m/%-d/%y') %></td>
-                <td><%= @number_sequoia_cpa_rc[0] %></td>
-                <% if @remaining_inventory_sequoia_cpa_rc < 500 %>
-                  <td class="red"><%= @remaining_inventory_sequoia_cpa_rc %></td>
-                <% elsif %>
-                  <td><%= @remaining_inventory_sequoia_cpa_rc %></td>
-                <% end %>
-              </tr>
-              <tr>
-                <td>Sequoia</td>
-                <td>EA NM</td>
-                <td><%= @date_sequoia_ea_nm.max.strftime('%-m/%-d/%y') %></td>
-                <td><%= @number_sequoia_ea_nm[0] %></td>
-                <% if @remaining_inventory_sequoia_ea_nm < 500 %>
-                  <td class="red"><%= @remaining_inventory_sequoia_ea_nm %></td>
-                <% elsif %>
-                  <td><%= @remaining_inventory_sequoia_ea_nm %></td>
-                <% end %>
-              </tr>
-              <tr>
-                <td>Sequoia</td>
-                <td>EA RC</td>
-                <td><%= @date_sequoia_ea_rc.max.strftime('%-m/%-d/%y') %></td>
-                <td><%= @number_sequoia_ea_rc[0] %></td>
-                <% if @remaining_inventory_sequoia_ea_rc < 500 %>
-                  <td class="red"><%= @remaining_inventory_sequoia_ea_rc%></td>
-                <% elsif %>
-                  <td><%= @remaining_inventory_sequoia_ea_rc %></td>
-                <% end %>
-              </tr>
-              <tr>
-                <td>Empire</td>
-                <td>General RC</td>
-                <td><%= @date_empire_rc.max.strftime('%-m/%-d/%y') %></td>
-                <td><%= @number_empire_rc[0] %></td>
-                <% if @remaining_inventory_empire_rc < 500 %>
-                  <td class="red"><%= @remaining_inventory_empire_rc %></td>
-                <% elsif %>
-                  <td><%= @remaining_inventory_empire_rc %></td>
-                <% end %>
-              </tr>
-            </tbody>
-          </table>
-
-        </div>
-  <!-- Tab 2 end -->
-      </div>
-  <!-- Tabs End -->
+      <%= render(:partial => 'postcard_mailings') %>
     </div>
 
     <div class="well">
-      <h3 class="text-center">Email Campaigns</h3>
-
-      <div class="well text-center">
-        <a target="_blank" href="https://app.mailjet.com/contacts/lists/edit/7yAC"><strong>Empire RC List Append</strong></a>
-        | <a target="_blank" href="https://app.mailjet.com/workflow"><strong>Mailjet Campaign Data</strong></a>
-      </div>
-
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Company</th>
-            <th>Active Campaigns</th>
-            <th>Send / Update</th>
-            <th>Last Stats Update</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @email_campaigns.each do |email_campaign| %>
-          <tr>
-            <% if email_campaign.active == true %>
-            <td> <%= email_campaign.company %></td>
-            <td> <%= email_campaign.campaign_name %> </td>
-            <td class="green"><strong> Every Wed </strong></td>
-              <% if (Date.today - 7) > email_campaign.update_stats %>
-                <td><strong><%= link_to email_campaign.update_stats.strftime('%-m/%-d/%y'), email_campaign, class: 'red' %> <%= link_to '- Update', email_campaign, class: 'red' %></strong></td>
-              <% elsif %>
-                <td><strong><%= link_to email_campaign.update_stats.strftime('%-m/%-d/%y'), email_campaign %> <%= link_to '- Update', email_campaign %></strong></td>
-              <% end %>
-
-            <% end %>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-
+      <%= render(:partial => 'empire_email_campaign') %>
     </div>
-
   </div>
 <!-- End Left Pannel -->
 
-<!-- Start Center Pannel -->
+<!-- *** START Center Pannel *** -->
   <div class="col-lg-4">
     <div class="well">
-  <!-- Tabs Start -->
-      <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#home2">Home</a></li>
-        <li><a data-toggle="tab" href="#menu2">Menu 1</a></li>
-      </ul>
-  <!-- Tab 1 Start -->
-      <div class="tab-content">
-        <div id="home2" class="tab-pane fade in active">
-          <h3>HOME</h3>
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Task</th>
-                <th>Status</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Course Updating</td>
-                <% if @course_update_status.sum == 0 %>
-                  <td class="green"><strong>No Updates</strong></td>
-                  <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
-                <% elsif %>
-                  <td class="red"><strong><%= link_to "Updates (#{@course_update_status.sum})", updatesheets_path, class: 'button-none' %></strong></td>
-                  <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
-                <% end %>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-  <!-- Tab 1 end -->
-  <!-- Tab 2 start -->
-        <div id="menu2" class="tab-pane fade">
-          <h3>Menu 1</h3>
-          <p>Some content in menu 1.</p>
-        </div>
-  <!-- Tab 2 end -->
-      </div>
-  <!-- Tabs End -->
+      <%= render(:partial => 'home_ashley') %>
     </div>
-
-    <div class="well">
-      <h3>Links</h3>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Task</th>
-            <th>Note</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Returned Postcards</td>
-            <td>Add as received</td>
-            <td><%= link_to 'Add New', new_postcard_return_path %></td>
-          </tr>
-          <tr>
-            <td>Course Copyrights</td>
-            <td>For Every New Course Add Publisher and Copyright</td>
-            <td><%= link_to 'Add Copyright', new_copyright_path %></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
   </div>
 <!-- End Center Pannel -->
 
-<!-- Start Right Pannel -->
+<!-- *** START Right Pannel *** -->
   <div class="col-lg-4">
-
     <div class="well">
       <%= render(:partial => 'task') %>
     </div>
-  <!-- End Task Section -->
 
     <div class="well">
   <!-- Tabs Start -->

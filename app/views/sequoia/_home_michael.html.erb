@@ -1,0 +1,101 @@
+<!-- <ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#home2">Home</a></li>
+  <li><a data-toggle="tab" href="#menu2">Menu 1</a></li>
+</ul> -->
+<!-- * Tab 1 Start * -->
+<!-- <div class="tab-content">
+  <div id="home2" class="tab-pane fade in active"> -->
+    <h3>HOME</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Status</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Course Updating</td>
+          <% if @course_update_status.sum == 0 %>
+            <td class="green"><strong>Up-to-date</strong></td>
+            <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
+          <% elsif %>
+            <td class="red"><strong><%= link_to "In-progress (#{@course_update_status.sum})", updatesheets_path, class: 'button-none' %></strong></td>
+            <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>Course Proofing</td>
+          <% if @course_update_status_proofing.sum == 0 %>
+            <td class="green"><strong>Up-to-date</strong></td>
+            <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
+          <% elsif %>
+            <td class="red"><strong><%= link_to "In-progress (#{@course_update_status_proofing.sum})", updatesheets_path, class: 'button-none' %></strong></td>
+            <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>Sequoia Postcards</td>
+          <% if @out_of_date_sequoia == 'True' %>
+            <td><strong class="red">Behind</strong></td>
+          <% elsif %>
+            <td class="green"><strong>Up-to-date</strong></td>
+          <% end %>
+          <td><%= link_to 'Postcard Index', postcard_mailings_path %></td>
+        </tr>
+
+        <tr>
+          <td>Empire Emails Stats</td>
+            <% if (Date.today - 7) > @last_updated_stats.min %>
+              <td class="red"><strong>Behind</strong></td>
+            <% elsif %>
+              <td class="green"><strong>Up-to-date</strong></td>
+            <% end %>
+          <td><%= link_to 'Campaign Index', email_campaigns_path %></td>
+        </tr>
+        <tr>
+          <td>Direct Mail CPA</td>
+          <td>
+            <% @mailings.each do |mailing| %>
+              <% if @last_msi_mailing_date_cpa == mailing.drop && mailing.who == 'CPA' %>
+              Last: <%= link_to "#{(mailing.drop + 10).strftime('%-m/%-d/%y')} (#{number_with_delimiter(mailing.quantity_sent, delimiter: ',')})", mailing  %>
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <% @mailings.each do |mailing| %>
+              <% if @next_msi_mailing_date_cpa == mailing.drop && mailing.who == 'CPA' %>
+              Next: <%= link_to "#{(mailing.drop + 10).strftime('%-m/%-d/%y')} (#{number_with_delimiter(mailing.estimate_quanity, delimiter: ',')})", mailing  %>
+              <% end %>
+            <% end %>
+            </td>
+        </tr>
+        <tr>
+          <td>Direct Mail EA</td>
+          <td>
+            <% @mailings.each do |mailing| %>
+              <% if @last_msi_mailing_date_ea == mailing.drop && mailing.who == 'EA' %>
+              Last: <%= link_to "#{(mailing.drop + 10).strftime('%-m/%-d/%y')} (#{number_with_delimiter(mailing.quantity_sent, delimiter: ',')})", mailing  %>
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <% @mailings.each do |mailing| %>
+              <% if @next_msi_mailing_date_ea == mailing.drop && mailing.who == 'EA' %>
+              Next: <%= link_to "#{(mailing.drop + 10).strftime('%-m/%-d/%y')} (#{number_with_delimiter(mailing.estimate_quanity, delimiter: ',')})", mailing  %>
+              <% end %>
+            <% end %>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  <!-- </div> -->
+<!-- Tab 1 end -->
+<!-- * Tab 2 start * -->
+  <!-- <div id="menu2" class="tab-pane fade">
+    <h3>Menu 1</h3>
+    <p>Some content in menu 1.</p>
+  </div> -->
+<!-- Tab 2 end -->
+<!-- </div> -->

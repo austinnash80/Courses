@@ -5,282 +5,60 @@
       <h3 class="off-white text-center"><%= Time.now.strftime('%A %-b %-d, %Y') %></h3>
 
 </br>
-<!-- *** Start Left Pannel *** -->
 <div class="row">
+<!-- *** START Left Pannel *** -->
   <div class="col-lg-4">
-
-  <!-- ** L1 ** -->
     <div class="well">
-      <h3 class="text-center">Sequoia Courses</h3>
-
-      <!-- <h4 class="text-center"><%= Date.today.strftime('%B %Y') %></h4> -->
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <caption class="text-center">Courses taken this month</caption>
-                <th></th>
-                <th class="text-center">Courses</th>
-                <th class="text-center">Exams</th>
-                <th class="text-center">Score</th>
-                <th class="text-center">Rating</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="text-center">
-                <td><strong>CPA</strong></td>
-                <td><%= @month_courses_cpa %></td>
-                <td><%= @month_exams_cpa %></td>
-                <% if @month_exams_cpa != 0 %>
-                  <td><%= number_to_percentage((@month_score_cpa.sum  /  @month_exams_cpa), precision: 1) %></td>
-                <% elsif %>
-                  <td>-</td>
-                <% end %>
-                <% if @month_courses_rated_cpa.sum != 0 %>
-                  <td><%= number_with_precision((@month_rating_cpa.sum  /  ( @month_courses_rated_cpa.sum )), precision: 2) %></td>
-                <% elsif %>
-                  <td>-</td>
-                <% end %>
-
-
-
-              </tr>
-              <tr class="text-center">
-                <td><strong>EA</strong></td>
-                <td><%= @month_courses_ea %></td>
-                <td><%= @month_exams_ea %></td>
-                <td><%= number_to_percentage((@month_score_ea.sum / @month_exams_ea), precision: 1) %></td>
-                <td><%= number_with_precision((@month_rating_ea.sum  /  ( @month_courses_rated_ea.sum )), precision: 2) %></td>
-              </tr>
-              <tr class="text-center">
-                <td><strong>Total</strong></td>
-                <td><strong><%= @month_courses_cpa + @month_courses_ea %></strong></td>
-                <td><strong><%= @month_exams_cpa + @month_exams_ea %></strong></td>
-                <td><strong><%= number_to_percentage(@month_score_all.sum / (@month_exams_cpa + @month_exams_ea), precision: 1) %></strong></td>
-                <td><strong><%= number_with_precision((@month_rating_all.sum  /  ( @month_courses_rated_all.sum )), precision: 2) %></strong></td>
-              </tr>
-            </tbody>
-          </table>
-
-          <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#cpa_exam">CPA</a></li>
-            <li><a data-toggle="tab" href="#ea_exam">EA</a></li>
-          </ul>
-        <!-- </br> -->
-        </br>
-        <!-- * Tab 1 Start * -->
-          <div class="tab-content">
-            <div id="cpa_exam" class="tab-pane fade in active">
-
-          <%= bar_chart @bar_chart_cpa_month, height: '2000px' %>
-
-        </div>
-  <!-- Tab 1 end -->
-  <!-- * Tab 2 start * -->
-
-
-        <div id="ea_exam" class="tab-pane fade">
-          <%= bar_chart @bar_chart_ea_month, height: '1000px' %>
-
-          <!-- <table class="table table-bordered">
-
-            <thead>
-              <tr>
-                <th>One</th>
-                <th>One</th>
-                <th>One</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table> -->
-
-        </div>
-    <!-- Tab 2 end -->
-      </div>
-    <!-- Tabs End -->
+      <%= render(:partial => 'sequoia_courses') %>
     </div>
-  <!-- ** L1 End ** -->
-
   </div>
-<!-- *** END Left Pannel *** -->
+<!-- end Left Pannel -->
 
 <!-- *** START Center Pannel *** -->
   <div class="col-lg-4">
-  <!-- ** START C1 ** -->
     <div class="well">
-      <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#home2">Home</a></li>
-        <li><a data-toggle="tab" href="#menu2">Menu 1</a></li>
-      </ul>
-      <!-- * Tab 1 Start * -->
-      <div class="tab-content">
-        <div id="home2" class="tab-pane fade in active">
-          <h3>HOME</h3>
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Task</th>
-                <th>Status</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Course Updating</td>
-                <% if @course_update_status.sum == 0 %>
-                  <td class="green"><strong>Up-to-date</strong></td>
-                  <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
-                <% elsif %>
-                  <td class="red"><strong><%= link_to "In-progress (#{@course_update_status.sum})", updatesheets_path, class: 'button-none' %></strong></td>
-                  <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
-                <% end %>
-              </tr>
-              <tr>
-                <td>Course Proofing</td>
-                <% if @course_update_status_proofing.sum == 0 %>
-                  <td class="green"><strong>Up-to-date</strong></td>
-                  <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
-                <% elsif %>
-                  <td class="red"><strong><%= link_to "In-progress (#{@course_update_status_proofing.sum})", updatesheets_path, class: 'button-none' %></strong></td>
-                  <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
-                <% end %>
-              </tr>
-              <tr>
-                <td>Sequoia Postcards</td>
-                <% if @out_of_date_sequoia == 'True' %>
-                  <td><strong class="red">Behind</strong></td>
-                <% elsif %>
-                  <td class="green"><strong>Up-to-date</strong></td>
-                <% end %>
-                <td><%= link_to 'Postcard Index', postcard_mailings_path %></td>
-              </tr>
-
-              <tr>
-                <td>Empire Emails Stats</td>
-                  <% if (Date.today - 7) > @last_updated_stats.min %>
-                    <td class="red"><strong>Behind</strong></td>
-                  <% elsif %>
-                    <td class="green"><strong>Up-to-date</strong></td>
-                  <% end %>
-                <td><%= link_to 'Campaign Index', email_campaigns_path %></td>
-              </tr>
-              <tr>
-                <td>Direct Mail CPA</td>
-                <td>
-                  <% @mailings.each do |mailing| %>
-                    <% if @last_msi_mailing_date_cpa == mailing.drop && mailing.who == 'CPA' %>
-                    Last: <%= link_to "#{(mailing.drop + 10).strftime('%-m/%-d/%y')} (#{number_with_delimiter(mailing.quantity_sent, delimiter: ',')})", mailing  %>
-                    <% end %>
-                  <% end %>
-                </td>
-                <td>
-                  <% @mailings.each do |mailing| %>
-                    <% if @next_msi_mailing_date_cpa == mailing.drop && mailing.who == 'CPA' %>
-                    Next: <%= link_to "#{(mailing.drop + 10).strftime('%-m/%-d/%y')} (#{number_with_delimiter(mailing.estimate_quanity, delimiter: ',')})", mailing  %>
-                    <% end %>
-                  <% end %>
-                  </td>
-              </tr>
-              <tr>
-                <td>Direct Mail EA</td>
-                <td>
-                  <% @mailings.each do |mailing| %>
-                    <% if @last_msi_mailing_date_ea == mailing.drop && mailing.who == 'EA' %>
-                    Last: <%= link_to "#{(mailing.drop + 10).strftime('%-m/%-d/%y')} (#{number_with_delimiter(mailing.quantity_sent, delimiter: ',')})", mailing  %>
-                    <% end %>
-                  <% end %>
-                </td>
-                <td>
-                  <% @mailings.each do |mailing| %>
-                    <% if @next_msi_mailing_date_ea == mailing.drop && mailing.who == 'EA' %>
-                    Next: <%= link_to "#{(mailing.drop + 10).strftime('%-m/%-d/%y')} (#{number_with_delimiter(mailing.estimate_quanity, delimiter: ',')})", mailing  %>
-                    <% end %>
-                  <% end %>
-                  </td>
-              </tr>
-            </tbody>
-          </table>
-          Array:<%= @next_msi_mailing_quanity %>
-        </div>
-  <!-- Tab 1 end -->
-  <!-- * Tab 2 start * -->
-        <div id="menu2" class="tab-pane fade">
-          <h3>Menu 1</h3>
-          <p>Some content in menu 1.</p>
-        </div>
-  <!-- Tab 2 end -->
-      </div>
-  <!-- Tabs End -->
+      <%= render(:partial => 'home_michael') %>
     </div>
-<!-- ** END C1 ** -->
-
-<!-- ** START C2 ** -->
-    <div class="well">
-      <h3>Home</h3>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>One</th>
-            <th>Two</th>
-            <th>Three</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
-  <!-- ** END C2 -->
-  </div>
-<!-- *** End Center Pannel *** -->
+<!-- *** end Center Pannel *** -->
 
 <!-- *** START Right Pannel *** -->
   <div class="col-lg-4">
-  <!-- ** START R1 (Task) ** -->
     <div class="well">
       <%= render(:partial => 'task') %>
     </div>
-  <!-- ** END C1 (Task) ** -->
 
-  <!-- ** START C2 ** -->
     <div class="well">
-    <!-- Tabs Start -->
       <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#home3">Home</a></li>
         <li><a data-toggle="tab" href="#menu3">Menu 1</a></li>
       </ul>
-    <!-- Tab 1 Start -->
       <div class="tab-content">
         <div id="home3" class="tab-pane fade in active">
-          <h3>HOME</h3>
-          <p>Some content.</p>
+          <h3>Home</h3>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>One</th>
+                <th>Two</th>
+                <th>Three</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-    <!-- Tab 1 end -->
-    <!-- Tab 2 start -->
         <div id="menu3" class="tab-pane fade">
           <h3>Menu 1</h3>
           <p>Some content in menu 1.</p>
         </div>
-  <!-- Tab 2 end -->
       </div>
-  <!-- Tabs End -->
     </div>
-  <!-- ** END C2 ** -->
   </div>
 <!-- *** End Right Pannel *** -->
 

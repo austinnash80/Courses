@@ -1,0 +1,61 @@
+<!-- <ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#home2">Home</a></li>
+  <li><a data-toggle="tab" href="#menu2">Menu 1</a></li>
+</ul> -->
+
+<!-- <div class="tab-content">
+  <div id="home2" class="tab-pane fade in active"> -->
+    <h3>HOME</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Status</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Course Updating</td>
+          <% if @course_update_status.sum == 0 %>
+            <td class="green"><strong>No Updates</strong></td>
+            <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
+          <% elsif %>
+            <td class="red"><strong><%= link_to "Updates (#{@course_update_status.sum})", updatesheets_path, class: 'button-none' %></strong></td>
+            <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
+          <% end %>
+        </tr>
+      </tbody>
+
+    </table>
+
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Note</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Returned Postcards</td>
+          <td>Add as received</td>
+          <td><%= link_to 'Add New', new_postcard_return_path %></td>
+        </tr>
+        <tr>
+          <td>Course Copyrights</td>
+          <td>For Every New Course Add Publisher and Copyright</td>
+          <td><%= link_to 'Add Copyright', new_copyright_path %></td>
+        </tr>
+      </tbody>
+    </table>
+  <!-- </div> -->
+
+  <!-- <div id="menu2" class="tab-pane fade">
+    <h3>Menu 1</h3>
+    <p>Some content in menu 1.</p>
+  </div> -->
+
+<!-- </div> -->

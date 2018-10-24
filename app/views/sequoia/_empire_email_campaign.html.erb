@@ -1,0 +1,34 @@
+<h3 class="text-center">Email Campaigns</h3>
+
+<div class="well text-center">
+  <a target="_blank" href="https://app.mailjet.com/contacts/lists/edit/7yAC"><strong>Empire RC List Append</strong></a>
+  | <a target="_blank" href="https://app.mailjet.com/workflow"><strong>Mailjet Campaign Data</strong></a>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Active Campaigns</th>
+      <th>Send / Update</th>
+      <th>Last Stats Update</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @email_campaigns.each do |email_campaign| %>
+    <tr>
+      <% if email_campaign.active == true %>
+      <td> <%= email_campaign.company %></td>
+      <td> <%= email_campaign.campaign_name %> </td>
+      <td class="green"><strong> Every Wed </strong></td>
+        <% if (Date.today - 7) > email_campaign.update_stats %>
+          <td><strong><%= link_to email_campaign.update_stats.strftime('%-m/%-d/%y'), email_campaign, class: 'red' %> <%= link_to '- Update', email_campaign, class: 'red' %></strong></td>
+        <% elsif %>
+          <td><strong><%= link_to email_campaign.update_stats.strftime('%-m/%-d/%y'), email_campaign %> <%= link_to '- Update', email_campaign %></strong></td>
+        <% end %>
+
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
