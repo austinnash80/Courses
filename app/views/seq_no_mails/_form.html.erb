@@ -11,62 +11,77 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name, id: :seq_no_mail_first_name %>
-  </div>
+<!-- <div class="col-lg-4">
+</div> -->
+
+  <div class="well col-lg-4 col-lg-offset-4">
+    <div class="well jumbotron text-center">
+      <h2> Add No Mail </h2>
+    </div>
+
+<div class="col-lg-5">
 
   <div class="field">
-    <%= form.label :mi %>
-    <%= form.text_field :mi, id: :seq_no_mail_mi %>
-  </div>
-
-  <div class="field">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name, id: :seq_no_mail_last_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :suf %>
-    <%= form.text_field :suf, id: :seq_no_mail_suf %>
-  </div>
-
-  <div class="field">
-    <%= form.label :co %>
-    <%= form.text_field :co, id: :seq_no_mail_co %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address, id: :seq_no_mail_address %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address_2 %>
-    <%= form.text_field :address_2, id: :seq_no_mail_address_2 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :city %>
-    <%= form.text_field :city, id: :seq_no_mail_city %>
-  </div>
-
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.text_field :state, id: :seq_no_mail_state %>
-  </div>
-
-  <div class="field">
-    <%= form.label :zip %>
-    <%= form.text_field :zip, id: :seq_no_mail_zip %>
-  </div>
-
-  <div class="field">
-    <%= form.label :date_added %>
+    <%= form.label :date_added, 'Date Added', class: 'text-center' %>
     <%= form.date_select :date_added, id: :seq_no_mail_date_added %>
   </div>
 
   <div class="field">
+    <%= form.label :first_name, 'First Name', class: 'text-center' %>
+    <%= form.text_field :first_name, id: :seq_no_mail_first_name, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mi, 'Middle Initial', class: 'text-center' %>
+    <%= form.text_field :mi, id: :seq_no_mail_mi, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name, 'Last Name', class: 'text-center' %>
+    <%= form.text_field :last_name, id: :seq_no_mail_last_name, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :suf, 'Suf', class: 'text-center' %>
+    <%= form.text_field :suf, id: :seq_no_mail_suf, class: 'form-control' %>
+  </div>
+</diV>
+<div class="col-lg-2">
+</div>
+
+<div class="col-lg-5">
+  <div class="field">
+    <%= form.label :co, 'Company', class: 'text-center' %>
+    <%= form.text_field :co, id: :seq_no_mail_co, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address, class: 'text-center' %>
+    <%= form.text_field :address, id: :seq_no_mail_address, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address_2, class: 'text-center' %>
+    <%= form.text_field :address_2, id: :seq_no_mail_address_2, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city, class: 'text-center' %>
+    <%= form.text_field :city, id: :seq_no_mail_city, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state, class: 'text-center' %>
+    <%= form.text_field :state, id: :seq_no_mail_state, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :zip, class: 'text-center' %>
+    <%= form.text_field :zip, id: :seq_no_mail_zip, class: 'form-control' %>
+  </div>
+
+</div>
+  <!-- <div class="field">
     <%= form.label :extra_i %>
     <%= form.number_field :extra_i, id: :seq_no_mail_extra_i %>
   </div>
@@ -79,9 +94,11 @@
   <div class="field">
     <%= form.label :extra_s %>
     <%= form.text_field :extra_s, id: :seq_no_mail_extra_s %>
+  </div> -->
+</br>
+  <div class="actions">
+    <%= form.submit 'Submit No Mail', class: 'btn btn-primary' %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
   </div>
 <% end %>

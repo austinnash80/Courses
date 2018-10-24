@@ -67,6 +67,12 @@ class SeqNoMailsController < ApplicationController
     end
   end
 
+  def remove_all
+    SeqNoMail.delete_all
+    flash[:notice] = "All Records Removed"
+    redirect_to seq_no_mails_path
+  end
+
   def import #Uploading CSV function
     SeqNoMail.import(params[:file])
     redirect_to seq_no_mails_path, notice: "Upload Complete"

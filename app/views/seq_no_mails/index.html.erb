@@ -16,7 +16,7 @@
   <input class="form-control" id="myInput" type="text" placeholder="Search Datasheet">
 </br>
   <%= link_to 'Add New', new_seq_no_mail_path, class: 'btn btn-primary' %>
-  <%= link_to 'Export(csv)', seq_no_mail_path('csv'), class: 'btn btn-default' %>
+  <%= link_to 'Export(csv)', seq_no_mails_path('csv'), class: 'btn btn-default' %>
 </div>
 </div>
 </br>
@@ -70,4 +70,4 @@
 
 <br>
 
-<!-- <%= link_to 'New Seq No Mail', new_seq_no_mail_path %> -->
+<%= link_to "Remove All", remove_all_seq_no_mails_path, :method => :get %>

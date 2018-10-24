@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   resources :seq_no_mails do
     collection {post :import}
-  end 
+    collection do
+      get 'remove_all'
+    end
+  end
   # get 'exam_results/index'
   # get 'exam_results/import' => 'exam_results#my_import'
   resources :exam_results do
