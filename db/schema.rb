@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181016225729) do
+ActiveRecord::Schema.define(version: 20181024210440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -308,6 +308,25 @@ ActiveRecord::Schema.define(version: 20181016225729) do
     t.string "postcard"
     t.integer "uid"
     t.string "reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "seq_no_mails", force: :cascade do |t|
+    t.string "first_name"
+    t.string "mi"
+    t.string "last_name"
+    t.string "suf"
+    t.string "co"
+    t.string "address"
+    t.string "address_2"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.date "date_added"
+    t.integer "extra_i"
+    t.boolean "extra_b"
+    t.string "extra_s"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

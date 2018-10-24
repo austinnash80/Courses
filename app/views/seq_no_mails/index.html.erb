@@ -1,0 +1,73 @@
+<p id="notice"><%= notice %></p>
+
+<div class="jumbotron well text-center">
+<h1>Sequoia No Mail List</h1>
+</div>
+
+<h3>Upload CSV File</h3>
+  <%= form_tag import_seq_no_mails_path, multipart: true do %>
+  <%= file_field_tag :file %>
+</br>
+  <%= submit_tag 'Upload', class: 'btn btn-primary' %>
+<% end %>
+</br>
+<div class="row">
+<div class="col-md-3">
+  <input class="form-control" id="myInput" type="text" placeholder="Search Datasheet">
+</br>
+  <%= link_to 'Add New', new_seq_no_mail_path, class: 'btn btn-primary' %>
+  <%= link_to 'Export(csv)', seq_no_mail_path('csv'), class: 'btn btn-default' %>
+</div>
+</div>
+</br>
+
+<h4>Total:</h4>
+
+<table class="table table-hover">  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Mi</th>
+      <th>Last name</th>
+      <th>Suf</th>
+      <th>Co</th>
+      <th>Address</th>
+      <th>Address 2</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+      <th>Date added</th>
+      <th>Extra i</th>
+      <th>Extra b</th>
+      <th>Extra s</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody id="myTable">
+    <% @seq_no_mails.each do |seq_no_mail| %>
+      <tr>
+        <td><%= seq_no_mail.first_name %></td>
+        <td><%= seq_no_mail.mi %></td>
+        <td><%= seq_no_mail.last_name %></td>
+        <td><%= seq_no_mail.suf %></td>
+        <td><%= seq_no_mail.co %></td>
+        <td><%= seq_no_mail.address %></td>
+        <td><%= seq_no_mail.address_2 %></td>
+        <td><%= seq_no_mail.city %></td>
+        <td><%= seq_no_mail.state %></td>
+        <td><%= seq_no_mail.zip %></td>
+        <td><%= seq_no_mail.date_added %></td>
+        <td><%= seq_no_mail.extra_i %></td>
+        <td><%= seq_no_mail.extra_b %></td>
+        <td><%= seq_no_mail.extra_s %></td>
+        <td><%= link_to 'Show', seq_no_mail %></td>
+        <td><%= link_to 'Edit', edit_seq_no_mail_path(seq_no_mail) %></td>
+        <td><%= link_to 'Destroy', seq_no_mail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<!-- <%= link_to 'New Seq No Mail', new_seq_no_mail_path %> -->

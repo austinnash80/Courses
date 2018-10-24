@@ -1,0 +1,87 @@
+<%= form_with(model: seq_no_mail, local: true) do |form| %>
+  <% if seq_no_mail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(seq_no_mail.errors.count, "error") %> prohibited this seq_no_mail from being saved:</h2>
+
+      <ul>
+      <% seq_no_mail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, id: :seq_no_mail_first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mi %>
+    <%= form.text_field :mi, id: :seq_no_mail_mi %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, id: :seq_no_mail_last_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :suf %>
+    <%= form.text_field :suf, id: :seq_no_mail_suf %>
+  </div>
+
+  <div class="field">
+    <%= form.label :co %>
+    <%= form.text_field :co, id: :seq_no_mail_co %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address, id: :seq_no_mail_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address_2 %>
+    <%= form.text_field :address_2, id: :seq_no_mail_address_2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city, id: :seq_no_mail_city %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state, id: :seq_no_mail_state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :zip %>
+    <%= form.text_field :zip, id: :seq_no_mail_zip %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_added %>
+    <%= form.date_select :date_added, id: :seq_no_mail_date_added %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_i %>
+    <%= form.number_field :extra_i, id: :seq_no_mail_extra_i %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_b %>
+    <%= form.check_box :extra_b, id: :seq_no_mail_extra_b %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_s %>
+    <%= form.text_field :extra_s, id: :seq_no_mail_extra_s %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

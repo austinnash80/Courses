@@ -55,13 +55,12 @@
     </tr>
     <tr>
       <td>Postcard Inventory</td>
-      <% if @remaining_inventory.min >= 500%>
+      <% if @remaining_inventory.min <= 500%>
         <td class="green">Good</td>
-        <td><a data-toggle="tab" href="#menu1">Inventory</a></td>
       <% elsif %>
-        <td class="red">Low</td>
-        <td> <strong><a data-toggle="tab" href="#menu1">Check Inventory</a></strong> </td>
+        <td><a data-toggle="tab" href="#postcard_inventory" class="button-none"><strong class="red">Low</strong></a> </td>
       <% end %>
+      <td><a data-toggle="tab" href="#postcard_inventory">Check Inventory</a> </td>
     </tr>
 
     <tr>

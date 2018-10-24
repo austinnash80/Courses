@@ -1,0 +1,2 @@
+module SeqNoMailsHelper
+end
