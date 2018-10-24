@@ -64,6 +64,16 @@ def sales
       @column_chart_mtd = SequoiaCustomer.where(:purchase_date => Date.today.beginning_of_month - 365..Date.today).group_by_month(:purchase_date, format: '%b').sum(:price)
 # End MTD Sales
 
+# MTD sales
+      @sales_last_month_total = SequoiaCustomer.where(:purchase_date => Date.today.last_month.beginning_of_month..Date.today.last_month.end_of_month ).pluck(:price).sum
+      @sales_last_month_cpa = SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => Date.today.last_month.beginning_of_month..Date.today.last_month.end_of_month).pluck(:price).sum
+      @sales_last_month_cpa_ethics = SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => Date.today.last_month.beginning_of_month..Date.today.last_month.end_of_month).where(:what => 'Ethics').pluck(:price).sum
+      @sales_last_month_ea = SequoiaCustomer.where(:who => 'EA').where(:purchase_date => Date.today.last_month.beginning_of_month..Date.today.last_month.end_of_month).pluck(:price).sum
+      @sales_last_month_afsp = SequoiaCustomer.where(:who => 'AFSP').where(:purchase_date => Date.today.last_month.beginning_of_month..Date.today.last_month.end_of_month).where(:what => 'AFSP').pluck(:price).sum
+      @sales_last_month_new_mem = SequoiaCustomer.where(:purchase_date => Date.today.last_month.beginning_of_month..Date.today.last_month.end_of_month ).where(:what => 'Membership-First').pluck(:price).sum
+      @sales_last_month_return_mem = SequoiaCustomer.where(:purchase_date => Date.today.last_month.beginning_of_month..Date.today.last_month.end_of_month ).where(:what => 'Membership-Renewal').pluck(:price).sum
+# End MTD Sales
+
 # Start YTD sales
       @total_ytd = SequoiaCustomer.where(:purchase_date => Date.today.beginning_of_year..Date.today ).pluck(:price).sum
       @cpa_ytd = SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => Date.today.beginning_of_year..Date.today).pluck(:price).sum
