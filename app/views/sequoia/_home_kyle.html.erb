@@ -24,7 +24,7 @@
       <% end %>
     <% end %>
     <% end %>
-    <tr>
+    <!-- <tr>
       <td>Course Updating</td>
       <% if @course_update_status.sum == 0 && @course_update_status_proofing.sum == 0 %>
         <td class="green">Nothing in-progress</td>
@@ -37,6 +37,16 @@
         <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Add Update', datasheets_path %></td>
       <% elsif @course_update_status.sum != 0 && @course_update_status_proofing.sum != 0%>
         <td class="red"><%= @course_update_status.sum %> In-progress | <%= @course_update_status_proofing.sum %> Proofing</td>
+        <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Add Update', datasheets_path %></td>
+      <% end %>
+    </tr> -->
+    <tr>
+      <td>Course Updating</td>
+      <% if @course_update_status.sum == 0 %>
+        <td class="green"><strong>Up-to-date</strong></td>
+        <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Add Update', datasheets_path %></td>
+      <% elsif %>
+        <td class="red"><strong><%= link_to "In-progress (#{@course_update_status.sum})", updatesheets_path, class: 'button-none' %></strong></td>
         <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Add Update', datasheets_path %></td>
       <% end %>
     </tr>
