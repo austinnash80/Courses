@@ -1,6 +1,6 @@
 <body class= 'body-home'>
 
-    <% if current_user.email == 'hamdo@sequoiacpe.com' || current_user.superadmin_role == true || current_user.supervisor_role == true %>
+    <% if current_user.email == 'hamdo@sequoiacpe.com' || current_user.superadmin_role? || current_user.supervisor_role? %>
       <h1 class="text-center off-white">Hamdo Dashboard</h1>
       <h3 class="off-white text-center"><%= Time.now.strftime('%A %-b %-d, %Y') %></h3>
 
