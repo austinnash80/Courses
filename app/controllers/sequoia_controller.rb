@@ -1,5 +1,14 @@
 class SequoiaController < ApplicationController
 
+  def dash_hamdo
+    postcard_schedule
+    postcard_inventory
+    course_update_status
+    name
+    task
+    email_campaign
+  end
+
   def dash_ashley
     postcard_schedule
     postcard_inventory
@@ -21,6 +30,19 @@ class SequoiaController < ApplicationController
   end
 
   def dash
+    sequoia_exams
+    sales
+    postcard_schedule #must be above postcard_inventory
+    postcard_inventory # must be below postcard_schedule
+    course_update_status
+    tx_royalties
+    task
+    msi_mailing
+    name
+  end
+
+  def dash_kyle
+    sequoia_exams
     sales
     postcard_schedule #must be above postcard_inventory
     postcard_inventory # must be below postcard_schedule

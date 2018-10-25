@@ -31,6 +31,8 @@ Rails.application.routes.draw do
   get 'sequoia/dash'
   get 'sequoia/dash_ashley'
   get 'sequoia/dash_michael'
+  get 'sequoia/dash_hamdo'
+  get 'sequoia/dash_kyle'
 
   resources :date_fields
   resources :pes_courses

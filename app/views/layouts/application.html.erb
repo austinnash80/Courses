@@ -24,7 +24,7 @@
 <div class="container-fluid">
   <div class="clearfix">
     <div class="col-lg-4">
-      <% if user_signed_in? && current_user.superadmin_role? && current_user.email = 'Austin@SequoiaCPE.com' %>
+      <% if user_signed_in? && current_user.superadmin_role? %>
         <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_path, class: 'button-none'%></strong>
       <% elsif user_signed_in? && @name = 'Ashley'%>
         <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_ashley_path, class: 'button-none'%></strong>
@@ -50,9 +50,9 @@
         <% if user_signed_in? && current_user.superadmin_role == true %>
           <li class="dropdown-header">Dashboards</li>
             <li><%= link_to 'Austin Dashboard', sequoia_dash_path %></li>
-            <li><%= link_to 'Kyle Dashboard', sequoia_dash_path %></li>
+            <li><%= link_to 'Kyle Dashboard', sequoia_dash_kyle_path %></li>
             <li><%= link_to 'Michael Dashboard', sequoia_dash_michael_path %></li>
-            <li><%= link_to 'Hamdo Dashboard', sequoia_dash_path %></li>
+            <li><%= link_to 'Hamdo Dashboard', sequoia_dash_hamdo_path %></li>
             <li><%= link_to 'Ashley Dashboard', sequoia_dash_ashley_path %></li>
           <li class="divider"></li>
         <% elsif user_signed_in? && current_user.supervisor_role == true %>

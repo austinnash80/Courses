@@ -1,0 +1,63 @@
+<body class= 'body-home'>
+
+    <% if current_user.email == 'hamdo@sequoiacpe.com' || current_user.superadmin_role == true || current_user.supervisor_role == true %>
+      <h1 class="text-center off-white">Hamdo Dashboard</h1>
+      <h3 class="off-white text-center"><%= Time.now.strftime('%A %-b %-d, %Y') %></h3>
+
+</br>
+<div class="row">
+<!-- *** START Left Pannel *** -->
+  <div class="col-lg-4">
+    <div class="well">
+      <h1 class="text-center">Title</h1>
+      <p>Content</p>
+    </div>
+
+    <div class="well">
+      <h1 class="text-center">Title</h1>
+      <p>Content</p>
+    </div>
+  </div>
+<!-- End Left Pannel -->
+
+<!-- *** START Center Pannel *** -->
+  <div class="col-lg-4">
+    <div class="well">
+      <%= render(:partial => 'home_hamdo') %>
+    </div>
+  </div>
+<!-- End Center Pannel -->
+
+<!-- *** START Right Pannel *** -->
+  <div class="col-lg-4">
+    <div class="well">
+      <%= render(:partial => 'task') %>
+    </div>
+
+    <div class="well">
+  <!-- Tabs Start -->
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#postcard_mailings">Sequoia Postcards</a></li>
+        <li><a data-toggle="tab" href="#empire_email_campaign">Empire Campaign</a></li>
+      </ul>
+  <!-- Tab 1 Start -->
+      <div class="tab-content">
+        <div id="postcard_mailings" class="tab-pane fade in active">
+          <%= render(:partial => 'postcard_mailings') %>
+        </div>
+  <!-- Tab 1 end -->
+  <!-- Tab 2 start -->
+        <div id="empire_email_campaign" class="tab-pane fade">
+            <%= render(:partial => 'empire_email_campaign') %>
+        </div>
+  <!-- Tab 2 end -->
+      </div>
+  <!-- Tabs End -->
+    </div>
+
+  </div>
+<!-- End Right Pannel -->
+
+  </div>
+  <% end %>
+</body>

@@ -1,0 +1,81 @@
+<body class= 'body-home'>
+
+<% if user_signed_in? && current_user.superadmin_role?%>
+
+
+    <h1 class="off-white text-center">Kyle Dashboard</h1>
+    <h3 class="off-white text-center"><%= Date.today.strftime('%A %-b %-d, %Y') %></h3>
+
+</br>
+
+<!-- ** START LEFT COLUMN ** -->
+<div class="col-lg-4">
+    <div class="well">
+        <%= render(:partial => 'task') %>
+    </div>
+    <div class="well">
+        <%= render(:partial => 'msi_mailing') %>
+    </div>
+</div>
+<!-- END LEFT COLUMN -->
+
+<!-- ** START CENTER COLUMN ** -->
+<div class="col-lg-4">
+  <!-- * start C1 * -->
+    <div class="well">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home_kyle">Home</a></li>
+        <li><a data-toggle="tab" href="#postcard_inventory">Postcard Inventory</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="home_kyle" class="tab-pane fade in active">
+            <%= render(:partial => 'home_kyle') %>
+        </div>
+
+        <div id="postcard_inventory" class="tab-pane fade">
+            <%= render(:partial => 'postcard_inventory') %>
+        </div>
+      </div>
+    </div>
+  <!-- end C1 -->
+
+  <!-- * start C2 * -->
+    <div class="well">
+      <%= render(:partial => 'sequoia_courses') %>
+    </div>
+  <!-- end C2 -->
+</div>
+<!--  END CENTER COLUMN *** -->
+
+<!-- ** START RIGHT COLUMN ** -->
+  <div class="col-lg-4">
+    <!-- * start R1 * -->
+      <div class="well">
+          <%= render(:partial => 'sales_day') %>
+      </div>
+    <!-- * start R2 -->
+      <div class="well">
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#sales_month">Month</a></li>
+          <li><a data-toggle="tab" href="#sales_year">Year</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div id="sales_month" class="tab-pane fade in active">
+            <%= render(:partial => 'sales_month') %>
+          </div>
+
+          <div id="sales_year" class="tab-pane fade">
+            <%= render(:partial => 'sales_year') %>
+          </div>
+        </div>
+
+      </div>
+    <!-- end R2 -->
+  </div>
+<!-- *** END RIGHT COLUMN *** -->
+
+<% end %>
+
+</body>
