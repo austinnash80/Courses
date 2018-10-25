@@ -25,15 +25,15 @@
 <div class="container-fluid">
   <div class="clearfix">
     <div class="col-lg-4">
-      <% if user_signed_in? && current_user.superadmin_role? && @name = 'Austin'%>
+      <% if user_signed_in? && current_user.superadmin_role? && @name == 'Austin'%>
         <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_path, class: 'button-none'%></strong>
-      <% elsif user_signed_in? && current_user.superadmin_role? && @name = 'Kyle'%>
+      <% elsif user_signed_in? && current_user.superadmin_role? && @name == 'Kyle'%>
         <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_kyle_path, class: 'button-none'%></strong>
-      <% elsif user_signed_in? && @name = 'Ashley' %>
+      <% elsif user_signed_in? && @name == 'Ashley' %>
         <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_ashley_path, class: 'button-none'%></strong>
-      <% elsif user_signed_in? && @name = 'Michael'%>
+      <% elsif user_signed_in? && @name == 'Michael'%>
         <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_michael_path, class: 'button-none'%></strong>
-      <% elsif user_signed_in? && @name = 'Hamdo'%>
+      <% elsif user_signed_in? && @name == 'Hamdo'%>
         <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_hamdo_path, class: 'button-none'%></strong>
       <% elsif %>
       <h1> Dashboard </h1>
