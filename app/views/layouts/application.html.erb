@@ -18,18 +18,23 @@
     <% user_signed_in? && current_user.email == 'michael@sequoiacpe.com' ? @name = 'Michael' : '' %>
     <% user_signed_in? && current_user.email == 'kyle@sequoiacpe.com' ? @name = 'Kyle' : '' %>
     <% user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' ? @name = 'Ashley' : '' %>
+    <% user_signed_in? && current_user.email == 'hamdo@sequoiacpe.com' ? @name = 'Hamdo' : '' %>
 
 <% unless controller_name == "sequoia" %>
 <nav class="navbar navbar-inverse">
 <div class="container-fluid">
   <div class="clearfix">
     <div class="col-lg-4">
-      <% if user_signed_in? && current_user.superadmin_role? %>
+      <% if user_signed_in? && current_user.superadmin_role? && @name = 'Austin'%>
         <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_path, class: 'button-none'%></strong>
-      <% elsif user_signed_in? && @name = 'Ashley'%>
+      <% elsif user_signed_in? && current_user.superadmin_role? && @name = 'Kyle'%>
+        <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_kyle_path, class: 'button-none'%></strong>
+      <% elsif user_signed_in? && @name = 'Ashley' %>
         <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_ashley_path, class: 'button-none'%></strong>
       <% elsif user_signed_in? && @name = 'Michael'%>
         <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_michael_path, class: 'button-none'%></strong>
+      <% elsif user_signed_in? && @name = 'Hamdo'%>
+        <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_hamdo_path, class: 'button-none'%></strong>
       <% elsif %>
       <h1> Dashboard </h1>
       <% end %>
@@ -64,7 +69,7 @@
         <% elsif user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' %>
           <li><%= link_to 'My Dashboard', sequoia_dash_ashley_path %></li>
         <% elsif user_signed_in? && current_user.email == 'hamdo@sequoiacpe.com' %>
-          <li><strong><%= link_to 'My Dashboard', sequoia_dash_ashley_path %></strong></li>
+          <li><strong><%= link_to 'My Dashboard', sequoia_dash_hamdo_path %></strong></li>
         <% end %>
 <!-- End Dashboards -->
         <li class="dropdown-header">Courses</li>
