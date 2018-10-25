@@ -122,7 +122,7 @@
   <div class="tab-content">
     <div id="total" class="tab-pane fade in active">
     </br>
-    <% if @mailing.boolean_1 == true %>
+    <% if @mailing.complete == true %>
     <!-- Completed == true -->
       <p>
         <strong>Total Cost:</strong>
@@ -155,7 +155,7 @@
         <strong>Postage:</strong>
         <%= number_to_currency(@mailing.cost_postage, precision: 0) %>
           </p>
-    <% elsif @mailing.boolean_1 == false %>
+    <% elsif @mailing.complete == false %>
           <!-- Completed == true -->
         <p class="text-center green"> Mailing is not complete</br>These are estimated costs</p>
 
@@ -224,7 +224,7 @@
 
   <div class="well">
     <h2 class="text-center">People</h2>
-    <h3><a class="btn btn-default" target="_blank" href="<%= @mailing.people_report %>"><i class="glyphicon glyphicon-download-alt" ></i> Full Report</a></h3>
+    <!-- <h3><a class="btn btn-default" target="_blank" href="<%= @mailing.people_report %>"><i class="glyphicon glyphicon-download-alt" ></i> Full Report</a></h3>
       <p>
         <strong>States Included:</strong>
           <% if @mailing.boolean_1 == true %>
@@ -237,7 +237,7 @@
       <p>
         <strong>States Expirations:</strong>
           <%= @mailing.group_1 %>, <%= @mailing.group_2 %>, <%= @mailing.group_3 %>
-      </p>
+      </p> -->
 
   </div>
 </div>
