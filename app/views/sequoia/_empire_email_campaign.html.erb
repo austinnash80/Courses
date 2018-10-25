@@ -20,7 +20,7 @@
       <% if email_campaign.active == true %>
       <td> <%= email_campaign.company %></td>
       <td> <%= email_campaign.campaign_name %> </td>
-      <td class="green"><strong> Every Wed </strong></td>
+      <td class="green"><strong> Wednesday </strong></td>
         <% if (Date.today - 7) > email_campaign.update_stats %>
           <td><strong><%= link_to email_campaign.update_stats.strftime('%-m/%-d/%y'), email_campaign, class: 'red' %> <%= link_to '- Update', email_campaign, class: 'red' %></strong></td>
         <% elsif %>
