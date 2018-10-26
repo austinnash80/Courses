@@ -75,7 +75,7 @@
     </tr>
     <tr>
       <td>Postcard Inventory</td>
-      <% if @remaining_inventory.min <= 500%>
+      <% if @remaining_inventory.min >= 500%>
         <td class="green">Good</td>
       <% elsif %>
         <td><a data-toggle="tab" href="#postcard_inventory" class="button-none"><strong class="red">Low</strong></a> </td>
