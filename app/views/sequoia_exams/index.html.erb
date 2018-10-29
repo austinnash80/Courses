@@ -1,0 +1,62 @@
+<p id="notice"><%= notice %></p>
+
+<div class="well jumbotron text-center">
+  <h1>Sequoia Exams</h1>
+</div>
+
+<h3>Upload CSV File</h3>
+  <%= form_tag import_sequoia_exams_path, multipart: true do %>
+  <%= file_field_tag :file %>
+</br>
+  <%= submit_tag 'Upload', class: 'btn btn-primary' %>
+<% end %>
+</br>
+
+<%= link_to "Remove All", remove_all_sequoia_exams_path, :method => :get %>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Aid</th>
+      <th>Lid</th>
+      <th>Uid</th>
+      <th>Who</th>
+      <th>Date s</th>
+      <th>Date c</th>
+      <th>Course number</th>
+      <th>Course version</th>
+      <th>Course title</th>
+      <th>Score</th>
+      <th>Rate</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sequoia_exams.each do |sequoia_exam| %>
+      <tr>
+        <td><%= sequoia_exam.aid %></td>
+        <td><%= sequoia_exam.lid %></td>
+        <td><%= sequoia_exam.uid %></td>
+        <td><%= sequoia_exam.who %></td>
+        <td><%= sequoia_exam.date_s %></td>
+        <td><%= sequoia_exam.date_c %></td>
+        <td><%= sequoia_exam.course_number %></td>
+        <td><%= sequoia_exam.course_version %></td>
+        <td><%= sequoia_exam.course_title %></td>
+        <td><%= sequoia_exam.score %></td>
+        <td><%= sequoia_exam.rate %></td>
+        <td><%= sequoia_exam.extra_i %></td>
+        <td><%= sequoia_exam.extra_s %></td>
+        <td><%= sequoia_exam.extra_b %></td>
+        <td><%= link_to 'Show', sequoia_exam %></td>
+        <td><%= link_to 'Edit', edit_sequoia_exam_path(sequoia_exam) %></td>
+        <td><%= link_to 'Destroy', sequoia_exam, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sequoia Exam', new_sequoia_exam_path %>

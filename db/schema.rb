@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181024210440) do
+ActiveRecord::Schema.define(version: 20181029195012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -350,6 +350,25 @@ ActiveRecord::Schema.define(version: 20181024210440) do
     t.string "zip"
     t.string "email"
     t.string "lic_num"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sequoia_exams", force: :cascade do |t|
+    t.integer "aid"
+    t.integer "lid"
+    t.integer "uid"
+    t.string "who"
+    t.date "date_s"
+    t.date "date_c"
+    t.integer "course_number"
+    t.string "course_version"
+    t.string "course_title"
+    t.integer "score"
+    t.integer "rate"
+    t.integer "extra_i"
+    t.string "extra_s"
+    t.boolean "extra_b"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

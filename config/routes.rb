@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   get 'sales_report/sequoia_sales'
   get 'sales_report/sequoia_exams'
   get 'sequoia_customers/index'
+  
   get 'sequoia_customers/import' => 'sequoia_customers#my_import'
   resources :sequoia_customers do
     collection {post :import}
@@ -47,6 +48,15 @@ Rails.application.routes.draw do
       get 'remove_all'
     end
   end
+
+  get 'sequoia_exams/import' => 'sequoia_exams#my_import'
+  resources :sequoia_exams do
+    collection {post :import}
+    collection do
+      get 'remove_all'
+    end
+  end
+
   get 'empire/dash'
 
   get 'empire/dash'

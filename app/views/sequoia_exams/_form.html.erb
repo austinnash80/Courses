@@ -1,0 +1,87 @@
+<%= form_with(model: sequoia_exam, local: true) do |form| %>
+  <% if sequoia_exam.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(sequoia_exam.errors.count, "error") %> prohibited this sequoia_exam from being saved:</h2>
+
+      <ul>
+      <% sequoia_exam.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :aid %>
+    <%= form.number_field :aid, id: :sequoia_exam_aid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lid %>
+    <%= form.number_field :lid, id: :sequoia_exam_lid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :uid %>
+    <%= form.number_field :uid, id: :sequoia_exam_uid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :who %>
+    <%= form.text_field :who, id: :sequoia_exam_who %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_s %>
+    <%= form.date_select :date_s, id: :sequoia_exam_date_s %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_c %>
+    <%= form.date_select :date_c, id: :sequoia_exam_date_c %>
+  </div>
+
+  <div class="field">
+    <%= form.label :course_number %>
+    <%= form.number_field :course_number, id: :sequoia_exam_course_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :course_version %>
+    <%= form.text_field :course_version, id: :sequoia_exam_course_version %>
+  </div>
+
+  <div class="field">
+    <%= form.label :course_title %>
+    <%= form.text_field :course_title, id: :sequoia_exam_course_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :score %>
+    <%= form.number_field :score, id: :sequoia_exam_score %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rate %>
+    <%= form.number_field :rate, id: :sequoia_exam_rate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_i %>
+    <%= form.number_field :extra_i, id: :sequoia_exam_extra_i %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_s %>
+    <%= form.text_field :extra_s, id: :sequoia_exam_extra_s %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_b %>
+    <%= form.check_box :extra_b, id: :sequoia_exam_extra_b %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
