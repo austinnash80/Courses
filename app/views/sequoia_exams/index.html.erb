@@ -11,8 +11,13 @@
   <%= submit_tag 'Upload', class: 'btn btn-primary' %>
 <% end %>
 </br>
+<h4>Total Records: <%= number_with_delimiter(@total_records, :delimiter => ',') %></h4>
 
+<h4>Most Recent: <%= @newest_record.strftime('%-m/%-d/%y') %></h4>
 <%= link_to "Remove All", remove_all_sequoia_exams_path, :method => :get %>
+</br>
+</br>
+
 
 <table class="table table-hover">
   <thead>

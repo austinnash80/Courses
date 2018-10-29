@@ -5,6 +5,13 @@ class SequoiaExamsController < ApplicationController
   # GET /sequoia_exams.json
   def index
     @sequoia_exams = SequoiaExam.all
+    @sequoia_exams = SequoiaExam.order(:date_c => :desc).first(25)
+    @sequoia_exams_all = SequoiaExam.all
+
+    # @total = []
+
+    @total_records = SequoiaExam.count(:uid)
+    @newest_record = SequoiaExam.pluck(:date_c).max
   end
 
   # GET /sequoia_exams/1
