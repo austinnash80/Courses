@@ -558,6 +558,10 @@ def postcard_schedule
   end
 
   def sequoia_exams_total
+    @exam_date_range = SequoiaExam.pluck(:date_s)
+    @first_exam_date = @exam_date_range.min
+    @newest_exam_date = @exam_date_range.max
+
     @total_taken = SequoiaExam.where('course_number < ?', 10000).count(:course_number)
     @total_sum_score = SequoiaExam.where('course_number < ?', 10000).sum(:score)
     @total_taken_rating = SequoiaExam.where('course_number < ?', 10000).where('rate > ?', 0).count(:rate)

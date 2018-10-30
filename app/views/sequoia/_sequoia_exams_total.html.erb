@@ -39,7 +39,7 @@
 </table>
 
 <table class="table table-bordered table-striped">
-  <caption class="text-center">All Time (x/x/xx - x/x/xx)</caption>
+  <caption class="text-center">All Time (<%= @first_exam_date.strftime('%b %d, %Y') %> - <%= @newest_exam_date.strftime('%b %d, %Y') %>)</caption>
   <thead>
     <tr>
       <th></th>
