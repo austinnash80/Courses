@@ -549,10 +549,10 @@ def postcard_schedule
     # @sequoia_exams_hash_all = @sequoia_exams_hash_ea.merge(@sequoia_exams_hash_cpa){|k,v1,v2|[v1,v2]}
 
     # Totals
-    @total_taken = SequoiaExam.where('course_number >= ?', 1000).where('course_number < ?', 10000).count(:course_number)
-    @total_sum_score = SequoiaExam.where('course_number >= ?', 1000).where('course_number < ?', 10000).sum(:score)
-    @total_taken_rating = SequoiaExam.where('course_number >= ?', 1000).where('course_number < ?', 10000).where('rate > ?', 0).count(:rate)
-    @total_sum_rating = SequoiaExam.where('course_number >= ?', 1000).where('course_number < ?', 10000).where('rate > ?', 0).sum(:rate)
+    @total_taken = SequoiaExam.where('course_number < ?', 10000).count(:course_number)
+    @total_sum_score = SequoiaExam.where('course_number < ?', 10000).sum(:score)
+    @total_taken_rating = SequoiaExam.where('course_number < ?', 10000).where('rate > ?', 0).count(:rate)
+    @total_sum_rating = SequoiaExam.where('course_number < ?', 10000).where('rate > ?', 0).sum(:rate)
 
     @total_taken_cpa = SequoiaExam.where('course_number >= ?', 1000).where('course_number < ?', 10000).where(:who => 'CPA').count(:course_number)
     @total_sum_score_cpa = SequoiaExam.where('course_number >= ?', 1000).where('course_number < ?', 10000).where(:who => 'CPA').sum(:score)
@@ -563,6 +563,11 @@ def postcard_schedule
     @total_sum_score_ea = SequoiaExam.where('course_number >= ?', 3000).where('course_number < ?', 10000).where(:who => 'EA').sum(:score)
     @total_taken_rating_ea = SequoiaExam.where('course_number >= ?', 3000).where('course_number < ?', 10000).where(:who => 'EA').where('rate > ?', 0).count(:rate)
     @total_sum_rating_ea = SequoiaExam.where('course_number >= ?', 3000).where('course_number < ?', 10000).where(:who => 'EA').where('rate > ?', 0).sum(:rate)
+
+    @total_taken_afsp = SequoiaExam.where('course_number < ?', 1000).count(:course_number)
+    @total_sum_score_afsp = SequoiaExam.where('course_number < ?', 1000).sum(:score)
+    @total_taken_rating_afsp = SequoiaExam.where('course_number < ?', 1000).where('rate > ?', 0).count(:rate)
+    @total_sum_rating_afsp = SequoiaExam.where('course_number < ?', 1000).where('rate > ?', 0).sum(:rate)
 
   end
 
