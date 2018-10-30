@@ -4,7 +4,8 @@
 Score Sum: <%= @sequoia_exams_grouped_score_sum_cpa %></br>
 Rating Sum: <%= @sequoia_exams_grouped_rating_sum_cpa %></br>
 Rating Total: <%= @sequoia_exams_grouped_rating_total_cpa %></br> -->
-
+AFSP: <%= @total_taken_afsp %></br>
+AFSP: <%= @total_sum_score_afsp %></br>
 <div>
 <table class="table table-bordered table-striped">
   <caption class="text-center">Past 12 Months</caption>
@@ -32,7 +33,7 @@ Rating Total: <%= @sequoia_exams_grouped_rating_total_cpa %></br> -->
     <tr>
       <td><strong>AFSP</strong></td>
       <td><%= number_with_delimiter(@total_taken_afsp, delimiter: ',') %></td>
-      <td><%= @total_taken_afsp.nil? ? @total_sum_score_afsp / @total_taken_afsp : '-' %></td>
+      <td><%= @total_taken_afsp.nil? ? (@total_sum_score_afsp / @total_taken_afsp) : '-' %></td>
       <td><%= @total_taken_rating_afsp.nil? ? number_with_precision(@total_sum_rating_afsp.to_f / @total_taken_rating_afsp.to_f, precision: 2) : '-' %></td>
     </tr>
     <tr>
