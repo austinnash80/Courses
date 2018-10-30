@@ -4,50 +4,10 @@
 Score Sum: <%= @sequoia_exams_grouped_score_sum_cpa %></br>
 Rating Sum: <%= @sequoia_exams_grouped_rating_sum_cpa %></br>
 Rating Total: <%= @sequoia_exams_grouped_rating_total_cpa %></br> -->
-AFSP: <%= @total_taken_afsp %></br>
-AFSP: <%= @total_sum_score_afsp %></br>
-<div>
-<table class="table table-bordered table-striped">
-  <caption class="text-center">Past 12 Months</caption>
-  <thead>
-    <tr>
-      <th></th>
-      <th class="text-center">Taken</th>
-      <th class="text-center">Score</th>
-      <th class="text-center">Rating</th>
-    </tr>
-  </thead>
-  <tbody class="text-center">
-    <tr>
-      <td><strong>CPA</strong></td>
-      <td><%= number_with_delimiter(@total_taken_cpa, delimiter: ',') %></td>
-      <td><%= @total_sum_score_cpa / @total_taken_cpa %></td>
-      <td><%= number_with_precision(@total_sum_rating_cpa.to_f / @total_taken_rating_cpa.to_f, precision: 2) %></td>
-    </tr>
-    <tr>
-      <td><strong>EA</strong></td>
-      <td><%= number_with_delimiter(@total_taken_ea, delimiter: ',') %></td>
-      <td><%= @total_sum_score_ea / @total_taken_ea %></td>
-      <td><%= number_with_precision(@total_sum_rating_ea.to_f / @total_taken_rating_ea.to_f, precision: 2) %></td>
-    </tr>
-    <tr>
-      <td><strong>AFSP</strong></td>
-      <td><%= number_with_delimiter(@total_taken_afsp, delimiter: ',') %></td>
-      <td><%= @total_taken_afsp > 0 ? (@total_sum_score_afsp / @total_taken_afsp) : '-' %></td>
-      <td><%= @total_taken_rating_afsp > 0 ? number_with_precision(@total_sum_rating_afsp.to_f / @total_taken_rating_afsp.to_f, precision: 2) : '-' %></td>
-    </tr>
-    <tr>
-      <td><strong>Total</strong></td>
-      <td><strong><%= number_with_delimiter(@total_taken, delimiter: ',') %></strong</td>
-      <td><strong><%= @total_sum_score / @total_taken %></strong></td>
-      <td><strong><%= number_with_precision(@total_sum_rating.to_f / @total_taken_rating.to_f, precision: 2) %></strong></td>
-    </tr>
-  </tbody>
-</table>
-</div>
+<!-- AFSP: <%= @total_taken_afsp %></br>
+AFSP: <%= @total_sum_score_afsp %></br> -->
+
 </br>
-
-
 <div class="row">
   <div class="col-lg-6">
 

@@ -7,6 +7,8 @@ class SequoiaController < ApplicationController
     name
     task
     email_campaign
+    sequoia_exams_total
+    sequoia_exams_individual
   end
 
   def dash_ashley
@@ -16,6 +18,8 @@ class SequoiaController < ApplicationController
     name
     task
     email_campaign
+    sequoia_exams_total
+    sequoia_exams_individual
   end
 
   def dash_michael
@@ -26,11 +30,13 @@ class SequoiaController < ApplicationController
     task
     email_campaign
     msi_mailing
-    sequoia_exams
+    sequoia_exams_total
+    sequoia_exams_individual
   end
 
   def dash
-    sequoia_exams
+    sequoia_exams_total
+    sequoia_exams_individual
     sequoia_exams_old
     sales
     postcard_schedule #must be above postcard_inventory
@@ -43,7 +49,8 @@ class SequoiaController < ApplicationController
   end
 
   def dash_kyle
-    sequoia_exams
+    sequoia_exams_total
+    sequoia_exams_individual
     sequoia_exams_old
     sales
     postcard_schedule #must be above postcard_inventory
@@ -107,6 +114,8 @@ def sales
       @new_mem_ytd = SequoiaCustomer.where(:purchase_date => Date.today.beginning_of_year..Date.today ).where(:what => 'Membership-First').pluck(:price).sum
       @return_mem_ytd = SequoiaCustomer.where(:purchase_date => Date.today.beginning_of_year..Date.today ).where(:what => 'Membership-Renewal').pluck(:price).sum
       @column_chart_ytd = SequoiaCustomer.group_by_year(:purchase_date, format: '%Y').sum(:price)
+
+      @total_all_time = SequoiaCustomer.pluck(:price).sum
 # End YTD Sales
 
 # Start Last Year sales
@@ -523,7 +532,7 @@ def postcard_schedule
       end
   end
 
-  def sequoia_exams
+  def sequoia_exams_individual
     @sequoia_exams = SequoiaExam.order(:course_number).all
 
     @sequoia_exams_grouped_taken_cpa = SequoiaExam.order(:course_number).group(:course_number).where(:who => 'CPA').where('course_number < ?', 9000).where('course_number >= ?', 1000).count(:course_number)
@@ -546,9 +555,9 @@ def postcard_schedule
     @hash_2_merge_ea = @sequoia_exams_grouped_rating_total_ea.merge(@sequoia_exams_grouped_rating_sum_ea){|k,v1,v2|[v1,v2]}
     @sequoia_exams_hash_ea = @hash_1_merge_ea.merge(@hash_2_merge_ea){|k,v1,v2|[v1,v2]}
 
-    # @sequoia_exams_hash_all = @sequoia_exams_hash_ea.merge(@sequoia_exams_hash_cpa){|k,v1,v2|[v1,v2]}
+  end
 
-    # Totals
+  def sequoia_exams_total
     @total_taken = SequoiaExam.where('course_number < ?', 10000).count(:course_number)
     @total_sum_score = SequoiaExam.where('course_number < ?', 10000).sum(:score)
     @total_taken_rating = SequoiaExam.where('course_number < ?', 10000).where('rate > ?', 0).count(:rate)
