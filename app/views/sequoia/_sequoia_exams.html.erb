@@ -33,8 +33,8 @@ AFSP: <%= @total_sum_score_afsp %></br>
     <tr>
       <td><strong>AFSP</strong></td>
       <td><%= number_with_delimiter(@total_taken_afsp, delimiter: ',') %></td>
-      <td><%= @total_taken_afsp.nil? ? (@total_sum_score_afsp / @total_taken_afsp) : '-' %></td>
-      <td><%= @total_taken_rating_afsp.nil? ? number_with_precision(@total_sum_rating_afsp.to_f / @total_taken_rating_afsp.to_f, precision: 2) : '-' %></td>
+      <td><%= @total_taken_afsp > 0 ? (@total_sum_score_afsp / @total_taken_afsp) : '-' %></td>
+      <td><%= @total_taken_rating_afsp > 0 ? number_with_precision(@total_sum_rating_afsp.to_f / @total_taken_rating_afsp.to_f, precision: 2) : '-' %></td>
     </tr>
     <tr>
       <td><strong>Total</strong></td>
