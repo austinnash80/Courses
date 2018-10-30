@@ -526,15 +526,15 @@ def postcard_schedule
   def sequoia_exams
     @sequoia_exams = SequoiaExam.order(:course_number).all
 
-    @sequoia_exams_grouped_taken_cpa = SequoiaExam.order(:course_number).group(:course_number).where(:who => 'CPA').where('course_number < ?', 9000).count(:course_number)
-    @sequoia_exams_grouped_score_sum_cpa = SequoiaExam.order(:course_number).group(:course_number).where(:who => 'CPA').where('course_number < ?', 9000).sum(:score)
-    @sequoia_exams_grouped_rating_sum_cpa = SequoiaExam.order(:course_number).group(:course_number).where('rate > ?', 0).where(:who => 'CPA').where('course_number < ?', 9000).sum(:rate)
-    @sequoia_exams_grouped_rating_total_cpa = SequoiaExam.order(:course_number).group(:course_number).where('rate > ?', 0).where(:who => 'CPA').where('course_number < ?', 9000).count(:rate)
+    @sequoia_exams_grouped_taken_cpa = SequoiaExam.order(:course_number).group(:course_number).where(:who => 'CPA').where('course_number < ?', 9000).where('course_number >= ?', 1000).count(:course_number)
+    @sequoia_exams_grouped_score_sum_cpa = SequoiaExam.order(:course_number).group(:course_number).where(:who => 'CPA').where('course_number < ?', 9000).where('course_number >= ?', 1000).sum(:score)
+    @sequoia_exams_grouped_rating_sum_cpa = SequoiaExam.order(:course_number).group(:course_number).where('rate > ?', 0).where(:who => 'CPA').where('course_number < ?', 9000).where('course_number >= ?', 1000).sum(:rate)
+    @sequoia_exams_grouped_rating_total_cpa = SequoiaExam.order(:course_number).group(:course_number).where('rate > ?', 0).where(:who => 'CPA').where('course_number < ?', 9000).where('course_number >= ?', 1000).count(:rate)
 
-    @sequoia_exams_grouped_taken_ea = SequoiaExam.order(:course_number).group(:course_number).where(:who => 'EA').count(:course_number)
-    @sequoia_exams_grouped_score_sum_ea = SequoiaExam.order(:course_number).group(:course_number).where(:who => 'EA').sum(:score)
-    @sequoia_exams_grouped_rating_sum_ea = SequoiaExam.order(:course_number).group(:course_number).where('rate > ?', 0).where(:who => 'EA').sum(:rate)
-    @sequoia_exams_grouped_rating_total_ea = SequoiaExam.order(:course_number).group(:course_number).where('rate > ?', 0).where(:who => 'EA').count(:rate)
+    @sequoia_exams_grouped_taken_ea = SequoiaExam.order(:course_number).group(:course_number).where(:who => 'EA').where('course_number >= ?', 3000).count(:course_number)
+    @sequoia_exams_grouped_score_sum_ea = SequoiaExam.order(:course_number).group(:course_number).where(:who => 'EA').where('course_number >= ?', 3000).sum(:score)
+    @sequoia_exams_grouped_rating_sum_ea = SequoiaExam.order(:course_number).group(:course_number).where('rate > ?', 0).where(:who => 'EA').where('course_number >= ?', 3000).sum(:rate)
+    @sequoia_exams_grouped_rating_total_ea = SequoiaExam.order(:course_number).group(:course_number).where('rate > ?', 0).where(:who => 'EA').where('course_number >= ?', 3000).count(:rate)
 
     # @exam_chart_cpa = SequoiaExam.order(:course_number).group(:course_number).where().count(:course_number)
 
@@ -549,20 +549,20 @@ def postcard_schedule
     # @sequoia_exams_hash_all = @sequoia_exams_hash_ea.merge(@sequoia_exams_hash_cpa){|k,v1,v2|[v1,v2]}
 
     # Totals
-    @total_taken = SequoiaExam.count(:course_number)
-    @total_sum_score = SequoiaExam.sum(:score)
-    @total_taken_rating = SequoiaExam.where('rate > ?', 0).count(:rate)
-    @total_sum_rating = SequoiaExam.where('rate > ?', 0).sum(:rate)
+    @total_taken = SequoiaExam.where('course_number >= ?', 1000).where('course_number < ?', 10000).count(:course_number)
+    @total_sum_score = SequoiaExam.where('course_number >= ?', 1000).where('course_number < ?', 10000).sum(:score)
+    @total_taken_rating = SequoiaExam.where('course_number >= ?', 1000).where('course_number < ?', 10000).where('rate > ?', 0).count(:rate)
+    @total_sum_rating = SequoiaExam.where('course_number >= ?', 1000).where('course_number < ?', 10000).where('rate > ?', 0).sum(:rate)
 
-    @total_taken_cpa = SequoiaExam.where(:who => 'CPA').count(:course_number)
-    @total_sum_score_cpa = SequoiaExam.where(:who => 'CPA').sum(:score)
-    @total_taken_rating_cpa = SequoiaExam.where(:who => 'CPA').where('rate > ?', 0).count(:rate)
-    @total_sum_rating_cpa = SequoiaExam.where(:who => 'CPA').where('rate > ?', 0).sum(:rate)
+    @total_taken_cpa = SequoiaExam.where('course_number >= ?', 1000).where('course_number < ?', 10000).where(:who => 'CPA').count(:course_number)
+    @total_sum_score_cpa = SequoiaExam.where('course_number >= ?', 1000).where('course_number < ?', 10000).where(:who => 'CPA').sum(:score)
+    @total_taken_rating_cpa = SequoiaExam.where('course_number >= ?', 1000).where('course_number < ?', 10000).where(:who => 'CPA').where('rate > ?', 0).count(:rate)
+    @total_sum_rating_cpa = SequoiaExam.where('course_number >= ?', 1000).where('course_number < ?', 10000).where(:who => 'CPA').where('rate > ?', 0).sum(:rate)
 
-    @total_taken_ea = SequoiaExam.where(:who => 'EA').count(:course_number)
-    @total_sum_score_ea = SequoiaExam.where(:who => 'EA').sum(:score)
-    @total_taken_rating_ea = SequoiaExam.where(:who => 'EA').where('rate > ?', 0).count(:rate)
-    @total_sum_rating_ea = SequoiaExam.where(:who => 'EA').where('rate > ?', 0).sum(:rate)
+    @total_taken_ea = SequoiaExam.where('course_number >= ?', 3000).where('course_number < ?', 10000).where(:who => 'EA').count(:course_number)
+    @total_sum_score_ea = SequoiaExam.where('course_number >= ?', 3000).where('course_number < ?', 10000).where(:who => 'EA').sum(:score)
+    @total_taken_rating_ea = SequoiaExam.where('course_number >= ?', 3000).where('course_number < ?', 10000).where(:who => 'EA').where('rate > ?', 0).count(:rate)
+    @total_sum_rating_ea = SequoiaExam.where('course_number >= ?', 3000).where('course_number < ?', 10000).where(:who => 'EA').where('rate > ?', 0).sum(:rate)
 
   end
 

@@ -63,7 +63,7 @@ Rating Total: <%= @sequoia_exams_grouped_rating_total_cpa %></br> -->
           <% if data[1].kind_of?(Array) %>
           <td><%= data[0][0] %></td>
           <td><%= data[0][1] / data[0][0] %></td>
-          <td><%= data[1][1].to_f / data[1][0].to_f %></td>
+          <td><%= number_with_precision( data[1][1].to_f / data[1][0].to_f, precision: 2) %></td>
           <% elsif %>
           <td><%= data[0] %></td>
           <td><%= data[1] / data[0] %></td>
@@ -95,7 +95,7 @@ Rating Total: <%= @sequoia_exams_grouped_rating_total_cpa %></br> -->
           <% if data[1].kind_of?(Array) %>
           <td><%= data[0][0] %></td>
           <td><%= data[0][1] / data[0][0] %></td>
-          <td><%= data[1][1].to_f / data[1][0].to_f %></td>
+          <td><%= number_with_precision(data[1][1].to_f / data[1][0].to_f, precision: 2) %></td>
           <% elsif %>
           <td><%= data[0] %></td>
           <td><%= data[1] / data[0] %></td>
