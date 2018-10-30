@@ -558,7 +558,7 @@ def postcard_schedule
   end
 
   def sequoia_exams_total
-    @exam_date_range = SequoiaExam.pluck(:date_s)
+    @exam_date_range = SequoiaExam.pluck(:date_c)
     @first_exam_date = @exam_date_range.min
     @newest_exam_date = @exam_date_range.max
 
