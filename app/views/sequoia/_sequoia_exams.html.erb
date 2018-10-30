@@ -1,0 +1,132 @@
+<h2 class="text-center">Sequoia Exams</h2>
+<!-- <h4 class="text-center">Past 12 Months</h4> -->
+<!-- Taken: <%= @sequoia_exams_grouped_taken_cpa %></br>
+Score Sum: <%= @sequoia_exams_grouped_score_sum_cpa %></br>
+Rating Sum: <%= @sequoia_exams_grouped_rating_sum_cpa %></br>
+Rating Total: <%= @sequoia_exams_grouped_rating_total_cpa %></br> -->
+
+<div>
+<table class="table table-bordered table-striped">
+  <caption class="text-center">Past 12 Months</caption>
+  <thead>
+    <tr>
+      <th></th>
+      <th class="text-center">Taken</th>
+      <th class="text-center">Score</th>
+      <th class="text-center">Rating</th>
+    </tr>
+  </thead>
+  <tbody class="text-center">
+    <tr>
+      <td><strong>CPA</strong></td>
+      <td><%= @total_taken_cpa %></td>
+      <td><%= @total_sum_score_cpa / @total_taken_cpa %></td>
+      <td><%= number_with_precision(@total_sum_rating_cpa.to_f / @total_taken_rating_cpa.to_f, precision: 2) %></td>
+    </tr>
+    <tr>
+      <td><strong>EA</strong></td>
+      <td><%= @total_taken_ea %></td>
+      <td><%= @total_sum_score_ea / @total_taken_ea %></td>
+      <td><%= number_with_precision(@total_sum_rating_ea.to_f / @total_taken_rating_ea.to_f, precision: 2) %></td>
+    </tr>
+    <tr>
+      <td><strong>Total</strong></td>
+      <td><strong><%= @total_taken %></strong</td>
+      <td><strong><%= @total_sum_score / @total_taken %></strong></td>
+      <td><strong><%= number_with_precision(@total_sum_rating.to_f / @total_taken_rating.to_f, precision: 2) %></strong></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</br>
+
+
+<div class="row">
+  <div class="col-lg-6">
+
+    <div>
+      <input class="form-control" id="myInputCPA" type="text" placeholder="Search CPA Courses">
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Course</th>
+          <th>Taken</th>
+          <th>Score</th>
+          <th>Rating</th>
+       </tr>
+      </thead>
+      <tbody id="myListCPA">
+        <% @sequoia_exams_hash_cpa.each do |course, data| %>
+        <tr>
+          <td><%= course %></td>
+          <% if data[1].kind_of?(Array) %>
+          <td><%= data[0][0] %></td>
+          <td><%= data[0][1] / data[0][0] %></td>
+          <td><%= data[1][1].to_f / data[1][0].to_f %></td>
+          <% elsif %>
+          <td><%= data[0] %></td>
+          <td><%= data[1] / data[0] %></td>
+          <td>-</td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-lg-6">
+    <div>
+      <input class="form-control" id="myInputEA" type="text" placeholder="Search EA Courses">
+    </div>
+    <table class="table table-striped">
+      <!-- <caption class="text-center">EA Courses</caption> -->
+      <thead>
+        <tr>
+          <th>Course</th>
+          <th>Taken</th>
+          <th>Score</th>
+          <th>Rating</th>
+       </tr>
+      </thead>
+      <tbody id="myListEA">
+        <% @sequoia_exams_hash_ea.each do |course, data| %>
+        <tr>
+          <td><%= course %></td>
+          <% if data[1].kind_of?(Array) %>
+          <td><%= data[0][0] %></td>
+          <td><%= data[0][1] / data[0][0] %></td>
+          <td><%= data[1][1].to_f / data[1][0].to_f %></td>
+          <% elsif %>
+          <td><%= data[0] %></td>
+          <td><%= data[1] / data[0] %></td>
+          <td>-</td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+
+$(document).ready(function(){
+  $("#myInputCPA").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myListCPA tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+$(document).ready(function(){
+  $("#myInputEA").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myListEA tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+</script>
