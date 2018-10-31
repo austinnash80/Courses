@@ -75,25 +75,3 @@ AFSP: <%= @total_sum_score_afsp %></br> -->
   </div>
 
 </div>
-
-<script>
-
-$(document).ready(function(){
-  $("#myInputCPA").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myListCPA tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-
-$(document).ready(function(){
-  $("#myInputEA").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myListEA tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-
-</script>

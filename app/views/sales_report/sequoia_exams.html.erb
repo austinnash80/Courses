@@ -305,23 +305,3 @@
     </div>
   </div>
 </div>
-
-<script>
-$(document).ready(function(){
-  $("#myInputWeek").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myListWeek tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-
-$(document).ready(function(){
-  $("#myInputMonth").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myListMonth tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-</script>

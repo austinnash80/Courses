@@ -235,7 +235,7 @@ def sales
   end
 
   def task
-    @tasks = Task.all
+    @tasks = Task.order(:due_date).all
 
 
   end
