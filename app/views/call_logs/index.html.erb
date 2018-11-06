@@ -1,0 +1,68 @@
+<p id="notice"><%= notice %></p>
+<div class="well jumbotron text-center">
+  <h1>Call Logs</h1>
+</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Taken</th>
+      <th>Date</th>
+      <th>Company</th>
+      <th>Caller des</th>
+      <th>Caller state</th>
+      <th>Customer</th>
+      <th>Caller fname</th>
+      <th>Caller lname</th>
+      <th>Uid</th>
+      <th>Call length</th>
+      <th>Question topic</th>
+      <th>Question 1</th>
+      <th>Question 2</th>
+      <th>Answered</th>
+      <th>Question answer</th>
+      <th>Question difficulty</th>
+      <th>Caller satisfaction</th>
+      <th>Extra b</th>
+      <th>Extra i</th>
+      <th>Extra s</th>
+      <th>Notes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @call_logs.each do |call_log| %>
+      <tr>
+        <td><%= call_log.taken %></td>
+        <td><%= call_log.call_date %></td>
+        <td><%= call_log.company %></td>
+        <td><%= call_log.caller_des %></td>
+        <td><%= call_log.caller_state %></td>
+        <td><%= call_log.customer %></td>
+        <td><%= call_log.caller_fname %></td>
+        <td><%= call_log.caller_lname %></td>
+        <td><%= call_log.UID %></td>
+        <td><%= call_log.call_length %></td>
+        <td><%= call_log.question_topic %></td>
+        <td><%= call_log.question_1 %></td>
+        <td><%= call_log.question_2 %></td>
+        <td><%= call_log.answered %></td>
+        <td><%= call_log.question_answer %></td>
+        <td><%= call_log.question_difficulty %></td>
+        <td><%= call_log.caller_satisfaction %></td>
+        <td><%= call_log.extra_b %></td>
+        <td><%= call_log.extra_i %></td>
+        <td><%= call_log.extra_s %></td>
+        <td><%= call_log.note %></td>
+        <td><%= link_to 'Show', call_log %></td>
+        <td><%= link_to 'Edit', edit_call_log_path(call_log) %></td>
+        <td><%= link_to 'Destroy', call_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Call Log', new_call_log_path %>

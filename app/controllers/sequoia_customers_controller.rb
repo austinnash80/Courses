@@ -78,7 +78,8 @@ class SequoiaCustomersController < ApplicationController
   end
 
   def remove_all
-    SequoiaCustomer.where('purchase_date > ?', '2018-09-30').delete_all
+    SequoiaCustomer.delete_all
+    # SequoiaCustomer.where('purchase_date > ?', '2018-09-30').delete_all
     flash[:notice] = "All Records Removed"
     redirect_to sequoia_customers_path
   end

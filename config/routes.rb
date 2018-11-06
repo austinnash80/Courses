@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :call_logs
   resources :seq_no_mails do
     collection {post :import}
     collection do

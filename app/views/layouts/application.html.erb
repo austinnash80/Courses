@@ -95,6 +95,7 @@
         <li class="dropdown-header">Other</li>
           <li><%= link_to 'Texas Royalties', tx_royalties_path %></li>
           <li><%= link_to 'Email Stats', email_campaigns_path %></li>
+          <li><%= link_to 'Call Logs', call_logs_path %></li>
         <% if user_signed_in? && current_user.superadmin_role? %>
         <li class="divider"></li>
         <li class="dropdown-header">Admin</li>

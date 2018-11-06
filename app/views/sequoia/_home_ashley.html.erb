@@ -16,13 +16,18 @@
       </thead>
       <tbody>
         <tr>
+          <td>Call Logs</td>
+          <td><strong>Ongoing</strong></td>
+          <td><strong><%= link_to 'New Call', new_call_log_path %></strong></td>
+        </tr>
+        <tr>
           <td>Course Updating</td>
           <% if @course_update_status.sum == 0 %>
             <td class="green"><strong>No Updates</strong></td>
             <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
           <% elsif %>
             <td class="red"><strong><%= link_to "Updates (#{@course_update_status.sum})", updatesheets_path, class: 'button-none' %></strong></td>
-            <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
+            <td><strong><%= link_to 'Updatesheet', updatesheets_path, class: '' %> | <%= link_to 'Datasheet', datasheets_path, class: '' %></strong></td>
           <% end %>
         </tr>
       </tbody>

@@ -10,10 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181029195012) do
+ActiveRecord::Schema.define(version: 20181106000946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "call_logs", force: :cascade do |t|
+    t.string "company"
+    t.string "caller_des"
+    t.string "caller_state"
+    t.boolean "customer"
+    t.string "caller_fname"
+    t.string "caller_lname"
+    t.integer "UID"
+    t.decimal "call_length"
+    t.string "question_topic"
+    t.text "question_1"
+    t.text "question_2"
+    t.boolean "answered"
+    t.text "question_answer"
+    t.integer "question_difficulty"
+    t.integer "caller_satisfaction"
+    t.boolean "extra_b"
+    t.integer "extra_i"
+    t.string "extra_s"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "taken"
+    t.date "call_date"
+    t.text "note"
+  end
 
   create_table "copyrights", force: :cascade do |t|
     t.integer "seq_number"

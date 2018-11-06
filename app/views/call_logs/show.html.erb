@@ -1,0 +1,95 @@
+<p id="notice"><%= notice %></p>
+
+<div class="well jumbotron text-center">
+  <h1>Call Log</h1>
+</div>
+</br>
+<%= link_to 'Edit Call', edit_call_log_path(@call_log), class: 'btn btn-primary' %> <%= link_to 'Back to Index', call_logs_path, class: 'btn btn-primary' %>
+</br>
+</br>
+<div class="col-lg-offset-2 col-lg-4">
+  <div class="well">
+<p>
+  <strong>Company:</strong>
+  <%= @call_log.company %>
+</p>
+
+<p>
+  <strong>Caller des:</strong>
+  <%= @call_log.caller_des %>
+</p>
+
+<p>
+  <strong>Caller state:</strong>
+  <%= @call_log.caller_state %>
+</p>
+
+<p>
+  <strong>Customer:</strong>
+  <%= @call_log.customer %>
+</p>
+
+<p>
+  <strong>Caller fname:</strong>
+  <%= @call_log.caller_fname %>
+</p>
+
+<p>
+  <strong>Caller lname:</strong>
+  <%= @call_log.caller_lname %>
+</p>
+
+<p>
+  <strong>Uid:</strong>
+  <%= @call_log.UID %>
+</p>
+
+<p>
+  <strong>Call length:</strong>
+  <%= @call_log.call_length %>
+</p>
+</div>
+</div>
+<div class="col-lg-4">
+  <div class="well">
+<p>
+  <strong>Question topic:</strong>
+  <%= @call_log.question_topic %>
+</p>
+
+<p>
+  <strong>Other:</strong>
+  <%= @call_log.extra_s %>
+</p>
+
+<p>
+  <strong>Question 1:</strong>
+  <%= @call_log.question_1 %>
+</p>
+
+<p>
+  <strong>Question 2:</strong>
+  <%= @call_log.question_2 %>
+</p>
+
+<p>
+  <strong>Answered:</strong>
+  <%= @call_log.answered %>
+</p>
+
+<p>
+  <strong>Question answer:</strong>
+  <%= @call_log.question_answer %>
+</p>
+
+<p>
+  <strong>Question difficulty:</strong>
+  <%= @call_log.question_difficulty %>
+</p>
+
+<p>
+  <strong>Caller satisfaction:</strong>
+  <%= @call_log.caller_satisfaction %>
+</p>
+</div>
+</div>

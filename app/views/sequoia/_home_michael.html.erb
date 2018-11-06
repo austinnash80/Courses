@@ -16,6 +16,11 @@
       </thead>
       <tbody>
         <tr>
+          <td>Call Logs</td>
+          <td><strong>Ongoing</strong></td>
+          <td><strong><%= link_to 'New Call', new_call_log_path %></strong></td>
+        </tr>
+        <tr>
           <td>Course Updating</td>
           <% if @course_update_status.sum == 0 %>
             <td class="green"><strong>Up-to-date</strong></td>
