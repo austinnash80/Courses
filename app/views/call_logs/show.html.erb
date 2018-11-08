@@ -9,87 +9,159 @@
 </br>
 <div class="col-lg-offset-2 col-lg-4">
   <div class="well">
-<p>
-  <strong>Company:</strong>
-  <%= @call_log.company %>
-</p>
+    <h2 class="text-center">Call Details</h2>
 
-<p>
-  <strong>Caller des:</strong>
-  <%= @call_log.caller_des %>
-</p>
+    <p>
+      <strong>Taken:</strong>
+      <%= @call_log.taken %>
+    </p>
+    <p>
+      <strong>Date:</strong>
+      <%= @call_log.call_date %>
+    </p>
+    <p>
+      <strong>Call length:</strong>
+      <%= @call_log.call_length %>
+    </p>
+  </div>
 
-<p>
-  <strong>Caller state:</strong>
-  <%= @call_log.caller_state %>
-</p>
+  <div class="well">
+    <h2 class="text-center">Caller Info</h2>
 
-<p>
-  <strong>Customer:</strong>
-  <%= @call_log.customer %>
-</p>
+    <p>
+      <strong>Company:</strong>
+      <%= @call_log.company %>
+    </p>
 
-<p>
-  <strong>Caller fname:</strong>
-  <%= @call_log.caller_fname %>
-</p>
+    <p>
+      <strong>Caller des:</strong>
+      <%= @call_log.caller_des %>
+    </p>
 
-<p>
-  <strong>Caller lname:</strong>
-  <%= @call_log.caller_lname %>
-</p>
+    <p>
+      <strong>Caller state:</strong>
+      <%= @call_log.caller_state %>
+    </p>
 
-<p>
-  <strong>Uid:</strong>
-  <%= @call_log.UID %>
-</p>
+    <p>
+      <strong>Customer:</strong>
+      <%= @call_log.customer %>
+    </p>
 
-<p>
-  <strong>Call length:</strong>
-  <%= @call_log.call_length %>
-</p>
+    <p>
+      <strong>Caller fname:</strong>
+      <%= @call_log.caller_fname %>
+    </p>
+
+    <p>
+      <strong>Caller lname:</strong>
+      <%= @call_log.caller_lname %>
+    </p>
+
+    <p>
+      <strong>Uid:</strong>
+      <%= @call_log.UID %>
+    </p>
+
+  </div>
 </div>
-</div>
+
 <div class="col-lg-4">
   <div class="well">
-<p>
-  <strong>Question topic:</strong>
-  <%= @call_log.question_topic %>
-</p>
+    <h2 class="text-center">Question 1</h2>
+    <div class="well">
+    <p>
+      <strong>Question topic:</strong>
+      <%= @call_log.question_topic %>
+    </p>
 
-<p>
-  <strong>Other:</strong>
-  <%= @call_log.extra_s %>
-</p>
+    <p>
+      <strong>Question Topic Other:</strong>
+      <%= @call_log.question_1_topic_other %>
+    </p>
 
-<p>
-  <strong>Question 1:</strong>
-  <%= @call_log.question_1 %>
-</p>
+    <p>
+      <strong>Question 1:</strong>
+      <%= @call_log.question_1 %>
+    </p>
 
-<p>
-  <strong>Question 2:</strong>
-  <%= @call_log.question_2 %>
-</p>
+    <p>
+      <strong>Question 1 Other:</strong>
+      <%= @call_log.question_1_other %>
+    </p>
 
-<p>
-  <strong>Answered:</strong>
-  <%= @call_log.answered %>
-</p>
+    <p>
+      <strong>Answered:</strong>
+      <%= @call_log.answered %>
+    </p>
 
-<p>
-  <strong>Question answer:</strong>
-  <%= @call_log.question_answer %>
-</p>
+    <p>
+      <strong>Question answer:</strong>
+      <%= @call_log.question_answer %>
+    </p>
+  </div>
 
-<p>
-  <strong>Question difficulty:</strong>
-  <%= @call_log.question_difficulty %>
-</p>
+    <h2 class="text-center">Question 2</h2>
+    <div class="well">
+    <p>
+      <strong>Question topic:</strong>
+      <%= @call_log.question_2_topic %>
+    </p>
 
-<p>
-  <strong>Caller satisfaction:</strong>
-  <%= @call_log.caller_satisfaction %>
-</p>
+    <p>
+      <strong>Question Topic Other:</strong>
+      <%= @call_log.question_2_topic_other %>
+    </p>
+
+    <p>
+      <strong>Question 1:</strong>
+      <%= @call_log.question_2 %>
+    </p>
+
+    <p>
+      <strong>Question 1 Other:</strong>
+      <%= @call_log.question_2_other %>
+    </p>
+
+    <p>
+      <strong>Answered:</strong>
+      <%= @call_log.question_2_answered %>
+    </p>
+
+    <p>
+      <strong>Question answer:</strong>
+      <%= @call_log.question_2_answer %>
+    </p>
+  </div>
+
+<div class="well">
+  <p>
+    <strong>Addtional Question:</strong>
+    <%= @call_log.question_additional %>
+  </p>
+
+  <p>
+    <strong>Answer:</strong>
+    <%= @call_log.question_additional_answer %>
+  </p>
+</div>
+
+</div>
+  <div class="well">
+  <p>
+    <strong>Call Note:</strong>
+    <%= @call_log.note %>
+  </p>
+
+  <p>
+    <strong>Question difficulty:</strong>
+    <%= @call_log.question_difficulty %>
+  </p>
+
+  <p>
+    <strong>Caller satisfaction:</strong>
+    <%= @call_log.caller_satisfaction %>
+  </p>
+  </div>
 </div>
 </div>
