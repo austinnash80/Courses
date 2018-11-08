@@ -1,7 +1,7 @@
 <%= form_with(model: call_log, local: true) do |form| %>
   <% if call_log.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(call_log.errors.count, "error") %> prohibited this call_log from being saved:</h2>
+      <h3><%= pluralize(call_log.errors.count, "error") %> prohibited this call_log from being saved:</h3>
 
       <ul>
       <% call_log.errors.full_messages.each do |message| %>
@@ -18,7 +18,7 @@
 </br>
   <div class="col-lg-6">
   <div class="well ">
-    <h2 class="text-center">Call Details </h2>
+    <h3 class="text-center">Call Details </h3>
 
     <div class="form-group form-inline">
       <!-- <%= form.label :taken, 'taken', class: 'control-label' %> -->
@@ -44,7 +44,7 @@
 <div class="well">
 
   <div class="form-inline">
-    <h2 class="text-center">Caller Info</h2>
+    <h3 class="text-center">Caller Info</h3>
   </br>
 
     <div class="form-group">
@@ -72,8 +72,8 @@
       </div>
     </div>
 </br>
-<div class="form-group">
-  <%= form.label :customer, 'Existing Customer', class: '' %>
+<div class="field form-inline">
+  <%= form.label :customer, 'Existing Customer', class: 'checkbox' %>
   <%= form.check_box :customer, id: :call_log_customer, class: 'checkbox' %>
 </div>
 
@@ -86,55 +86,107 @@
 </div>
 </div>
 
+<div class="well">
+  <h3 class="text-center">Question 1</h3>
+<div class="field">
+  <%= form.label :question_topic, 'Topic' %>
+  <%= form.select :question_topic, ['Topic 1', 'Topic 2', 'Topic 3', 'Other'], id: :call_log_question_topic %>
+</div>
+
+<div class="field">
+  <!-- <%= form.label :extra_s, 'Other' %> -->
+  <%= form.text_field :question_1_topic_other, id: :call_log_question_1_topic_other, class: 'form-control', placeholder: 'Other ...' %>
+</div>
+
+<div class="field">
+  <%= form.label :question_1, 'Question' %>
+  <%= form.select :question_1, ['Q 1', 'Q 2', 'Q 3', 'Other'], id: :call_log_question_1 %>
+</div>
+
+<div class="field">
+  <!-- <%= form.label :question_2, 'Other' %> -->
+  <%= form.text_area :question_1_other, id: :call_log_question_1_other, class: 'form-control', placeholder: 'Other ...' %>
+</div>
+
+<div class="field form-inline">
+  <%= form.label :answered, class: 'checkbox' %>
+  <%= form.check_box :answered, id: :call_log_answered, class: 'checkbox' %>
+</div>
+
+<div class="field">
+  <!-- <%= form.label :question_answer %> -->
+  <%= form.text_area :question_answer, id: :call_log_question_answer, class: 'form-control', placeholder: 'Answer ...' %>
+</div>
+
+</div>
+
 </div>
 <div class="col-lg-6">
-  <div class="well">
-    <h2 class="text-center">Question</h2>
+
+<div class="well">
+  <h3 class="text-center">Question 2</h3>
+
   <div class="field">
-    <%= form.label :question_topic %>
-    <%= form.select :question_topic, ['Topic 1', 'Topic 2', 'Topic 3', 'Other'], id: :call_log_question_topic %>
+    <%= form.label :question_2_topic, 'Topic' %>
+    <%= form.select :question_2_topic, ['n/a','Topic 1', 'Topic 2', 'Topic 3', 'Other'], id: :call_log_question_2_topic %>
   </div>
 
   <div class="field">
     <!-- <%= form.label :extra_s, 'Other' %> -->
-    <%= form.text_field :extra_s, id: :call_log_extra_s, class: 'form-control', placeholder: 'Other ...' %>
+    <%= form.text_field :question_2_topic_other, id: :call_log_question_2_topic_other, class: 'form-control', placeholder: 'Other ...' %>
   </div>
 
   <div class="field">
-    <%= form.label :question_1, 'Question' %>
-    <%= form.select :question_1, ['Q 1', 'Q 2', 'Q 3', 'Other'], id: :call_log_question_1 %>
+    <%= form.label :question_2, 'Question' %>
+    <%= form.select :question_2, ['n/a', 'Q 1', 'Q 2', 'Q 3', 'Other'], id: :call_log_question_2 %>
   </div>
 
   <div class="field">
     <!-- <%= form.label :question_2, 'Other' %> -->
-    <%= form.text_area :question_2, id: :call_log_question_2, class: 'form-control', placeholder: 'Other ...' %>
+    <%= form.text_area :question_2_other, id: :call_log_question_2_other, class: 'form-control', placeholder: 'Other ...' %>
   </div>
 
   <div class="field form-inline">
-    <%= form.label :answered, class: 'checkbox' %>
-    <%= form.check_box :answered, id: :call_log_answered, class: 'checkbox' %>
+    <%= form.label :question_2_answered, 'Answered', class: 'checkbox' %>
+    <%= form.check_box :question_2_answered, id: :call_log_question_2_answered, class: 'checkbox' %>
   </div>
 
   <div class="field">
     <!-- <%= form.label :question_answer %> -->
-    <%= form.text_area :question_answer, id: :call_log_question_answer, class: 'form-control', placeholder: 'Answer ...' %>
+    <%= form.text_area :question_2_answer, id: :call_log_question_2_answer, class: 'form-control', placeholder: 'Answer ...' %>
   </div>
-</br>
+
+</div>
+<div class="well">
+  <!-- <h3 class="text-center">Question 2</h3> -->
+
+  <div class="field">
+    <!-- <%= form.label :question_additional %> -->
+    <%= form.text_area :question_additional, id: :call_log_question_additional, class: 'form-control', placeholder: 'Additional Questions ...' %>
+  </div>
+
+  <div class="field">
+    <!-- <%= form.label :question_additional %> -->
+    <%= form.text_area :question_additional_answer, id: :call_log_question_additional_answer, class: 'form-control', placeholder: 'Answers ...' %>
+  </div>
+
+</div>
+
   <div class="field">
     <!-- <%= form.label :note %> -->
-    <%= form.text_area :note, id: :call_log_note, class: 'form-control', placeholder: 'Notes ...' %>
+    <%= form.text_area :note, id: :call_log_note, class: 'form-control', placeholder: 'General Caller Notes ...' %>
   </div>
-</div>
+
 
 <!-- <div class="row"> -->
 <div class="well">
   <div class="form-group form-inline">
-    <%= form.label :question_difficulty, class: 'control-label' %>
+    <%= form.label :question_difficulty, 'Call Difficulty', class: 'control-label' %>
     <%= form.select :question_difficulty,[1,2,3,4,5], id: :call_log_question_difficulty, class: 'form-control' %>
   </div>
 
   <div class="field form-inline">
-    <%= form.label :caller_satisfaction %>
+    <%= form.label :caller_satisfaction, 'Caller Satisfaction' %>
     <%= form.select :caller_satisfaction,[1,2,3,4,5], id: :call_log_caller_satisfaction %>
   </div>
 </div>

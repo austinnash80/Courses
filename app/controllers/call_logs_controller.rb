@@ -79,6 +79,6 @@ class CallLogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def call_log_params
-      params.require(:call_log).permit(:company, :caller_des, :caller_state, :customer, :caller_fname, :caller_lname, :UID, :call_length, :question_topic, :question_1, :question_2, :answered, :question_answer, :question_difficulty, :caller_satisfaction, :extra_b, :extra_i, :extra_s, :taken, :call_date, :note)
+      params.require(:call_log).permit(:company, :caller_des, :caller_state, :customer, :caller_fname, :caller_lname, :UID, :call_length, :question_topic, :question_1, :question_2, :answered, :question_answer, :question_difficulty, :caller_satisfaction, :extra_b, :extra_i, :extra_s, :taken, :call_date, :note, :question_1_topic_other, :question_2_topic, :question_2_topic_other, :question_1_other, :question_2_other, :question_2_answered, :question_2_answer, :question_additional, :question_additional_answer)
     end
 end

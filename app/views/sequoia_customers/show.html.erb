@@ -95,5 +95,7 @@
   <%= @sequoia_customer.lic_num %>
 </p>
 
+<a target="_blank" href="https://www.sequoiacpe.com/user/<%= @sequoia_customer.uid %>"> Link to Customer on Sequoia</a></br>
+
 <%= link_to 'Edit', edit_sequoia_customer_path(@sequoia_customer) %> |
 <%= link_to 'Back', sequoia_customers_path %>

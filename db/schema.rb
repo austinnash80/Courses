@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181106000946) do
+ActiveRecord::Schema.define(version: 20181108192239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20181106000946) do
     t.string "taken"
     t.date "call_date"
     t.text "note"
+    t.string "question_1_topic_other"
+    t.string "question_2_topic"
+    t.string "question_2_topic_other"
+    t.text "question_1_other"
+    t.text "question_2_other"
+    t.boolean "question_2_answered"
+    t.text "question_2_answer"
+    t.text "question_additional"
+    t.text "question_additional_answer"
   end
 
   create_table "copyrights", force: :cascade do |t|
