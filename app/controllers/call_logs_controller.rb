@@ -4,7 +4,7 @@ class CallLogsController < ApplicationController
   # GET /call_logs
   # GET /call_logs.json
   def index
-    @call_logs = CallLog.all
+    @call_logs = CallLog.order(:call_date => 'desc').all
   end
 
   # GET /call_logs/1
