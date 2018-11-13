@@ -36,9 +36,10 @@
       <th>State</th>
       <th>Zip</th>
       <th>Date added</th>
-      <!-- <th>Extra i</th> -->
-      <th>Customer</th>
       <th>Reason</th>
+      <th>Customer</th>
+      <th>UID</th>
+
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -57,9 +58,9 @@
         <td><%= seq_no_mail.state %></td>
         <td><%= seq_no_mail.zip %></td>
         <td><%= seq_no_mail.date_added %></td>
-        <!-- <td><%= seq_no_mail.extra_i %></td> -->
-        <td><%= seq_no_mail.extra_b %></td>
         <td><%= seq_no_mail.extra_s %></td>
+        <td><%= seq_no_mail.extra_b %></td>
+        <td><%= seq_no_mail.extra_i %></td>
         <td><%= link_to 'Show', seq_no_mail %></td>
         <td><%= link_to 'Edit', edit_seq_no_mail_path(seq_no_mail) %></td>
         <td><%= link_to 'Destroy', seq_no_mail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
