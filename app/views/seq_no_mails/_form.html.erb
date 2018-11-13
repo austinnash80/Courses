@@ -50,7 +50,7 @@
     <%= form.label :co, 'Company', class: 'text-center' %>
     <%= form.text_field :co, id: :seq_no_mail_co, class: 'form-control' %>
   </div>
-  
+
 </diV>
 <div class="col-lg-2">
 </div>
@@ -83,13 +83,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :extra_b, 'Customer', class: 'text-center' %>
-    <%= form.check_box :extra_b, id: :seq_no_mail_extra_b, class: 'form-control' %>
-  </div>
-
-  <div class="field">
     <%= form.label :extra_s, 'Reason', class: 'text-center' %>
     <%= form.text_field :extra_s, id: :seq_no_mail_extra_s, class: 'form-control' %>
+  </div>
+
+  <div class="field form-inline">
+    <%= form.label :extra_b, 'Customer?', class: 'checkbox' %>
+    <%= form.check_box :extra_b, id: :seq_no_mail_extra_b, class: 'checkbox' %>
   </div>
 
 </div>
