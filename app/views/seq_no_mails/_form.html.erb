@@ -45,15 +45,17 @@
     <%= form.label :suf, 'Suf', class: 'text-center' %>
     <%= form.text_field :suf, id: :seq_no_mail_suf, class: 'form-control' %>
   </div>
+
+  <div class="field">
+    <%= form.label :co, 'Company', class: 'text-center' %>
+    <%= form.text_field :co, id: :seq_no_mail_co, class: 'form-control' %>
+  </div>
+  
 </diV>
 <div class="col-lg-2">
 </div>
 
 <div class="col-lg-5">
-  <div class="field">
-    <%= form.label :co, 'Company', class: 'text-center' %>
-    <%= form.text_field :co, id: :seq_no_mail_co, class: 'form-control' %>
-  </div>
 
   <div class="field">
     <%= form.label :address, class: 'text-center' %>
@@ -78,6 +80,16 @@
   <div class="field">
     <%= form.label :zip, class: 'text-center' %>
     <%= form.text_field :zip, id: :seq_no_mail_zip, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_b, 'Customer', class: 'text-center' %>
+    <%= form.check_box :extra_b, id: :seq_no_mail_extra_b, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_s, 'Reason', class: 'text-center' %>
+    <%= form.text_field :extra_s, id: :seq_no_mail_extra_s, class: 'form-control' %>
   </div>
 
 </div>
