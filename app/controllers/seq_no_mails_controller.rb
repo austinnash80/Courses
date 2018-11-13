@@ -4,7 +4,7 @@ class SeqNoMailsController < ApplicationController
   # GET /seq_no_mails
   # GET /seq_no_mails.json
   def index
-    @seq_no_mails = SeqNoMail.order(:date_added).all
+    @seq_no_mails = SeqNoMail.order('date_added DESC').all
 
     respond_to do |format|
       format.html
