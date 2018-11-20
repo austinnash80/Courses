@@ -1,6 +1,9 @@
 <!-- <h1>Editing Call Log</h1> -->
 
+<!-- <%= link_to 'Show', @call_log, class: 'btn btn-primary' %> -->
+<%= link_to 'Call log index', call_logs_path, class: 'btn btn-primary' %>
+
+
 <%= render 'form_edit', call_log: @call_log %>
 
-<%= link_to 'Show', @call_log %> |
-<%= link_to 'Back', call_logs_path %>
+<!-- <%= link_to 'Back', call_logs_path %> -->
