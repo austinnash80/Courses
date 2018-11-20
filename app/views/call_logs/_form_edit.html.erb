@@ -180,15 +180,27 @@
 
 <!-- <div class="row"> -->
 <div class="well">
+
   <div class="form-group form-inline">
-    <%= form.label :question_difficulty, 'Call Difficulty', class: 'control-label' %>
-    <%= form.select :question_difficulty,[1,2,3,4,5], id: :call_log_question_difficulty, class: 'form-control' %>
+    <%= form.label :question_difficulty, 'Question Difficulty', class: 'control-label' %>
+    <%= form.select :question_difficulty,[1,2,3], id: :call_log_question_difficulty, class: 'form-control' %>
   </div>
+
+  <!-- <div class="form-group form-inline">
+    <%#= form.label :question_satisfaction, 'Satisfaction with Answer', class: 'control-label' %>
+    <%#= form.select :question_satisfaction,[1,2,3], id: :call_log_question_satisfaction, class: 'form-control' %>
+  </div> -->
 
   <div class="field form-inline">
     <%= form.label :caller_satisfaction, 'Caller Satisfaction' %>
-    <%= form.select :caller_satisfaction,[1,2,3,4,5], id: :call_log_caller_satisfaction %>
+    <%= form.select :caller_satisfaction,[1,2,3], id: :call_log_caller_satisfaction %>
   </div>
+
+  <div class="field form-inline">
+    <%= form.label :call_difficulty, 'Call Difficulty' %>
+    <%= form.select :call_difficulty,[1,2,3], id: :call_log_call_difficulty %>
+  </div>
+
 </div>
 <!-- </div> -->
   <div class="actions">
