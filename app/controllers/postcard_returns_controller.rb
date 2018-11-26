@@ -3,6 +3,10 @@ class PostcardReturnsController < ApplicationController
 
   # GET /postcard_returns
   # GET /postcard_returns.json
+
+  def stats
+  end
+  
   def index
     @postcard_returns = PostcardReturn.all
   end

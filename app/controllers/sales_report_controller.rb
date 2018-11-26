@@ -1,5 +1,12 @@
 class SalesReportController < ApplicationController
 
+  def postcard_return_stats
+    @empire_postcard_retun_total = PostcardReturn.where(:company => 'Empire Learning').group(:postcard).count
+    @sequoia_postcard_retun_total = PostcardReturn.where(:company => 'Sequoia CPE').group(:postcard).count
+    @sequoia_postcard_retun_total_reason = PostcardReturn.where(:company => 'Sequoia CPE').group(:reason).count
+    @empire_postcard_retun_total_reason = PostcardReturn.where(:company => 'Empire Learning').group(:reason).count
+  end
+
   def sequoia_sales
     @sequoia_customers_all = SequoiaCustomer.all
 
