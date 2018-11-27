@@ -1,0 +1,37 @@
+<div class="well jumbotron text-center">
+  <h1>Call Log - Stats</h1>
+</div>
+<div class="col-md-3">
+  <h2 class="text-center">Sequoia </h2>
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th style="width: ">Type</th>
+        <th>Date</th>
+        <th>Calls</th>
+        <th>Time</th>
+        <!-- <th>Number</th> -->
+      </tr>
+    </thead>
+    <tbody id="">
+      <% @sequoia_call_log_total.each do |k, v| %>
+      <% if v > 0 && k[1] > 1.month.ago %>
+      <tr>
+        <td><%= k[0] %></td>
+        <td><%= k[1] %></td>
+        <td><%= v %></td>
+      <!-- </tr> -->
+      <% end %>
+      <% end %>
+    <!-- </tbody>
+    <tbody id=""> -->
+      <% @sequoia_call_log_total_time.each do |k, v| %>
+      <!-- <tr> -->
+        <!-- <td><%= k %></td> -->
+        <td><%= v %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>

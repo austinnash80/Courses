@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   resources :pes_courses
   resources :postcard_returns
   get 'sales_report/postcard_return_stats'
+  get 'sales_report/call_log_stats'
   get 'sales_report/sequoia_sales'
   get 'sales_report/sequoia_exams'
   get 'sequoia_customers/index'

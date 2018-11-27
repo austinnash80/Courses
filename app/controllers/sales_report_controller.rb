@@ -7,6 +7,14 @@ class SalesReportController < ApplicationController
     @empire_postcard_retun_total_reason = PostcardReturn.where(:company => 'Empire Learning').group(:reason).count
   end
 
+  def call_log_stats
+    @sequoia_call_log_total = CallLog.where(:company => 'Sequoia').group(:taken).group_by_month(:call_date).count
+    @sequoia_call_log_total_time = CallLog.where(:company => 'Sequoia').group(:taken).group_by_month(:call_date).sum(:call_length)
+    # @sequoia_postcard_retun_total = PostcardReturn.where(:company => 'Sequoia CPE').group(:postcard).count
+    # @sequoia_postcard_retun_total_reason = PostcardReturn.where(:company => 'Sequoia CPE').group(:reason).count
+    # @empire_postcard_retun_total_reason = PostcardReturn.where(:company => 'Empire Learning').group(:reason).count
+  end
+
   def sequoia_sales
     @sequoia_customers_all = SequoiaCustomer.all
 
