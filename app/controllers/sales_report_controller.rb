@@ -8,21 +8,16 @@ class SalesReportController < ApplicationController
   end
 
   def call_log_stats
-    @sequoia_call_log_total = CallLog.where(:company => 'Sequoia').group(:taken).group_by_month(:call_date).count
-    @sequoia_call_log_total_time = CallLog.where(:company => 'Sequoia').group(:taken).group_by_month(:call_date).sum(:call_length)
-    # @sequoia_postcard_retun_total = PostcardReturn.where(:company => 'Sequoia CPE').group(:postcard).count
-    # @sequoia_postcard_retun_total_reason = PostcardReturn.where(:company => 'Sequoia CPE').group(:reason).count
-    # @empire_postcard_retun_total_reason = PostcardReturn.where(:company => 'Empire Learning').group(:reason).count
+    @sequoia_call_log_total = CallLog.where(:company => 'Sequoia').group(:taken).count
+    @sequoia_call_log_total_time = CallLog.where(:company => 'Sequoia').group(:taken).sum(:call_length)
   end
 
   def sequoia_sales
     @sequoia_customers_all = SequoiaCustomer.all
-
     @day_sales = SequoiaCustomer.group_by_day(:purchase_date).sum(:price)
     @week_sales = SequoiaCustomer.group_by_week(:purchase_date, week_start: :mon).sum(:price)
     @month_sales = SequoiaCustomer.group_by_month(:purchase_date).sum(:price)
     @year_sales = SequoiaCustomer.group_by_year(:purchase_date).sum(:price)
-
     @year_pie_chart_who = SequoiaCustomer.group(:who).sum(:price)
     @year_pie_chart_what = SequoiaCustomer.group(:what).sum(:price)
   end
