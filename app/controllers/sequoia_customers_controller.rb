@@ -4,7 +4,13 @@ class SequoiaCustomersController < ApplicationController
   # GET /sequoia_customers
   # GET /sequoia_customers.json
   def index
-    @sequoia_customers = SequoiaCustomer.order(:purchase_date => :desc).first(25)
+    if params[:product]
+      @sequoia_customers = SequoiaCustomer.where('product LIKE ?', "%#{params[:product]}%")
+    else
+      @sequoia_customers = SequoiaCustomer.order(:purchase_date => :desc).first(25)
+    end
+
+    # @sequoia_customers = SequoiaCustomer.order(:purchase_date => :desc).first(25)
     @sequoia_customers_all = SequoiaCustomer.all
 
     @total = []
@@ -89,6 +95,10 @@ class SequoiaCustomersController < ApplicationController
     redirect_to sequoia_customers_path, notice: "upload Complete"
   end
 
+  # def product_params
+  #   params.require(:sequoia_customer).permit(:product)
+  # end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sequoia_customer
@@ -99,4 +109,6 @@ class SequoiaCustomersController < ApplicationController
     def sequoia_customer_params
       params.require(:sequoia_customer).permit(:unique_id, :order_id, :uid, :purchase_date, :product, :who, :what, :hours, :price, :fname, :lname, :street_1, :street_2, :city, :state, :state, :zip, :email, :lic_num)
     end
+
+
 end

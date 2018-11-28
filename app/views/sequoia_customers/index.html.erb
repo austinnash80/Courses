@@ -26,6 +26,11 @@
   <% end %> -->
 </h4>
 
+<%= form_tag sequoia_customers_path, :method => 'get' do %>
+  Search Product: <%= text_field_tag :product, params[:product] %>
+  <%= submit_tag 'Search' %>
+<% end %>
+
 
 <table class="table table-hover">
   <thead>
