@@ -31,8 +31,9 @@
 
         <!-- <td><%#= sequoia_course.active == true ? 'Active' : 'Not Listed' %></td> -->
         <td><%= sequoia_course.pes_course.active == true ? 'Yes' : 'No' %></td>
-        <td><%= sequoia_course.seq_update.strftime('%-m/%-d/%y') %></td>
-        <td><%= sequoia_course.seq_original_list.strftime('%-m/%-d/%y') %></td>
+
+        <td><%= sequoia_course.seq_update.nil? == false ? sequoia_course.seq_update.strftime('%-m/%-d/%y') : 'nil' %></td>
+        <td><%= sequoia_course.seq_original_list.nil? == false ? sequoia_course.seq_original_list.strftime('%-m/%-d/%y') : 'nil' %></td>
         <td><a target="_blank" href="https://www.mypescpe.com/panel.account/OPEN/purchase.manager/indexOpenItem.cmc?&file=FULLpes&sku=<%= sequoia_course.pes_course.pes_number %>&view=1A&ste="> PES </a></td>
         <td><a target="_blank" href="../datasheets/<%= sequoia_course.seq_number %>">Seq </a></td>
       </tr>

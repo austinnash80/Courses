@@ -7,6 +7,12 @@ class PesCoursesController < ApplicationController
   def index
     @pes_courses = PesCourse.all
     @date_fields = DateField.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @pes_courses.to_csv, filename: "pes_course-#{Date.today}.csv" }
+    end
+
   end
 
   # GET /pes_courses/1
