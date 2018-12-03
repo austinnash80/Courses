@@ -1,0 +1,77 @@
+<div class="well jumbotron text-center">
+  <h1>Course Status</h1>
+</div>
+
+<p>Find the courses that are active on Sequoia (datasheet) and no loger listed by pes (PesCourses)</p>
+<p>Match 'Datasheet' PES number with PES number from 'PESCourses'</p>
+<p> Only display the ones they have in common</p>
+
+<div class="col-md-4 well">
+  <h2 class="text-center">Oldest Active Pub Dates (15)</h2>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Course</th>
+      <th>Pub Date</th>
+      <th>PES</th>
+      <th>List Date</th>
+      <th>Last Update</th>
+      <th>Links</th>
+      <!-- <th>Pes number</th> -->
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pub_dates.each do |sequoia_course| %>
+    <% if sequoia_course.pes_course.pes_number != 0 %>
+      <tr>
+        <td><%= sequoia_course.seq_number %><%= sequoia_course.seq_version %></td>
+        <td><%= sequoia_course.pub_date.strftime('%-m/%-d/%y') %></td>
+
+        <!-- <td><%#= sequoia_course.active == true ? 'Active' : 'Not Listed' %></td> -->
+        <td><%= sequoia_course.pes_course.active == true ? 'Yes' : 'No' %></td>
+        <td><%= sequoia_course.seq_update.strftime('%-m/%-d/%y') %></td>
+        <td><%= sequoia_course.seq_original_list.strftime('%-m/%-d/%y') %></td>
+        <td><a target="_blank" href="https://www.mypescpe.com/panel.account/OPEN/purchase.manager/indexOpenItem.cmc?&file=FULLpes&sku=<%= sequoia_course.pes_course.pes_number %>&view=1A&ste="> PES </a></td>
+        <td><a target="_blank" href="../datasheets/<%= sequoia_course.seq_number %>">Seq </a></td>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<div class="col-md-4 right-square left-square well-white well">
+  <h2 class="text-center">Active Sequoia - Non Active PES</h2>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Course</th>
+        <th>Pub Date</th>
+        <th>Inactive Date</th>
+        <th>Complaints</th>
+        <th>PES Link</th>
+        <!-- <th>Pes number</th> -->
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @sequoia_course.each do |sequoia_course| %>
+      <% if sequoia_course.pes_course.pes_number != 0 && sequoia_course.active == true && sequoia_course.pes_course.active == false %>
+        <tr>
+          <td><%= sequoia_course.seq_number %><%= sequoia_course.seq_version %></td>
+          <td><%= sequoia_course.pub_date.strftime('%-m/%-d/%y') %></td>
+          <td><%= sequoia_course.pes_course.date_removed.strftime('%-m/%-d/%y') %></td>
+          <td></td>
+          <td><a target="_blank" href="https://www.mypescpe.com/panel.account/OPEN/purchase.manager/indexOpenItem.cmc?&file=FULLpes&sku=<%= sequoia_course.pes_course.pes_number %>&view=1A&ste="> PES </a></td>
+        </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="col-md-4 well">
+  <h2 class="text-center">Course Complaints</h2>
+</div>

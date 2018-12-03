@@ -42,6 +42,8 @@ Rails.application.routes.draw do
   get 'sales_report/call_log_stats'
   get 'sales_report/sequoia_sales'
   get 'sales_report/sequoia_exams'
+
+  get 'sales_report/course_status'
   get 'sequoia_customers/index'
 
   get 'sequoia_customers/import' => 'sequoia_customers#my_import'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181112183147) do
+ActiveRecord::Schema.define(version: 20181129210251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -323,6 +323,12 @@ ActiveRecord::Schema.define(version: 20181112183147) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.string "tag"
+    t.date "date_added"
+    t.date "date_removed"
+    t.string "extra_s"
+    t.integer "extra_i"
+    t.boolean "extra_b"
+    t.date "extra_d"
   end
 
   create_table "postcard_mailings", force: :cascade do |t|

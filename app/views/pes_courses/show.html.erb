@@ -29,6 +29,14 @@
   <strong>Active:</strong>
   <%= @pes_course.active %>
 </p>
+<p>
+  <strong>Date added:</strong>
+  <%= @pes_course.date_added %>
+</p>
+<p>
+  <strong>Date Removed:</strong>
+  <%= @pes_course.date_removed %>
+</p>
 
 <%= link_to 'Edit', edit_pes_course_path(@pes_course) %> |
 <%= link_to 'Back', pes_courses_path %>

@@ -12,6 +12,13 @@ class SalesReportController < ApplicationController
     @sequoia_call_log_total_time = CallLog.where(:company => 'Sequoia').group(:taken).sum(:call_length)
   end
 
+  def course_status
+    @sequoia_course = Datasheet.all
+    @pes_course = PesCourse.all
+    @pub_dates = Datasheet.order(:pub_date).first(15)
+  end
+
+
   def sequoia_sales
     @sequoia_customers_all = SequoiaCustomer.all
     @day_sales = SequoiaCustomer.group_by_day(:purchase_date).sum(:price)

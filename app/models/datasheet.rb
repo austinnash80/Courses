@@ -2,7 +2,7 @@ class Datasheet < ApplicationRecord
   self.primary_key = 'seq_number'
   has_many :Updatesheets
   has_one :Copyrights
-  has_one :pes_course, foreign_key: 'pes_number'
+  belongs_to :pes_course, foreign_key: 'pes_number'
   validates :seq_number, :presence => true, :uniqueness => true
 
   def self.to_csv # Export to csv function

@@ -67,12 +67,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :pes_number, "P Number" %>
-    <%= form.number_field :pes_number, id: :datasheet_pes_number %>
+    <%= form.label :pes_number, "PES Number" %>
+    <!-- <p>Must enter '0' for courses with no PES number</p> -->
+    <%= form.number_field :pes_number, id: :datasheet_pes_number, placeholder: 'Enter 0 if no PES #' %>
   </div>
 
   <div class="field">
-    <%= form.label :pes_version, "P Version" %>
+    <%= form.label :pes_version, "PES Version" %>
     <%= form.text_field :pes_version, id: :datasheet_pes_version %>
   </div>
 

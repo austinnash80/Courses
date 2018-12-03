@@ -72,6 +72,6 @@ class PesCoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pes_course_params
-      params.require(:pes_course).permit(:pes_number, :category, :hours, :active, :title, :tag)
+      params.require(:pes_course).permit(:pes_number, :category, :hours, :active, :title, :tag, :date_added, :date_removed, :extra_s, :extra_i, :extra_b, :extra_d)
     end
 end
