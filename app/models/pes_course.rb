@@ -14,4 +14,10 @@ class PesCourse < ApplicationRecord
     end
   end
 
+  def self.import(file) # import to cvs function
+    CSV.foreach(file.path, headers: true) do |row|
+    PesCourse.create! row.to_hash
+  end
+end
+
 end

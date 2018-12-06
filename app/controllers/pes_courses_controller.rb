@@ -69,6 +69,17 @@ class PesCoursesController < ApplicationController
     end
   end
 
+  def remove_all
+    PesCourse.delete_all
+    flash[:notice] = "All Records Removed"
+    redirect_to pes_courses_path
+  end
+
+  def import #Uploading CSV function
+    PesCourse.import(params[:file])
+    redirect_to pes_courses_path, notice: "Upload Complete"
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Taken:</strong>
+  <%= @course_comment.taken %>
+</p>
+
+<p>
+  <strong>Course number:</strong>
+  <%= @course_comment.course_number %>
+</p>
+
+<p>
+  <strong>Course version:</strong>
+  <%= @course_comment.course_version %>
+</p>
+
+<p>
+  <strong>Comment type:</strong>
+  <%= @course_comment.comment_type %>
+</p>
+
+<p>
+  <strong>Comment type other:</strong>
+  <%= @course_comment.comment_type_other %>
+</p>
+
+<p>
+  <strong>Comment details:</strong>
+  <%= @course_comment.comment_details %>
+</p>
+
+<p>
+  <strong>Comment date:</strong>
+  <%= @course_comment.comment_date %>
+</p>
+
+<p>
+  <strong>Extra s:</strong>
+  <%= @course_comment.extra_s %>
+</p>
+
+<p>
+  <strong>Extra i:</strong>
+  <%= @course_comment.extra_i %>
+</p>
+
+<p>
+  <strong>Extra b:</strong>
+  <%= @course_comment.extra_b %>
+</p>
+
+<p>
+  <strong>Extra d:</strong>
+  <%= @course_comment.extra_d %>
+</p>
+
+<%= link_to 'Edit', edit_course_comment_path(@course_comment) %> |
+<%= link_to 'Back', course_comments_path %>

@@ -1,6 +1,7 @@
 class Datasheet < ApplicationRecord
   self.primary_key = 'seq_number'
   has_many :Updatesheets
+  has_many :CourseComments
   has_one :Copyrights
   belongs_to :pes_course, foreign_key: 'pes_number'
   validates :seq_number, :presence => true, :uniqueness => true

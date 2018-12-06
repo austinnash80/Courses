@@ -1,0 +1,72 @@
+<%= form_with(model: course_comment, local: true) do |form| %>
+  <% if course_comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(course_comment.errors.count, "error") %> prohibited this course_comment from being saved:</h2>
+
+      <ul>
+      <% course_comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :taken %>
+    <%= form.text_field :taken, id: :course_comment_taken %>
+  </div>
+
+  <div class="field">
+    <%= form.label :course_number %>
+    <%= form.number_field :course_number, id: :course_comment_course_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :course_version %>
+    <%= form.text_field :course_version, id: :course_comment_course_version %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comment_type %>
+    <%= form.text_field :comment_type, id: :course_comment_comment_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comment_type_other %>
+    <%= form.text_field :comment_type_other, id: :course_comment_comment_type_other %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comment_details %>
+    <%= form.text_area :comment_details, id: :course_comment_comment_details %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comment_date %>
+    <%= form.date_select :comment_date, id: :course_comment_comment_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_s %>
+    <%= form.text_field :extra_s, id: :course_comment_extra_s %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_i %>
+    <%= form.number_field :extra_i, id: :course_comment_extra_i %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_b %>
+    <%= form.check_box :extra_b, id: :course_comment_extra_b %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extra_d %>
+    <%= form.date_select :extra_d, id: :course_comment_extra_d %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

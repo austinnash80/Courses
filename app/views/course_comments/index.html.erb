@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Course Comments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Taken</th>
+      <th>Course number</th>
+      <th>Course version</th>
+      <th>Comment type</th>
+      <th>Comment type other</th>
+      <th>Comment details</th>
+      <th>Comment date</th>
+      <th>Extra s</th>
+      <th>Extra i</th>
+      <th>Extra b</th>
+      <th>Extra d</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @course_comments.each do |course_comment| %>
+      <tr>
+        <td><%= course_comment.taken %></td>
+        <td><%= course_comment.course_number %></td>
+        <td><%= course_comment.course_version %></td>
+        <td><%= course_comment.comment_type %></td>
+        <td><%= course_comment.comment_type_other %></td>
+        <td><%= course_comment.comment_details %></td>
+        <td><%= course_comment.comment_date %></td>
+        <td><%= course_comment.extra_s %></td>
+        <td><%= course_comment.extra_i %></td>
+        <td><%= course_comment.extra_b %></td>
+        <td><%= course_comment.extra_d %></td>
+        <td><%= link_to 'Show', course_comment %></td>
+        <td><%= link_to 'Edit', edit_course_comment_path(course_comment) %></td>
+        <td><%= link_to 'Destroy', course_comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Course Comment', new_course_comment_path %>

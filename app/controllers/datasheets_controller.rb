@@ -70,6 +70,12 @@ class DatasheetsController < ApplicationController
     end
   end
 
+  def remove_all
+    Datasheet.delete_all
+    flash[:notice] = "All Records Removed"
+    redirect_to datasheets_path
+  end
+
   def import #Uploading CSV function
     Datasheet.import(params[:file])
     redirect_to datasheets_path, notice: "Upload Complete"

@@ -1,0 +1,13 @@
+<%= simple_form_for(@course_comment) do |f| %>
+
+  <%= f.error_notification %>
+  <%= f.input :taken, label: 'Taken By', input_html: { value: @name }, hint: 'Hint Text here', class: 'col-lg-2' %>
+  <%= f.input :comment_date, label: false %>
+  <%= f.input :course_number, label: 'Course Number' %>
+  <%= f.input :course_version, label: 'Version' %>
+  <%= f.input :comment_type, label: 'Comment Type', as: :radio_buttons, collection: [['Out of Date'],['Grammer Error'], ['Other']] %>
+  <%= f.input :comment_type_other, label: 'If Other' %>
+  <%= f.input :comment_details, label: 'Details' %>
+  <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
+
+  <% end %>

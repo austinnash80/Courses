@@ -35,7 +35,11 @@
             <td><%= (mailing.drop - 8).strftime('%a %-m/%-d') %> </td>
             <td><%= (mailing.drop).strftime('%-m/%-d') %> </td>
             <td><%= number_with_delimiter(mailing.estimate_quanity, delimiter: ',') %></td>
-            <td><%= number_to_currency((mailing.estimate_cost * mailing.estimate_quanity), precision: 0) %></td>
+              <% if mailing.estimate_cost.nil? == false && mailing.estimate_quanity.nil? == false %>
+                <td><%= number_to_currency((mailing.estimate_cost * mailing.estimate_quanity), precision: 0) %></td>
+              <% elsif %>
+                <td> n/a </td>
+              <% end %>
             <% if mailing.msi_art.url =~/missing/ %>
               <td><%= link_to '', mailing, class: 'glyphicon glyphicon-remove-circle red gi-2x' %></td>
             <% elsif %>

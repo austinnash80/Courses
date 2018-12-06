@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181129210251) do
+ActiveRecord::Schema.define(version: 20181206220541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,22 @@ ActiveRecord::Schema.define(version: 20181129210251) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "book"
+  end
+
+  create_table "course_comments", force: :cascade do |t|
+    t.string "taken"
+    t.integer "course_number"
+    t.string "course_version"
+    t.string "comment_type"
+    t.string "comment_type_other"
+    t.text "comment_details"
+    t.date "comment_date"
+    t.string "extra_s"
+    t.integer "extra_i"
+    t.boolean "extra_b"
+    t.date "extra_d"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "datasheets", force: :cascade do |t|
@@ -168,21 +184,6 @@ ActiveRecord::Schema.define(version: 20181129210251) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "exams", force: :cascade do |t|
-    t.integer "eid"
-    t.integer "uid"
-    t.string "des"
-    t.date "start_date"
-    t.date "complete_date"
-    t.integer "seq_number"
-    t.string "seq_v"
-    t.string "seq_t"
-    t.float "score"
-    t.integer "rating"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "inventories", force: :cascade do |t|
     t.string "company"
     t.string "version"
@@ -195,54 +196,6 @@ ActiveRecord::Schema.define(version: 20181129210251) do
     t.datetime "updated_at", null: false
     t.date "order"
     t.decimal "cost"
-  end
-
-  create_table "mail_items", force: :cascade do |t|
-    t.integer "mail_id"
-    t.string "title"
-    t.integer "quantity"
-    t.string "data_name"
-    t.string "art_name"
-    t.text "msi_note"
-    t.text "note_1"
-    t.text "note_2"
-    t.boolean "complete"
-    t.boolean "boolean_1"
-    t.integer "integer_1"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "image_file_name"
-    t.string "image_content_type"
-    t.integer "image_file_size"
-    t.datetime "image_updated_at"
-    t.string "data_file_name"
-    t.string "data_content_type"
-    t.integer "data_file_size"
-    t.datetime "data_updated_at"
-  end
-
-  create_table "mail_schedules", force: :cascade do |t|
-    t.integer "mail_id"
-    t.date "drop_date"
-    t.integer "group_30"
-    t.integer "group_60"
-    t.integer "group_90"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "mailing_postcards", force: :cascade do |t|
-    t.string "company"
-    t.string "version"
-    t.boolean "sent"
-    t.date "date_sent"
-    t.integer "number_sent"
-    t.text "note"
-    t.integer "extra_i"
-    t.boolean "extra_b"
-    t.string "extra_s"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "mailings", force: :cascade do |t|
@@ -292,28 +245,6 @@ ActiveRecord::Schema.define(version: 20181129210251) do
     t.decimal "estimate_cost"
   end
 
-  create_table "notes", force: :cascade do |t|
-    t.string "title"
-    t.text "note"
-    t.boolean "due"
-    t.date "due_date"
-    t.boolean "done"
-    t.boolean "important"
-    t.boolean "type_one"
-    t.boolean "type_two"
-    t.boolean "type_three"
-    t.boolean "extra_boolean"
-    t.string "extra_string"
-    t.integer "extra_integer"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "doc_file_name"
-    t.string "doc_content_type"
-    t.integer "doc_file_size"
-    t.datetime "doc_updated_at"
-  end
-
   create_table "pes_courses", force: :cascade do |t|
     t.integer "pes_number"
     t.string "category"
@@ -351,6 +282,27 @@ ActiveRecord::Schema.define(version: 20181129210251) do
     t.string "postcard"
     t.integer "uid"
     t.string "reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "seq_customers", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "uid"
+    t.date "purchase"
+    t.string "product_1"
+    t.string "product_2"
+    t.string "designation"
+    t.string "fname"
+    t.string "lname"
+    t.string "street_1"
+    t.string "street_2"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "email"
+    t.integer "price_2"
+    t.string "lic_num"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -451,19 +403,6 @@ ActiveRecord::Schema.define(version: 20181129210251) do
     t.string "task_doc_2_content_type"
     t.integer "task_doc_2_file_size"
     t.datetime "task_doc_2_updated_at"
-  end
-
-  create_table "texas_royalties", force: :cascade do |t|
-    t.string "quarter"
-    t.integer "sold"
-    t.decimal "cost"
-    t.decimal "percentage"
-    t.boolean "sent"
-    t.integer "extra_i"
-    t.boolean "extra_b"
-    t.string "extra_s"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "tx_royalties", force: :cascade do |t|

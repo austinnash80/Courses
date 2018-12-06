@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :course_comments
   resources :call_logs
   resources :seq_no_mails do
     collection {post :import}
@@ -36,7 +37,13 @@ Rails.application.routes.draw do
   get 'sequoia/dash_kyle'
 
   resources :date_fields
-  resources :pes_courses
+  resources :pes_courses do
+    collection {post :import}
+    collection do
+      get 'remove_all'
+    end
+  end
+
   resources :postcard_returns
   get 'sales_report/postcard_return_stats'
   get 'sales_report/call_log_stats'
@@ -71,6 +78,9 @@ Rails.application.routes.draw do
   resources :updatesheets
   resources :datasheets do
     collection {post :import}
+    collection do
+      get 'remove_all'
+    end
   end
 
   root :to => 'home#index'

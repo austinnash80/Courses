@@ -89,4 +89,6 @@ gem 'pdfkit' # generate pdfs
 
 gem 'wkhtmltopdf-binary' #need for pdfkit gem
 
+gem 'simple_form'
+
 gem 'derailed', group: :development
