@@ -75,7 +75,7 @@ class CourseCommentsController < ApplicationController
   end
 
   def form_collections
-    @comment_types = ['Out of Date','Grammer Error', 'Content', 'Other']
+    @comment_types = ['Out of Date','General Quality','Confusing Question','Grammer Error','Content Error','Other']
   end
 
   private

@@ -27,9 +27,9 @@
 </br>
   <%= f.input :comment_type, label: 'Comment Type', collection: @comment_types , as: :radio_buttons %>
 </br>
-  <%= f.input :comment_type_other, label: 'If Other' %>
+  <%= f.input :comment_type_other, label: false, placeholder: 'Other Content Type' %>
 </br>
-  <%= f.input :comment_details, label: 'Details' %>
+  <%= f.input :comment_details, label: 'Comment Details' %>
 </br>
   <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
 </br>

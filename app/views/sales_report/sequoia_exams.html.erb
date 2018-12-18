@@ -267,7 +267,13 @@
               <td><strong>CPA</strong></td>
               <td><%= @month_courses_cpa %></td>
               <td><%= @month_exams_cpa %></td>
-              <td><%= number_to_percentage((@month_score_cpa.sum  /  @month_exams_cpa), precision: 1) %></td>
+              <% if @month_exams_cpa != 0 %>
+                <td><%= number_to_percentage((@month_score_cpa.sum  /  @month_exams_cpa), precision: 1) %></td>
+              <% elsif %>
+                <td>-</td>
+              <% end %>
+
+              <!-- <td><%#= @month_exams_cpa != 0 ? number_to_percentage((@month_score_cpa.sum  /  @month_exams_cpa), precision: 1) : %></td> -->
               <% if @month_courses_rated_cpa.sum != 0 %>
                 <td><%= number_with_precision((@month_rating_cpa.sum  /  ( @month_courses_rated_cpa.sum )), precision: 2) %></td>
               <% elsif %>
@@ -281,15 +287,33 @@
               <td><strong>EA</strong></td>
               <td><%= @month_courses_ea %></td>
               <td><%= @month_exams_ea %></td>
-              <td><%= number_to_percentage((@month_score_ea.sum / @month_exams_ea), precision: 1) %></td>
-              <td><%= number_with_precision((@month_rating_ea.sum  /  ( @month_courses_rated_ea.sum )), precision: 2) %></td>
+              <% if  @month_exams_ea != 0 %>
+                <td><%= number_to_percentage((@month_score_ea.sum / @month_exams_ea), precision: 1) %></td>
+              <% elsif %>
+                <td>-</td>
+              <% end %>
+              <% if @month_courses_rated_ea.sum != 0 %>
+                <td><%= number_with_precision((@month_rating_ea.sum  /  ( @month_courses_rated_ea.sum )), precision: 2) %></td>
+              <% elsif %>
+              <td>-</td>
+              <% end %>
+
             </tr>
             <tr class="text-center">
               <td><strong>Total</strong></td>
               <td><strong><%= @month_courses_cpa + @month_courses_ea %></strong></td>
               <td><strong><%= @month_exams_cpa + @month_exams_ea %></strong></td>
-              <td><strong><%= number_to_percentage(@month_score_all.sum / (@month_exams_cpa + @month_exams_ea), precision: 1) %></strong></td>
-              <td><strong><%= number_with_precision((@month_rating_all.sum  /  ( @month_courses_rated_all.sum )), precision: 2) %></strong></td>
+              <% if (@month_exams_cpa + @month_exams_ea) != 0 %>
+                <td><strong><%= number_to_percentage(@month_score_all.sum / (@month_exams_cpa + @month_exams_ea), precision: 1) %></strong></td>
+              <% elsif %>
+                <td>-</td>
+              <% end %>
+              <% if @month_courses_rated_all.sum != 0 %>
+                <td><strong><%= number_with_precision((@month_rating_all.sum  /  ( @month_courses_rated_all.sum )), precision: 2) %></strong></td>
+              <% elsif %>
+                <td>-</td>
+              <% end %>
+
             </tr>
           </tbody>
         </table>

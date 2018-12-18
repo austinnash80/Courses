@@ -59,4 +59,28 @@ $(document).ready(function(){
       });
     });
 
+    // Course Status - Pub Dates
+    $("#myInputPubdates").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myListPubdates tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+
+    // Course Status - Non Active
+    $("#myInputNonactive").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myListNonactive tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+
+    // Course Status - Course Comments
+    $("#myInputComments").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myListCommments tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+
 });

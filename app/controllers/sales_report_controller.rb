@@ -16,9 +16,9 @@ class SalesReportController < ApplicationController
 
   def course_status
     @sequoia_course = Datasheet.all
-    @pes_course = PesCourse.all
-    @pub_dates = Datasheet.order(:pub_date).first(15)
-    @course_comments = CourseComment.all
+    @pes_course = PesCourse.order(:date_removed)
+    @pub_dates = Datasheet.order(:pub_date)
+    @course_comments = CourseComment.order('comment_date DESC')
   end
 
 
