@@ -15,12 +15,13 @@ class CallLogsController < ApplicationController
   # GET /call_logs/new
   def new
     @call_log = CallLog.new
-
     name
+    form_collections
   end
 
   # GET /call_logs/1/edit
   def edit
+    form_collections
   end
 
   # POST /call_logs
@@ -71,6 +72,15 @@ class CallLogsController < ApplicationController
     user_signed_in? && current_user.email == 'hamdo@sequoiacpe.com' ? @name = 'Hamdo' : ''
   end
 
+  def form_collections
+    @companies = ['Sequoia', 'Empire', 'Tax Preparers']
+    @rating = 1..3
+    @q_topic = ['1','2','3','other']
+    @des = ['CPA','EA', 'Tax Preparer', 'Empire', 'Unknown']
+    @questions = ['Q1', 'Q2', 'Q3', 'Other']
+    @answered = ['Answered', 'Not Answered']
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_call_log
@@ -79,6 +89,6 @@ class CallLogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def call_log_params
-      params.require(:call_log).permit(:company, :caller_des, :caller_state, :customer, :caller_fname, :caller_lname, :UID, :call_length, :question_topic, :question_1, :question_2, :answered, :question_answer, :question_difficulty, :caller_satisfaction, :extra_b, :extra_i, :extra_s, :taken, :call_date, :note, :question_1_topic_other, :question_2_topic, :question_2_topic_other, :question_1_other, :question_2_other, :question_2_answered, :question_2_answer, :question_additional, :question_additional_answer, :question_satisfaction, :call_difficulty)
+      params.require(:call_log).permit(:company, :caller_des, :caller_state, :customer, :caller_fname, :caller_lname, :UID, :call_length, :question_topic, :question_1, :question_2, :answered, :question_answer, :question_difficulty, :caller_satisfaction, :extra_b, :extra_i, :extra_s, :taken, :call_date, :note, :question_1_topic_other, :question_2_topic, :question_2_topic_other, :question_1_other, :question_2_other, :question_2_answered, :question_2_answer, :question_additional, :question_additional_answer, :question_satisfaction, :call_difficulty, :time)
     end
 end

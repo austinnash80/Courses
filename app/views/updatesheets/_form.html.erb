@@ -1,148 +1,95 @@
-<%= form_for @updatesheet do |form| %>
-  <% if updatesheet.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(updatesheet.errors.count, "error") %> prohibited this updatesheet from being saved:</h2>
+<%= simple_form_for(@updatesheet) do |f| %>
 
-      <ul>
-      <% updatesheet.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <%= f.error_notification %>
+
+</br>
+  <h3 class="text-center"><strong><%= @updatesheet.seq_number %><%= @updatesheet.seq_version %> - <%= @updatesheet.seq_title %></strong></h3>
+</br>
+
+
+<div class="well well-white col-lg-offset-2 col-lg-8">
+</br>
+
+  <div class="row">
+    <div class="col-lg-2">
+      <%= f.input :seq_number, label: 'Sequoia Number' %>
     </div>
-  <% end %>
-
-  <!-- Course info -->
-  <div class="col-sm-3"> 
-    <div class="well length">
-    <div class="form-group row">
-      <%= form.label :seq_number, 'Course', class: 'col-sm-3 col-form-label' %>
-      <%= form.number_field :seq_number, id: :updatesheet_seq_number %>
+    <div class="col-lg-1">
+      <%= f.input :seq_version, label:  'V.' %>
     </div>
-
-    <div class="form-group row">
-      <%= form.label :seq_version, 'Version', class: 'col-sm-3 col-form-label' %>
-      <%= form.text_field :seq_version, id: :updatesheet_seq_version %>
+    <div class="col-lg-offset-1 col-lg-3">
+      <%= f.input :date_received, label: 'Course was recieved on:' %>
     </div>
-
-    <div class="form-group row">
-      <%= form.label :seq_title, 'Title', class: 'col-sm-3 col-form-label' %>
-      <%= form.text_field :seq_title, id: :updatesheet_seq_title %>
+  </div>
+  <div class="row">
+    <div class="col-lg-2">
+      <%= f.input :pes_number, label: 'PES Number' %>
     </div>
-
-    <div class="form-group row">
-      <%= form.label :pes_number, "PES", class: 'col-sm-3 col-form-label' %>
-      <%= form.number_field :pes_number, id: :updatesheet_pes_number %>
-    </div>
-
-    <div class="form-group row">
-      <%= form.label :pes_version, "Version", class: 'col-sm-3 col-form-label' %>
-      <%= form.text_field :pes_version, id: :updatesheet_pes_version %>
-    </div>
-
-    <div class="field">
-      <%= form.label :date_received %>
-      <%= form.date_select :date_received, id: :updatesheet_date_received %>
-    </div>
-
-    <div class="field form-group">
-      <%= form.label :note_approval, 'Course Approval Notes' %>
-      <%= form.text_area :note_approval, id: :updatesheet_note_approval, class: 'form-control' %>
-    </div>
-
-    </div>
-
-    <div class="actions">
-      <%= form.submit 'Submit', class: 'btn btn-primary' %>
+    <div class="col-lg-1">
+      <%= f.input :pes_version, label: 'V.' %>
     </div>
 
   </div>
-  <!-- End Course Info -->
+<!-- </br> -->
+<% if @updatesheet.extra_boolean == true %>
+  <span class="red"><strong><%= f.input :extra_boolean, label: 'Course is on hold' %></strong></span>
+<% elsif %>
+  <%= f.input :extra_boolean, label: 'Put course on hold' %>
+<% end %>
 
-<!-- Check Boxes -->
-<div class="col-sm-3">
-<div class="well length">
-  <div class="form-group row">
-    <%= form.label :text_complete, 'Text Done', class: 'col-sm-5 col-form-label' %>
-    <%= form.check_box :text_complete, id: :updatesheet_text_complete, class: "" %>
+</br>
+  <%= f.input :note_approval, label: false, placeholder: 'Addtional Notes' %>
+
+</br>
+<div class="well ">
+  <div class="row">
+    <div class="col-lg-2">
+      <%= f.input :text_complete, label: 'Text Done?', as: :radio_buttons %>
+    </div>
+    <div class="col-lg-2">
+      <%= f.input :exam_complete, label: 'Exam Done?', as: :radio_buttons %>
+    </div>
+    <div class="col-lg-2">
+      <%= f.input :course_listed, label: 'Course Listed?', as: :radio_buttons %>
+    </div>
+    <div class="col-lg-3">
+      <%= f.input :date_listed, label: 'Date Listed' %>
+    </div>
+
   </div>
+<!-- </div> -->
+</br>
+</br>
 
-  <div class="form-group row">
-    <%= form.label :exam_complete, 'Exam Done', class: 'col-sm-5 col-form-label' %>
-    <%= form.check_box :exam_complete, id: :updatesheet_exam_complete, class: '' %>
+<!-- <div class="well"> -->
+  <div class="row">
+    <div class="col-lg-2">
+      <%= f.input :role, label: 'Role' %>
+    </div>
+    <div class="col-lg-2">
+      <%= f.input :rolep, label: 'Rolep' %>
+    </div>
+    <div class="col-lg-2">
+      <%= f.input :irs_number, label: 'IRS#' %>
+    </div>
   </div>
-
-  <div class="form-group row">
-    <%= form.label :course_listed, 'Course Listed', class: 'col-sm-5 col-form-label' %>
-    <%= form.check_box :course_listed, id: :updatesheet_course_listed, class: '' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :date_listed, class: '' %>
-    <%= form.date_select :date_listed, id: :updatesheet_date_listed %>
-  </div>
-
-  <div class="form-group row">
-    <%= form.label :proofed, 'Proofed', class: 'col-sm-5 col-form-label' %>
-    <%= form.check_box :proofed, id: :updatesheet_proofed, class: '' %>
-  </div>
-
-  <div class="form-group row">
-    <%= form.label :extra_boolean, 'Put Course On Hold', class: 'col-sm-7 col-form-label' %>
-    <%= form.check_box :extra_boolean, id: :updatesheet_extra_boolean, class: '' %>
+<!-- </div> -->
+</br>
+</br>
+<!-- <div class="well"> -->
+  <div class="row">
+    <div class="col-lg-2">
+      <%= f.input :proofed, label: 'Proofed?', as: :radio_buttons %>
+    </div>
+    <div class="col-lg-10">
+      <%= f.input :proofed_note, label: false, placeholder: 'Proofing Notes' %>
+    </div>
   </div>
 </div>
 
-</div>
-<!-- End Check boxes -->
+</br>
+<%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
 
-<!-- Course Details -->
-<div class="col-sm-3">
-<div class="well length">
-  <div class="field">
-    <%= form.label :role %>
-    <%= form.text_field :role, id: :updatesheet_role %>
-  </div>
-
-  <div class="field">
-    <%= form.label :rolep %>
-    <%= form.text_field :rolep, id: :updatesheet_rolep %>
-  </div>
-
-  <div class="field">
-    <%= form.label :irs_number %>
-    <%= form.text_field :irs_number, id: :updatesheet_irs_number %>
-  </div>
-
-  <div class="field form-group">
-    <%= form.label :proofed_note, 'Course Notes' %>
-    <%= form.text_area :proofed_note, id: :updatesheet_proofed_note, class: 'form-control' %>
-  </div>
-
-</div>
-</div>
-</div>
-<!-- End Course Details -->
-
-<!-- <div class="field">
-  <%= form.label :datasheet_id %>
-  <%= form.number_field :datasheet_id, id: :updatesheet_datasheet_id %>
-</div> -->
-
-  <!-- <div class="field">
-    <%= form.label :extra_string %>
-    <%= form.text_field :extra_string, id: :updatesheet_extra_string %>
-  </div>
-
-  <div class="field">
-    <%= form.label :extra_integer %>
-    <%= form.number_field :extra_integer, id: :updatesheet_extra_integer %>
-  </div>
-</div> -->
-
-<!-- <div class="field">
-  <%= form.label :update_course %>
-  <%= form.check_box :update_course, id: :updatesheet_update_course %>
-</div> -->
-
+</div> <!--End Well -->
 
 <% end %>

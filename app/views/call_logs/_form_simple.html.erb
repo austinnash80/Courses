@@ -4,7 +4,7 @@
 </br>
   <div class="row">
     <div class="col-lg-4">
-      <%= f.input :taken, label: false, hint: '' %>
+      <%= f.input :taken, label: false, input_html: { value: @name }, hint: '' %>
     </div>
     <div class="col-lg-4">
       <%= f.input :call_date, label: false %>
@@ -27,12 +27,15 @@
       <%= f.input :company, label: 'Company', collection: @companies, as: :radio_buttons %>
     </div>
     <div class="col-lg-3">
-      <%= f.input :caller_des, placeholder: 'Des', collection: @des, as: :radio_buttons %>
+      <%= f.input :caller_des, label: 'Designation', placeholder: 'Des', collection: @des, as: :radio_buttons %>
+    </div>
+    <div class="col-lg-3">
+      <%= f.input :caller_state, label: 'Caller Lic State', placeholder: 'ex: CA', hint: 'Emprie or Sequoia' %>
     </div>
   </div>
 <!-- </br> -->
 
-    <%= f.input :customer, label: 'Was the caller a customer?', as: :radio_buttons %>
+  <%= f.input :customer, label: 'Was the caller a customer?', as: :radio_buttons %>
 <div class="row">
   <div class="col-lg-3">
     <%= f.input :UID, label: false, placeholder: 'UID' %>
@@ -62,9 +65,9 @@
       <h2>Question 1</h2>
       </br>
         <%= f.input :question_topic, label: 'Select Topic', collection: @q_topic, as: :select %>
-        <%= f.input :question_1_topic_other, label: false, placeholder: 'If Other Topics' %>
+        <%= f.input :question_1_topic_other, label: false, placeholder: 'If Other' %>
         <%= f.input :question_1, label: 'Select Question',  as: :select, collection: @questions %>
-        <%= f.input :question_1_other, label: false, placeholder: 'If Other Question' %>
+        <%= f.input :question_1_other, label: false, placeholder: 'If Other' %>
         <%= f.input :answered, label: 'Were you able to answer this question?', as: :radio_buttons %>
         <%= f.input :question_answer, label: false, placeholder: 'Enter Answer'  %>
     </div>
@@ -75,7 +78,7 @@
         <%= f.input :question_2_topic_other, label: false, placeholder: 'If Other Topics' %>
         <%= f.input :question_2, label: 'Select Question', collection: @questions , as: :select %>
         <%= f.input :question_2_other, label: false, placeholder: 'If Other Question' %>
-        <%= f.input :question_2_answered, label: false, collection: @answered, as: :radio_buttons %>
+        <%= f.input :question_2_answered, label: 'Were you able to answer this question?', as: :radio_buttons %>
         <%= f.input :question_2_answer, label: false, placeholder: 'Enter Answer' %>
     </div>
     <div id="q3" class="tab-pane fade">
@@ -105,9 +108,12 @@
     </div>
   </div>
   </div>
-</br>
+<!-- </br> -->
 </br>
   <%= f.input :note, label: false, placeholder: 'Additional Notes From This Call' %>
+<p>
+  <strong><%= link_to 'Comment on specific course?', new_course_comment_path, target: "_blank" %></strong> Add a course comment in addtion to this call log
+</p>
 </br>
 
   <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>

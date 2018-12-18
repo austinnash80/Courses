@@ -1,4 +1,5 @@
 class CourseCommentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_course_comment, only: [:show, :edit, :update, :destroy]
 
   # GET /course_comments
@@ -15,17 +16,20 @@ class CourseCommentsController < ApplicationController
   # GET /course_comments/new
   def new
     @course_comment = CourseComment.new
+    form_collections
     name
   end
 
   # GET /course_comments/1/edit
   def edit
+    form_collections
   end
 
   # POST /course_comments
   # POST /course_comments.json
   def create
     @course_comment = CourseComment.new(course_comment_params)
+    form_collections
 
     respond_to do |format|
       if @course_comment.save
@@ -68,6 +72,10 @@ class CourseCommentsController < ApplicationController
     user_signed_in? && current_user.email == 'kyle@sequoiacpe.com' ? @name = 'Kyle' : ''
     user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' ? @name = 'Ashley' : ''
     user_signed_in? && current_user.email == 'hamdo@sequoiacpe.com' ? @name = 'Hamdo' : ''
+  end
+
+  def form_collections
+    @comment_types = ['Out of Date','Grammer Error', 'Content', 'Other']
   end
 
   private

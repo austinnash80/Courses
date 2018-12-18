@@ -10,6 +10,8 @@ class SalesReportController < ApplicationController
   def call_log_stats
     @sequoia_call_log_total = CallLog.where(:company => 'Sequoia').group(:taken).count
     @sequoia_call_log_total_time = CallLog.where(:company => 'Sequoia').group(:taken).sum(:call_length)
+    @empire_call_log_total = CallLog.where(:company => 'Empire').group(:taken).count
+    @empire_call_log_total_time = CallLog.where(:company => 'Empire').group(:taken).sum(:call_length)
   end
 
   def course_status

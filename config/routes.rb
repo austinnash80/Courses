@@ -43,7 +43,7 @@ Rails.application.routes.draw do
       get 'remove_all'
     end
   end
-
+  
   resources :postcard_returns
   get 'sales_report/postcard_return_stats'
   get 'sales_report/call_log_stats'

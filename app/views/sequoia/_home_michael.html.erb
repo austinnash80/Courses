@@ -21,6 +21,11 @@
           <td><strong><%= link_to 'New Call', new_call_log_path %></strong></td>
         </tr>
         <tr>
+          <td>Course Comments</td>
+          <td><strong>Ongoing</strong></td>
+          <td><%= link_to 'New Comment', new_course_comment_path %> | <%= link_to 'View', course_comments_path %></td>
+        </tr>
+        <tr>
           <td>Course Updating</td>
           <% if @course_update_status.sum == 0 %>
             <td class="green"><strong>Up-to-date</strong></td>

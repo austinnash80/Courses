@@ -1,5 +1,5 @@
 class PesCoursesController < ApplicationController
-  before_action :set_pes_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_pes_course, only: [:show, :edit, :update, :destroy, :change]
 
   # GET /pes_courses
   # GET /pes_courses.json

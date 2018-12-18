@@ -3,7 +3,7 @@
   <%= f.error_notification %>
   <div class="row">
     <div class="col-lg-4">
-      <%= f.input :taken, label: false, input_html: { value: @name }, hint: '', class: 'col-lg-2' %>
+      <%= f.input :taken, label: false, hint: '', class: 'col-lg-2' %>
     </div>
     <div class="col-lg-4">
       <%= f.input :comment_date, label: false %>
@@ -25,7 +25,7 @@
     </div>
   </div>
 </br>
-  <%= f.input :comment_type, label: 'Comment Type', collection: @comment_types , as: :radio_buttons %>
+<%= f.input :comment_type, label: 'Comment Type', collection: @comment_types , as: :radio_buttons %>
 </br>
   <%= f.input :comment_type_other, label: 'If Other' %>
 </br>

@@ -4,15 +4,17 @@
   <h1>Call Log</h1>
 </div>
 </br>
-<%= link_to 'Edit Call', edit_call_log_path(@call_log), class: 'btn btn-primary' %> <%= link_to 'Back to Index', call_logs_path, class: 'btn btn-primary' %>
+<div class="col-lg-offset-2 col-lg-8">
+<%= link_to 'Back to Index', call_logs_path, class: 'btn btn-primary' %> <%= link_to 'Edit Call', edit_call_log_path(@call_log), class: 'btn btn-primary' %>
 </br>
 </br>
-<div class="col-lg-offset-2 col-lg-4">
-  <div class="well">
-    <h2 class="text-center">Call Details</h2>
-
+<div class="well well-white">
+    <h3 class=""><strong>Call Details</strong></h3>
+<!-- </br> -->
+<div class="row">
+  <div class="col-lg-6">
     <p>
-      <strong>Taken:</strong>
+      <strong>Taken By:</strong>
       <%= @call_log.taken %>
     </p>
     <p>
@@ -23,11 +25,29 @@
       <strong>Call length:</strong>
       <%= @call_log.call_length %>
     </p>
+
+    <div class="">
+      <p>
+        <strong>Question difficulty:</strong>
+        <%= @call_log.question_difficulty %>
+      </p>
+
+      <p>
+        <strong>Question satisfaction:</strong>
+        <%= @call_log.question_satisfaction %>
+      </p>
+      <p>
+        <strong>Call difficulty:</strong>
+        <%= @call_log.call_difficulty %>
+      </p>
+      <p>
+        <strong>Caller satisfaction:</strong>
+        <%= @call_log.caller_satisfaction %>
+      </p>
+      </div>
   </div>
 
-  <div class="well">
-    <h2 class="text-center">Caller Info</h2>
-
+  <div class="col-lg-6">
     <p>
       <strong>Company:</strong>
       <%= @call_log.company %>
@@ -65,103 +85,137 @@
 
   </div>
 </div>
+</br>
 
-<div class="col-lg-4">
-  <div class="well">
-    <h2 class="text-center">Question 1</h2>
-    <div class="well">
+<h3 class=""><strong>Question</strong></h3>
+<!-- </br> -->
+
+  <% if @call_log.answered == true %>
+    <h5 class="green"> Question was answered succesfully </h5>
+  <% elsif %>
+    <h5 class="red"> Question was unable to be answered </h5>
+  <% end %>
+
+
+  <% if @call_log.question_topic != 'Other' %>
     <p>
-      <strong>Question topic:</strong>
+      <strong>Topic:</strong>
       <%= @call_log.question_topic %>
     </p>
 
+  <% elsif @call_log.question_topic == 'Other'%>
     <p>
-      <strong>Question Topic Other:</strong>
+      <strong>Topic (other):</strong>
       <%= @call_log.question_1_topic_other %>
     </p>
+  <% end %>
 
+
+  <% if @call_log.question_1 != 'Other' %>
     <p>
-      <strong>Question 1:</strong>
+      <strong>Question:</strong>
       <%= @call_log.question_1 %>
     </p>
 
+  <% elsif @call_log.question_1 == 'Other'%>
     <p>
-      <strong>Question 1 Other:</strong>
+      <strong>Question (other)</strong>
       <%= @call_log.question_1_other %>
     </p>
-
-    <p>
-      <strong>Answered:</strong>
-      <%= @call_log.answered %>
-    </p>
+  <% end %>
 
     <p>
       <strong>Question answer:</strong>
       <%= @call_log.question_answer %>
     </p>
-  </div>
 
-    <h2 class="text-center">Question 2</h2>
-    <div class="well">
+  </br>
+
+<% if @call_log.question_2_topic.empty? == false && @call_log.question_2_topic_other.empty? == false %>
+
+<h3 class=""><strong>Question 2</strong></h3>
+<!-- </br> -->
+
+  <% if @call_log.question_2_answer == true %>
+    <h5 class="green"> Question was answered succesfully </h5>
+  <% elsif %>
+    <h5 class="red"> Question was unable to be answered </h5>
+  <% end %>
+
+
+  <% if @call_log.question_2_topic != 'Other' %>
     <p>
-      <strong>Question topic:</strong>
+      <strong>Topic:</strong>
       <%= @call_log.question_2_topic %>
     </p>
 
+  <% elsif @call_log.question_2_topic == 'Other'%>
     <p>
-      <strong>Question Topic Other:</strong>
+      <strong>Topic (other):</strong>
       <%= @call_log.question_2_topic_other %>
     </p>
+  <% end %>
 
+
+  <% if @call_log.question_2 != 'Other' %>
     <p>
-      <strong>Question 1:</strong>
+      <strong>Question:</strong>
       <%= @call_log.question_2 %>
     </p>
 
+  <% elsif @call_log.question_2 == 'Other'%>
     <p>
-      <strong>Question 1 Other:</strong>
+      <strong>Question (other)</strong>
       <%= @call_log.question_2_other %>
     </p>
-
-    <p>
-      <strong>Answered:</strong>
-      <%= @call_log.question_2_answered %>
-    </p>
+  <% end %>
 
     <p>
       <strong>Question answer:</strong>
       <%= @call_log.question_2_answer %>
     </p>
-  </div>
+  </br>
+<% end %>
 
-<div class="well">
-  <p>
-    <strong>Addtional Question:</strong>
-    <%= @call_log.question_additional %>
-  </p>
+  <% if @call_log.question_additional.empty? == false %>
+    <h3 class=""><strong>Addtional Questions</strong></h3>
+    <!-- </br> -->
 
-  <p>
-    <strong>Answer:</strong>
-    <%= @call_log.question_additional_answer %>
-  </p>
-</div>
+    <p>
+      <strong>Addtional Question:</strong>
+      <%= @call_log.question_additional %>
+    </p>
 
-</div>
-  <div class="well">
+    <p>
+      <strong>Answer:</strong>
+      <%= @call_log.question_additional_answer %>
+    </p>
+
+  </br>
+  <% end %>
+
+<% if @call_log.note.empty? == false %>
+<h3 class=""><strong>Notes</strong></h3>
   <p>
     <strong>Call Note:</strong>
     <%= @call_log.note %>
+<% end %>
   </p>
 
-  <p>
-    <strong>Question difficulty:</strong>
-    <%= @call_log.question_difficulty %>
-  </p>
-
-  <p>
-    <strong>Caller satisfaction:</strong>
-    <%= @call_log.caller_satisfaction %>
-  </p>
+<div class="row">
+  <div class="col-lg-3">
+  <h4><strong> Questions: </strong></h4>
+    <p><%= @call_log.question_difficulty %> - Difficulty</p>
+    <p><%= @call_log.question_satisfaction %> - Satisfaction</p>
   </div>
+  <div class="col-lg-3">
+    <h4><strong> Call: </strong></h4>
+    <p><%= @call_log.call_difficulty %> - Difficulty</p>
+    <p><%= @call_log.caller_satisfaction %> - Satisfaction</p>
+  </div>
+
+
 </div>
+</div>
+
 </div>

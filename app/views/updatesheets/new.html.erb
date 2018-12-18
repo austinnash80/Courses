@@ -1,5 +1,8 @@
-<h1>New Updatesheet</h1>
-
-<%= render 'new_form', updatesheet: @updatesheet %>
-
-<%= link_to 'Back', updatesheets_path %>
+</br>
+<h1 class="text-center">Add New Course For Updating</h1>
+<!-- </br> -->
+  <div class="col-lg-offset-2">
+    <%= link_to 'Updatesheet', updatesheets_path, class: 'btn btn-default' %>
+    <%= link_to 'Datasheet', datasheets_path, class: 'btn btn-default' %>
+  </div>
+<%= render 'form_simple', updatesheet: @updatesheet %>

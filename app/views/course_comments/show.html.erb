@@ -1,59 +1,45 @@
 <p id="notice"><%= notice %></p>
 
+<div class="well jumbotron text-center">
+  <h1>Course Comment</h1>
+  <p><%= @course_comment.course_number %><%= @course_comment.course_version %> -</p>
+</div>
+</br>
+<div class="col-lg-offset-2 col-lg-8">
+<%= link_to 'Back to Index', course_comments_path, class: 'btn btn-primary' %> <%= link_to 'Edit Comment', edit_course_comment_path(@course_comment), class: 'btn btn-primary' %>
+</br>
+</br>
+<div class="well well-white" >
+  <h3 class=""><strong>Details</strong></h3>
+</br>
 <p>
-  <strong>Taken:</strong>
+  <strong>Taken By:</strong>
   <%= @course_comment.taken %>
 </p>
 
 <p>
-  <strong>Course number:</strong>
-  <%= @course_comment.course_number %>
+  <strong>Date:</strong>
+  <%= @course_comment.comment_date.strftime('%-m/%-d/%y') %>
 </p>
 
 <p>
-  <strong>Course version:</strong>
-  <%= @course_comment.course_version %>
+  <strong>Course:</strong>
+  <%= @course_comment.course_number %><%= @course_comment.course_version %> - ''
 </p>
 
 <p>
-  <strong>Comment type:</strong>
-  <%= @course_comment.comment_type %>
-</p>
-
-<p>
-  <strong>Comment type other:</strong>
-  <%= @course_comment.comment_type_other %>
-</p>
-
-<p>
-  <strong>Comment details:</strong>
-  <%= @course_comment.comment_details %>
-</p>
-
-<p>
-  <strong>Comment date:</strong>
-  <%= @course_comment.comment_date %>
-</p>
-
-<p>
-  <strong>Extra s:</strong>
-  <%= @course_comment.extra_s %>
-</p>
-
-<p>
-  <strong>Extra i:</strong>
+  <strong>UID:</strong>
   <%= @course_comment.extra_i %>
 </p>
-
+</br>
 <p>
-  <strong>Extra b:</strong>
-  <%= @course_comment.extra_b %>
+  <strong>Type of Comment:</strong>
+  <%= @course_comment.comment_type != 'Other' ? @course_comment.comment_type : @course_comment.comment_type_other %>
 </p>
-
+</br>
 <p>
-  <strong>Extra d:</strong>
-  <%= @course_comment.extra_d %>
+  <!-- <strong>Comment details:</strong> -->
+  <%= @course_comment.comment_details %>
 </p>
-
-<%= link_to 'Edit', edit_course_comment_path(@course_comment) %> |
-<%= link_to 'Back', course_comments_path %>
+</div>
+</div> <!-- Main well -->

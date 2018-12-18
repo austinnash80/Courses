@@ -1,8 +1,8 @@
-<div class="well jumbotron">
-  <h1 class="text-center">New Course Comment</h1>
-</div>
-<div class="col-lg-3">
-<%= render 'form', course_comment: @course_comment %>
+
+<strong><%= link_to 'Course Comment Index', course_comments_path %></strong>
 </br>
-<%= link_to 'Course Comment Index', course_comments_path %>
+<div class="well well-white col-md-6 col-md-offset-3">
+<%= render 'form', course_comment: @course_comment %>
+<!-- </br> -->
+<!-- <%= link_to 'Course Comment Index', course_comments_path %> -->
 </div>

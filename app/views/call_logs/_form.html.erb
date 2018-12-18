@@ -186,19 +186,19 @@
     <%= form.select :question_difficulty,[1,2,3], id: :call_log_question_difficulty, class: 'form-control' %>
   </div>
 
-  <!-- <div class="form-group form-inline">
-    <%#= form.label :question_satisfaction, 'Satisfaction with Answer', class: 'control-label' %>
-    <%#= form.select :question_satisfaction,[1,2,3], id: :call_log_question_satisfaction, class: 'form-control' %>
-  </div> -->
-
-  <div class="field form-inline">
-    <%= form.label :caller_satisfaction, 'Caller Satisfaction' %>
-    <%= form.select :caller_satisfaction,[1,2,3], id: :call_log_caller_satisfaction %>
+  <div class="form-group form-inline">
+    <%= form.label :question_satisfaction, 'Question Satisfaction', class: 'control-label' %>
+    <%= form.select :question_satisfaction,[1,2,3], id: :call_log_question_satisfaction, class: 'form-control' %>
   </div>
 
   <div class="field form-inline">
     <%= form.label :call_difficulty, 'Call Difficulty' %>
     <%= form.select :call_difficulty,[1,2,3], id: :call_log_call_difficulty %>
+  </div>
+
+  <div class="field form-inline">
+    <%= form.label :caller_satisfaction, 'Caller Satisfaction' %>
+    <%= form.select :caller_satisfaction,[1,2,3], id: :call_log_caller_satisfaction %>
   </div>
 
 </div>

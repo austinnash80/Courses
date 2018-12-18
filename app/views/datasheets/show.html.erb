@@ -1,113 +1,116 @@
 <p id="notice"><%= notice %></p>
 
-<div class="jumbotron text-center">
-  <h1><%= @datasheet.seq_number %><%= @datasheet.seq_version %></h1>
-  <p>  <%= @datasheet.seq_title %></p>
-</div>
-
-<h4><%= link_to 'Back to Datasheet', datasheets_path %> | <%= link_to 'Edit', edit_datasheet_path(@datasheet) %></h4>
+<!-- <div class="well jumbotron text-center">
+  <h1>Course Details</h1>
+  <p><%= @datasheet.seq_number %><%= @datasheet.seq_version %> - <%= @datasheet.seq_title %></p>
+</div> -->
 </br>
-<!-- <p>
-  <strong>Seq number:</strong>
+<div class="col-lg-offset-2 col-lg-8">
+  <h3 class="text-center"><strong><%= @datasheet.seq_number %><%= @datasheet.seq_version %> - <%= @datasheet.seq_title %></strong></h3>
+<%= link_to 'Back to Index', datasheets_path, class: 'btn btn-primary' %> <%= link_to 'Edit Course', edit_datasheet_path(@datasheet), class: 'btn btn-primary' %>
+</br>
+</br>
+<div class="well well-white">
+  <!-- <h2><strong>Course</strong></h2> -->
+<!-- </br> -->
+
+<% if @datasheet.active == true %>
+  <h4 class="green"><strong>Active Course</strong></h4>
+  <% elsif %>
+  <h4 class="red"><strong>Inactive Course</strong></h4>
+<% end %>
+</br>
+<div class="row">
+<div class="col-lg-4">
+<p>
+  <strong>Number:</strong>
   <%= @datasheet.seq_number %>
 </p>
-
 <p>
-  <strong>Seq version:</strong>
+  <strong>Current Version:</strong>
   <%= @datasheet.seq_version %>
-</p> -->
-
+</p>
+<p>
+  <strong>Title:</strong>
+  <%= @datasheet.seq_title %>
+</p>
 <p>
   <strong>Category:</strong>
   <%= @datasheet.category %>
 </p>
 
-<!-- <p>
-  <strong>Seq title:</strong>
-  <%= @datasheet.seq_title %>
-</p> -->
-
 <p>
   <strong>Hours:</strong>
   <%= @datasheet.hours %>
 </p>
+</div>
+<div class="col-lg-4">
 
 <p>
-  <strong>Pub date:</strong>
-  <%= @datasheet.pub_date %>
+  <strong>PES Number:</strong>
+  <%= @datasheet.pes_number != 0 ? @datasheet.pes_number : 'Not PES Course'%>
 </p>
 
 <p>
-  <strong>Seq update:</strong>
-  <%= @datasheet.seq_update %>
+  <strong>PES Current Version:</strong>
+  <%= @datasheet.pes_number != 0 ? @datasheet.pes_version : 'N/A'%>
+</div>
+
+<div class="col-lg-4">
+
+<p>
+  <strong>Publication Date:</strong>
+  <%= @datasheet.pub_date.blank? == false ? @datasheet.pub_date.strftime('%-m/%-d/%y') : 'n/a' %>
 </p>
 
 <p>
-  <strong>Seq original list:</strong>
-  <%= @datasheet.seq_original_list %>
+  <strong>Sequoia Last Update:</strong>
+  <%= @datasheet.seq_update.blank? == false && @datasheet.seq_update.strftime('%-m/%-d/%y') != '1/1/13' && @datasheet.seq_update.strftime('%-m/%-d/%y') != @datasheet.seq_original_list.strftime('%-m/%-d/%y') ? @datasheet.seq_update.strftime('%-m/%-d/%y') : 'N/A' %>
 </p>
 
 <p>
-  <strong>Active:</strong>
-  <%= @datasheet.active %>
+  <strong>Original listing Date:</strong>
+  <%= @datasheet.seq_original_list.blank? == false && @datasheet.seq_original_list.strftime('%-m/%-d/%y') != '1/1/13' ? @datasheet.seq_original_list.strftime('%-m/%-d/%y') : 'N/A' %>
 </p>
 
+</div>
+</div>
+</br>
+</br>
 <p>
-  <strong>Drop date:</strong>
-  <%= @datasheet.drop_date %>
+  <strong>Addtional Course Note:</strong>
+  <%= @datasheet.course_note.blank? == false ? @datasheet.course_note : 'N/A'%>
 </p>
+</br>
 
-<p>
-  <strong>Drop reason:</strong>
-  <%= @datasheet.drop_reason %>
-</p>
+<% if @datasheet.active == false %>
+  <div class="well ">
+</br>
+    <p>
+      <strong>Date Dropped:</strong>
+      <%= @datasheet.drop_date.blank? == false ? @datasheet.drop_date.strftime('%-m/%-d/%y') : 'n/a' %>
+    </p>
 
-<p>
-  <strong>P number:</strong>
-  <%= @datasheet.pes_number %>
-</p>
+    <p>
+      <strong>Reason Course Was Dropped:</strong>
+      <%= @datasheet.drop_reason.blank? == false ? @datasheet.drop_reason : 'N/A' %>
+    </p>
+  </div>
+<% end %>
 
-<p>
-  <strong>P version:</strong>
-  <%= @datasheet.pes_version %>
-</p>
+<% if @datasheet.needs_approval == true %>
+  <div class="well well-white ">
+  <h4><strong>Course Needs Specific aproval</strong></h4>
+    <p>
+      <!-- <strong>Has Approval:</strong> -->
+      <%= @datasheet.has_approval == true ? 'Has Approval' : 'Does not have approval' %>
+    </p>
+    <p>
+      <!-- <strong>Reason Course Was Dropped:</strong> -->
+      <%= @datasheet.approval_info %>
+    </p>
+  </div>
+  </br>
+<% end %>
 
-<!-- <p>
-  <strong>Pes listed:</strong>
-  <%= @datasheet.pes_listed %>
-</p> -->
-
-<p>
-  <strong>Needs approval:</strong>
-  <%= @datasheet.needs_approval %>
-</p>
-
-<p>
-  <strong>Has approval:</strong>
-  <%= @datasheet.has_approval %>
-</p>
-
-<p>
-  <strong>Approval info:</strong>
-  <%= @datasheet.approval_info %>
-</p>
-
-<p>
-  <strong>Course note:</strong>
-  <%= @datasheet.course_note %>
-</p>
-
-<p>
-  <strong>Extra note:</strong>
-  <%= @datasheet.extra_note %>
-</p>
-
-<p>
-  <strong>Extra boolean:</strong>
-  <%= @datasheet.extra_boolean %>
-</p>
-
-<p>
-  <strong>Extra integer:</strong>
-  <%= @datasheet.extra_integer %>
-</p>
+</div> <!--Well end -->

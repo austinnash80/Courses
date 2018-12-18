@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181206220541) do
+ActiveRecord::Schema.define(version: 20181213223248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20181206220541) do
     t.text "question_additional_answer"
     t.integer "question_satisfaction"
     t.integer "call_difficulty"
+    t.time "call_time"
   end
 
   create_table "copyrights", force: :cascade do |t|

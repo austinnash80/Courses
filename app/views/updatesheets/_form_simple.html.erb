@@ -1,0 +1,52 @@
+<%= simple_form_for(@updatesheet) do |f| %>
+
+  <%= f.error_notification %>
+</br>
+<div class="well well-white col-lg-offset-2 col-lg-8">
+</br>
+  <%= f.input :date_received, label: false, hint: 'When update was recieved from PES' %>
+</br>
+  <div class="row">
+  <div class="col-lg-3">
+    <% if params[:pes_number] == 0 %>
+      <%= f.input :pes_number, label: 'PES Number', input_html: { value: params[:pes_number] } %>
+    <% elsif %>
+      <%= f.input :pes_number, label: 'PES Number', input_html: { value: params[:pes_number] }, hint: 'Non-PES = 0' %>
+    <% end %>
+
+
+
+
+  <% if params[:pes_version].blank? == false %>
+    <%= f.input :pes_version, label: 'PES Version', input_html: { value: params[:pes_version].next }, hint: 'Double Check Version'  %>
+  <% elsif %>
+    <%= f.input :pes_version, label: 'PES Version', input_html: { value: params[:pes_version] }, hint: 'Non-PES = blank' %>
+  <% end %>
+
+</div>
+<div class="col-lg-3">
+  <%= f.input :seq_number, label: 'Sequoia Number', input_html: { value: params[:seq_number] } %>
+  <%= f.input :seq_version, label: 'Sequoia Version', input_html: { value: params[:seq_version].next, }, hint: 'Double Check Verion' %>
+</div>
+</div>
+</br>
+<div class="row">
+  <div class="col-lg-3">
+  <%= f.input :update_course, label: 'Is this an update to an existing Sequoia course?', as: :radio_buttons %>
+</div>
+<div class="col-lg-3">
+  <%= f.input :extra_boolean, label: 'Do not list course until further notice', as: :radio_buttons %>
+</div>
+
+<div class="col-lg-12">
+</br>
+<%= f.input :note_approval, label: false, placeholder: 'Addtional Notes' %>
+</div>
+
+</div>
+</br>
+<%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
+
+</div> <!--End Well -->
+
+<% end %>
