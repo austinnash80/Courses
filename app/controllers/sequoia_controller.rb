@@ -127,111 +127,7 @@ def sales
       @sales_last_year_new_mem = SequoiaCustomer.where(:purchase_date => Date.today.last_year.beginning_of_year..Date.today.last_year.end_of_year ).where(:what => 'Membership-First').pluck(:price).sum
       @sales_last_year_return_mem = SequoiaCustomer.where(:purchase_date => Date.today.last_year.beginning_of_year..Date.today.last_year.end_of_year ).where(:what => 'Membership-Renewal').pluck(:price).sum
 # End Last Year Sales
-    #   @seq_customers_all.each do |i|
-    #     @cpa_purchases = SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => (Date.today - 2))
-    #     i['who'] == 'CPA' ? @CPA_all_time = Array.new.push(i['price']) : ''
-    #     i['who'] == 'EA' ? @EA_all_time = Array.new.push.push(i['price']) : ''
-    #     i['who'] == 'AFSP' ? @AFSP_all_time = Array.new.push.push(i['price']) : ''
-    #     @total_all_time = Array.new.push.push(i['price'])
-    #   end
-    #
-    #   @yesterday_all = []
-    #   # @yesterday_cpa = []
-    #   # @yesterday_ea = []
-    #   # @yesterday_afsp = []
-    #
-    #
-    #   @seq_customers_all.each do |i|
-    #     i['purchase_date'] > 2.day.ago..Time.now ? i['purchase_date'] < 1.day.ago..Time.now ? (
-    #       i['who'] == 'CPA' ? @yesterday_cpa = Array.new.push(i['price']) : ''
-    #       i['who'] == 'EA' ? @yesterday_ea = Array.new.push(i['price']) : ''
-    #       i['who'] == 'AFSP' ? @yesterday_afsp = Array.new.push(i['price']) : ''
-    #       @yesterday_all.push(i['price'])
-    #     ) : '' : ''
-    #   end
-    #
-    #   @what_new_cpa = []
-    #   @what_new_ea = []
-    #   @what_renew_cpa = []
-    #   @what_renew_ea = []
-    #   @what_ethics = []
-    #   @what_afsp = []
-    #
-    #   @seq_customers_all.each do |i|
-    #     i['purchase_date'] > 2.day.ago..Time.now ? i['purchase_date'] < 1.day.ago..Time.now ? (
-    #       i['who'] == 'CPA' && i['what'] == 'Membership-First' ? @what_new_cpa.push(i['price']) : ''
-    #       i['who'] == 'EA' && i['what'] == 'Membership-First' ? @what_new_ea.push(i['price']) : ''
-    #       i['who'] == 'CPA' && i['what'] == 'Membership-Renewal' ? @what_renew_cpa.push(i['price']) : ''
-    #       i['who'] == 'EA' && i['what'] == 'Membership-Renewal' ? @what_renew_ea.push(i['price']) : ''
-    #       i['who'] == 'CPA' && i['what'] == 'Ethics' ? @what_ethics.push(i['price']) : ''
-    #       i['who'] == 'AFSP' ? @what_afsp.push(i['price']) : ''
-    #     ) : '' : ''
-    #   end
-    #
-    # @cpa1 = []
-    # @ea1 = []
-    # @afsp1 = []
-    # @mem_first1 = []
-    # @mem_renewal1 = []
-    # @ethics1 = []
-    # @cpa2 = []
-    # @ea2 = []
-    # @afsp2 = []
-    # @cpa3 = []
-    # @ea3 = []
-    # @afsp3 = []
-    # @mem_first2 = []
-    # @mem_renewal2 = []
-    # @ethics2 = []
-    # @mem_first3 = []
-    # @mem_renewal3 = []
-    # @ethics3 = []
-    # @mtd_total =[]
-    # @last_month_total = []
-    #
-    # @t = SequoiaCustomer.group_by_year(:purchase_date, current: false, format: '%Y').sum(:price)
-    # # @t6 = SequoiaCustomer.group_by_year(:purchase_date, format: '%Y').group(:who).sum(:price)
-    # @t6 = SequoiaCustomer.group(:what).sum(:price)
-    # @t7 = SequoiaCustomer.sum(:price)
-    #
-    # @t1 = SequoiaCustomer.group_by_day(:purchase_date, last: 3, format: ('%a')).group(:who).sum(:price)
-    # @t2 = SequoiaCustomer.group_by_day(:purchase_date, last: 3, format: ('%a')).group(:what).sum(:price)
-    #
-    # @t3 = SequoiaCustomer.group_by_month(:purchase_date, last: 3, format: ('%B')).group(:who).sum(:price)
-    # @t4 = SequoiaCustomer.group_by_month(:purchase_date, last: 3, format: ('%B')).sum(:price)
-    # @t5 = SequoiaCustomer.group_by_month(:purchase_date, last: 3, format: ('%B')).group(:what).sum(:price)
-    #
-    # @t1.each do |key, value|
-    #     key[1] == "CPA" && key[0] == 1.day.ago.strftime('%a') ? @cpa1.push(value) : ''
-    #     key[1] == "EA" && key[0] == 1.day.ago.strftime('%a') ? @ea1.push(value) : ''
-    #     key[1] == "AFSP" && key[0] == 1.day.ago.strftime('%a') ? @afsp1.push(value) : ''
-    # end
-    #
-    # @t2.each do |key, value|
-    #     key[1] == "Membership-First" && key[0] == 1.day.ago.strftime('%a') ? @mem_first1.push(value) : ''
-    #     key[1] == "Membership-Renewal" && key[0] == 1.day.ago.strftime('%a') ? @mem_renewal1.push(value) : ''
-    #     key[1] == "Ethics" && key[0] == 1.day.ago.strftime('%a') ? @ethics1.push(value) : ''
-    # end
-    #
-    # @t3.each do |key, value|
-    #     key[0] == 0.month.ago.strftime('%B') ? @mtd_total.push(value) : ''
-    #     key[0] == 1.month.ago.strftime('%B') ? @last_month_total.push(value) : ''
-    #     key[1] == "CPA" && key[0] == 0.month.ago.strftime('%B') ? @cpa2.push(value) : ''
-    #     key[1] == "EA" && key[0] == 0.month.ago.strftime('%B') ? @ea2.push(value) : ''
-    #     key[1] == "AFSP" && key[0] == 0.month.ago.strftime('%B') ? @afsp2.push(value) : ''
-    #     key[1] == "CPA" && key[0] == 1.month.ago.strftime('%B') ? @cpa3.push(value) : ''
-    #     key[1] == "EA" && key[0] == 1.month.ago.strftime('%B') ? @ea3.push(value) : ''
-    #     key[1] == "AFSP" && key[0] == 1.month.ago.strftime('%B') ? @afsp3.push(value) : ''
-    # end
-    #
-    # @t5.each do |key, value|
-    #     key[1] == "Membership-First" && key[0] == 0.month.ago.strftime('%B') ? @mem_first2.push(value) : ''
-    #     key[1] == "Membership-Renewal" && key[0] == 0.month.ago.strftime('%B') ? @mem_renewal2.push(value) : ''
-    #     key[1] == "Ethics" && key[0] == 0.month.ago.strftime('%B') ? @ethics2.push(value) : ''
-    #     key[1] == "Membership-First" && key[0] == 1.month.ago.strftime('%B') ? @mem_first3.push(value) : ''
-    #     key[1] == "Membership-Renewal" && key[0] == 1.month.ago.strftime('%B') ? @mem_renewal3.push(value) : ''
-    #     key[1] == "Ethics" && key[0] == 1.month.ago.strftime('%B') ? @ethics3.push(value) : ''
-    # end
+
   end
 
   def task
@@ -581,6 +477,35 @@ def postcard_schedule
     @total_sum_score_afsp = SequoiaExam.where('course_number < ?', 1000).sum(:score)
     @total_taken_rating_afsp = SequoiaExam.where('course_number < ?', 1000).where('rate > ?', 0).count(:rate)
     @total_sum_rating_afsp = SequoiaExam.where('course_number < ?', 1000).where('rate > ?', 0).sum(:rate)
+
+    # Past 30 Days
+
+      #function
+    @exam_where = SequoiaExam.where('course_number < ?', 10000).where('date_c > ?', Date.today - 30)
+    @exam_where_cpa = SequoiaExam.where('course_number >= ?', 1000).where('course_number < ?', 10000).where(:who => 'CPA').where('date_c > ?', Date.today - 30)
+    @exam_where_ea = SequoiaExam.where('course_number >= ?', 3000).where('course_number < ?', 10000).where(:who => 'EA').where('date_c > ?', Date.today - 30)
+    @exam_where_afsp = SequoiaExam.where('course_number < ?', 1000).where('date_c > ?', Date.today - 30)
+      #functions
+
+        @taken_30 = @exam_where.count(:course_number)
+        @sum_score_30 = @exam_where.sum(:score)
+        @taken_rating_30 = @exam_where.where('rate > ?', 0).count(:rate)
+        @sum_rating_30 = @exam_where.where('rate > ?', 0).sum(:rate)
+
+        @taken_cpa_30 = @exam_where_cpa.count(:course_number)
+        @sum_score_cpa_30 = @exam_where_cpa.sum(:score)
+        @taken_rating_cpa_30 = @exam_where_cpa.where('rate > ?', 0).count(:rate)
+        @sum_rating_cpa_30 = @exam_where_cpa.where('rate > ?', 0).sum(:rate)
+
+        @taken_ea_30 = @exam_where_ea.count(:course_number)
+        @sum_score_ea_30 = @exam_where_ea.sum(:score)
+        @taken_rating_ea_30 = @exam_where_ea.where('rate > ?', 0).count(:rate)
+        @sum_rating_ea_30 = @exam_where_ea.where('rate > ?', 0).sum(:rate)
+
+        @taken_afsp_30 = @exam_where_afsp.count(:course_number)
+        @sum_score_afsp_30 = @exam_where_afsp.sum(:score)
+        @taken_rating_afsp_30 = @exam_where_afsp.where('rate > ?', 0).count(:rate)
+        @sum_rating_afsp_30 = @exam_where_afsp.where('rate > ?', 0).sum(:rate)
 
   end
 

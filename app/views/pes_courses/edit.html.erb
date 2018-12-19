@@ -1,6 +1,11 @@
-<h1>Editing Pes Course</h1>
+</br>
+<div class="page-header ">
+  <h1 class="text-center">Editing Pes Course</h1>
+</div>
 
-<%= render 'form', pes_course: @pes_course %>
+</br>
+  <div class="col-lg-offset-4">
+  <%= link_to 'PES Course Index', pes_courses_path, class: 'btn btn-default' %> <%= link_to 'Show', @pes_course, class: 'btn btn-default' %>
+</div>
 
-<%= link_to 'Show', @pes_course %> |
-<%= link_to 'Back', pes_courses_path %>
+<%= render 'form_edit', pes_course: @pes_course %>

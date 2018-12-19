@@ -1,24 +1,7 @@
 <p id="notice"><%= notice %></p>
+</br>
+<h3>Date Updated: <%= @date_field.date1.strftime('%-m/%-d/%y') %></h3>
+</br>
+<%= link_to 'Back to PES Course Index', pes_courses_path, class: 'btn btn-default' %>
 
-<p>
-  <strong>Date1:</strong>
-  <%= @date_field.date1 %>
-</p>
-
-<p>
-  <strong>Date2:</strong>
-  <%= @date_field.date2 %>
-</p>
-
-<p>
-  <strong>Date3:</strong>
-  <%= @date_field.date3 %>
-</p>
-
-<p>
-  <strong>Date4:</strong>
-  <%= @date_field.date4 %>
-</p>
-
-<%= link_to 'Edit', edit_date_field_path(@date_field) %> |
-<%= link_to 'Back', date_fields_path %>
+<%= link_to 'Edit Date', edit_date_field_path(@date_field), class: 'btn btn-default' %>

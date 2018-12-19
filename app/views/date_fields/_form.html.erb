@@ -1,22 +1,14 @@
-<%= form_with(model: date_field, local: true) do |form| %>
-  <% if date_field.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(date_field.errors.count, "error") %> prohibited this date_field from being saved:</h2>
+<%= simple_form_for(@date_field) do |f| %>
+</br>
+  <%= f.error_notification %>
+  <div class="col-lg-offset-4 col-lg-4 well well-white">
+  </br>
+  <div class="col-lg-offset-4">
+  <%= f.input :date1, label: 'Most Recent Update'%>
+</br>
+  <%= f.button :submit, 'Submit', class: 'btn btn-primary' %> <%= link_to 'Back', pes_courses_path, class: 'btn btn-default' %>
+</br>
+</div>
+</div>
 
-      <ul>
-      <% date_field.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :date1, 'Last Update Date' %>
-    <%= form.date_select :date1, id: :date_field_date1 %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "update", class: 'btn btn-primary'%>
-  </div>
 <% end %>

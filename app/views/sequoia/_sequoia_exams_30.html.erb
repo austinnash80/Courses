@@ -1,0 +1,41 @@
+<h2 class="text-center">Sequoia Exams</h2>
+<div>
+<table class="table table-bordered table-striped">
+  <caption class="text-center">Past 30 Days </br> <%= (Date.today - 30).strftime('%-m/%-d/%y') %> - <%= (Date.today - 1).strftime('%-m/%-d/%y') %></caption>
+  <thead>
+    <tr>
+      <th></th>
+      <th class="text-center">Taken</th>
+      <th class="text-center">Score</th>
+      <th class="text-center">Rating</th>
+    </tr>
+  </thead>
+  <tbody class="text-center">
+    <tr>
+      <td><strong>CPA</strong></td>
+      <td><%= number_with_delimiter(@taken_cpa_30, delimiter: ',') %></td>
+      <td><%= @sum_score_cpa_30 / @taken_cpa_30 %></td>
+      <td><%= number_with_precision(@sum_rating_cpa_30.to_f / @taken_rating_cpa_30.to_f, precision: 2) %></td>
+    </tr>
+    <tr>
+      <td><strong>EA</strong></td>
+      <td><%= number_with_delimiter(@taken_ea_30, delimiter: ',') %></td>
+      <td><%= @sum_score_ea_30.blank? == false ? @sum_score_ea_30 / @taken_ea_30 : 'n/a' %></td>
+      <td><%= number_with_precision(@sum_rating_ea_30.to_f / @taken_rating_ea_30.to_f, precision: 2) %></td>
+    </tr>
+    <tr>
+      <td><strong>AFSP</strong></td>
+      <td><%= number_with_delimiter(@taken_afsp_30, delimiter: ',') %></td>
+      <td><%= @taken_afsp_30 > 0 ? (@sum_score_afsp_30 / @taken_afsp_30) : '-' %></td>
+      <td><%= @taken_rating_afsp_30 > 0 ? number_with_precision(@sum_rating_afsp_30.to_f / @taken_rating_afsp_30.to_f, precision: 2) : '-' %></td>
+    </tr>
+    <tr>
+      <td><strong>Total</strong></td>
+      <td><strong><%= number_with_delimiter(@taken_30, delimiter: ',') %></strong</td>
+      <td><strong><%= @sum_score_30 / @taken_30 %></strong></td>
+      <td><strong><%= number_with_precision(@sum_rating_30.to_f / @taken_rating_30.to_f, precision: 2) %></strong></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</br>

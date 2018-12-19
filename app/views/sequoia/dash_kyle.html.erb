@@ -48,7 +48,7 @@
     </ul>
     <div class="tab-content">
       <div id="home2" class="tab-pane fade in active">
-<%= render(:partial => 'sequoia_exams_total') %>
+<%= render(:partial => 'sequoia_exams_30') %>
       </div>
 
       <div id="menu2" class="tab-pane fade">
@@ -63,18 +63,20 @@
 <!-- ** START RIGHT COLUMN ** -->
   <div class="col-lg-4">
     <!-- * start R1 * -->
-      <div class="well">
-          <%= render(:partial => 'sales_day') %>
-      </div>
     <!-- * start R2 -->
       <div class="well">
         <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" href="#sales_month">Month</a></li>
+          <li class="active"><a data-toggle="tab" href="#sales_day">Yesterday</a></li>
+          <li><a data-toggle="tab" href="#sales_month">Month</a></li>
           <li><a data-toggle="tab" href="#sales_year">Year</a></li>
         </ul>
 
         <div class="tab-content">
-          <div id="sales_month" class="tab-pane fade in active">
+          <div id="sales_day" class="tab-pane fade in active">
+            <%= render(:partial => 'sales_day') %>
+          </div>
+
+          <div id="sales_month" class="tab-pane fade">
             <%= render(:partial => 'sales_month') %>
           </div>
 

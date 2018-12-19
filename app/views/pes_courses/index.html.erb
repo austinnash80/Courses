@@ -18,6 +18,8 @@
 <% end %>
 
 </br>
+<h5>Active PES Courses: <%= @active_pes_courses %></h5>
+<h5>Inactive PES Courses: <%= @inactive_pes_courses %></h5>
 </br>
 <div class="row">
   <div class="col-md-3">
@@ -25,20 +27,23 @@
     <%= link_to 'Export(csv)', pes_courses_path('csv'), class: 'btn btn-default' %>
   </div>
 </div>
-
+</br>
+<p class=""><a href="https://www.mypescpe.com/search-cpe-courses">Search PES Course By Number</a></p>
 </br>
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Pes number</th>
+      <th>Number</th>
+      <th>Status</th>
+      <th>Link</th>
       <th>Tag</th>
       <th>Category</th>
       <th>Hours</th>
       <th>Title</th>
-      <th>date_added</th>
-      <th>date_removed</th>
-      <th>Active</th>
-      <th>Active</th>
+      <th>Added</th>
+      <th>Removed</th>
+      <!-- <th>Status</th> -->
+      <!-- <th>Active</th> -->
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -47,19 +52,35 @@
     <% @pes_courses.each do |pes_course| %>
       <tr>
         <td><%= pes_course.pes_number %></td>
+
+        <% if pes_course.active == true %>
+          <td> <%= link_to 'Active', edit_pes_course_path(pes_course) %></td>
+        <% elsif %>
+          <td> <%= link_to 'Unlisted', edit_pes_course_path(pes_course) %></td>
+        <% end %>
+
+        <td><a target="_blank" href="https://www.mypescpe.com/panel.account/OPEN/purchase.manager/indexOpenItem.cmc?&file=FULLpes&sku=<%= pes_course.pes_number %>&view=1A&ste="> PES </a></td>
         <td><%= pes_course.tag %></td>
         <td><%= pes_course.category %></td>
         <td><%= pes_course.hours %></td>
         <td><%= pes_course.title %></td>
-        <td><%= pes_course.date_added %></td>
-        <td><%= pes_course.date_removed %></td>
-        <% if pes_course.active == true %>
+        <% if pes_course.date_added.blank? == true %>
+          <td>nil</td>
+        <% elsif pes_course.date_added.strftime('%-m/%-d/%y') == '1/1/13' %>
+          <td>Unknown</td>
+        <% elsif pes_course.date_added.strftime('%-m/%-d/%y') == '8/21/18' %>
+          <td>Orginal</td>
+        <% elsif %>
+          <td><%= pes_course.date_added.strftime('%-m/%-d/%y') %></td>
+        <% end %>
+        <td><%= pes_course.active == false ? 'N/A' : pes_course.date_removed.strftime('%-m/%-d/%y') == '1/1/13' ? 'Unknown' : pes_course.date_removed.strftime('%-m/%-d/%y') %></td>
+        <!-- <% if pes_course.active == true %>
           <td>Active</td>
         <% elsif pes_course.active == false %>
           <td>Unlisted</td>
-        <% end %>
+        <% end %> -->
         <!-- <td><%= link_to 'Show', pes_course %></td> -->
-        <td><%= link_to 'Edit', edit_pes_course_path(pes_course) %></td>
+        <!-- <td><%= link_to 'Edit', edit_pes_course_path(pes_course) %></td> -->
         <td><%= link_to 'Remove', pes_course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

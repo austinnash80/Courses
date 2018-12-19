@@ -5,13 +5,15 @@ class PesCoursesController < ApplicationController
   # GET /pes_courses.json
 
   def index
-    @pes_courses = PesCourse.all
+    @pes_courses = PesCourse.order('active DESC').order(:date_added)
     @date_fields = DateField.all
 
     respond_to do |format|
       format.html
       format.csv { send_data @pes_courses.to_csv, filename: "pes_course-#{Date.today}.csv" }
     end
+
+    course_counter
 
   end
 
@@ -23,10 +25,12 @@ class PesCoursesController < ApplicationController
   # GET /pes_courses/new
   def new
     @pes_course = PesCourse.new
+    form_collections
   end
 
   # GET /pes_courses/1/edit
   def edit
+    form_collections
   end
 
   # POST /pes_courses
@@ -80,6 +84,14 @@ class PesCoursesController < ApplicationController
     redirect_to pes_courses_path, notice: "Upload Complete"
   end
 
+  def form_collections
+    @course_tags = ['N/A', 'New', 'Top Seller', 'Hot Topic', 'Popular']
+  end
+
+  def course_counter
+    @active_pes_courses = PesCourse.where('active = true').count
+    @inactive_pes_courses = PesCourse.where('active = false').count
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
