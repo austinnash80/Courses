@@ -24,7 +24,7 @@
       <th></th>
       <th class="text-center">Taken</th>
       <th class="text-center">Score</th>
-      <th class="text-center">Rating</th>
+      <th class="text-center">Rating<br><small>previous 30 day period</small></th>
     </tr>
   </thead>
   <tbody class="text-center">
@@ -48,7 +48,10 @@
       <td><%= @sum_score_ea_30.blank? == false ? @sum_score_ea_30 / @taken_ea_30 : 'n/a' %></td>
       <td><%= number_with_precision(@sum_rating_ea_30.to_f / @taken_rating_ea_30.to_f, precision: 2) %>
 
-          <% if @ea_now > @ea_last %>
+          <% if @ea_now = @ea_last %>
+          <p class="glyphicon-glyphicon-minus"><%= number_with_precision(@ea_now.to_f - @ea_last.to_f, precision: 2) %></p>
+
+          <% elsif @ea_now > @ea_last %>
           <p class="green glyphicon glyphicon-arrow-up"><%= number_with_precision(@ea_now.to_f - @ea_last.to_f, precision: 2) %></p>
           <% elsif %>
           <p class="red glyphicon glyphicon-arrow-down"><%= number_with_precision(@ea_now.to_f - @ea_last.to_f, precision: 2) %></p>
