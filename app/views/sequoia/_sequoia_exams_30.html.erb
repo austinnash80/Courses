@@ -35,7 +35,7 @@
       <td><%= number_with_precision(@sum_rating_cpa_30.to_f / @taken_rating_cpa_30.to_f, precision: 2) %>
 
         <% if @cpa_now == @cpa_last %>
-        <p class="glyphicon glyphicon-ok"><%= number_with_precision(@cpa_now.to_f - @cpa_last.to_f, precision: 2) %></p>
+        <p class="glyphicon glyphicon-ok"></p>
         <% elsif @cpa_now > @cpa_last %>
         <p class="green glyphicon glyphicon-arrow-up"><%= number_with_precision(@cpa_now.to_f - @cpa_last.to_f, precision: 2) %></p>
         <% elsif %>
@@ -51,7 +51,7 @@
       <td><%= number_with_precision(@sum_rating_ea_30.to_f / @taken_rating_ea_30.to_f, precision: 2) %>
 
           <% if @ea_now == @ea_last %>
-          <p class="glyphicon glyphicon-ok"><%= number_with_precision(@ea_now.to_f - @ea_last.to_f, precision: 2) %></p>
+          <p class="glyphicon glyphicon-ok"></p>
           <% elsif @ea_now > @ea_last %>
           <p class="green glyphicon glyphicon-arrow-up"><%= number_with_precision(@ea_now.to_f - @ea_last.to_f, precision: 2) %></p>
           <% elsif %>
@@ -67,7 +67,7 @@
       <td><%= @taken_rating_afsp_30 > 0 ? number_with_precision(@sum_rating_afsp_30.to_f / @taken_rating_afsp_30.to_f, precision: 2) : '-' %>
 
         <% if @afsp_now == @afsp_last %>
-        <p class="glyphicon glyphicon-ok"><%= number_with_precision(@afsp_now.to_f - @afsp_last.to_f, precision: 2) %></p>
+        <p class="glyphicon glyphicon-ok"></p>
         <% elsif @afsp_now > @afsp_last %>
         <p class="green glyphicon glyphicon-arrow-up"><%= number_with_precision(@afsp_now.to_f - @afsp_last.to_f, precision: 2) %></p>
         <% elsif %>
@@ -83,7 +83,7 @@
       <td><strong><%= number_with_precision(@sum_rating_30.to_f / @taken_rating_30.to_f, precision: 2) %></strong>
 
         <% if @now == @last %>
-        <p class="glyphicon glyphicon-ok"><%= number_with_precision(@now.to_f - @last.to_f, precision: 2) %></p>
+        <p class="glyphicon glyphicon-ok"></p>
         <% elsif @now > @last %>
         <p class="green glyphicon glyphicon-arrow-up"><%= number_with_precision(@now.to_f - @last.to_f, precision: 2) %></p>
         <% elsif %>
