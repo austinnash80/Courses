@@ -32,10 +32,10 @@
 </br>
 <div class="row">
   <div class="col-lg-3">
-  <%= f.input :update_course, label: 'Is this an update to an existing Sequoia course?', as: :radio_buttons %>
+  <%= f.input :update_course, label: 'Is this an update to an existing Sequoia course?', as: :radio_buttons, :checked => ['Yes', true] %>
 </div>
 <div class="col-lg-3">
-  <%= f.input :extra_boolean, label: 'Do not list course until further notice', as: :radio_buttons %>
+  <%= f.input :extra_boolean, label: 'Do not list course until further notice', as: :radio_buttons, :checked => ['No', false] %>
 </div>
 
 <div class="col-lg-12">
