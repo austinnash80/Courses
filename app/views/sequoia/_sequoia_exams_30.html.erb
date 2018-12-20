@@ -1,5 +1,22 @@
 <h2 class="text-center">Sequoia Exams</h2>
 <div>
+
+<% @cpa_now = number_with_precision(@sum_rating_cpa_30.to_f / @taken_rating_cpa_30.to_f, precision: 2) %>
+<% @cpa_last = number_with_precision(@sum_rating_cpa_30_compare.to_f / @taken_rating_cpa_30_compare.to_f, precision: 2) %>
+
+<% @ea_now = number_with_precision(@sum_rating_ea_30.to_f / @taken_rating_ea_30.to_f, precision: 2) %>
+<% @ea_last = number_with_precision(@sum_rating_ea_30_compare.to_f / @taken_rating_ea_30_compare.to_f, precision: 2) %>
+
+<% @afsp_now = number_with_precision(@sum_rating_afsp_30.to_f / @taken_rating_afsp_30.to_f, precision: 2) %>
+<% @afsp_last = number_with_precision(@sum_rating_afsp_30_compare.to_f / @taken_rating_afsp_30_compare.to_f, precision: 2) %>
+
+<% @now = number_with_precision(@sum_rating_30.to_f / @taken_rating_30.to_f, precision: 2) %>
+<% @last = number_with_precision(@sum_rating_30_compare.to_f / @taken_rating_30_compare.to_f, precision: 2) %>
+
+
+
+
+
 <table class="table table-bordered table-striped">
   <caption class="text-center">Past 30 Days </br> <%= (Date.today - 30).strftime('%-m/%-d/%y') %> - <%= (Date.today - 1).strftime('%-m/%-d/%y') %></caption>
   <thead>
@@ -15,25 +32,57 @@
       <td><strong>CPA</strong></td>
       <td><%= number_with_delimiter(@taken_cpa_30, delimiter: ',') %></td>
       <td><%= @sum_score_cpa_30 / @taken_cpa_30 %></td>
-      <td><%= number_with_precision(@sum_rating_cpa_30.to_f / @taken_rating_cpa_30.to_f, precision: 2) %></td>
+      <td><%= number_with_precision(@sum_rating_cpa_30.to_f / @taken_rating_cpa_30.to_f, precision: 2) %>
+
+        <% if @cpa_now > @cpa_last %>
+        <p class="green glyphicon glyphicon-arrow-up"><%= number_with_precision(@cpa_now.to_f - @cpa_last.to_f, precision: 2) %></p>
+        <% elsif %>
+        <p class="red glyphicon glyphicon-arrow-down"><%= number_with_precision(@cpa_now.to_f - @cpa_last.to_f, precision: 2) %></p>
+        <% end %>
+
+      </td>
     </tr>
     <tr>
       <td><strong>EA</strong></td>
       <td><%= number_with_delimiter(@taken_ea_30, delimiter: ',') %></td>
       <td><%= @sum_score_ea_30.blank? == false ? @sum_score_ea_30 / @taken_ea_30 : 'n/a' %></td>
-      <td><%= number_with_precision(@sum_rating_ea_30.to_f / @taken_rating_ea_30.to_f, precision: 2) %></td>
+      <td><%= number_with_precision(@sum_rating_ea_30.to_f / @taken_rating_ea_30.to_f, precision: 2) %>
+
+          <% if @ea_now > @ea_last %>
+          <p class="green glyphicon glyphicon-arrow-up"><%= number_with_precision(@ea_now.to_f - @ea_last.to_f, precision: 2) %></p>
+          <% elsif %>
+          <p class="red glyphicon glyphicon-arrow-down"><%= number_with_precision(@ea_now.to_f - @ea_last.to_f, precision: 2) %></p>
+          <% end %>
+
+    </td>
     </tr>
     <tr>
       <td><strong>AFSP</strong></td>
       <td><%= number_with_delimiter(@taken_afsp_30, delimiter: ',') %></td>
       <td><%= @taken_afsp_30 > 0 ? (@sum_score_afsp_30 / @taken_afsp_30) : '-' %></td>
-      <td><%= @taken_rating_afsp_30 > 0 ? number_with_precision(@sum_rating_afsp_30.to_f / @taken_rating_afsp_30.to_f, precision: 2) : '-' %></td>
+      <td><%= @taken_rating_afsp_30 > 0 ? number_with_precision(@sum_rating_afsp_30.to_f / @taken_rating_afsp_30.to_f, precision: 2) : '-' %>
+
+        <% if @afsp_now > @afsp_last %>
+        <p class="green glyphicon glyphicon-arrow-up"><%= number_with_precision(@afsp_now.to_f - @afsp_last.to_f, precision: 2) %></p>
+        <% elsif %>
+        <p class="red glyphicon glyphicon-arrow-down"><%= number_with_precision(@afsp_now.to_f - @afsp_last.to_f, precision: 2) %></p>
+        <% end %>
+
+      </td>
     </tr>
     <tr>
       <td><strong>Total</strong></td>
       <td><strong><%= number_with_delimiter(@taken_30, delimiter: ',') %></strong</td>
       <td><strong><%= @sum_score_30 / @taken_30 %></strong></td>
-      <td><strong><%= number_with_precision(@sum_rating_30.to_f / @taken_rating_30.to_f, precision: 2) %></strong></td>
+      <td><strong><%= number_with_precision(@sum_rating_30.to_f / @taken_rating_30.to_f, precision: 2) %></strong>
+
+        <% if @now > @last %>
+        <p class="green glyphicon glyphicon-arrow-up"><%= number_with_precision(@now.to_f - @last.to_f, precision: 2) %></p>
+        <% elsif %>
+        <p class="red glyphicon glyphicon-arrow-down"><%= number_with_precision(@now.to_f - @last.to_f, precision: 2) %></p>
+        <% end %>
+
+      </td>
     </tr>
   </tbody>
 </table>

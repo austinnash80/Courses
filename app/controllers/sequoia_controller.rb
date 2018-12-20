@@ -487,6 +487,24 @@ def postcard_schedule
     @exam_where_afsp = SequoiaExam.where('course_number < ?', 1000).where('date_c > ?', Date.today - 30)
       #functions
 
+            #Comparison
+            @rating_cpa_compare = SequoiaExam.where('course_number >= ?', 1000).where('course_number < ?', 10000).where(:who => 'CPA').where('date_c > ?', Date.today - 60).where('date_c < ?', Date.today - 30).where('rate > ?', 0)
+            @taken_rating_cpa_30_compare = @rating_cpa_compare.count(:rate)
+            @sum_rating_cpa_30_compare = @rating_cpa_compare.sum(:rate)
+
+            @rating_ea_compare = SequoiaExam.where('course_number >= ?', 3000).where('course_number < ?', 10000).where(:who => 'EA').where('date_c > ?', Date.today - 60).where('date_c < ?', Date.today - 30).where('rate > ?', 0)
+            @taken_rating_ea_30_compare = @rating_ea_compare.count(:rate)
+            @sum_rating_ea_30_compare = @rating_ea_compare.sum(:rate)
+
+            @rating_afsp_compare = SequoiaExam.where('course_number < ?', 1000).where('date_c > ?', Date.today - 60).where('date_c < ?', Date.today - 30).where('rate > ?', 0)
+            @taken_rating_afsp_30_compare = @rating_afsp_compare.count(:rate)
+            @sum_rating_afsp_30_compare = @rating_afsp_compare.sum(:rate)
+
+            @rating_compare = SequoiaExam.where('course_number < ?', 10000).where('date_c > ?', Date.today - 60).where('date_c < ?', Date.today - 30).where('rate > ?', 0)
+            @taken_rating_30_compare = @rating_compare.count(:rate)
+            @sum_rating_30_compare = @rating_compare.sum(:rate)
+            #/Comparison
+
         @taken_30 = @exam_where.count(:course_number)
         @sum_score_30 = @exam_where.sum(:score)
         @taken_rating_30 = @exam_where.where('rate > ?', 0).count(:rate)
