@@ -33,7 +33,6 @@ module SequoiaCourses
     config.middleware.use PDFKit::Middleware, :print_media_type => true
     config.paperclip_defaults = { s3_host_name: "s3.#{ENV['AWS_REGION']}.amazonaws.com", } #try without
 
-    confit.time_zone = "Los Angeles"
-    config.active_record.default_timezone = :local
+
   end
 end
