@@ -37,5 +37,3 @@ module SequoiaCourses
     config.active_record.default_timezone = :local
   end
 end
-confit.time_zone = "Los Angeles"
-config.active_record.default_timezone = :local
