@@ -1,5 +1,7 @@
 class SequoiaController < ApplicationController
 
+@today_date = (Date.today - 8.hours)
+
   def dash_hamdo
     postcard_schedule
     postcard_inventory

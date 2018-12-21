@@ -2,7 +2,7 @@
 
     <% if current_user.email == 'ashley@sequoiacpe.com' || current_user.superadmin_role? || current_user.supervisor_role? %>
       <h1 class="text-center off-white">Ashley Dashboard</h1>
-      <h3 class="off-white text-center"><%= Time.now.strftime('%A %-b %-d, %Y') %></h3>
+      <h3 class="off-white text-center"><%= (Date.today - 8.hours).strftime('%A %-b %-d, %Y') %></h3>
 
 </br>
 <div class="row">
@@ -39,7 +39,7 @@
         </div>
       </div>
     </div>
-    
+
   </div>
 <!-- End Center Pannel -->
 
