@@ -3,7 +3,9 @@
 <div class="page-header ">
 </br>
   <h1 class="text-center">Add New Postcard Mailing</h1>
-  <%= link_to 'Back to Index', postcard_mailings_path, class: 'btn btn-default' %>
+  <div class="col-lg-offset-3">
+    <%= link_to 'Back to Index', postcard_mailings_path, class: 'btn btn-default' %>
+  </div>
 </div>
 
 <%= render 'form', postcard_mailing: @postcard_mailing %>

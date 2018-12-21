@@ -1,109 +1,92 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>P number:</strong>
-  <%= @updatesheet.pes_number %>
-</p>
+<div class="page-header ">
+</br>
+  <h1 class="text-center"><strong>Course Update - <%= @updatesheet.seq_number %><%= @updatesheet.seq_version %></strong> </br><small>Recieved: <%= @updatesheet.date_received.strftime("%b %-d, %Y")%></small></h1>
+  <div class="col-lg-offset-2">
+    <%= link_to 'Back to Index', updatesheets_path, class: 'btn btn-default' %> <%= link_to 'Edit Entry', edit_updatesheet_path(@updatesheet), class: 'btn btn-default' %>
+  </div>
+</div>
+</br>
+<div class="col-lg-offset-2 col-lg-8">
+<div class="well well-white" >
+  <h3 class=""><strong>Details</strong></h3>
+</br>
 
-<p>
-  <strong>P version:</strong>
-  <%= @updatesheet.pes_version %>
-</p>
+  <h4>
+    <strong>Sequoia Number:</strong>
+    <%= @updatesheet.seq_number %><%= @updatesheet.seq_version %> - <%= @updatesheet.seq_title %>
+  </h4>
 
-<p>
-  <strong>Date received:</strong>
-  <%= @updatesheet.date_received %>
-</p>
+  <h4>
+    <strong>PES Number:</strong>
+    <%= @updatesheet.pes_number %><%= @updatesheet.pes_version %>
+  </h4>
 
-<p>
-  <strong>Update course:</strong>
-  <%= @updatesheet.update_course %>
-</p>
+  <h4>
+    <strong>Date Recieved:</strong>
+    <%= @updatesheet.date_received.strftime("%-m/%-d/%y") %>
+  </h4>
 
-<p>
-  <strong>Note approval:</strong>
-  <%= @updatesheet.note_approval %>
-</p>
+</br>
+  <p>
+      <strong>Hold:</strong>
+      <%= @updatesheet.extra_boolean %>
+  </p>
 
-<p>
-  <strong>Text complete:</strong>
-  <%= @updatesheet.text_complete %>
-</p>
+  <p>
+    <strong>Update Course:</strong>
+    <%= @updatesheet.update_course %>
+  </p>
 
-<p>
-  <strong>Exam complete:</strong>
-  <%= @updatesheet.exam_complete %>
-</p>
+  <p>
+    <strong>Text Complete:</strong>
+    <%= @updatesheet.text_complete %>
+  </p>
 
-<p>
-  <strong>Course listed:</strong>
-  <%= @updatesheet.course_listed %>
-</p>
+  <p>
+    <strong>Exam Complete:</strong>
+    <%= @updatesheet.exam_complete %>
+  </p>
 
-<p>
-  <strong>Date listed:</strong>
-  <%= @updatesheet.date_listed %>
-</p>
+  <p>
+    <strong>Course listed:</strong>
+    <%= @updatesheet.course_listed %>
+  </p>
 
-<p>
-  <strong>Role:</strong>
-  <%= @updatesheet.role %>
-</p>
+  <p>
+    <strong>Proofed:</strong>
+    <%= @updatesheet.proofed %>
+  </p>
 
-<p>
-  <strong>Rolep:</strong>
-  <%= @updatesheet.rolep %>
-</p>
+  <p>
+    <strong>Proofed Notes:</strong>
+    <%= @updatesheet.proofed_note %>
+  </p>
 
-<p>
-  <strong>Irs number:</strong>
-  <%= @updatesheet.irs_number %>
-</p>
+  <p>
+    <strong>Date Listed:</strong>
+    <%= @updatesheet.course_listed == false ? 'N/A' : @updatesheet.date_listed.strftime("%-m/%-d/%y") %>
+  </p>
 
-<p>
-  <strong>Proofed:</strong>
-  <%= @updatesheet.proofed %>
-</p>
+  <p>
+    <strong>Role:</strong>
+    <%= @updatesheet.role %>
+  </p>
 
-<p>
-  <strong>Proofed note:</strong>
-  <%= @updatesheet.proofed_note %>
-</p>
+  <p>
+    <strong>Rolep:</strong>
+    <%= @updatesheet.rolep %>
+  </p>
 
-<p>
-  <strong>Datasheet:</strong>
-  <%= @updatesheet.datasheet_id %>
-</p>
+  <p>
+    <strong>Irs number:</strong>
+    <%= @updatesheet.irs_number %>
+  </p>
 
-<p>
-  <strong>Seq number:</strong>
-  <%= @updatesheet.seq_number %>
-</p>
+  <p>
+    <strong>Datasheet:</strong>
+    <%= @updatesheet.datasheet_id %>
+  </p>
 
-<p>
-  <strong>Seq version:</strong>
-  <%= @updatesheet.seq_version %>
-</p>
-
-<p>
-  <strong>Seq title:</strong>
-  <%= @updatesheet.seq_title %>
-</p>
-
-<p>
-  <strong>Extra string:</strong>
-  <%= @updatesheet.extra_string %>
-</p>
-
-<p>
-  <strong>Extra integer:</strong>
-  <%= @updatesheet.extra_integer %>
-</p>
-
-<p>
-  <strong>Extra boolean:</strong>
-  <%= @updatesheet.extra_boolean %>
-</p>
-
-<%= link_to 'Edit', edit_updatesheet_path(@updatesheet) %> |
-<%= link_to 'Back', updatesheets_path %>
+</div>
