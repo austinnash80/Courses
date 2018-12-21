@@ -1,7 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header ">
+</br>
+  <h1 class="text-center"><strong>No Mail</strong> </br><small><%= @seq_no_mail.date_added.strftime("%A %b %-d, %Y")%></small></h1>
+  <div class="col-lg-offset-2">
+    <%= link_to 'Add Another Entry', new_seq_no_mail_path, class: 'btn btn-default' %> <%= link_to 'Back to Index', seq_no_mails_path, class: 'btn btn-default' %> <%= link_to 'Edit Entry', edit_seq_no_mail_path(@seq_no_mail), class: 'btn btn-default' %>
+  </div>
+</div>
+</br>
+<div class="col-lg-offset-2 col-lg-8">
+<div class="well well-white" >
+  <h3 class=""><strong>Details</strong></h3>
+</br>
+<p>
+  <strong>Date:</strong>
+  <%= @seq_no_mail.date_added.strftime('%-m/%-d/%y') %>
+</p>
+</br>
 
 <p>
-  <strong>First name:</strong>
+  <strong>First:</strong>
   <%= @seq_no_mail.first_name %>
 </p>
 
@@ -11,7 +27,7 @@
 </p>
 
 <p>
-  <strong>Last name:</strong>
+  <strong>Last:</strong>
   <%= @seq_no_mail.last_name %>
 </p>
 
@@ -51,24 +67,18 @@
 </p>
 
 <p>
-  <strong>Date added:</strong>
-  <%= @seq_no_mail.date_added %>
+  <strong>Customer:</strong>
+  <%= @seq_no_mail.extra_b == true ? 'Yes' : 'No'%>
 </p>
 
 <p>
-  <strong>Extra i:</strong>
-  <%= @seq_no_mail.extra_i %>
+  <strong>UID:</strong>
+  <%= @seq_no_mail.extra_i.blank? == true ? 'N/A' : @seq_no_mail.extra_i %>
 </p>
 
 <p>
-  <strong>Extra b:</strong>
-  <%= @seq_no_mail.extra_b %>
-</p>
-
-<p>
-  <strong>Extra s:</strong>
+  <strong>Reason:</strong>
   <%= @seq_no_mail.extra_s %>
 </p>
 
-<%= link_to 'Edit', edit_seq_no_mail_path(@seq_no_mail) %> |
-<%= link_to 'Back', seq_no_mails_path %>
+</div>

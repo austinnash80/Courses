@@ -6,7 +6,7 @@ class PostcardReturnsController < ApplicationController
 
   def stats
   end
-  
+
   def index
     @postcard_returns = PostcardReturn.all
   end
@@ -19,10 +19,12 @@ class PostcardReturnsController < ApplicationController
   # GET /postcard_returns/new
   def new
     @postcard_return = PostcardReturn.new
+    form_collections
   end
 
   # GET /postcard_returns/1/edit
   def edit
+    form_collections
   end
 
   # POST /postcard_returns
@@ -63,6 +65,11 @@ class PostcardReturnsController < ApplicationController
       format.html { redirect_to postcard_returns_url, notice: 'Postcard return was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def form_collections
+    @companies = ['Sequoia', 'Empire']
+    @postcard_type = ['CPA NM', 'CPA RC', 'EA NM', 'EA RC', 'Empire RC', 'Empire NM', 'Other']
   end
 
   private

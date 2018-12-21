@@ -1,108 +1,54 @@
-<%= form_with(model: seq_no_mail, local: true) do |form| %>
-  <% if seq_no_mail.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(seq_no_mail.errors.count, "error") %> prohibited this seq_no_mail from being saved:</h2>
+<%= simple_form_for(@seq_no_mail) do |f| %>
 
-      <ul>
-      <% seq_no_mail.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-<!-- <div class="col-lg-4">
-</div> -->
-
-  <div class="well col-lg-4 col-lg-offset-4">
-    <div class="well jumbotron text-center">
-      <h2> Add No Mail </h2>
-    </div>
-
-<div class="col-lg-5">
-
-  <div class="field">
-    <%= form.label :date_added, 'Date Added', class: 'text-center' %>
-    <%= form.date_select :date_added, id: :seq_no_mail_date_added %>
-  </div>
-
-  <div class="field">
-    <%= form.label :first_name, 'First Name', class: 'text-center' %>
-    <%= form.text_field :first_name, id: :seq_no_mail_first_name, class: 'form-control' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :mi, 'Middle Initial', class: 'text-center' %>
-    <%= form.text_field :mi, id: :seq_no_mail_mi, class: 'form-control' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :last_name, 'Last Name', class: 'text-center' %>
-    <%= form.text_field :last_name, id: :seq_no_mail_last_name, class: 'form-control' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :suf, 'Suf', class: 'text-center' %>
-    <%= form.text_field :suf, id: :seq_no_mail_suf, class: 'form-control' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :co, 'Company', class: 'text-center' %>
-    <%= form.text_field :co, id: :seq_no_mail_co, class: 'form-control' %>
-  </div>
-
-</diV>
-<div class="col-lg-2">
-</div>
-
-<div class="col-lg-5">
-
-  <div class="field">
-    <%= form.label :address, class: 'text-center' %>
-    <%= form.text_field :address, id: :seq_no_mail_address, class: 'form-control' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address_2, class: 'text-center' %>
-    <%= form.text_field :address_2, id: :seq_no_mail_address_2, class: 'form-control' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :city, class: 'text-center' %>
-    <%= form.text_field :city, id: :seq_no_mail_city, class: 'form-control' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :state, class: 'text-center' %>
-    <%= form.text_field :state, id: :seq_no_mail_state, class: 'form-control' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :zip, class: 'text-center' %>
-    <%= form.text_field :zip, id: :seq_no_mail_zip, class: 'form-control' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :extra_s, 'Reason', class: 'text-center' %>
-    <%= form.text_field :extra_s, id: :seq_no_mail_extra_s, class: 'form-control' %>
-  </div>
-
-  <div class="field form-inline">
-    <%= form.label :extra_b, 'Customer?', class: 'checkbox' %>
-    <%= form.check_box :extra_b, id: :seq_no_mail_extra_b, class: 'checkbox' %>
-  </div>
-
-  <div class="field">
-    <!-- <%= form.label :extra_i, 'UID'  %> -->
-    <%= form.number_field :extra_i, id: :seq_no_mail_extra_i, placeholder: 'UID', class: 'form-control' %>
-  </div>
-
-</div>
- 
+  <%= f.error_notification %>
 </br>
-  <div class="actions">
-    <%= form.submit 'Submit No Mail', class: 'btn btn-primary' %>
+<div class="well well-white col-lg-offset-3 col-lg-6">
+</br>
+<div class="">
+  <div class="col-lg-offset-2">
+    <%= f.input :date_added, label: false %>
   </div>
+</div>
+</br>
+<div class="row">
+  <div class="col-lg-offset-2 col-lg-4">
+    <%= f.input :first_name, label: false, placeholder: 'First Name' %>
+    <%= f.input :mi, label: false, placeholder: 'Middle Initial' %>
+    <%= f.input :last_name, label: false, placeholder: 'Last Name' %>
+    <%= f.input :suf, label: false, placeholder: 'Suf' %>
+    <%= f.input :co, label: false, placeholder: 'Company' %>
 
   </div>
-<% end %>
+  <div class="col-lg-4">
+    <%= f.input :address, label: false, placeholder: 'Address' %>
+    <%= f.input :address_2, label: false, placeholder: 'Address 2' %>
+    <%= f.input :city, label: false, placeholder: 'City' %>
+    <%= f.input :state, label: false, placeholder: 'State' %>
+    <%= f.input :zip, label: false, placeholder: 'Zip' %>
+  </div>
+</div>
+</br>
+</br>
+
+<div class="row">
+  <div class=" col-lg-offset-2 col-lg-2">
+    <%= f.input :extra_b, label: 'Customer?', as: :radio_buttons, :checked => ['No', false] %>
+  </div>
+    <div class="col-lg-2">
+    <%= f.input :extra_i, label: 'UID', placeholder: '' %>
+  </div>
+  </div>
+</br>
+</br>
+<div class="row">
+<div class="col-lg-offset-2 col-lg-8">
+    <%= f.input :extra_s, label: false, placeholder: 'Reason for wanting off the mailing list', as: :text %>
+</br>
+    <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
+  </br>
+  </br>
+  </div>
+  </div>
+  </div>
+
+    <% end %>

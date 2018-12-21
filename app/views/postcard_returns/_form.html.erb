@@ -1,42 +1,35 @@
-<%= form_with(model: postcard_return, local: true) do |form| %>
-  <% if postcard_return.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(postcard_return.errors.count, "error") %> prohibited this postcard_return from being saved:</h2>
+<%= simple_form_for(@postcard_return) do |f| %>
 
-      <ul>
-      <% postcard_return.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :company %>
-    <%= form.select :company, ['Sequoia CPE', 'Empire Learning'], id: :postcard_return_company %>
+  <%= f.error_notification %>
+</br>
+<div class="well well-white col-lg-offset-3 col-lg-6">
+</br>
+<div class="">
+  <div class="">
+    <%= f.input :postmark, label: 'Postmark Date' %>
   </div>
+</div>
+</br>
+<div class="row">
+  <div class="col-lg-3">
+    <%= f.input :company, label: 'Company', collection: @companies, as: :radio_buttons %>
 
-  <div class="field">
-    <%= form.label :uid %>
-    <%= form.number_field :uid, id: :postcard_return_uid %>
   </div>
+  <div class="col-lg-3">
+    <%= f.input :postcard, label: 'Postcard Type', collection: @postcard_type, as: :radio_buttons %>
+  </div>
+</div>
+</br>
+<!-- </br> -->
+<div class="row">
+  <div class="col-lg-3">
+    <%= f.input :uid, label: false, placeholder: 'UID' %>
 
-  <div class="field">
-    <%= form.label :postcard %>
-    <%= form.select :postcard, ['New Member','Return Customer', 'NM Pros'], id: :postcard_return_postcard %>
   </div>
+</div>
+</br>
+<%= f.input :reason, label: false, placeholder: 'Reason for return', as: :text %>
+</br>
+<%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
 
-  <div class="field">
-    <%= form.label :postmark %>
-    <%= form.date_select :postmark, id: :postcard_return_postmark %>
-  </div>
-
-  <div class="field">
-    <%= form.label :reason %>
-    <%= form.select :reason, ['International', 'Unable to Forward', 'Not Deliverable','bad print','blank Address', 'Other'], id: :postcard_return_reason %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

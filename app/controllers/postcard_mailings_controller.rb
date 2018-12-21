@@ -15,10 +15,12 @@ class PostcardMailingsController < ApplicationController
   # GET /postcard_mailings/new
   def new
     @postcard_mailing = PostcardMailing.new
+    form_collections
   end
 
   # GET /postcard_mailings/1/edit
   def edit
+    form_collections
   end
 
   # POST /postcard_mailings
@@ -59,6 +61,11 @@ class PostcardMailingsController < ApplicationController
       format.html { redirect_to postcard_mailings_url, notice: 'Postcard mailing was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def form_collections
+    @companies = ['Sequoia', 'Empire']
+    @postcard_type = ['CPA NM', 'CPA RC', 'EA NM', 'EA RC', 'Empire RC', 'Empire NM', 'Other']
   end
 
   private

@@ -1,38 +1,41 @@
 <p id="notice"><%= notice %></p>
+
+<div class="page-header ">
 </br>
-<h3> Mailing added for <strong><%=@postcard_mailing.company %> <%= @postcard_mailing.version %></strong></h3>
+  <h1 class="text-center"><strong>Postcard Mailing</strong> </br><small><%= @postcard_mailing.date_sent.strftime("%A %b %-d, %Y")%></small></h1>
+  <div class="col-lg-offset-2">
+    <%= link_to 'Add Another Entry', new_postcard_mailing_path, class: 'btn btn-default' %> <%= link_to 'Back to Index', postcard_mailings_path, class: 'btn btn-default' %> <%= link_to 'Edit mailing', edit_postcard_mailing_path(@postcard_mailing), class: 'btn btn-default' %>
+  </div>
+</div>
+</br>
+<div class="col-lg-offset-2 col-lg-8">
+<div class="well well-white" >
+  <h3 class=""><strong>Details</strong></h3>
 </br>
 
-<p>
-  <strong>Sent On:</strong>
-  <%= @postcard_mailing.date_sent %>
-</p>
+  <h4>
+    <strong>Company:</strong>
+    <%= @postcard_mailing.company %>
+  </h4>
 
-<p>
-  <strong>Number Sent:</strong>
-  <%= @postcard_mailing.number_sent %>
-</p>
+  <h4>
+    <strong>Type:</strong>
+    <%= @postcard_mailing.version %>
+  </h4>
 
-<p>
-  <strong>Note:</strong>
-  <%= @postcard_mailing.note %>
-</p>
+  <h4>
+    <strong>Date:</strong>
+    <%= @postcard_mailing.date_sent.strftime("%-m/%-d/%y") %>
+  </h4>
 
-<!-- <p>
-  <strong>Extra i:</strong>
-  <%= @postcard_mailing.extra_i %>
-</p>
+  <h4>
+    <strong>Sent:</strong>
+    <%= @postcard_mailing.number_sent %>
+  </h4>
 
-<p>
-  <strong>Extra b:</strong>
-  <%= @postcard_mailing.extra_b %>
-</p>
+  <h4>
+    <strong>Note:</strong>
+    <%= @postcard_mailing.note %>
+  </h4>
 
-<p>
-  <strong>Extra s:</strong>
-  <%= @postcard_mailing.extra_s %>
-</p> -->
-
-<%= link_to 'Edit Entry', edit_postcard_mailing_path(@postcard_mailing) %> |
-<%= link_to 'Add Another Entry', new_postcard_mailing_path %> |
-<%= link_to 'Postcard Index', postcard_mailings_path %>
+</div>

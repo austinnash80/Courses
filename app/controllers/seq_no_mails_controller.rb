@@ -21,10 +21,12 @@ class SeqNoMailsController < ApplicationController
   # GET /seq_no_mails/new
   def new
     @seq_no_mail = SeqNoMail.new
+    form_collections
   end
 
   # GET /seq_no_mails/1/edit
   def edit
+    form_collections
   end
 
   # POST /seq_no_mails
@@ -76,6 +78,10 @@ class SeqNoMailsController < ApplicationController
   def import #Uploading CSV function
     SeqNoMail.import(params[:file])
     redirect_to seq_no_mails_path, notice: "Upload Complete"
+  end
+
+  def form_collections
+    @companies = ['Sequoia', 'Empire']
   end
 
   private

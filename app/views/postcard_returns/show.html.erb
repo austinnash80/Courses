@@ -1,29 +1,41 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Company:</strong>
-  <%= @postcard_return.company %>
-</p>
+<div class="page-header ">
+</br>
+  <h1 class="text-center"><strong>Postcard Return</strong> </br><small><%= @postcard_return.postmark.strftime("%A %b %-d, %Y")%></small></h1>
+  <div class="col-lg-offset-2">
+    <%= link_to 'Add Another Entry', new_postcard_return_path, class: 'btn btn-default' %> <%= link_to 'Back to Index', postcard_returns_path, class: 'btn btn-default' %> <%= link_to 'Edit Postcard', edit_postcard_return_path(@postcard_return), class: 'btn btn-default' %>
+  </div>
+</div>
+</br>
+<div class="col-lg-offset-2 col-lg-8">
+<div class="well well-white" >
+  <h3 class=""><strong>Details</strong></h3>
+</br>
 
-<p>
-  <strong>Postmark:</strong>
-  <%= @postcard_return.postmark %>
-</p>
+  <h4>
+    <strong>Company:</strong>
+    <%= @postcard_return.company %>
+  </h4>
 
-<p>
-  <strong>Postcard:</strong>
-  <%= @postcard_return.postcard %>
-</p>
+  <h4>
+    <strong>Type:</strong>
+    <%= @postcard_return.postcard %>
+  </h4>
 
-<p>
-  <strong>Uid:</strong>
-  <%= @postcard_return.uid %>
-</p>
+  <h4>
+    <strong>Date:</strong>
+    <%= @postcard_return.postmark.strftime("%-m/%-d/%y") %>
+  </h4>
 
-<p>
-  <strong>Reason:</strong>
-  <%= @postcard_return.reason %>
-</p>
+  <h4>
+    <strong>UID:</strong>
+    <%= @postcard_return.uid %>
+  </h4>
 
-<%= link_to 'Edit', edit_postcard_return_path(@postcard_return) %> |
-<%= link_to 'Back', postcard_returns_path %>
+  <h4>
+    <strong>Reason:</strong>
+    <%= @postcard_return.reason %>
+  </h4>
+
+</div>

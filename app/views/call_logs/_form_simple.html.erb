@@ -7,10 +7,10 @@
       <%= f.input :taken, label: false, input_html: { value: @name }, hint: '' %>
     </div>
     <div class="col-lg-4">
-      <%= f.input :call_date, label: false %>
+      <%= f.input :call_date, label: false, default: Date.today %>
     </div>
     <div class="col-lg-4">
-      <%= f.input :call_time, label: false %>
+      <%= f.input :call_time, label: false, default: Time.now %>
     </div>
   </div>
 </br>

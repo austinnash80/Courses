@@ -19,7 +19,11 @@
     </p>
     <p>
       <strong>Date:</strong>
-      <%= @call_log.call_date %>
+      <%= @call_log.call_date.strftime('%-m/%-d/%y') %>
+    </p>
+    <p>
+      <strong>Time:</strong>
+      <%= @call_log.call_time.strftime('%l:%M %p') %>
     </p>
     <p>
       <strong>Call length:</strong>

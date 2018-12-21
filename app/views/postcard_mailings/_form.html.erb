@@ -1,75 +1,35 @@
-<%= form_with(model: postcard_mailing, local: true) do |form| %>
-  <% if postcard_mailing.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(postcard_mailing.errors.count, "error") %> prohibited this postcard_mailing from being saved:</h2>
+<%= simple_form_for(@postcard_mailing) do |f| %>
 
-      <ul>
-      <% postcard_mailing.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+  <%= f.error_notification %>
+</br>
+<div class="well well-white col-lg-offset-3 col-lg-6">
+</br>
+<div class="row">
+  <div class="col-lg-offset-4">
+    <%= f.input :date_sent, label: 'Mailing Date' %>
+  </div>
+</div>
+</br>
+<div class="row">
   <div class="col-lg-3">
+    <%= f.input :sent, label: 'Mailing Complete?', as: :radio_buttons, :checked => ['Yes', true] %>
+  </br>
+    <%= f.input :company, label: 'Company', collection: @companies, as: :radio_buttons %>
   </div>
-
-  <div class="well col-lg-6">
-    <div class="well">
-      <h3>Type of Mailing</h3>
-
-      <div class="field">
-        <%= form.label :company %>
-        <%= form.select :company, ['Sequoia','Empire'], id: :postcard_mailing_company %>
-      </div>
-
-      <div class="field">
-        <%= form.label :version, 'Type' %>
-        <%= form.select :version, ['CPA NM', 'CPA RC', 'EA NM', 'EA RC', 'Empire RC', 'Empire NM', 'Other'], id: :postcard_mailing_version %>
-      </div>
-
-    </div>
-
-    <div class="well">
-      <h3>Mailing Details</h3>
-      <div class="field">
-        <%= form.label :sent %>
-        <%= form.check_box :sent, id: :postcard_mailing_sent %>
-      </div>
-
-      <div class="field">
-        <%= form.label :date_sent, 'Date of Mailing' %>
-        <%= form.date_select :date_sent, id: :postcard_mailing_date_sent %>
-      </div>
-
-      <div class="field">
-        <%= form.label :number_sent, 'Number of Postcards Sent' %>
-        <%= form.number_field :number_sent, id: :postcard_mailing_number_sent %>
-      </div>
-
-      <div class="field">
-        <%= form.label :note, 'Add Addtional Note' %>
-        <%= form.text_area :note, id: :postcard_mailing_note %>
-      </div>
-
-    </div>
-
-  <!-- <div class="field">
-    <%= form.label :extra_i %>
-    <%= form.number_field :extra_i, id: :postcard_mailing_extra_i %>
+  <div class="col-lg-3">
+    <%= f.input :version, label: 'Postcard Type', collection: @postcard_type, as: :radio_buttons %>
   </div>
-
-  <div class="field">
-    <%= form.label :extra_b %>
-    <%= form.check_box :extra_b, id: :postcard_mailing_extra_b %>
+</div>
+</br>
+<!-- </br> -->
+<div class="row">
+  <div class="col-lg-3">
+    <%= f.input :number_sent, label: 'Number sent' %>
   </div>
+</div>
+</br>
+<%= f.input :note, label: false, placeholder: 'Add any notes about this mailing' %>
+</br>
+<%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
 
-  <div class="field">
-    <%= form.label :extra_s %>
-    <%= form.text_field :extra_s, id: :postcard_mailing_extra_s %>
-  </div> -->
-
-  <div class="actions">
-    <%= form.submit "Submit Postcard Mailing", class: 'btn btn-primary' %>
-  </div>
 <% end %>

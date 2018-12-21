@@ -8,7 +8,7 @@
 </br>
   <div class="row">
   <div class="col-lg-3">
-    <% if params[:pes_number] == 0 %>
+    <% if params[:pes_number] != 0 %>
       <%= f.input :pes_number, label: 'PES Number', input_html: { value: params[:pes_number] } %>
     <% elsif %>
       <%= f.input :pes_number, label: 'PES Number', input_html: { value: params[:pes_number] }, hint: 'Non-PES = 0' %>

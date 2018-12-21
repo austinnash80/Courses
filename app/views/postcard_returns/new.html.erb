@@ -1,5 +1,9 @@
-<h1>New Postcard Return</h1>
+<div class="page-header ">
+</br>
+  <h1 class="text-center">Add New Postcard Return</h1>
+  <div class="col-lg-offset-3">
+  <%= link_to 'Back to Index', postcard_returns_path, class: 'btn btn-default' %>
+</div>
+</div>
 
 <%= render 'form', postcard_return: @postcard_return %>
-
-<%= link_to 'Back', postcard_returns_path %>
