@@ -20,8 +20,8 @@ Bundler.require(*Rails.groups)
 
 module SequoiaCourses
   class Application < Rails::Application
-    config.time_zone = 'Pacific Time (US & Canada)'
-    config.active_record.default_timezone = :local
+    # config.time_zone = 'Pacific Time (US & Canada)'
+    # config.active_record.default_timezone = :local
 
 
     # Initialize configuration defaults for originally generated Rails version.
