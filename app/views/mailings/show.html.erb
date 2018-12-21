@@ -1,13 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<!-- <%#= image_tag @mailing.msi_art.url %> -->
-<!-- <%#= @mailing.msi_invoice.url %> -->
 <div class="display-none">
-<div class="well text-center">
-  <h1><%= @mailing.name %> - <%= @mailing.who %></h1>
-  <h2>Delivered: <%= (@mailing.drop + 10).strftime('%-m/%-d/%Y') %><h2>
-    <!-- <%= link_to 'Mailing Index', mailings_path %> -->
+<div class="page-header ">
+</br>
+  <h1 class="text-center"><strong><%= @mailing.name %> - <%= @mailing.who %></strong>
+  </br>
+  <small>
+    <% if @mailing.complete == true %>
+      Landed: <%= (@mailing.drop + 10).strftime('%-m/%-d/%Y') %>
+    <% elsif @mailing.complete == false && @mailing.boolean_1 == true %>
+      Landing: <%= (@mailing.drop + 10).strftime('%-m/%-d/%Y') %>
+    <% elsif %>
+      Planned Drop Date: <%= (@mailing.drop).strftime('%-m/%-d/%Y') %>
+    <% end %>
+  </small>
+
+</h1>
+  <div class="btn-group">
+    <%= link_to 'Edit Mailing', edit_mailing_path(@mailing), class: 'btn btn-default' %>
+    <%= link_to 'Mailing Index', mailings_path, class: 'btn btn-default' %>
+  </div>
 </div>
+
 
 <% if @mailing.complete == true %>
   <h4 class="text-center green_text">This mailing is complete</h4>
@@ -18,12 +32,7 @@
 <% end %>
 
 <div class="col-sm-4">
-  <div class="btn-group display-none">
-  <%= link_to 'Edit Mailing', edit_mailing_path(@mailing), class: 'btn btn-default' %>
-  <%= link_to 'Mailing Index', mailings_path, class: 'btn btn-default' %></h4>
-</div>
-</br>
-</br>
+
 
   <div class="btn-group display-none">
     <a class="btn btn-primary" target="_blank" href="<%= @mailing.msi_art %>"><i class="glyphicon glyphicon-download-alt" ></i> Art</a>
@@ -222,7 +231,7 @@
 
 </div>
 
-  <div class="well">
+  <div class="well well-white">
     <h2 class="text-center">People</h2>
     <!-- <h3><a class="btn btn-default" target="_blank" href="<%= @mailing.people_report %>"><i class="glyphicon glyphicon-download-alt" ></i> Full Report</a></h3>
       <p>
@@ -243,12 +252,12 @@
 </div>
 
 <div class="col-sm-4">
-  <div class="well">
+  <div class="well well-white">
     <h2 class="text-center">Document Uploading</h2>
       <%= render 'form_upload_docs', mailing: @mailing %>
   </div>
 
-  <div class="well">
+  <div class="well well-white">
     <h2 class="text-center">Notes</h2>
       <% if @mailing.note_2.empty? %>
         <%= render 'form_notes', mailing: @mailing %>
@@ -272,7 +281,7 @@
       <% end %>
   </div>
 
-  <div class="well">
+  <div class="well well-white">
     <h2 class="text-center">Results</h2>
   </div>
 </div>

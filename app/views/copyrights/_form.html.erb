@@ -1,46 +1,34 @@
-<%= form_with(model: copyright, local: true) do |form| %>
-  <% if copyright.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(copyright.errors.count, "error") %> prohibited this copyright from being saved:</h2>
+<%= simple_form_for(@copyright) do |f| %>
 
-      <ul>
-      <% copyright.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="row col-md-3">
-  <div class="well length">
-    <div class="field">
-      <%= form.label :seq_number %>
-      <%= form.number_field :seq_number, id: :copyright_seq_number %>
-    </div>
-
-    <div class="field">
-      <%= form.label :publisher %>
-      <%= form.text_field :publisher, id: :copyright_publisher %>
-    </div>
-
-    <div class="field">
-      <%= form.label :author %>
-      <%= form.text_field :author, id: :copyright_author %>
-    </div>
-
-    <div class="field">
-      <%= form.label :book, 'Book Title'%>
-      <%= form.text_field :book, id: :copyright_book %>
-    </div>
-
-    <div class="field">
-      <%= form.label :cpdate, 'CR Date'%>
-      <%= form.number_field :cpdate, id: :copyright_cpdate %>
-    </div>
-
-    <div class="actions">
-      <%= form.submit 'Submit' %>
-    </div>
+  <%= f.error_notification %>
+</br>
+<div class="well well-white col-lg-offset-3 col-lg-6">
+</br>
+<div class="row">
+  <div class="col-lg-3">
+    <%= f.input :seq_number, label: false, placeholder: 'Sequoia Number' %>
   </div>
 </div>
+</br>
+<div class="row">
+  <div class="col-lg-3">
+    <%= f.input :author, label: false, placeholder: 'Author' %>
+  </div>
+  <div class="col-lg-3">
+    <%= f.input :publisher, label: false, placeholder: 'Publisher' %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-6">
+    <%= f.input :book, label: false, placeholder: 'Book Title' %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-3">
+    <%= f.input :cpdate, label: false, placeholder: 'Copyright Date' %>
+  </div>
+</div>
+</br>
+<%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
+
 <% end %>
