@@ -7,7 +7,7 @@
       <%= f.input :taken, label: false, input_html: { value: @name }, hint: '' %>
     </div>
     <div class="col-lg-4">
-      <%= f.input :call_date, label: false, default: Date.today - 8.hours%>
+      <%= f.input :call_date, label: false %>
     </div>
     <div class="col-lg-4">
       <%= f.input :call_time, label: false, default: Time.now - 8.hours %>
