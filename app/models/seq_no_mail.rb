@@ -1,7 +1,7 @@
 class SeqNoMail < ApplicationRecord
 
   def self.to_csv # Export to csv function
-    attributes = %w{ first_name mi last_name suf co address address_2 city state zip date_added}
+    attributes = %w{ remove first_name mi last_name suf co address address_2 city state zip date_added}
     CSV.generate(headers: true) do |csv|
       csv << attributes
 
