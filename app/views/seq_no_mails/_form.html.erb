@@ -37,12 +37,18 @@
     <div class="col-lg-2">
     <%= f.input :extra_i, label: 'UID', placeholder: '' %>
   </div>
-  </div>
+</div>
 </br>
+<div class="row">
+  <div class=" col-lg-offset-2 col-lg-3">
+    <%= f.input :remove, label: 'Remove from list?', as: :radio_buttons, :checked => ['Yes', true] %>
+  </div>
+</div>
+<!-- </br> -->
 </br>
 <div class="row">
 <div class="col-lg-offset-2 col-lg-8">
-    <%= f.input :extra_s, label: false, placeholder: 'Reason for wanting off the mailing list', as: :text %>
+    <%= f.input :extra_s, label: false, placeholder: 'Reason for wanting off the mailing list - write "Change" for Address Change only', as: :text %>
 </br>
     <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
   </br>

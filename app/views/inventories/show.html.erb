@@ -1,39 +1,46 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Company:</strong>
-  <%= @inventory.company %>
-</p>
+<div class="page-header ">
+</br>
+  <h1 class="text-center"><strong>New Order - <%= @inventory.version %></strong> </br><small>Ordered: <%= @inventory.order.strftime("%b %-d, %Y")%></small></h1>
+  <div class="col-lg-offset-2">
+    <%= link_to 'Back to Index', inventories_path, class: 'btn btn-default' %> <%= link_to 'Edit Entry', edit_inventory_path(@inventory), class: 'btn btn-default' %>
+  </div>
+</div>
+</br>
+<div class="col-lg-offset-2 col-lg-8">
+<div class="well well-white" >
+  <h3 class=""><strong>Details</strong></h3>
+</br>
 
-<p>
-  <strong>Version:</strong>
-  <%= @inventory.version %>
-</p>
+  <h4>
+    <strong>Company:</strong>
+    <%= @inventory.company %>
+  </h4>
 
-<p>
-  <strong>Number:</strong>
-  <%= @inventory.number %>
-</p>
+  <h4>
+    <strong>Postcard:</strong>
+    <%= @inventory.version %>
+  </h4>
 
-<p>
-  <strong>Note:</strong>
-  <%= @inventory.note %>
-</p>
+  <h4>
+    <strong>Order Date:</strong>
+    <%= @inventory.order.strftime("%-m/%-d/%Y") %>
+  </h4>
 
-<p>
-  <strong>Extra s:</strong>
-  <%= @inventory.extra_s %>
-</p>
+</br>
+  <h4>
+      <strong>Number:</strong>
+      <%= number_with_delimiter(@inventory.number, delimiter: ',') %>
+  </h4>
 
-<p>
-  <strong>Extra i:</strong>
-  <%= @inventory.extra_i %>
-</p>
+  <h4>
+    <strong>Cost:</strong>
+    <%= number_to_currency(@inventory.cost) %>
+  </h4>
 
-<p>
-  <strong>Extra b:</strong>
-  <%= @inventory.extra_b %>
-</p>
-
-<%= link_to 'Edit', edit_inventory_path(@inventory) %> |
-<%= link_to 'Back', inventories_path %>
+  <h4>
+    <strong>Unit Cost:</strong>
+    <%= number_to_currency(@inventory.cost/@inventory.number) %>
+  </h4>
+</div>

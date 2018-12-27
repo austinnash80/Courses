@@ -1,6 +1,12 @@
-<h1>Editing Inventory</h1>
+<div class="page-header ">
+</br>
+  <h1 class="text-center">Edit Postcard Order</h1>
+  <div class="col-lg-offset-3">
+    <%= link_to 'Back to Index', inventories_path, class: 'btn btn-default' %>
+  </div>
+</div>
 
-<%= render 'form', inventory: @inventory %>
+<%= render 'form_simple', inventory: @inventory %>
 
-<%= link_to 'Show', @inventory %> |
-<%= link_to 'Back', inventories_path %>
+<!-- <%= link_to 'Show', @inventory %> |
+<%= link_to 'Back', inventories_path %> -->

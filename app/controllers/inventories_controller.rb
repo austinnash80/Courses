@@ -15,10 +15,12 @@ class InventoriesController < ApplicationController
   # GET /inventories/new
   def new
     @inventory = Inventory.new
+    form_collections
   end
 
   # GET /inventories/1/edit
   def edit
+    form_collections
   end
 
   # POST /inventories
@@ -70,5 +72,10 @@ class InventoriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def inventory_params
       params.require(:inventory).permit(:company, :version, :number, :note, :extra_s, :extra_i, :extra_b, :order, :cost)
+    end
+
+    def form_collections
+      @companies = ['Sequoia', 'Empire', 'Other']
+      @version = ['CPA NM', 'CPA RC', 'EA NM', 'EA RC', 'Empire RC', 'Empire New Mexico', 'Empire congratulations', 'Other']
     end
 end

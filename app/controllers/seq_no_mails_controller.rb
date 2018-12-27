@@ -92,6 +92,6 @@ class SeqNoMailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def seq_no_mail_params
-      params.require(:seq_no_mail).permit(:first_name, :mi, :last_name, :suf, :co, :address, :address_2, :city, :state, :zip, :date_added, :extra_i, :extra_b, :extra_s)
+      params.require(:seq_no_mail).permit(:first_name, :mi, :last_name, :suf, :co, :address, :address_2, :city, :state, :zip, :date_added, :extra_i, :extra_b, :extra_s, :remove)
     end
 end

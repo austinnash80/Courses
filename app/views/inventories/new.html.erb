@@ -1,5 +1,9 @@
-<h1>New Inventory</h1>
+<div class="page-header ">
+</br>
+  <h1 class="text-center">Add New Postcard Order</h1>
+  <div class="col-lg-offset-3">
+    <%= link_to 'Back to Index', inventories_path, class: 'btn btn-default' %>
+  </div>
+</div>
 
-<%= render 'form', inventory: @inventory %>
-
-<%= link_to 'Back', inventories_path %>
+<%= render 'form_simple', inventory: @inventory %>

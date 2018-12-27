@@ -1,0 +1,32 @@
+<%= simple_form_for(@inventory) do |f| %>
+
+  <%= f.error_notification %>
+</br>
+  <div class="row">
+    <div class="col-lg-offset-3 col-lg-6 well well-white">
+    </br>
+      <%= f.input :order, label: 'Order Date' %>
+    </br>
+    <div class="row">
+      <div class="col-lg-3">
+        <%= f.input :company, label: 'Company', collection: @companies, as: :radio_buttons %>
+      </div>
+      <div class="col-lg-3">
+        <%= f.input :version, label: 'Postcard Version', collection: @version, as: :select %>
+      </div>
+    </div>
+  </br>
+    <div class="row">
+      <div class="col-lg-3">
+        <%= f.input :number, label: 'Number' %>
+      </div>
+      <div class="col-lg-3">
+        <%= f.input :cost, label: 'Cost' %>
+      </div>
+    </div>
+  </br>
+      <%= f.input :note, label: false, placeholder: 'Order Notes',  as: :text %>
+    </br>
+      <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
+      <% end %>
+    </div>

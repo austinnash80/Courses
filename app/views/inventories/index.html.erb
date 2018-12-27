@@ -12,9 +12,9 @@
       <th>Date Ordered</th>
       <th>Cost</th>
       <th>Note</th>
-      <th>Extra s</th>
+      <!-- <th>Extra s</th>
       <th>Extra i</th>
-      <th>Extra b</th>
+      <th>Extra b</th> -->
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -24,13 +24,13 @@
       <tr>
         <td><%= inventory.company %></td>
         <td><%= inventory.version %></td>
-        <td><%= inventory.number %></td>
+        <td><%= number_with_delimiter(inventory.number, delimiter: ',') %></td>
         <td><%= inventory.order.strftime('%-m/%-d/%y') %></td>
         <td><%= number_to_currency(inventory.cost) %></td>
         <td><%= inventory.note %></td>
-        <td><%= inventory.extra_s %></td>
+        <!-- <td><%= inventory.extra_s %></td>
         <td><%= inventory.extra_i %></td>
-        <td><%= inventory.extra_b %></td>
+        <td><%= inventory.extra_b %></td> -->
         <td><%= link_to 'Show', inventory %></td>
         <td><%= link_to 'Edit', edit_inventory_path(inventory) %></td>
         <td><%= link_to 'Destroy', inventory, method: :delete, data: { confirm: 'Are you sure?' } %></td>
