@@ -95,6 +95,7 @@
     <thead>
       <tr>
         <th>Course</th>
+        <!-- <th>Title</th> -->
         <th>Date</th>
         <th>Type</th>
         <th>Comment</th>
@@ -107,8 +108,9 @@
     <tbody id="myListCommments">
       <% @course_comments.each do |course_comment| %>
         <tr>
-          <td><%= course_comment.course_number %><%= course_comment.course_version %></td>
-          <td><%= course_comment.comment_date.strftime('%-m/%-d/%y') %></td>
+          <td><%= course_comment.course_number %><%= course_comment.course_version %> - </br><%= course_comment.Datasheet.seq_title %></td>
+          <!-- <td><%= course_comment.Datasheet.seq_title %></td> -->
+          <td><%= course_comment.comment_date.blank? ? 'nil' : course_comment.comment_date.strftime('%-m/%-d/%y') %></td>
           <td><%= course_comment.comment_type %></td>
           <td><a href="../course_comments/<%= course_comment.id %>"><%= course_comment.comment_details.truncate(75)%></a></td>
           <!-- <td><%= course_comment.taken%></td> -->

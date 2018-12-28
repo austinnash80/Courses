@@ -1,14 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<div class="well jumbotron text-center">
-  <h1>Course Comment</h1>
-  <p><%= @course_comment.course_number %><%= @course_comment.course_version %> -</p>
+<div class="page-header">
+</br>
+<h1 class="text-center"><strong>Course Comment</strong></h1>
+<h4 class="text-center"><%= @course_comment.course_number %><%= @course_comment.course_version %> - <%= @course_comment.Datasheet.seq_title %></h4>
+  <div class="col-lg-offset-2">
+    <%= link_to 'Back to Index', course_comments_path, class: 'btn btn-default' %> <%= link_to 'Edit Entry', edit_course_comment_path(@course_comment), class: 'btn btn-default' %>
+  </div>
 </div>
 </br>
+
+
 <div class="col-lg-offset-2 col-lg-8">
-<%= link_to 'Back to Index', course_comments_path, class: 'btn btn-primary' %> <%= link_to 'Edit Comment', edit_course_comment_path(@course_comment), class: 'btn btn-primary' %>
-</br>
-</br>
+
 <div class="well well-white" >
   <h3 class=""><strong>Details</strong></h3>
 </br>
@@ -24,7 +28,7 @@
 
 <p>
   <strong>Course:</strong>
-  <%= @course_comment.course_number %><%= @course_comment.course_version %> - <%= @course_comment.datasheet.seq_title %>
+  <%= @course_comment.course_number %><%= @course_comment.course_version %> - <%= @course_comment.Datasheet.seq_title %>
 </p>
 
 <p>

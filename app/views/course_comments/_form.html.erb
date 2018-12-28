@@ -18,10 +18,10 @@
 </br>
   <div class="row">
     <div class="col-lg-3">
-      <%= f.input :course_number, label: false, placeholder: 'Course Number' %>
+      <%= f.association :Datasheet, as: :select, label_method: :seq_number, value_method: :id, label: 'Course Number' %>
     </div>
     <div class="col-lg-1">
-      <%= f.input :course_version, label: false, placeholder: 'V.' %>
+      <%= f.input :course_version, label: 'Ver.', placeholder: '' %>
     </div>
   </div>
 </br>
