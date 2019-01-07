@@ -25,13 +25,13 @@
     <% @tx_royalties.each do |tx_royalty| %>
       <tr>
         <td><%= tx_royalty.quarter %></td>
-        <td><%= tx_royalty.start_date.strftime('%-m/%-d/%Y') %></td>
-        <td><%= tx_royalty.end_date.strftime('%-m/%-d/%Y') %></td>
-        <td><%= tx_royalty.sent_date.strftime('%-m/%-d/%Y') %></td>
+        <td><%= tx_royalty.start_date.blank? == false ? tx_royalty.start_date.strftime('%-m/%-d/%Y') : '' %></td>
+        <td><%= tx_royalty.end_date.blank? == false ? tx_royalty.end_date.strftime('%-m/%-d/%Y') : '' %></td>
+        <td><%= tx_royalty.sent_date.blank? == false ? tx_royalty.sent_date.strftime('%-m/%-d/%Y') : '' %></td>
         <td><%= tx_royalty.extra_s %></td>
         <td><%= tx_royalty.sold %></td>
         <td><%= number_to_currency(tx_royalty.cost) %></td>
-        <td><%= number_to_percentage((tx_royalty.percentage * 100), :precision => 0) %></td>
+        <td><%= tx_royalty.percentage.blank? == false ? number_to_percentage((tx_royalty.percentage * 100), :precision => 0) : '' %></td>
         <% if tx_royalty.sent == true %>
           <td class="green"><strong>Sent</strong></td>
         <% elsif %>

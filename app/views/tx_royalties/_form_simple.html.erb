@@ -1,0 +1,63 @@
+<%= simple_form_for(@tx_royalty) do |f| %>
+
+  <%= f.error_notification %>
+</br>
+<div class="well well-white col-lg-offset-3 col-lg-6">
+</br>
+<div class="row">
+  <div class="col-lg-3">
+    <%= f.input :quarter, label: 'ex: 2018 Q1' %>
+  </div>
+</div>
+  <div class="row">
+    <div class="col-lg-12">
+      <%= f.input :extra_s, label: 'Course Title', input_html: { value: '9245 - A CPAs Guidebook to Ethical Behavior: A CPE Ethics course for texas CPAs' } %>
+    </div>
+</div>
+</br>
+<div class="row">
+  <div class="col-lg-3">
+    <%= f.input :extra_i, label: 'Quarter', collection: 1..4 , as: :radio_buttons %>
+  </div>
+<!-- </br> -->
+  <div class="col-lg-4">
+    <%= f.input :start_date, label: 'Quarter Start' %>
+  </div>
+  <div class="col-lg-4">
+    <%= f.input :end_date, label: 'Quarter End' %>
+  </div>
+</div>
+</br>
+<!-- </br> -->
+<div class="row">
+  <div class="col-lg-2">
+    <% if @tx_royalty.sold.nil? %>
+      <%= f.input :sold, label: 'Number sent', input_html: { value: 0 } %>
+    <% elsif %>
+      <%= f.input :sold, label: 'Number sent' %>
+    <% end %>
+    <%= f.input :cost, label: 'Cost', input_html: { value: 64.50 } %>
+    <%= f.input :percentage, label: 'Percent', input_html: { value: 0.25 } %>
+  </div>
+<!-- </br> -->
+  <div class="col-lg-offset-1 col-lg-3">
+    <%= f.input :sent, label: 'Check sent?', as: :radio_buttons, :checked => ['No', false] %>
+  </div>
+  <div class="col-lg-4">
+    <%= f.input :sent_date, label: 'Date Sent' %>
+  </div>
+
+</div>
+<!-- </div> -->
+</br>
+
+<div class="row">
+  <div class="col-lg-4">
+    <%= f.input :sales_report, label: 'Upload Sales Report' %>
+  </div>
+</div>
+</br>
+<%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
+</div>
+
+<% end %>
