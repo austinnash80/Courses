@@ -1,6 +1,9 @@
-<h1>Editing Tx Royalty</h1>
+<div class="page-header ">
+</br>
+  <h1 class="text-center">Update Texas Royality</h1>
+  <div class="col-lg-offset-3">
+    <%= link_to 'Back to Index', tx_royalties_path, class: 'btn btn-default' %>
+  </div>
+</div>
 
-<%= render 'form', tx_royalty: @tx_royalty %>
-
-<%= link_to 'Show', @tx_royalty %> |
-<%= link_to 'Back', tx_royalties_path %>
+<%= render 'form_simple', postcard_mailing: @postcard_mailing %>

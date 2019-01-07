@@ -4,7 +4,7 @@ class TxRoyaltiesController < ApplicationController
   # GET /tx_royalties
   # GET /tx_royalties.json
   def index
-    @tx_royalties = TxRoyalty.all
+    @tx_royalties = TxRoyalty.order(:start_date => 'asc').all
   end
 
   # GET /tx_royalties/1
