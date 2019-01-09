@@ -73,7 +73,7 @@
           </thead>
 
           <tbody>
-            <% @mailings.each do |mailing| %>
+            <% @mailings_complete.each do |mailing| %>
               <% if user_signed_in? && mailing.complete == true && mailing.drop > 12.month.ago..Time.now %>
               <tr>
                 <td><strong><%= link_to mailing.name, mailing %></strong></td>

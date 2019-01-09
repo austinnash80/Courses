@@ -141,6 +141,7 @@ def sales
   def msi_mailing
     @mailings = Mailing.all.order(:drop).reverse_order
     @mailings_not_complete = Mailing.all.where(:complete => false).order('drop ASC').first(5)
+    @mailings_complete = Mailing.all.where(:complete => true).order('drop DESC').first(12)
 
 
     @ytd_drops = []
