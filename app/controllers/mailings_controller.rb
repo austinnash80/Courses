@@ -6,7 +6,6 @@ class MailingsController < ApplicationController
   # GET /mailings.json
   def index
     @mailings = Mailing.order(sort_column + " " + sort_direction)
-    @mailings_not_complete = Mailing.all.where(:complete => false).order(:drop => desc).first(1)
   end
 
   # GET /mailings/1

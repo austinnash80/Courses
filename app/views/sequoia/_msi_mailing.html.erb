@@ -28,7 +28,7 @@
           </thead>
         <tbody>
         <% @mailings_not_complete.each do |mailing| %>
-          <% if mailing.complete == false %>
+          <%# if mailing.complete == false %>
           <tr>
             <td><strong><%= link_to mailing.name, mailing %></strong> </td>
             <td><%= mailing.who %> </td>
@@ -50,7 +50,7 @@
              <!-- <td><%= link_to 'Edit', edit_mailing_path(mailing) %></td> -->
           </tr>
           <% end %>
-        <% end %>
+        <%# end %>
         </tbody>
       </table>
       </div>
@@ -73,7 +73,7 @@
           </thead>
 
           <tbody>
-            <% @mailings_complete.each do |mailing| %>
+            <% @mailings.each do |mailing| %>
               <% if user_signed_in? && mailing.complete == true && mailing.drop > 12.month.ago..Time.now %>
               <tr>
                 <td><strong><%= link_to mailing.name, mailing %></strong></td>
