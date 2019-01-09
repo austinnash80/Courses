@@ -27,7 +27,7 @@
             </tr>
           </thead>
         <tbody>
-        <% @mailings.reverse_each do |mailing| %>
+        <% @mailings.reverse_each.first(5) do |mailing| %>
           <% if mailing.complete == false %>
           <tr>
             <td><strong><%= link_to mailing.name, mailing %></strong> </td>
