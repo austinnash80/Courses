@@ -1,6 +1,12 @@
-<h1>Editing Datasheet</h1>
+<div class="page-header ">
+</br>
+  <h1 class="text-center">Edit Course</h1>
+  <div class="col-lg-offset-3">
+    <%= link_to 'Back to Index', datasheets_path, class: 'btn btn-default' %> <%= link_to 'Show', @datasheet, class: 'btn btn-default' %>
+  </div>
+</div>
 
-<%= render 'form', datasheet: @datasheet %>
+<%= render 'form_edit', datasheet: @datasheet %>
 
-<%= link_to 'Show', @datasheet %> |
-<%= link_to 'Back', datasheets_path %>
+<!-- <%= link_to 'Show', @datasheet %> |
+<%= link_to 'Back', datasheets_path %> -->

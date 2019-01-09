@@ -4,7 +4,7 @@
 </br>
   <h1 class="text-center"><strong>Course Update - <%= @updatesheet.seq_number %><%= @updatesheet.seq_version %></strong> </br><small>Recieved: <%= @updatesheet.date_received.strftime("%b %-d, %Y")%></small></h1>
   <div class="col-lg-offset-2">
-    <%= link_to 'Back to Index', updatesheets_path, class: 'btn btn-default' %> <%= link_to 'Edit Entry', edit_updatesheet_path(@updatesheet), class: 'btn btn-default' %>
+    <%= link_to 'Back to Index', updatesheets_path, class: 'btn btn-default' %> <%= link_to 'Edit Entry', edit_updatesheet_path(@updatesheet), class: 'btn btn-default' %> <%= link_to 'Add Another Update', datasheets_path, class: 'btn btn-default' %>
   </div>
 </div>
 </br>
@@ -15,7 +15,7 @@
 
   <h4>
     <strong>Sequoia Number:</strong>
-    <%= @updatesheet.seq_number %><%= @updatesheet.seq_version %> - <%= @updatesheet.seq_title %>
+    <%= @updatesheet.seq_number %><%= @updatesheet.seq_version %> - <%= @updatesheet.datasheet.seq_title %>
   </h4>
 
   <h4>
@@ -31,62 +31,62 @@
 </br>
   <p>
       <strong>Hold:</strong>
-      <%= @updatesheet.extra_boolean %>
+      <%= @updatesheet.extra_boolean == true ? 'Yes' : 'No'%>
   </p>
 
   <p>
     <strong>Update Course:</strong>
-    <%= @updatesheet.update_course %>
+    <%= @updatesheet.update_course == true ? 'Yes' : 'No' %>
   </p>
 
   <p>
     <strong>Text Complete:</strong>
-    <%= @updatesheet.text_complete %>
+    <%= @updatesheet.text_complete == true ? 'Yes' : 'No' %>
   </p>
 
   <p>
     <strong>Exam Complete:</strong>
-    <%= @updatesheet.exam_complete %>
+    <%= @updatesheet.exam_complete == true ? 'Yes' : 'No' %>
   </p>
 
   <p>
     <strong>Course listed:</strong>
-    <%= @updatesheet.course_listed %>
+    <%= @updatesheet.course_listed == true ? 'Yes' : 'No' %>
   </p>
 
   <p>
     <strong>Proofed:</strong>
-    <%= @updatesheet.proofed %>
+    <%= @updatesheet.proofed == true ? 'Yes' : 'No' %>
   </p>
 
   <p>
     <strong>Proofed Notes:</strong>
-    <%= @updatesheet.proofed_note %>
+    <%= @updatesheet.proofed_note.blank? ? 'n/a' : @updatesheet.proofed_note %>
   </p>
 
   <p>
     <strong>Date Listed:</strong>
-    <%= @updatesheet.course_listed == false ? 'N/A' : @updatesheet.date_listed.strftime("%-m/%-d/%y") %>
+    <%= @updatesheet.course_listed == true ? @updatesheet.date_listed.strftime("%-m/%-d/%y") : 'n/a'  %>
   </p>
 
   <p>
     <strong>Role:</strong>
-    <%= @updatesheet.role %>
+    <%= @updatesheet.role.blank? ? 'n/a' : @updatesheet.role %>
   </p>
 
   <p>
     <strong>Rolep:</strong>
-    <%= @updatesheet.rolep %>
+    <%= @updatesheet.rolep.blank? ? 'n/a' : @updatesheet.rolep %>
   </p>
 
   <p>
     <strong>Irs number:</strong>
-    <%= @updatesheet.irs_number %>
+    <%= @updatesheet.irs_number.blank? ? 'n/a' : @updatesheet.irs_number %>
   </p>
 
-  <p>
+  <!-- <p>
     <strong>Datasheet:</strong>
     <%= @updatesheet.datasheet_id %>
-  </p>
+  </p> -->
 
 </div>

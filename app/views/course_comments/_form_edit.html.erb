@@ -1,6 +1,9 @@
 <%= simple_form_for(@course_comment) do |f| %>
 </br>
   <%= f.error_notification %>
+<div class="well well-white col-lg-offset-3 col-lg-6">
+</br>
+
   <div class="row">
     <div class="col-lg-4">
       <%= f.input :taken, label: false, hint: '', class: 'col-lg-2' %>
@@ -33,4 +36,6 @@
 </br>
   <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
 </br>
+
+</div>
   <% end %>

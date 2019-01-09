@@ -5,6 +5,12 @@
   <h1 class="text-center">Course Comments</h1>
 </div>
 
+<div class="row">
+  <div class="col-lg-2">
+    <input class="form-control" id="myInput" type="text" placeholder="Search Comments">
+  </div>
+</div>
+</br>
 <strong><%= link_to 'New Course Comment', new_course_comment_path %></strong>
 </br>
 <table class="table table-hover">
@@ -25,7 +31,7 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody id="myTable">
     <% @course_comments.each do |course_comment| %>
       <tr>
         <td><%= course_comment.taken %></td>

@@ -1,5 +1,9 @@
 class SalesReportController < ApplicationController
 
+  def test
+    method_without_layout
+  end
+
   def postcard_return_stats
     @empire_postcard_retun_total = PostcardReturn.where(:company => 'Empire Learning').group(:postcard).count
     @sequoia_postcard_retun_total = PostcardReturn.where(:company => 'Sequoia CPE').group(:postcard).count
@@ -121,4 +125,9 @@ class SalesReportController < ApplicationController
       # End Week
 
   end
+
+  def method_without_layout
+    render layout: true
+  end
+
 end

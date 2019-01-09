@@ -78,9 +78,9 @@
               <tr>
                 <td><strong><%= link_to mailing.name, mailing %></strong></td>
                 <td><%= mailing.who %></td>
-                <td><%= (mailing.drop + 10).strftime('%-m/%-d') %></td>
-                <td><%= (mailing.drop).strftime('%-m/%-d') %> </td>
-                <td><%= number_with_delimiter(mailing.quantity_sent, :precision => 0, :delimiter => ',') %></td>
+                <td><%= mailing.drop.blank? == false ? (mailing.drop + 10).strftime('%-m/%-d') : 'blank' %></td>
+                <td><%= mailing.drop.blank? == false ? (mailing.drop).strftime('%-m/%-d') : 'blank' %> </td>
+                <td><%= mailing.quantity_sent.blank? == false ? number_with_delimiter(mailing.quantity_sent, :precision => 0, :delimiter => ',') : 'blank' %></td>
                 <td><%= mailing.cost_service.blank? == false && mailing.cost_postage.blank? == false && mailing.cost_print.blank? == false ? number_to_currency((mailing.cost_service) + (mailing.cost_postage) + (mailing.cost_print), :precision => 0) : 'blank'%></td>
               </tr>
               <% end %>

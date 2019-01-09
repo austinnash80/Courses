@@ -1,6 +1,9 @@
 <%= simple_form_for(@course_comment) do |f| %>
 </br>
   <%= f.error_notification %>
+<div class="well well-white col-lg-offset-3 col-lg-6">
+</br>
+
   <div class="row">
     <div class="col-lg-4">
       <%= f.input :taken, label: false, input_html: { value: @name }, hint: '', class: 'col-lg-2' %>
@@ -18,7 +21,7 @@
 </br>
   <div class="row">
     <div class="col-lg-3">
-      <%= f.association :Datasheet, as: :select, label_method: :seq_number, value_method: :id, label: 'Course Number' %>
+      <%= f.association :Datasheet, as: :select, collection: Datasheet.all.order(:seq_number), label_method: :seq_number, value_method: :id, label: 'Course Number' %>
     </div>
     <div class="col-lg-1">
       <%= f.input :course_version, label: 'Ver.', placeholder: '' %>
@@ -33,4 +36,5 @@
 </br>
   <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
 </br>
+</div>
   <% end %>

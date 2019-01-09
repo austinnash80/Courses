@@ -1,5 +1,9 @@
-<h1>New Datasheet</h1>
+<div class="page-header ">
+</br>
+  <h1 class="text-center">Add New Course to Datasheet</h1>
+  <div class="col-lg-offset-3">
+    <%= link_to 'Back to Index', datasheets_path, class: 'btn btn-default' %>
+  </div>
+</div>
 
-<%= render 'form', datasheet: @datasheet %>
-
-<%= link_to 'Back', datasheets_path %>
+<%= render 'form_new', datasheet: @datasheet %>

@@ -156,68 +156,73 @@
 <!-- End PDFs -->
 
 <div class="display-none">
-<div class="jumbotron">
-  <h2 class="text-center">
-    <%= @tx_royalty.extra_s %>
-  </h2>
-  <h3 class="text-center">
-    Royalties for <%= @tx_royalty.quarter %>
-  </h3>
+
+  <div class="page-header ">
+  </br>
+    <h1 class="text-center"><strong>Quarterly Royalties For: <%= @tx_royalty.quarter %></strong> </br><small><%= @tx_royalty.extra_s %></small></h1>
+  </br>
+  <div class="row">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= link_to 'Back to Index', tx_royalties_path, class: 'btn btn-default' %> <%= link_to 'Edit', edit_tx_royalty_path(@tx_royalty), class: 'btn btn-default' %>
+    </div>
+  </div>
 </div>
+  </br>
 
 
+<div class="col-lg-offset-2 col-lg-8">
 
-<!-- Buttons -->
-<div class="btn-group display-none">
-  <!-- <a class="btn btn-primary" target="_blank" href="#"><i class="glyphicon glyphicon-download-alt" ></i> Art</a> -->
-  <a class="btn btn-primary" target="_blank" href="<%= @tx_royalty.sales_report %>"><i class="glyphicon glyphicon-download-alt" ></i> Sales Report </a>
-  <%= link_to raw('<i class="glyphicon glyphicon-download-alt" ></i> Letter/Invoice'), tx_royalty_path(@tx_royalty, :format => 'pdf'), class: 'btn btn-primary', target: '_blank'%>
-  <!-- <a class="btn btn-primary" target="_blank" href="#"><i class="glyphicon glyphicon-download-alt" ></i> Invoice</a> -->
+    <!-- Buttons -->
+    <div class="btn-group display-none">
+      <!-- <a class="btn btn-primary" target="_blank" href="#"><i class="glyphicon glyphicon-download-alt" ></i> Art</a> -->
+      <a class="btn btn-primary" target="_blank" href="<%= @tx_royalty.sales_report %>"><i class="glyphicon glyphicon-download-alt" ></i> Sales Report </a>
+      <%= link_to raw('<i class="glyphicon glyphicon-download-alt" ></i> Letter/Invoice'), tx_royalty_path(@tx_royalty, :format => 'pdf'), class: 'btn btn-primary', target: '_blank'%>
+      <!-- <a class="btn btn-primary" target="_blank" href="#"><i class="glyphicon glyphicon-download-alt" ></i> Invoice</a> -->
+    </div>
+    <!-- end Button -->
+    </br>
+    </br>
+    </br>
+    <div class="well well-white" >
+    <!-- </br> -->
+    <p>
+      <strong>Dates: <%= @tx_royalty.start_date.strftime('%B %-d,%Y') %> - <%= @tx_royalty.end_date.strftime('%B %-d,%Y') %></strong>
+    </p>
+
+    <p>
+      <strong>Courses Sold:</strong>
+      <%= @tx_royalty.sold %>
+    </p>
+
+    <p>
+      <strong>Unit Cost:</strong>
+      <%= @tx_royalty.cost %>
+    </p>
+
+    <p>
+      <strong>Royalty Percentage:</strong>
+      <%= number_to_percentage((@tx_royalty.percentage * 100), :precision => 0) %>
+    </p>
+
+    <% if @tx_royalty.sales_report.url =~/missing/ %>
+      <p>
+        <strong>Sales Report:</strong> <span class="red">Not Attached</span>
+      </p>
+    <% elsif %>
+      <p>
+          <strong>Sales Report:</strong> <span class="green">Attached</span>
+      </p>
+    <% end %>
+
+    <% if @tx_royalty.sent == true %>
+      <p>
+        <strong>Status:</strong> <span class="green">Sent</span>
+      </p>
+    <% elsif %>
+      <p>
+        <strong>Status:</strong> <span class="red">Not Sent</span>
+      </p>
+    <% end %>
+  </div>
 </div>
-<!-- end Button -->
-
-</br>
-</br>
-<p>
-  <strong><%= @tx_royalty.start_date.strftime('%B %-d,%Y') %> - <%= @tx_royalty.end_date.strftime('%B %-d,%Y') %></strong>
-</p>
-
-<p>
-  <strong>Courses Sold:</strong>
-  <%= @tx_royalty.sold %>
-</p>
-
-<p>
-  <strong>Unit Cost:</strong>
-  <%= @tx_royalty.cost %>
-</p>
-
-<p>
-  <strong>Royalty Percentage:</strong>
-  <%= number_to_percentage((@tx_royalty.percentage * 100), :precision => 0) %>
-</p>
-
-<% if @tx_royalty.sales_report.url =~/missing/ %>
-  <p>
-    <strong>Sales Report:</strong> <span class="red">Not Attached</span>
-  </p>
-<% elsif %>
-  <p>
-      <strong>Sales Report:</strong> <span class="green">Attached</span>
-  </p>
-<% end %>
-
-<% if @tx_royalty.sent == true %>
-  <p>
-    <strong>Status:</strong> <span class="green">Sent</span>
-  </p>
-<% elsif %>
-  <p>
-    <strong>Status:</strong> <span class="red">Not Sent</span>
-  </p>
-<% end %>
-
-
-<%= link_to 'Edit', edit_tx_royalty_path(@tx_royalty) %> |
-<%= link_to 'Back', tx_royalties_path %>
 </div>

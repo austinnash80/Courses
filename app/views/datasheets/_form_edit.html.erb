@@ -1,0 +1,100 @@
+<!-- Notes -->
+  <!-- form_new has default check boxes to 'NO', form_edit cannot have any default -->
+  <!-- Whrn making changes to this form, must also make changes to form_edit and vise versa-->
+<!-- End Notes -->
+
+<%= simple_form_for(@datasheet) do |f| %>
+
+  <%= f.error_notification %>
+</br>
+<div class="well well-white col-lg-offset-3 col-lg-6">
+</br>
+<div class="row">
+  <div class="col-lg-4">
+    <%= f.input :seq_number, label: 'Sequoia Number' %>
+  </div>
+  <div class="col-lg-2">
+    <%= f.input :seq_version, label: 'Version' %>
+  </div>
+  <div class="col-lg-6">
+    <%= f.input :seq_title, label: 'Course Title', placeholder: false %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4">
+    <%= f.input :pes_number, label: 'PES Number' %>
+  </div>
+  <div class="col-lg-2">
+    <%= f.input :pes_version, label: 'Version' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6">
+    <%= f.input :category, label: 'Category' %>
+  </div>
+</div>
+
+</br>
+
+<div class="row">
+  <div class="col-lg-2">
+    <%= f.input :hours, label: 'Hours' %>
+  </div>
+  <div class="col-lg-offset-1 col-lg-3">
+    <%= f.input :active, label: 'Is the course active?', as: :radio_buttons %>
+  </div>
+</div>
+
+</br>
+<div class="row">
+  <div class="col-lg-3">
+    <%= f.input :needs_approval, label: 'Any approvals needed?', as: :radio_buttons %>
+  </div>
+  <div class="col-lg-3">
+    <%= f.input :has_approval, label: 'If so, do we have necessary approvals?', as: :radio_buttons %>
+  </div>
+  <div class="col-lg-6">
+    <%= f.input :approval_info, label: 'Information on course approvals', placeholder: 'Exp dates, contact info, link to form, etc.' %>
+  </div>
+  </div>
+
+</br>
+
+<div class="row">
+  <div class="col-lg-6">
+    <%= f.input :pub_date, label: 'Publication Date', hint: 'Pub date of active version' %>
+  </div>
+  <div class="col-lg-6">
+    <%= f.input :seq_update, label: 'Update Date', hint: 'Date the late update was completed' %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-6">
+    <%= f.input :seq_original_list, label: 'List Date', hint: 'Date the course first went active' %>
+  </div>
+  <div class="col-lg-6">
+    <%= f.input :drop_date, label: 'Drop Date', hint: 'Only relevent if course is inactive' %>
+  </div>
+  </div>
+  <div class="row">
+  <div class="col-lg-6">
+    <%= f.input :drop_reason, label: 'Drop Reason' %>
+  </div>
+  </div>
+</br>
+<div class="row">
+  <div class="col-lg-6">
+    <%= f.input :course_note, label: 'Course Note' %>
+  </div>
+  <div class="col-lg-6">
+    <%= f.input :extra_note, label: 'Extra Note' %>
+  </div>
+</div>
+
+</br>
+<%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
+
+</div>
+<% end %>

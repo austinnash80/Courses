@@ -43,12 +43,14 @@ Rails.application.routes.draw do
       get 'remove_all'
     end
   end
-  
+
   resources :postcard_returns
   get 'sales_report/postcard_return_stats'
   get 'sales_report/call_log_stats'
   get 'sales_report/sequoia_sales'
   get 'sales_report/sequoia_exams'
+
+  get 'sales_report/test'
 
   get 'sales_report/course_status'
   get 'sequoia_customers/index'

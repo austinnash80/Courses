@@ -83,4 +83,18 @@ $(document).ready(function(){
       });
     });
 
+    // test JS
+    	$('.banner .banner-section .banner-section-inner').click(function(){
+    		if ($(this).hasClass('active')) {
+    			$(this).removeClass('active');
+    		} else {
+    			$('.banner .banner-section .banner-section-inner').removeClass('active');
+    			$(this).addClass('active');
+    		}
+    	});
+
+      // Test_hp
+      var height = $('.footer').height();
+      $('.sect-t-footer').css('height', height);
+
 });
