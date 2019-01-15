@@ -6,9 +6,9 @@
     <h4>Versions: <%= @seq_1_sent.count %></h3>
     </br>
     <p><strong>Sent: <%= @seq_1_sent.sum %> </strong></p>
-    <p>Delivery Rate: <%= number_to_percentage(@seq_1_delivered.sum.to_f / @seq_1_sent.sum, precision: 2) %></p>
-    <p>Open Rate: <%= number_to_percentage(@seq_1_opened.sum.to_f / @seq_1_delivered.sum, precision: 2) %></p>
-    <p>Click Rate: <%= number_to_percentage(@seq_1_clicked.sum.to_f / @seq_1_opened.sum, precision: 2) %></p>
+    <p>Delivery Rate: <%= number_to_percentage((@seq_1_delivered.sum.to_f / @seq_1_sent.sum) * 100, precision: 1) %></p>
+    <p>Open Rate: <%= number_to_percentage((@seq_1_opened.sum.to_f / @seq_1_delivered.sum) * 100, precision: 1) %></p>
+    <p>Click Rate: <%= number_to_percentage((@seq_1_clicked.sum.to_f / @seq_1_opened.sum) * 100, precision: 1) %></p>
   </div>
   <div class="col-lg-2 well well-white left-square">
     <h3>Segment 2</h3>
@@ -16,9 +16,9 @@
     <h4>Versions: <%= @seq_2_sent.count %></h3>
     </br>
     <p><strong>Sent: <%= @seq_2_sent.sum %> </strong></p>
-    <p>Delivery Rate: <%= number_to_percentage(@seq_2_delivered.sum.to_f / @seq_2_sent.sum, precision: 2) %></p>
-    <p>Open Rate: <%= number_to_percentage(@seq_2_opened.sum.to_f / @seq_2_delivered.sum, precision: 2) %></p>
-    <p>Click Rate: <%= number_to_percentage(@seq_2_clicked.sum.to_f / @seq_2_opened.sum, precision: 2) %></p>
+    <p>Delivery Rate: <%= number_to_percentage((@seq_2_delivered.sum.to_f / @seq_2_sent.sum) * 100, precision: 1) %></p>
+    <p>Open Rate: <%= number_to_percentage((@seq_2_opened.sum.to_f / @seq_2_delivered.sum) * 100, precision: 1) %></p>
+    <p>Click Rate: <%= number_to_percentage((@seq_2_clicked.sum.to_f / @seq_2_opened.sum) * 100, precision: 1) %></p>
   </div>
   <div class="col-lg-2 well well-white left-square">
     <h3>Segment 4</h3>
@@ -26,9 +26,9 @@
     <h4>Versions: <%= @seq_4_sent.count %></h3>
     </br>
     <p><strong>Sent: <%= @seq_4_sent.sum %> </strong></p>
-    <p>Delivery Rate: <%= number_to_percentage(@seq_4_delivered.sum.to_f / @seq_4_sent.sum, precision: 2) %></p>
-    <p>Open Rate: <%= number_to_percentage(@seq_4_opened.sum.to_f / @seq_4_delivered.sum, precision: 2) %></p>
-    <p>Click Rate: <%= number_to_percentage(@seq_4_clicked.sum.to_f / @seq_4_opened.sum, precision: 2) %></p>
+    <p>Delivery Rate: <%= number_to_percentage((@seq_4_delivered.sum.to_f / @seq_4_sent.sum) * 100, precision: 1) %></p>
+    <p>Open Rate: <%= number_to_percentage((@seq_4_opened.sum.to_f / @seq_4_delivered.sum) * 100, precision: 1) %></p>
+    <p>Click Rate: <%= number_to_percentage((@seq_4_clicked.sum.to_f / @seq_4_opened.sum) * 100, precision: 1) %></p>
   </div>
   <div class="col-lg-2 well well-white left-square">
     <h3>Segment 6</h3>
@@ -36,9 +36,9 @@
     <h4>Versions: <%= @seq_6_sent.count %></h3>
     </br>
     <p><strong>Sent: <%= @seq_6_sent.sum %> </strong></p>
-    <p>Delivery Rate: <%= number_to_percentage(@seq_6_delivered.sum.to_f / @seq_6_sent.sum, precision: 2) %></p>
-    <p>Open Rate: <%= number_to_percentage(@seq_6_opened.sum.to_f / @seq_6_delivered.sum, precision: 2) %></p>
-    <p>Click Rate: <%= number_to_percentage(@seq_6_clicked.sum.to_f / @seq_6_opened.sum, precision: 2) %></p>
+    <p>Delivery Rate: <%= number_to_percentage((@seq_6_delivered.sum.to_f / @seq_6_sent.sum) * 100, precision: 1) %></p>
+    <p>Open Rate: <%= number_to_percentage((@seq_6_opened.sum.to_f / @seq_6_delivered.sum) * 100, precision: 1) %></p>
+    <p>Click Rate: <%= number_to_percentage((@seq_6_clicked.sum.to_f / @seq_6_opened.sum) * 100, precision: 1) %></p>
   </div>
   <div class="col-lg-2 well well-white left-square">
     <h3>Segment 7</h3>
@@ -46,9 +46,9 @@
     <h4>Versions: <%= @seq_7_sent.count %></h3>
     </br>
     <p><strong>Sent: <%= @seq_7_sent.sum %> </strong></p>
-    <p>Delivery Rate: <%= number_to_percentage(@seq_7_delivered.sum.to_f / @seq_7_sent.sum, precision: 2) %></p>
-    <p>Open Rate: <%= number_to_percentage(@seq_7_opened.sum.to_f / @seq_7_delivered.sum, precision: 2) %></p>
-    <p>Click Rate: <%= number_to_percentage(@seq_7_clicked.sum.to_f / @seq_7_opened.sum, precision: 2) %></p>
+    <p>Delivery Rate: <%= number_to_percentage((@seq_7_delivered.sum.to_f / @seq_7_sent.sum) * 100, precision: 1) %></p>
+    <p>Open Rate: <%= number_to_percentage((@seq_7_opened.sum.to_f / @seq_7_delivered.sum) * 100, precision: 1) %></p>
+    <p>Click Rate: <%= number_to_percentage((@seq_7_clicked.sum.to_f / @seq_7_opened.sum) * 100, precision: 1) %></p>
   </div>
 
 </div>
