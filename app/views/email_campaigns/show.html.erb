@@ -65,6 +65,18 @@
 
 </div>
 
+<div class="row">
+  <div class="col-lg-8 well well-white">
+    <h4><strong>Stats</strong></h4>
+    <p>
+      <strong>Click Rate</strong>
+      <%= number_to_percentage(@email_campaign.clicked.to_f / @email_campaign.opened, precision: 1)%>
+    </p>
+
+  </div>
+
+</div>
+
 <%= link_to 'Edit Campaign Details', edit_email_campaign_path(@email_campaign), class: 'btn btn-default' %>
 <%= link_to 'Campaign Index', email_campaigns_path, class: 'btn btn-default' %>
 

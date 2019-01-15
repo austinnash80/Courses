@@ -130,4 +130,5 @@ class SalesReportController < ApplicationController
     render layout: true
   end
 
+
 end
