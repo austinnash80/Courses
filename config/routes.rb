@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  resources :cpe_due_dates do
+    collection {post :import}
+    end
+
   resources :course_comments
   resources :call_logs
   resources :seq_no_mails do

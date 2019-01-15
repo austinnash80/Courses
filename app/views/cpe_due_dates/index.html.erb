@@ -1,0 +1,84 @@
+<p id="notice"><%= notice %></p>
+
+<!-- <h1>Cpe Due Dates</h1> -->
+
+<!-- </br> -->
+</br>
+  <%= render(:partial => 'mailings_state') %>
+</br>
+</br>
+
+<h3>Upload File</h3>
+  <%= form_tag import_cpe_due_dates_path, multipart: true do %>
+  <%= file_field_tag :file %>
+</br>
+  <%= submit_tag 'Upload', class: 'btn btn-primary' %>
+<% end %>
+</br>
+
+<div class="row">
+<div class="col-md-3">
+  <input class="form-control" id="myInput" type="text" placeholder="Search Datasheet">
+</br>
+  <%= link_to 'Add New', new_cpe_due_date_path, class: 'btn btn-primary' %>
+</div>
+</div>
+
+
+
+
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>State</th>
+      <th>St</th>
+      <th>Quanity</th>
+      <th>Cpe group</th>
+      <th>Renew type</th>
+      <th>Cpe due</th>
+      <th>Self Study (%)</th>
+      <th>Year Minimum (hrs.)</th>
+      <th>Exclude</th>
+      <th>State Note</th>
+      <th>Extra s</th>
+      <th>All 2019</th>
+      <th>Extra i</th>
+      <th>partial mail</th>
+      <th>partial Number</th>
+      <th>Extra i</th>
+      <!-- <th>Extra d</th> -->
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody id="myTable">
+    <% @cpe_due_dates.each do |cpe_due_date| %>
+      <tr>
+        <td><%= cpe_due_date.state %></td>
+        <td><%= cpe_due_date.st %></td>
+        <td><%= cpe_due_date.quanity %></td>
+        <td><%= cpe_due_date.cpe_group %></td>
+        <td><%= cpe_due_date.renew_type %></td>
+        <td><%= cpe_due_date.cpe_due %></td>
+        <td><%= cpe_due_date.ss_allowed %></td>
+        <td><%= cpe_due_date.year_minimum %></td>
+        <td class="red"><%= cpe_due_date.exclude == true ? 'EXCLUDE' : '' %></td>
+        <td><%= cpe_due_date.state_note %></td>
+        <td><%= cpe_due_date.extra_s %></td>
+        <td><%= cpe_due_date.extra_b %></td>
+        <td><%= cpe_due_date.extra_i %></td>
+        <td><%= cpe_due_date.partial_mail %></td>
+        <td><%= cpe_due_date.partial_number %></td>
+        <!-- <td><%= cpe_due_date.extra_d %></td> -->
+        <td><%= link_to 'Show', cpe_due_date %></td>
+        <td><%= link_to 'Edit', edit_cpe_due_date_path(cpe_due_date) %></td>
+        <td><%= link_to 'Destroy', cpe_due_date, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cpe Due Date', new_cpe_due_date_path %>

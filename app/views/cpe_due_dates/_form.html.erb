@@ -1,0 +1,27 @@
+
+<%= simple_form_for(@cpe_due_date) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :state %>
+    <%= f.input :st %>
+    <%= f.input :quanity %>
+    <%= f.input :cpe_group %>
+    <%= f.input :renew_type %>
+    <%= f.input :cpe_due %>
+    <%= f.input :ss_allowed %>
+    <%= f.input :year_minimum %>
+    <%= f.input :exclude %>
+    <%= f.input :state_note %>
+    <%= f.input :partial_mail %>
+    <%= f.input :partial_number %>
+    <%= f.input :extra_s %>
+    <%= f.input :extra_b %>
+    <%= f.input :extra_i %>
+    <%= f.input :extra_d %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
