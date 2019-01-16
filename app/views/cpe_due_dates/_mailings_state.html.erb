@@ -1,6 +1,9 @@
 <div class="page-header ">
 </br>
   <h1 class="text-center">2019 Mailing States</h1>
+  <h4><strong>Total People:</strong> <%= number_with_delimiter(number_with_precision((@total * 0.9).round(-2), precision: 0)) %> </h4>
+  <h4><strong>Total Cards:</strong> <%= number_with_delimiter(number_with_precision((@total * 3 * 0.9).round(-2), precision: 0)) %> </h4>
+  <h4><strong>Total Cost:</strong> <%= number_to_currency((@total * 3 * 0.35 * 0.9).round(-2), precision: 0)  %> </h4>
   </div>
 </div>
 
@@ -20,16 +23,14 @@
         </thead>
         <tbody>
       <% @cpe_due_dates.each do |cpe_due_date| %>
-        <% if cpe_due_date.cpe_due == '0' && cpe_due_date.exclude == false%>
+        <% if cpe_due_date.cpe_due == '0' && cpe_due_date.exclude == false %>
           <tr>
             <td><%= cpe_due_date.state %> </td>
             <% if cpe_due_date.extra_b == true %>
               <td><%= number_with_delimiter((cpe_due_date.quanity * 0.9).round(-2)) %> </td>
             <% elsif %>
-              <td><%= number_with_delimiter((cpe_due_date.quanity * cpe_due_date.partial_number * 0.9).round(-2) ) %> </td>
+            <td><%= cpe_due_date.partial_number.blank? == false ? number_with_delimiter(number_with_precision((cpe_due_date.quanity * cpe_due_date.partial_number * 0.9).round(-2), precision: 0 )) : 'nil' %> </td>
             <% end %>
-
-
             <td><%= cpe_due_date.extra_b == true ? 'All' : cpe_due_date.partial_mail %> </td>
             <td><%= cpe_due_date.extra_s %>
           </tr>
@@ -37,8 +38,8 @@
         <% end %>
       </tbody>
     </table>
-    <h5><strong>Total:</strong> <%= number_with_delimiter((@cpe_due_dates.where('cpe_due' => '0', 'exclude' => false).sum(:quanity) * 0.9).round(-2) ) %></h5>
-    <h5><strong>Per Month:</strong>  <%=number_with_delimiter(((@cpe_due_dates.where('cpe_due' => '0', 'exclude' => false).sum(:quanity) / 12) * 0.9).round(-2)) %></h5>
+    <h5><strong>Total:</strong> <%= number_with_delimiter(((@partials_0.sum + @monthly_all) * 0.9).round(-2)) %></h5>
+    <h5><strong>Total:</strong> <%= number_with_delimiter((((@partials_0.sum + @monthly_all) * 0.9) / 12).round(-2)) %></h5>
   </div>
 
     <div class="col-lg-3 well well-white">
@@ -59,7 +60,7 @@
           <% if cpe_due_date.extra_b == true %>
             <td><%= number_with_delimiter((cpe_due_date.quanity * 0.9).round(-2)) %> </td>
           <% elsif %>
-            <td><%= cpe_due_date.partial_number.blank? == false ? number_with_delimiter((cpe_due_date.quanity * cpe_due_date.partial_number * 0.9).round(-2)) : 'nil' %> </td>
+          <td><%= cpe_due_date.partial_number.blank? == false ? number_with_delimiter(number_with_precision((cpe_due_date.quanity * cpe_due_date.partial_number * 0.9).round(-2), precision: 0 )) : 'nil' %> </td>
           <% end %>
           <td><%= cpe_due_date.extra_b == true ? 'All' : cpe_due_date.partial_mail %> </td>
           <td><%= cpe_due_date.extra_s %>
@@ -68,7 +69,7 @@
         <% end %>
       </tbody>
     </table>
-    <h5><strong>Total:</strong> <%= number_with_delimiter(@cpe_due_dates.where('cpe_due' => '6', 'exclude' => false).sum(:quanity)) %></h5>
+    <h5><strong>Total:</strong> <%= number_with_delimiter(((@partials_6.sum + @month_6_all) * 0.9).round(-2)) %></h5>
   </div>
 
   <div class="col-lg-3 well well-white">
@@ -89,7 +90,7 @@
         <% if cpe_due_date.extra_b == true %>
           <td><%= number_with_delimiter((cpe_due_date.quanity * 0.9).round(-2)) %> </td>
         <% elsif %>
-          <td><%= cpe_due_date.partial_number.blank? == false ? number_with_delimiter((cpe_due_date.quanity * cpe_due_date.partial_number * 0.9).round(-2)) : 'nil' %> </td>
+        <td><%= cpe_due_date.partial_number.blank? == false ? number_with_delimiter(number_with_precision((cpe_due_date.quanity * cpe_due_date.partial_number * 0.9).round(-2), precision: 0 )) : 'nil' %> </td>
         <% end %>
         <td><%= cpe_due_date.extra_b == true ? 'All' : cpe_due_date.partial_mail %> </td>
         <td><%= cpe_due_date.extra_s %>
@@ -98,10 +99,10 @@
       <% end %>
     </tbody>
   </table>
-  <h5><strong>Total:</strong> <%= number_with_delimiter(@cpe_due_dates.where('cpe_due' => '12', 'exclude' => false ).sum(:quanity)) %></h5>
+  <h5><strong>Total:</strong> <%= number_with_delimiter(((@partials_12.sum + @month_12_all) * 0.9).round(-2)) %></h5>
 </div>
 
-<div class="col-lg-2 well well-white">
+<div class="col-lg-3 well well-white">
   <h4 class="text-center"><strong> Others Mailing States</strong></h4>
   <table class="table table-striped">
     <thead>
@@ -109,15 +110,23 @@
         <th>State</th>
         <th>Quantity</th>
         <th>Due</th>
+        <th>2019</th>
+        <th>Note</th>
       </tr>
     </thead>
   <% @cpe_due_dates.each do |cpe_due_date| %>
     <% if cpe_due_date.cpe_due == '7' || cpe_due_date.cpe_due == '9'  && cpe_due_date.exclude == false %>
-      <tr>
-        <td><%= cpe_due_date.state %> </td>
-        <td><%= number_with_delimiter(cpe_due_date.quanity) %> </td>
-        <td><%= cpe_due_date.cpe_due %> </td>
-      </tr>
+    <tr>
+      <td><%= cpe_due_date.state %> </td>
+      <% if cpe_due_date.extra_b == true %>
+        <td><%= number_with_delimiter((cpe_due_date.quanity * 0.9).round(-2)) %> </td>
+      <% elsif %>
+      <td><%= cpe_due_date.partial_number.blank? == false ? number_with_delimiter(number_with_precision((cpe_due_date.quanity * cpe_due_date.partial_number * 0.9).round(-2), precision: 0 )) : 'nil' %> </td>
+      <% end %>
+      <td><%= cpe_due_date.cpe_due %></td>
+      <td><%= cpe_due_date.extra_b == true ? 'All' : cpe_due_date.partial_mail %> </td>
+      <td><%= cpe_due_date.extra_s %>
+    </tr>
       <% end %>
     <% end %>
   </tbody>
@@ -125,7 +134,7 @@
 
 <% month_7 = (@cpe_due_dates.where('cpe_due' => '7', 'exclude' => false).sum(:quanity)) %>
 <% month_9 = (@cpe_due_dates.where('cpe_due' => '9', 'exclude' => false).sum(:quanity)) %>
-<h5><strong>Total:</strong> <%= number_with_delimiter(month_9 + month_7) %></h5>
+<h5><strong>Total:</strong> <%= number_with_delimiter((@month_other_all * 0.9).round(-2)) %></h5>
 </div>
 
 </div>

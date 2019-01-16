@@ -5,6 +5,34 @@ class CpeDueDatesController < ApplicationController
   # GET /cpe_due_dates.json
   def index
     @cpe_due_dates = CpeDueDate.all.order(:state)
+    totals
+  end
+
+  def totals
+
+    @monthly_all = CpeDueDate.where('cpe_due' => '0', 'exclude' => false, 'extra_b' => true ).sum(:quanity)
+    @month_6_all = CpeDueDate.where('cpe_due' => '6', 'exclude' => false, 'extra_b' => true ).sum(:quanity)
+    @month_12_all = CpeDueDate.where('cpe_due' => '12', 'exclude' => false, 'extra_b' => true ).sum(:quanity)
+    @month_other_all = CpeDueDate.where('exclude' => false, 'extra_b' => true ).where('cpe_due=? OR cpe_due=?', '7', '9').sum(:quanity)
+
+    @partials_12 = []
+    @partials_6 = []
+    @partials_0 = []
+
+    @cpe_due_dates.each do |cpe_due_date|
+      if cpe_due_date.cpe_due == '12' && cpe_due_date.exclude == false && cpe_due_date.partial_number.blank? == false
+        @partials_12.push(cpe_due_date['partial_number'].to_f * cpe_due_date['quanity'])
+      end
+      if cpe_due_date.cpe_due == '6' && cpe_due_date.exclude == false && cpe_due_date.partial_number.blank? == false
+        @partials_6.push(cpe_due_date['partial_number'].to_f * cpe_due_date['quanity'])
+      end
+      if cpe_due_date.cpe_due == '0' && cpe_due_date.exclude == false && cpe_due_date.partial_number.blank? == false
+        @partials_0.push(cpe_due_date['partial_number'].to_f * cpe_due_date['quanity'])
+      end
+    end
+
+    @total = @monthly_all + @month_6_all + @month_12_all + @month_other_all + @partials_12.sum + @partials_6.sum + @partials_0.sum
+
   end
 
   # GET /cpe_due_dates/1

@@ -1,32 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<!-- <h1>Cpe Due Dates</h1> -->
-
-<!-- </br> -->
-</br>
   <%= render(:partial => 'mailings_state') %>
 </br>
-</br>
 
-<h3>Upload File</h3>
-  <%= form_tag import_cpe_due_dates_path, multipart: true do %>
-  <%= file_field_tag :file %>
-</br>
-  <%= submit_tag 'Upload', class: 'btn btn-primary' %>
-<% end %>
-</br>
 
 <div class="row">
 <div class="col-md-3">
-  <input class="form-control" id="myInput" type="text" placeholder="Search Datasheet">
+  <input class="form-control" id="myInput" type="text" placeholder="Search">
+</div>
+</div>
 </br>
-  <%= link_to 'Add New', new_cpe_due_date_path, class: 'btn btn-primary' %>
-</div>
-</div>
-
-
-
-
 
 <table class="table table-hover">
   <thead>
@@ -57,7 +40,7 @@
       <tr>
         <td><%= cpe_due_date.state %></td>
         <td><%= cpe_due_date.st %></td>
-        <td><%= cpe_due_date.quanity %></td>
+        <td><%= number_with_delimiter(cpe_due_date.quanity) %></td>
         <td><%= cpe_due_date.cpe_group %></td>
         <td><%= cpe_due_date.renew_type %></td>
         <td><%= cpe_due_date.cpe_due %></td>
@@ -80,5 +63,12 @@
 </table>
 
 <br>
+<h3>Upload File</h3>
+  <%= form_tag import_cpe_due_dates_path, multipart: true do %>
+  <%= file_field_tag :file %>
+</br>
+  <%= submit_tag 'Upload', class: 'btn btn-primary' %>
+<% end %>
+</br>
 
 <%= link_to 'New Cpe Due Date', new_cpe_due_date_path %>
