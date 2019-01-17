@@ -11,6 +11,28 @@ $(document).ready(function(){
       });
     });
 
+    // For Dashboard Live Chat Answers
+    $("#myInputSequoia").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTableSequoia tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+
+    $("#myInputEmpire").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTableEmpire tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+
+    $("#myInputTax").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTableTax tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+
     // Dashboard CPA Exam Search
     $("#myInputCPA").on("keyup", function() {
       var value = $(this).val().toLowerCase();

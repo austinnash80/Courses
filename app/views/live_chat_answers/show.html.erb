@@ -1,0 +1,68 @@
+<p id="notice"><%= notice %></p>
+
+<div class="page-header ">
+</br>
+  <h1 class="text-center"><strong>Question - <%= @live_chat_answer.question %></strong> </br><small>Added: <%= @live_chat_answer.date_org.strftime("%b %-d, %Y")%></small></h1>
+  <div class="col-lg-offset-2">
+    <%= link_to 'Live Chat Index', live_chat_answers_path, class: 'btn btn-default' %> <%= link_to 'Edit Answer', edit_live_chat_answer_path(@live_chat_answer), class: 'btn btn-default' %> <%= link_to 'Add New', new_live_chat_answer_path(@live_chat_answer), class: 'btn btn-default' %>
+  </div>
+</div>
+</br>
+<div class="col-lg-offset-2 col-lg-8">
+<div class="well well-white" >
+  <h3 class=""><strong>Details</strong></h3>
+</br>
+
+  <h4>
+    <strong>Company:</strong>
+    <%= @live_chat_answer.company %>
+  </h4>
+
+  <h4>
+    <strong>Des:</strong>
+    <%= @live_chat_answer.des %>
+  </h4>
+  <h4>
+    <strong>State:</strong>
+    <%= @live_chat_answer.state %>
+  </h4>
+  <h4>
+    <strong>Topic:</strong>
+    <%= @live_chat_answer.topic %>
+  </h4>
+</br>
+  <p>
+    <strong>Question:</strong>
+    <%= @live_chat_answer.question %>
+  </p>
+
+  <p>
+    <strong>Answer:</strong>
+    <%= @live_chat_answer.answer %>
+  </p>
+
+  <p>
+    <strong>Extra Notes:</strong>
+    <%= @live_chat_answer.notes %>
+  </p>
+
+  </div>
+
+
+<!-- <p>
+  <strong>Extra i:</strong>
+  <%= @live_chat_answer.extra_i %>
+</p>
+
+<p>
+  <strong>Extra s:</strong>
+  <%= @live_chat_answer.extra_s %>
+</p>
+
+<p>
+  <strong>Extra d:</strong>
+  <%= @live_chat_answer.extra_d %>
+</p> -->
+
+<!-- <%= link_to 'Edit', edit_live_chat_answer_path(@live_chat_answer) %> | -->
+<!-- <%= link_to 'Back', live_chat_answers_path %> -->

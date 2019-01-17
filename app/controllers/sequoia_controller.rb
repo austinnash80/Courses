@@ -11,6 +11,7 @@ class SequoiaController < ApplicationController
     email_campaign
     sequoia_exams_total
     sequoia_exams_individual
+    live_chat_answer
   end
 
   def dash_ashley
@@ -22,6 +23,7 @@ class SequoiaController < ApplicationController
     email_campaign
     sequoia_exams_total
     sequoia_exams_individual
+    live_chat_answer
   end
 
   def dash_michael
@@ -34,6 +36,7 @@ class SequoiaController < ApplicationController
     msi_mailing
     sequoia_exams_total
     sequoia_exams_individual
+    live_chat_answer
   end
 
   def dash
@@ -48,6 +51,7 @@ class SequoiaController < ApplicationController
     task
     msi_mailing
     name
+    live_chat_answer
   end
 
   def dash_kyle
@@ -62,11 +66,13 @@ class SequoiaController < ApplicationController
     task
     msi_mailing
     name
+    live_chat_answer
   end
 
   def dash_john
     task
     name
+    live_chat_answer
   end
 
 private
@@ -74,6 +80,10 @@ private
 # def test
 #   SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => '2018-09-25').where(:what => 'Ethics')
 # end
+
+ def live_chat_answer
+   @live_chat_answers = LiveChatAnswer.all
+ end
 
 def sales
     @seq_customers_all = SequoiaCustomer.all

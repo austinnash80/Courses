@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :live_chat_answers
   resources :cpe_due_dates do
     collection {post :import}
     end
