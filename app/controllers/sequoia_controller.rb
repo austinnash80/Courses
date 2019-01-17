@@ -66,6 +66,7 @@ class SequoiaController < ApplicationController
 
   def dash_john
     task
+    name
   end
 
 private
@@ -375,6 +376,7 @@ def postcard_schedule
     user_signed_in? && current_user.email == 'michael@sequoiacpe.com' ? @name = 'Michael' : ''
     user_signed_in? && current_user.email == 'kyle@sequoiacpe.com' ? @name = 'Kyle' : ''
     user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' ? @name = 'Ashley' : ''
+    user_signed_in? && current_user.email == 'john@empirelearning.com' ? @name = 'John' : ''
 
     @user_task = 'task.user_1'
   end
