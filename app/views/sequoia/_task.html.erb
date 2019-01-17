@@ -26,13 +26,11 @@
       <tbody>
         <% @tasks.each do |task| %>
         <% if task.user_1 == @name || task.user_2 == @name || task.user_3 == @name || task.user_4 == @name || task.user_5 == @name %>
-          <% if task.type_one == true && task.done == false %>
-          <%# if user_signed_in? && task.user_id == current_user.id && task.type_one == true && task.done == false %>
+          <% if task.extra_string == 'Current'  %>
             <tr>
               <td><strong><%= link_to task.title, task %></strong></td>
               <td><%= task.note.truncate_words(20) %>
               <td><%= task.no_due_date == true ? 'No Due Date' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
-              <!-- <td><%= link_to 'Edit', edit_task_path(task) %></td> -->
             </tr>
             <% end %>
           <% end %>
@@ -52,18 +50,18 @@
           <th>Title</th>
           <th>Note</th>
           <th>Due Date</th>
-          <th> </th>
+          <!-- <th> </th> -->
         </tr>
       </thead>
       <tbody>
         <% @tasks.each do |task| %>
           <% if task.user_1 == @name || task.user_2 == @name || task.user_3 == @name || task.user_4 == @name || task.user_5 == @name %>
-            <% if task.type_two == true && task.done == false && task.type_one == false %>
+          <% if task.extra_string == 'Future'  %>
             <tr>
               <td><strong><%= link_to task.title, task %></strong></td>
               <td><%= task.note.truncate_words(20) %>
               <td><%= task.no_due_date == true ? 'No Due Date' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
-              <td><%= link_to 'Edit', edit_task_path(task) %></td>
+              <!-- <td><%= link_to 'Edit', edit_task_path(task) %></td> -->
             </tr>
             <% end %>
           <% end %>
@@ -80,18 +78,18 @@
         <th>Title</th>
         <th>Note</th>
         <th>Due Date</th>
-        <th> </th>
+        <!-- <th> </th> -->
       </tr>
     </thead>
     <tbody>
       <% @tasks.each do |task| %>
         <% if task.user_1 == @name || task.user_2 == @name || task.user_3 == @name || task.user_4 == @name || task.user_5 == @name %>
-          <% if task.done == true %>
+        <% if task.extra_string == 'Complete'  %>
         <tr>
           <td><strong><%= link_to task.title, task %></strong></td>
           <td><%= task.note.truncate_words(20) %>
           <td><%= task.no_due_date == true ? 'No Due Date' : task.due_date.strftime('%a, %-m/%d/%y') %> </td>
-          <td><%= link_to 'Edit', edit_task_path(task) %></td>
+          <!-- <td><%= link_to 'Edit', edit_task_path(task) %></td> -->
         </tr>
           <% end %>
         <% end %>

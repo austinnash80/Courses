@@ -64,6 +64,10 @@ class SequoiaController < ApplicationController
     name
   end
 
+  def dash_john
+    task
+  end
+
 private
 
 # def test

@@ -1,5 +1,10 @@
-<h1 class="text-center">Edit Task</h1>
+<div class="page-header ">
 </br>
+  <h1 class="text-center">Edit Task</h1>
+  <div class="col-lg-offset-3">
+    <%= link_to 'Back to Index', tasks_path, class: 'btn btn-default' %>
+  </div>
+</div>
 
 <%= render 'form', task: @task %>
 

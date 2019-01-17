@@ -19,6 +19,7 @@
     <% user_signed_in? && current_user.email == 'kyle@sequoiacpe.com' ? @name = 'Kyle' : '' %>
     <% user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' ? @name = 'Ashley' : '' %>
     <% user_signed_in? && current_user.email == 'hamdo@sequoiacpe.com' ? @name = 'Hamdo' : '' %>
+    <% user_signed_in? && current_user.email == 'john@empirelearning.com' ? @name = 'John' : '' %>
 
 <% unless controller_name == "sequoia" %>
 <nav class="navbar navbar-inverse">
@@ -35,6 +36,8 @@
         <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_michael_path, class: 'button-none'%></strong>
       <% elsif user_signed_in? && @name == 'Hamdo'%>
         <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_hamdo_path, class: 'button-none'%></strong>
+      <% elsif user_signed_in? && @name == 'John'%>
+        <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_john_path, class: 'button-none'%></strong>
       <% elsif %>
       <h1> Dashboard </h1>
       <% end %>
@@ -59,6 +62,7 @@
             <li><%= link_to 'Michael Dashboard', sequoia_dash_michael_path %></li>
             <li><%= link_to 'Hamdo Dashboard', sequoia_dash_hamdo_path %></li>
             <li><%= link_to 'Ashley Dashboard', sequoia_dash_ashley_path %></li>
+            <li><%= link_to 'John Dashboard', sequoia_dash_john_path %></li>
           <li class="divider"></li>
         <% elsif user_signed_in? && current_user.supervisor_role == true %>
           <li class="dropdown-header">Dashboards</li>
@@ -103,6 +107,7 @@
         <li class="dropdown-header">Admin</li>
           <li><%= link_to 'MSI Mailing Index', mailings_path %></li>
             <li><%= link_to 'Empire MSI', empire_mailings_path %></li>
+            <li><%= link_to 'State CPE Info', cpe_due_dates_path %></li>
           <li><a href="/admin">Admin Panel</a></li>
         <% end %>
 

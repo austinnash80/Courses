@@ -10,19 +10,23 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    form_collection
   end
 
   # GET /tasks/new
   def new
     @task = Task.new
+    form_collection
   end
 
   # GET /tasks/1/edit
   def edit
+    form_collection
   end
 
   # GET /tasks/1/edit
   def update_status
+    form_collection
   end
 
   # POST /tasks
@@ -53,6 +57,7 @@ class TasksController < ApplicationController
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
+    form_collection
   end
 
   # DELETE /tasks/1
@@ -63,6 +68,12 @@ class TasksController < ApplicationController
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def form_collection
+    @task_assign = ['Austin', 'Kyle', 'Michael', 'Ashley', 'Hamdo', 'John']
+    @task_status = [['Current', 'Current'], ['Future', 'Future'],['Complete', 'Complete']]
+    @due_date = [['Due Date', true], ['No Due Date', false]]
   end
 
   private

@@ -1,38 +1,10 @@
-<%= form_with(model: task, local: true) do |form| %>
-  <% if task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+<%= simple_form_for(@task) do |f| %>
 
-      <ul>
-      <% task.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= f.error_notification %>
+  <p id="notice"><%= notice %></p>
 
-
+  <%= f.input :task_doc_1, label: 'Task Doc 1: (will overwrite exisiting)' %>
+  <%= f.input :task_doc_2, label: 'Task Doc 2: (will overwrite exisiting)' %>
 </br>
-    <div class="custom-file">
-      <%= form.label :task_doc_1, 'Upload Document 1' %>
-      <%= form.file_field :task_doc_1, id: :task_task_doc_1, class: 'custom-file-control' %>
-    </div>
-  </br>
-
-    <div class="field">
-      <%= form.label :task_doc_2, 'Upload Document 2' %>
-      <%= form.file_field :task_doc_2, id: :task_task_doc_2 %>
-    </div>
-
-  </br>
-    <div class="actions">
-      <%= form.submit class: 'btn btn-primary' %>
-    </div>
-  </div>
-
-
-
-
-
-  </div>
-    <% end %>
+  <%= f.button :submit, 'Update Docs', class: 'btn btn-primary' %>
+<% end %>

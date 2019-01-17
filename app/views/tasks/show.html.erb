@@ -1,76 +1,84 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
+
+<div class="page-header ">
+</br>
+  <h1 class="text-center"><strong>Task - <%= @task.title %>
+  </br>
+  <% if @task.due == true %><small>Due: <%= @task.due_date.strftime("%A - %b %-d, %Y")%></small><% end %></h1>
+
+  <div class="text-center col-lg-offset-0">
+    <%#= link_to 'Back to Index', tasks_path, class: 'btn btn-default' %> <%= link_to 'Edit Task', edit_task_path(@task), class: 'btn btn-default' %>
+  </div>
+</div>
 
 <!-- <div class="container"> -->
   <!-- <div class="row"> -->
-    <div class="col-lg-8">
-      <div class="well">
-      <div class="well">
-        <% if @task.done == true %>
+
+  <div class="col-lg-offset-0 col-lg-3">
+        <div class="well well-white">
+          <h3 class="text-center"><strong>Task Status</strong></h3>
+          </br>
+          <%= render 'form_status', task: @task %>
+        </div>
+
+      <div class="well well-white">
+        <h3 class="text-center"><strong>Task Documents</strong></h3>
+        </br>
+         <%= render 'form_docs', task: @task %>
+      </div>
+  </div>
+
+
+    <div class="col-lg-9">
+      <div class="well well-white">
+      <div class="">
+        <% if @task.extra_string == 'Complete' %>
           <h4 class="green"> Task has been completed</h4>
+        <% elsif (Date.today - @task.due_date).to_i > 0 %>
+          <h4 class="red"> Task is past due</h4>
         <% end %>
-        <h2> <strong>Name:</strong> <%= @task.title %></h2>
+        <h3> <strong>Name:</strong> <%= @task.title %></h3>
+        <% if @task.extra_string == 'Complete'%>
+        <% elsif %>
         <h4> <strong>Due:</strong>
-          <% if @task.no_due_date == true %>
-            No Due Date </h4>
-          <% elsif @task.due == true && @task.done == true %>
-            <%= @task.due_date.strftime('%a, %-m/%-d/%Y') %></h4>
-          <% elsif @task.due == true && @task.done == false %>
-            <% if (Date.today - @task.due_date).to_i < 0 %>
-              <%= (@task.due_date - Date.today).to_i %> Days | <%= @task.due_date.strftime('%a, %-m/%-d/%Y') %></h4>
-            <% elsif (Date.today - @task.due_date).to_i == 0 %>
-              <span class="red">Due Today</span> | <%= @task.due_date.strftime('%a, %-m/%-d/%Y') %></h4>
-            <% elsif (Date.today - @task.due_date).to_i > 0 %>
-              <span class="red">Past Due</span> | <%= @task.due_date.strftime('%a, %-m/%-d/%Y') %></h4>
-            <% end %>
-          <% end %>
-        <h4> <strong>Status:</strong>
-          <% if @task.type_one == true && @task.done == false %>
-              Current Task </h4>
-            <% elsif @task.type_two == true && @task.done == false %>
-              Future Task </h4>
-            <% elsif @task.done == true %>
-              Complete </h4>
-          <% end %>
+          <%= @task.due == false ? 'No Due Date' : (@task.due_date - Date.today).to_i > 0 ? "#{(@task.due_date - Date.today).to_i} Days" : "#{(Date.today - @task.due_date).to_i} Days Past Due" %>
+        </h4>
+        <% end %>
+
+        <% if @task.extra_string == 'Complete'%>
+        <% elsif %>
+        <h4> <strong>Task Type:</strong> <%= @task.extra_string %></h4>
+        <% end %>
+
         <h4>
           <strong>Task For:</strong>
-          <% if @task.user_1 != 'N/A' %>
-              <%= @task.user_1 %>
-          <% end %>
-
-          <% if @task.user_2 != 'N/A'  %>
-               , <%= @task.user_2 %>
-          <% end %>
-
-          <% if @task.user_3 != 'N/A'  %>
-              , <%= @task.user_3 %>
-          <% end %>
-
-          <% if @task.user_4 != 'N/A'  %>
-              , <%= @task.user_4 %>
-          <% end %>
-
-          <% if @task.user_5 != 'N/A'  %>
-              , <%= @task.user_5 %>
-          <% end %>
+          <%= @task.user_1.blank? == false ? @task.user_1 : '' %>
+          <%= @task.user_2.blank? == false ? ", #{@task.user_2}" : '' %>
+          <%= @task.user_3.blank? == false ? ", #{@task.user_3}" : '' %>
+          <%= @task.user_4.blank? == false ? ", #{@task.user_4}" : '' %>
+          <%= @task.user_5.blank? == false ? ", #{@task.user_5}" : '' %>
+          <%= @task.user_6.blank? == false ? ", #{@task.user_6}" : '' %>
         </h4>
+
         <h4>
           <strong>Files:</strong>
           <% if @task.task_doc_1.url =~/missing/ && @task.task_doc_2.url =~/missing/ %>
-            No Documents </h4>
+            No Documents
           <% elsif @task.task_doc_1.url !=~/missing/ && @task.task_doc_2.url =~/missing/ %>
-            1 Supporting Document </h4>
+            1 Supporting Document
           <% elsif @task.task_doc_1.url !=~/missing/ && @task.task_doc_2.url !=~/missing/ %>
-            2 Supporting Documents </h4>
+            2 Supporting Documents
           <% end %>
+        </h4>
 
 
-        </br>
-          <%= link_to 'Edit Task', edit_task_path(@task), class: ' btn btn-default' %>
+        <!-- </br>
+          <%= link_to 'Edit Task', edit_task_path(@task), class: ' btn btn-default' %> -->
       </div>
-
+</br>
     <!-- </div> -->
-        <div class="well">
-          <h2><strong>Task:</strong></h2>
+        <div class="">
+          <h2><strong>Task Details:</strong></h2>
            <h4><%= @task.note %></h4>
          </br>
          <% if @task.update_note.empty? %>
@@ -97,7 +105,7 @@
            <h4><%= @task.additional_note_3 %></h4>
           <% end %>
         </br>
-        <%= link_to 'Edit Task', edit_task_path(@task), class: ' btn btn-default' %>
+        <%#= link_to 'Edit Full Task', edit_task_path(@task), class: ' btn btn-default' %>
 
         <!-- <div class="btn-group">
           <a class="btn btn-primary" target="_blank" href="#"><i class="glyphicon glyphicon-download-alt" ></i> Document 1</a>
@@ -107,8 +115,9 @@
         <!-- </div> -->
         </div>
       </div>
+</div>
 
-  <div class="col-lg-6">
+<div class="col-lg-offset-3 col-lg-9">
   <% if @task.task_doc_1.url =~/missing/ %>
     <h4>
       No documents have been added to this task
@@ -123,7 +132,8 @@
     <% end %>
   <% end %>
 </div>
-<div class="col-lg-6">
+
+<div class="col-lg-offset-3 col-lg-9">
   <% if @task.task_doc_2.url =~/missing/ %>
   <% elsif %>
   <div class="btn-group">
@@ -134,46 +144,4 @@
       <iframe src= <%= @task.task_doc_2.url %> width="100%" height="300px" style="border: none;"> </iframe>
     <% end %>
   <% end %>
-  </div>
-
-  <div>
-    <p> </p>
-  </br>
-  </div>
-
-  </div>
-
-
-
-  <div class="col-lg-4">
-    <!-- <div class="row"> -->
-      <div class="well">
-        <h2 class="text-center"><strong>Change Task Status</strong></h2>
-      </br>
-        <!-- <div class="row"> -->
-        <div class="well">
-            <%= render 'form_status', task: @task %>
-          </div>
-          <div class="well ">
-            <%= render 'form_due_date', task: @task %>
-          </div>
-          <!-- <div class="well col-lg-4 length">
-            <%= render 'form_add_people', task: @task %>
-          </div> -->
-        <!-- <%= link_to 'Edit Task', edit_task_path(@task), class: ' btn btn-primary' %> -->
-        <!-- <%= link_to 'Update Status', edit_task_path(@task), class: ' btn btn-primary' %> -->
-        <!-- <%= link_to 'Add People To Task', edit_task_path(@task), class: ' btn btn-primary' %> -->
-        <!-- <p>""</p> -->
-
-    <!-- </div> -->
-      <div class="well">
-        <h2 class="text-center"><strong>Task Documents:</strong></h2>
-         <!-- <h4>No Docs for this task</h4>  -->
-         <%= render 'form_docs', task: @task %>
-         <!-- <%= link_to 'Upload Docs', edit_task_path(@task), class: ' btn btn-default' %> -->
-
-       </br>
-      </div>
-    </div>
-    <!-- </div> -->
   </div>

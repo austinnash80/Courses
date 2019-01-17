@@ -6,6 +6,12 @@ class CpeDueDatesController < ApplicationController
   def index
     @cpe_due_dates = CpeDueDate.all.order(:state)
     totals
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @cpe_due_dates.to_csv, filename: "cpe_due_dates-#{Date.today}.csv" }
+    end
+
   end
 
   def totals

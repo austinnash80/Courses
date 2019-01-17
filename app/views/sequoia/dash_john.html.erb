@@ -1,0 +1,66 @@
+<body class= 'body-home'>
+
+    <% if current_user.email == 'john@empirelearning.com' || current_user.superadmin_role? %>
+      <h1 class="text-center off-white">John Dashboard</h1>
+      <h3 class="off-white text-center"><%= Date.today.strftime('%A %-b %-d, %Y') %></h3>
+
+</br>
+<div class="row">
+<!-- *** START Left Pannel *** -->
+  <div class="col-lg-4">
+    <div class="well">
+      <%= render(:partial => 'task') %>
+
+    </div>
+  </div>
+<!-- end Left Pannel -->
+
+<!-- *** START Center Pannel *** -->
+  <div class="col-lg-4">
+    <div class="well">
+    </div>
+    </div>
+<!-- *** end Center Pannel *** -->
+
+<!-- *** START Right Pannel *** -->
+  <div class="col-lg-4">
+    <div class="well">
+    </div>
+
+    <div class="well">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home3">Home</a></li>
+        <li><a data-toggle="tab" href="#menu3">Home 1</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="home3" class="tab-pane fade in active">
+          <h3>Sample</h3>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>One</th>
+                <th>Two</th>
+                <th>Three</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="menu3" class="tab-pane fade">
+          <h3>Menu 1</h3>
+          <p>Some content in menu 1.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- *** End Right Pannel *** -->
+
+  </div>
+  <% end %>
+</body>

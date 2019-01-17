@@ -1,38 +1,25 @@
-<%= form_with(model: task, local: true) do |form| %>
-  <% if task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+<%= simple_form_for(@task) do |f| %>
 
-      <ul>
-      <% task.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= f.error_notification %>
+  <p id="notice"><%= notice %></p>
 
-    </br>
+
     <div class="row">
-      <div class="field col-lg-3">
-        <%= form.label :type_one, 'Current Task' %>
-        <%= form.check_box :type_one, id: :task_type_one %>
+      <div class="col-lg-4">
+        <%= f.input :extra_string, label: false, as: :radio_buttons, collection: @task_status %>
       </div>
-
-      <div class="field col-lg-3">
-        <%= form.label :type_two, 'Future Task' %>
-        <%= form.check_box :type_two, id: :task_type_two %>
-      </div>
-
-      <div class="field col-lg-3">
-        <%= form.label :done, 'Completed Task' %>
-        <%= form.check_box :done, id: :task_done %>
-      </div>
-      <div class="field col-lg-3">
-      </div>
-
-      <div class="actions">
-        <%= form.submit label: 'Update', class: 'btn btn-primary' %>
+      <div class="col-lg-4">
+        <%= f.input :due, label: false, as: :radio_buttons, collection: @due_date %>
       </div>
     </div>
+  </br>
+    <div class="row">
+      <div class="col-lg-12">
+        <%= f.input :due_date, label: 'Due Date (if applicable)' %>
+</br>
+        <%= f.button :submit, 'Change Status', class: 'btn btn-primary' %>
+      </div>
+    </div>
+
 
     <% end %>

@@ -47,7 +47,7 @@
     <tr>
       <td><strong>EA</strong></td>
       <td><%= number_with_delimiter(@taken_ea_30, delimiter: ',') %></td>
-      <td><%= @sum_score_ea_30.blank? == false ? @sum_score_ea_30 / @taken_ea_30 : 'n/a' %></td>
+      <td><%= @sum_score_ea_30.blank? == false && @taken_ea_30 != 0 ? @sum_score_ea_30 / @taken_ea_30 : 'n/a' %></td>
       <td><%= number_with_precision(@sum_rating_ea_30.to_f / @taken_rating_ea_30.to_f, precision: 2) %>
 
           <% if @ea_now == @ea_last %>
