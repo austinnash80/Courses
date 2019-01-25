@@ -71,7 +71,7 @@
         <% elsif pes_course.date_added.strftime('%-m/%-d/%y') == '8/21/18' %>
           <td>Orginal</td>
         <% elsif %>
-          <td><%= pes_course.date_added.strftime('%-m/%-d/%y') %></td>
+          <td><%= pes_course.date_added.blank? == false ? pes_course.date_added.strftime('%-m/%-d/%y') : 'missing' %></td>
         <% end %>
         <td><%= pes_course.active == false ? 'N/A' : pes_course.date_removed.strftime('%-m/%-d/%y') == '1/1/13' ? 'Unknown' : pes_course.date_removed.strftime('%-m/%-d/%y') %></td>
         <!-- <% if pes_course.active == true %>
