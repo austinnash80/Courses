@@ -1,0 +1,47 @@
+<h3 class="text-center">Calendar</h3>
+  <p class="text-center"><%= link_to 'Index', calendars_path, class: 'btn btn-default' %> <%= link_to 'Add New', new_calendar_path(@calendar), class: 'btn btn-default' %></p>
+
+<!-- <div class="well"> -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home3">Home</a></li>
+    <li><a data-toggle="tab" href="#general">General</a></li>
+    <li><a data-toggle="tab" href="#sequoia">Sequoia</a></li>
+    <li><a data-toggle="tab" href="#empire">Empire</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="home3" class="tab-pane fade in active">
+    </br>
+      <h4 class="text-center">Select Company Above</h4>
+    </div>
+    <div id="general" class="tab-pane fade">
+      <h3>General</h3>
+
+      <div class="row">
+      <div class="col-md-8">
+        <input class="form-control" id="myInputCalendarGeneral" type="text" placeholder="Search">
+      </div>
+      </div>
+    </br>
+        <table class="table table-bordered">
+            <thead>
+              <th>Event</th>
+              <th>Due</th>
+              <th>Frequency</th>
+            </thead>
+            <tbody id="myTableCalendarGeneral">
+              <% @calendars.each do |calendar| %>
+                <% if calendar.extra_s == 'General' %>
+                  <tr>
+                    <td><%= link_to calendar.title, calendar %></td>
+                    <td><%= Date.today > calendar.event_date ? 'Past' : Date.today > calendar.event_date - 7 ? calendar.event_date.strftime('%A') : "#{(calendar.event_date - Date.today).to_i} Days" %></td>
+                    <td><%= calendar.reoccurring == 'Yes' ?  'Reoccurring #{calendar.reoccurring_rate}' : 'One-Time'%></td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+    </div>
+
+  </div>
+
+</div>

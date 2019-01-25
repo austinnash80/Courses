@@ -16,9 +16,12 @@
         <div class="row">
           <div class="col-lg-3">
             <%= f.input :extra_s, label: 'Company', collection: @company, as: :radio_buttons %>
+            <%= f.input :reoccurring, label: 'Reoccurring Event?', as: :radio_buttons %>
           </div>
           <div class="col-lg-3">
-            <%= f.input :reoccurring, label: 'Reoccurring Event?', as: :radio_buttons %>
+            <%= f.input :reoccurring_rate, label: 'Reoccurring Rate', hint: '*Leave blank it not reoccurring', collection: @reoccurring_rate, as: :radio_buttons  %>
+            </br>
+            <!-- <%= f.input :extra_d, label: 'Stop Reoccurring Date'%> -->
             <!-- <%= f.input :people, label: 'Assign', collection: @people, as: :check_boxes  %> -->
           </div>
         </div>
@@ -26,11 +29,6 @@
           <div class="col-lg-3">
 
             <!-- <%= f.input :people, label: 'Assign', collection: @people, as: :radio_buttons %> -->
-          </div>
-          <div class="col-lg-3">
-            <%= f.input :reoccurring_rate, collection: @reoccurring_rate, as: :radio_buttons  %>
-
-            <%= f.input :extra_d, label: 'Stop Reoccurring Date'%>
           </div>
         </div>
       </br>

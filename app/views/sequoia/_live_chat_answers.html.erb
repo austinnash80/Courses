@@ -57,7 +57,7 @@
               <% @live_chat_answers.each do |live_chat_answer| %>
                 <% if live_chat_answer.company == 'Empire' %>
                   <tr>
-                    <td><%= link_to live_chat_answer.question, live_chat_answer %></br></br>Des: <%= live_chat_answer.state.blank? == false ? live_chat_answer.des : 'n/a' %></td>
+                    <td><%= link_to live_chat_answer.question, live_chat_answer %></br></br>State: <%= live_chat_answer.state.blank? == false ? live_chat_answer.state : 'n/a' %></td>
                     <td><%= live_chat_answer.answer %></td>
                   </tr>
                 <% end %>

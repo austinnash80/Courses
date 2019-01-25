@@ -12,6 +12,7 @@ class SequoiaController < ApplicationController
     sequoia_exams_total
     sequoia_exams_individual
     live_chat_answer
+    calendar
   end
 
   def dash_ashley
@@ -24,6 +25,7 @@ class SequoiaController < ApplicationController
     sequoia_exams_total
     sequoia_exams_individual
     live_chat_answer
+    calendar
   end
 
   def dash_michael
@@ -37,6 +39,7 @@ class SequoiaController < ApplicationController
     sequoia_exams_total
     sequoia_exams_individual
     live_chat_answer
+    calendar
   end
 
   def dash
@@ -52,6 +55,7 @@ class SequoiaController < ApplicationController
     msi_mailing
     name
     live_chat_answer
+    calendar
   end
 
   def dash_kyle
@@ -67,12 +71,14 @@ class SequoiaController < ApplicationController
     msi_mailing
     name
     live_chat_answer
+    calendar
   end
 
   def dash_john
     task
     name
     live_chat_answer
+    calendar
   end
 
 private
@@ -80,6 +86,11 @@ private
 # def test
 #   SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => '2018-09-25').where(:what => 'Ethics')
 # end
+
+def calendar
+  @calendars = Calendar.all
+end
+
 
  def live_chat_answer
    @live_chat_answers = LiveChatAnswer.all

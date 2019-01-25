@@ -31,7 +31,7 @@
     <% if sequoia_course.pes_course.pes_number != 0 %>
       <tr>
         <td><%= sequoia_course.seq_number %><%= sequoia_course.seq_version %></td>
-        <td><%= sequoia_course.pub_date.strftime('%-m/%-d/%y') %></td>
+        <td><%= sequoia_course.pub_date.blank? == false ? sequoia_course.pub_date.strftime('%-m/%-d/%y') : 'missing' %></td>
 
         <!-- <td><%#= sequoia_course.active == true ? 'Active' : 'Not Listed' %></td> -->
         <td><%= sequoia_course.pes_course.active? ? 'Yes' : 'No' %></td>
