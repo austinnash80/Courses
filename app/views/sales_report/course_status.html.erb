@@ -28,7 +28,7 @@
 
   <tbody id="myListPubdates">
     <% @pub_dates.each do |sequoia_course| %>
-    <% if sequoia_course.pes_course.pes_number != 0 %>
+    <% if sequoia_course.pes_course.pes_number.blank? == false && sequoia_course.pes_course.pes_number != 0 %>
       <tr>
         <td><%= sequoia_course.seq_number %><%= sequoia_course.seq_version %></td>
         <td><%= sequoia_course.pub_date.blank? == false ? sequoia_course.pub_date.strftime('%-m/%-d/%y') : 'missing' %></td>
