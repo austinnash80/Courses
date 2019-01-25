@@ -5,6 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+group :assets do
+  gem 'jquery-ui-rails', '~> 6.0'
+end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'
@@ -18,6 +21,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 
 gem 'bootstrap-sass'
+
+gem 'bootstrap-datepicker-rails', '~> 1.6', '>= 1.6.1.1'
 
 gem 'jquery-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes

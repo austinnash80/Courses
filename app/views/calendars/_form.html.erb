@@ -1,0 +1,53 @@
+<%= simple_form_for(@calendar) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+
+    <div class="row">
+      <div class="well well-white col-lg-offset-2 col-lg-8">
+        <%= f.input :event_date, label: 'Event Start Date' %>
+        <div class="row">
+          <div class="col-lg-2">
+            <%= f.input :creator, label: 'Event Added By:', input_html: { value: @name }, hint: '' %>
+          </div>
+        </div>
+        <%= f.input :title %>
+        <%= f.input :details, label: false, placeholder: 'Add any addtion details for this event' %>
+        <div class="row">
+          <div class="col-lg-3">
+            <%= f.input :extra_s, label: 'Company', collection: @company, as: :radio_buttons %>
+          </div>
+          <div class="col-lg-3">
+            <%= f.input :reoccurring, label: 'Reoccurring Event?', as: :radio_buttons %>
+            <!-- <%= f.input :people, label: 'Assign', collection: @people, as: :check_boxes  %> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3">
+
+            <!-- <%= f.input :people, label: 'Assign', collection: @people, as: :radio_buttons %> -->
+          </div>
+          <div class="col-lg-3">
+            <%= f.input :reoccurring_rate, collection: @reoccurring_rate, as: :radio_buttons  %>
+
+            <%= f.input :extra_d, label: 'Stop Reoccurring Date'%>
+          </div>
+        </div>
+      </br>
+        <div class="row">
+          <div class="col-lg-3">
+            <%= f.input :tag %>
+          </div>
+        </div>
+        <!-- <%= f.input :extra_d %>
+        <%= f.input :extra_i %>
+        <%= f.input :extra_s %> -->
+
+        <div class="form-actions">
+          <%= f.button :submit, 'Submit Event', class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>

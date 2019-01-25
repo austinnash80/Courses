@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Event date:</strong>
+  <%= @calendar.event_date %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @calendar.title %>
+</p>
+
+<p>
+  <strong>Details:</strong>
+  <%= @calendar.details %>
+</p>
+
+<p>
+  <strong>People:</strong>
+  <%= @calendar.people %>
+</p>
+
+<p>
+  <strong>Creator:</strong>
+  <%= @calendar.creator %>
+</p>
+
+<p>
+  <strong>Reoccurring:</strong>
+  <%= @calendar.reoccurring %>
+</p>
+
+<p>
+  <strong>Reoccurring rate:</strong>
+  <%= @calendar.reoccurring_rate %>
+</p>
+
+<p>
+  <strong>Tag:</strong>
+  <%= @calendar.tag %>
+</p>
+
+<p>
+  <strong>Extra d:</strong>
+  <%= @calendar.extra_d %>
+</p>
+
+<p>
+  <strong>Extra i:</strong>
+  <%= @calendar.extra_i %>
+</p>
+
+<p>
+  <strong>Extra s:</strong>
+  <%= @calendar.extra_s %>
+</p>
+
+<%= link_to 'Edit', edit_calendar_path(@calendar) %> |
+<%= link_to 'Back', calendars_path %>
