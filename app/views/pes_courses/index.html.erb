@@ -64,17 +64,17 @@
         <td><%= pes_course.category %></td>
         <td><%= pes_course.hours %></td>
         <td><%= pes_course.title %></td>
-        <td><%= pes_course.date_added %></td>
-        <%# if pes_course.date_added.blank? == true %>
+        <!-- <td><%#= pes_course.date_added %></td> -->
+        <% if pes_course.date_added.blank? == true %>
           <td>nil</td>
-        <%# elsif pes_course.date_added.strftime('%-m/%-d/%y') == '1/1/13' %>
+        <% elsif pes_course.date_added.strftime('%-m/%-d/%y') == '1/1/13' %>
           <td>Unknown</td>
-        <%# elsif pes_course.date_added.strftime('%-m/%-d/%y') == '8/21/18' %>
+        <% elsif pes_course.date_added.strftime('%-m/%-d/%y') == '8/21/18' %>
           <td>Orginal</td>
-        <%# elsif %>
-          <td><%#= pes_course.date_added.blank? == false ? pes_course.date_added : 'missing' %></td>
-        <%# end %>
-        <td><%#= pes_course.active == false ? 'N/A' : pes_course.date_removed.strftime('%-m/%-d/%y') == '1/1/13' ? 'Unknown' : pes_course.date_removed.strftime('%-m/%-d/%y') %></td>
+        <% elsif %>
+          <td><%= pes_course.date_added.blank? == false ? pes_course.date_added : 'missing' %></td>
+        <% end %>
+        <td><%= pes_course.active == false ? 'N/A' : pes_course.date_removed.strftime('%-m/%-d/%y') == '1/1/13' ? 'Unknown' : pes_course.date_removed.strftime('%-m/%-d/%y') %></td>
 
         <td><%= link_to 'Remove', pes_course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
