@@ -87,7 +87,7 @@
 </div>
 <div class="col-md-4 left-square well well-white">
   <div class="well">
-    <h2 class="text-center">Course Comments</h2></br>
+    <h2 class="text-center">Out of Date Comments</h2></br>
     <input class="form-control" id="myInputComments" type="text" placeholder="Search">
   </div>
 
@@ -97,7 +97,7 @@
         <th>Course</th>
         <!-- <th>Title</th> -->
         <th>Date</th>
-        <th>Type</th>
+        <!-- <th>Type</th> -->
         <th>Comment</th>
         <!-- <th>By</th> -->
         <!-- <th>View</th> -->
@@ -107,15 +107,17 @@
 
     <tbody id="myListCommments">
       <% @course_comments.each do |course_comment| %>
+      <% if course_comment.comment_type == 'Out of Date' %>
         <tr>
           <td><%= course_comment.course_number %><%= course_comment.course_version %> - </br><%= course_comment.Datasheet.seq_title %></td>
           <!-- <td><%= course_comment.Datasheet.seq_title %></td> -->
           <td><%= course_comment.comment_date.blank? ? 'nil' : course_comment.comment_date.strftime('%-m/%-d/%y') %></td>
-          <td><%= course_comment.comment_type %></td>
+          <!-- <td><%= course_comment.comment_type %></td> -->
           <td><a href="../course_comments/<%= course_comment.id %>"><%= course_comment.comment_details.truncate(75)%></a></td>
           <!-- <td><%= course_comment.taken%></td> -->
           <!-- <td><a href="../course_comments/<%= course_comment.id %>"><%= course_comment.comment_details.truncate(50)%></a></td> -->
         </tr>
+      <% end %>
       <% end %>
     </tbody>
   </table>
