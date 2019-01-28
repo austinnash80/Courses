@@ -32,7 +32,7 @@
                 <% if live_chat_answer.company == 'Sequoia' %>
                   <tr>
                     <td><%= link_to live_chat_answer.question, live_chat_answer %> </br></br>Des: <%= live_chat_answer.des.blank? == false ? live_chat_answer.des : 'n/a' %></td>
-                    <td><%= live_chat_answer.answer %></td>
+                    <td class="word-break"><%= live_chat_answer.answer %></td>
                   </tr>
                 <% end %>
               <% end %>

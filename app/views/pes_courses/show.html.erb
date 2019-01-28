@@ -1,7 +1,17 @@
 <p id="notice"><%= notice %></p>
 
+<div class="page-header ">
+</br>
+  <h1 class="text-center"><strong>PES Course - <%= @pes_course.pes_number %></strong> </br><small>PES Active: <%= @pes_course.active %></small></h1>
+  <div class="col-lg-offset-2">
+    <%= link_to 'Back to Index', pes_courses_path, class: 'btn btn-default' %> <%= link_to 'Edit Entry', edit_pes_course_path(@pes_course), class: 'btn btn-default' %>
+  </div>
+</div>
+</br>
+
+<div class="col-lg-offset-2">
 <p>
-  <strong>Pes number:</strong>
+  <strong>Pes Number:</strong>
   <%= @pes_course.pes_number %>
 </p>
 
@@ -30,13 +40,14 @@
   <%= @pes_course.active %>
 </p>
 <p>
-  <strong>Date added:</strong>
-  <%= @pes_course.date_added %>
+  <strong>Date Added:</strong>
+  <%= @pes_course.date_added.blank? == false ? @pes_course.date_added.strftime('%-m/%-d/%y') : 'n/a' %>
 </p>
 <p>
   <strong>Date Removed:</strong>
-  <%= @pes_course.date_removed %>
+  <%= @pes_course.date_removed.blank? == false ? @pes_course.date_removed.strftime('%-m/%-d/%y') : 'n/a' %>
 </p>
+</div>
 
-<%= link_to 'Edit', edit_pes_course_path(@pes_course) %> |
-<%= link_to 'Back', pes_courses_path %>
+<!-- <%= link_to 'Edit', edit_pes_course_path(@pes_course) %> |
+<%= link_to 'Back', pes_courses_path %> -->
