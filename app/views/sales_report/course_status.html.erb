@@ -6,90 +6,112 @@
 <!-- <p>Find the courses that are active on Sequoia (datasheet) and no loger listed by pes (PesCourses)</p>
 <p>Match 'Datasheet' PES number with PES number from 'PESCourses'</p>
 <p> Only display the ones they have in common</p> -->
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#seq_active"><h4><strong>Oldest Active Pub Dates</strong></h4></a></li>
+  <li><a data-toggle="tab" href="#pes_inactive"><h4><strong>Active Sequoia - Non Active PES</strong></h4></a></li>
+</ul>
+<div class="tab-content">
 
-<div class="col-md-4 right-square well well-white">
-  <div class="well">
-    <h2 class="text-center">Oldest Active Pub Dates</h2></br>
-    <input class="form-control" id="myInputPubdates" type="text" placeholder="Search">
-  </div>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Course</th>
-      <th>Pub Date</th>
-      <th>PES</th>
-      <th>List Date</th>
-      <th>Last Update</th>
-      <th colspan="2" class="text-center">Links</th>
-      <!-- <th>Pes number</th> -->
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody id="myListPubdates">
-    <% @pub_dates.each do |sequoia_course| %>
-    <% if sequoia_course.pes_course.pes_number.blank? == false && sequoia_course.pes_course.pes_number != 0 %>
-      <tr>
-        <td><%= sequoia_course.seq_number %><%= sequoia_course.seq_version %></td>
-        <td><%= sequoia_course.pub_date.blank? == false ? sequoia_course.pub_date.strftime('%-m/%-d/%y') : 'missing' %></td>
-
-        <!-- <td><%#= sequoia_course.active == true ? 'Active' : 'Not Listed' %></td> -->
-        <td><%= sequoia_course.pes_course.active? ? 'Yes' : 'No' %></td>
-        <td><%= sequoia_course.seq_original_list.nil? ? 'nil' : sequoia_course.seq_original_list.strftime('%-m/%-d/%y') == '1/1/13' ? 'n/a' : sequoia_course.seq_original_list.strftime('%-m/%-d/%y') %></td>
-        <td><%= sequoia_course.seq_update.nil? ? 'nil' : sequoia_course.seq_update.strftime('%-m/%-d/%y') == '1/1/13' ? 'n/a' : sequoia_course.seq_update.strftime('%-m/%-d/%y') %></td>
-        <td><a target="_blank" href="https://www.mypescpe.com/panel.account/OPEN/purchase.manager/indexOpenItem.cmc?&file=FULLpes&sku=<%= sequoia_course.pes_course.pes_number %>&view=1A&ste="> PES </a></td>
-        <td><a target="_blank" href="../datasheets/<%= sequoia_course.seq_number %>">Seq </a></td>
-      </tr>
-    <% end %>
-    <% end %>
-  </tbody>
-</table>
-</div>
-
-<div class="col-md-4 right-square left-square well-white well">
-  <div class="well">
-    <h2 class="text-center">Active Sequoia - Non Active PES</h2></br>
-    <input class="form-control" id="myInputNonactive" type="text" placeholder="Search">
-  </br>
-    <p class="text-center"><a target="_blank" href="https://www.mypescpe.com/search-cpe-courses"> PES course search for possible replacement </a></p>
-  </div>
-
-
-<div class="col-lg-offset-1 col-lg-10">
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Course</th>
-        <th>Pub Date</th>
-        <th>Inactive Date</th>
-        <!-- <th>Complaints</th> -->
-        <th>PES Link</th>
-        <!-- <th>Pes number</th> -->
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody id="myListNonactive">
-      <% @sequoia_course.each do |sequoia_course| %>
-      <% if sequoia_course.pes_course.pes_number != 0 && sequoia_course.active == true && sequoia_course.pes_course.active == false %>
+  <div id="seq_active" class="tab-pane fade in active">
+    <div class="col-md-6 right-square well well-white">
+        <div class="col-md-12 well">
+        </br>
+          <div class="col-md-6">
+            <input class="form-control" id="myInputPubdates" type="text" placeholder="Search">
+          </div>
+        </br>
+        </div>
+    <table class="table table-hover">
+      <thead>
         <tr>
-          <td><%= sequoia_course.seq_number %><%= sequoia_course.seq_version %></td>
-          <td><%= sequoia_course.pub_date.strftime('%-m/%-d/%y') %></td>
-          <td><%= sequoia_course.pes_course.date_removed.strftime('%-m/%-d/%y') == "1/1/13" ? "n/a" : sequoia_course.pes_course.date_removed.strftime('%-m/%-d/%y') %></td>
-          <!-- <td></td> -->
-          <td><a target="_blank" href="https://www.mypescpe.com/panel.account/OPEN/purchase.manager/indexOpenItem.cmc?&file=FULLpes&sku=<%= sequoia_course.pes_course.pes_number %>&view=1A&ste="> PES </a></td>
+          <th>Seq</th>
+          <th>PES</th>
+          <th>Pub Date</th>
+          <th>PES</th>
+          <th>List Date</th>
+          <th>Last Update</th>
+          <th colspan="2" class="text-center">Links</th>
+          <!-- <th>Pes number</th> -->
+          <!-- <th colspan="3"></th> -->
         </tr>
-      <% end %>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-</div>
-<div class="col-md-4 left-square well well-white">
-  <div class="well">
-    <h2 class="text-center">Out of Date Comments</h2></br>
-    <input class="form-control" id="myInputComments" type="text" placeholder="Search">
+      </thead>
+
+      <tbody id="myListPubdates">
+        <% @pub_dates.each do |sequoia_course| %>
+        <% if sequoia_course.pes_course.pes_number.blank? == false && sequoia_course.pes_course.pes_number != 0 && sequoia_course.active == true %>
+          <tr>
+            <td><%= sequoia_course.seq_number %><%= sequoia_course.seq_version %></td>
+            <td><%= sequoia_course.pes_course.pes_number %></td>
+            <td><%= sequoia_course.pub_date.blank? == false ? sequoia_course.pub_date.strftime('%-m/%-d/%y') : 'missing' %></td>
+            <td class="<%= 'red' if sequoia_course.pes_course.active == false %> "><%= sequoia_course.pes_course.active? ? 'Active' : 'Inactive' %></td>
+            <td><%= sequoia_course.seq_original_list.nil? ? 'nil' : sequoia_course.seq_original_list.strftime('%-m/%-d/%y') == '1/1/13' ? 'n/a' : sequoia_course.seq_original_list.strftime('%-m/%-d/%y') %></td>
+            <td><%= sequoia_course.seq_update.nil? ? 'nil' : sequoia_course.seq_update.strftime('%-m/%-d/%y') == '1/1/13' ? 'n/a' : sequoia_course.seq_update.strftime('%-m/%-d/%y') %></td>
+            <td><a target="_blank" href="https://www.mypescpe.com/panel.account/OPEN/purchase.manager/indexOpenItem.cmc?&file=FULLpes&sku=<%= sequoia_course.pes_course.pes_number %>&view=1A&ste="> PES.com </a></td>
+            <td><a target="_blank" href="../datasheets/<%= sequoia_course.seq_number %>">Seq</a></td>
+            <td><a target="_blank" href="../pes_courses/<%= sequoia_course.pes_course.pes_number %>">PES</a></td>
+          </tr>
+        <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
   </div>
+
+  <div id="pes_inactive" class="tab-pane fade in">
+    <div class="col-md-6 right-square left-square well-white well">
+      <div class="col-md-12 well">
+        <div class="col-md-6">
+        </br>
+          <input class="form-control" id="myInputNonactive" type="text" placeholder="Search">
+        </br>
+        <p class=""><a target="_blank" href="https://www.mypescpe.com/search-cpe-courses"> PES course search for possible replacement </a></p>
+        </div>
+      </div>
+
+
+    <div class="col-lg-offset-0 col-lg-10">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Seq</th>
+            <th>PES</th>
+            <th>Pub Date</th>
+            <th>Inactive Date</th>
+          </tr>
+        </thead>
+
+        <tbody id="myListNonactive">
+          <% @sequoia_course.each do |sequoia_course| %>
+          <% if sequoia_course.pes_course.pes_number != 0 && sequoia_course.active == true && sequoia_course.pes_course.active == false %>
+            <tr>
+              <td><%= sequoia_course.seq_number %><%= sequoia_course.seq_version %></td>
+              <td><%= sequoia_course.pes_course.pes_number %></td>
+              <td><%= sequoia_course.pub_date.strftime('%-m/%-d/%y') %></td>
+              <td><%= sequoia_course.pes_course.date_removed.strftime('%-m/%-d/%y') == "1/1/13" ? "n/a" : sequoia_course.pes_course.date_removed.strftime('%-m/%-d/%y') %></td>
+            </tr>
+          <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+
+    <div class="col-md-6 right-square well well-white">
+        <div class="col-md-12 well">
+      <div class="col-md-6">
+      </br>
+        <input class="form-control" id="myInputComments" type="text" placeholder="Search">
+      <!-- </br> -->
+      </div>
+    </div>
+  </br>
+    <h4 class="text-center"><strong>Out of Date Course Comments</strong></h4>
+  </br>
+
 
   <table class="table table-hover">
     <thead>
@@ -113,7 +135,7 @@
           <!-- <td><%= course_comment.Datasheet.seq_title %></td> -->
           <td><%= course_comment.comment_date.blank? ? 'nil' : course_comment.comment_date.strftime('%-m/%-d/%y') %></td>
           <!-- <td><%= course_comment.comment_type %></td> -->
-          <td><a href="../course_comments/<%= course_comment.id %>"><%= course_comment.comment_details.truncate(75)%></a></td>
+          <td><a href="../course_comments/<%= course_comment.id %>"><%= course_comment.comment_details%></a></td>
           <!-- <td><%= course_comment.taken%></td> -->
           <!-- <td><a href="../course_comments/<%= course_comment.id %>"><%= course_comment.comment_details.truncate(50)%></a></td> -->
         </tr>
@@ -122,4 +144,6 @@
     </tbody>
   </table>
 
+</div>
+</div>
 </div>
