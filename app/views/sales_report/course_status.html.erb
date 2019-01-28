@@ -30,9 +30,7 @@
           <th>PES</th>
           <th>List Date</th>
           <th>Last Update</th>
-          <th colspan="2" class="text-center">Links</th>
-          <!-- <th>Pes number</th> -->
-          <!-- <th colspan="3"></th> -->
+          <th colspan="1" class="">Link</th>
         </tr>
       </thead>
 
@@ -40,15 +38,14 @@
         <% @pub_dates.each do |sequoia_course| %>
         <% if sequoia_course.pes_course.pes_number.blank? == false && sequoia_course.pes_course.pes_number != 0 && sequoia_course.active == true %>
           <tr>
-            <td><%= sequoia_course.seq_number %><%= sequoia_course.seq_version %></td>
-            <td><%= sequoia_course.pes_course.pes_number %></td>
+            <td><a target="_blank" href="../datasheets/<%= sequoia_course.seq_number %>"><%= sequoia_course.seq_number %><%= sequoia_course.seq_version %></a></td>
+            <!-- <td><%= sequoia_course.seq_number %><%= sequoia_course.seq_version %></td> -->
+            <td><a target="_blank" href="../pes_courses/<%= sequoia_course.pes_course.pes_number %>"><%= sequoia_course.pes_course.pes_number %></a></td>
             <td><%= sequoia_course.pub_date.blank? == false ? sequoia_course.pub_date.strftime('%-m/%-d/%y') : 'missing' %></td>
             <td class="<%= 'red' if sequoia_course.pes_course.active == false %> "><%= sequoia_course.pes_course.active? ? 'Active' : 'Inactive' %></td>
             <td><%= sequoia_course.seq_original_list.nil? ? 'nil' : sequoia_course.seq_original_list.strftime('%-m/%-d/%y') == '1/1/13' ? 'n/a' : sequoia_course.seq_original_list.strftime('%-m/%-d/%y') %></td>
             <td><%= sequoia_course.seq_update.nil? ? 'nil' : sequoia_course.seq_update.strftime('%-m/%-d/%y') == '1/1/13' ? 'n/a' : sequoia_course.seq_update.strftime('%-m/%-d/%y') %></td>
             <td><a target="_blank" href="https://www.mypescpe.com/panel.account/OPEN/purchase.manager/indexOpenItem.cmc?&file=FULLpes&sku=<%= sequoia_course.pes_course.pes_number %>&view=1A&ste="> PES.com </a></td>
-            <td><a target="_blank" href="../datasheets/<%= sequoia_course.seq_number %>">Seq</a></td>
-            <td><a target="_blank" href="../pes_courses/<%= sequoia_course.pes_course.pes_number %>">PES</a></td>
           </tr>
         <% end %>
         <% end %>
