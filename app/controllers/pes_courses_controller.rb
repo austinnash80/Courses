@@ -5,7 +5,7 @@ class PesCoursesController < ApplicationController
   # GET /pes_courses.json
 
   def index
-    @pes_courses = PesCourse.order('active DESC').order(:date_added)
+    @pes_courses = PesCourse.order('active DESC').order(:pes_number)
     @date_fields = DateField.all
 
     respond_to do |format|

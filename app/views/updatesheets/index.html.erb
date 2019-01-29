@@ -65,7 +65,7 @@
       <th>Rolep</th>
       <th>IRS</th>
       <!-- <th>Proofed</th> -->
-      <th colspan="2" class="text-center">Notes</th>
+      <th colspan="1" class="">Notes</th>
       <!-- <th>Datasheet</th> -->
       <!-- <th>Extra string</th> -->
       <!-- <th>Extra integer</th> -->
@@ -149,8 +149,13 @@
         <td><%= updatesheet.role %></td>
         <td><%= updatesheet.rolep %></td>
         <td><%= updatesheet.irs_number %></td>
-        <td><strong><%= updatesheet.note_approval %></strong></td>
-        <td><%= updatesheet.proofed_note %></td>
+        <% if updatesheet.note_approval.blank? == false || updatesheet.proofed_note.blank? == false %>
+        <td><strong><%= link_to 'View Course Note', updatesheet, class: 'bold_text' %></strong></td>
+        <% elsif %>
+        <td></td>
+        <% end %>
+
+        <!-- <td><%= updatesheet.proofed_note %></td> -->
 
         <!-- <td><%= updatesheet.datasheet_id %></td> -->
         <!-- <td><%= updatesheet.extra_string %></td> -->

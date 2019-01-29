@@ -1,6 +1,7 @@
 <!-- Notes -->
   <!-- form_new has default check boxes to 'NO', form_edit cannot have any default -->
   <!-- Whrn making changes to this form, must also make changes to form_edit and vise versa-->
+  <!-- Only the edit form has the older pub dates section - Add new does not have / need it -->
 <!-- End Notes -->
 
 <%= simple_form_for(@datasheet) do |f| %>
@@ -91,6 +92,33 @@
   <div class="col-lg-6">
     <%= f.input :extra_note, label: 'Extra Note' %>
   </div>
+</div>
+
+<div class="row display-none-form">
+    <h3 class="text-center">Older Version Publication Dates</h3>
+  </br>
+    <div class="col-lg-4">
+        <%= f.input :version_a, label: 'Version A' %>
+        <%= f.input :version_b, label: 'Version B' %>
+        <%= f.input :version_c, label: 'Version C' %>
+        <%= f.input :version_d, label: 'Version D' %>
+        <%= f.input :version_e, label: 'Version E' %>
+    </div>
+
+    <div class="col-lg-4">
+        <%= f.input :version_f, label: 'Version F' %>
+        <%= f.input :version_g, label: 'Version G' %>
+        <%= f.input :version_h, label: 'Version H' %>
+        <%= f.input :version_i, label: 'Version I' %>
+        <%= f.input :version_j, label: 'Version J' %>
+    </div>
+
+    <div class="col-lg-4">
+        <%= f.input :version_k, label: 'Version K' %>
+        <%= f.input :version_l, label: 'Version L' %>
+        <%= f.input :version_m, label: 'Version M' %>
+        <%= f.input :version_n, label: 'Version N' %>
+    </div>
 </div>
 
 </br>

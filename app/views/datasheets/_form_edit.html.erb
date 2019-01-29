@@ -1,6 +1,7 @@
 <!-- Notes -->
   <!-- form_new has default check boxes to 'NO', form_edit cannot have any default -->
   <!-- Whrn making changes to this form, must also make changes to form_edit and vise versa-->
+  <!-- Only the edit form has the older pub dates section - Add new does not have / need it -->
 <!-- End Notes -->
 
 <%= simple_form_for(@datasheet) do |f| %>
@@ -91,6 +92,63 @@
   <div class="col-lg-6">
     <%= f.input :extra_note, label: 'Extra Note' %>
   </div>
+</div>
+</br>
+
+<div class="row">
+    <h3 class="text-center">Older Version Publication Dates</h3>
+  </br>
+    <div class="col-lg-4">
+      <!-- <%= f.input :version_0, label: 'Version 0'%> -->
+      <% if @datasheet.seq_version > 'A' %>
+        <%= f.input :version_a, label: 'Version A' %>
+      <% end %>
+      <% if @datasheet.seq_version > 'B' %>
+        <%= f.input :version_b, label: 'Version B' %>
+      <% end %>
+      <% if @datasheet.seq_version > 'C' %>
+        <%= f.input :version_c, label: 'Version C' %>
+      <% end %>
+      <% if @datasheet.seq_version > 'D' %>
+        <%= f.input :version_d, label: 'Version D' %>
+      <% end %>
+      <% if @datasheet.seq_version > 'E' %>
+        <%= f.input :version_e, label: 'Version E' %>
+      <% end %>
+    </div>
+
+    <div class="col-lg-4">
+      <% if @datasheet.seq_version > 'F' %>
+        <%= f.input :version_f, label: 'Version F' %>
+      <% end %>
+      <% if @datasheet.seq_version > 'G' %>
+        <%= f.input :version_g, label: 'Version G' %>
+      <% end %>
+      <% if @datasheet.seq_version > 'H' %>
+        <%= f.input :version_h, label: 'Version H' %>
+      <% end %>
+      <% if @datasheet.seq_version > 'I' %>
+        <%= f.input :version_i, label: 'Version I' %>
+      <% end %>
+      <% if @datasheet.seq_version > 'J' %>
+        <%= f.input :version_j, label: 'Version J' %>
+      <% end %>
+    </div>
+
+    <div class="col-lg-4">
+      <% if @datasheet.seq_version > 'K' %>
+        <%= f.input :version_k, label: 'Version K' %>
+      <% end %>
+      <% if @datasheet.seq_version > 'L' %>
+        <%= f.input :version_l, label: 'Version L' %>
+      <% end %>
+      <% if @datasheet.seq_version > 'M' %>
+        <%= f.input :version_m, label: 'Version M' %>
+      <% end %>
+      <% if @datasheet.seq_version > 'N' %>
+        <%= f.input :version_n, label: 'Version N' %>
+      <% end %>
+    </div>
 </div>
 
 </br>

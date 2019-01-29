@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190118202331) do
+ActiveRecord::Schema.define(version: 20190129210103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,21 @@ ActiveRecord::Schema.define(version: 20190118202331) do
     t.integer "extra_integer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "version_0"
+    t.date "version_a"
+    t.date "version_b"
+    t.date "version_c"
+    t.date "version_d"
+    t.date "version_e"
+    t.date "version_f"
+    t.date "version_g"
+    t.date "version_h"
+    t.date "version_i"
+    t.date "version_j"
+    t.date "version_k"
+    t.date "version_l"
+    t.date "version_m"
+    t.date "version_n"
   end
 
   create_table "date_fields", force: :cascade do |t|

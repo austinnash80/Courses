@@ -55,7 +55,7 @@
         <% elsif %>
           <td>Dropped</td>
         <% end %>
-        <td><%= datasheet.seq_number %></td>
+        <td><%= link_to datasheet.seq_number, datasheet %></td>
         <td><%= datasheet.seq_version %></td>
         <td><%= truncate(datasheet.seq_title, :length => 25) %></td>
         <td><%= datasheet.hours %></td>
@@ -84,7 +84,7 @@
         <!-- <td><%= datasheet.extra_boolean %></td> -->
         <!-- <td><%= datasheet.extra_integer %></td> -->
         <td><%= link_to 'New Update', new_updatesheet_path(:datasheet_id => datasheet, :pes_number => datasheet.pes_number, :seq_version => datasheet.seq_version, :pes_version => datasheet.pes_version, :seq_number => datasheet.seq_number, :seq_title => datasheet.seq_title) %></td>
-        <td><%= link_to 'View', datasheet %></td>
+        <!-- <td><%= link_to 'View', datasheet %></td> -->
         <td><%= link_to 'Edit', edit_datasheet_path(datasheet) %></td>
         <td><%= link_to 'Remove', datasheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

@@ -112,5 +112,33 @@
   </div>
   </br>
 <% end %>
+</br>
+
+<div class="row">
+  <div class="well well-white col-lg-10 col-lg-offset-1">
+  <h3 class="text-center">Older Version Publication Dates</h3>
+  <h4 class="text-center">Average Time Between Publications: <strong><%= @time_between.blank? == false ? "#{@time_between} Days" : 'n/a' %> </strong></h4>
+  <div class="col-lg-4">
+    <p><%= @datasheet.version_a.blank? == false && @datasheet.seq_version > 'A' ? "Version A: #{@datasheet.version_a.strftime('%-m/%-d/%y')}" : '' %></p>
+    <p><%= @datasheet.version_b.blank? == false && @datasheet.seq_version > 'B' ? "Version B: #{@datasheet.version_b.strftime('%-m/%-d/%y')}" : ''  %></p>
+    <p><%= @datasheet.version_c.blank? == false && @datasheet.seq_version > 'C' ? "Version C: #{@datasheet.version_c.strftime('%-m/%-d/%y')}" : '' %></p>
+    <p><%= @datasheet.version_d.blank? == false && @datasheet.seq_version > 'D' ? "Version D: #{@datasheet.version_d.strftime('%-m/%-d/%y')}" : '' %></p>
+    <p><%= @datasheet.version_e.blank? == false && @datasheet.seq_version > 'E' ? "Version E: #{@datasheet.version_e.strftime('%-m/%-d/%y')}" : '' %></p>
+  </div>
+  <div class="col-lg-4">
+    <p><%= @datasheet.version_f.blank? == false && @datasheet.seq_version > 'F' ? "Version F: #{@datasheet.version_f.strftime('%-m/%-d/%y')}" : ''  %></p>
+    <p><%= @datasheet.version_g.blank? == false && @datasheet.seq_version > 'G' ? "Version G: #{@datasheet.version_g.strftime('%-m/%-d/%y')}" : '' %></p>
+    <p><%= @datasheet.version_h.blank? == false && @datasheet.seq_version > 'H' ? "Version H: #{@datasheet.version_H.strftime('%-m/%-d/%y')}" : '' %></p>
+    <p><%= @datasheet.version_i.blank? == false && @datasheet.seq_version > 'I' ? "Version I: #{@datasheet.version_i.strftime('%-m/%-d/%y')}" : '' %></p>
+    <p><%= @datasheet.version_j.blank? == false && @datasheet.seq_version > 'J' ? "Version J: #{@datasheet.version_j.strftime('%-m/%-d/%y')}" : ''  %></p>
+  </div>
+  <div class="col-lg-4">
+    <p><%= @datasheet.version_k.blank? == false && @datasheet.seq_version > 'K' ? "Version K: #{@datasheet.version_k.strftime('%-m/%-d/%y')}" : '' %></p>
+    <p><%= @datasheet.version_l.blank? == false && @datasheet.seq_version > 'L' ? "Version L: #{@datasheet.version_l.strftime('%-m/%-d/%y')}" : '' %></p>
+    <p><%= @datasheet.version_m.blank? == false && @datasheet.seq_version > 'M' ? "Version M: #{@datasheet.version_m.strftime('%-m/%-d/%y')}" : '' %></p>
+    <p><%= @datasheet.version_n.blank? == false && @datasheet.seq_version > 'N' ? "Version N: #{@datasheet.version_n.strftime('%-m/%-d/%y')}" : '' %></p>
+  </div>
+</div>
+</div>
 
 </div> <!--Well end -->
