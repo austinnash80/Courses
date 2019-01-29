@@ -28,8 +28,8 @@
       <th>Hours</th>
       <th>Category</th>
       <th><%= sortable 'pub_date', 'Pub date' %></th> <!--sortable column header -->
-      <!-- <th>Seq update</th> -->
-      <!-- <th>Seq original list</th> -->
+      <th>Update Date</th>
+      <th>Org list Date</th>
       <!-- <th>Active</th> - became status at the top-->
       <!-- <th>Drop date</th> -->
       <!-- <th>Drop reason</th> -->
@@ -59,9 +59,10 @@
         <td><%= datasheet.seq_version %></td>
         <td><%= truncate(datasheet.seq_title, :length => 25) %></td>
         <td><%= datasheet.hours %></td>
-        <td><%= datasheet.category %></td>
-        <td><%= datasheet.pub_date.strftime('%m/%d/%y')  %></td>
-        <!-- <td><%= datasheet.seq_update %></td> -->
+        <td><%= truncate(datasheet.category, :length => 25) %></td>
+        <td><%= datasheet.pub_date.blank? == false ? datasheet.pub_date.strftime('%-m/%-d/%y') : 'missing' %></td>
+        <td><%= datasheet.seq_update.blank? == false && datasheet.seq_update.strftime('%-m/%-d/%y') == '1/1/13' ? 'unknown' : datasheet.seq_update.blank? == false ? datasheet.seq_update.strftime('%-m/%-d/%y') : 'missing' %></td>
+        <td><%= datasheet.seq_original_list.blank? == false && datasheet.seq_original_list.strftime('%-m/%-d/%y') == '1/1/13' ? 'unknown' : datasheet.seq_original_list.blank? == false ? datasheet.seq_original_list.strftime('%-m/%-d/%y') : 'missing' %></td>
         <!-- <td><%= datasheet.seq_original_list %></td> -->
         <!-- <td><%= datasheet.active %></td> -->
         <!-- <td><%= datasheet.drop_date %></td> -->
