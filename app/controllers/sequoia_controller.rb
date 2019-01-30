@@ -41,6 +41,7 @@ class SequoiaController < ApplicationController
     sequoia_exams_individual
     live_chat_answer
     calendar
+    empire_email_stats
   end
 
   def dash
@@ -87,6 +88,54 @@ private
 # def test
 #   SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => '2018-09-25').where(:what => 'Ethics')
 # end
+
+def empire_email_stats
+  @email_campaigns = EmailCampaign.all
+
+  @seq_1_sent = []
+  @seq_2_sent = []
+  @seq_4_sent = []
+  @seq_6_sent = []
+  @seq_7_sent = []
+
+  @seq_1_delivered = []
+  @seq_2_delivered = []
+  @seq_4_delivered = []
+  @seq_6_delivered = []
+  @seq_7_delivered = []
+
+  @seq_1_opened = []
+  @seq_2_opened = []
+  @seq_4_opened = []
+  @seq_6_opened = []
+  @seq_7_opened = []
+
+  @seq_1_clicked = []
+  @seq_2_clicked = []
+  @seq_4_clicked = []
+  @seq_6_clicked = []
+  @seq_7_clicked = []
+
+  @email_campaigns.each do |i|
+    i['segment'] == 'Empire RC - 1' ? @seq_1_sent.push(i['emails_sent']) : i['segment'] == 'Empire RC - 2' ? @seq_2_sent.push(i['emails_sent']) :
+    i['segment'] == 'Empire RC - 4' ? @seq_4_sent.push(i['emails_sent']) : i['segment'] == 'Empire RC - 6' ? @seq_6_sent.push(i['emails_sent']) :
+    i['segment'] == 'Empire RC - 7' ? @seq_7_sent.push(i['emails_sent']) : ''
+
+
+    i['segment'] == 'Empire RC - 1' ? @seq_1_delivered.push(i['delivered']) : i['segment'] == 'Empire RC - 2' ? @seq_2_delivered.push(i['delivered']) :
+    i['segment'] == 'Empire RC - 4' ? @seq_4_delivered.push(i['delivered']) : i['segment'] == 'Empire RC - 6' ? @seq_6_delivered.push(i['delivered']) :
+    i['segment'] == 'Empire RC - 7' ? @seq_7_delivered.push(i['delivered']) : ''
+
+    i['segment'] == 'Empire RC - 1' ? @seq_1_opened.push(i['opened']) : i['segment'] == 'Empire RC - 2' ? @seq_2_opened.push(i['opened']) :
+    i['segment'] == 'Empire RC - 4' ? @seq_4_opened.push(i['opened']) : i['segment'] == 'Empire RC - 6' ? @seq_6_opened.push(i['opened']) :
+    i['segment'] == 'Empire RC - 7' ? @seq_7_opened.push(i['opened']) : ''
+
+
+    i['segment'] == 'Empire RC - 1' ? @seq_1_clicked.push(i['clicked']) : i['segment'] == 'Empire RC - 2' ? @seq_2_clicked.push(i['clicked']) :
+    i['segment'] == 'Empire RC - 4' ? @seq_4_clicked.push(i['clicked']) : i['segment'] == 'Empire RC - 6' ? @seq_6_clicked.push(i['clicked']) :
+    i['segment'] == 'Empire RC - 7' ? @seq_7_clicked.push(i['clicked']) : ''
+  end
+end
 
 def date_fields
   @date_fields = DateField.all

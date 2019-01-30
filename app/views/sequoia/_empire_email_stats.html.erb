@@ -1,0 +1,62 @@
+<h3 class="text-center">Empire Email Stats</h3>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Segment</th>
+      <th>Range <small>(Time From EXP)</small></th>
+      <th>Versions</th>
+      <th>Sent</th>
+      <th>Delivery Rate</th>
+      <th>Open Rate</th>
+      <th>Click Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="text-center">
+      <td><strong><a target="" href="../email_campaigns/1">1</a></strong></td>
+      <td>120 Day</td>
+      <td><%= @seq_1_sent.count %></td>
+      <td><%= @seq_1_sent.sum %></td>
+      <td><%= number_to_percentage((@seq_1_delivered.sum.to_f / @seq_1_sent.sum) * 100, precision: 1) %></td>
+      <td><%= number_to_percentage((@seq_1_opened.sum.to_f / @seq_1_delivered.sum) * 100, precision: 1) %></td>
+      <td><%= number_to_percentage((@seq_1_clicked.sum.to_f / @seq_1_opened.sum) * 100, precision: 1) %></td>
+    </tr>
+    <tr class="text-center">
+      <td><strong><a target="" href="../email_campaigns/2">2</a></strong></td>
+      <td>90 Days</td>
+      <td><%= @seq_2_sent.count %></td>
+      <td><%= @seq_2_sent.sum %></td>
+      <td><%= number_to_percentage((@seq_2_delivered.sum.to_f / @seq_2_sent.sum) * 100, precision: 1) %></td>
+      <td><%= number_to_percentage((@seq_2_opened.sum.to_f / @seq_2_delivered.sum) * 100, precision: 1) %></td>
+      <td><%= number_to_percentage((@seq_2_clicked.sum.to_f / @seq_2_opened.sum) * 100, precision: 1) %></td>
+    </tr>
+    <tr class="text-center">
+      <td><strong><a target="" href="../email_campaigns/4">4</a></strong></td>
+      <td>60 Days</td>
+      <td><%= @seq_4_sent.count %></td>
+      <td><%= @seq_4_sent.sum %></td>
+      <td><%= number_to_percentage((@seq_4_delivered.sum.to_f / @seq_4_sent.sum) * 100, precision: 1) %></td>
+      <td><%= number_to_percentage((@seq_4_opened.sum.to_f / @seq_4_delivered.sum) * 100, precision: 1) %></td>
+      <td><%= number_to_percentage((@seq_4_clicked.sum.to_f / @seq_4_opened.sum) * 100, precision: 1) %></td>
+    </tr>
+    <tr class="text-center">
+      <td><strong><a target="" href="../email_campaigns/6">6</a></strong></td>
+      <td>30 Days</td>
+      <td><%= @seq_6_sent.count %></td>
+      <td><%= @seq_6_sent.sum %></td>
+      <td><%= number_to_percentage((@seq_6_delivered.sum.to_f / @seq_6_sent.sum) * 100, precision: 1) %></td>
+      <td><%= number_to_percentage((@seq_6_opened.sum.to_f / @seq_6_delivered.sum) * 100, precision: 1) %></td>
+      <td><%= number_to_percentage((@seq_6_clicked.sum.to_f / @seq_6_opened.sum) * 100, precision: 1) %></td>
+    </tr>
+    <tr class="text-center">
+      <td><strong><a target="" href="../email_campaigns/7">7</a></strong></td>
+      <td>15 Days</td>
+      <td><%= @seq_7_sent.count %></td>
+      <td><%= @seq_7_sent.sum %></td>
+      <td><%= number_to_percentage((@seq_7_delivered.sum.to_f / @seq_7_sent.sum) * 100, precision: 1) %></td>
+      <td><%= number_to_percentage((@seq_7_opened.sum.to_f / @seq_7_delivered.sum) * 100, precision: 1) %></td>
+      <td><%= number_to_percentage((@seq_7_clicked.sum.to_f / @seq_7_opened.sum) * 100, precision: 1) %></td>
+    </tr>
+  </tbody>
+</table>
