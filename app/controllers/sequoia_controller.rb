@@ -13,6 +13,7 @@ class SequoiaController < ApplicationController
     sequoia_exams_individual
     live_chat_answer
     calendar
+    date_fields
   end
 
   def dash_ashley
@@ -86,6 +87,15 @@ private
 # def test
 #   SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => '2018-09-25').where(:what => 'Ethics')
 # end
+
+def date_fields
+  @date_fields = DateField.all
+
+    @date_fields.each do |date_field|
+        @pes_list_update = date_field.date1
+    end
+end
+
 
 def calendar
   @calendars = Calendar.all

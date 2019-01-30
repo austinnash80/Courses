@@ -45,6 +45,19 @@
             <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
           <% end %>
         </tr>
+        <tr>
+          <td>PES List Update</td>
+          <% if (@pes_list_update + 30) < (Date.today + 4) %>
+            <td class=""><strong>Due: <span class="red"><%= (@pes_list_update + 30).strftime('%-m/%-d/%y') %></span></strong></td>
+            <% elsif (@pes_list_update + 30) == Date.today %>
+              <td class=""><strong>Due: <span class="red">Today<span></strong></td>
+          <% elsif (@pes_list_update + 30) > Date.today + 4%>
+            <td class=""><strong>Due: <span class="green"><%= (@pes_list_update + 30).strftime('%-m/%-d/%y') %></span></strong></td>
+          <% elsif %>
+            <td class="red"><strong>Past Due</strong></td>
+          <% end %>
+            <td><%= link_to 'Update', pes_courses_path %>
+        </tr>
       </tbody>
 
     </table>
