@@ -46,15 +46,20 @@
           <% end %>
         </tr>
         <tr>
+          <% pes_due_date = @pes_list_update + 30 %>
+          <% today = Date.today %>
+          <% due_soon = pes_due_date - 4 %>
+          <%= today.strftime('%-m/%-d/%y') %> |
+          <%= due_soon.strftime('%-m/%-d/%y') %> |
+          <%= pes_due_date.strftime('%-m/%-d/%y') %>
+
           <td>PES List Update</td>
-          <% if (@pes_list_update + 30) < (Date.today + 4) %>
-            <td class=""><strong>Due: <span class="red"><%= (@pes_list_update + 30).strftime('%-m/%-d/%y') %></span></strong></td>
-            <% elsif (@pes_list_update + 30) == Date.today %>
-              <td class=""><strong>Due: <span class="red">Today<span></strong></td>
-          <% elsif (@pes_list_update + 30) > Date.today + 4%>
-            <td class=""><strong>Due: <span class="green"><%= (@pes_list_update + 30).strftime('%-m/%-d/%y') %></span></strong></td>
-          <% elsif %>
-            <td class="red"><strong>Past Due</strong></td>
+          <% if today < due_soon  %>
+            <td class=""><strong>Due: <span class="green"><%= pes_due_date.strftime('%-m/%-d/%y') %></span></strong></td>
+          <% elsif today > due_soon && today < pes_due_date %>
+            <td class=""><strong>Due: <span class="red"><%= pes_due_date.strftime('%-m/%-d/%y') %><span></strong></td>
+          <% elsif today > pes_due_date %>
+            <td class=""><strong>Due: <span class="red">Past Due</span></strong></td>
           <% end %>
             <td><%= link_to 'Update', pes_courses_path %>
         </tr>
