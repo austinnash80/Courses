@@ -12,6 +12,7 @@ class SequoiaExamsController < ApplicationController
 
     @total_records = SequoiaExam.count(:uid)
     @newest_record = SequoiaExam.pluck(:date_c).max
+    @oldest_record = SequoiaExam.pluck(:date_c).min
   end
 
   # GET /sequoia_exams/1

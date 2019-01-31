@@ -40,9 +40,9 @@
         <% @pub_dates.each do |sequoia_course| %>
         <% if sequoia_course.pes_course.pes_number.blank? == false && sequoia_course.pes_course.pes_number != 0 && sequoia_course.active == true %>
           <tr>
-            <td><a target="_blank" href="../datasheets/<%= sequoia_course.seq_number %>"><%= sequoia_course.seq_number %><%= sequoia_course.seq_version %></a></td>
+            <td><a target="" href="../datasheets/<%= sequoia_course.seq_number %>"><%= sequoia_course.seq_number %><%= sequoia_course.seq_version %></a></td>
             <!-- <td><%= sequoia_course.seq_number %><%= sequoia_course.seq_version %></td> -->
-            <td><a target="_blank" href="../pes_courses/<%= sequoia_course.pes_course.pes_number %>"><%= sequoia_course.pes_course.pes_number %></a></td>
+            <td><a target="" href="../pes_courses/<%= sequoia_course.pes_course.pes_number %>"><%= sequoia_course.pes_course.pes_number %></a></td>
             <td><%= sequoia_course.pub_date.blank? == false ? sequoia_course.pub_date.strftime('%-m/%-d/%y') : 'missing' %></td>
             <td class="<%= 'red' if sequoia_course.pes_course.active == false %> "><%= sequoia_course.pes_course.active? ? 'Active' : 'Inactive' %></td>
             <td><%= sequoia_course.seq_original_list.nil? ? 'nil' : sequoia_course.seq_original_list.strftime('%-m/%-d/%y') == '1/1/13' ? 'n/a' : sequoia_course.seq_original_list.strftime('%-m/%-d/%y') %></td>
