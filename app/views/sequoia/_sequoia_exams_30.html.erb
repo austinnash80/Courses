@@ -1,4 +1,3 @@
-<h2 class="text-center">Sequoia Exams</h2>
 <div>
 
 <% @cpa_now = number_with_precision(@sum_rating_cpa_30.to_f / @taken_rating_cpa_30.to_f, precision: 2) %>
@@ -18,6 +17,7 @@
 
 
 <table class="table table-bordered table-striped">
+  <!-- <h3 class="text-center">Exams Taken</h3> -->
   <caption class="text-center">Past 30 Days </br> <%= (Date.today - 30).strftime('%-m/%-d/%y') %> - <%= (Date.today - 1).strftime('%-m/%-d/%y') %></caption>
   <thead>
     <tr>

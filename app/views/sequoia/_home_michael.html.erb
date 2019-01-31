@@ -9,40 +9,30 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>Task</th>
-          <th>Status</th>
-          <th>Note</th>
+          <th width='33%'>Task</th>
+          <th width='33%'>Status</th>
+          <th width='33%'>Note</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Call Logs</td>
-          <td><strong>Ongoing</strong></td>
-          <td><strong><%= link_to 'New Call', new_call_log_path %></strong></td>
-        </tr>
-        <tr>
-          <td>Course Comments</td>
-          <td><strong>Ongoing</strong></td>
-          <td><%= link_to 'New Comment', new_course_comment_path %> | <%= link_to 'View', course_comments_path %></td>
-        </tr>
-        <tr>
           <td>Course Updating</td>
           <% if @course_update_status.sum == 0 %>
             <td class="green"><strong>Up-to-date</strong></td>
-            <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
+            <td><%= link_to 'Updatesheet', updatesheets_path, class: 'bold' %> </br> <%= link_to 'Datasheet', datasheets_path, class: 'bold' %></td>
           <% elsif %>
             <td class="red"><strong><%= link_to "In-progress (#{@course_update_status.sum})", updatesheets_path, class: 'button-none' %></strong></td>
-            <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
+            <td><%= link_to 'Updatesheet', updatesheets_path, class: 'bold' %> </br> <%= link_to 'Datasheet', datasheets_path, class: 'bold' %></td>
           <% end %>
         </tr>
         <tr>
           <td>Course Proofing</td>
           <% if @course_update_status_proofing.sum == 0 %>
             <td class="green"><strong>Up-to-date</strong></td>
-            <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
+            <td><%= link_to 'Updatesheet', updatesheets_path, class: 'bold' %> </br> <%= link_to 'Datasheet', datasheets_path, class: 'bold' %></td>
           <% elsif %>
             <td class="red"><strong><%= link_to "In-progress (#{@course_update_status_proofing.sum})", updatesheets_path, class: 'button-none' %></strong></td>
-            <td><%= link_to 'Updatesheet', updatesheets_path %> | <%= link_to 'Datasheet', datasheets_path %></td>
+            <td><%= link_to 'Updatesheet', updatesheets_path, class: 'bold' %> </br> <%= link_to 'Datasheet', datasheets_path, class: 'bold' %></td>
           <% end %>
         </tr>
         <tr>
@@ -52,7 +42,7 @@
           <% elsif %>
             <td class="green"><strong>Up-to-date</strong></td>
           <% end %>
-          <td><%= link_to 'Postcard Index', postcard_mailings_path %></td>
+          <td><%= link_to 'Postcard Index', postcard_mailings_path, class: 'bold' %></td>
         </tr>
 
         <tr>
@@ -62,10 +52,29 @@
             <% elsif %>
               <td class="green"><strong>Up-to-date</strong></td>
             <% end %>
-          <td><%= link_to 'Campaign Index', email_campaigns_path %></td>
+          <td><%= link_to 'Campaign Index', email_campaigns_path, class: 'bold' %></td>
         </tr>
         <tr>
-          <td>Direct Mail CPA</td>
+        <tr>
+          <td>Call Logs</td>
+          <td><strong>Ongoing</strong></td>
+          <td><%= link_to 'New Call', new_call_log_path, class: 'bold' %></td>
+        </tr>
+        <tr>
+          <td>Course Comments</td>
+          <td><strong>Ongoing</strong></td>
+          <td><%= link_to 'Add Comment', new_course_comment_path, class: 'bold' %> </br> <%= link_to 'View Comments', course_comments_path, class: 'bold' %></td>
+        </tr>
+        <tr>
+          <td>Sequoia No Mail</td>
+          <td class="bold">Ongoing</td>
+          <td><%= link_to 'Add No Mail', new_seq_no_mail_path, class: 'bold' %></td>
+        </tr>
+      </tbody>
+    </table>
+
+<!-- /// Direct Mail Date - Not Need for Now -->
+          <!-- <td>Direct Mail CPA</td>
           <td>
             <% @mailings.each do |mailing| %>
               <% if @last_msi_mailing_date_cpa == mailing.drop && mailing.who == 'CPA' %>
@@ -80,8 +89,8 @@
               <% end %>
             <% end %>
             </td>
-        </tr>
-        <tr>
+        </tr> -->
+        <!-- <tr>
           <td>Direct Mail EA</td>
           <td>
             <% @mailings.each do |mailing| %>
@@ -97,20 +106,6 @@
               <% end %>
             <% end %>
             </td>
-        </tr>
-        <tr>
-          <td>Sequoia No Mail</td>
-          <td>Requests to be removed from mailing list</td>
-          <td><%= link_to 'Add No Mail', new_seq_no_mail_path %></td>
-        </tr>
-      </tbody>
-    </table>
-  <!-- </div> -->
-<!-- Tab 1 end -->
-<!-- * Tab 2 start * -->
-  <!-- <div id="menu2" class="tab-pane fade">
-    <h3>Menu 1</h3>
-    <p>Some content in menu 1.</p>
-  </div> -->
-<!-- Tab 2 end -->
-<!-- </div> -->
+        </tr> -->
+
+<!-- /// Direct Mail Date - Not Need for Now -->
