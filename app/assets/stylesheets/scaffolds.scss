@@ -91,6 +91,13 @@ label {
   padding: 20px;
 }
 
+.full-square {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
 .right-square {
   border-top-right-radius: 0px;
   // border-bottom-right-radius: 0px
@@ -98,6 +105,15 @@ label {
 
 .left-square {
   border-top-left-radius: 0px;
+  // border-bottom-left-radius: 0px
+}
+.right-square_bottom {
+  border-bottom-right-radius: 0px;
+  // border-bottom-right-radius: 0px
+}
+
+.left-square_bottom {
+  border-bottom-left-radius: 0px;
   // border-bottom-left-radius: 0px
 }
 

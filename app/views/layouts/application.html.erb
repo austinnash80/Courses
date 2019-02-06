@@ -6,7 +6,7 @@
     <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%#= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
     <%#= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
    <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <link href="https://fonts.googleapis.com/css?family=Lora|Varela+Round|Alfa+Slab+One" rel="stylesheet">
@@ -21,7 +21,9 @@
     <% user_signed_in? && current_user.email == 'hamdo@sequoiacpe.com' ? @name = 'Hamdo' : '' %>
     <% user_signed_in? && current_user.email == 'john@empirelearning.com' ? @name = 'John' : '' %>
 
-<% unless controller_name == "sequoia" %>
+<% unless controller_name == "test_pages" %> <!-- No Menus at all for test page -->
+
+<% unless controller_name == "sequoia" || controller_name == "test_pages" %>
 <nav class="navbar navbar-inverse">
 <div class="container-fluid">
   <div class="clearfix">
@@ -124,6 +126,7 @@
   </div>
 </div>
 </nav>
+<% end %>
 
     <%= yield %>
 

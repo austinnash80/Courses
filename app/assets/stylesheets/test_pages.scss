@@ -1,0 +1,44 @@
+html body #bgimage {
+    background: url('test_pages/shutterstock_736958407.jpg');
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.hp_theme_1 {
+  background-color: #243f61;
+  opacity: .90;
+  height: 100%
+  // width: 25%
+}
+.hp_theme_2 {
+  background-color: #cd9557;
+  opacity: 0.90;
+  height: auto;
+  // width: 25%
+}
+
+.nav_op {
+  opacity: .90;
+}
+
+.well-color_test{
+    background: #fff;
+}
+
+.margin_none {
+  padding: 0;
+  margin: 0
+}
+
+.fade_test {
+  opacity: 50%
+}
+
+.no-padding {
+   padding: 0 !important;
+   margin: 0 !important;
+}

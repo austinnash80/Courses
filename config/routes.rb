@@ -58,7 +58,7 @@ Rails.application.routes.draw do
   get 'sales_report/sequoia_sales'
   get 'sales_report/sequoia_exams'
 
-  get 'sales_report/test'
+  get 'test_pages/test_1'
 
   get 'sales_report/course_status'
   get 'sequoia_customers/index'

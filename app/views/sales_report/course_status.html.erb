@@ -8,7 +8,7 @@
 <p> Only display the ones they have in common</p> -->
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#seq_active"><h4><strong>Oldest Active Pub Dates</strong></h4></a></li>
-  <li><a data-toggle="tab" href="#pes_inactive"><h4><strong>Active Sequoia - Non Active PES</strong></h4></a></li>
+  <li><a data-toggle="tab" href="#pes_inactive"><h4><strong>PES Courses We Dont Have</strong></h4></a></li>
 </ul>
 <div class="tab-content">
 
@@ -19,7 +19,7 @@
           <div class="col-md-6">
             <input class="form-control" id="myInputPubdates" type="text" placeholder="Search">
           </br>
-            <h5 class=""><a target="_blank" href="https://www.mypescpe.com/search-cpe-courses">Search PES.com for possible replacement</a></h5>
+            <h5 class=""><a target="_blank" href="https://www.mypescpe.com/search-cpe-courses">Search PES.com by course number</a></h5>
           </div>
         </br>
         </div>
@@ -67,8 +67,8 @@
         </div>
       </div>
 
-
-    <div class="col-lg-offset-0 col-lg-10">
+Find all the courses that PES has and we dont - In progress 
+    <!-- <div class="col-lg-offset-0 col-lg-10">
       <table class="table table-hover">
         <thead>
           <tr>
@@ -81,18 +81,16 @@
 
         <tbody id="myListNonactive">
           <% @sequoia_course.each do |sequoia_course| %>
-          <% if sequoia_course.pes_course.pes_number != 0 && sequoia_course.active == true && sequoia_course.pes_course.active == false %>
+          <% if sequoia_course.pes_course.pes_number.blank? == false%>
             <tr>
-              <td><%= sequoia_course.seq_number %><%= sequoia_course.seq_version %></td>
-              <td><%= sequoia_course.pes_course.pes_number %></td>
-              <td><%= sequoia_course.pub_date.strftime('%-m/%-d/%y') %></td>
-              <td><%= sequoia_course.pes_course.date_removed.strftime('%-m/%-d/%y') == "1/1/13" ? "n/a" : sequoia_course.pes_course.date_removed.strftime('%-m/%-d/%y') %></td>
-            </tr>
+              <td><%= sequoia_course.seq_number%></td>
           <% end %>
           <% end %>
         </tbody>
       </table>
-    </div>
+    </div> -->
+
+
     </div>
   </div>
 </div>

@@ -43,7 +43,7 @@
       <!-- <th>Extra note</th> -->
       <!-- <th>Extra boolean</th> -->
       <!-- <th>Extra integer</th> -->
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -85,8 +85,8 @@
         <!-- <td><%= datasheet.extra_integer %></td> -->
         <td><%= link_to 'New Update', new_updatesheet_path(:datasheet_id => datasheet, :pes_number => datasheet.pes_number, :seq_version => datasheet.seq_version, :pes_version => datasheet.pes_version, :seq_number => datasheet.seq_number, :seq_title => datasheet.seq_title) %></td>
         <!-- <td><%= link_to 'View', datasheet %></td> -->
-        <td><%= link_to 'Edit', edit_datasheet_path(datasheet) %></td>
-        <td><%= link_to 'Remove', datasheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <!-- <td><%= link_to 'Edit', edit_datasheet_path(datasheet) %></td> -->
+        <td><%= link_to 'Delete', datasheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
