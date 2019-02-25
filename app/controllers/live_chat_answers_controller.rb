@@ -64,7 +64,7 @@ class LiveChatAnswersController < ApplicationController
   end
 
   def form_collections
-    @companies = ['Sequoia', 'Empire', 'Tax Preparers']
+    @companies = ['Sequoia', 'Empire', 'Tax Preparers', 'N/A']
     @states = [ "AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","PR","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"]
     @des = ['CPA', 'EA', 'Tax Preparer']
   end
@@ -77,6 +77,6 @@ class LiveChatAnswersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def live_chat_answer_params
-      params.require(:live_chat_answer).permit(:company, :state, :des, :question, :topic, :answer, :notes, :date_org, :extra_i, :extra_s, :extra_d)
+      params.require(:live_chat_answer).permit(:company, :state, :des, :question, :topic, :answer, :notes, :date_org, :extra_i, :extra_s, :extra_d, :policy)
     end
 end

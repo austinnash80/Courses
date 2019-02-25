@@ -4,33 +4,80 @@
 
 <div class="well well-white col-lg-offset-2 col-lg-8">
   <div class="form-inputs">
-    <div class="row">
-    <div class="col-lg-2">
-      <%= f.input :company, label: 'Company', collection: @companies, as: :radio_buttons %>
-    </div>
-    <div class="col-lg-2">
-      <%= f.input :des, label: 'Des (sequoia)', collection: @des, as: :radio_buttons %>
-    </div>
-    <div class="col-lg-2">
-      <%= f.input :state, label: 'State (empire)', collection: @states, as: :select%>
-      <!-- <%= f.input :topic, label: false, placeholder: 'Other: "TN Ethics"'%> -->
+    <!-- <div class="row"> -->
 
-    </div>
-    </div>
-  </br>
-    <%= f.input :question %>
-    <!-- <%= f.input :topic %> -->
-    <%= f.input :answer %>
-    <%= f.input :notes, label: 'Addtional Notes' %>
-    <%= f.input :date_org, label: 'Date Added' %>
-    <!-- <%= f.input :extra_i %>
-    <%= f.input :extra_s %>
-    <%= f.input :extra_d %> -->
-  </div>
+<!-- Tab Menu -->
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#question">Question</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#policy">Policy</a>
+        </li>
+      </ul>
+<!-- END  Tab Menu -->
+
 </br>
+
+      <div class="tab-content">
+<!-- Tab Content 1 -->
+        <div class="tab-pane active container" id="question">
+          <div class="row">
+            <div class="col-lg-2">
+              <%= f.input :company, label: 'Company', collection: @companies, as: :radio_buttons %>
+            </div>
+            <div class="col-lg-2">
+              <%= f.input :des, label: 'Des (sequoia)', collection: @des, as: :radio_buttons %>
+            </div>
+            <div class="col-lg-2">
+              <%= f.input :state, label: 'State (empire)', collection: @states, as: :select%>
+              <!-- <%= f.input :topic, label: false, placeholder: 'Other: "TN Ethics"'%> -->
+            </div>
+          </div>
+        </br>
+          <%= f.input :question %>
+          <!-- <%= f.input :topic %> -->
+          <%= f.input :answer %>
+          <%= f.input :notes, label: 'Addtional Notes' %>
+          <%= f.input :date_org, label: 'Date Added' %>
+          <!-- <%= f.input :extra_i %>
+          <%= f.input :extra_s %>
+          <%= f.input :extra_d %> -->
+        </div>
+      <!-- </br> -->
+    <!-- </div> -->
+<!-- END Tab Content 1 -->
+
+<!-- Tab Content 2 -->
+        <div class="tab-pane container" id="policy">
+          <!-- <div class="row">
+            <div class="col-lg-2">
+              <%= f.input :company, label: 'Company', collection: @companies, as: :radio_buttons %>
+            </div>
+            <div class="col-lg-2">
+              <%= f.input :des, label: 'Des (sequoia)', collection: @des, as: :radio_buttons %>
+            </div>
+            <div class="col-lg-2">
+              <%= f.input :state, label: 'State (empire)', collection: @states, as: :select%>
+            </div>
+          </div> -->
+
+        </br>
+        <%= f.input :company, label: 'Company', collection: @companies, as: :radio_buttons %>
+        <%= f.input :topic %>
+        <%= f.input :policy, as: :text %>
+        </div>
+      </br>
+    <!-- </div> -->
+<!-- END Tab Content 2 -->
+
+</div>
+<!-- END Tab Content -->
 
   <div class="form-actions">
     <%= f.button :submit, 'Submit', class: 'btn btn-primary'%>
   </div>
 </div>
+</div>
+<!-- </div> -->
 <% end %>

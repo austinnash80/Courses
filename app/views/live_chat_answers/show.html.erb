@@ -2,9 +2,14 @@
 
 <div class="page-header ">
 </br>
+<% if @live_chat_answer.topic.blank? %>
   <h1 class="text-center"><strong>Question - <%= @live_chat_answer.question %></strong> </br><small>Added: <%= @live_chat_answer.date_org.strftime("%b %-d, %Y")%></small></h1>
+<% elsif %>
+  <h1 class="text-center"><strong>Topic - <%= @live_chat_answer.topic %></strong> </br><small>Added: <%= @live_chat_answer.date_org.strftime("%b %-d, %Y")%></small></h1>
+<% end %>
+
   <div class="col-lg-offset-2">
-    <%= link_to 'Live Chat Index', live_chat_answers_path, class: 'btn btn-default' %> <%= link_to 'Edit Answer', edit_live_chat_answer_path(@live_chat_answer), class: 'btn btn-default' %> <%= link_to 'Add New', new_live_chat_answer_path(@live_chat_answer), class: 'btn btn-default' %>
+    <%= link_to 'Other Canned Responses', live_chat_answers_path, class: 'btn btn-default' %> <%= link_to 'Edit Answer', edit_live_chat_answer_path(@live_chat_answer), class: 'btn btn-default' %> <%= link_to 'Add New', new_live_chat_answer_path(@live_chat_answer), class: 'btn btn-default' %>
   </div>
 </div>
 </br>
@@ -13,38 +18,50 @@
   <h3 class=""><strong>Details</strong></h3>
 </br>
 
+
   <h4>
     <strong>Company:</strong>
     <%= @live_chat_answer.company %>
   </h4>
 
-  <h4>
-    <strong>Des:</strong>
-    <%= @live_chat_answer.des %>
-  </h4>
-  <h4>
-    <strong>State:</strong>
-    <%= @live_chat_answer.state %>
-  </h4>
-  <h4>
-    <strong>Topic:</strong>
-    <%= @live_chat_answer.topic %>
-  </h4>
-</br>
-  <p>
-    <strong>Question:</strong>
-    <%= @live_chat_answer.question %>
-  </p>
+  <% if @live_chat_answer.topic.empty? %>
+    <h4>
+      <strong>Des:</strong>
+      <%= @live_chat_answer.des %>
+    </h4>
+    <h4>
+      <strong>State:</strong>
+      <%= @live_chat_answer.state %>
+    </h4>
+  </br>
+    <p>
+      <strong>Question:</strong>
+      <%= @live_chat_answer.question %>
+    </p>
 
-  <p>
-    <strong>Answer:</strong>
-    <%= @live_chat_answer.answer %>
-  </p>
+    <p>
+      <strong>Answer:</strong>
+      <%= @live_chat_answer.answer %>
+    </p>
 
-  <p>
-    <strong>Extra Notes:</strong>
-    <%= @live_chat_answer.notes %>
-  </p>
+    <p>
+      <strong>Extra Notes:</strong>
+      <%= @live_chat_answer.notes %>
+    </p>
+<!-- for Policy -->
+  <% elsif %>
+    <h4>
+      <strong>Topic:</strong>
+      <%= @live_chat_answer.topic %>
+    </h4>
+
+    <h4>
+      <strong>Policy:</strong>
+      <%= @live_chat_answer.policy %>
+    </h4>
+  <% end %>
+
+
 
   </div>
 

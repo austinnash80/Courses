@@ -1,4 +1,4 @@
-<h3 class="text-center">Live Chat Answers</h3>
+<h3 class="text-center">Canned Responses</h3>
   <p class="text-center"><%= link_to 'Index', live_chat_answers_path, class: 'btn btn-default' %> <%= link_to 'Add New', new_live_chat_answer_path(@live_chat_answer), class: 'btn btn-default' %></p>
 
 <!-- <div class="well"> -->
@@ -7,11 +7,12 @@
     <li><a data-toggle="tab" href="#sequoia">Sequoia</a></li>
     <li><a data-toggle="tab" href="#empire">Empire</a></li>
     <li><a data-toggle="tab" href="#taxpreparers">Tax Preparers</a></li>
+    <li><a data-toggle="tab" href="#policy">Policies</a></li>
   </ul>
   <div class="tab-content">
     <div id="home3" class="tab-pane fade in active">
     </br>
-      <h4 class="text-center">Search above by Company</h4>
+      <h4 class="text-center">Select Catagory from above</h4>
     </div>
     <div id="sequoia" class="tab-pane fade">
       <h3>Sequoia</h3>
@@ -87,6 +88,37 @@
               <tr>
                 <td><%= link_to live_chat_answer.question, live_chat_answer %></td>
                 <td><%= live_chat_answer.answer %></td>
+              </tr>
+              <% end %>
+              <% end %>
+            </tbody>
+          </table>
+    </div>
+
+
+    <div id="policy" class="tab-pane fade">
+      <h3>Policies</h3>
+      <div class="row">
+      <div class="col-md-8">
+        <input class="form-control" id="myInputPol" type="text" placeholder="Search">
+      </div>
+      </div>
+    </br>
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>Topic</th>
+                <th>Policy</th>
+              </tr>
+            </thead>
+            <tbody id="myTablePol">
+              <% @live_chat_answers.each do |live_chat_answer| %>
+              <% if live_chat_answer.topic.blank? == false %>
+              <tr>
+                <td><%= live_chat_answer.company %></td>
+                <td><%= link_to live_chat_answer.topic, live_chat_answer %></td>
+                <td><%= live_chat_answer.policy %></td>
               </tr>
               <% end %>
               <% end %>

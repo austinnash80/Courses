@@ -40,6 +40,13 @@ $(document).ready(function(){
       });
     });
 
+    $("#myInputPol").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTablePol tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+
     // Dashboard CPA Exam Search
     $("#myInputCPA").on("keyup", function() {
       var value = $(this).val().toLowerCase();

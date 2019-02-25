@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <div class="page-header ">
 </br>
-<h1 class="text-center">Live Chat Answers</h1>
+<h1 class="text-center">Canned Responses</h1>
     <%= link_to 'Add New', new_live_chat_answer_path, class: 'btn btn-default ' %>
 </div>
 
@@ -12,14 +12,15 @@
 </div>
 </br>
 
-<table class="table table-hover">  <thead>
+<table class="table table-hover">
+  <thead>
     <tr>
+      <th>Type</th>
       <th>Company</th>
       <th>State</th>
       <th>Des</th>
-      <th>Question</th>
-      <th>Topic</th>
-      <th>Answer</th>
+      <th>Question/Topic</th>
+      <th>Answer/Policy</th>
       <th>Notes</th>
       <th>Date org</th>
       <!-- <th>Extra i</th>
@@ -30,14 +31,14 @@
   </thead>
 
   <tbody id="myTable">
-    <% @live_chat_answers.each do |live_chat_answer| %>
+    <% @live_chat_answers.reverse.each do |live_chat_answer| %>
       <tr>
+        <td><%= live_chat_answer.topic.blank? ? 'Question' : 'Policy' %></td>
         <td><%= live_chat_answer.company %></td>
         <td><%= live_chat_answer.state %></td>
         <td><%= live_chat_answer.des %></td>
-        <td><%= live_chat_answer.question %></td>
-        <td><%= live_chat_answer.topic %></td>
-        <td><%= live_chat_answer.answer %></td>
+        <td><%= live_chat_answer.topic.blank? ? live_chat_answer.question : live_chat_answer.topic %></td>
+        <td><%= live_chat_answer.topic.blank? ? live_chat_answer.answer : live_chat_answer.policy %></td>
         <td><%= live_chat_answer.notes %></td>
         <td><%= live_chat_answer.date_org %></td>
         <!-- <td><%= live_chat_answer.extra_i %></td>
