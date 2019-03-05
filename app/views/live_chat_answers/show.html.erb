@@ -9,7 +9,7 @@
 <% end %>
 
   <div class="col-lg-offset-2">
-    <%= link_to 'Other Canned Responses', live_chat_answers_path, class: 'btn btn-default' %> <%= link_to 'Edit Answer', edit_live_chat_answer_path(@live_chat_answer), class: 'btn btn-default' %> <%= link_to 'Add New', new_live_chat_answer_path(@live_chat_answer), class: 'btn btn-default' %>
+    <%= link_to 'Canned Responses Index', live_chat_answers_path, class: 'btn btn-default' %> <%= link_to 'Edit Answer', edit_live_chat_answer_path(@live_chat_answer), class: 'btn btn-default' %> <%= link_to 'Add New', new_live_chat_answer_path(@live_chat_answer), class: 'btn btn-default' %>
   </div>
 </div>
 </br>
@@ -24,7 +24,7 @@
     <%= @live_chat_answer.company %>
   </h4>
 
-  <% if @live_chat_answer.topic.empty? %>
+  <% if @live_chat_answer.topic.blank? %>
     <h4>
       <strong>Des:</strong>
       <%= @live_chat_answer.des %>
