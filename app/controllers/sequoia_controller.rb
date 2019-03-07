@@ -157,7 +157,7 @@ end
 
 
  def live_chat_answer
-   @live_chat_answers = LiveChatAnswer.all
+   @live_chat_answers = LiveChatAnswer.all.order(:question).order(:company)
  end
 
 def sales

@@ -30,7 +30,7 @@
             </thead>
             <tbody id="myTableSequoia">
               <% @live_chat_answers.each do |live_chat_answer| %>
-                <% if live_chat_answer.company == 'Sequoia' %>
+                <% if live_chat_answer.company == 'Sequoia' && live_chat_answer.answer.blank? == false %>
                   <tr>
                     <td><%= link_to live_chat_answer.question, live_chat_answer %> </br></br>Des: <%= live_chat_answer.des.blank? == false ? live_chat_answer.des : 'n/a' %></td>
                     <td class="word-break"><%= live_chat_answer.answer %></td>
@@ -56,7 +56,7 @@
             </thead>
             <tbody id="myTableEmpire">
               <% @live_chat_answers.each do |live_chat_answer| %>
-                <% if live_chat_answer.company == 'Empire' %>
+                <% if live_chat_answer.company == 'Empire' && live_chat_answer.answer.blank? == false %>
                   <tr>
                     <td><%= link_to live_chat_answer.question, live_chat_answer %></br></br>State: <%= live_chat_answer.state.blank? == false ? live_chat_answer.state : 'n/a' %></td>
                     <td><%= live_chat_answer.answer %></td>
@@ -84,7 +84,7 @@
             </thead>
             <tbody id="myTableTax">
               <% @live_chat_answers.each do |live_chat_answer| %>
-              <% if live_chat_answer.company == 'Tax Preparers' %>
+              <% if live_chat_answer.company == 'Tax Preparers' && live_chat_answer.answer.blank? == false %>
               <tr>
                 <td><%= link_to live_chat_answer.question, live_chat_answer %></td>
                 <td><%= live_chat_answer.answer %></td>
