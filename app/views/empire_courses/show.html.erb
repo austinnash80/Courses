@@ -42,7 +42,7 @@
       <td><%= course_creation_task.task %></td>
       <td><%= course_creation_task.task_note_1 %></td>
       <td><%= course_creation_task.assign_1.blank? ? 'Not Assigned' : course_creation_task.assign_1 %></td>
-      <td><%= link_to 'Edit', edit_course_creation_task_path(course_creation_task) %></td>
+      <td><%= link_to 'Edit Task / Update Status', edit_course_creation_task_path(course_creation_task) %></td>
       <td><%= link_to 'View', course_creation_task %></td>
     </tr>
     <% end %>

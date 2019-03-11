@@ -112,7 +112,8 @@ def empire_course_creation
     end
 
     @empire_courses.each do |i|
-      @course_ip.push(i['number'])
+      i['extra_b'] == false ? @course_ip.push(i['id']) : ''
+      i['extra_b'] == true ? @course_c.push(i['id']) : ''
     end
 end
 
