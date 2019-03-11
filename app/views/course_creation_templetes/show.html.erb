@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Task:</strong>
+  <%= @course_creation_templete.templete_type %>
+</p>
+
+<p>
+  <strong>Arello:</strong>
+  <%= @course_creation_templete.instruction_1 %>
+</p>
+
+<p>
+  <strong>CA Course:</strong>
+  <%= @course_creation_templete.instruction_2 %>
+</p>
+
+<!-- <p>
+  <strong>Extra s:</strong>
+  <%= @course_creation_templete.extra_s %>
+</p>
+
+<p>
+  <strong>Extra t:</strong>
+  <%= @course_creation_templete.extra_t %>
+</p>
+
+<p>
+  <strong>Extra i:</strong>
+  <%= @course_creation_templete.extra_i %>
+</p>
+
+<p>
+  <strong>Extra d:</strong>
+  <%= @course_creation_templete.extra_d %>
+</p>
+
+<p>
+  <strong>Extra b:</strong>
+  <%= @course_creation_templete.extra_b %>
+</p> -->
+
+<%= link_to 'Edit', edit_course_creation_templete_path(@course_creation_templete) %> |
+<%= link_to 'Back', course_creation_templetes_path %>

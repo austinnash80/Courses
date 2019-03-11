@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<div class="page-header ">
+  <h1 class="text-center">Course Creation Templetes</h1>
+  <div class="text-center">
+  </br>
+     <%= link_to 'Add New Templete', new_course_creation_templete_path, class: 'btn btn-primary' %>
+  </br>
+  </div>
+</div>
+</br>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Task</th>
+      <th>Arello</th>
+      <th>CA Course</th>
+      <!-- <th>Extra s</th> -->
+      <!-- <th>Extra t</th> -->
+      <!-- <th>Extra i</th> -->
+      <!-- <th>Extra d</th> -->
+      <!-- <th>Extra b</th> -->
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @course_creation_templetes.each do |course_creation_templete| %>
+      <tr>
+        <td><%= course_creation_templete.id %></td>
+        <td><%= course_creation_templete.templete_type %></td>
+        <td><%= course_creation_templete.instruction_1 %></td>
+        <td><%= course_creation_templete.instruction_2 %></td>
+        <!-- <td><%= course_creation_templete.extra_s %></td> -->
+        <!-- <td><%= course_creation_templete.extra_t %></td> -->
+        <!-- <td><%= course_creation_templete.extra_i %></td> -->
+        <!-- <td><%= course_creation_templete.extra_d %></td> -->
+        <!-- <td><%= course_creation_templete.extra_b %></td> -->
+        <td><%= link_to 'Show', course_creation_templete %></td>
+        <td><%= link_to 'Edit', edit_course_creation_templete_path(course_creation_templete) %></td>
+        <td><%= link_to 'Destroy', course_creation_templete, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<!-- <%= link_to 'New Course Creation Templete', new_course_creation_templete_path %> -->

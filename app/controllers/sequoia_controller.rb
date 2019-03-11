@@ -86,6 +86,7 @@ class SequoiaController < ApplicationController
     live_chat_answer
     calendar
     empire_email_stats
+    empire_course_creation
   end
 
 private
@@ -93,6 +94,27 @@ private
 # def test
 #   SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => '2018-09-25').where(:what => 'Ethics')
 # end
+
+def empire_course_creation
+  @empire_courses = EmpireCourse.all
+  @course_creation_tasks = CourseCreationTask.all
+
+    @task_ip = []
+    @task_t = []
+    @task_c = []
+
+    @course_ip = []
+    @course_c = []
+
+    @course_creation_tasks.each do |i|
+      i['extra_s'] == 'In-progress' ? @task_ip.push(i['extra_s']) : i['extra_s'] == 'Complete' ? @task_c.push(i['extra_s']) : ''
+      @task_t.push(i['extra_s'])
+    end
+
+    @empire_courses.each do |i|
+      @course_ip.push(i['number'])
+    end
+end
 
 def empire_email_stats
   @email_campaigns = EmailCampaign.all

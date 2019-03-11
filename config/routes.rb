@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :course_creation_tasks
+  resources :empire_courses
+  resources :course_creation_templetes
   resources :calendars
   resources :live_chat_answers
   resources :cpe_due_dates do

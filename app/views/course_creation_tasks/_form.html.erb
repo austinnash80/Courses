@@ -1,0 +1,47 @@
+<div class="page-header ">
+  <h2 class="text-center"><%= params['title']%></h2>
+  <p class="text-center">Create new task</p>
+</div>
+
+<%= simple_form_for(@course_creation_task) do |f| %>
+  <%= f.error_notification %>
+<div class="col-lg-8 col-lg-offset-2">
+  <div class="form-inputs">
+    <%= f.input :empire_course_id, as: :hidden, input_html: {value: params['empire_course_id']} %>
+  </br>
+    <div class="row">
+      <div class="col-lg-6">
+        <%= f.input :course_creation_templete_id, label: 'Task', as: :select, collection: @templete, label_method: :second, value_method: :first %>
+      </div>
+      <div class="col-lg-6">
+        <%= f.input :task, label: 'Templete', as: :select, collection: @task %>
+      </div>
+    </div>
+    <%= f.input :task_note_1 %>
+    <%= f.input :task_note_2 %>
+    <div class="row">
+      <h3 class="text-center">Assign Task</h5>
+      <h5 class="text-center">Select all that apply</h5>
+      <div class="col-lg-4">
+        <%= f.input :assign_1, label: false, as: :select, collection: @assign %>
+      </div>
+      <div class="col-lg-4">
+        <%= f.input :assign_2, label: false, as: :select, collection: @assign %>
+      </div>
+      <div class="col-lg-4">
+        <%= f.input :assign_3, label: false, as: :select, collection: @assign %>
+      </div>
+    </div>
+    <!-- <%= f.input :extra_s %>
+    <%= f.input :extra_t %>
+    <%= f.input :extra_i %>
+    <%= f.input :extra_d %>
+    <%= f.input :extra_b %> -->
+  </div>
+</br>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+</div>
+
+<% end %>

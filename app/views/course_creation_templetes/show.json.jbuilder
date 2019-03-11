@@ -1,0 +1,1 @@
+json.partial! "course_creation_templetes/course_creation_templete", course_creation_templete: @course_creation_templete

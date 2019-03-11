@@ -1,0 +1,2 @@
+module CourseCreationTasksHelper
+end

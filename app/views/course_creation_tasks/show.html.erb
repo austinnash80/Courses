@@ -1,0 +1,70 @@
+<p id="notice"><%= notice %></p>
+
+<!-- <p>
+  <strong>Empire course:</strong>
+  <%= @course_creation_task.empire_course_id %>
+</p> -->
+<p>
+  <strong>Course:</strong>
+  <%= @course_creation_task.empire_course.title %>
+</p>
+
+<!-- <p>
+  <strong>Templete:</strong>
+  <%= @course_creation_task.course_creation_templete_id %>
+</p> -->
+<p>
+  <strong>Job:</strong>
+  <%= @course_creation_task.course_creation_templete.templete_type %>
+</p>
+<p>
+  <strong>Type:</strong>
+  <%= @course_creation_task.task %>
+</p>
+
+<p>
+  <strong>Templete Instructions:</strong>
+  <% if @course_creation_task.task == "ARELLO" %>
+    <%= @course_creation_task.course_creation_templete.instruction_1 %>
+  <% elsif @course_creation_task.task == "California Course" %>
+    <%= @course_creation_task.course_creation_templete.instruction_2 %>
+  <% end %>
+</p>
+
+
+<% unless @course_creation_task.task_note_1.blank? %>
+  <p><strong>Task note 1:</strong>
+  <%= @course_creation_task.task_note_1 %></p>
+<% end %>
+
+<% unless @course_creation_task.task_note_2.blank? %>
+  <p><strong>Task note 2:</strong>
+  <%= @course_creation_task.task_note_2 %></p>
+<% end %>
+
+<% unless @course_creation_task.task_note_3.blank? %>
+  <p><strong>Task note 3:</strong>
+  <%= @course_creation_task.task_note_3 %></p>
+<% end %>
+
+<% unless @course_creation_task.assign_1.blank? %>
+  <p><strong>Assigned:</strong>
+    <%= @course_creation_task.assign_1 %></p>
+<% end %>
+
+<% unless @course_creation_task.assign_2.blank? %>
+<p>
+  <strong>Assigned:</strong>
+  <%= @course_creation_task.assign_2 %>
+</p>
+<% end %>
+<% unless @course_creation_task.assign_3.blank? %>
+  <p>
+    <strong>Assigned:</strong>
+    <%= @course_creation_task.assign_3 %>
+  </p>
+<% end %>
+
+
+<%= link_to 'Edit', edit_course_creation_task_path(@course_creation_task) %> |
+<%= link_to 'Back', course_creation_tasks_path %>

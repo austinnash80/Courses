@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190225224313) do
+ActiveRecord::Schema.define(version: 20190308013837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,38 @@ ActiveRecord::Schema.define(version: 20190225224313) do
     t.integer "extra_i"
     t.boolean "extra_b"
     t.date "extra_d"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "course_creation_tasks", force: :cascade do |t|
+    t.integer "empire_course_id"
+    t.string "task"
+    t.text "task_note_1"
+    t.text "task_note_2"
+    t.text "task_note_3"
+    t.string "assign_1"
+    t.string "assign_2"
+    t.string "assign_3"
+    t.string "extra_s"
+    t.text "extra_t"
+    t.integer "extra_i"
+    t.date "extra_d"
+    t.boolean "extra_b"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "course_creation_templete_id"
+  end
+
+  create_table "course_creation_templetes", force: :cascade do |t|
+    t.string "templete_type"
+    t.text "instruction_1"
+    t.text "instruction_2"
+    t.string "extra_s"
+    t.text "extra_t"
+    t.integer "extra_i"
+    t.date "extra_d"
+    t.boolean "extra_b"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -192,6 +224,20 @@ ActiveRecord::Schema.define(version: 20190225224313) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "update_stats"
+  end
+
+  create_table "empire_courses", force: :cascade do |t|
+    t.integer "number"
+    t.string "version"
+    t.string "title"
+    t.string "category"
+    t.integer "hours"
+    t.string "extra_s"
+    t.integer "extra_i"
+    t.date "extra_d"
+    t.boolean "extra_b"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "empire_mailings", force: :cascade do |t|

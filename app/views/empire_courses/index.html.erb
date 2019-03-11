@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+<div class="page-header ">
+  <h1 class="text-center">Empire Courses</h1>
+  <div class="text-center">
+  </br>
+     <%= link_to 'Add New Course', new_empire_course_path, class: 'btn btn-primary' %>
+  </br>
+  </div>
+</div>
+</br>
+
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <!-- <th>#</th> -->
+      <th>ID</th>
+      <th>Status</th>
+      <!-- <th>Number</th> -->
+      <!-- <th>Version</th> -->
+      <th>Title</th>
+      <th>Category</th>
+      <th>Hours</th>
+      <th>In-progress</th>
+      <th>Not Taken</th>
+      <!-- <th>Extra i</th>
+      <th>Extra d</th>
+      <th>Extra b</th> -->
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @empire_courses.reverse_each do |empire_course| %>
+
+      <tr>
+        <td><%= empire_course.id %></td>
+        <td><%= empire_course.extra_b == true ? 'Complete' : 'In-progress' %></td>
+        <!-- <td><%= empire_course.number %></td> -->
+        <!-- <td><%= empire_course.version %></td> -->
+        <td><%= empire_course.title %></td>
+        <td><%= empire_course.category %></td>
+        <td><%= empire_course.hours %></td>
+        <!-- <td><%= empire_course.extra_i %></td>
+        <td><%= empire_course.extra_d %></td>
+        <td><%= empire_course.extra_b %></td> -->
+        <td><%= link_to 'View', empire_course %></td>
+        <td><%= link_to 'Add Task', new_course_creation_task_path(:empire_course_id => empire_course, :title => empire_course.title) %></td>
+        <!-- <td><%#= link_to 'New Task', new_course_creation_task_path(:empire_course_id => empire_course, :pes_number => datasheet.pes_number, :seq_version => datasheet.seq_version, :pes_version => datasheet.pes_version, :seq_number => datasheet.seq_number, :seq_title => datasheet.seq_title) %></td> -->
+        <!-- <td><%= link_to 'Edit', edit_empire_course_path(empire_course) %></td> -->
+        <td><%= link_to 'Delete', empire_course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<!-- <%= link_to 'New Empire Course', new_empire_course_path %> -->
