@@ -28,7 +28,7 @@ class CourseCreationTempletesController < ApplicationController
 
     respond_to do |format|
       if @course_creation_templete.save
-        format.html { redirect_to @course_creation_templete, notice: 'Course creation templete was successfully created.' }
+        format.html { redirect_to @course_creation_templete, notice: 'Course creation template was successfully created.' }
         format.json { render :show, status: :created, location: @course_creation_templete }
       else
         format.html { render :new }
