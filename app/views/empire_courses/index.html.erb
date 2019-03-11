@@ -26,7 +26,7 @@
       <!-- <th>Extra i</th>
       <th>Extra d</th>
       <th>Extra b</th> -->
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -38,13 +38,13 @@
         <td><%= empire_course.extra_b == true ? 'Complete' : 'In-progress' %></td>
         <!-- <td><%= empire_course.number %></td> -->
         <!-- <td><%= empire_course.version %></td> -->
-        <td><%= empire_course.title %></td>
+        <td><%= link_to empire_course.title, empire_course %></td>
         <td><%= empire_course.category %></td>
         <td><%= empire_course.hours %></td>
         <!-- <td><%= empire_course.extra_i %></td>
         <td><%= empire_course.extra_d %></td>
         <td><%= empire_course.extra_b %></td> -->
-        <td><%= link_to 'View', empire_course %></td>
+        <!-- <td><%= link_to 'View', empire_course %></td> -->
         <td><%= link_to 'Add Task', new_course_creation_task_path(:empire_course_id => empire_course, :title => empire_course.title) %></td>
         <!-- <td><%#= link_to 'New Task', new_course_creation_task_path(:empire_course_id => empire_course, :pes_number => datasheet.pes_number, :seq_version => datasheet.seq_version, :pes_version => datasheet.pes_version, :seq_number => datasheet.seq_number, :seq_title => datasheet.seq_title) %></td> -->
         <!-- <td><%= link_to 'Edit', edit_empire_course_path(empire_course) %></td> -->
