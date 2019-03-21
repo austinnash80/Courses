@@ -485,6 +485,7 @@ def postcard_schedule
     user_signed_in? && current_user.email == 'kyle@sequoiacpe.com' ? @name = 'Kyle' : ''
     user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' ? @name = 'Ashley' : ''
     user_signed_in? && current_user.email == 'john@empirelearning.com' ? @name = 'John' : ''
+    user_signed_in? && current_user.email == 'hamdo@sequoiacpe.com' ? @name = 'Hamdo' : ''
 
     @user_task = 'task.user_1'
   end
