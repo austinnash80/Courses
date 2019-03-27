@@ -69,7 +69,7 @@ class CourseCreationTasksController < ApplicationController
                 [12,'Create exams'],[13,'Add exams to platform'],[14,'Write review question remediations'],[15,'Add review questions and explanations to InDesign'],[16,'Edit text'],[17,'Create table of contents'],[18,'Create PDF of course'],[19,'Create course listing on platform'],[20,'Upload course to AWS'],[21,'Apply course to DRE']]
     # @task = ['ARELLO','California Course']
     @assign = ['John', 'Michael', 'Ashley', 'Homdo']
-    @status = ['Complete']
+    @status = ['In-progress','Complete']
   end
 
   private
