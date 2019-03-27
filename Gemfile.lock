@@ -321,5 +321,8 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   wkhtmltopdf-binary
 
+RUBY VERSION
+   ruby 2.6.2p47
+
 BUNDLED WITH
-   1.16.1
+   2.0.1

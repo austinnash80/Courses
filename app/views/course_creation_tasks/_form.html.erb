@@ -1,6 +1,6 @@
 <div class="page-header ">
-  <h2 class="text-center"><%= params['title']%></h2>
-  <p class="text-center">Create new task</p>
+  <h2 class="text-center"><%= params['title']%></br><small><%= params['temp'] %> </small></h2>
+  <!-- <h4 class="text-center">Create new task</h4> -->
 </div>
 
 <%= simple_form_for(@course_creation_task) do |f| %>
@@ -8,14 +8,15 @@
 <div class="col-lg-8 col-lg-offset-2">
   <div class="form-inputs">
     <%= f.input :empire_course_id, as: :hidden, input_html: {value: params['empire_course_id']} %>
+    <%= f.input :task, as: :hidden, input_html: {value: params['temp']} %>
   </br>
     <div class="row">
       <div class="col-lg-6">
         <%= f.input :course_creation_templete_id, label: 'Task', as: :select, collection: @templete, label_method: :second, value_method: :first %>
       </div>
-      <div class="col-lg-6">
-        <%= f.input :task, label: 'Templete', as: :select, collection: @task %>
-      </div>
+      <!-- <div class="col-lg-6">
+        <%#= f.input :task, label: 'Templete', as: :select, collection: @task %>
+      </div> -->
     </div>
     <%= f.input :task_note_1 %>
     <%= f.input :task_note_2 %>

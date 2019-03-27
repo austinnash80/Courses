@@ -17,10 +17,12 @@ class EmpireCoursesController < ApplicationController
   # GET /empire_courses/new
   def new
     @empire_course = EmpireCourse.new
+    form_collection
   end
 
   # GET /empire_courses/1/edit
   def edit
+    form_collection
   end
 
   # POST /empire_courses
@@ -63,6 +65,10 @@ class EmpireCoursesController < ApplicationController
     end
   end
 
+  def form_collection
+    @templete_type = ['ARELLO','California Course']
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_empire_course
@@ -71,6 +77,6 @@ class EmpireCoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def empire_course_params
-      params.require(:empire_course).permit(:number, :version, :title, :category, :hours, :extra_i, :extra_d, :extra_b)
+      params.require(:empire_course).permit(:number, :version, :title, :category, :hours, :extra_i, :extra_d, :extra_b, :extra_s)
     end
 end

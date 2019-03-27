@@ -5,12 +5,14 @@
     <%= f.input :empire_course_id, as: :hidden %>
   </br>
     <div class="row">
-      <div class="col-lg-6">
-        <%= f.input :course_creation_templete_id, label: 'Tash', as: :select, collection: @templete, label_method: :second, value_method: :first %>
+      <div class="col-lg-12">
+        <h2 class="">Task: <%= params['task'] %></h2>
+      </br>
+        <%#= f.input :course_creation_templete_id, label: 'Task', as: :select, collection: @templete, label_method: :second, value_method: :first %>
       </div>
-      <div class="col-lg-6">
-        <%= f.input :task, label: 'Templete', as: :select, collection: @task %>
-      </div>
+      <!-- <div class="col-lg-6">
+        <%#= f.input :task, label: 'Templete', as: :select, collection: @task %>
+      </div> -->
     </div>
     <%= f.input :task_note_1 %>
     <%= f.input :task_note_2 %>

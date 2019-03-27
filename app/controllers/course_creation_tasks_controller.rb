@@ -65,10 +65,11 @@ class CourseCreationTasksController < ApplicationController
   end
 
   def form_collection
-    @templete = [[1,'Write Oulines'], [2,'Write Objectives'], [3,'Write Questions']]
-    @task = ['ARELLO','California Course']
+    @templete = [[5,'Acquire source material'],[6,'Decide on course topic and length'],[7,'Add course content to InDesign'],[8,'Select Key Points'],[9,'Write questions'],[10,'Review and edit questions'],[11,'Divide questions'],
+                [12,'Create exams'],[13,'Add exams to platform'],[14,'Write review question remediations'],[15,'Add review questions and explanations to InDesign'],[16,'Edit text'],[17,'Create table of contents'],[18,'Create PDF of course'],[19,'Create course listing on platform'],[20,'Upload course to AWS'],[21,'Apply course to DRE']]
+    # @task = ['ARELLO','California Course']
     @assign = ['John', 'Michael', 'Ashley', 'Homdo']
-    @status = ['In-progress', 'On-hold', 'Complete']
+    @status = ['Complete']
   end
 
   private
