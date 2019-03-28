@@ -5,7 +5,7 @@
   <h1 class="text-center"><strong><%= @empire_course.title %></strong> </br><small>Course: <%= @empire_course.number %><%= @empire_course.version%></small></h1>
   <div class="text-center">
     <div class="btn-group" >
-      <%= link_to 'Add Task', new_course_creation_task_path(:empire_course_id => @empire_course, :title => @empire_course.title, :temp => @empire_course.extra_s), class: 'btn btn-primary' %>
+      <!-- <%= link_to 'Add Task', new_course_creation_task_path(:empire_course_id => @empire_course, :title => @empire_course.title, :temp => @empire_course.extra_s), class: 'btn btn-primary' %> -->
       <%= link_to 'Back to Index', empire_courses_path, class: 'btn btn-primary' %>
       <%= link_to 'Edit Course', edit_empire_course_path(@empire_course), class: 'btn btn-primary' %>
     </div>
@@ -21,18 +21,35 @@
   </div>
 </div>
 
-</br>
+<h5 class="text-center"><strong><big>Task Status:</big></strong> Assigned: <%= (@inprogress_tasks.sum + @completed_tasks.sum) %> | Completed: <%= @completed_tasks.sum %> | Total: <%= @total_templetes.sum %></h5>
+
+<div class="row">
+  <div class="col-lg-offset-1 col-lg-10">
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="70"
+      aria-valuemin="0" aria-valuemax="100" style="width:<%= (@completed_tasks.sum.to_f / @total_templetes.sum) * 100 %>%">
+        <%= @completed_tasks.sum %> / <%= @total_templetes.sum %>
+      </div>
+    </div>
+  </div>
 
 <div class="well well-white col-lg-10 col-lg-offset-1">
-<h2 class="text-center">Not Assigned</h2>
+    <h2 class="text-center">Not Assigned</h2>
+      <%= render(:partial => 'not_assigned') %>
+  </br>
+    <h2 class="text-center">In-progress</h2>
+      <%= render(:partial => 'inprogress') %>
+  </br>
+    <h2 class="text-center">Completed </h2>
+      <%= render(:partial => 'completed') %>
+</div>
 
-<table class="table table-striped table-bordered">
+<!-- <table class="table table-striped table-bordered">
   <thead>
     <th width="40%">Task</th>
     <th>Assigned</th>
     <th>Notes</th>
     <th width="20%"></th>
-    <!-- <th></th> -->
   </thead>
   <tbody>
     <% @course_creation_tasks.each do |course_creation_task| %>
@@ -42,63 +59,8 @@
       <td><%= course_creation_task.assign_3.blank? == false ? "#{course_creation_task.assign_3}, #{course_creation_task.assign_2}, #{course_creation_task.assign_1}" : course_creation_task.assign_2.blank? == false ? "#{course_creation_task.assign_2}, #{course_creation_task.assign_1}" : course_creation_task.assign_1.blank? == false ? course_creation_task.assign_1 : '' %></td>
       <td><%= course_creation_task.task_note_1 %></td>
       <td><%= link_to 'Assign / Edit / Update', edit_course_creation_task_path(course_creation_task, :course => @empire_course.id, :task => course_creation_task.course_creation_templete.templete_type) %></td>
-      <!-- <td><%#= link_to 'View', course_creation_task %></td> -->
     </tr>
     <% end %>
     <% end %>
   </tbody>
-</table>
-</br>
-
-<h2 class="text-center">In-progress</h2>
-
-<table class="table table-striped table-bordered">
-  <thead>
-    <th width="40%">Task</th>
-    <th>Assigned</th>
-    <th>Notes</th>
-    <th width="20%"></th>
-    <!-- <th></th> -->
-  </thead>
-  <tbody>
-    <% @course_creation_tasks.each do |course_creation_task| %>
-    <% if course_creation_task.empire_course_id == @empire_course.id && course_creation_task.extra_s == 'In-progress' %>
-    <tr>
-      <td><%= link_to course_creation_task.course_creation_templete.templete_type, course_creation_task %></td>
-      <td><%= course_creation_task.assign_3.blank? == false ? "#{course_creation_task.assign_3}, #{course_creation_task.assign_2}, #{course_creation_task.assign_1}" : course_creation_task.assign_2.blank? == false ? "#{course_creation_task.assign_2}, #{course_creation_task.assign_1}" : course_creation_task.assign_1 %></td>
-      <td><%= course_creation_task.task_note_1 %></td>
-      <td><%= link_to 'Assign / Edit / Update', edit_course_creation_task_path(course_creation_task, :course => @empire_course.id, :task => course_creation_task.course_creation_templete.templete_type) %></td>
-      <!-- <td><%#= link_to 'View', course_creation_task %></td> -->
-    </tr>
-    <% end %>
-    <% end %>
-  </tbody>
-</table>
-</br>
-
-<h2 class="text-center">Completed </h2>
-<table class="table table-striped table-bordered">
-  <thead>
-    <th width="40%">Task</th>
-    <th width="">Date Complete</th>
-    <th>Completed By</th>
-    <th>Notes</th>
-    <th></th>
-    <!-- <th></th> -->
-  </thead>
-  <tbody>
-    <% @course_creation_tasks.each do |course_creation_task| %>
-    <% if course_creation_task.empire_course_id == @empire_course.id && course_creation_task.extra_s == 'Complete' %>
-    <tr>
-      <td><%= link_to course_creation_task.course_creation_templete.templete_type, course_creation_task %></td>
-      <td class="green"><%= course_creation_task.extra_d.blank? ? 'nil' : course_creation_task.extra_d.strftime("%b %-d, %Y") %></td>
-      <td><%= course_creation_task.assign_3.blank? == false ? "#{course_creation_task.assign_3}, #{course_creation_task.assign_2}, #{course_creation_task.assign_1}" : course_creation_task.assign_2.blank? == false ? "#{course_creation_task.assign_2}, #{course_creation_task.assign_1}" : course_creation_task.assign_1 %></td>
-      <td><%= course_creation_task.task_note_1 %></td>
-      <td><%= link_to 'Edit', edit_course_creation_task_path(course_creation_task, :course => @empire_course.id, :task => course_creation_task.course_creation_templete.templete_type) %></td>
-      <!-- <td><%#= link_to 'View', course_creation_task %></td> -->
-    </tr>
-    <% end %>
-    <% end %>
-  </tbody>
-</table>
-</div>
+</table> -->

@@ -1,0 +1,26 @@
+<table class="table table-striped table-bordered">
+  <thead>
+    <th width="5%" class="text-center">ID</th>
+    <th width="40%">Task</th>
+    <th width="">Date Complete</th>
+    <th>Completed By</th>
+    <th>Notes</th>
+    <th></th>
+    <!-- <th></th> -->
+  </thead>
+  <tbody>
+    <% @course_creation_tasks.each do |course_creation_task| %>
+    <% if course_creation_task.empire_course_id == @empire_course.id && course_creation_task.extra_s == 'Complete' %>
+    <tr>
+      <td class="text-center"><%= course_creation_task.course_creation_templete.id %></td>
+      <td><%= link_to course_creation_task.course_creation_templete.templete_type, course_creation_task %></td>
+      <td class="green"><%= course_creation_task.extra_d.blank? ? 'nil' : course_creation_task.extra_d.strftime("%b %-d, %Y") %></td>
+      <td><%= course_creation_task.assign_3.blank? == false ? "#{course_creation_task.assign_3}, #{course_creation_task.assign_2}, #{course_creation_task.assign_1}" : course_creation_task.assign_2.blank? == false ? "#{course_creation_task.assign_2}, #{course_creation_task.assign_1}" : course_creation_task.assign_1 %></td>
+      <td><%= course_creation_task.task_note_1 %></td>
+      <td><%= link_to 'Edit', edit_course_creation_task_path(course_creation_task, :course => @empire_course.id, :task => course_creation_task.course_creation_templete.templete_type) %></td>
+      <!-- <td><%#= link_to 'View', course_creation_task %></td> -->
+    </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>

@@ -3,16 +3,21 @@
   <!-- <h4 class="text-center">Create new task</h4> -->
 </div>
 
+
+
 <%= simple_form_for(@course_creation_task) do |f| %>
   <%= f.error_notification %>
 <div class="col-lg-8 col-lg-offset-2">
   <div class="form-inputs">
+    <h3><%= params['task']%></h3>
     <%= f.input :empire_course_id, as: :hidden, input_html: {value: params['empire_course_id']} %>
     <%= f.input :task, as: :hidden, input_html: {value: params['temp']} %>
   </br>
     <div class="row">
       <div class="col-lg-6">
-        <%= f.input :course_creation_templete_id, label: 'Task', as: :select, collection: @templete, label_method: :second, value_method: :first %>
+        <%#= f.input :course_creation_templete_id, label: 'Task', as: :select, collection: @templete, label_method: :second, value_method: :first %>
+        <%= f.input :course_creation_templete_id, as: :hidden, input_html: {value: params['task_id']} %>
+
       </div>
       <!-- <div class="col-lg-6">
         <%#= f.input :task, label: 'Templete', as: :select, collection: @task %>
