@@ -1,19 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Task:</strong>
-  <%= @course_creation_templete.templete_type %>
-</p>
+<div class="col-lg-offset-1 col-lg-10">
+</br>
+  <h2 class="text-center"><%= @course_creation_templete.templete_type %></h2>
 
-<p>
-  <strong>Arello:</strong>
-  <%= @course_creation_templete.instruction_1 %>
-</p>
+  <% if params['temp'] == 'ARELLO' %>
+    <p><strong>Arello Course Instructions: </strong><%= @course_creation_templete.instruction_1 %></p>
+  <% elsif params['temp'] == 'California Course' %>
+    <p><strong>CA Course Instructions: </strong></br><%= @course_creation_templete.instruction_2 %></p>
+  <% elsif %>
+    <p><strong>Arello: </strong><%= @course_creation_templete.instruction_1 %></p>
+    <p><strong>CA Course: </strong><%= @course_creation_templete.instruction_2 %></p>
+  <% end %>
+</div>
 
-<p>
-  <strong>CA Course:</strong>
-  <%= @course_creation_templete.instruction_2 %>
-</p>
+
 
 <!-- <p>
   <strong>Extra s:</strong>
