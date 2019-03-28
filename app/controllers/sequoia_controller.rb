@@ -15,6 +15,7 @@ class SequoiaController < ApplicationController
     calendar
     date_fields
     empire_email_stats
+    empire_course_creation
   end
 
   def dash_ashley
@@ -29,6 +30,7 @@ class SequoiaController < ApplicationController
     live_chat_answer
     calendar
     empire_email_stats
+    empire_course_creation
   end
 
   def dash_michael
@@ -44,6 +46,7 @@ class SequoiaController < ApplicationController
     live_chat_answer
     calendar
     empire_email_stats
+    empire_course_creation
   end
 
   def dash

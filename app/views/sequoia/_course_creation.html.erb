@@ -1,0 +1,33 @@
+<h3 class="text-center">Empire Course Creation</h3>
+
+<!-- </br>
+  <div class="text-center">
+    <div class="btn-group">
+      <%= link_to 'Courses', empire_courses_path, class: 'btn btn-primary' %>
+      <%= link_to 'Tasks', course_creation_tasks_path, class: 'btn btn-primary' %>
+      <%= link_to 'Templates', course_creation_templetes_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</br> -->
+<% @hamdo = [] %>
+
+
+
+<table class="table table-striped table-bordered">
+  <caption>You have assigned tasks for</caption>
+  <thead>
+    <tr>
+      <!-- <th>Course</th> -->
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @course_creation_tasks.each do |course_creation_task| %>
+      <% if course_creation_task.assign_1 == @name %>
+      <tr>
+        <td><%= link_to course_creation_task.empire_course.title, empire_course_path(:id => course_creation_task.empire_course.id) %></td>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
