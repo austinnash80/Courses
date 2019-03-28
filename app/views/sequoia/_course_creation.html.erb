@@ -9,7 +9,6 @@
     </div>
   </div>
 </br> -->
-<% @hamdo = [] %>
 
 
 
@@ -23,7 +22,7 @@
 
   <tbody>
     <% @course_creation_tasks.each do |course_creation_task| %>
-      <% if course_creation_task.assign_1 == @name %>
+      <% if course_creation_task.assign_1 == @name || course_creation_task.assign_2 == @name || course_creation_task.assign_3 == @name %>
       <tr>
         <td><%= link_to course_creation_task.empire_course.title, empire_course_path(:id => course_creation_task.empire_course.id) %></td>
       </tr>
