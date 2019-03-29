@@ -22,11 +22,11 @@
 
   <tbody>
     <% @course_creation_tasks.each do |course_creation_task| %>
-      <% if course_creation_task.assign_1 == @name || course_creation_task.assign_2 == @name || course_creation_task.assign_3 == @name %>
+      <% if course_creation_task.assign_1 == @dash_name || course_creation_task.assign_2 == @dash_name || course_creation_task.assign_3 == @dash_name %>
       <tr>
         <td><%= link_to course_creation_task.empire_course.title, empire_course_path(:id => course_creation_task.empire_course.id) %></td>
       </tr>
-    <% end %>
+      <% end %>
     <% end %>
   </tbody>
 </table>

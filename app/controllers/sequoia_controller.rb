@@ -491,6 +491,21 @@ def postcard_schedule
     user_signed_in? && current_user.email == 'hamdo@sequoiacpe.com' ? @name = 'Hamdo' : ''
 
     @user_task = 'task.user_1'
+    
+    url = request.path_info
+    if url.include?('dash_hamdo')
+      @dash_name = 'Hamdo'
+    elsif url.include?('dash_ashley')
+      @dash_name = 'Ashley'
+    elsif url.include?('dash_john')
+      @dash_name = 'John'
+    elsif url.include?('dash_michael')
+      @dash_name = 'Michael'
+    elsif url.include?('dash_kyle')
+      @dash_name = 'Kyle'
+    end
+
+
   end
 
   def email_campaign
