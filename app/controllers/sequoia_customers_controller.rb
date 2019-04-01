@@ -7,7 +7,7 @@ class SequoiaCustomersController < ApplicationController
     if params[:product]
       @sequoia_customers = SequoiaCustomer.where('product LIKE ?', "%#{params[:product]}%")
     else
-      @sequoia_customers = SequoiaCustomer.order(:purchase_date => :desc).first(25)
+      @sequoia_customers = SequoiaCustomer.order(:purchase_date => :desc).first(75)
     end
 
     # @sequoia_customers = SequoiaCustomer.order(:purchase_date => :desc).first(25)
