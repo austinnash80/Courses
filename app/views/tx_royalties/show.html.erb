@@ -44,7 +44,7 @@
 </p>
 
 <p>
-  Included is a check and sales print out for all courses sold this past quarter ending <%= @tx_royalty.end_date.strftime('%B %d, %Y') %>. <%= @tx_royalty.sold %> courses were sold for a total of <%= number_to_currency(@tx_royalty.sold * @tx_royalty.cost) %>. Royalties of <%= number_to_percentage(@tx_royalty.percentage) %> come out to <strong><%= number_to_currency((@tx_royalty.sold * @tx_royalty.cost) * @tx_royalty.percentage) %></strong>.
+  Included is a check and sales print out for all courses sold this past quarter ending <%= @tx_royalty.end_date.strftime('%B %d, %Y') %>. <%= @tx_royalty.sold %> courses were sold for a total of <%= number_to_currency(@tx_royalty.sold * @tx_royalty.cost) %>. Royalties of <%= number_to_percentage((@tx_royalty.percentage * 100), :precision => 0) %> come out to <strong><%= number_to_currency((@tx_royalty.sold * @tx_royalty.cost) * @tx_royalty.percentage) %></strong>.
 </p>
 </br>
 <p>
