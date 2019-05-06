@@ -40,6 +40,24 @@
       <tr>
         <td><%= course_creation_task.extra_s.blank? ? 'Not Taken' : course_creation_task.extra_s %></td>
         <td><%= course_creation_task.empire_course_id %></td>
+        <td><%= course_creation_task.empire_course.title%></td>
+        <td><%#= course_creation_task.course_creation_templete_id %></td>
+        <td><%= course_creation_task.task %></td>
+        <td><%#= course_creation_task.task == 'ARELLO' ? course_creation_task.course_creation_templete.instruction_1 : course_creation_task.task == 'California Course' ? course_creation_task.course_creation_templete.instruction_2 : 'missing' %></td>
+        <td><%= course_creation_task.task_note_1 %></td>
+        <!-- <td><%#= course_creation_task.task_note_2 %></td> -->
+        <!-- <td><%#= course_creation_task.task_note_3 %></td> -->
+        <td><%= course_creation_task.assign_1 %></td>
+        <!-- <td><%#= course_creation_task.assign_2 %></td> -->
+        <!-- <td><%#= course_creation_task.assign_3 %></td> -->
+        <!-- <td><%#= course_creation_task.extra_s %></td>
+        <td><%#= course_creation_task.extra_t %></td>
+        <td><%#= course_creation_task.extra_i %></td>
+        <td><%#= course_creation_task.extra_d %></td>
+        <td><%#= course_creation_task.extra_b %></td> -->
+        <td><%= link_to 'View Task', course_creation_task %></td>
+        <td><%= link_to 'Edit Task', edit_course_creation_task_path(course_creation_task, :task => course_creation_task.course_creation_templete.templete_type) %></td>
+        <td><%= link_to 'Remove', course_creation_task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
       </tr>
     <% end %>
