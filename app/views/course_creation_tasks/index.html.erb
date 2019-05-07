@@ -1,12 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <div class="page-header ">
-  <h1 class="text-center">Course Creation Tasks</h1>
-  <div class="text-center">
-  </br>
-     <%= link_to 'View Courses | Add Task', empire_courses_path, class: 'btn btn-primary' %>
+  <h1 class="text-center">Empire Course Creation</br><small>All Tasks</small></h1>
+  <div class="text-right">
+  <!-- </br> -->
+  <%= link_to 'View Courses | Add Task', empire_courses_path, class: 'btn btn-primary' %>
   </br>
   </div>
+</br>
 </div>
 </br>
 
@@ -15,16 +16,16 @@
   <thead>
     <tr>
       <th>Status</th>
-      <th>Course ID</th>
-      <th>Title</th>
+      <th>Course#</th>
+      <th>Course Title</th>
       <!-- <th>Job ID</th> -->
-      <th>Job#</th>
-      <th>Job</th>
-      <th>Template</th>
-      <th>Instructions</th>
-      <th>Task note 1</th>
+      <th>Task#</th>
+      <th>Task Name</th>
+      <!-- <th>Template</th> -->
+      <!-- <th>Task Details</th> -->
+      <th>Task Note 1</th>
       <!-- <th>Task note 3</th> -->
-      <th>Assign 1</th>
+      <th>Assigned</th>
       <!-- <th>Assign 2</th> -->
       <!-- <th>Assign 3</th> -->
       <!-- <th>Extra s</th> -->
@@ -40,17 +41,17 @@
     <% @course_creation_tasks.each do |course_creation_task| %>
       <tr>
         <td><%= course_creation_task.extra_s.blank? ? 'Not Taken' : course_creation_task.extra_s %></td>
-        <td><%= course_creation_task.empire_course_id %></td>
+        <td><%= course_creation_task.empire_course.number %></td>
         <td><%= course_creation_task.empire_course.title%></td>
         <td><%= course_creation_task.course_creation_templete.extra_i %></td>
-        <!-- <td><%= course_creation_task.course_creation_templete_id %></td> -->
+        <!-- <td><%#= course_creation_task.course_creation_templete_id %></td> -->
         <td><%= course_creation_task.course_creation_templete.templete_type %></td>
-        <td><%= course_creation_task.task %></td>
-        <td><%= course_creation_task.task == 'ARELLO' ? course_creation_task.course_creation_templete.instruction_1 : course_creation_task.task == 'California Course' ? course_creation_task.course_creation_templete.instruction_2 : 'missing' %></td>
+        <!-- <td><%= course_creation_task.task %></td> -->
+        <!-- <td><%= course_creation_task.task == 'ARELLO' ? course_creation_task.course_creation_templete.instruction_1 : course_creation_task.task == 'California Course' ? course_creation_task.course_creation_templete.instruction_2 : 'missing' %></td> -->
         <td><%= course_creation_task.task_note_1 %></td>
         <!-- <td><%#= course_creation_task.task_note_2 %></td> -->
         <!-- <td><%#= course_creation_task.task_note_3 %></td> -->
-        <td><%= course_creation_task.assign_1 %></td>
+        <td><%= course_creation_task.assign_1 %> <%= course_creation_task.assign_2.blank? ? '' : course_creation_task.assign_2 %> <%= course_creation_task.assign_3.blank? ? '' : course_creation_task.assign_3 %></td>
         <!-- <td><%#= course_creation_task.assign_2 %></td> -->
         <!-- <td><%#= course_creation_task.assign_3 %></td> -->
         <!-- <td><%#= course_creation_task.extra_s %></td> -->
