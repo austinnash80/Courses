@@ -1,17 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<div class="col-lg-offset-1 col-lg-10">
-</br>
-  <h2 class="text-center"><%= @course_creation_templete.templete_type %></h2>
 
-  <% if params['temp'] == 'ARELLO' %>
-    <p><strong>Arello Course Instructions: </strong><%= @course_creation_templete.instruction_1 %></p>
-  <% elsif params['temp'] == 'California Course' %>
-    <p><strong>CA Course Instructions: </strong></br><%= @course_creation_templete.instruction_2 %></p>
-  <% elsif %>
-    <p><strong>Arello: </strong><%= @course_creation_templete.instruction_1 %></p>
-    <p><strong>CA Course: </strong><%= @course_creation_templete.instruction_2 %></p>
-  <% end %>
+<div class="col-lg-offset-1 col-lg-10">
+
+  <div class="page-header ">
+    <h1 class="text-center">Task #<%=@course_creation_templete.extra_i%></br><small><%= @course_creation_templete.templete_type %></small></h1>
+  </div>
+
+  <p><%= @course_creation_templete.instruction_1 %></p>
 </div>
 
 
