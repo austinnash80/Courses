@@ -43,7 +43,20 @@
 <!-- *** START Center Pannel *** -->
   <div class="col-lg-4">
     <div class="well">
-      <%= render(:partial => 'home_michael') %>
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home_austin">Home</a></li>
+        <li><a data-toggle="tab" href="#postcard_inventory">Postcard Inventory</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="home_austin" class="tab-pane fade in active">
+            <%= render(:partial => 'home_michael') %>
+        </div>
+
+        <div id="postcard_inventory" class="tab-pane fade">
+            <%= render(:partial => 'postcard_inventory') %>
+        </div>
+      </div>
     </div>
     </div>
 <!-- *** end Center Pannel *** -->
