@@ -69,6 +69,6 @@ class CourseCreationTempletesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_creation_templete_params
-      params.require(:course_creation_templete).permit(:templete_type, :instruction_1, :instruction_2, :extra_s, :extra_t, :extra_i, :extra_d, :extra_b)
+      params.require(:course_creation_templete).permit(:templete_type, :instruction_1, :instruction_2, :extra_s, :extra_t, :extra_i, :extra_d, :extra_b, :time_multiple)
     end
 end
