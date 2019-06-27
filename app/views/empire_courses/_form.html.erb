@@ -3,18 +3,38 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :number %>
-    <%= f.input :version %>
-    <%= f.input :title %>
-    <%= f.input :category %>
-    <%= f.input :hours %>
-    <%= f.input :extra_s, label: 'Templete', as: :radio_buttons, collection: @templete_type %>
-    <!-- <%= f.input :extra_i %> -->
-    <%= f.input :extra_d, label: 'Date Added' %>
-    <%= f.input :extra_b, label: 'Complete' %>
-  </div>
+    <div class="row">
+      <div class="col-lg-2">
+        <%= f.input :number %>
+      </div>
+      <div class="col-lg-2">
+        <%= f.input :version %>
+      </div>
+    </div>
+    <%= f.input :extra_s, label: false, as: :radio_buttons, collection: ['ARELLO', 'CA', 'Dearborn'] %>
+    <div class="row">
+      <div class="col-lg-6">
+        <%= f.input :title %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <%= f.input :category %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <%= f.input :hours %>
+      </div>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+    <!-- <%= f.input :extra_i %> -->
+    <%#= f.input :extra_d, label: 'Date Added' %>
+    <%#= f.input :extra_b, label: 'Complete' %>
   </div>
+</br>
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-primary' %>
+  </div>
+</br>
 <% end %>

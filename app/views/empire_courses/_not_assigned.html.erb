@@ -10,14 +10,16 @@
 
   <tbody>
     <% @course_creation_templetes.each do |course_creation_templete| %>
-    <% unless @created.include? course_creation_templete.id %>
-      <tr>
-        <td class="text-center"><%= course_creation_templete.extra_i %></td>
-        <td><%= link_to course_creation_templete.templete_type, course_creation_templete_path(:id => course_creation_templete.id, :temp => @empire_course.extra_s) %></td>
-        <td><%= course_creation_templete.instruction_1.truncate(125) %></td>
-        <td><%= link_to 'Assign', new_course_creation_task_path(:empire_course_id => @empire_course, :empire_course_number => @empire_course.number, :task_id => course_creation_templete.id, :task => course_creation_templete.templete_type, :title => @empire_course.title, :temp => @empire_course.extra_s) %></td>
-      </tr>
-    <% end %>
+      <% if @empire_course.extra_s == course_creation_templete.extra_s %>
+        <% unless @created.include? course_creation_templete.id %>
+          <tr>
+            <td class="text-center"><%= course_creation_templete.extra_i %></td>
+            <td><%= link_to course_creation_templete.templete_type, course_creation_templete_path(:id => course_creation_templete.id, :temp => @empire_course.extra_s) %></td>
+            <td><%= course_creation_templete.instruction_1.truncate(125) %></td>
+            <td><%= link_to 'Assign', new_course_creation_task_path(:empire_course_id => @empire_course, :empire_course_number => @empire_course.number, :task_id => course_creation_templete.id, :task => course_creation_templete.templete_type, :title => @empire_course.title, :temp => @empire_course.extra_s) %></td>
+          </tr>
+        <% end %>
+      <% end %>
     <% end %>
   </tbody>
 </table>

@@ -31,7 +31,7 @@ class CourseCreationTasksController < ApplicationController
 
     respond_to do |format|
       if @course_creation_task.save
-        format.html { redirect_to empire_courses_path, notice: 'Course creation task was successfully created.' }
+        format.html { redirect_to empire_course_path(@course_creation_task.empire_course_id), notice: 'Course creation task was successfully created.' }
         format.json { render :show, status: :created, location: @course_creation_task }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class CourseCreationTasksController < ApplicationController
   def update
     respond_to do |format|
       if @course_creation_task.update(course_creation_task_params)
-        format.html { redirect_to empire_courses_path, notice: 'Course creation task was successfully updated.' }
+        format.html { redirect_to empire_course_path(@course_creation_task.empire_course_id), notice: 'Course creation task was successfully updated.' }
         format.json { render :show, status: :ok, location: @course_creation_task }
       else
         format.html { render :edit }

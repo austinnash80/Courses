@@ -3,12 +3,26 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :extra_i, label: 'Task#' %>
-    <%= f.input :templete_type, label: "Task Name" %>
-    <%= f.input :instruction_1, label: "Task Details" %>
-    <%= f.input :instruction_2, label: "California Course" %>
-    <!-- <%= f.input :extra_s %>
-    <%= f.input :extra_t %> -->
+    <div class="row">
+      <div class="col-lg-2">
+        <%= f.input :extra_i, label: 'Task#' %>
+      </div>
+      <div class="col-lg-3">
+        <%= f.input :extra_s, label: 'What', as: :select, collection: ['ARELLO', 'CA', 'Dearborn'] %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-5">
+        <%= f.input :templete_type, label: "Task Name" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-5">
+        <%= f.input :instruction_1, label: "Task Details" %>
+      </div>
+    </div>
+    <%#= f.input :instruction_2, label: "California Course" %>
+    <!-- <%= f.input :extra_t %> -->
     <!-- <%= f.input :extra_d %> -->
     <!-- <%= f.input :extra_b %> -->
   </div>

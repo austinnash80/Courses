@@ -15,10 +15,11 @@
     <tr>
       <!-- <th>#</th> -->
       <th>ID</th>
+      <th>Title</th>
+      <th>For</th>
       <th>Status</th>
       <!-- <th>Number</th> -->
       <!-- <th>Version</th> -->
-      <th>Title</th>
       <th>Category</th>
       <th>Hours</th>
       <!-- <th>Temp</th> -->
@@ -36,10 +37,12 @@
 
       <tr>
         <td><%= empire_course.id %></td>
+        <td><%= link_to empire_course.title, empire_course %></td>
+        <td><%= empire_course.extra_s %></td>
+
         <td><%= empire_course.extra_b == true ? 'Complete' : 'In-progress' %></td>
         <!-- <td><%= empire_course.number %></td> -->
         <!-- <td><%= empire_course.version %></td> -->
-        <td><%= link_to empire_course.title, empire_course %></td>
         <td><%= empire_course.category %></td>
         <td><%= empire_course.hours %></td>
         <!-- <td><%= empire_course.extra_s %></td> -->

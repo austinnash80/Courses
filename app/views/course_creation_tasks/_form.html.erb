@@ -1,5 +1,5 @@
 <div class="page-header ">
-  <h2 class="text-center"><%= params['title']%></br><small>Course #<%= params['empire_course_number'] %> </small></h2>
+  <h2 class="text-center"><%= params['title']%> - <%= params['temp'] %></br><small>Course #<%= params['empire_course_number'] %> </small></h2>
   <!-- <h4 class="text-center">Create new task</h4> -->
 </div>
 
@@ -9,25 +9,21 @@
   <%= f.error_notification %>
 <div class="col-lg-8 col-lg-offset-2">
   <div class="form-inputs">
-    <h3><%= params['task']%></h3>
+    <h3><strong>Task: </strong><%= params['task']%></h3>
+</br>
     <%= f.input :empire_course_id, as: :hidden, input_html: {value: params['empire_course_id']} %>
     <%= f.input :task, as: :hidden, input_html: {value: params['temp']} %>
-  </br>
-    <div class="row">
-      <div class="col-lg-6">
-        <%#= f.input :course_creation_templete_id, label: 'Task', as: :select, collection: @templete, label_method: :second, value_method: :first %>
-        <%= f.input :course_creation_templete_id, as: :hidden, input_html: {value: params['task_id']} %>
+    <%= f.input :course_creation_templete_id, as: :hidden, input_html: {value: params['task_id']} %>
 
-      </div>
-      <!-- <div class="col-lg-6">
-        <%#= f.input :task, label: 'Templete', as: :select, collection: @task %>
-      </div> -->
-    </div>
-    <%= f.input :task_note_1 %>
-    <%= f.input :task_note_2 %>
-    <div class="row">
-      <h3 class="text-center">Assign Task</h5>
-      <h5 class="text-center">Select all that apply</h5>
+      <%#= f.input :course_creation_templete_id, label: 'Task', as: :select, collection: @templete, label_method: :second, value_method: :first %>
+      <%#= f.input :task, label: 'Templete', as: :select, collection: @task %>
+
+    <%= f.input :task_note_1, label: false, placeholder: 'Add Any Addtional Task Notes' %>
+    <%#= f.input :task_note_2 %>
+    </br>
+      <h3 class=""><strong>Assign:</strong></h3>
+      <p class="">Select all that apply</p>
+      <div class="row">
       <div class="col-lg-4">
         <%= f.input :assign_1, label: false, as: :select, collection: @assign %>
       </div>
@@ -38,15 +34,24 @@
         <%= f.input :assign_3, label: false, as: :select, collection: @assign %>
       </div>
     </div>
-    <!-- <%= f.input :extra_s %>
-    <%= f.input :extra_t %>
-    <%= f.input :extra_i %>
-    <%= f.input :extra_d %>
-    <%= f.input :extra_b %> -->
+  </br>
+  <div class="row">
+    <div class="col-lg-2">
+      <%= f.input :extra_b, label: 'Has Due Date?', as: :radio_buttons, collection: ['YES', 'NO'] %>
+    </div>
+    <div class="col-lg-7">
+      <%= f.input :extra_d, label: 'Due Date' %>
+    </div>
+  </div>
+
+    <!-- <%= f.input :extra_s %> -->
+    <!-- <%= f.input :extra_t %> -->
+    <!-- <%= f.input :extra_i %> -->
+    <!-- <%= f.input :extra_b %> -->
   </div>
 </br>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, 'Assign Task', class: 'btn btn-primary' %>
   </div>
 </div>
 

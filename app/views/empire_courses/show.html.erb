@@ -2,7 +2,7 @@
 
 <div class="page-header ">
 </br>
-  <h1 class="text-center"><strong><%= @empire_course.title %></strong> </br><small>Course: <%= @empire_course.number %><%= @empire_course.version%></small></h1>
+  <h1 class="text-center"><strong><%= @empire_course.title %> - <%= @empire_course.extra_s %></strong> </br><small>Course: <%= @empire_course.number %><%= @empire_course.version%></small></h1>
   <div class="text-center">
     <div class="btn-group" >
       <!-- <%= link_to 'Add Task', new_course_creation_task_path(:empire_course_id => @empire_course, :title => @empire_course.title, :temp => @empire_course.extra_s), class: 'btn btn-primary' %> -->
@@ -14,10 +14,11 @@
 
 <div class="row">
   <div class="col-lg-offset-1">
+    <p><strong>For:</strong> <%= @empire_course.extra_s %></p>
     <p><strong>Category:</strong> <%= @empire_course.category %></p>
     <p><strong>Hours:</strong> <%= @empire_course.hours %></p>
     <!-- <p><strong>Course Type:</strong> <%= @empire_course.extra_s %></p> -->
-    <p><strong>Development Status:</strong> <%= @empire_course.extra_b == true ? 'Complete' : 'In-progress' %></p>
+    <!-- <p><strong>Development Status:</strong> <%= @empire_course.extra_b == true ? 'Complete' : 'In-progress' %></p> -->
   </div>
 </div>
 

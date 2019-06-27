@@ -12,7 +12,8 @@ class EmpireCoursesController < ApplicationController
   # GET /empire_courses/1.json
   def show
     @course_creation_tasks = CourseCreationTask.order(:course_creation_templete_id).all
-    @course_creation_templetes = CourseCreationTemplete.order(:id).all
+    @course_creation_templetes = CourseCreationTemplete.order(:extra_i).all
+    # @course_creation_templetes = CourseCreationTemplete.where(@empire_course.extra_s => :extra_s).order(:id).all
 
     @created = []
     @completed_tasks = []
@@ -26,8 +27,11 @@ class EmpireCoursesController < ApplicationController
 
     @total_templetes = []
     @course_creation_templetes.each do |course_creation_templete|
-      @total_templetes.push(1)
+      if @empire_course.extra_s == course_creation_templete.extra_s
+        @total_templetes.push(1)
+      end
     end
+
   end
 
   # GET /empire_courses/new

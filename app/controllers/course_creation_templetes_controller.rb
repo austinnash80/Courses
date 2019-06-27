@@ -4,7 +4,7 @@ class CourseCreationTempletesController < ApplicationController
   # GET /course_creation_templetes
   # GET /course_creation_templetes.json
   def index
-    @course_creation_templetes = CourseCreationTemplete.order(:id).all
+    @course_creation_templetes = CourseCreationTemplete.order(:extra_s).order(:extra_i).all
   end
 
   # GET /course_creation_templetes/1
