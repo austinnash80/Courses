@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<div class="page-header ">
+</br>
+  <h1 class="text-center"><%= @task_deadline.title %></h1>
+  <div class="text-center">
+    <%= link_to 'Edit Task', edit_task_deadline_path(@task_deadline), class: 'btn btn-primary' %>
+    <%= link_to 'Task Index', task_deadlines_path, class: 'btn btn-primary' %>
+  </br></br>
+  </div>
+</div>
+
+<div class="col-lg-offset-1">
+  <p>
+    <strong>Title:</strong>
+    <%= @task_deadline.title %>
+  </p>
+
+  <p>
+    <strong>State:</strong>
+    <%= @task_deadline.state %>
+  </p>
+
+  <p>
+    <strong>Note:</strong>
+    <%= @task_deadline.note %>
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+    <%= @task_deadline.status %>
+  </p>
+
+  <p>
+    <strong>Date 1:</strong>
+    <%= @task_deadline.date_s.strftime('%-m/%-d/%y') %>
+  </p>
+
+  <p>
+    <strong>Date 2:</strong>
+    <%= @task_deadline.date_f.strftime('%-m/%-d/%y') %>
+  </p>
+</div>
+
+
+<!-- <%= link_to 'Edit', edit_task_deadline_path(@task_deadline) %> | -->
+<!-- <%= link_to 'Back', task_deadlines_path %> -->

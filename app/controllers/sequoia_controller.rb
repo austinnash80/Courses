@@ -90,6 +90,7 @@ class SequoiaController < ApplicationController
     calendar
     empire_email_stats
     empire_course_creation
+    task_deadline
   end
 
 private
@@ -97,6 +98,10 @@ private
 # def test
 #   SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => '2018-09-25').where(:what => 'Ethics')
 # end
+
+def task_deadline
+  @task_deadlines = TaskDeadline.order(:date_s).all
+end
 
 def empire_course_creation
   @empire_courses = EmpireCourse.all
@@ -491,7 +496,7 @@ def postcard_schedule
     user_signed_in? && current_user.email == 'hamdo@sequoiacpe.com' ? @name = 'Hamdo' : ''
 
     @user_task = 'task.user_1'
-    
+
     url = request.path_info
     if url.include?('dash_hamdo')
       @dash_name = 'Hamdo'

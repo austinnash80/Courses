@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :task_deadlines
   resources :course_creation_tasks
   resources :empire_courses
   resources :course_creation_templetes

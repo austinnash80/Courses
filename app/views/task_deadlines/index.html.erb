@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Task Deadlines</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>State</th>
+      <th>Note</th>
+      <th>Status</th>
+      <th>Attention</th>
+      <th>Due</th>
+      <!-- <th>Extra s</th>
+      <th>Extra i</th>
+      <th>Extra b</th>
+      <th>Extra d</th> -->
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @task_deadlines.each do |task_deadline| %>
+      <tr>
+        <td><%= task_deadline.title %></td>
+        <td><%= task_deadline.state %></td>
+        <td><%= task_deadline.note %></td>
+        <td><%= task_deadline.status %></td>
+        <td><%= task_deadline.date_s.strftime('%-m/%-d/%y') %></td>
+        <td><%= task_deadline.date_f.strftime('%-m/%-d/%y')  %></td>
+        <!-- <td><%= task_deadline.extra_s %></td>
+        <td><%= task_deadline.extra_i %></td>
+        <td><%= task_deadline.extra_b %></td>
+        <td><%= task_deadline.extra_d %></td> -->
+        <td><%= link_to 'Show', task_deadline %></td>
+        <td><%= link_to 'Edit', edit_task_deadline_path(task_deadline) %></td>
+        <td><%= link_to 'Destroy', task_deadline, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Task Deadline', new_task_deadline_path %>
