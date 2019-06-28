@@ -6,6 +6,8 @@
   <div class="text-center">
     <%= link_to 'Edit Task', edit_task_deadline_path(@task_deadline), class: 'btn btn-primary' %>
     <%= link_to 'Task Index', task_deadlines_path, class: 'btn btn-primary' %>
+    <%= link_to 'Remove', task_deadline_path, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
+
   </br></br>
   </div>
 </div>
