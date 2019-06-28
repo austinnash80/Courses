@@ -9,57 +9,31 @@
     </div>
   </div>
 </br>
+<% all_tasks = [] %>
 
-<% @present = [] %>
-<table class="table table-striped table-bordered">
-  <caption>You have assigned tasks in progress for</caption>
+<table class="table table-stripped">
   <thead>
     <tr>
-      <!-- <th>Course</th> -->
+      <th>Title</th>
+      <th>Templete</th>
+      <th>Assigned</th>
+      <th>Completed</th>
+      <!-- <th>Status</th> -->
     </tr>
   </thead>
-
   <tbody>
-    <% @course_creation_tasks.each do |course_creation_task| %>
-      <% if course_creation_task.assign_1 == @dash_name || course_creation_task.assign_2 == @dash_name || course_creation_task.assign_3 == @dash_name %>
-        <% unless course_creation_task.extra_s == 'Complete' %>
-        <% unless @present.include? course_creation_task.empire_course.title %>
-          <% @present.push(course_creation_task.empire_course.title) %>
-            <tr>
-              <td><%= link_to course_creation_task.empire_course.title, empire_course_path(:id => course_creation_task.empire_course.id) %></td>
-            </tr>
+    <% @empire_courses.each do |empire_course| %>
+      <tr>
+        <td><%= link_to empire_course.title, empire_course %></td>
+        <td><%= empire_course.extra_s %></td>
+        <td><%= CourseCreationTask.where(:empire_course_id => empire_course.id).count %> / <%= CourseCreationTemplete.where(:extra_s => empire_course.extra_s ).count %></td>
+        <!-- <td><%= CourseCreationTask.order(:extra_i).where(:empire_course_id => empire_course.id).where(:extra_s => 'Complete').count %></td> -->
+          <% if CourseCreationTask.order(:extra_i).where(:empire_course_id => empire_course.id).where(:extra_s => 'Complete').count == CourseCreationTemplete.where(:extra_s => empire_course.extra_s ).count %>
+            <td class=""> <%= CourseCreationTask.order(:extra_i).where(:empire_course_id => empire_course.id).where(:extra_s => 'Complete').count %> / <%= CourseCreationTemplete.where(:extra_s => empire_course.extra_s ).count %> <span class="glyphicon glyphicon-ok green 2x"</span></td>
+          <% else %>
+            <td><%= CourseCreationTask.order(:extra_i).where(:empire_course_id => empire_course.id).where(:extra_s => 'Complete').count %> / <%= CourseCreationTemplete.where(:extra_s => empire_course.extra_s ).count %></td>
           <% end %>
-          <% end %>
-      <% end %>
+      </tr>
     <% end %>
   </tbody>
 </table>
-
-<!-- <table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th colspan="2" class="text-center">Courses</th>
-      <th colspan="2" class="text-center">Tasks</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>In-progess</th>
-      <td><%= @course_ip.count %></td>
-      <th>Not Taken</th>
-      <td><%= @task_t.count - (@task_ip.count + @task_c.count) %></td>
-    </tr>
-    <tr>
-      <th>Complete</th>
-      <td><%= @course_c.count %></td>
-      <th>In-Progress</th>
-      <td><%= @task_ip.count %></td>
-    </tr>
-    <tr>
-      <th></th>
-      <td></td>
-      <th>Complete</th>
-      <td><%= @task_c.count %></td>
-    </tr>
-  </tbody>
-</table> -->

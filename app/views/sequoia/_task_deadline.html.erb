@@ -9,7 +9,6 @@
   </div>
 </br>
 
-
 <table class="table">
   <thead>
     <tr>
@@ -22,7 +21,7 @@
   </thead>
 
   <tbody>
-    <% @task_deadlines.each do |task_deadline| %>
+    <% @task_deadlines.where('date_s < ?', (Date.today + 31)).each do |task_deadline| %>
       <tr>
         <td><%= link_to task_deadline.title, task_deadline %></td>
         <td><%= task_deadline.state %></td>
@@ -32,7 +31,7 @@
           <% else %>
             <td><%= task_deadline.date_s.strftime('%-m/%-d/%y') %></td>
           <% end %>
-          <% if Time.now > (task_deadline.date_f - 1.day) %>
+          <% if Time.now > (task_deadline.date_f - 7.day) %>
             <td class="red"><strong><%= task_deadline.date_f.strftime('%-m/%-d/%y') %></strong></td>
           <% else %>
             <td><%= task_deadline.date_f.strftime('%-m/%-d/%y') %></td>
