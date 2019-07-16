@@ -1,0 +1,10 @@
+<h1 class="text-center">Editing Day Sales</h1>
+
+<h2 class="text-center"><%= @sale.day.strftime('%a, %-m/%-d/%Y') %></h2>
+</br>
+<div class="well well-white col-lg-6 col-lg-offset-3">
+  <%= render 'form', sale: @sale %>
+</br>
+  <%= link_to 'Show', @sale %> |
+  <%= link_to 'Back', sales_path %>
+</div>

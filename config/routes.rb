@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :sales do
+    collection {post :import}
+  end 
   resources :task_deadlines
   resources :course_creation_tasks
   resources :empire_courses

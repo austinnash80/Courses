@@ -5,7 +5,7 @@
     <h1 class="off-white text-center">Austin Dashboard</h1>
     <h3 class="off-white text-center"><%= Date.today.strftime('%A %-b %-d, %Y') %></h3>
 
-</br>    
+</br>
 
 
 <!-- <a target="_blank" href="https://www.sequoiacpe.com/user/192/orders"> Link </a> -->
@@ -76,9 +76,9 @@
 <!-- ** START RIGHT COLUMN ** -->
   <div class="col-lg-4">
     <!-- * start R1 * -->
-      <!-- <div class="well">
-          <%#= render(:partial => 'sales_day') %>
-      </div> -->
+      <div class="well">
+          <%= render(:partial => 'enter_sales') %>
+      </div>
     <!-- * start R2 -->
       <div class="well">
         <ul class="nav nav-tabs">

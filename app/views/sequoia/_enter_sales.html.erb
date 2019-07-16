@@ -1,0 +1,11 @@
+<h3 class="text-center">Enter Sales</h3>
+
+<div class="text-center">
+  <a target="_blank" href="https://www.sequoiacpe.com/admin/customer-report-2">Sequoia</a> |
+  <a target="_blank" href="https://www.empirelearning.com/admin/customer-report">Empire</a> |
+  <a target="_blank" href="https://www.pacificcpe.com/purchases">Pacific</a>
+</div>
+
+    <% @enter_sales.each do |sale| %>
+      <%= link_to sale.day.strftime('%a, %-m/%-d/%y'), edit_sale_path(sale), class: 'btn btn-info' %>
+    <% end %>

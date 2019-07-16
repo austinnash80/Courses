@@ -64,6 +64,7 @@ class SequoiaController < ApplicationController
     live_chat_answer
     calendar
     empire_email_stats
+    enter_sales
   end
 
   def dash_kyle
@@ -98,6 +99,12 @@ private
 # def test
 #   SequoiaCustomer.where(:who => 'CPA').where(:purchase_date => '2018-09-25').where(:what => 'Ethics')
 # end
+
+def enter_sales
+  # @enter_sales = Sale.where(:sequoia => nil OR :empire => nil OR :pacific => nil).where('day < ?', Date.today).all
+  # @enter_sales = Sale.where('sequoia = ?' OR 'empire = ?' OR 'pacific = ?', nil,nil,nil).where('day < ?', Date.today).all
+  @enter_sales = Sale.where(:sequoia => nil).or(Sale.where(:empire => nil)).or(Sale.where(:pacific => nil)).where('day < ?', Date.today).all
+end
 
 def task_deadline
   @task_deadlines = TaskDeadline.order(:date_s).all
