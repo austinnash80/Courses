@@ -5,6 +5,7 @@
   <a target="_blank" href="https://www.empirelearning.com/admin/customer-report">Empire</a> |
   <a target="_blank" href="https://www.pacificcpe.com/purchases">Pacific</a>
 </div>
+<p class="text-center"><%= link_to 'Index', sales_path %></p>
 
     <% @enter_sales.each do |sale| %>
       <%= link_to sale.day.strftime('%a, %-m/%-d/%y'), edit_sale_path(sale), class: 'btn btn-info' %>
