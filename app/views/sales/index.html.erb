@@ -100,8 +100,6 @@
 
   <div id="weekly" class="tab-pane fade in <%= @weekly %>">
 
-    <%= @tue %>
-
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
@@ -125,7 +123,7 @@
       </tr>
       <tr>
         <td>Tuesday</td>
-        <% @tue.each do |i| %>
+        <% @tue.first(10).each do |i| %>
           <td><%= number_to_currency(i) %></td>
         <% end %>
       </tr>
@@ -161,8 +159,16 @@
       </tr>
       <tr>
         <td><strong>Total</strong></td>
-        <td><strong><%= number_to_currency(@sales_seq.select { |x| @sales_seq.index(x) < 7}.sum) %></strong></td>
-        <td><strong><%= number_to_currency(@sales_seq.select { |x| @sales_seq.index(x) > 6 && @sales_seq.index(x) < 14 }.sum) %></strong></td>
+        <td><strong><%= number_to_currency(@mon[0] + @tue[0] + @wed[0] + @thu[0] + @fri[0] + @sat[0] + @sun[0]) %></strong></td>
+        <td><strong><%= number_to_currency(@mon[1] + @tue[1] + @wed[1] + @thu[1] + @fri[1] + @sat[1] + @sun[1]) %></strong></td>
+        <td><strong><%= number_to_currency(@mon[2] + @tue[2] + @wed[2] + @thu[2] + @fri[2] + @sat[2] + @sun[2]) %></strong></td>
+        <td><strong><%= number_to_currency(@mon[3] + @tue[3] + @wed[3] + @thu[3] + @fri[3] + @sat[3] + @sun[3]) %></strong></td>
+        <td><strong><%= number_to_currency(@mon[4] + @tue[4] + @wed[4] + @thu[4] + @fri[4] + @sat[4] + @sun[4]) %></strong></td>
+        <td><strong><%= number_to_currency(@mon[5] + @tue[5] + @wed[5] + @thu[5] + @fri[5] + @sat[5] + @sun[5]) %></strong></td>
+        <td><strong><%= number_to_currency(@mon[6] + @tue[6] + @wed[6] + @thu[6] + @fri[6] + @sat[6] + @sun[6]) %></strong></td>
+        <td><strong><%= number_to_currency(@mon[7] + @tue[7] + @wed[7] + @thu[7] + @fri[7] + @sat[7] + @sun[7]) %></strong></td>
+        <td><strong><%= number_to_currency(@mon[8] + @tue[8] + @wed[8] + @thu[8] + @fri[8] + @sat[8] + @sun[8]) %></strong></td>
+        <td><strong><%= number_to_currency(@mon[9] + @tue[9] + @wed[9] + @thu[9] + @fri[9] + @sat[9] + @sun[9]) %></strong></td>
       </tr>
     </table>
 

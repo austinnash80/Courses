@@ -13,16 +13,35 @@ class SalesController < ApplicationController
     @dates = Sale.where('day > ?', @week_b).where('day < ?', @week_e + 1.day).order('day ASC').pluck(:day)
 
 
-    @sales_seq = Sale.where('day > ?', @week_b).where('day < ?', @week_e + 1.day).order('day ASC').pluck(:sequoia)
+    @sales_seq = Sale.where('day > ?', @week_b).where('day < ?', @week_e + 1.day).order('day ASC').all
+    # @sales_seq = Sale.where('day > ?', @week_b).where('day < ?', @week_e + 1.day).order('day ASC').pluck(:sequoia)
+    @test = Sale.where('day > ?', @week_b).where('day < ?', @week_e + 1.day).order('day ASC').pluck(:day)
 
     #DAYS of the WEEK
-    @mon = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 7 == 0}
-    @tue = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 8 == 0}
-    @wed = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 9 == 0}
-    @thu = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 10 == 0}
-    @fri = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 11 == 0}
-    @sat = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 12 == 0}
-    @sun = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 13 == 0}
+    @mon = []
+    @tue = []
+    @wed = []
+    @thu = []
+    @fri = []
+    @sat = []
+    @sun = []
+    @sales_seq.each do |i|
+      i.day.wday == 1 ? @mon.push(i.sequoia) : ''
+      i.day.wday == 2 ? @tue.push(i.sequoia) : ''
+      i.day.wday == 3 ? @wed.push(i.sequoia) : ''
+      i.day.wday == 4 ? @thu.push(i.sequoia) : ''
+      i.day.wday == 5 ? @fri.push(i.sequoia) : ''
+      i.day.wday == 6 ? @sat.push(i.sequoia) : ''
+      i.day.wday == 0 ? @sun.push(i.sequoia) : ''
+    end
+    # @w = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 7 == 0}
+    # @tue = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 8 == 0}
+    # @tue_t = @test.select { |x| (@test.index(x) + 7) % 8 == 0}
+    # @wed = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 9 == 0}
+    # @thu = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 10 == 0}
+    # @fri = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 11 == 0}
+    # @sat = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 12 == 0}
+    # @sun = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 13 == 0}
 
     respond_to do |format|
       format.html
