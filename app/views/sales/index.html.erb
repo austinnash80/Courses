@@ -41,7 +41,7 @@
 
       <tbody>
         <% @sales_display.each do |sale| %>
-        <% unless sale.sequoia.blank? && sale.empire.blank? && sale.pacific.blank? %>
+        <% unless sale.sequoia == 0 && sale.empire == 0 && sale.pacific == 0 %>
           <tr>
             <td><%= link_to sale.day.strftime('%a, %-m/%-d/%y'), edit_sale_path(sale) %></td>
             <td><%= sale.sequoia.blank? ? 0 : number_to_currency(sale.sequoia) %></td>
@@ -74,7 +74,7 @@
 
       <tbody>
         <% @sales_enter.each do |sale| %>
-        <% if sale.sequoia.blank? && sale.empire.blank? && sale.pacific.blank? %>
+        <% if sale.sequoia == 0 && sale.empire == 0 && sale.pacific == 0 %>
           <tr>
             <td><%= link_to sale.day.strftime('%a, %-m/%-d/%y'), edit_sale_path(sale) %></td>
             <td><%= sale.sequoia.blank? ? 0 : number_to_currency(sale.sequoia) %></td>
