@@ -12,9 +12,9 @@
     <% end %>
 
   <!-- </br><%= @week_b %></br><%= @week_e %></br>  -->
-  <%= @sales_seq %>
+  <!-- <%= @sales_seq %> -->
 
-<table class="table table-boxed">
+<table class="table table-bordered table-striped">
   <thead>
     <th></th>
     <th colspan="2" class="text-center">Sequoia</th>
@@ -76,65 +76,6 @@
     <td><strong><%= number_to_currency(@sales_emp.select { |x| @sales_emp.index(x) < 7}.sum) %></strong></td>
     <td><strong><%= number_to_currency(@sales_emp.select { |x| @sales_emp.index(x) > 7}.sum) %></strong></td>
   </tr>
-  <!-- <tbody>
-    <% @sales.each do |sale| %>
-      <% if sale.day.wday == 0 %>
-      <tr>
-        <td>Sunday</td>
-        <td><%= number_to_currency(sale.sequoia) %></td>
-        <td><%= number_to_currency(sale.empire) %></td>
-        <td><%= number_to_currency(sale.pacific) %></td>
-      </tr>
-      <% end %>
-      <% if sale.day.wday == 6 %>
-      <tr>
-        <td>Saturday</td>
-        <td><%= number_to_currency(sale.sequoia) %></td>
-        <td><%= number_to_currency(sale.empire) %></td>
-        <td><%= number_to_currency(sale.pacific) %></td>
-      </tr>
-      <% end %>
-      <% if sale.day.wday == 5 %>
-      <tr>
-        <td>Friday</td>
-        <td><%= number_to_currency(sale.sequoia) %></td>
-        <td><%= number_to_currency(sale.empire) %></td>
-        <td><%= number_to_currency(sale.pacific) %></td>
-      </tr>
-      <% end %>
-      <% if sale.day.wday == 4 %>
-      <tr>
-        <td>Thursday</td>
-        <td><%= number_to_currency(sale.sequoia) %></td>
-        <td><%= number_to_currency(sale.empire) %></td>
-        <td><%= number_to_currency(sale.pacific) %></td>
-      </tr>
-      <% end %>
-      <% if sale.day.wday == 3 %>
-      <tr>
-        <td>Wednesday</td>
-        <td><%= number_to_currency(sale.sequoia) %></td>
-        <td><%= number_to_currency(sale.empire) %></td>
-        <td><%= number_to_currency(sale.pacific) %></td>
-      </tr>
-      <% end %>
-      <% if sale.day.wday == 2 %>
-      <tr>
-        <td>Tuesday</td>
-        <td><%= number_to_currency(sale.sequoia) %></td>
-        <td><%= number_to_currency(sale.empire) %></td>
-        <td><%= number_to_currency(sale.pacific) %></td>
-      </tr>
-      <% end %>
-
-    <% end %>
-    <tr>
-      <td><strong>Total</strong></td>
-      <td><%= number_to_currency(@sales.sum(:sequoia)) %></td>
-      <td><%= number_to_currency(@sales.sum(:empire)) %></td>
-      <td><%= number_to_currency(@sales.sum(:pacific)) %></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody> -->
 </table>
+
+<%= link_to 'More', sales_path(:weekly => 'yes'), class: 'btn btn-default' %>

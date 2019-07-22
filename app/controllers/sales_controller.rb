@@ -8,6 +8,22 @@ class SalesController < ApplicationController
     @sales_display = Sale.order('day DESC').all
     @sales_enter = Sale.order('day ASC').all
 
+    @week_b = Date.today.at_beginning_of_week - 64.day
+    @week_e = Date.today.at_end_of_week
+    @dates = Sale.where('day > ?', @week_b).where('day < ?', @week_e + 1.day).order('day ASC').pluck(:day)
+
+
+    @sales_seq = Sale.where('day > ?', @week_b).where('day < ?', @week_e + 1.day).order('day ASC').pluck(:sequoia)
+
+    #DAYS of the WEEK
+    @mon = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 7 == 0}
+    @tue = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 8 == 0}
+    @wed = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 9 == 0}
+    @thu = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 10 == 0}
+    @fri = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 11 == 0}
+    @sat = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 12 == 0}
+    @sun = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 13 == 0}
+
     respond_to do |format|
       format.html
       format.csv { send_data @sales.to_csv, filename: "sales-#{Date.today}.csv" }
