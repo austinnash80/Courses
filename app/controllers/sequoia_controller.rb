@@ -108,7 +108,7 @@ def enter_sales
   @enter_sales = Sale.where(:sequoia => nil).or(Sale.where(:empire => nil)).or(Sale.where(:pacific => nil)).where('day < ?', Date.today).all
   @sales = Sale.where('day > ?', @week_b - 8.days).where('day < ?', @week_e + 1.day).order('day DESC').all
   @sales_seq = Sale.where('day > ?', @week_b).where('day < ?', @week_e + 1.day).order('day ASC').pluck(:sequoia)
-  @sales_emp = Sale.where('day > ?', @week_b - 8.days).where('day < ?', @week_e + 1.day).order('day ASC').pliuck(:empire)
+  @sales_emp = Sale.where('day > ?', @week_b).where('day < ?', @week_e + 1.day).order('day ASC').pluck(:empire)
 
 
   # @sales = Sale.where.not(:sequoia => nil).or(Sale.where.not(:empire => nil)).or(Sale.where.not(:pacific => nil)).where('day > ?', Date.today - 7.days).all

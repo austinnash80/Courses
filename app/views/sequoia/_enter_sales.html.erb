@@ -11,7 +11,7 @@
       <%= link_to sale.day.strftime('%a, %-m/%-d/%y'), edit_sale_path(sale), class: 'btn btn-info' %>
     <% end %>
 
-  </br><%= @week_b %></br><%= @week_e %></br> <%= @sales_seq %>
+  <!-- </br><%= @week_b %></br><%= @week_e %></br> <%= @sales_seq %> -->
 
 <table class="table table-boxed">
   <thead>
@@ -23,50 +23,50 @@
     <td>Monday</td>
     <td><%= number_to_currency(@sales_seq[0]) %></td>
     <td><%= number_to_currency(@sales_seq[7]) %></td>
-    <td><%= number_to_currency(@empire_seq[0]) %></td>
-    <td><%= number_to_currency(@sales_seq[7]) %></td>
+    <td><%= number_to_currency(@sales_emp[0]) %></td>
+    <td><%= number_to_currency(@sales_emp[7]) %></td>
   </tr>
   <tr>
     <td>Tuesday</td>
     <td><%= number_to_currency(@sales_seq[1]) %></td>
     <td><%= number_to_currency(@sales_seq[8]) %></td>
-    <td><%= number_to_currency(@empire_seq[1]) %></td>
-    <td><%= number_to_currency(@empire_seq[8]) %></td>
+    <td><%= number_to_currency(@sales_emp[1]) %></td>
+    <td><%= number_to_currency(@sales_emp[8]) %></td>
   </tr>
   <tr>
     <td>Wednesday</td>
     <td><%= number_to_currency(@sales_seq[2]) %></td>
     <td><%= number_to_currency(@sales_seq[9]) %></td>
-    <td><%= number_to_currency(@empire_seq[2]) %></td>
-    <td><%= number_to_currency(@empire_seq[9]) %></td>
+    <td><%= number_to_currency(@sales_emp[2]) %></td>
+    <td><%= number_to_currency(@sales_emp[9]) %></td>
   </tr>
   <tr>
     <td>Thursday</td>
     <td><%= number_to_currency(@sales_seq[3]) %></td>
     <td><%= number_to_currency(@sales_seq[10]) %></td>
-    <td><%= number_to_currency(@empire_seq[3]) %></td>
-    <td><%= number_to_currency(@empire_seq[10]) %></td>
+    <td><%= number_to_currency(@sales_emp[3]) %></td>
+    <td><%= number_to_currency(@sales_emp[10]) %></td>
   </tr>
   <tr>
     <td>Friday</td>
     <td><%= number_to_currency(@sales_seq[4]) %></td>
     <td><%= number_to_currency(@sales_seq[11]) %></td>
-    <td><%= number_to_currency(@empire_seq[4]) %></td>
-    <td><%= number_to_currency(@empire_seq[11]) %></td>
+    <td><%= number_to_currency(@sales_emp[4]) %></td>
+    <td><%= number_to_currency(@sales_emp[11]) %></td>
   </tr>
   <tr>
     <td>Saturday</td>
     <td><%= number_to_currency(@sales_seq[5]) %></td>
     <td><%= number_to_currency(@sales_seq[12]) %></td>
-    <td><%= number_to_currency(@empire_seq[5]) %></td>
-    <td><%= number_to_currency(@empire_seq[12]) %></td>
+    <td><%= number_to_currency(@sales_emp[5]) %></td>
+    <td><%= number_to_currency(@sales_emp[12]) %></td>
   </tr>
   <tr>
     <td>Sunday</td>
     <td><%= number_to_currency(@sales_seq[6]) %></td>
     <td><%= number_to_currency(@sales_seq[13]) %></td>
-    <td><%= number_to_currency(@empire_seq[6]) %></td>
-    <td><%= number_to_currency(@empire_seq[13]) %></td>
+    <td><%= number_to_currency(@sales_emp[6]) %></td>
+    <td><%= number_to_currency(@sales_emp[13]) %></td>
   </tr>
   <tr>
     <td>Total</td>
