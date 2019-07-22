@@ -104,6 +104,10 @@ def enter_sales
   # @enter_sales = Sale.where(:sequoia => nil OR :empire => nil OR :pacific => nil).where('day < ?', Date.today).all
   # @enter_sales = Sale.where('sequoia = ?' OR 'empire = ?' OR 'pacific = ?', nil,nil,nil).where('day < ?', Date.today).all
   @enter_sales = Sale.where(:sequoia => nil).or(Sale.where(:empire => nil)).or(Sale.where(:pacific => nil)).where('day < ?', Date.today).all
+  @sales = Sale.where('day > ?', 8.days.ago).where('day < ?', Date.today).order('day DESC').all
+
+
+  # @sales = Sale.where.not(:sequoia => nil).or(Sale.where.not(:empire => nil)).or(Sale.where.not(:pacific => nil)).where('day > ?', Date.today - 7.days).all
 end
 
 def task_deadline

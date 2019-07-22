@@ -10,3 +10,78 @@
     <% @enter_sales.each do |sale| %>
       <%= link_to sale.day.strftime('%a, %-m/%-d/%y'), edit_sale_path(sale), class: 'btn btn-info' %>
     <% end %>
+
+<table class="table table-boxed">
+  <thead>
+    <th></th>
+    <th>Sequoia</th>
+    <th>Empire</th>
+    <th>Pacific</th>
+  </thead>
+  <tbody>
+    <% @sales.each do |sale| %>
+      <% if sale.day.wday == 1 %>
+      <tr>
+        <td><strong>Monday</strong></td>
+        <td><%= number_to_currency(sale.sequoia) %></td>
+        <td><%= number_to_currency(sale.empire) %></td>
+        <td><%= number_to_currency(sale.pacific) %></td>
+      </tr>
+      <% end %>
+      <% if sale.day.wday == 2 %>
+      <tr>
+        <td><strong>Tuesday</strong></td>
+        <td><%= number_to_currency(sale.sequoia) %></td>
+        <td><%= number_to_currency(sale.empire) %></td>
+        <td><%= number_to_currency(sale.pacific) %></td>
+      </tr>
+      <% end %>
+      <% if sale.day.wday == 3 %>
+      <tr>
+        <td><strong>Wednesday</strong></td>
+        <td><%= number_to_currency(sale.sequoia) %></td>
+        <td><%= number_to_currency(sale.empire) %></td>
+        <td><%= number_to_currency(sale.pacific) %></td>
+      </tr>
+      <% end %>
+      <% if sale.day.wday == 4 %>
+      <tr>
+        <td><strong>Thrusday</strong></td>
+        <td><%= number_to_currency(sale.sequoia) %></td>
+        <td><%= number_to_currency(sale.empire) %></td>
+        <td><%= number_to_currency(sale.pacific) %></td>
+      </tr>
+      <% end %>
+      <% if sale.day.wday == 5 %>
+      <tr>
+        <td><strong>Friday</strong></td>
+        <td><%= number_to_currency(sale.sequoia) %></td>
+        <td><%= number_to_currency(sale.empire) %></td>
+        <td><%= number_to_currency(sale.pacific) %></td>
+      </tr>
+      <% end %>
+      <% if sale.day.wday == 6 %>
+      <tr>
+        <td><strong>Saturday</strong></td>
+        <td><%= number_to_currency(sale.sequoia) %></td>
+        <td><%= number_to_currency(sale.empire) %></td>
+        <td><%= number_to_currency(sale.pacific) %></td>
+      </tr>
+      <% end %>
+      <% if sale.day.wday == 0 %>
+      <tr>
+        <td><strong>Sunday</strong></td>
+        <td><%= number_to_currency(sale.sequoia) %></td>
+        <td><%= number_to_currency(sale.empire) %></td>
+        <td><%= number_to_currency(sale.pacific) %></td>
+      </tr>
+      <% end %>
+    <% end %>
+    <tr>
+      <td><strong>Total</strong></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
