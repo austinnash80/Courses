@@ -101,12 +101,14 @@ private
 # end
 
 def enter_sales
-  @week_b = Date.today.at_beginning_of_week
+  @week_b = Date.today.at_beginning_of_week - 8.day
   @week_e = Date.today.at_end_of_week
   # @enter_sales = Sale.where(:sequoia => nil OR :empire => nil OR :pacific => nil).where('day < ?', Date.today).all
   # @enter_sales = Sale.where('sequoia = ?' OR 'empire = ?' OR 'pacific = ?', nil,nil,nil).where('day < ?', Date.today).all
   @enter_sales = Sale.where(:sequoia => nil).or(Sale.where(:empire => nil)).or(Sale.where(:pacific => nil)).where('day < ?', Date.today).all
-  @sales = Sale.where('day > ?', @week_b - 1.days).where('day < ?', @week_e + 1.day).order('day DESC').all
+  @sales = Sale.where('day > ?', @week_b - 8.days).where('day < ?', @week_e + 1.day).order('day DESC').all
+  @sales_seq = Sale.where('day > ?', @week_b).where('day < ?', @week_e + 1.day).order('day ASC').pluck(:sequoia)
+  @sales_emp = Sale.where('day > ?', @week_b - 8.days).where('day < ?', @week_e + 1.day).order('day ASC').pliuck(:empire)
 
 
   # @sales = Sale.where.not(:sequoia => nil).or(Sale.where.not(:empire => nil)).or(Sale.where.not(:pacific => nil)).where('day > ?', Date.today - 7.days).all

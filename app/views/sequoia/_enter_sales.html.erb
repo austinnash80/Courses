@@ -11,20 +11,71 @@
       <%= link_to sale.day.strftime('%a, %-m/%-d/%y'), edit_sale_path(sale), class: 'btn btn-info' %>
     <% end %>
 
-  </br><%= @week_b %></br><%= @week_e %>
+  </br><%= @week_b %></br><%= @week_e %></br> <%= @sales_seq %>
 
 <table class="table table-boxed">
   <thead>
     <th></th>
-    <th>Sequoia</th>
-    <th>Empire</th>
-    <th>Pacific</th>
+    <th colspan="2" class="text-center">Sequoia</th>
+    <th colspan="2" class="text-center">Empire</th>
   </thead>
-  <tbody>
+  <tr>
+    <td>Monday</td>
+    <td><%= number_to_currency(@sales_seq[0]) %></td>
+    <td><%= number_to_currency(@sales_seq[7]) %></td>
+    <td><%= number_to_currency(@empire_seq[0]) %></td>
+    <td><%= number_to_currency(@sales_seq[7]) %></td>
+  </tr>
+  <tr>
+    <td>Tuesday</td>
+    <td><%= number_to_currency(@sales_seq[1]) %></td>
+    <td><%= number_to_currency(@sales_seq[8]) %></td>
+    <td><%= number_to_currency(@empire_seq[1]) %></td>
+    <td><%= number_to_currency(@empire_seq[8]) %></td>
+  </tr>
+  <tr>
+    <td>Wednesday</td>
+    <td><%= number_to_currency(@sales_seq[2]) %></td>
+    <td><%= number_to_currency(@sales_seq[9]) %></td>
+    <td><%= number_to_currency(@empire_seq[2]) %></td>
+    <td><%= number_to_currency(@empire_seq[9]) %></td>
+  </tr>
+  <tr>
+    <td>Thursday</td>
+    <td><%= number_to_currency(@sales_seq[3]) %></td>
+    <td><%= number_to_currency(@sales_seq[10]) %></td>
+    <td><%= number_to_currency(@empire_seq[3]) %></td>
+    <td><%= number_to_currency(@empire_seq[10]) %></td>
+  </tr>
+  <tr>
+    <td>Friday</td>
+    <td><%= number_to_currency(@sales_seq[4]) %></td>
+    <td><%= number_to_currency(@sales_seq[11]) %></td>
+    <td><%= number_to_currency(@empire_seq[4]) %></td>
+    <td><%= number_to_currency(@empire_seq[11]) %></td>
+  </tr>
+  <tr>
+    <td>Saturday</td>
+    <td><%= number_to_currency(@sales_seq[5]) %></td>
+    <td><%= number_to_currency(@sales_seq[12]) %></td>
+    <td><%= number_to_currency(@empire_seq[5]) %></td>
+    <td><%= number_to_currency(@empire_seq[12]) %></td>
+  </tr>
+  <tr>
+    <td>Sunday</td>
+    <td><%= number_to_currency(@sales_seq[6]) %></td>
+    <td><%= number_to_currency(@sales_seq[13]) %></td>
+    <td><%= number_to_currency(@empire_seq[6]) %></td>
+    <td><%= number_to_currency(@empire_seq[13]) %></td>
+  </tr>
+  <tr>
+    <td>Total</td>
+  </tr>
+  <!-- <tbody>
     <% @sales.each do |sale| %>
       <% if sale.day.wday == 0 %>
       <tr>
-        <td>Monday</td>
+        <td>Sunday</td>
         <td><%= number_to_currency(sale.sequoia) %></td>
         <td><%= number_to_currency(sale.empire) %></td>
         <td><%= number_to_currency(sale.pacific) %></td>
@@ -32,7 +83,7 @@
       <% end %>
       <% if sale.day.wday == 6 %>
       <tr>
-        <td>Tuesday</td>
+        <td>Saturday</td>
         <td><%= number_to_currency(sale.sequoia) %></td>
         <td><%= number_to_currency(sale.empire) %></td>
         <td><%= number_to_currency(sale.pacific) %></td>
@@ -40,7 +91,7 @@
       <% end %>
       <% if sale.day.wday == 5 %>
       <tr>
-        <td>Wednesday</td>
+        <td>Friday</td>
         <td><%= number_to_currency(sale.sequoia) %></td>
         <td><%= number_to_currency(sale.empire) %></td>
         <td><%= number_to_currency(sale.pacific) %></td>
@@ -56,7 +107,7 @@
       <% end %>
       <% if sale.day.wday == 3 %>
       <tr>
-        <td>Friday</td>
+        <td>Wednesday</td>
         <td><%= number_to_currency(sale.sequoia) %></td>
         <td><%= number_to_currency(sale.empire) %></td>
         <td><%= number_to_currency(sale.pacific) %></td>
@@ -64,20 +115,13 @@
       <% end %>
       <% if sale.day.wday == 2 %>
       <tr>
-        <td>Saturday</td>
+        <td>Tuesday</td>
         <td><%= number_to_currency(sale.sequoia) %></td>
         <td><%= number_to_currency(sale.empire) %></td>
         <td><%= number_to_currency(sale.pacific) %></td>
       </tr>
       <% end %>
-      <% if sale.day.wday == 1 %>
-      <tr>
-        <td>Sunday</td>
-        <td><%= number_to_currency(sale.sequoia) %></td>
-        <td><%= number_to_currency(sale.empire) %></td>
-        <td><%= number_to_currency(sale.pacific) %></td>
-      </tr>
-      <% end %>
+
     <% end %>
     <tr>
       <td><strong>Total</strong></td>
@@ -87,5 +131,5 @@
       <td></td>
       <td></td>
     </tr>
-  </tbody>
+  </tbody> -->
 </table>
