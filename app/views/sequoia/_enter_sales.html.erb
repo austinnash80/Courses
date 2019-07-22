@@ -20,41 +20,9 @@
   </thead>
   <tbody>
     <% @sales.each do |sale| %>
-      <% if sale.day.wday == 1 %>
+      <% if sale.day.wday == 0 %>
       <tr>
-        <td><strong>Monday</strong></td>
-        <td><%= number_to_currency(sale.sequoia) %></td>
-        <td><%= number_to_currency(sale.empire) %></td>
-        <td><%= number_to_currency(sale.pacific) %></td>
-      </tr>
-      <% end %>
-      <% if sale.day.wday == 2 %>
-      <tr>
-        <td><strong>Tuesday</strong></td>
-        <td><%= number_to_currency(sale.sequoia) %></td>
-        <td><%= number_to_currency(sale.empire) %></td>
-        <td><%= number_to_currency(sale.pacific) %></td>
-      </tr>
-      <% end %>
-      <% if sale.day.wday == 3 %>
-      <tr>
-        <td><strong>Wednesday</strong></td>
-        <td><%= number_to_currency(sale.sequoia) %></td>
-        <td><%= number_to_currency(sale.empire) %></td>
-        <td><%= number_to_currency(sale.pacific) %></td>
-      </tr>
-      <% end %>
-      <% if sale.day.wday == 4 %>
-      <tr>
-        <td><strong>Thrusday</strong></td>
-        <td><%= number_to_currency(sale.sequoia) %></td>
-        <td><%= number_to_currency(sale.empire) %></td>
-        <td><%= number_to_currency(sale.pacific) %></td>
-      </tr>
-      <% end %>
-      <% if sale.day.wday == 5 %>
-      <tr>
-        <td><strong>Friday</strong></td>
+        <td>Monday</td>
         <td><%= number_to_currency(sale.sequoia) %></td>
         <td><%= number_to_currency(sale.empire) %></td>
         <td><%= number_to_currency(sale.pacific) %></td>
@@ -62,15 +30,47 @@
       <% end %>
       <% if sale.day.wday == 6 %>
       <tr>
-        <td><strong>Saturday</strong></td>
+        <td>Tuesday</td>
         <td><%= number_to_currency(sale.sequoia) %></td>
         <td><%= number_to_currency(sale.empire) %></td>
         <td><%= number_to_currency(sale.pacific) %></td>
       </tr>
       <% end %>
-      <% if sale.day.wday == 0 %>
+      <% if sale.day.wday == 5 %>
       <tr>
-        <td><strong>Sunday</strong></td>
+        <td>Wednesday</td>
+        <td><%= number_to_currency(sale.sequoia) %></td>
+        <td><%= number_to_currency(sale.empire) %></td>
+        <td><%= number_to_currency(sale.pacific) %></td>
+      </tr>
+      <% end %>
+      <% if sale.day.wday == 4 %>
+      <tr>
+        <td>Thursday</td>
+        <td><%= number_to_currency(sale.sequoia) %></td>
+        <td><%= number_to_currency(sale.empire) %></td>
+        <td><%= number_to_currency(sale.pacific) %></td>
+      </tr>
+      <% end %>
+      <% if sale.day.wday == 3 %>
+      <tr>
+        <td>Friday</td>
+        <td><%= number_to_currency(sale.sequoia) %></td>
+        <td><%= number_to_currency(sale.empire) %></td>
+        <td><%= number_to_currency(sale.pacific) %></td>
+      </tr>
+      <% end %>
+      <% if sale.day.wday == 2 %>
+      <tr>
+        <td>Saturday</td>
+        <td><%= number_to_currency(sale.sequoia) %></td>
+        <td><%= number_to_currency(sale.empire) %></td>
+        <td><%= number_to_currency(sale.pacific) %></td>
+      </tr>
+      <% end %>
+      <% if sale.day.wday == 1 %>
+      <tr>
+        <td>Sunday</td>
         <td><%= number_to_currency(sale.sequoia) %></td>
         <td><%= number_to_currency(sale.empire) %></td>
         <td><%= number_to_currency(sale.pacific) %></td>
