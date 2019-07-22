@@ -11,6 +11,8 @@
       <%= link_to sale.day.strftime('%a, %-m/%-d/%y'), edit_sale_path(sale), class: 'btn btn-info' %>
     <% end %>
 
+  </br><%= @week_b %></br><%= @week_e %>
+
 <table class="table table-boxed">
   <thead>
     <th></th>
@@ -79,7 +81,9 @@
     <% end %>
     <tr>
       <td><strong>Total</strong></td>
-      <td></td>
+      <td><%= number_to_currency(@sales.sum(:sequoia)) %></td>
+      <td><%= number_to_currency(@sales.sum(:empire)) %></td>
+      <td><%= number_to_currency(@sales.sum(:pacific)) %></td>
       <td></td>
       <td></td>
     </tr>
