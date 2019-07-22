@@ -71,10 +71,10 @@
   </tr>
   <tr>
     <td><strong>Total</strong></td>
-    <td><strong><%= number_to_currency(@sales_seq.select { |x| (@sales_seq.index(x) + 1) % 2 == 1}.sum) %></strong></td>
-    <td><strong><%= number_to_currency(@sales_seq.select { |x| (@sales_seq.index(x) + 1) % 2 == 0}.sum) %></strong></td>
-    <td><strong><%= number_to_currency(@sales_emp.select { |x| (@sales_emp.index(x) + 1) % 2 == 1}.sum) %></strong></td>
-    <td><strong><%= number_to_currency(@sales_emp.select { |x| (@sales_emp.index(x) + 1) % 2 == 0}.sum) %></strong></td>
+    <td><strong><%= number_to_currency(@sales_seq.select { |x| @sales_seq.index(x) < 7}.sum) %></strong></td>
+    <td><strong><%= number_to_currency(@sales_seq.select { |x| @sales_seq.index(x) > 6}.sum) %></strong></td>
+    <td><strong><%= number_to_currency(@sales_emp.select { |x| @sales_emp.index(x) < 7}.sum) %></strong></td>
+    <td><strong><%= number_to_currency(@sales_emp.select { |x| @sales_emp.index(x) > 7}.sum) %></strong></td>
   </tr>
   <!-- <tbody>
     <% @sales.each do |sale| %>
