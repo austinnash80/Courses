@@ -11,7 +11,7 @@ class EmpireCoursesController < ApplicationController
   # GET /empire_courses/1
   # GET /empire_courses/1.json
   def show
-    @course_creation_tasks = CourseCreationTask.order(:course_creation_templete_id).all
+    @course_creation_tasks = CourseCreationTask.order(:extra_i).all
     @course_creation_templetes = CourseCreationTemplete.order(:extra_i).all
     # @course_creation_templetes = CourseCreationTemplete.where(@empire_course.extra_s => :extra_s).order(:id).all
 
