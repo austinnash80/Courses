@@ -12,6 +12,9 @@ class EmpireCoursesController < ApplicationController
   # GET /empire_courses/1.json
   def show
     @course_creation_tasks = CourseCreationTask.order(:extra_i).all
+    @course_creation_tasks_ip = CourseCreationTask.includes(:course_creation_templete).order('course_creation_templetes.extra_i ASC').all
+    @course_creation_tasks_c = CourseCreationTask.includes(:course_creation_templete).order('course_creation_templetes.extra_i ASC').all
+    # User.joins(:user_extension).merge(UserExtension.order(company: :desc))
     @course_creation_templetes = CourseCreationTemplete.order(:extra_i).all
     # @course_creation_templetes = CourseCreationTemplete.where(@empire_course.extra_s => :extra_s).order(:id).all
 

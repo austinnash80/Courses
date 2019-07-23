@@ -9,7 +9,7 @@
     <!-- <th></th> -->
   </thead>
   <tbody>
-    <% @course_creation_tasks.each do |course_creation_task| %>
+    <% @course_creation_tasks_c.each do |course_creation_task| %>
     <% if course_creation_task.empire_course_id == @empire_course.id && course_creation_task.extra_s == 'Complete' %>
     <tr>
       <td class="text-center"><%= course_creation_task.course_creation_templete.extra_i %></td>
