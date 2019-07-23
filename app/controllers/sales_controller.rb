@@ -8,7 +8,7 @@ class SalesController < ApplicationController
     @sales_display = Sale.order('day DESC').all
     @sales_enter = Sale.order('day ASC').all
 
-    @week_b = Date.today.at_beginning_of_week - 64.day
+    @week_b = Date.today.at_beginning_of_week - 64.days
     @week_e = Date.today.at_end_of_week
     @dates = Sale.where('day > ?', @week_b).where('day < ?', @week_e + 1.day).order('day ASC').pluck(:day)
 

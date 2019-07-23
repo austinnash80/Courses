@@ -10,7 +10,7 @@
     <% @enter_sales.each do |sale| %>
       <%= link_to sale.day.strftime('%a, %-m/%-d/%y'), edit_sale_path(sale), class: 'btn btn-info' %>
     <% end %>
-
+</br></br>
   <!-- </br><%= @week_b %></br><%= @week_e %></br>  -->
   <!-- <%= @sales_seq %> -->
 
@@ -74,7 +74,7 @@
     <td><strong><%= number_to_currency(@sales_seq.select { |x| @sales_seq.index(x) < 7}.sum) %></strong></td>
     <td><strong><%= number_to_currency(@sales_seq.select { |x| @sales_seq.index(x) > 6}.sum) %></strong></td>
     <td><strong><%= number_to_currency(@sales_emp.select { |x| @sales_emp.index(x) < 7}.sum) %></strong></td>
-    <td><strong><%= number_to_currency(@sales_emp.select { |x| @sales_emp.index(x) > 7}.sum) %></strong></td>
+    <td><strong><%= number_to_currency(@sales_emp.select { |x| @sales_emp.index(x) > 6}.sum) %></strong></td>
   </tr>
 </table>
 
