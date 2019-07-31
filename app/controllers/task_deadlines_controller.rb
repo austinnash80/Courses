@@ -70,6 +70,6 @@ class TaskDeadlinesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_deadline_params
-      params.require(:task_deadline).permit(:title, :state, :note, :status, :date_s, :date_f, :extra_s, :extra_i, :extra_b, :extra_d)
+      params.require(:task_deadline).permit(:title, :state, :note, :status, :date_s, :date_f, :extra_s, :extra_i, :extra_b, :extra_d, :cost, :time)
     end
 end

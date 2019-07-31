@@ -34,13 +34,25 @@
   </p>
 
   <p>
-    <strong>Date 1:</strong>
+    <strong>Attention:</strong>
     <%= @task_deadline.date_s.strftime('%-m/%-d/%y') %>
   </p>
 
   <p>
-    <strong>Date 2:</strong>
+    <strong>Submit:</strong>
     <%= @task_deadline.date_f.strftime('%-m/%-d/%y') %>
+  </p>
+  <p>
+    <strong>Due:</strong>
+    <%= @task_deadline.extra_d.blank? ? '' : @task_deadline.extra_d.strftime('%-m/%-d/%y') %>
+  </p>
+  <p>
+    <strong>Cost:</strong>
+    <%= @task_deadline.cost.blank? ? '' : number_to_currency(@task_deadline.cost) %>
+  </p>
+  <p>
+    <strong>Time:</strong>
+    <%= @task_deadline.time.blank? ? '' : @task_deadline.time %>
   </p>
 </div>
 

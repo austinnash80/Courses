@@ -3,11 +3,24 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.input :state %>
+    <div class="row">
+      <div class="col-lg-8">
+        <%= f.input :title %>
+      </div>
+      <div class="col-lg-4">
+        <%= f.input :state %>
+      </div>
+    </div>
     <%= f.input :note %>
     <%= f.input :date_s, label: 'Attention' %>
-    <%= f.input :date_f, label: 'Due' %>
+    <%= f.input :date_f, label: 'Submit' %>
+    <%= f.input :extra_d, label: 'Due' %>
+    <div class="row">
+      <div class="col-lg-4">
+        <%= f.input :cost, label: 'Cost' %>
+        <%= f.input :time, label: 'Time' %>
+      </div>
+    </div>
   </br>
     <div class="row">
       <div class="well col-lg-4">
