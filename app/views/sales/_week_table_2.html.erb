@@ -1,0 +1,71 @@
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="10" class="text-center">Sequoia</th>
+    </tr>
+    <tr>
+      <th></th>
+      <% @dates_2.each do |i| %>
+        <% if i.strftime('%a') == 'Mon' %>
+          <th><%= i.strftime('%-m/%-d/%y') %></th>
+        <% end %>
+      <% end %>
+    </tr>
+  </thead>
+  <tr>
+    <td>Monday</td>
+    <% @mon_2.each do |i| %>
+      <td><%= number_to_currency(i) %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td>Tuesday</td>
+    <% @tue_2.each do |i| %>
+      <td><%= number_to_currency(i) %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td>Wednesday</td>
+    <% @wed_2.each do |i| %>
+      <td><%= number_to_currency(i) %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td>Thursday</td>
+    <% @thu_2.each do |i| %>
+      <td><%= number_to_currency(i) %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td>Friday</td>
+    <% @fri_2.each do |i| %>
+      <td><%= number_to_currency(i) %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td>Saturday</td>
+    <% @sat_2.each do |i| %>
+      <td><%= number_to_currency(i) %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td>Sunday</td>
+    <% @sun_2.each do |i| %>
+      <td><%= number_to_currency(i) %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td><strong><%= number_to_currency(@mon_2[0] + @tue_2[0] + @wed_2[0] + @thu_2[0] + @fri_2[0] + @sat_2[0] + @sun_2[0]) %></strong></td>
+    <td><strong><%= number_to_currency(@mon_2[1] + @tue_2[1] + @wed_2[1] + @thu_2[1] + @fri_2[1] + @sat_2[1] + @sun_2[1]) %></strong></td>
+    <td><strong><%= number_to_currency(@mon_2[2] + @tue_2[2] + @wed_2[2] + @thu_2[2] + @fri_2[2] + @sat_2[2] + @sun_2[2]) %></strong></td>
+    <td><strong><%= number_to_currency(@mon_2[3] + @tue_2[3] + @wed_2[3] + @thu_2[3] + @fri_2[3] + @sat_2[3] + @sun_2[3]) %></strong></td>
+    <td><strong><%= number_to_currency(@mon_2[4] + @tue_2[4] + @wed_2[4] + @thu_2[4] + @fri_2[4] + @sat_2[4] + @sun_2[4]) %></strong></td>
+    <td><strong><%= number_to_currency(@mon_2[5] + @tue_2[5] + @wed_2[5] + @thu_2[5] + @fri_2[5] + @sat_2[5] + @sun_2[5]) %></strong></td>
+    <td><strong><%= number_to_currency(@mon_2[6] + @tue_2[6] + @wed_2[6] + @thu_2[6] + @fri_2[6] + @sat_2[6] + @sun_2[6]) %></strong></td>
+    <td><strong><%= number_to_currency(@mon_2[7] + @tue_2[7] + @wed_2[7] + @thu_2[7] + @fri_2[7] + @sat_2[7] + @sun_2[7]) %></strong></td>
+    <td><strong><%= number_to_currency(@mon_2[8] + @tue_2[8] + @wed_2[8] + @thu_2[8] + @fri_2[8] + @sat_2[8] + @sun_2[8]) %></strong></td>
+    <td><strong><%= number_to_currency(@mon_2[9] + @tue_2[9] + @wed_2[9] + @thu_2[9] + @fri_2[9] + @sat_2[9] + @sun_2[9]) %></strong></td>
+  </tr>
+</table>

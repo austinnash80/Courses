@@ -34,18 +34,58 @@ class SalesController < ApplicationController
       i.day.wday == 6 ? @sat.push(i.sequoia) : ''
       i.day.wday == 0 ? @sun.push(i.sequoia) : ''
     end
-    # @w = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 7 == 0}
-    # @tue = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 8 == 0}
-    # @tue_t = @test.select { |x| (@test.index(x) + 7) % 8 == 0}
-    # @wed = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 9 == 0}
-    # @thu = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 10 == 0}
-    # @fri = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 11 == 0}
-    # @sat = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 12 == 0}
-    # @sun = @sales_seq.select { |x| (@sales_seq.index(x) + 7) % 13 == 0}
 
+# EXPORT
     respond_to do |format|
       format.html
       format.csv { send_data @sales.to_csv, filename: "sales-#{Date.today}.csv" }
+    end
+#EXPORT
+year_change
+table_2
+  end
+
+  def year_change
+    @week_b_year = (Date.today.at_beginning_of_week - 64.days)
+    @week_e_year = (Date.today.at_end_of_week)
+    @sales_seq_year = Sale.where('day > ?', @week_b_year).where('day < ?', @week_e_year + 1.day).order('day ASC').all
+
+    @weeks = []
+    @sales_seq_year.each do |i|
+      @weeks.push(i.sequoia)
+    end
+
+
+
+  end
+
+  def table_2
+
+    @week_b_2 = (((Date.today - 128.days).at_beginning_of_week) - 1.day)
+    @week_e_2 = (((Date.today - 67.days).at_end_of_week) + 1.day)
+    @dates_2 = Sale.where('day > ?', @week_b_2).where('day < ?', @week_e_2).order('day ASC').pluck(:day)
+
+
+    @sales_seq_2 = Sale.where('day > ?', @week_b_2).where('day < ?', @week_e_2).order('day ASC').all
+    # @sales_seq = Sale.where('day > ?', @week_b).where('day < ?', @week_e + 1.day).order('day ASC').pluck(:sequoia)
+    # @test = Sale.where('day > ?', @week_b).where('day < ?', @week_e + 1.day).order('day ASC').pluck(:day)
+
+    #DAYS of the WEEK
+    @mon_2 = []
+    @tue_2 = []
+    @wed_2 = []
+    @thu_2 = []
+    @fri_2 = []
+    @sat_2 = []
+    @sun_2 = []
+    @sales_seq_2.each do |i|
+      i.day.wday == 1 ? @mon_2.push(i.sequoia) : ''
+      i.day.wday == 2 ? @tue_2.push(i.sequoia) : ''
+      i.day.wday == 3 ? @wed_2.push(i.sequoia) : ''
+      i.day.wday == 4 ? @thu_2.push(i.sequoia) : ''
+      i.day.wday == 5 ? @fri_2.push(i.sequoia) : ''
+      i.day.wday == 6 ? @sat_2.push(i.sequoia) : ''
+      i.day.wday == 0 ? @sun_2.push(i.sequoia) : ''
     end
 
   end

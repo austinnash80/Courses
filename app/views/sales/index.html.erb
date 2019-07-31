@@ -180,6 +180,11 @@
 
 
 
-<br>
-
+<br></br>
+<%= render( :partial => 'week_table_2') %>
+<%= render( :partial => 'week_table_test') %>
+B: <%= @week_b_2.strftime('%a %-m/%-d/%y') %>
+E: <%= @week_e_2.strftime('%a %-m/%-d/%y') %>
+<p><%= @weeks %></p>
+</br>
 <%= link_to 'New Sale', new_sale_path %>

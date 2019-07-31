@@ -1,0 +1,72 @@
+
+<% @days = ['Monday','Tuesday','Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] %>
+<table class="table">
+
+    <% @days.each do |i| %><tr><td><%= i %></td></tr><% end %>
+    <tr>
+      <% @weeks.select { |x| @weeks.index(x) % 7 == 0}.each do |i| %><td><%= number_to_currency(i) %></td><% end %>
+    </tr>
+    <tr>
+      <% @weeks.select { |x| @weeks.index(x) % 7 == 0}.each do |i| %><td><%= number_to_currency(i) %></td><% end %>
+    </tr>
+</table>
+
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="10" class="text-center">Sequoia</th>
+    </tr>
+    <tr>
+      <th></th>
+      <% @dates_2.each do |i| %>
+        <% if i.strftime('%a') == 'Mon' %>
+          <th><%= i.strftime('%-m/%-d/%y') %></th>
+        <% end %>
+      <% end %>
+    </tr>
+  </thead>
+  <tr>
+    <td>Monday</td>
+    <% @weeks.select { |x| (@weeks.index(x) + 7) % 7 == 0}.each do |i| %>
+      <td><%= number_to_currency(i) %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td>Tuesday</td>
+    <% @weeks.select { |x| (@weeks.index(x) + 7) % 8 == 0}.each do |i| %>
+      <td><%= number_to_currency(i) %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td>Wednesday</td>
+    <% @weeks.select { |x| (@weeks.index(x) + 7) % 9 == 0}.each do |i| %>
+      <td><%= number_to_currency(i) %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td>Thursday</td>
+    <% @weeks.select { |x| (@weeks.index(x) + 7) % 10 == 0}.each do |i| %>
+      <td><%= number_to_currency(i) %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td>Friday</td>
+    <% @weeks.select { |x| (@weeks.index(x) + 7) % 11 == 0}.each do |i| %>
+      <td><%= number_to_currency(i) %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td>Saturday</td>
+    <% @sat_2.each do |i| %>
+      <td><%= number_to_currency(i) %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td>Sunday</td>
+    <% @sun_2.each do |i| %>
+      <td><%= number_to_currency(i) %></td>
+    <% end %>
+  </tr>
+</table>
