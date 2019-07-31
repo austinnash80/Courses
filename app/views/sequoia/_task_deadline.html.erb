@@ -15,7 +15,9 @@
       <th>Title</th>
       <th>State</th>
       <th>Note</th>
-      <th colspan="2" class="text-center">Due Date</th>
+      <th>Time</th>
+      <th colspan="" class="text-center">Submit</th>
+      <th colspan="" class="text-center">Due</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -26,15 +28,16 @@
         <td><%= link_to task_deadline.title, task_deadline %></td>
         <td><%= task_deadline.state %></td>
         <td><%= task_deadline.note.truncate_words(15) %></td>
-          <% if Time.now > (task_deadline.date_s - 7.days) %>
-            <td class="red"><%= task_deadline.date_s.strftime('%-m/%-d/%y') %></td>
-          <% else %>
-            <td><%= task_deadline.date_s.strftime('%-m/%-d/%y') %></td>
-          <% end %>
-          <% if Time.now > (task_deadline.date_f - 7.day) %>
-            <td class="red"><strong><%= task_deadline.date_f.strftime('%-m/%-d/%y') %></strong></td>
+        <td><%= task_deadline.time.blank? ? '' : "#{task_deadline.time} hrs" %></td>
+          <% if Time.now > (task_deadline.date_f - 7.days) %>
+            <td class="red"><%= task_deadline.date_f.strftime('%-m/%-d/%y') %></td>
           <% else %>
             <td><%= task_deadline.date_f.strftime('%-m/%-d/%y') %></td>
+          <% end %>
+          <% if Time.now > (task_deadline.extra_d - 7.day) %>
+            <td class="red"><strong><%= task_deadline.extra_d.strftime('%-m/%-d/%y') %></strong></td>
+          <% else %>
+            <td><%= task_deadline.extra_d.strftime('%-m/%-d/%y') %></td>
           <% end %>
       </tr>
     <% end %>

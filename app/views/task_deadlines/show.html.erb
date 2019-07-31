@@ -52,7 +52,7 @@
   </p>
   <p>
     <strong>Time:</strong>
-    <%= @task_deadline.time.blank? ? '' : @task_deadline.time %>
+    <%= @task_deadline.time.blank? ? '' : "#{@task_deadline.time} hours" %>
   </p>
 </div>
 
