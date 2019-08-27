@@ -85,4 +85,45 @@
   </table>
 
 </div>
+<div class="col-md-3">
+  <h2 class="text-center">Pacific - All Calls</h2>
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th style="width: ">Who</th>
+        <th>Calls</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @pacific_call_log_total.each do |k, v| %>
+      <% if k.empty? == false %>
+      <tr>
+        <td><%= k %></td>
+        <td><%= v %></td>
+      </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th style="width: ">Who</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @pacific_call_log_total_time.each do |k, v| %>
+      <% if k.empty? == false %>
+      <tr>
+        <td><%= k %></td>
+        <td><%= v %></td>
+      </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
 </div>
