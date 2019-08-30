@@ -115,7 +115,7 @@ class UpdatesheetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def updatesheet_params
-      params.require(:updatesheet).permit(:pes_number, :pes_version, :date_received, :update_course, :note_approval, :text_complete, :exam_complete, :course_listed, :date_listed, :role, :rolep, :irs_number, :proofed, :proofed_note, :datasheet_id, :seq_number, :seq_version, :seq_title, :extra_string, :extra_integer, :extra_boolean, :pub_date, :update_datasheet)
+      params.require(:updatesheet).permit(:pes_number, :pes_version, :date_received, :update_course, :note_approval, :text_complete, :exam_complete, :course_listed, :date_listed, :role, :rolep, :irs_number, :proofed, :proofed_note, :datasheet_id, :seq_number, :seq_version, :seq_title, :extra_string, :extra_integer, :extra_boolean, :pub_date, :update_datasheet, :extra_d)
 
     end
 
