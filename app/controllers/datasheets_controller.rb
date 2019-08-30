@@ -114,7 +114,7 @@ class DatasheetsController < ApplicationController
        @datasheet.seq_version > 'N' ? @array.push((@datasheet.version_n - @datasheet.version_m).to_i) : ''
        @array.length > 0 ? @time_between = @array.sum / @array.length : 'nil'
      end
-     
+
   end
 
   private
