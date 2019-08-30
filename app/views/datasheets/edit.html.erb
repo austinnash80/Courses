@@ -4,6 +4,8 @@
   <div class="col-lg-offset-3">
     <%= link_to 'Back to Index', datasheets_path, class: 'btn btn-default' %> <%= link_to 'Show', @datasheet, class: 'btn btn-default' %>
   </div>
+  <p id="notice" class="text-center"><%= notice %></p>
+
 </div>
 
 <%= render 'form_edit', datasheet: @datasheet %>

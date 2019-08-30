@@ -14,9 +14,9 @@
   <div class="col-lg-4">
     <%= f.input :seq_number, label: 'Sequoia Number' %>
   </div>
-  <div class="col-lg-2">
-    <%= f.input :seq_version, label: 'Version' %>
-  </div>
+      <div class="col-lg-2">
+        <%= f.input :seq_version, label: 'Version' %>
+      </div>
   <div class="col-lg-6">
     <%= f.input :seq_title, label: 'Course Title', placeholder: false %>
   </div>
@@ -26,9 +26,9 @@
   <div class="col-lg-4">
     <%= f.input :pes_number, label: 'PES Number' %>
   </div>
-  <div class="col-lg-2">
-    <%= f.input :pes_version, label: 'Version' %>
-  </div>
+    <div class="col-lg-2">
+      <%= f.input :pes_version, label: 'Version' %>
+    </div>
 </div>
 
 <div class="row">
@@ -64,12 +64,12 @@
 </br>
 
 <div class="row">
-  <div class="col-lg-6">
-    <%= f.input :pub_date, label: 'Publication Date', hint: 'Pub date of active version' %>
-  </div>
-  <div class="col-lg-6">
-    <%= f.input :seq_update, label: 'Update Date', hint: 'Date the late update was completed' %>
-  </div>
+    <div class="col-lg-6">
+      <%= f.input :pub_date, label: 'Publication Date', hint: 'Pub date of active version' %>
+    </div>
+    <div class="col-lg-6">
+      <%= f.input :seq_update, label: 'Update Date', hint: 'Date the late update was completed' %>
+    </div>
 </div>
 <div class="row">
   <div class="col-lg-6">
@@ -96,10 +96,9 @@
 </br>
 
 <div class="row">
-    <h3 class="text-center">Older Version Publication Dates</h3>
+    <h3 class="">Old Publication Dates</h3>
   </br>
     <div class="col-lg-4">
-      <!-- <%= f.input :version_0, label: 'Version 0'%> -->
       <% if @datasheet.seq_version > 'A' %>
         <%= f.input :version_a, label: 'Version A' %>
       <% end %>
@@ -116,40 +115,42 @@
         <%= f.input :version_e, label: 'Version E' %>
       <% end %>
     </div>
-
     <div class="col-lg-4">
-      <% if @datasheet.seq_version > 'F' %>
-        <%= f.input :version_f, label: 'Version F' %>
+      <% if @datasheet.seq_version > 'f' %>
+        <%= f.input :version_f, label: 'Version f' %>
       <% end %>
-      <% if @datasheet.seq_version > 'G' %>
-        <%= f.input :version_g, label: 'Version G' %>
+      <% if @datasheet.seq_version > 'g' %>
+        <%= f.input :version_g, label: 'Version g' %>
       <% end %>
-      <% if @datasheet.seq_version > 'H' %>
-        <%= f.input :version_h, label: 'Version H' %>
+      <% if @datasheet.seq_version > 'h' %>
+        <%= f.input :version_h, label: 'Version h' %>
       <% end %>
-      <% if @datasheet.seq_version > 'I' %>
-        <%= f.input :version_i, label: 'Version I' %>
+      <% if @datasheet.seq_version > 'i' %>
+        <%= f.input :version_i, label: 'Version i' %>
       <% end %>
-      <% if @datasheet.seq_version > 'J' %>
-        <%= f.input :version_j, label: 'Version J' %>
+      <% if @datasheet.seq_version > 'j' %>
+        <%= f.input :version_j, label: 'Version j' %>
       <% end %>
     </div>
-
     <div class="col-lg-4">
-      <% if @datasheet.seq_version > 'K' %>
-        <%= f.input :version_k, label: 'Version K' %>
+      <% if @datasheet.seq_version > 'k' %>
+        <%= f.input :version_k, label: 'Version k' %>
       <% end %>
-      <% if @datasheet.seq_version > 'L' %>
-        <%= f.input :version_l, label: 'Version L' %>
+      <% if @datasheet.seq_version > 'l' %>
+        <%= f.input :version_l, label: 'Version l' %>
       <% end %>
-      <% if @datasheet.seq_version > 'M' %>
-        <%= f.input :version_m, label: 'Version M' %>
+      <% if @datasheet.seq_version > 'm' %>
+        <%= f.input :version_m, label: 'Version m' %>
       <% end %>
-      <% if @datasheet.seq_version > 'N' %>
-        <%= f.input :version_n, label: 'Version N' %>
+      <% if @datasheet.seq_version > 'n' %>
+        <%= f.input :version_n, label: 'Version n' %>
+      <% end %>
+      <% if @datasheet.seq_version > 'o' %>
+        <%= f.input :version_o, label: 'Version o' %>
       <% end %>
     </div>
-</div>
+  </div>
+
 
 </br>
 <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>

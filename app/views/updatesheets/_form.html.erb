@@ -28,6 +28,9 @@
     <div class="col-lg-1">
       <%= f.input :pes_version, label: 'V.' %>
     </div>
+    <div class="col-lg-offset-1 col-lg-3">
+      <%= f.input :pub_date, label: 'Publication Date:' %>
+    </div>
 
   </div>
 <!-- </br> -->
@@ -86,6 +89,13 @@
     </div>
   </div>
 </div>
+
+<% if @updatesheet.seq_version == @updatesheet.datasheet.seq_version %>
+  <%= f.input :update_datasheet, label: false, as: :hidden, input_html: { checked: false } %>
+<% elsif %>
+  <%= f.input :update_datasheet, label: 'Update Datasheet (Course Listed)', input_html: { checked: false } %>
+<% end %>
+
 
 </br>
   <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
