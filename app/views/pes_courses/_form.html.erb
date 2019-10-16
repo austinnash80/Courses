@@ -1,28 +1,37 @@
 <%= simple_form_for(@pes_course) do |f| %>
 </br>
   <%= f.error_notification %>
-  <div class="col-lg-offset-4 col-lg-4 well well-white">
+  <div class="row">
+    <div class="col-lg-offset-3">
+      <%= f.input :extra_d, label: 'PES List Update' %>
+    </div>
+  </div>
+  <div class="col-lg-offset-3 col-lg-6 well well-white">
   </br>
     <div class="row">
-      <div class="col-lg-4">
+      <div class="col-lg-3">
         <%= f.input :pes_number, label: 'PES Number'%>
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-3">
         <%= f.input :hours, label: 'Hours' %>
+      </div>
+      <div class="col-lg-3">
+        <%= f.input :category, label: 'Category', collection: @course_cat , as: :select %>
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-4">
-        <%= f.input :tag, label: 'Course Tag', collection: @course_tags , as: :select %>
-      </div>
-      <div class="col-lg-6">
-        <%= f.input :category, label: 'Category' %>
+      <div class="col-lg-9">
+        <%= f.input :title, label: 'Course Title' %>
       </div>
     </div>
-<%= f.input :title, label: 'Course Title' %>
-<%= f.input :active, label: 'Is Course Currently Active?', as: :radio_buttons, :checked => ['Yes', true] %>
-<%= f.input :date_added, label: 'Course first seen on PES' %>
-<%= f.input :date_removed, label: 'Course no longer active' %>
+    <div class="row">
+      <div class="col-lg-3">
+        <%= f.input :tag, label: 'Course Tag', collection: @course_tags , as: :select %>
+      </div>
+    </div>
+<%#= f.input :active, label: 'Is Course Currently Active?', as: :radio_buttons, :checked => ['Yes', true] %>
+<%#= f.input :date_added, label: 'Course first seen on PES' %>
+<%#= f.input :date_removed, label: 'Course no longer active' %>
 </br>
 <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
 </div>

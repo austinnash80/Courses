@@ -1,0 +1,33 @@
+
+<%= simple_form_for(@mailing_empire_nm) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :list %>
+    <%= f.input :license_type %>
+    <%= f.input :name_prefix %>
+    <%= f.input :first %>
+    <%= f.input :middle %>
+    <%= f.input :last %>
+    <%= f.input :license_no %>
+    <%= f.input :add1 %>
+    <%= f.input :add2 %>
+    <%= f.input :city %>
+    <%= f.input :state %>
+    <%= f.input :zipcode %>
+    <%= f.input :county %>
+    <%= f.input :email %>
+    <%= f.input :licese_status %>
+    <%= f.input :issued %>
+    <%= f.input :expires %>
+    <%= f.input :last_renewal %>
+    <%= f.input :extra_s %>
+    <%= f.input :extra_i %>
+    <%= f.input :extra_b %>
+    <%= f.input :extra_d %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

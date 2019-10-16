@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190830181002) do
+ActiveRecord::Schema.define(version: 20191016203919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -313,6 +313,37 @@ ActiveRecord::Schema.define(version: 20190830181002) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "policy"
+  end
+
+  create_table "mailing_empire_nms", force: :cascade do |t|
+    t.date "list"
+    t.string "license_type"
+    t.string "name_prefix"
+    t.string "first"
+    t.string "middle"
+    t.string "last"
+    t.string "license_no"
+    t.string "add1"
+    t.string "add2"
+    t.string "city"
+    t.string "state"
+    t.string "zipcode"
+    t.string "county"
+    t.string "email"
+    t.string "licese_status"
+    t.date "issued"
+    t.date "expires"
+    t.date "last_renewal"
+    t.string "extra_s"
+    t.integer "extra_i"
+    t.boolean "extra_b"
+    t.date "extra_d"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "customer"
+    t.boolean "no_mail"
+    t.string "dup"
+    t.integer "dup_number"
   end
 
   create_table "mailings", force: :cascade do |t|

@@ -86,6 +86,7 @@ class PesCoursesController < ApplicationController
 
   def form_collections
     @course_tags = ['N/A', 'New', 'Top Seller', 'Hot Topic', 'Popular']
+    @course_cat = ['Accounting', 'Auditing', 'Taxes', 'Management Services', 'Business Law', 'Business Management', 'Communications', 'Computer Applications', 'Finance', 'Personnel/Human Resources', 'Ethics']
   end
 
   def course_counter

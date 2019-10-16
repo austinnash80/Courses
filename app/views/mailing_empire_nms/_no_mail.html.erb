@@ -1,0 +1,52 @@
+<h2>Add a No Mail for NM</h2>
+<div class="row">
+  <div class="col-md-3">
+    <%= form_tag(mailing_empire_nms_path, {:method => 'get'}) do %>
+      <%= text_field_tag(:last, params[:last], placeholder: 'Enter Last Name (All Uppercase)', class: 'form-control') %>
+      <p><%= submit_tag('Search', :name => nil, class: 'btn btn-primary') %> Enter All Uppercase</p>
+    <% end %>
+  </div>
+</div>
+
+
+</br>
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-md-6">
+    <input class="form-control" id="myInput" type="text" placeholder="Filter Table - Any Field"></br>
+  </div>
+</div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>First</th>
+          <th>Middle</th>
+          <th>Last</th>
+          <th>Add1</th>
+          <th>Add2</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Zipcode</th>
+          <th>NoMail</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="myTable">
+        <% @nm_no_mail.each do |mailing_empire_nm| %>
+          <tr>
+            <td><%= mailing_empire_nm.first %></td>
+            <td><%= mailing_empire_nm.middle %></td>
+            <td><%= mailing_empire_nm.last %></td>
+            <td><%= mailing_empire_nm.add1 %></td>
+            <td><%= mailing_empire_nm.add2 %></td>
+            <td><%= mailing_empire_nm.city %></td>
+            <td><%= mailing_empire_nm.state %></td>
+            <td><%= mailing_empire_nm.zipcode %></td>
+            <td><%= mailing_empire_nm.no_mail %></td>
+            <td><%= link_to 'No Mail', no_mail_mailing_empire_nms_path(id: mailing_empire_nm.id, last: mailing_empire_nm.last) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>

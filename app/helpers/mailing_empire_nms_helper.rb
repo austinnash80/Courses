@@ -1,0 +1,2 @@
+module MailingEmpireNmsHelper
+end

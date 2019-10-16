@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
 
+  resources :mailing_empire_nms do
+    collection {post :import}
+    collection do
+      get 'remove_all'
+      get 'no_mail'
+    end
+  end
+
   resources :sales do
     collection {post :import}
-  end 
+  end
   resources :task_deadlines
   resources :course_creation_tasks
   resources :empire_courses
