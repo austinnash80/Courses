@@ -104,7 +104,7 @@ class MailingEmpireNmsController < ApplicationController
   end
 
   def import #Uploading CSV function
-    MailingEmpireNm.import(params[:file])
+    MailingEmpireNm.my_import(params[:file])
     redirect_to mailing_empire_nms_path(page: 'nomail'), notice: "Upload Complete"
   end
 

@@ -13,22 +13,22 @@ class MailingEmpireNm < ApplicationRecord
     end
   end
 
-  def self.import(file) # import to cvs function
-      CSV.foreach(file.path, headers: true) do |row|
-      MailingEmpireNm.create! row.to_hash
-    end
-  end
-
-  # def self.import(file)
-  #   batch,batch_size = [], 1_000
-  #   CSV.foreach(file.path, headers: true, header_converters: :symbol, :encoding => 'utf-8') do |row|
-  #     batch << MailingEmpireNm.new(row.to_hash)
-  #     if batch.size >= batch_size
-  #       MailingEmpireNm.import batch
-  #         batch = []
+  # def self.import(file) # import to cvs function
+  #     CSV.foreach(file.path, headers: true) do |row|
+  #     MailingEmpireNm.create! row.to_hash
   #   end
   # end
-  #   MailingEmpireNm.import batch
-  # end
+
+  def self.my_import(file)
+    batch,batch_size = [], 1_000
+    CSV.foreach(file.path, headers: true, header_converters: :symbol, :encoding => 'utf-8') do |row|
+      batch << MailingEmpireNm.new(row.to_hash)
+      if batch.size >= batch_size
+        MailingEmpireNm.import batch
+          batch = []
+    end
+  end
+    MailingEmpireNm.import batch
+  end
 
 end
