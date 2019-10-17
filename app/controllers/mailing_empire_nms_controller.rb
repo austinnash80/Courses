@@ -6,6 +6,7 @@ class MailingEmpireNmsController < ApplicationController
   def index
     @nm_total = MailingEmpireNm.all.count
     @nm_no_mail = MailingEmpireNm.where(last: params['last']).order(:id).all
+    @export = MailingEmpireNm.all
 
 # Buttom Filters
     if params['filter'].blank?
@@ -40,7 +41,6 @@ class MailingEmpireNmsController < ApplicationController
       @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-12-31','2021-01-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).all
     end
 # end Button Filters
-
 
     respond_to do |format|
       format.html

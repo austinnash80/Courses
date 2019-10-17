@@ -22,7 +22,8 @@
   </br></br>
   <p>
   Records: <strong><%= @mailing_empire_nms.count %></strong>
-  <%= link_to 'Export', mailing_empire_nms_path('csv'), class: 'btn btn-success' %>
+  <%= link_to 'Export', mailing_empire_nms_path(filter: params['filter'],format: :csv), class: 'btn btn-success' %>
+  <!-- date: @date, format: :csv -->
   </p>
   </br></br>
 
