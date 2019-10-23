@@ -1,0 +1,26 @@
+
+<%= simple_form_for(@master_list) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :who %>
+    <%= f.input :list %>
+    <%= f.input :lid %>
+    <%= f.input :lic %>
+    <%= f.input :fname %>
+    <%= f.input :mi %>
+    <%= f.input :lname %>
+    <%= f.input :suf %>
+    <%= f.input :co %>
+    <%= f.input :add2 %>
+    <%= f.input :add %>
+    <%= f.input :city %>
+    <%= f.input :state %>
+    <%= f.input :zip %>
+    <%= f.input :no_mail %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

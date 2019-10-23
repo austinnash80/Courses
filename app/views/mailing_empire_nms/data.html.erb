@@ -1,0 +1,43 @@
+<h1>Empire Data</h1>
+
+<div class="" id="empire">
+
+</div>
+
+<script>
+  function get_the_data(){
+  var token = "2e8-YoR-K3D-fMp";
+  $.post("https://www.empirece.com/nash-e28snfiac93.php", { anash_auth: token }, function(data) {
+         if(data != ""){
+
+           // var t1 = [{"id":"1","uid":"3309","license_num":"269404","existing":"","purchase_date":"07/13/15","lic_state":"NC","products":"800","order_total":"39.50","fname":"Jenee","lname":"Stankus","company":"","street_1":"18386 North Shore Ct. Unit 1","street_2":"","city":"Spring Lake","state":"MI","zip":"49456","email":"jeneestankus@hotmail.com","phone",""},
+
+            var nm = []
+
+            // var arrayOfObjects = [{'id':'1','uid':'150', 'lic_num': 'A1','lic_state': 'nm'}, {'id': '2', 'uid':'175', 'lic_num': 'B1','lic_state': 'nm'}, {'id':'3','uid':'200', 'lic_num': 'C1', 'lic_state':'nc'}]
+            var arrayOfObjects = jQuery.parseJSON(data)
+
+              // "{'id':'1','uid':'150', 'lic_num': 'A1','lic_state': 'nm'}, {'id': '2', 'uid':'175', 'lic_num': 'B1','lic_state': 'nm'}, {'id':'3','uid':'200', 'lic_num': 'C1', 'lic_state':'nc'}")
+            // var test = "[{'id':'1','uid':'150', 'lic_num': 'A1','lic_state': 'nm'}, {'id': '2', 'uid':'175', 'lic_num': 'B1','lic_state': 'nm'}, {'id':'3','uid':'200', 'lic_num': 'C1', 'lic_state':'nc'}]"
+
+            for (var i = 0; i < arrayOfObjects.length; i++) {
+              var object = arrayOfObjects[i];
+              if (object.id == 1){
+                nm.push(object.license_num)
+              // nm.push(1)
+              }
+            }
+
+           $("#empire").html(nm);
+
+           // window.alert('test');
+           // $("#empire").html(data);
+
+         } else {
+             window.alert("no data");
+         }
+       });
+  }
+  get_the_data();
+
+</script>

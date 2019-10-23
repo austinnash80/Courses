@@ -1,0 +1,112 @@
+<h1 class="text-center">Master Lists - Sequoia</h1>
+
+
+<h3>No Mail Search</h3>
+<div class="row">
+  <div class="well col-md-3">
+      <%= text_field_tag "search", '', placeholder: 'Search By Last Name or Zip+4', value: params['search'], class: "search_field form-control" %>
+      <div>
+      </br>
+        <%= link_to "Search", master_lists_path, class: "search_link btn btn-success" %>
+        <%= link_to "Clear", master_lists_path, class: "btn btn-default" %>
+      </div>
+    </br>
+      <div>
+        <input class="form-control" id="myInput" type="text" placeholder="Filter Table..">
+      </div>
+  </div>
+</div>
+
+<p id="notice"><%= notice %></p>
+<p><%= link_to 'View No Mails', no_mail_master_lists_path %></p>
+<p>List size: <%= number_with_delimiter(@master_lists_count) %></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Who</th>
+      <th>List</th>
+      <th>Lid</th>
+      <th>Lic</th>
+      <th>Fname</th>
+      <th>Mi</th>
+      <th>Lname</th>
+      <th>Suf</th>
+      <th>Co</th>
+      <th>Add2</th>
+      <th>Add</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+      <th>No mail</th>
+      <th>Add</th>
+    </tr>
+  </thead>
+
+  <tbody id="myTable">
+    <%# @master_lists.each do |master_list| %>
+    <% @master_lists_search_param.each do |master_list| %>
+      <tr>
+        <td><%= master_list.who %></td>
+        <td><%= master_list.list %></td>
+        <td><%= master_list.lid %></td>
+        <td><%= master_list.lic %></td>
+        <td><%= master_list.fname %></td>
+        <td><%= master_list.mi %></td>
+        <td><%= master_list.lname %></td>
+        <td><%= master_list.suf %></td>
+        <td><%= master_list.co %></td>
+        <td><%= master_list.add2 %></td>
+        <td><%= master_list.add %></td>
+        <td><%= master_list.city %></td>
+        <td><%= master_list.state %></td>
+        <td><%= master_list.zip %></td>
+        <td class="red"><strong><%= master_list.no_mail %></strong></td>
+        <td class="text-center"><%= link_to 'Select', no_mail_add_master_lists_path(:master_list_id => master_list.id), class: 'blue_link' %></td>
+        <!-- <td><%= link_to 'Show', master_list %></td> -->
+        <!-- <td><%= link_to 'Edit', edit_master_list_path(master_list) %></td> -->
+        <!-- <td><%= link_to 'Destroy', master_list, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%#= link_to 'New Master List', new_master_list_path %>
+
+<% if current_user.email == 'austin@sequoiacpe.com' %>
+<div class="row">
+  <div class="well col-md-3">
+    <p>Upload New List (CSV)</p>
+      <%= form_tag import_master_lists_path, multipart: true do %>
+      <%= file_field_tag :file %>
+    </br>
+      <%= submit_tag 'Upload', class: 'btn btn-default' %>
+    <% end %>
+  </br>
+    <p><%= link_to "Remove All Records", remove_all_master_lists_path, :method => :get %></p>
+  </div>
+</div>
+<% end %>
+
+
+<script>
+$(".search_link").click(function() {
+  $(this).attr("href", function() {
+    return this.href + "?search=" + $('.search_field').val();
+    // return this.href + "&search=" + $('.search_field').val();
+  });
+});
+</script>
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>

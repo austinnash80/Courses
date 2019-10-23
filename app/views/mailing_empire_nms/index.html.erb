@@ -7,6 +7,10 @@
     </div>
 </div>
 
+<%= link_to 'Data', data_mailing_empire_nms_path %>
+<!-- <div class="" id="empire">
+</div> -->
+
 
 
 <p><%= link_to 'Add a NM No Mail', mailing_empire_nms_path(page: 'nm_no_mail'), class: 'btn btn-default' %></p>
@@ -111,12 +115,37 @@
 
 <% end %>
 <script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
+// $(function() {
+//   $("#empire").hide(1000);
+// })
+      $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+        });
+
+      });
+
+// Empire Data
+     function get_the_data(){
+     var token = "2e8-YoR-K3D-fMp";
+     $.post("https://www.empirece.com/nash-e28snfiac93.php", { anash_auth: token }, function(data) {
+              if(data != ""){
+                  //Do something with the data variable
+                  // window.alert(data);
+                  // $("#empire").hide(1000).show(1000);
+                  $("#empire").html(data);
+
+                  // $("#empire").html(data.id[0]);
+
+
+              } else {
+                  window.alert("no data");
+              }
+          });
+     }
+     get_the_data();
+
 </script>

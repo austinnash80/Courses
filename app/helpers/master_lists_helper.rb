@@ -1,0 +1,2 @@
+module MasterListsHelper
+end

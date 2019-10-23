@@ -1,10 +1,20 @@
 Rails.application.routes.draw do
 
+  resources :master_lists do
+    collection {post :import}
+    collection do
+      get 'remove_all'
+      get 'no_mail_add'
+      get 'no_mail'
+    end
+  end
+
   resources :mailing_empire_nms do
     collection {post :import}
     collection do
       get 'remove_all'
       get 'no_mail'
+      get 'data'
     end
   end
 

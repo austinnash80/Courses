@@ -96,4 +96,6 @@ gem 'wkhtmltopdf-binary' #need for pdfkit gem
 
 gem 'simple_form'
 
+gem 'json'
+
 gem 'derailed', group: :development

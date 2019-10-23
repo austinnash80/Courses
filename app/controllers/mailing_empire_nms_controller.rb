@@ -49,6 +49,10 @@ class MailingEmpireNmsController < ApplicationController
 
   end
 
+  def data
+
+  end
+
   # GET /mailing_empire_nms/1
   # GET /mailing_empire_nms/1.json
   def show

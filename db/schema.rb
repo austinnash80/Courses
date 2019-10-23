@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191016203919) do
+ActiveRecord::Schema.define(version: 20191023211117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -391,6 +391,26 @@ ActiveRecord::Schema.define(version: 20191016203919) do
     t.datetime "people_report_updated_at"
     t.integer "estimate_quanity"
     t.decimal "estimate_cost"
+  end
+
+  create_table "master_lists", force: :cascade do |t|
+    t.string "who"
+    t.string "list"
+    t.integer "lid"
+    t.string "lic"
+    t.string "fname"
+    t.string "mi"
+    t.string "lname"
+    t.string "suf"
+    t.string "co"
+    t.string "add2"
+    t.string "add"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "no_mail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pes_courses", force: :cascade do |t|
