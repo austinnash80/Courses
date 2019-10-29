@@ -1,8 +1,12 @@
 <div class="page-header ">
 </br>
-  <h1 class="text-center">Add to No-Mail List</h1>
+<% if params['lid'].present? %>
+  <h1 class="text-center">Change Address</h1>
+<% elsif %>
+  <h1 class="text-center">No-Mail - Can't Find List</h1>
+<% end %>
   <div class="col-lg-offset-3">
-  <%= link_to 'No-Mail Index', seq_no_mails_path, class: 'btn btn-default' %>
+  <!-- <%= link_to 'No-Mail Index', seq_no_mails_path, class: 'btn btn-default' %> -->
 </div>
 </div>
 <%= render 'form', seq_no_mail: @seq_no_mail %>

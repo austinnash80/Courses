@@ -36,7 +36,7 @@ class SeqNoMailsController < ApplicationController
 
     respond_to do |format|
       if @seq_no_mail.save
-        format.html { redirect_to @seq_no_mail, notice: 'Seq no mail was successfully created.' }
+        format.html { redirect_to seq_no_mails_path, notice: 'Seq no mail was successfully created.' }
         format.json { render :show, status: :created, location: @seq_no_mail }
       else
         format.html { render :new }
@@ -92,6 +92,6 @@ class SeqNoMailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def seq_no_mail_params
-      params.require(:seq_no_mail).permit(:first_name, :mi, :last_name, :suf, :co, :address, :address_2, :city, :state, :zip, :date_added, :extra_i, :extra_b, :extra_s, :remove)
+      params.require(:seq_no_mail).permit(:first_name, :mi, :last_name, :suf, :co, :address, :address_2, :city, :state, :zip, :date_added, :extra_i, :extra_b, :extra_s, :remove, :change, :lid, :who, :list)
     end
 end

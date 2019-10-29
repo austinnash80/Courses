@@ -2,7 +2,26 @@
 
   <%= f.error_notification %>
 </br>
+
+
 <div class="well well-white col-lg-offset-3 col-lg-6">
+    <% if params['lid'].present? %>
+  </br>
+    <div class="row well">
+      <div class="col-lg-2">
+        <%= f.input :change, :input_html => { :checked => true } %>
+      </div>
+      <div class="col-lg-2">
+        <%= f.input :lid, label: false, :input_html => { :value => params['lid'] } %>
+      </div>
+      <div class="col-lg-2">
+        <%= f.input :who, label: false, :input_html => { :value => params['who'] } %>
+      </div>
+      <div class="col-lg-2">
+        <%= f.input :list, label: false, :input_html => { :value => params['list'] } %>
+      </div>
+    </div>
+    <% end %>
 </br>
 <div class="">
   <div class="col-lg-offset-2">
@@ -10,6 +29,7 @@
   </div>
 </div>
 </br>
+
 <div class="row">
   <div class="col-lg-offset-2 col-lg-4">
     <%= f.input :first_name, label: false, placeholder: 'First Name' %>
@@ -27,28 +47,30 @@
     <%= f.input :zip, label: false, placeholder: 'Zip' %>
   </div>
 </div>
-</br>
-</br>
+<!-- </br> -->
+<!-- </br> -->
 
-<div class="row">
+<!-- <div class="row">
   <div class=" col-lg-offset-2 col-lg-2">
     <%= f.input :extra_b, label: 'Customer?', as: :radio_buttons, :checked => ['No', false] %>
   </div>
     <div class="col-lg-2">
     <%= f.input :extra_i, label: 'UID', placeholder: '' %>
   </div>
-</div>
-</br>
-<div class="row">
+</div> -->
+<!-- </br> -->
+<!-- <div class="row">
   <div class=" col-lg-offset-2 col-lg-3">
     <%= f.input :remove, label: 'Remove from list?', as: :radio_buttons, :checked => ['Yes', true] %>
   </div>
-</div>
+</div> -->
 <!-- </br> -->
 </br>
+
+
 <div class="row">
 <div class="col-lg-offset-2 col-lg-8">
-    <%= f.input :extra_s, label: false, placeholder: 'Reason for wanting off the mailing list - write "Change" for Address Change only', as: :text %>
+    <%= f.input :extra_s, label: false, placeholder: 'Reason for wanting off the mailing list', as: :text %>
 </br>
     <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
   </br>

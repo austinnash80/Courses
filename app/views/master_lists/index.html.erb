@@ -18,29 +18,36 @@
 </div>
 
 <p id="notice"><%= notice %></p>
-<p><%= link_to 'View No Mails', no_mail_master_lists_path %></p>
+<h4>Can't Find?</h4>
+<p class=""><%= link_to "Add New", new_seq_no_mail_path %> | <%= link_to "View", seq_no_mails_path %></p>
 </br>
+<p><%= link_to 'View No Mails', no_mail_master_lists_path %></p>
+
 <table class="table-bordered">
   <tr>
-    <th></th>
-    <th class="text-center">Size</th>
-    <th class="text-center">List</th>
+    <th width="25%"></th>
+    <th class="text-center" width="25%">Size</th>
+    <th class="text-center" width="25%">List</th>
+    <th class="text-center" width="25%">No-Mail</th>
   </tr>
   <tbody>
     <tr>
       <td><strong>CPA</strong></td>
       <td class="text-right"><%= number_with_delimiter(@master_lists_count_cpa) %></td>
       <td class="text-center"><%= @master_lists_count_cpa_list[0] %></td>
+      <td class="text-right"><%= @master_lists_count_cpa_nomail %></td>
     </tr>
     <tr>
       <td><strong>EA</strong></td>
       <td class="text-right"><%= number_with_delimiter(@master_lists_count_ea) %></td>
       <td class="text-center"><%= @master_lists_count_ea_list[0] %></td>
+      <td class="text-right"><%= @master_lists_count_ea_nomail %></td>
     </tr>
     <tr>
       <td><strong>Total<strong></td>
       <td class="text-right"><%= number_with_delimiter(@master_lists_count) %></td>
       <td></td>
+      <td class="text-right"><%= @master_lists_count_nomail %></td>
     </tr>
   </tbody>
 </table>
@@ -62,15 +69,19 @@
       <th>City</th>
       <th>State</th>
       <th>Zip</th>
-      <th>No mail</th>
-      <th>Add</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody id="myTable">
     <%# @master_lists.each do |master_list| %>
     <% @master_lists_search_param.each do |master_list| %>
-      <tr>
+      <% if master_list.no_mail == 'yes'%>
+        <tr class="alert alert-info">
+      <% elsif %>
+        <tr>
+      <% end %>
         <td><strong><%= master_list.who %></strong></td>
         <td><%= master_list.list %></td>
         <td><%= master_list.lid %></td>
@@ -85,8 +96,9 @@
         <td><%= master_list.city %></td>
         <td><%= master_list.state %></td>
         <td><%= master_list.zip %></td>
-        <td class="red"><strong><%= master_list.no_mail %></strong></td>
-        <td class="text-center"><%= link_to 'Select', no_mail_add_master_lists_path(:master_list_id => master_list.id), class: 'blue_link' %></td>
+        <!-- <td class="red"><strong><%= master_list.no_mail %></strong></td> -->
+        <td class="text-center"><%= link_to 'Remove', no_mail_add_master_lists_path(:master_list_id => master_list.id), class: 'blue_link' %></td>
+        <td class="text-center"><%= link_to 'Change', new_seq_no_mail_path(lid: master_list.lid, list: master_list.list, who: master_list.who), class: 'blue_link' %></td>
         <!-- <td><%= link_to 'Show', master_list %></td> -->
         <!-- <td><%= link_to 'Edit', edit_master_list_path(master_list) %></td> -->
         <!-- <td><%= link_to 'Destroy', master_list, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->

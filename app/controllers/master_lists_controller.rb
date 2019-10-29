@@ -7,9 +7,12 @@ class MasterListsController < ApplicationController
     # @master_lists = MasterList.all.first(10)
     @master_lists_count = MasterList.all.count
     @master_lists_count_cpa = MasterList.where(who: 'CPA').all.count
+    @master_lists_count_nomail = MasterList.where(no_mail: 'yes').all.count
     @master_lists_count_cpa_list = MasterList.where(who: 'CPA').first(1).pluck(:list)
+    @master_lists_count_cpa_nomail = MasterList.where(who: 'CPA').where(no_mail: 'yes').all.count
     @master_lists_count_ea = MasterList.where(who: 'EA').all.count
     @master_lists_count_ea_list = MasterList.where(who: 'EA').first(1).pluck(:list)
+    @master_lists_count_ea_nomail = MasterList.where(who: 'EA').where(no_mail: 'yes').all.count
     @master_lists_search_param = MasterList.where('lower(lname) = lower(?)', params['search']).or(MasterList.where(:zip => params['search']))
 
     # Find Duplicates / destroy duplicates

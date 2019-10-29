@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191023211117) do
+ActiveRecord::Schema.define(version: 20191029183249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -505,6 +505,10 @@ ActiveRecord::Schema.define(version: 20191023211117) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "remove"
+    t.boolean "change"
+    t.integer "lid"
+    t.string "who"
+    t.string "list"
   end
 
   create_table "sequoia_customers", force: :cascade do |t|
