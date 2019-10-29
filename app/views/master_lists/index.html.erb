@@ -1,4 +1,4 @@
-<h1 class="text-center">Master Lists - Sequoia</h1>
+<h1 class="text-center">Master Lists - CPA/EA</h1>
 
 
 <h3>No Mail Search</h3>
@@ -19,10 +19,32 @@
 
 <p id="notice"><%= notice %></p>
 <p><%= link_to 'View No Mails', no_mail_master_lists_path %></p>
-<p>List size: <%= number_with_delimiter(@master_lists_count) %></p>
-<p>CPA: <%= number_with_delimiter(@master_lists_count_cpa) %></p>
-<p>EA: <%= number_with_delimiter(@master_lists_count_ea) %></p>
-
+</br>
+<table class="table-bordered">
+  <tr>
+    <th></th>
+    <th class="text-center">Size</th>
+    <th class="text-center">List</th>
+  </tr>
+  <tbody>
+    <tr>
+      <td><strong>CPA</strong></td>
+      <td class="text-right"><%= number_with_delimiter(@master_lists_count_cpa) %></td>
+      <td class="text-center"><%= @master_lists_count_cpa_list[0] %></td>
+    </tr>
+    <tr>
+      <td><strong>EA</strong></td>
+      <td class="text-right"><%= number_with_delimiter(@master_lists_count_ea) %></td>
+      <td class="text-center"><%= @master_lists_count_ea_list[0] %></td>
+    </tr>
+    <tr>
+      <td><strong>Total<strong></td>
+      <td class="text-right"><%= number_with_delimiter(@master_lists_count) %></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</br>
 <table class="table">
   <thead>
     <tr>
