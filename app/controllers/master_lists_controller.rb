@@ -6,6 +6,8 @@ class MasterListsController < ApplicationController
   def index
     # @master_lists = MasterList.all.first(10)
     @master_lists_count = MasterList.all.count
+    @master_lists_count_cpa = MasterList.where(who: 'CPA').all.count
+    @master_lists_count_ea = MasterList.where(who: 'EA').all.count
     @master_lists_search_param = MasterList.where('lower(lname) = lower(?)', params['search']).or(MasterList.where(:zip => params['search']))
   end
 
