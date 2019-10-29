@@ -31,19 +31,19 @@
     <th class="text-center" width="25%">No-Mail</th>
   </tr>
   <tbody>
-    <tr>
+    <tr class="grey-b-100">
       <td><strong>CPA</strong></td>
       <td class="text-right"><%= number_with_delimiter(@master_lists_count_cpa) %></td>
       <td class="text-center"><%= @master_lists_count_cpa_list[0] %></td>
       <td class="text-right"><%= @master_lists_count_cpa_nomail %></td>
     </tr>
-    <tr>
+    <tr class="grey-b-100">
       <td><strong>EA</strong></td>
       <td class="text-right"><%= number_with_delimiter(@master_lists_count_ea) %></td>
       <td class="text-center"><%= @master_lists_count_ea_list[0] %></td>
       <td class="text-right"><%= @master_lists_count_ea_nomail %></td>
     </tr>
-    <tr>
+    <tr class="grey-b-100">
       <td><strong>Total<strong></td>
       <td class="text-right"><%= number_with_delimiter(@master_lists_count) %></td>
       <td></td>
@@ -52,7 +52,7 @@
   </tbody>
 </table>
 </br>
-<table class="table">
+<table class="table table-outline">
   <thead>
     <tr>
       <th>Who</th>
@@ -80,7 +80,7 @@
       <% if master_list.no_mail == 'yes'%>
         <tr class="alert alert-info">
       <% elsif %>
-        <tr>
+      <tr class="grey-b-100">
       <% end %>
         <td><strong><%= master_list.who %></strong></td>
         <td><%= master_list.list %></td>
