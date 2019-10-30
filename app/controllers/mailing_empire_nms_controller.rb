@@ -4,6 +4,7 @@ class MailingEmpireNmsController < ApplicationController
   # GET /mailing_empire_nms
   # GET /mailing_empire_nms.json
   def index
+
     @nm_total = MailingEmpireNm.all.count
     @nm_no_mail = MailingEmpireNm.where(last: params['last']).order(:id).all
     @export = MailingEmpireNm.all
@@ -50,6 +51,7 @@ class MailingEmpireNmsController < ApplicationController
   end
 
   def data
+     test_data
 
   end
 
@@ -121,6 +123,14 @@ class MailingEmpireNmsController < ApplicationController
   def no_mail
     MailingEmpireNm.where(id: params['id']).update_all no_mail: true
     redirect_to mailing_empire_nms_path(last: params['last']), notice: "NoMail Successful"
+  end
+
+  def test_data
+    d = "string"
+    # @c =  d[3]
+    @c =  d[354120]
+    @c1 =  d[354121]
+    @c2 =  d[354122]
   end
 
   private

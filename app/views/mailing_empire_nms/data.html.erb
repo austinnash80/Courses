@@ -1,5 +1,6 @@
 <h1>Empire Data</h1>
 
+<p><%= @c %></p>
 <div class="" id="empire">
 
 </div>
@@ -12,26 +13,39 @@
 
            // var t1 = [{"id":"1","uid":"3309","license_num":"269404","existing":"","purchase_date":"07/13/15","lic_state":"NC","products":"800","order_total":"39.50","fname":"Jenee","lname":"Stankus","company":"","street_1":"18386 North Shore Ct. Unit 1","street_2":"","city":"Spring Lake","state":"MI","zip":"49456","email":"jeneestankus@hotmail.com","phone",""},
 
-            var nm = []
 
-            // var arrayOfObjects = [{'id':'1','uid':'150', 'lic_num': 'A1','lic_state': 'nm'}, {'id': '2', 'uid':'175', 'lic_num': 'B1','lic_state': 'nm'}, {'id':'3','uid':'200', 'lic_num': 'C1', 'lic_state':'nc'}]
-            var arrayOfObjects = jQuery.parseJSON(data)
+            // var test_string = [{'id':'1','uid':'150', 'license_num': 'A1','lic_state': 'nm'}, {'id': '2', 'uid':'175', 'license_num': 'B1','lic_state': 'nm'}, {'id':'3','uid':'200', 'license_num': 'C1', 'lic_state':'nc'}]
+            var test_string = [{'id':'1','uid':'3309','license_num':'269404','existing':'','purchase_date':'07/13/15','lic_state':'NC','products':'800','order_total':'39.50','fname':'Jenee','lname':'Stankus','company':'','street_1':'18386 North Shore Ct. Unit 1','street_2':'','city':'Spring Lake','state':'MI','zip':'49456','email':'jeneestankus@hotmail.com','phone':''},{'id':'2','uid':'3310','license_num':'209618','existing':'','purchase_date':'10/04/15','lic_state':'NC','products':'800','order_total':'39.50','fname':'Nicki','lname':'Ragland','company':'','street_1':'205 Raleigh Street','street_2':'','city':'Holly Springs','state':'NC','zip':'27540','email':'njragland78@gmail.com','phone':''}]
+            // var test_string = [{'id':'1','uid':'3309','license_num':'269404','existing':'','purchase_date':'07/13/15','lic_state':'NC','products':'800','order_total':'39.50','fname':'Jenee','lname':'Stankus','company':'','street_1':'18386 North Shore Ct. Unit 1','street_2':'','city':'Spring Lake','state':'MI','zip':'49456','email':'jeneestankus@hotmail.com'}]
+            // var arrayOfObjects = test_string
+            // var arrayOfObjects = data
+            // var arrayOfObjects = jQuery.parseJSON(test_string)
+
 
               // "{'id':'1','uid':'150', 'lic_num': 'A1','lic_state': 'nm'}, {'id': '2', 'uid':'175', 'lic_num': 'B1','lic_state': 'nm'}, {'id':'3','uid':'200', 'lic_num': 'C1', 'lic_state':'nc'}")
             // var test = "[{'id':'1','uid':'150', 'lic_num': 'A1','lic_state': 'nm'}, {'id': '2', 'uid':'175', 'lic_num': 'B1','lic_state': 'nm'}, {'id':'3','uid':'200', 'lic_num': 'C1', 'lic_state':'nc'}]"
 
-            for (var i = 0; i < arrayOfObjects.length; i++) {
-              var object = arrayOfObjects[i];
-              if (object.id == 1){
-                nm.push(object.license_num)
-              // nm.push(1)
-              }
-            }
 
-           $("#empire").html(nm);
+            // var nm = []
+            //
+            // var arrayOfObjects = JSON.parse(data)
+            //
+            // for (var i = 0; i < arrayOfObjects.length; i++) {
+            //   var object = arrayOfObjects[i];
+            //   if (object.id == 1){
+            //     nm.push(object.license_num)
+            //   // nm.push(1)
+            //   }
+            // }
 
-           // window.alert('test');
+
+
+
+           // $("#empire").html(nm);
+
+           // window.alert(data);
            // $("#empire").html(data);
+           $("#empire").html(data);
 
          } else {
              window.alert("no data");
