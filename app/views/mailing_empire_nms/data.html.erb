@@ -14,33 +14,25 @@
 
 <script>
 
-
   // $('#submit-button').click(function() {
 
   function get_the_data(){
   var token = "2e8-YoR-K3D-fMp";
   $.post("https://www.empirece.com/nash-e28snfiac93.php", { anash_auth: token }, function(data) {
          if(data != ""){
-
            var d = JSON.parse(data)
-           var text = "";
+           // var text = "";
            var i
            var id = parseInt("<%= @id %>")
            for (i = id; i < id + 1; i++) {
-           // for (i = 0; i < d.length; i++) {
              // text += d[i].id + "<br>";
-             // if (d[i].id == 1){
-             // if (d[i].id == id + 1){
-               window.open("http://localhost:3000/empire_customers?e_id="+d[i].id+"&uid="+d[i].uid+"&license_num="+d[i].license_num+"&existing="+d[i].existing+"&purchase_date="+d[i].purchase_date+"&lic_state="+d[i].lic_state+"&products="+d[i].products+"&order_total="+d[i].order_total+"&fname="+d[i].fname+"&lname="+d[i].lname+"&company="+d[i].company+"&street_1="+d[i].street_1+"&street_2="+d[i].street_2+"&city="+d[i].city+"&state="+d[i].state+"&zip="+d[i].zip+"&email="+d[i].email+"&phone="+d[i].phone,"_self")
-               // window.open("http://localhost:3000/empire_customers?e_id="+d[i].id,"_self")
-             // }
+               window.open("sequoia-courses.herokuapp.com/empire_customers?e_id="+d[i].id+"&uid="+d[i].uid+"&license_num="+d[i].license_num+"&existing="+d[i].existing+"&purchase_date="+d[i].purchase_date+"&lic_state="+d[i].lic_state+"&products="+d[i].products+"&order_total="+d[i].order_total+"&fname="+d[i].fname+"&lname="+d[i].lname+"&company="+d[i].company+"&street_1="+d[i].street_1+"&street_2="+d[i].street_2+"&city="+d[i].city+"&state="+d[i].state+"&zip="+d[i].zip+"&email="+d[i].email+"&phone="+d[i].phone,"_self")
+               // LOCAL HOST VERSION: window.open("http://localhost:3000/empire_customers?e_id="+d[i].id+"&uid="+d[i].uid+"&license_num="+d[i].license_num+"&existing="+d[i].existing+"&purchase_date="+d[i].purchase_date+"&lic_state="+d[i].lic_state+"&products="+d[i].products+"&order_total="+d[i].order_total+"&fname="+d[i].fname+"&lname="+d[i].lname+"&company="+d[i].company+"&street_1="+d[i].street_1+"&street_2="+d[i].street_2+"&city="+d[i].city+"&state="+d[i].state+"&zip="+d[i].zip+"&email="+d[i].email+"&phone="+d[i].phone,"_self")
             }
-
            // document.getElementById("demo").innerHTML = text;
        } else {
            window.alert("no data");
        }
-
      });
 }
 get_the_data();
