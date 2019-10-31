@@ -1,21 +1,12 @@
-</br>
-<h1 class="text-center"><big>Mailing Empire - New Mexico</big></h1>
-<div class="text-center">
+<div class="text-center jumbotron">
+  <h1 class="text-center">Mailing Empire - New Mexico</h1>
   <a class="text-center" data-toggle="collapse" data-target="#demo">Notes</a>
     <div id="demo" class="collapse">
       <p class="text-center">Mailed in-house with vista print cards - mailed once per month. Each person recieves 2 cards - 30 and 60 days before license expiration. </p>
     </div>
 </div>
 
-<%= link_to 'Data', data_mailing_empire_nms_path %>
-<!-- <div class="" id="empire">
-</div> -->
-
-
-
 <p><%= link_to 'Add a NM No Mail', mailing_empire_nms_path(page: 'nm_no_mail'), class: 'btn btn-default' %></p>
-<p><%= link_to 'Clear Filter', mailing_empire_nms_path, class: 'btn btn-default' %></p>
-</br></br>
 
 <% if params['page'] == 'nm_no_mail' || params['last'].present? %>
   <%= render(:partial => 'no_mail') %>
@@ -27,6 +18,8 @@
   <p>
   Records: <strong><%= @mailing_empire_nms.count %></strong>
   <%= link_to 'Export', mailing_empire_nms_path(filter: params['filter'],format: :csv), class: 'btn btn-success' %>
+  <%= link_to 'Clear', mailing_empire_nms_path, class: 'btn btn-default' %>
+
   <!-- date: @date, format: :csv -->
   </p>
   </br></br>

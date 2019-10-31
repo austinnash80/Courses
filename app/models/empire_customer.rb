@@ -1,0 +1,2 @@
+class EmpireCustomer < ApplicationRecord
+end

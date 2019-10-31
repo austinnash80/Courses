@@ -1,57 +1,49 @@
 <h1>Empire Data</h1>
 
-<p><%= @c %></p>
-<div class="" id="empire">
+
+<button type="button" id="submit-button">Click Me</button>
+<div class="" id="demo">
 
 </div>
 
+<p>Id: <%= @id %></p>
+
+
+
+
+
 <script>
+
+
+  // $('#submit-button').click(function() {
+
   function get_the_data(){
   var token = "2e8-YoR-K3D-fMp";
   $.post("https://www.empirece.com/nash-e28snfiac93.php", { anash_auth: token }, function(data) {
          if(data != ""){
 
-           // var t1 = [{"id":"1","uid":"3309","license_num":"269404","existing":"","purchase_date":"07/13/15","lic_state":"NC","products":"800","order_total":"39.50","fname":"Jenee","lname":"Stankus","company":"","street_1":"18386 North Shore Ct. Unit 1","street_2":"","city":"Spring Lake","state":"MI","zip":"49456","email":"jeneestankus@hotmail.com","phone",""},
+           var d = JSON.parse(data)
+           var text = "";
+           var i
+           var id = parseInt("<%= @id %>")
+           for (i = id; i < id + 1; i++) {
+           // for (i = 0; i < d.length; i++) {
+             // text += d[i].id + "<br>";
+             // if (d[i].id == 1){
+             // if (d[i].id == id + 1){
+               window.open("http://localhost:3000/empire_customers?e_id="+d[i].id+"&uid="+d[i].uid+"&license_num="+d[i].license_num+"&existing="+d[i].existing+"&purchase_date="+d[i].purchase_date+"&lic_state="+d[i].lic_state+"&products="+d[i].products+"&order_total="+d[i].order_total+"&fname="+d[i].fname+"&lname="+d[i].lname+"&company="+d[i].company+"&street_1="+d[i].street_1+"&street_2="+d[i].street_2+"&city="+d[i].city+"&state="+d[i].state+"&zip="+d[i].zip+"&email="+d[i].email+"&phone="+d[i].phone,"_self")
+               // window.open("http://localhost:3000/empire_customers?e_id="+d[i].id,"_self")
+             // }
+            }
 
+           // document.getElementById("demo").innerHTML = text;
+       } else {
+           window.alert("no data");
+       }
 
-            // var test_string = [{'id':'1','uid':'150', 'license_num': 'A1','lic_state': 'nm'}, {'id': '2', 'uid':'175', 'license_num': 'B1','lic_state': 'nm'}, {'id':'3','uid':'200', 'license_num': 'C1', 'lic_state':'nc'}]
-            var test_string = [{'id':'1','uid':'3309','license_num':'269404','existing':'','purchase_date':'07/13/15','lic_state':'NC','products':'800','order_total':'39.50','fname':'Jenee','lname':'Stankus','company':'','street_1':'18386 North Shore Ct. Unit 1','street_2':'','city':'Spring Lake','state':'MI','zip':'49456','email':'jeneestankus@hotmail.com','phone':''},{'id':'2','uid':'3310','license_num':'209618','existing':'','purchase_date':'10/04/15','lic_state':'NC','products':'800','order_total':'39.50','fname':'Nicki','lname':'Ragland','company':'','street_1':'205 Raleigh Street','street_2':'','city':'Holly Springs','state':'NC','zip':'27540','email':'njragland78@gmail.com','phone':''}]
-            // var test_string = [{'id':'1','uid':'3309','license_num':'269404','existing':'','purchase_date':'07/13/15','lic_state':'NC','products':'800','order_total':'39.50','fname':'Jenee','lname':'Stankus','company':'','street_1':'18386 North Shore Ct. Unit 1','street_2':'','city':'Spring Lake','state':'MI','zip':'49456','email':'jeneestankus@hotmail.com'}]
-            // var arrayOfObjects = test_string
-            // var arrayOfObjects = data
-            // var arrayOfObjects = jQuery.parseJSON(test_string)
-
-
-              // "{'id':'1','uid':'150', 'lic_num': 'A1','lic_state': 'nm'}, {'id': '2', 'uid':'175', 'lic_num': 'B1','lic_state': 'nm'}, {'id':'3','uid':'200', 'lic_num': 'C1', 'lic_state':'nc'}")
-            // var test = "[{'id':'1','uid':'150', 'lic_num': 'A1','lic_state': 'nm'}, {'id': '2', 'uid':'175', 'lic_num': 'B1','lic_state': 'nm'}, {'id':'3','uid':'200', 'lic_num': 'C1', 'lic_state':'nc'}]"
-
-
-            // var nm = []
-            //
-            // var arrayOfObjects = JSON.parse(data)
-            //
-            // for (var i = 0; i < arrayOfObjects.length; i++) {
-            //   var object = arrayOfObjects[i];
-            //   if (object.id == 1){
-            //     nm.push(object.license_num)
-            //   // nm.push(1)
-            //   }
-            // }
-
-
-
-
-           // $("#empire").html(nm);
-
-           // window.alert(data);
-           // $("#empire").html(data);
-           $("#empire").html(data);
-
-         } else {
-             window.alert("no data");
-         }
-       });
-  }
-  get_the_data();
+     });
+}
+get_the_data();
+// });
 
 </script>

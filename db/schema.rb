@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191029183249) do
+ActiveRecord::Schema.define(version: 20191031210737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -239,6 +239,32 @@ ActiveRecord::Schema.define(version: 20191029183249) do
     t.boolean "extra_b"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "empire_customers", force: :cascade do |t|
+    t.string "uid"
+    t.string "license_num"
+    t.string "existing"
+    t.string "purchase_date"
+    t.string "lic_state"
+    t.string "products"
+    t.string "order_total"
+    t.string "fname"
+    t.string "lname"
+    t.string "company"
+    t.string "street_1"
+    t.string "street_2"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "email"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "ids"
+    t.integer "e_id"
+    t.date "p_date"
+    t.decimal "total"
   end
 
   create_table "empire_mailings", force: :cascade do |t|

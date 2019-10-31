@@ -1,0 +1,28 @@
+
+<%= simple_form_for(@empire_customer) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :uid %>
+    <%= f.input :license_num %>
+    <%= f.input :existing %>
+    <%= f.input :purchase_date %>
+    <%= f.input :lic_state %>
+    <%= f.input :products %>
+    <%= f.input :order_total %>
+    <%= f.input :fname %>
+    <%= f.input :lname %>
+    <%= f.input :company %>
+    <%= f.input :street_1 %>
+    <%= f.input :street_2 %>
+    <%= f.input :city %>
+    <%= f.input :state %>
+    <%= f.input :zip %>
+    <%= f.input :email %>
+    <%= f.input :phone %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

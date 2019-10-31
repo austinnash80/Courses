@@ -9,37 +9,39 @@ class MailingEmpireNmsController < ApplicationController
     @nm_no_mail = MailingEmpireNm.where(last: params['last']).order(:id).all
     @export = MailingEmpireNm.all
 
+    @id = EmpireCustomer.pluck(:id).max
+
 # Buttom Filters
     if params['filter'].blank?
       @mailing_empire_nms = MailingEmpireNm.all.first(0)
     elsif params['filter'] == 'nov_19'
-      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2019-11-30','2019-12-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).all
+      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2019-11-30','2019-12-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).order(:id).all
     elsif params['filter'] == 'dec_19'
-      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2019-12-31','2020-01-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).all
+      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2019-12-31','2020-01-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).order(:id).all
     elsif params['filter'] == 'jan_20'
-      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-01-31','2020-02-28']).where(licese_status: 'Active').where(dup_number: [1,nil]).all
+      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-01-31','2020-02-28']).where(licese_status: 'Active').where(dup_number: [1,nil]).order(:id).all
     elsif params['filter'] == 'feb_20'
-      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-02-28','2020-03-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).all
+      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-02-28','2020-03-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).order(:id).all
     elsif params['filter'] == 'mar_20'
-      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-03-31','2020-04-30']).where(licese_status: 'Active').where(dup_number: [1,nil]).all
+      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-03-31','2020-04-30']).where(licese_status: 'Active').where(dup_number: [1,nil]).order(:id).all
     elsif params['filter'] == 'apr_20'
-      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-04-30','2020-05-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).all
+      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-04-30','2020-05-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).order(:id).all
     elsif params['filter'] == 'may_20'
-      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-05-31','2020-06-30']).where(licese_status: 'Active').where(dup_number: [1,nil]).all
+      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-05-31','2020-06-30']).where(licese_status: 'Active').where(dup_number: [1,nil]).order(:id).all
     elsif params['filter'] == 'jun_20'
-      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-06-30','2020-07-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).all
+      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-06-30','2020-07-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).order(:id).all
     elsif params['filter'] == 'jul_20'
-      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-07-31','2020-08-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).all
+      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-07-31','2020-08-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).order(:id).all
     elsif params['filter'] == 'aug_20'
-      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-08-31','2020-09-30']).where(licese_status: 'Active').where(dup_number: [1,nil]).all
+      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-08-31','2020-09-30']).where(licese_status: 'Active').where(dup_number: [1,nil]).order(:id).all
     elsif params['filter'] == 'sep_20'
-      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-09-30','2020-10-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).all
+      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-09-30','2020-10-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).order(:id).all
     elsif params['filter'] == 'oct_20'
-      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-10-31','2020-11-30']).where(licese_status: 'Active').where(dup_number: [1,nil]).all
+      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-10-31','2020-11-30']).where(licese_status: 'Active').where(dup_number: [1,nil]).order(:id).all
     elsif params['filter'] == 'nov_20'
-      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-11-30','2020-12-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).all
+      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-11-30','2020-12-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).order(:id).all
     elsif params['filter'] == 'dec_20'
-      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-12-31','2021-01-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).all
+      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-12-31','2021-01-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).order(:id).all
     end
 # end Button Filters
 
@@ -51,8 +53,8 @@ class MailingEmpireNmsController < ApplicationController
   end
 
   def data
-     test_data
-
+    @id = EmpireCustomer.pluck(:e_id).max
+  # MailingEmpireNm.where(last: "LUCERO").update_all middle: 'A'
   end
 
   # GET /mailing_empire_nms/1
@@ -125,13 +127,7 @@ class MailingEmpireNmsController < ApplicationController
     redirect_to mailing_empire_nms_path(last: params['last']), notice: "NoMail Successful"
   end
 
-  def test_data
-    d = "string"
-    # @c =  d[3]
-    @c =  d[354120]
-    @c1 =  d[354121]
-    @c2 =  d[354122]
-  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
