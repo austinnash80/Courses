@@ -6,18 +6,24 @@ class MailingEmpireNmsController < ApplicationController
   def index
 
     @nm_total = MailingEmpireNm.all.count
-    @nm_no_mail = MailingEmpireNm.where(last: params['last']).order(:id).all
+    if params['last'].present?
+      @nm_no_mail = MailingEmpireNm.where('lower(last) = ?', params['last'].downcase).order(:id).all
+    end
     @export = MailingEmpireNm.all
 
     @id = EmpireCustomer.pluck(:id).max
 
     @nm_customers = EmpireCustomer.where(lic_state: 'NM')
+    @customer = MailingEmpireNm.where(customer: true).all.count
+    @no_mails = MailingEmpireNm.where(no_mail: true).all.count
 
-@customer = MailingEmpireNm.where(customer: true).all.count
 
-
-    EmpireCustomer.where(lic_state: "NM").all.each do |i|
-      MailingEmpireNm.where(customer: false).where(license_no: i.license_num).update_all customer: true
+# MATCHING CUSTOMERS - HAPPENS Each time you load the page
+    if params['run'] == 'customer'
+      EmpireCustomer.where(lic_state: "NM").all.each do |i|
+        MailingEmpireNm.where(customer: false).where(license_no: i.license_num).update_all customer: true
+      end
+      redirect_to mailing_empire_nms_path, notice: 'Customer Match Updated'
     end
 
 
