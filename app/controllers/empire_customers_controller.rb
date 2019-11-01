@@ -6,16 +6,52 @@ class EmpireCustomersController < ApplicationController
   # GET /empire_customers
   # GET /empire_customers.json
   def index
-    @empire_customers_count = EmpireCustomer.all.count
+    run_data
+    # @empire_customers_count = EmpireCustomer.all.count
     @empire_customers = EmpireCustomer.order(:e_id).last(1)
     @uids = EmpireCustomer.pluck(:uid)
     @id = '3'
-    # if params['fname'].present?
+    @total_purchases = EmpireCustomer.all.count
+    customers = EmpireCustomer.all.pluck(:uid)
+    @unique_customers = customers.uniq.count
+    states = EmpireCustomer.all.pluck(:lic_state)
+    @unique_states = states.uniq.count
+    @last_update = EmpireCustomer.all.last(1).pluck(:p_date)
+
+# State Table
+  @states = EmpireCustomer.all.group_by(&:lic_state)
+  # @states = s.group_by{|h| h[:e_id]}.map{[k,v.size]}.to_hash
+    if params['search'].present?
+      @empire_customers_search = EmpireCustomer.where('lower(lname) = ?', params['search'].downcase).or(EmpireCustomer.where(uid: params['search']))
+    end
+  end
+
+  def run_data
     if params['e_id'].present?
-      # if @uids.exclude?(params['uid'])
-        new = EmpireCustomer.create(e_id: params['e_id'].to_i, uid: params['uid'], license_num: params['license_num'], existing: params['existing'], p_date: Date::strptime(params['purchase_date'],"%m/%d/%y"), purchase_date: params['purchase_date'], lic_state: params['lic_state'], products: params['products'], total: params['order_total'].to_f, order_total: params['order_total'], fname: params['fname'], lname: params['lname'], company: params['company'], street_1: params['street_1'], street_2: params['street_2'], city: params['city'], state: params['state'], zip: params['zip'], email: params['email'], phone: params['phone'])
+        new = EmpireCustomer.create(
+          e_id: params['e_id'].present? ? params['e_id'].to_i : 0,
+          uid: params['uid'],
+          license_num: params['license_num'],
+          existing: params['existing'],
+          p_date: params['purchase_date'].present? ? Date::strptime(params['purchase_date'],"%m/%d/%y") : '',
+          purchase_date: params['purchase_date'],
+          lic_state: params['lic_state'],
+          products: params['products'],
+          total: params['order_total'].present? ? params['order_total'].to_f : 0,
+          order_total: params['order_total'],
+          fname: params['fname'],
+          lname: params['lname'],
+          company: params['company'],
+          street_1: params['street_1'],
+          street_2: params['street_2'],
+          city: params['city'],
+          state: params['state'],
+          zip: params['zip'],
+          email: params['email'],
+          phone: params['phone'])
+
         new.save
-      # end
+        
       redirect_to data_mailing_empire_nms_path
     end
   end

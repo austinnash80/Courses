@@ -1,16 +1,7 @@
-<h1>Empire Data</h1>
-
-
-<button type="button" id="submit-button">Click Me</button>
-<div class="" id="demo">
-
-</div>
-
+<h1>Empire Customer - Run Data</h1>
+<!-- <button type="button" id="submit-button">Click Me</button>
+<div class="" id="demo"></div> -->
 <p>Id: <%= @id %></p>
-
-
-
-
 
 <script>
 
@@ -26,8 +17,9 @@
            var id = parseInt("<%= @id %>")
            for (i = id; i < id + 1; i++) {
              // text += d[i].id + "<br>";
-               window.open("http://sequoia-courses.herokuapp.com/empire_customers?e_id="+d[i].id+"&uid="+d[i].uid+"&license_num="+d[i].license_num+"&existing="+d[i].existing+"&purchase_date="+d[i].purchase_date+"&lic_state="+d[i].lic_state+"&products="+d[i].products+"&order_total="+d[i].order_total+"&fname="+d[i].fname+"&lname="+d[i].lname+"&company="+d[i].company+"&street_1="+d[i].street_1+"&street_2="+d[i].street_2+"&city="+d[i].city+"&state="+d[i].state+"&zip="+d[i].zip+"&email="+d[i].email+"&phone="+d[i].phone,"_self")
-               // LOCAL HOST VERSION: window.open("http://localhost:3000/empire_customers?e_id="+d[i].id+"&uid="+d[i].uid+"&license_num="+d[i].license_num+"&existing="+d[i].existing+"&purchase_date="+d[i].purchase_date+"&lic_state="+d[i].lic_state+"&products="+d[i].products+"&order_total="+d[i].order_total+"&fname="+d[i].fname+"&lname="+d[i].lname+"&company="+d[i].company+"&street_1="+d[i].street_1+"&street_2="+d[i].street_2+"&city="+d[i].city+"&state="+d[i].state+"&zip="+d[i].zip+"&email="+d[i].email+"&phone="+d[i].phone,"_self")
+               // window.open("http://sequoia-courses.herokuapp.com/empire_customers?e_id="+d[i].id+"&uid="+d[i].uid+"&license_num="+d[i].license_num+"&existing="+d[i].existing+"&purchase_date="+d[i].purchase_date+"&lic_state="+d[i].lic_state+"&products="+d[i].products+"&order_total="+d[i].order_total+"&fname="+d[i].fname+"&lname="+d[i].lname+"&company="+d[i].company+"&street_1="+d[i].street_1+"&street_2="+d[i].street_2+"&city="+d[i].city+"&state="+d[i].state+"&zip="+d[i].zip+"&email="+d[i].email+"&phone="+d[i].phone,"_self")
+               // LOCAL HOST VERSION:
+                 window.open("http://localhost:3000/empire_customers?e_id="+d[i].id+"&uid="+d[i].uid+"&license_num="+d[i].license_num+"&existing="+d[i].existing+"&purchase_date="+d[i].purchase_date+"&lic_state="+d[i].lic_state+"&products="+d[i].products+"&order_total="+d[i].order_total+"&fname="+d[i].fname+"&lname="+d[i].lname+"&company="+d[i].company+"&street_1="+d[i].street_1+"&street_2="+d[i].street_2+"&city="+d[i].city+"&state="+d[i].state+"&zip="+d[i].zip+"&email="+d[i].email+"&phone="+d[i].phone,"_self")
             }
            // document.getElementById("demo").innerHTML = text;
        } else {
