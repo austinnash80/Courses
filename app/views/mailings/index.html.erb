@@ -4,7 +4,7 @@
   <h1>Mailings</h1>
 </div>
 
-<% if user_signed_in? && current_user.email == 'john@sequoiacpe.com' || current_user.email == 'austin@sequoiacpe.com' %>
+<% if user_signed_in? && current_user.email == 'john@empirelearning.com' || current_user.email == 'austin@sequoiacpe.com' %>
 <h3>Upload CSV File</h3>
   <%= form_tag import_mailings_path, multipart: true do %>
   <%= file_field_tag :file %>
