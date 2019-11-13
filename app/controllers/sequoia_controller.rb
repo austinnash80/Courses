@@ -2,6 +2,10 @@ class SequoiaController < ApplicationController
 
 @today_date = (Date.today - 8.hours)
 
+def s_data
+  @id = SCustomer.pluck(:s_id).max
+end
+
   def dash_hamdo
     postcard_schedule
     postcard_inventory

@@ -1,0 +1,98 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="jumbotron text-center">Sequoia Customers</h1>
+
+<div class="row">
+  <div class="well col-md-2">
+    <div class="text-center">
+      <p><small>Last Record: <strong><%= @last_update[0] %></strong></small></p>
+      <p><%= link_to 'Run Data', sequoia_s_data_path, target: "_blank", class: 'btn btn-success' %></p>
+    </div>
+    <br>
+    <p>Total Purchases: <strong><%= @total_purchases %></strong></p>
+    <p>Unique Customers: <strong><%= @unique_customers %></strong></p>
+    <p>States: <strong><%= @unique_states %></strong> <a class="text-center" data-toggle="collapse" data-target="#demo">more</a></p>
+      <div id="demo" class="collapse">
+        <table class="table table-bordered table-outline">
+          <tr>
+            <th>States</th>
+            <th>Purchases</th>
+            <th>Customers</th>
+          </tr>
+          <tbody>
+            <%# @states.each do |k,v| %>
+            <tr>
+              <td><%#= k %></td>
+              <td><%#= v.count %></td>
+              <td></td>
+            </tr>
+            <%# end %>
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>
+
+<!-- <table>
+  <thead>
+    <tr>
+      <th>S</th>
+      <th>Order</th>
+      <th>Uid</th>
+      <th>Existing</th>
+      <th>Purchase s</th>
+      <th>Purchase</th>
+      <th>Product 1</th>
+      <th>Product 2</th>
+      <th>Designation</th>
+      <th>Fname</th>
+      <th>Lname</th>
+      <th>Street 1</th>
+      <th>Street 2</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+      <th>Email</th>
+      <th>Price s</th>
+      <th>Price</th>
+      <th>Lic num</th>
+      <th>Lic state</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @s_customers.each do |s_customer| %>
+      <tr>
+        <td><%= s_customer.s_id %></td>
+        <td><%= s_customer.order_id %></td>
+        <td><%= s_customer.uid %></td>
+        <td><%= s_customer.existing %></td>
+        <td><%= s_customer.purchase_s %></td>
+        <td><%= s_customer.purchase %></td>
+        <td><%= s_customer.product_1 %></td>
+        <td><%= s_customer.product_2 %></td>
+        <td><%= s_customer.designation %></td>
+        <td><%= s_customer.fname %></td>
+        <td><%= s_customer.lname %></td>
+        <td><%= s_customer.street_1 %></td>
+        <td><%= s_customer.street_2 %></td>
+        <td><%= s_customer.city %></td>
+        <td><%= s_customer.state %></td>
+        <td><%= s_customer.zip %></td>
+        <td><%= s_customer.email %></td>
+        <td><%= s_customer.price_s %></td>
+        <td><%= s_customer.price %></td>
+        <td><%= s_customer.lic_num %></td>
+        <td><%= s_customer.lic_state %></td>
+        <td><%= link_to 'Show', s_customer %></td>
+        <td><%= link_to 'Edit', edit_s_customer_path(s_customer) %></td>
+        <td><%= link_to 'Destroy', s_customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New S Customer', new_s_customer_path %> -->

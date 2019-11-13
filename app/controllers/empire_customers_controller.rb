@@ -16,7 +16,8 @@ class EmpireCustomersController < ApplicationController
     @unique_customers = customers.uniq.count
     states = EmpireCustomer.all.pluck(:lic_state)
     @unique_states = states.uniq.count
-    @last_update = EmpireCustomer.all.last(1).pluck(:p_date)
+    newest = EmpireCustomer.pluck(:e_id).max
+    @last_update = EmpireCustomer.where(e_id: newest).pluck(:p_date)
 
 # State Table
   @states = EmpireCustomer.all.group_by(&:lic_state)
@@ -28,32 +29,37 @@ class EmpireCustomersController < ApplicationController
 
   def run_data
     if params['e_id'].present?
-        new = EmpireCustomer.create(
-          e_id: params['e_id'].present? ? params['e_id'].to_i : 0,
-          uid: params['uid'],
-          license_num: params['license_num'],
-          existing: params['existing'],
-          p_date: params['purchase_date'].present? ? Date::strptime(params['purchase_date'],"%m/%d/%y") : '',
-          purchase_date: params['purchase_date'],
-          lic_state: params['lic_state'],
-          products: params['products'],
-          total: params['order_total'].present? ? params['order_total'].to_f : 0,
-          order_total: params['order_total'],
-          fname: params['fname'],
-          lname: params['lname'],
-          company: params['company'],
-          street_1: params['street_1'],
-          street_2: params['street_2'],
-          city: params['city'],
-          state: params['state'],
-          zip: params['zip'],
-          email: params['email'],
-          phone: params['phone'])
+      # if params['e_id'].to_i > EmpireCustomer.all.pluck(:e_id).max
+          new = EmpireCustomer.create(
+            e_id: params['e_id'].present? ? params['e_id'].to_i : 0,
+            uid: params['uid'],
+            license_num: params['license_num'],
+            existing: params['existing'],
+            p_date: params['purchase_date'].present? ? Date::strptime(params['purchase_date'],"%m/%d/%y") : '',
+            purchase_date: params['purchase_date'],
+            lic_state: params['lic_state'],
+            products: params['products'],
+            total: params['order_total'].present? ? params['order_total'].to_f : 0,
+            order_total: params['order_total'],
+            fname: params['fname'],
+            lname: params['lname'],
+            company: params['company'],
+            street_1: params['street_1'],
+            street_2: params['street_2'],
+            city: params['city'],
+            state: params['state'],
+            zip: params['zip'],
+            email: params['email'],
+            phone: params['phone'])
 
-        new.save
-        
-      redirect_to data_mailing_empire_nms_path
+          new.save
+
+        redirect_to data_mailing_empire_nms_path
+      # elsif
+        # redirect_to empire_customers_path(done: 'YES')
+      # end
     end
+    # redirect_to empire_customers_path(done: 'YES')
   end
 
   # GET /empire_customers/1

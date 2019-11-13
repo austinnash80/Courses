@@ -1,0 +1,52 @@
+<h1 class="jumbotron text-center">Sequoia Customers - Run Data</h1>
+
+<p>ID: <%= @id %></p>
+<div class="" id="demo">
+
+</div>
+<script>
+
+  // $('#submit-button').click(function() {
+
+  function get_the_data(){
+  var token = "c6D-YoR-lD3-fMp";
+  $.post("https://www.krnseq.com/nash-uw82mOC8lWd21.php", { anash_auth: token }, function(data) {
+         if(data != ""){
+           var d = JSON.parse(data)
+           var text = "";
+           var i
+           var id = parseInt("<%= @id %>")
+           for (i = id; i < id + 1; i++) {
+             // text += d[i].purchase + "<br>";
+             window.open("http://localhost:3000/s_customers?s_id="+d[i].id+
+             // window.open("http://sequoia-courses.herokuapp.com/s_customers?s_id="+d[i].id+
+             "&order_id="+d[i].order_id+
+             "&uid="+d[i].uid+
+             "&existing="+d[i].existing+
+             "&purchase="+d[i].purchase+
+             "&product_1="+d[i].product_1+
+             "&product_2="+d[i].product_2+
+             "&designation="+d[i].designation+
+             "&fname="+d[i].fname+
+             "&lname="+d[i].lname+
+             "&street_1="+d[i].street_1+
+             "&street_2="+d[i].street_2+
+             "&city="+d[i].city+
+             "&state="+d[i].state+
+             "&zip="+d[i].zip+
+             "&email="+d[i].email+
+             "&price="+d[i].price_2,
+             "&lic_num="+d[i].lic_num,
+             "&lic_state="+d[i].lic_state,"_self")
+            }
+           // document.getElementById("demo").innerHTML = data;
+           // document.getElementById("demo").innerHTML = text;
+       } else {
+           window.alert("no data");
+       }
+     });
+  }
+get_the_data();
+// });
+
+</script>

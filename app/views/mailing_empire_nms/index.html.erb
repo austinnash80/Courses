@@ -14,6 +14,8 @@
 </div>
 <!-- END HEADER -->
 
+<%= @nm_customer %>
+
 <% if params['page'] == 'nm_no_mail' || params['last'].present? %>
   <%= render(:partial => 'no_mail') %>
 <% elsif params['page'] == 'customer'%>
@@ -32,8 +34,12 @@
           <td><strong><%= number_with_delimiter(@nm_total) %></strong></td>
         </tr>
         <tr>
+          <td>Customer Purchases</td>
+          <td><strong><%= number_with_delimiter(@customer_purchase.uniq.count) %></strong></td>
+        </tr>
+        <tr>
           <td>Customer Matches</td>
-          <td><strong><%= number_with_delimiter(@customer) %></strong></td>
+          <td><strong><%= number_with_delimiter(@customer_match) %></strong></td>
         </tr>
         <tr>
           <td>No-Mails</td>

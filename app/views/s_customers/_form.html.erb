@@ -1,0 +1,32 @@
+
+<%= simple_form_for(@s_customer) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :s_id %>
+    <%= f.input :order_id %>
+    <%= f.input :uid %>
+    <%= f.input :existing %>
+    <%= f.input :purchase_s %>
+    <%= f.input :purchase %>
+    <%= f.input :product_1 %>
+    <%= f.input :product_2 %>
+    <%= f.input :designation %>
+    <%= f.input :fname %>
+    <%= f.input :lname %>
+    <%= f.input :street_1 %>
+    <%= f.input :street_2 %>
+    <%= f.input :city %>
+    <%= f.input :state %>
+    <%= f.input :zip %>
+    <%= f.input :email %>
+    <%= f.input :price_s %>
+    <%= f.input :price %>
+    <%= f.input :lic_num %>
+    <%= f.input :lic_state %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

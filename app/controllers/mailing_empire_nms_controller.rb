@@ -14,7 +14,8 @@ class MailingEmpireNmsController < ApplicationController
     @id = EmpireCustomer.pluck(:id).max
 
     @nm_customers = EmpireCustomer.where(lic_state: 'NM')
-    @customer = MailingEmpireNm.where(customer: true).all.count
+    @customer_match = MailingEmpireNm.where(customer: true).all.count
+    @customer_purchase = EmpireCustomer.where(lic_state: 'NM').pluck(:uid)
     @no_mails = MailingEmpireNm.where(no_mail: true).all.count
 
 
@@ -30,6 +31,8 @@ class MailingEmpireNmsController < ApplicationController
      #     match = @nm_customers.where(license_num: i.license_no).pluck(:license_num)
      #     match.present? ? (MailingEmpireNm.where(license_no: match[0]).update_all customer: true) : ''
      # end
+
+     @nm_customer = EmpireCustomer.where(lic_state: 'NM').order('e_id DESC').all.count
 
 
 

@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  resources :s_customers do
+    collection do
+      get 'data'
+    end
+  end
   resources :empire_customers
   resources :master_lists do
     collection {post :import}
@@ -69,6 +74,7 @@ Rails.application.routes.draw do
   get 'sequoia/dash_hamdo'
   get 'sequoia/dash_kyle'
   get 'sequoia/dash_john'
+  get 'sequoia/s_data'
 
   resources :date_fields
   resources :pes_courses do
