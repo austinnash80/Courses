@@ -14,7 +14,6 @@
 </div>
 <!-- END HEADER -->
 
-<%= @nm_customer %>
 
 <% if params['page'] == 'nm_no_mail' || params['last'].present? %>
   <%= render(:partial => 'no_mail') %>
@@ -23,7 +22,7 @@
 <% elsif %>
 
 <p id="notice"><%= notice %></p>
-<p><%= link_to 'Run Customer Match', mailing_empire_nms_path(run: 'customer'), class: 'btn btn-info' %></p>
+<!-- <p><%= link_to 'Run Customer Match', mailing_empire_nms_path(run: 'customer'), class: 'btn btn-info' %></p> -->
 
 <div class="row">
   <div class="col-md-2">
@@ -33,14 +32,14 @@
           <td>Total Records</td>
           <td><strong><%= number_with_delimiter(@nm_total) %></strong></td>
         </tr>
-        <tr>
+        <!-- <tr>
           <td>Customer Purchases</td>
           <td><strong><%= number_with_delimiter(@customer_purchase.uniq.count) %></strong></td>
         </tr>
         <tr>
           <td>Customer Matches</td>
           <td><strong><%= number_with_delimiter(@customer_match) %></strong></td>
-        </tr>
+        </tr> -->
         <tr>
           <td>No-Mails</td>
           <td><strong><%= number_with_delimiter(@no_mails) %></strong></td>
