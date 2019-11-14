@@ -12,4 +12,15 @@ class MasterList < ApplicationRecord
     MasterList.import batch
   end
 
+  def self.to_csv # Export to csv function
+    attributes = %w{lid list lname no_mail}
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+        all.each do |master_list|
+          csv << attributes.map{ |attr| master_list.send(attr) }
+        end
+    end
+  end
+
 end

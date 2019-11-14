@@ -19,11 +19,18 @@ class MasterListsController < ApplicationController
     # ids = MasterList.where(who: 'EA').select("MIN(id) as id").group(:lid).collect(&:id)
     # MasterList.where(who: 'EA').where.not(id: ids).destroy_all
 
+
   end
 
   def no_mail
     @no_mails = MasterList.where(no_mail: 'yes').order(:lname).all
     @no_mails_count = MasterList.where(no_mail: 'yes').count
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data MasterList.where(no_mail: true).where(list: '07/19').to_csv, filename: "No_mail-#{Date.today}.csv" }
+    end
+
   end
 
   # GET /master_lists/1

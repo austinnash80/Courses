@@ -6,6 +6,8 @@
     <input class="form-control" id="myInput" type="text" placeholder="Search Table..">
   </div>
 </div>
+<%= link_to 'Export(csv)', no_mail_master_lists_path('csv'), class: 'btn btn-default' %>
+<br>
 <p>List size: <%= number_with_delimiter(@no_mails_count) %></p>
 
 
