@@ -28,7 +28,7 @@ class MasterListsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { send_data MasterList.where(no_mail: true).where(list: '07/19').to_csv, filename: "No_mail-#{Date.today}.csv" }
+      format.csv { send_data MasterList.where(no_mail: 'yes').where(list: '07/19').all.to_csv, filename: "No_mail-#{Date.today}.csv" }
     end
 
   end
