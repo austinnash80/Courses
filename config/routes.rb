@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       get 'remove_all'
       get 'no_mail_add'
       get 'no_mail'
+      get 'mailings'
     end
   end
 

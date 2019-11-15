@@ -28,9 +28,15 @@ class MasterListsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { send_data MasterList.where(no_mail: 'yes').where(list: '07/19').all.to_csv, filename: "No_mail-#{Date.today}.csv" }
+      format.csv { send_data MasterList.where(no_mail: 'yes').where(list: '10/19').all.to_csv, filename: "No_mail-EA-#{Date.today}.csv" }
     end
 
+  end
+
+  def mailings
+    @ea_list = (MasterList.last(1).pluck(:list))[0]
+    @ea_total = MasterList.where(who: 'EA', list: @ea_list).count
+    @pacific_mailing = MasterList.where(who: 'EA', list: @ea_list).where.not(no_mail: true).all
   end
 
   # GET /master_lists/1
