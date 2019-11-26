@@ -18,8 +18,6 @@ class MasterListsController < ApplicationController
     # Find Duplicates / destroy duplicates
     # ids = MasterList.where(who: 'EA').select("MIN(id) as id").group(:lid).collect(&:id)
     # MasterList.where(who: 'EA').where.not(id: ids).destroy_all
-
-
   end
 
   def no_mail
