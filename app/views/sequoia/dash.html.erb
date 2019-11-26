@@ -78,6 +78,11 @@
     <!-- * start R1 * -->
       <div class="well">
           <%#= render(:partial => 'enter_sales') %>
+          <p><%= link_to 'Update', data_mailing_empire_nms_path, target: "_blank", class: 'btn btn-success' %></p>
+            <h4><u>Empire Sales</u></h4>
+          <% EmpireCustomer.where('p_date > ?',Date.today - 15.days).order('p_date DESC').group(:p_date).sum(:total).each do |k, v| %>
+            <p><strong><%= k.strftime('%a') %></strong>, <%= k.strftime('%-b %-d') %>: <%= number_to_currency(v) %></p>
+          <% end %>
       </div>
     <!-- * start R2 -->
       <div class="well">
