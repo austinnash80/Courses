@@ -25,7 +25,7 @@
   </thead>
 
   <tbody>
-    <% @empire_state_lists.each do |empire_state_list| %>
+    <% @empire_state_lists.order('list_upload_updated_at DESC').each do |empire_state_list| %>
       <tr>
         <td><%= empire_state_list.st %></td>
         <!-- <td><%#= empire_state_list.tilte %></td> -->
