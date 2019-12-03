@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>St:</strong>
+  <%= @empire_state_list.st %>
+</p>
+
+<p>
+  <strong>Tilte:</strong>
+  <%= @empire_state_list.tilte %>
+</p>
+
+<p>
+  <strong>Cost:</strong>
+  <%= @empire_state_list.cost %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @empire_state_list.notes %>
+</p>
+
+<p>
+  <strong>Extra s:</strong>
+  <%= @empire_state_list.extra_s %>
+</p>
+
+<p>
+  <strong>List file name:</strong>
+  <%= @empire_state_list.list_file_name %>
+</p>
+
+<p>
+  <strong>List content type:</strong>
+  <%= @empire_state_list.list_content_type %>
+</p>
+
+<p>
+  <strong>List file size:</strong>
+  <%= @empire_state_list.list_file_size %>
+</p>
+
+<p>
+  <strong>List updated at:</strong>
+  <%= @empire_state_list.list_updated_at %>
+</p>
+
+<%= link_to 'Edit', edit_empire_state_list_path(@empire_state_list) %> |
+<%= link_to 'Back', empire_state_lists_path %>

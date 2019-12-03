@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Empire State Lists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>St</th>
+      <th>Tilte</th>
+      <th>Cost</th>
+      <th>Notes</th>
+      <th>Extra s</th>
+      <th>List file name</th>
+      <th>List content type</th>
+      <th>List file size</th>
+      <th>List updated at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @empire_state_lists.each do |empire_state_list| %>
+      <tr>
+        <td><%= empire_state_list.st %></td>
+        <td><%= empire_state_list.tilte %></td>
+        <td><%= empire_state_list.cost %></td>
+        <td><%= empire_state_list.notes %></td>
+        <td><%= empire_state_list.extra_s %></td>
+        <td><%= empire_state_list.list_file_name %></td>
+        <td><%= empire_state_list.list_content_type %></td>
+        <td><%= empire_state_list.list_file_size %></td>
+        <td><%= empire_state_list.list_updated_at %></td>
+        <td><%= link_to 'Show', empire_state_list %></td>
+        <td><%= link_to 'Edit', edit_empire_state_list_path(empire_state_list) %></td>
+        <td><%= link_to 'Destroy', empire_state_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Empire State List', new_empire_state_list_path %>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :empire_state_lists
   resources :s_customers do
     collection do
       get 'data'

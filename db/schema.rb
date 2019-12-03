@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191101193320) do
+ActiveRecord::Schema.define(version: 20191203002751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -291,6 +291,24 @@ ActiveRecord::Schema.define(version: 20191101193320) do
     t.decimal "cost_postage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "empire_state_lists", force: :cascade do |t|
+    t.string "st"
+    t.string "tilte"
+    t.decimal "cost"
+    t.text "notes"
+    t.string "extra_s"
+    t.string "list_file_name"
+    t.string "list_content_type"
+    t.integer "list_file_size"
+    t.datetime "list_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "list_upload_file_name"
+    t.string "list_upload_content_type"
+    t.integer "list_upload_file_size"
+    t.datetime "list_upload_updated_at"
   end
 
   create_table "exam_results", force: :cascade do |t|
