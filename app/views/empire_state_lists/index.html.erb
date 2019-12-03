@@ -33,7 +33,8 @@
         <td><%= empire_state_list.notes %></td>
         <td><%= empire_state_list.list_upload_file_name %></td>
         <td><%= empire_state_list.list_upload_updated_at.present? ? empire_state_list.list_upload_updated_at.strftime('%-m/%-d/%y') : '' %></td>
-        <td><a class="btn btn-default" target="_blank" href="<%= empire_state_list.list_upload %>"><i class="glyphicon glyphicon-download-alt" ></i> List</a></td>
+        <td><a class="btn btn-default" href="<%= empire_state_list.list_upload %>"><i class="glyphicon glyphicon-download-alt" ></i> List</a></td>
+        <!-- <td><a class="btn btn-default" target="_blank" href="<%= empire_state_list.list_upload %>"><i class="glyphicon glyphicon-download-alt" ></i> List</a></td> -->
         <% if empire_state_list.receipt_upload.url =~/missing/ %>
           <td>No Receipt</td>
         <% else %>

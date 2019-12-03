@@ -30,7 +30,7 @@ class EmpireStateListsController < ApplicationController
 
     respond_to do |format|
       if @empire_state_list.save
-        format.html { redirect_to @empire_state_list, notice: 'Empire state list was successfully created.' }
+        format.html { redirect_to empire_state_lists_path, notice: 'Empire state list was successfully created.' }
         format.json { render :show, status: :created, location: @empire_state_list }
       else
         format.html { render :new }
