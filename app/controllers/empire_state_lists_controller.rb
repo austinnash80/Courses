@@ -15,10 +15,12 @@ class EmpireStateListsController < ApplicationController
   # GET /empire_state_lists/new
   def new
     @empire_state_list = EmpireStateList.new
+    collections
   end
 
   # GET /empire_state_lists/1/edit
   def edit
+    collections
   end
 
   # POST /empire_state_lists
@@ -61,6 +63,10 @@ class EmpireStateListsController < ApplicationController
     end
   end
 
+  def collections
+    @states = [ "AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","PR","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"]
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_empire_state_list
@@ -69,6 +75,6 @@ class EmpireStateListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def empire_state_list_params
-      params.require(:empire_state_list).permit(:st, :tilte, :cost, :notes, :extra_s, :list_file_name, :list_content_type, :list_file_size, :list_updated_at, :list_upload)
+      params.require(:empire_state_list).permit(:st, :tilte, :cost, :notes, :extra_s, :list_file_name, :list_content_type, :list_file_size, :list_updated_at, :list_upload, :receipt)
     end
 end

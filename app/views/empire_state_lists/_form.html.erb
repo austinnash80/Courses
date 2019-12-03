@@ -4,14 +4,15 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :st %>
-    <%= f.input :tilte %>
+    <%= f.input :st, label: 'State', as: :select, collection: @states %>
+    <%#= f.input :tilte %>
     <%= f.input :cost %>
     <%= f.input :notes %>
-    <%= f.input :list_upload, as: :file %>
+    <%= f.input :list_upload, label: 'List', as: :file %>
+    <%= f.input :receipt_upload, label: 'Receipt', as: :file %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, 'Submit List', class: 'btn btn-primary' %>
   </div>
 <% end %>

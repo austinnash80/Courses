@@ -1,12 +1,13 @@
 <div class="down20 text-center">
   <h1 class="">Upload Empire List</h1>
+    <%= link_to 'Show', @empire_state_list %> |
+    <%= link_to 'Back', empire_state_lists_path %>
 </div>
 <div class="down40 row">
   <div class="col-lg-offset-4 col-lg-4">
     <%= render 'form', empire_state_list: @empire_state_list %>
 
-  <%= link_to 'Show', @empire_state_list %> |
-  <%= link_to 'Back', empire_state_lists_path %>
+
 
 </div>
 </div>

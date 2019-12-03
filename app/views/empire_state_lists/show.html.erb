@@ -5,10 +5,10 @@
   <%= @empire_state_list.st %>
 </p>
 
-<p>
+<!-- <p>
   <strong>Title:</strong>
-  <%= @empire_state_list.tilte %>
-</p>
+  <%#= @empire_state_list.tilte %>
+</p> -->
 
 <p>
   <strong>Cost:</strong>
@@ -20,23 +20,31 @@
   <%= @empire_state_list.notes %>
 </p>
 
-<p>
+<!-- <p>
   <strong>Extra s:</strong>
-  <%= @empire_state_list.extra_s %>
-</p>
+  <%#= @empire_state_list.extra_s %>
+</p> -->
 
 <p>
-  <strong>List file name:</strong>
+  <strong>List file:</strong>
   <%= @empire_state_list.list_upload_file_name %>
+</p>
+<p>
+  <strong>Receipt file:</strong>
+  <%= @empire_state_list.receipt_upload_file_name %>
 </p>
 
 <p>
   <strong>List updated at:</strong>
-  <%= @empire_state_list.list_upload_updated_at.strftime('%-m/%-d/%y') %>
+  <%= @empire_state_list.list_upload_updated_at.present? ? @empire_state_list.list_upload_updated_at.strftime('%-m/%-d/%y') : ''%>
 </p>
 
 <br>
   <a class="btn btn-primary" target="_blank" href="<%= @empire_state_list.list_upload %>"><i class="glyphicon glyphicon-download-alt" ></i> List</a>
+<br>
+<br>
+  <a class="btn btn-primary" target="_blank" href="<%= @empire_state_list.receipt_upload %>"><i class="glyphicon glyphicon-download-alt" ></i> Receipt</a>
+<br>
 <br>
 
 <%= link_to 'Edit', edit_empire_state_list_path(@empire_state_list) %> |
