@@ -6,7 +6,9 @@ Rails.application.routes.draw do
       get 'data'
     end
   end
-  resources :empire_customers
+  resources :empire_customers do
+    collection {post :import}
+  end
   resources :master_lists do
     collection {post :import}
     collection do

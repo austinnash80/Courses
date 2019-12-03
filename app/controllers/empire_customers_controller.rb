@@ -116,6 +116,11 @@ class EmpireCustomersController < ApplicationController
     end
   end
 
+  def import #Uploading CSV function
+    EmpireCustomer.my_import(params[:file])
+    redirect_to empire_customers_path, notice: "Upload Complete"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_empire_customer
