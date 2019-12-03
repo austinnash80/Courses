@@ -54,10 +54,10 @@ end
   end
 
   def dash
-    sequoia_exams_total
-    sequoia_exams_individual
-    sequoia_exams_old
-    sales
+    # sequoia_exams_total
+    # sequoia_exams_individual
+    # sequoia_exams_old
+    # sales
     postcard_schedule #must be above postcard_inventory
     postcard_inventory # must be below postcard_schedule
     course_update_status
@@ -65,10 +65,10 @@ end
     task
     msi_mailing
     name
-    live_chat_answer
-    calendar
-    empire_email_stats
-    enter_sales
+    # live_chat_answer
+    # calendar
+    # empire_email_stats
+    # enter_sales
   end
 
   def dash_kyle
