@@ -26,10 +26,8 @@
         <td><%= empire_state_list.cost %></td>
         <td><%= empire_state_list.notes %></td>
         <td><%= empire_state_list.extra_s %></td>
-        <td><%= empire_state_list.list_file_name %></td>
-        <td><%= empire_state_list.list_content_type %></td>
-        <td><%= empire_state_list.list_file_size %></td>
-        <td><%= empire_state_list.list_updated_at %></td>
+        <td><%= empire_state_list.list_upload_file_name %></td>
+        <td><%= empire_state_list.list_upload_updated_at.strftime('%-m/%-d/%y') %></td>
         <td><%= link_to 'Show', empire_state_list %></td>
         <td><%= link_to 'Edit', edit_empire_state_list_path(empire_state_list) %></td>
         <td><%= link_to 'Destroy', empire_state_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>

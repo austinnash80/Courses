@@ -36,7 +36,7 @@
 </p>
 
 <br>
-  <p src= <%= @empire_state_list.list_upload.url %> > Download List</p>
+  <a class="btn btn-primary" target="_blank" href="<%= @empire_state_list.list_upload %>"><i class="glyphicon glyphicon-download-alt" ></i> List</a>
 <br>
 
 <%= link_to 'Edit', edit_empire_state_list_path(@empire_state_list) %> |
