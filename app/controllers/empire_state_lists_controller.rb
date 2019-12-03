@@ -75,6 +75,6 @@ class EmpireStateListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def empire_state_list_params
-      params.require(:empire_state_list).permit(:st, :tilte, :cost, :notes, :extra_s, :list_file_name, :list_content_type, :list_file_size, :list_updated_at, :list_upload, :receipt)
+      params.require(:empire_state_list).permit(:st, :tilte, :cost, :notes, :extra_s, :list_file_name, :list_content_type, :list_file_size, :list_updated_at, :list_upload, :receipt_upload, :receipt)
     end
 end
