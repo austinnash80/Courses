@@ -6,6 +6,7 @@
   <div class="form-inputs">
     <%= f.input :st, label: 'State', as: :select, collection: @states %>
     <%#= f.input :tilte %>
+    <%#= f.input :extra_s, label: 'Status', as: :select, collection: ['Requested', 'Recieved'] %>
     <%= f.input :cost %>
     <%= f.input :notes %>
     <%= f.input :list_upload, label: 'List', as: :file %>
