@@ -31,26 +31,12 @@
 </p>
 
 <p>
-  <strong>List content type:</strong>
-  <%= @empire_state_list.list_upload_content_type %>
-</p>
-
-<p>
-  <strong>List file size:</strong>
-  <%= @empire_state_list.list_upload_file_size %>
-</p>
-
-<p>
   <strong>List updated at:</strong>
-  <%= @empire_state_list.list_upload_updated_at %>
+  <%= @empire_state_list.list_upload_updated_at.strftime('%-m/%-d/%y') %>
 </p>
 
 <br>
-<div class="row">
-  <div class="col-md-3">
-    <iframe src= <%= @empire_state_list.list_upload.url %> width="100%" height="500px" style="border: none;"> </iframe>
-  </div>
-</div>
+  <p src= <%= @empire_state_list.list_upload.url %> > Download List</p>
 <br>
 
 <%= link_to 'Edit', edit_empire_state_list_path(@empire_state_list) %> |
