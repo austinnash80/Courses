@@ -1,18 +1,26 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Empire State Lists</h1>
+<div class="well text-center">
+  <h1>Empire State Lists</h1>
+  <div class="text-center down20">
+    <%= link_to 'Add New List', new_empire_state_list_path, class: 'btn btn-primary' %>
+  </div>
+</div>
 
-<table class="table">
+
+<div class="down20">
+
+<table class="table table-outline table-stripped">
   <thead>
     <tr>
       <th>St</th>
       <!-- <th>Tilte</th> -->
-      <th>Cost</th>
+      <!-- <th>Cost</th> -->
       <th>Notes</th>
       <!-- <th>Extra s</th> -->
       <th>List file name</th>
       <th>List updated at</th>
-      <th colspan="4"></th>
+      <th colspan="5"></th>
     </tr>
   </thead>
 
@@ -21,7 +29,7 @@
       <tr>
         <td><%= empire_state_list.st %></td>
         <!-- <td><%#= empire_state_list.tilte %></td> -->
-        <td><%= empire_state_list.cost %></td>
+        <!-- <td><%#= empire_state_list.cost %></td> -->
         <td><%= empire_state_list.notes %></td>
         <td><%= empire_state_list.list_upload_file_name %></td>
         <td><%= empire_state_list.list_upload_updated_at.present? ? empire_state_list.list_upload_updated_at.strftime('%-m/%-d/%y') : '' %></td>
@@ -34,7 +42,6 @@
     <% end %>
   </tbody>
 </table>
+</div>
 
 <br>
-
-<%= link_to 'New Empire State List', new_empire_state_list_path %>
