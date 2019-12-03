@@ -14,13 +14,14 @@
   <thead>
     <tr>
       <th>St</th>
+      <th>Date</th>
       <!-- <th>Tilte</th> -->
       <!-- <th>Cost</th> -->
-      <th>Notes</th>
       <!-- <th>Extra s</th> -->
-      <th>List file name</th>
-      <th>List updated at</th>
-      <th colspan="5"></th>
+      <th>List</th>
+      <th colspan="2"></th>
+      <th>Notes</th>
+      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -28,11 +29,10 @@
     <% @empire_state_lists.order('list_upload_updated_at DESC').each do |empire_state_list| %>
       <tr>
         <td><%= empire_state_list.st %></td>
+        <td><%= empire_state_list.list_upload_updated_at.present? ? empire_state_list.list_upload_updated_at.strftime('%-m/%-d/%y') : '' %></td>
         <!-- <td><%#= empire_state_list.tilte %></td> -->
         <!-- <td><%#= empire_state_list.cost %></td> -->
-        <td><%= empire_state_list.notes %></td>
         <td><%= empire_state_list.list_upload_file_name %></td>
-        <td><%= empire_state_list.list_upload_updated_at.present? ? empire_state_list.list_upload_updated_at.strftime('%-m/%-d/%y') : '' %></td>
         <td><a class="btn btn-default" href="<%= empire_state_list.list_upload %>"><i class="glyphicon glyphicon-download-alt" ></i> List</a></td>
         <!-- <td><a class="btn btn-default" target="_blank" href="<%= empire_state_list.list_upload %>"><i class="glyphicon glyphicon-download-alt" ></i> List</a></td> -->
         <% if empire_state_list.receipt_upload.url =~/missing/ %>
@@ -40,6 +40,7 @@
         <% else %>
           <td><a class="btn btn-default" target="_blank" href="<%= empire_state_list.receipt_upload %>"><i class="glyphicon glyphicon-download-alt" ></i> Receipt</a></td>
         <% end %>
+        <td><%= empire_state_list.notes %></td>
         <td><%= link_to 'Show', empire_state_list %></td>
         <td><%= link_to 'Edit', edit_empire_state_list_path(empire_state_list) %></td>
         <td><%= link_to 'Delete', empire_state_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
