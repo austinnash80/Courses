@@ -1,0 +1,34 @@
+
+<%= simple_form_for(@empire_master_list) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :lid %>
+    <%= f.input :source %>
+    <%= f.input :list %>
+    <%= f.input :license_number %>
+    <%= f.input :record_type %>
+    <%= f.input :lic_status %>
+    <%= f.input :iss_date_s %>
+    <%= f.input :iss_date %>
+    <%= f.input :exp_date_s %>
+    <%= f.input :expe_date %>
+    <%= f.input :first_name %>
+    <%= f.input :mi %>
+    <%= f.input :last_name %>
+    <%= f.input :company %>
+    <%= f.input :address_1 %>
+    <%= f.input :address_2 %>
+    <%= f.input :city %>
+    <%= f.input :state %>
+    <%= f.input :zip %>
+    <%= f.input :county %>
+    <%= f.input :extra_d %>
+    <%= f.input :extra_s %>
+    <%= f.input :extra_b %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

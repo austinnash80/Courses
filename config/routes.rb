@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :empire_master_lists do
+    collection {post :import}
+  end
   resources :empire_state_lists
   resources :s_customers do
     collection do

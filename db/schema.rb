@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191203205506) do
+ActiveRecord::Schema.define(version: 20191204034529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "add_email_to_empire_master_lists", force: :cascade do |t|
+    t.string "emailL"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "calendars", force: :cascade do |t|
     t.date "event_date"
@@ -291,6 +297,37 @@ ActiveRecord::Schema.define(version: 20191203205506) do
     t.decimal "cost_postage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "empire_master_lists", force: :cascade do |t|
+    t.integer "lid"
+    t.string "source"
+    t.string "list"
+    t.string "license_number"
+    t.string "record_type"
+    t.string "lic_status"
+    t.string "iss_date_s"
+    t.date "iss_date"
+    t.string "exp_date_s"
+    t.date "expe_date"
+    t.string "first_name"
+    t.string "mi"
+    t.string "last_name"
+    t.string "company"
+    t.string "address_1"
+    t.string "address_2"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "county"
+    t.date "extra_d"
+    t.string "extra_s"
+    t.boolean "extra_b"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "exp_date"
+    t.string "emailL"
+    t.string "email"
   end
 
   create_table "empire_state_lists", force: :cascade do |t|
