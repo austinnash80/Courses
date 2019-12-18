@@ -12,4 +12,15 @@ class EmpireCustomer < ApplicationRecord
     EmpireCustomer.import batch
   end
 
+  def self.to_csv # Export to csv function
+    attributes = %w{uid lic_state fname lname email}
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+        all.each do |empire_customer|
+          csv << attributes.map{ |attr| empire_customer.send(attr) }
+        end
+    end
+  end
+
 end

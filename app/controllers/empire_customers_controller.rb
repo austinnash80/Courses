@@ -27,6 +27,37 @@ class EmpireCustomersController < ApplicationController
     end
   end
 
+  def exports
+    if params['page'] == 'pa_email'
+      @renewal_year = '2020'
+      @message = 'PA Return Customer Emails'
+      @info = 'Removed users who have purchase in this renewal cycle. Removed Duplicates.'
+      @show = EmpireCustomer.where(lic_state: 'PA').first(10)
+      @title = 'PA_email'
+      export_1 = EmpireCustomer.where(lic_state: 'PA').all
+      pa_exclude = export_1.where('p_date > ?', '2018-06-01').pluck(:uid)
+      @export_2 = export_1.where.not(uid: pa_exclude).all
+
+      ids = []
+      uid = []
+
+      @export_2.each do |i|
+        unless uid.include? i.uid
+          ids.push(i.id)
+          uid.push(i.uid)
+        end
+      end
+
+      @export = @export_2.where(id: ids).all
+    end
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @export.to_csv, filename: "#{@title}_#{Date.today}.csv" }
+    end
+
+  end
+
   def run_data
     if params['e_id'].present?
       # if params['e_id'].to_i > EmpireCustomer.all.pluck(:e_id).max
