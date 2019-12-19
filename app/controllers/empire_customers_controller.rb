@@ -58,6 +58,10 @@ class EmpireCustomersController < ApplicationController
 
   end
 
+  def sales
+
+  end
+
   def run_data
     if params['e_id'].present?
       # if params['e_id'].to_i > EmpireCustomer.all.pluck(:e_id).max

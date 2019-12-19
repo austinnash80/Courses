@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     collection {post :import}
     collection do
       get 'exports'
+      get 'sales'
     end
   end
   resources :master_lists do

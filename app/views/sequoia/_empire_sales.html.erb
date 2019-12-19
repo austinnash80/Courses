@@ -1,0 +1,5 @@
+<p><%= link_to 'Update', data_mailing_empire_nms_path, target: "_blank", class: 'btn btn-success' %></p>
+  <h4><u><%= link_to 'Empire Sales', sales_empire_customers_path %></u></h4>
+<% EmpireCustomer.where('p_date > ?',Date.today - 15.days).order('p_date DESC').group(:p_date).sum(:total).each do |k, v| %>
+  <p><strong><%= k.strftime('%a') %></strong>, <%= k.strftime('%-b %-d') %>: <%= number_to_currency(v) %></p>
+<% end %>
