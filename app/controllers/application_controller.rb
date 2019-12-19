@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     current_user.email == 'ashley@sequoiacpe.com' ? sequoia_dash_ashley_path : ''
     current_user.email == 'hamdo@sequoiacpe.com' ? sequoia_dash_hamdo_path : ''
     current_user.email == 'michael@sequoiacpe.com' ? sequoia_dash_michael_path : ''
-    current_user.email == 'kyle@sequoiacpe.com' ? sequoia_dash_kyle_path : ''
+    current_user.email == 'kyle@sequoiacpe.com' ? sequoia_dash_path : ''
     current_user.email == 'john@empirelearning.com' ? sequoia_dash_john_path : ''
   end
 

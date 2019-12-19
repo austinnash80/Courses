@@ -10,7 +10,7 @@ class HomeController < ApplicationController
        when 'hamdo@sequoiacpe.com'
          sequoia_dash_hamdo_path
        when 'kyle@sequoiacpe.com'
-         sequoia_dash_hamdo_path
+         sequoia_dash_kyle_path
        else
          datasheets_path
      end

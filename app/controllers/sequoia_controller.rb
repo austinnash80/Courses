@@ -72,6 +72,8 @@ end
   end
 
   def dash_kyle
+    calendar
+    task_deadline
     sequoia_exams_total
     sequoia_exams_individual
     sequoia_exams_old
