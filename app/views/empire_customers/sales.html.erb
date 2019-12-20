@@ -1,7 +1,6 @@
 <h1>Sales</h1>
 
-<% data = EmpireCustomer.group_by_week(:p_date).sum(:total) %>
-<p><%= data %></p>
+<% data = EmpireCustomer.group_by_week(:p_date, week_start: :mon).sum(:total) %>
 
 <div class="row">
   <div class="col-md-4">
@@ -19,7 +18,8 @@
         <% data.each do |k, v| %>
         <% if k.strftime('%Y') == '2017' %>
           <tr>
-            <td><%= (k - 6.days).strftime('%-m/%-d/%y') %> - <%= k.strftime('%-m/%-d/%y')%></td>
+            <!-- <td><%= (k - 6.days).strftime('%-m/%-d/%y') %> - <%= k.strftime('%-m/%-d/%y')%></td> -->
+            <td><%= k.strftime('%-m/%-d/%y')%> - <%= (k + 6.days).strftime('%-m/%-d/%y') %></td>
             <td><%= number_to_currency(v) %></td>
           </tr>
         <% end %>
@@ -42,7 +42,7 @@
         <% data.each do |k, v| %>
         <% if k.strftime('%Y') == '2018' %>
           <tr>
-            <td><%= (k - 6.days).strftime('%-m/%-d/%y') %> - <%= k.strftime('%-m/%-d/%y')%></td>
+            <td><%= k.strftime('%-m/%-d/%y')%> - <%= (k + 6.days).strftime('%-m/%-d/%y') %></td>
             <td><%= number_to_currency(v) %></td>
           </tr>
         <% end %>
@@ -65,7 +65,7 @@
         <% data.each do |k, v| %>
         <% if k.strftime('%Y') == '2019' %>
           <tr>
-            <td><%= (k - 6.days).strftime('%-m/%-d/%y') %> - <%= k.strftime('%-m/%-d/%y')%></td>
+            <td><%= k.strftime('%-m/%-d/%y')%> - <%= (k + 6.days).strftime('%-m/%-d/%y') %></td>
             <td><%= number_to_currency(v) %></td>
           </tr>
         <% end %>
