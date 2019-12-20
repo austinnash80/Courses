@@ -1,0 +1,76 @@
+<% data = EmpireCustomer.group_by_week(:p_date, week_start: :mon).sum(:total) %>
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-4">
+      <table class="table table-outline">
+        <thead>
+          <tr>
+            <th class="text-center" colspan="2">2017</th>
+          </tr>
+          <tr>
+            <th>Week Of</th>
+            <th>Sales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% data.each do |k, v| %>
+          <% if k.strftime('%Y') == '2017' %>
+            <tr>
+              <!-- <td><%= (k - 6.days).strftime('%-m/%-d/%y') %> - <%= k.strftime('%-m/%-d/%y')%></td> -->
+              <td><%= k.strftime('%-m/%-d/%y')%> - <%= (k + 6.days).strftime('%-m/%-d/%y') %></td>
+              <td><%= number_to_currency(v) %></td>
+            </tr>
+          <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <table class="table table-outline">
+        <thead>
+          <tr>
+            <th class="text-center" colspan="2">2018</th>
+          </tr>
+          <tr>
+            <th>Week Of</th>
+            <th>Sales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% data.each do |k, v| %>
+          <% if k.strftime('%Y') == '2018' %>
+            <tr>
+              <td><%= k.strftime('%-m/%-d/%y')%> - <%= (k + 6.days).strftime('%-m/%-d/%y') %></td>
+              <td><%= number_to_currency(v) %></td>
+            </tr>
+          <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <table class="table table-outline">
+        <thead>
+          <tr>
+            <th class="text-center" colspan="2">2019</th>
+          </tr>
+          <tr>
+            <th>Week Of</th>
+            <th>Sales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% data.each do |k, v| %>
+          <% if k.strftime('%Y') == '2019' %>
+            <tr>
+              <td><%= k.strftime('%-m/%-d/%y')%> - <%= (k + 6.days).strftime('%-m/%-d/%y') %></td>
+              <td><%= number_to_currency(v) %></td>
+            </tr>
+          <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
