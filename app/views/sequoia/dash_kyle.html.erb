@@ -1,5 +1,46 @@
 <body class= 'body-home'>
 
+<% if user_signed_in? && current_user.superadmin_role? %>
 
+
+    <h1 class="off-white text-center">Kyle Dashboard</h1>
+    <h3 class="off-white text-center"><%= Date.today.strftime('%A %-b %-d, %Y') %></h3>
+
+<br>
+
+<!-- ** START LEFT COLUMN ** -->
+
+<div class="row">
+<!-- *** START Left Pannel *** -->
+  <div class="col-lg-5">
+    <div class="well">
+      <%= render(:partial => 'task_deadline') %>
+    </div>
+
+    <div class="well">
+      <%= render(:partial => 'task') %>
+    </div>
+  </div>
+
+<!-- END LEFT COLUMN -->
+
+<!-- ** START CENTER COLUMN ** -->
+<div class="col-lg-5">
+    <div class="well">
+        <%= render(:partial => 'msi_mailing') %>
+    </div>
+</div>
+<!--  END CENTER COLUMN *** -->
+
+<!-- ** START RIGHT COLUMN ** -->
+  <div class="col-lg-2">
+    <div class="well">
+      <%= render(:partial => 'empire_sales') %>
+    </div>
+
+  </div>
+<!-- *** END RIGHT COLUMN *** -->
+
+<% end %>
 
 </body>

@@ -77,7 +77,7 @@ end
     sequoia_exams_total
     sequoia_exams_individual
     sequoia_exams_old
-    sales
+    # sales
     postcard_schedule #must be above postcard_inventory
     postcard_inventory # must be below postcard_schedule
     course_update_status
