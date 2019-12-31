@@ -435,6 +435,18 @@ def postcard_schedule
       @day_of_week == 'Tue' && @most_recent_postcart_mailing_empire.max < Date.today - 6 ? @out_of_date_empire = 'True' :
       @day_of_week == 'Wed' && @most_recent_postcart_mailing_empire.max < Date.today - 7 ? @out_of_date_empire = 'True' : @out_of_date_empire = 'False'
 
+      dates = ['2019-12-16', '2020-01-20', '2020-02-17', '2020-03-16', '2020-04-20', '2020-05-20','2020-06-20','2020-07-20','2020-08-20','2020-09-20','2020-10-20', '2020-11-20', '2020-12-20']
+      next_due = []
+
+      dates.each do |i|
+        if (Date.today + 3.days) < i.to_date
+          next_due.push(i)
+        end
+      end
+
+      @display_due_date = next_due.first
+
+      @new_mexico_schedule = MailingEmpireNm.where()
   end
 
   def postcard_inventory

@@ -29,6 +29,11 @@
 <% elsif params['filter'] == 'apr_20' %>
   <%= link_to 'Arp 20th', mailing_empire_nms_path(filter: 'apr_20'), class: 'btn btn-primary btn-w-100' %>
 <% end %>
+<% if params['filter'] != 'may_20' %>
+  <%= link_to 'May 20th', mailing_empire_nms_path(filter: 'may_20'), class: 'btn btn-default btn-w-100' %>
+<% elsif params['filter'] == 'may_20' %>
+  <%= link_to 'May 20th', mailing_empire_nms_path(filter: 'may_20'), class: 'btn btn-primary btn-w-100' %>
+<% end %>
 <br>
 <!-- <br>
 <% if params['filter'] != 'jun_20' %>
