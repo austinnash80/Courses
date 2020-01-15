@@ -1,0 +1,30 @@
+
+<%= simple_form_for(@postcard_export) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :company %>
+    <%= f.input :group %>
+    <%= f.input :mail_id %>
+    <%= f.input :mail_date %>
+    <%= f.input :state %>
+    <%= f.input :list %>
+    <%= f.input :license_number %>
+    <%= f.input :uid %>
+    <%= f.input :merge_1 %>
+    <%= f.input :merge_2 %>
+    <%= f.input :merge_3 %>
+    <%= f.input :f_name %>
+    <%= f.input :l_name %>
+    <%= f.input :add_1 %>
+    <%= f.input :add_2 %>
+    <%= f.input :city %>
+    <%= f.input :st %>
+    <%= f.input :zip %>
+    <%= f.input :email %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

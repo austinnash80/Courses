@@ -4,14 +4,12 @@
   <h1 class="text-center">Empire Master Lists</h1>
 </div>
 
-<div class="">
+<%# <!-- <div class="">
   <% s = '2019-12-31' %>
   <% e = '2020-12-31' %>
-  <% empire = EmpireMasterList.where(source: 'WA').where('expe_date > ?, '2019-12-31').all %>
+  <% empire = EmpireMasterList.where(source: 'WA').where('expe_date > ?', '2019-12-31').all %>
   <p><%= empire.count %></p>
 </div>
-
-
 
 <h3>Upload CSV File</h3>
   <%= form_tag import_empire_master_lists_path, multipart: true do %>
@@ -108,4 +106,4 @@
 
 <br>
 
-<%#= link_to 'New Empire Master List', new_empire_master_list_path %>
+<%#= link_to 'New Empire Master List', new_empire_master_list_path %> --> %>

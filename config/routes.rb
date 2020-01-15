@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :postcard_exports
+
   resources :empire_master_lists do
     collection {post :import}
   end
@@ -14,6 +16,7 @@ Rails.application.routes.draw do
     collection do
       get 'exports'
       get 'sales'
+      get 'rc_marketing'
     end
   end
   resources :master_lists do
