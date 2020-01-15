@@ -6,7 +6,12 @@ class EmpireMasterListsController < ApplicationController
   def index
     @empire_master_lists = EmpireMasterList.all
 
-    @states = EmpireMasterList.all.group_by(&:list)
+    # @states = EmpireMasterList.all.group_by(&:list)
+    @ca = EmpireMasterList.where(source: 'CA').pluck(:list)
+    @ny = EmpireMasterList.where(source: 'NY').pluck(:list)
+    @nm = EmpireMasterList.where(source: 'NM').pluck(:list)
+    @ut = EmpireMasterList.where(source: 'UT').pluck(:list)
+    @wa = EmpireMasterList.where(source: 'WA').pluck(:list)
    end
 
   # GET /empire_master_lists/1

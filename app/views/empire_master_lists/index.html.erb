@@ -23,12 +23,33 @@
         </tr>
       </thead>
       <tbody>
-        <% @states.each do |k,v| %>
         <tr>
-          <td><%= k %></td>
-          <td><%= number_with_delimiter(v.count) %></td>
+          <td><%= @ca[0] %></td>
+          <td><%= @ca.count %></td>
         </tr>
-        <% end %>
+        <tr>
+          <td><%= @ny[0] %></td>
+          <td><%= @ny.count %></td>
+        </tr>
+        <tr>
+          <td><%= @nm[0] %></td>
+          <td><%= @nm.count %></td>
+        </tr>
+        <tr>
+          <td><%= @ut[0] %></td>
+          <td><%= @ut.count %></td>
+        </tr>
+        <tr>
+          <td><%= @wa[0] %></td>
+          <td><%= @wa.count %></td>
+        </tr>
+
+        <%# @states.each do |k,v| %>
+        <!-- <tr> -->
+          <!-- <td><%#= k %></td> -->
+          <!-- <td><%#= number_with_delimiter(v.count) %></td> -->
+        <!-- </tr> -->
+        <%# end %>
       </tbody>
     </table>
   </div>
