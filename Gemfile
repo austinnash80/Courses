@@ -99,3 +99,5 @@ gem 'simple_form'
 gem 'json'
 
 gem 'derailed', group: :development
+
+gem 'rearmed' #not using 
