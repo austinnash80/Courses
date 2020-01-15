@@ -13,35 +13,72 @@
 <% end %>
 <br>
 
+<% if params['confirm'] == 'yes' %>
+  <% EmpireMasterList.where(source: params['delete']).delete_all %>
+  <% redirect_to empire_master_lists_path(done: 'yes') %>
+<% end %>
+
 <div class="row">
   <div class="col-md-3">
     <table class="table table-outline">
       <thead>
         <tr>
+          <th>State</th>
           <th>List</th>
           <th>Count</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr>
+          <td>CA</td>
           <td><%= @ca[0] %></td>
-          <td><%= @ca.count %></td>
+          <td><%=  number_with_delimiter(@ca.count) %></td>
+          <% if params['delete'] == 'CA' %>
+            <td><%= link_to 'Confirm', empire_master_lists_path(delete: 'CA', confirm: 'yes') %></td>
+          <% elsif %>
+            <td><%= link_to 'Delete', empire_master_lists_path(delete: 'CA') %></td>
+          <% end %>
         </tr>
         <tr>
+          <td>NY</td>
           <td><%= @ny[0] %></td>
-          <td><%= @ny.count %></td>
+          <td><%=  number_with_delimiter(@ny.count) %></td>
+          <% if params['delete'] == 'NY' %>
+            <td><%= link_to 'Confirm', empire_master_lists_path(delete: 'NY', confirm: 'yes') %></td>
+          <% elsif %>
+            <td><%= link_to 'Delete', empire_master_lists_path(delete: 'NY') %></td>
+          <% end %>
         </tr>
         <tr>
+          <td>NM</td>
           <td><%= @nm[0] %></td>
-          <td><%= @nm.count %></td>
+          <td><%=  number_with_delimiter(@nm.count) %></td>
+          <% if params['delete'] == 'NM' %>
+            <td><%= link_to 'Confirm', empire_master_lists_path(delete: 'NM', confirm: 'yes') %></td>
+          <% elsif %>
+            <td><%= link_to 'Delete', empire_master_lists_path(delete: 'NM') %></td>
+          <% end %>
         </tr>
         <tr>
+          <td>UT</td>
           <td><%= @ut[0] %></td>
-          <td><%= @ut.count %></td>
+          <td><%= number_with_delimiter(@ut.count) %></td>
+          <% if params['delete'] == 'UT' %>
+            <td><%= link_to 'Confirm', empire_master_lists_path(delete: 'UT', confirm: 'yes') %></td>
+          <% elsif %>
+            <td><%= link_to 'Delete', empire_master_lists_path(delete: 'UT') %></td>
+          <% end %>
         </tr>
         <tr>
+          <td>WA</td>
           <td><%= @wa[0] %></td>
-          <td><%= @wa.count %></td>
+          <td><%= number_with_delimiter(@wa.count) %></td>
+          <% if params['delete'] == 'WA' %>
+            <td><%= link_to 'Confirm', empire_master_lists_path(delete: 'WA', confirm: 'yes') %></td>
+          <% elsif %>
+            <td><%= link_to 'Delete', empire_master_lists_path(delete: 'WA') %></td>
+          <% end %>
         </tr>
 
         <%# @states.each do |k,v| %>

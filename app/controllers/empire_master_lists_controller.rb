@@ -12,6 +12,13 @@ class EmpireMasterListsController < ApplicationController
     @nm = EmpireMasterList.where(source: 'NM').pluck(:list)
     @ut = EmpireMasterList.where(source: 'UT').pluck(:list)
     @wa = EmpireMasterList.where(source: 'WA').pluck(:list)
+
+#Delete List
+    if params['confirm'] == 'yes'
+      EmpireMasterList.where(source: params['delete']).delete_all
+      redirect_to empire_master_lists_path
+    end
+
    end
 
   # GET /empire_master_lists/1
