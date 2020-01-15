@@ -4,12 +4,6 @@
   <h1 class="text-center">Empire Master Lists</h1>
 </div>
 
-<%# <!-- <div class="">
-  <% s = '2019-12-31' %>
-  <% e = '2020-12-31' %>
-  <% empire = EmpireMasterList.where(source: 'WA').where('expe_date > ?', '2019-12-31').all %>
-  <p><%= empire.count %></p>
-</div>
 
 <h3>Upload CSV File</h3>
   <%= form_tag import_empire_master_lists_path, multipart: true do %>
@@ -39,71 +33,3 @@
     </table>
   </div>
 </div>
-
-<table class="table table-outline">
-  <thead>
-    <tr>
-      <th>Lid</th>
-      <th>Source</th>
-      <th>List</th>
-      <th>License number</th>
-      <th>Record type</th>
-      <th>Lic status</th>
-      <!-- <th>Iss date s</th> -->
-      <th>Iss date</th>
-      <!-- <th>Exp date s</th> -->
-      <th>Exp date</th>
-      <th>First name</th>
-      <th>Mi</th>
-      <th>Last name</th>
-      <th>Company</th>
-      <th>Address 1</th>
-      <th>Address 2</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Zip</th>
-      <th>County</th>
-      <th>Extra d</th>
-      <!-- <th>Extra s</th> -->
-      <!-- <th>Extra b</th> -->
-      <!-- <th colspan="3"></th> -->
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @empire_master_lists.last(10).each do |empire_master_list| %>
-      <tr>
-        <td><%= empire_master_list.lid %></td>
-        <td><%= empire_master_list.source %></td>
-        <td><%= empire_master_list.list %></td>
-        <td><%= empire_master_list.license_number %></td>
-        <td><%= empire_master_list.record_type %></td>
-        <td><%= empire_master_list.lic_status %></td>
-        <!-- <td><%#= empire_master_list.iss_date_s %></td> -->
-        <td><%= empire_master_list.iss_date %></td>
-        <!-- <td><%#= empire_master_list.exp_date_s %></td> -->
-        <td><%= empire_master_list.exp_date %></td>
-        <td><%= empire_master_list.first_name %></td>
-        <td><%= empire_master_list.mi %></td>
-        <td><%= empire_master_list.last_name %></td>
-        <td><%= empire_master_list.company %></td>
-        <td><%= empire_master_list.address_1 %></td>
-        <td><%= empire_master_list.address_2 %></td>
-        <td><%= empire_master_list.city %></td>
-        <td><%= empire_master_list.state %></td>
-        <td><%= empire_master_list.zip %></td>
-        <td><%= empire_master_list.county %></td>
-        <td><%= empire_master_list.extra_d %></td>
-        <!-- <td><%#= empire_master_list.extra_s %></td> -->
-        <!-- <td><%#= empire_master_list.extra_b %></td> -->
-        <!-- <td><%#= link_to 'Show', empire_master_list %></td> -->
-        <!-- <td><%#= link_to 'Edit', edit_empire_master_list_path(empire_master_list) %></td> -->
-        <!-- <td><%#= link_to 'Destroy', empire_master_list, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%#= link_to 'New Empire Master List', new_empire_master_list_path %> --> %>
