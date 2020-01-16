@@ -1,0 +1,17 @@
+
+<%= simple_form_for(@postcard_record) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :company %>
+    <%= f.input :group %>
+    <%= f.input :mailing_id %>
+    <%= f.input :mail_date %>
+    <%= f.input :card %>
+    <%= f.input :sent %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

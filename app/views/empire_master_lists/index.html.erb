@@ -32,7 +32,7 @@
       <tbody>
         <tr>
           <td>CA</td>
-          <td><%= @ca[0] %></td>
+          <td><%= @ca.uniq.join %></td>
           <td><%=  number_with_delimiter(@ca.count) %></td>
           <% if params['delete'] == 'CA' %>
             <td><%= link_to 'Confirm', empire_master_lists_path(delete: 'CA', confirm: 'yes') %></td>
@@ -42,7 +42,7 @@
         </tr>
         <tr>
           <td>NY</td>
-          <td><%= @ny[0] %></td>
+          <td><%= @ny.uniq.join %></td>
           <td><%=  number_with_delimiter(@ny.count) %></td>
           <% if params['delete'] == 'NY' %>
             <td><%= link_to 'Confirm', empire_master_lists_path(delete: 'NY', confirm: 'yes') %></td>
@@ -52,7 +52,7 @@
         </tr>
         <tr>
           <td>NM</td>
-          <td><%= @nm[0] %></td>
+          <td><%= @nm.uniq.join %></td>
           <td><%=  number_with_delimiter(@nm.count) %></td>
           <% if params['delete'] == 'NM' %>
             <td><%= link_to 'Confirm', empire_master_lists_path(delete: 'NM', confirm: 'yes') %></td>
@@ -62,7 +62,7 @@
         </tr>
         <tr>
           <td>UT</td>
-          <td><%= @ut[0] %></td>
+          <td><%= @ut.uniq.join %></td>
           <td><%= number_with_delimiter(@ut.count) %></td>
           <% if params['delete'] == 'UT' %>
             <td><%= link_to 'Confirm', empire_master_lists_path(delete: 'UT', confirm: 'yes') %></td>
@@ -72,7 +72,7 @@
         </tr>
         <tr>
           <td>WA</td>
-          <td><%= @wa[0] %></td>
+          <td><%= @wa.uniq.join %></td>
           <td><%= number_with_delimiter(@wa.count) %></td>
           <% if params['delete'] == 'WA' %>
             <td><%= link_to 'Confirm', empire_master_lists_path(delete: 'WA', confirm: 'yes') %></td>

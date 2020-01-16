@@ -14,6 +14,17 @@ class PostcardExportsController < ApplicationController
       format.csv { send_data @postcard_exports.to_csv, filename: "#{@mail_id}.csv" }
     end
 
+    if params['record'] == 'yes'
+      new = PostcardRecord.create(
+        company: params['co'],
+        group: params['group'],
+        mailing_id: params['mail_id'],
+        mail_date: params['day'],
+        card: params['card'],
+        sent: params['sent']
+      )
+      new.save
+    end
   end
 
   # GET /postcard_exports/1

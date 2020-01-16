@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @postcard_record.company %>
+</p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @postcard_record.group %>
+</p>
+
+<p>
+  <strong>Mailing:</strong>
+  <%= @postcard_record.mailing_id %>
+</p>
+
+<p>
+  <strong>Mail date:</strong>
+  <%= @postcard_record.mail_date %>
+</p>
+
+<p>
+  <strong>Card:</strong>
+  <%= @postcard_record.card %>
+</p>
+
+<p>
+  <strong>Sent:</strong>
+  <%= @postcard_record.sent %>
+</p>
+
+<%= link_to 'Edit', edit_postcard_record_path(@postcard_record) %> |
+<%= link_to 'Back', postcard_records_path %>

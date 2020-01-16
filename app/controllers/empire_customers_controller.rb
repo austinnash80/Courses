@@ -52,6 +52,7 @@ class EmpireCustomersController < ApplicationController
     @empire_customers = EmpireCustomer.pluck(:uid).uniq
 
       if params['added'] == 'done'
+          PostcardExport.delete_all #Delete all the current records - fresh database each time.
         ### CA
         ca_export = @ca_master_1.union(@ca_master_2)
         ca_empire = EmpireCustomer.where(lic_state: 'CA').where(license_num: ca_export).all
@@ -206,7 +207,7 @@ class EmpireCustomersController < ApplicationController
 
 
 
-        redirect_to postcard_exports_path(mail_id: "E-RC-#{params['day']}", day: params['day'])
+        redirect_to postcard_exports_path(co: 'empire', group: 'rc', mail_id: "E-RC-#{params['day']}", day: params['day'], card: 'standard', sent: @exp_1 + @exp_2)
 
       end #If 'data'
   end

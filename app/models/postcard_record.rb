@@ -1,0 +1,2 @@
+class PostcardRecord < ApplicationRecord
+end

@@ -4,11 +4,19 @@
   <div class="well">
     <h1 class=""><big>Postcard Exports</big></h1>
   </div>
+  <% if params['record'] == 'yes' %>
+    <br>
+    <div class="container">
+      <p class="alert alert-success text-center">Postcard mailing has been recorded. <%= link_to 'View postcard records', postcard_records_path %></p>
+    </div>
+  <% end %>
   <h3>Mail Date: <strong><%= params['day'].to_date.strftime('%-m/%-d/%Y') %></strong></h3>
   <h3>Mail ID: <strong><%= params['mail_id'] %></strong></h3>
   <h3>Records: <strong> <%= @postcard_exports.count %></strong></h3>
   <br>
   <%= link_to 'Export List', postcard_exports_path(mail_id: params['mail_id'], format: 'csv'), class: 'btn btn-primary btn-lg' %>
+  <%= link_to 'Record', postcard_exports_path(record: 'yes', co: params['co'], group: params['group'], mail_id: params['mail_id'], day: params['day'], card: params['card'], sent: params['sent']), class: 'btn btn-success btn-lg' %>
+
 </div>
 
 <br>

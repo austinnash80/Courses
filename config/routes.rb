@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :postcard_records
   resources :postcard_exports
 
   resources :empire_master_lists do
