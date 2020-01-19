@@ -1,198 +1,32 @@
 <div class="well text-center">
-  <h1 class=""><big>Empire Return Customer Marketing</big></h1>
+  <h1 class=""><big>Empire Return Customer Marketing Dashboard</big></h1>
+  <br>
+    <% if params['page'] == 'info' %>
+      <%= link_to 'State info', rc_marketing_empire_customers_path(page: 'info'), class: 'btn btn-lg btn-success' %>
+    <% elsif %>
+      <%= link_to 'State info', rc_marketing_empire_customers_path(page: 'info'), class: 'btn btn-lg btn-default' %>
+    <% end %>
+    <% if params['page'] == 'rolling' %>
+      <%= link_to 'Rolling States', rc_marketing_empire_customers_path(page: 'rolling'), class: 'btn btn-lg btn-success' %>
+    <% elsif %>
+      <%= link_to 'Rolling States', rc_marketing_empire_customers_path(page: 'rolling'), class: 'btn btn-lg btn-default' %>
+    <% end %>
+    <% if params['page'] == 'deadline' %>
+      <%= link_to 'Deadline States', rc_marketing_empire_customers_path(page: 'deadline'), class: 'btn btn-lg btn-success' %>
+    <% elsif %>
+      <%= link_to 'Deadline States', rc_marketing_empire_customers_path(page: 'deadline'), class: 'btn btn-lg btn-default' %>
+    <% end %>
+
 </div>
 
-
-<div class="container">
-  <p><strong>1. Select mailing date</strong>  - <% if params['day'].present? %> <%= link_to 'Select new date', rc_marketing_empire_customers_path %> <% end %></p>
-  <p><strong>2. Add records </strong> (take note of 'Mailing ID' and record count)</p>
-  <p><strong>3. Export List </strong>(check that 'Mailing ID' record count match)</p>
-
-<% if params['day'].present? == false %>
-<br>
-  <%= render(partial: 'rc_marketing_buttons') %>
-<% elsif %>
-<!-- <br> -->
-  <div class="text-center">
-    <h3>Mail Date: <strong><%= params['day'].present? ? params['day'].to_date.strftime('%-m/%-d/%Y') : ''%></strong> </h3>
-    <h3>Mail ID: <strong><%= "E-RC-#{params['day']}" %></strong></h3>
-    <h3>Records: <strong> <%= @exp_1 + @exp_2 %></strong></h3>
-    <br>
-    <%= link_to 'Add Records', rc_marketing_empire_customers_path(st: params['st'], day: params['day'], added: 'done'), class: 'btn btn-success btn-lg'  %>
-  </div>
-
-<br>
-  <p class="">EXP 1 (33 days): <%= params['day'].present? ? @date_1a.to_date.strftime('%-m/%-d/%y') : ''%> - <%= params['day'].present? ? @date_1b.to_date.strftime('%-m/%-d/%y') : ''%> | EXP 2 (63 days): <%= params['day'].present? ? @date_2a.to_date.strftime('%-m/%-d/%y') : ''%> - <%= params['day'].present? ? @date_2b.to_date.strftime('%-m/%-d/%y') : ''%></p>
-  <!-- <p class="">EXP 2 (63 days): <%= params['day'].present? ? @date_2a.to_date.strftime('%-m/%-d/%y') : ''%> - <%= params['day'].present? ? @date_2b.to_date.strftime('%-m/%-d/%y') : ''%></p> -->
-  <table class="table table-outline">
-    <thead>
-      <tr class="grey-b-200 ">
-        <th>State</th>
-        <th>Exp 1</th>
-        <th>Exp 2</th>
-        <th>Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="grey-b-100 ">
-        <td>CA</td>
-        <td><%= @ca_master_1.count %></td>
-        <td><%= @ca_master_2.count %></td>
-        <td><%= @ca_master_1.count + @ca_master_2.count %> </td>
-      </tr>
-      <tr class="grey-b-100 ">
-        <td>NY</td>
-        <td><%= @ny_master_1.count %></td>
-        <td><%= @ny_master_2.count %></td>
-        <td><%= @ny_master_1.count + @ny_master_2.count %> </td>
-      </tr>
-      <tr class="grey-b-100 ">
-        <td>NM</td>
-        <td><%= @nm_master_1.count %></td>
-        <td><%= @nm_master_2.count %></td>
-        <td><%= @nm_master_1.count + @nm_master_2.count %> </td>
-      </tr>
-      <tr class="grey-b-100 ">
-        <td>UT</td>
-        <td><%= @ut_master_1.count %></td>
-        <td><%= @ut_master_2.count %></td>
-        <td><%= @ut_master_1.count + @ut_master_2.count %> </td>
-      </tr>
-      <tr class="grey-b-100 ">
-        <td>WA</td>
-        <td><%= @wa_master_1.count %></td>
-        <td><%= @wa_master_2.count %></td>
-        <td><%= @wa_master_1.count + @wa_master_2.count %> </td>
-      </tr>
-      <tr class="grey-b-100 ">
-        <td><strong>Total</td>
-        <td><strong><%= @exp_1 %></strong></td>
-        <td><strong><%= @exp_2 %></strong></td>
-        <td><strong><%= @exp_1 + @exp_2 %></strong></td>
-      </tr>
-    </tbody>
-  </table>
-
-
+<% if params['page'] == 'rolling' %>
+  <%= render(partial: 'rc_marketing_rolling') %>
 <% end %>
-<br>
 
-<%= link_to 'State info', rc_marketing_empire_customers_path(info: 'state') %>
+<% if params['page'] == 'info' %>
+  <%= render(partial: 'rc_marketing_state_info') %>
+<% end %>
 
-</div>
-
-
-<% if params['info'].present? %>
-<div class="container">
-
-<table class="table table-outline">
-  <thead>
-    <tr>
-      <th>State</th>
-      <th>Dealine</th>
-      <th>Frequency</th>
-      <th>Customers</th>
-      <th>Notes</th>
-      <th></th>
-      <th>Link to new list</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>CA</td>
-      <td>Monthly</td>
-      <td>4 Year</td>
-      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'CA').count) %></td>
-      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'monthly') %></td>
-      <td>Daily Exp</td>
-      <td>http://www.bre.ca.gov/Licensees/ExamineeLicenseeListDataFiles.html</td>
-    </tr>
-    <tr>
-      <td>NY</td>
-      <td>Monthly</td>
-      <td>1 Year</td>
-      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'NY').count) %></td>
-      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'monthly') %></td>
-      <td>Daily Exp</td>
-      <td>https://data.ny.gov/Economic-Development/Active-Real-Estate-Salespersons-and-Brokers/yg7h-zjbf</td>
-    </tr>
-    <tr>
-      <td>NM</td>
-      <td>Monthly</td>
-      <td>3 Year</td>
-      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'NM').count) %></td>
-      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'monthly') %></td>
-      <td>End of Month Exp</td>
-    </tr>
-    <tr>
-      <td>WA</td>
-      <td>Monthly</td>
-      <td>3 Year</td>
-      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'WA').count) %></td>
-      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'monthly') %></td>
-      <td>Daily Exp</td>
-    </tr>
-    <tr>
-      <td>UT</td>
-      <td>Monthly</td>
-      <td>2 Year</td>
-      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'UT').count) %></td>
-      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'monthly') %></td>
-      <td>End of Month</td>
-      <td>https://secure.utah.gov/rer/relv/search.html</td>
-    </tr>
-    <tr>
-      <td>NC</td>
-      <td>6/10/20</td>
-      <td>1 Year</td>
-      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'NC').count) %></td>
-      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'nc') %></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>MO</td>
-      <td>6/30/20</td>
-      <td>2 Year</td>
-      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'MO').count) %></td>
-      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'mo') %></td>
-      <td>Brokers Only</td>
-    </tr>
-    <tr>
-      <td>MO</td>
-      <td>9/30/20</td>
-      <td>2 Year</td>
-      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'MO').count) %></td>
-      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'mo') %></td>
-      <td>Salesperson Only</td>
-    </tr>
-    <tr>
-      <td>NJ</td>
-      <td>4/30/20</td>
-      <td>2 Year</td>
-      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'NJ').count) %></td>
-      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'nj') %></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>SC</td>
-      <td>6/30/20</td>
-      <td>2 Year</td>
-      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'SC').count) %></td>
-      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'sc') %></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>IN</td>
-      <td>4/30/21</td>
-      <td>2 Year</td>
-      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'IND').count) %></td>
-      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'in') %></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
-
-
-</div>
-
+<% if params['page'] == 'deadline' %>
+  <%= render(partial: 'rc_marketing_deadline') %>
 <% end %>

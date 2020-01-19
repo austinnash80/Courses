@@ -1,0 +1,127 @@
+<% s_date = '2020-01-01'.to_date %>
+<% e_date = '2021-01-31'.to_date %>
+<% days_1 = [] %>
+<% days_2 = [] %>
+<% days_3 = [] %>
+<% days_4 = [] %>
+
+<% mail_dates = (s_date..e_date).to_a %>
+
+<% mail_dates.each do |date| %>
+  <% if date.strftime('%a') == 'Wed' && date >= '2020-01-01'.to_date && date <= '2020-03-31'.to_date %>
+    <% days_1.push(date) %>
+  <% end %>
+  <% if date.strftime('%a') == 'Wed' && date >= '2020-04-01'.to_date && date <= '2020-06-30'.to_date %>
+    <% days_2.push(date) %>
+  <% end %>
+  <% if date.strftime('%a') == 'Wed' && date >= '2020-07-01'.to_date && date <= '2020-9-30'.to_date %>
+    <% days_3.push(date) %>
+  <% end %>
+  <% if date.strftime('%a') == 'Wed' && date >= '2020-10-01'.to_date && date <= '2021-01-31'.to_date %>
+    <% days_4.push(date) %>
+  <% end %>
+<% end %>
+<div class="row">
+  <div class="col-md-3">
+    <table class="table table-outline">
+      <thead>
+        <tr class="grey-b-200">
+          <th class="text-center" colspan="3">2020 Q1</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% days_1.each do |day| %>
+        <% mail_id_postcard = "E-RC-Rolling-Postcard-#{day}" %>
+        <% mail_id_email = "E-RC-Rolling-email-#{day}" %>
+        <% records = PostcardRecord.all.pluck(:mailing_id) %>
+          <tr class="">
+            <td><%= day.strftime('%-m/%-d/%Y') %></td>
+            <% if records.include? mail_id_postcard %>
+              <td><%= link_to 'Postcard', rc_marketing_empire_customers_path(page: 'rolling', st: 'rolling', day: day, what: 'postcard'), class: '' %> <span class="glyphicon glyphicon-ok success"></span></td>
+            <% elsif %>
+              <td><%= link_to 'Postcard', rc_marketing_empire_customers_path(page: 'rolling', st: 'rolling', day: day, what: 'postcard'), class: '' %></td>
+            <% end %>
+            <% if records.include? mail_id_email %>
+              <td><%= link_to 'Email', rc_marketing_empire_customers_path(page: 'rolling', st: 'rolling', day: day, what: 'email'), class: '' %> <span class="glyphicon glyphicon-ok success"></span></td>
+            <% elsif %>
+              <td><%= link_to 'Email', rc_marketing_empire_customers_path(page: 'rolling', st: 'rolling', day: day, what: 'email'), class: '' %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="col-md-3">
+    <table class="table table-outline">
+      <thead>
+        <tr class="grey-b-200">
+          <th class="text-center" colspan="3">2020 Q2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% days_2.each do |day| %>
+        <% mail_id = "E-RC-Rolling-Postcard-#{day}" %>
+        <% records = PostcardRecord.all.pluck(:mailing_id) %>
+          <tr class="">
+            <td><%= day.strftime('%-m/%-d/%Y') %></td>
+            <td><%= link_to 'Export Postcard', rc_marketing_empire_customers_path(page: 'rolling', st: 'rolling', day: day), class: '' %></td>
+            <% if records.include? mail_id %>
+              <td><span class="glyphicon glyphicon-ok success"></span></td>
+            <% elsif %>
+              <td></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-3">
+    <table class="table table-outline">
+      <thead>
+        <tr class="grey-b-200">
+          <th class="text-center" colspan="3">2020 Q3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% days_3.each do |day| %>
+        <% mail_id = "E-RC-Rolling-Postcard-#{day}" %>
+        <% records = PostcardRecord.all.pluck(:mailing_id) %>
+        <tr class="">
+          <td><%= day.strftime('%-m/%-d/%Y') %></td>
+          <td><%= link_to 'Export Postcard', rc_marketing_empire_customers_path(page: 'rolling', st: 'rolling', day: day), class: '' %></td>
+          <% if records.include? mail_id %>
+            <td><span class="glyphicon glyphicon-ok success"></span></td>
+          <% elsif %>
+          <td></td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-3">
+    <table class="table table-outline">
+      <thead>
+        <tr class="grey-b-200">
+          <th class="text-center" colspan="3">2020 Q4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% days_4.each do |day| %>
+        <% mail_id = "E-RC-Rolling-Postcard-#{day}" %>
+        <% records = PostcardRecord.all.pluck(:mailing_id) %>
+        <tr class="">
+          <td><%= day.strftime('%-m/%-d/%Y') %></td>
+          <td><%= link_to 'Export Postcard', rc_marketing_empire_customers_path(page: 'rolling', st: 'rolling', day: day), class: '' %></td>
+          <% if records.include? mail_id %>
+            <td><span class="glyphicon glyphicon-ok success"></span></td>
+          <% elsif %>
+          <td></td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

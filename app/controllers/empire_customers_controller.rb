@@ -28,6 +28,9 @@ class EmpireCustomersController < ApplicationController
   end
 
   def rc_marketing
+    if params['page'] == 'deadline'
+      rc_marketing_deadline
+    end
     rc_marketing_date
     rc_marketing_states
     @ca_master_1 = EmpireMasterList.where(source: 'CA').where(license_number: @ca_1).where.not(license_number: @ca_2).where('exp_date >= ? AND exp_date <= ?', @date_1a, @date_1b).pluck(:license_number)
@@ -63,7 +66,7 @@ class EmpireCustomersController < ApplicationController
             new = PostcardExport.create(
               company: 'Empire',
               group: 'rc postcard',
-              mail_id: "E-RC-#{params['day']}",
+              mail_id: "E-RC-Rolling-Postcard-#{params['day']}",
               mail_date: params['day'],
               state: 'CA',
               license_number: empire_customer.license_num,
@@ -94,7 +97,7 @@ class EmpireCustomersController < ApplicationController
             new = PostcardExport.create(
               company: 'Empire',
               group: 'rc postcard',
-              mail_id: "E-RC-#{params['day']}",
+              mail_id: "E-RC-Rolling-Postcard-#{params['day']}",
               mail_date: params['day'],
               state: 'NY',
               license_number: empire_customer.license_num,
@@ -124,7 +127,7 @@ class EmpireCustomersController < ApplicationController
             new = PostcardExport.create(
               company: 'Empire',
               group: 'rc postcard',
-              mail_id: "E-RC-#{params['day']}",
+              mail_id: "E-RC-Rolling-Postcard-#{params['day']}",
               mail_date: params['day'],
               state: 'NM',
               license_number: empire_customer.license_num,
@@ -154,7 +157,7 @@ class EmpireCustomersController < ApplicationController
             new = PostcardExport.create(
               company: 'Empire',
               group: 'rc postcard',
-              mail_id: "E-RC-#{params['day']}",
+              mail_id: "E-RC-Rolling-Postcard-#{params['day']}",
               mail_date: params['day'],
               state: 'UT',
               license_number: empire_customer.license_num,
@@ -184,7 +187,7 @@ class EmpireCustomersController < ApplicationController
             new = PostcardExport.create(
               company: 'Empire',
               group: 'rc postcard',
-              mail_id: "E-RC-#{params['day']}",
+              mail_id: "E-RC-Rolling-Postcard-#{params['day']}",
               mail_date: params['day'],
               state: 'WA',
               license_number: empire_customer.license_num,
@@ -205,9 +208,7 @@ class EmpireCustomersController < ApplicationController
           end
         end
 
-
-
-        redirect_to postcard_exports_path(co: 'empire', group: 'rc', mail_id: "E-RC-#{params['day']}", day: params['day'], card: 'standard', sent: @exp_1 + @exp_2)
+        redirect_to postcard_exports_path(co: 'empire', group: 'rc postcard', mail_id: "E-RC-Rolling-Postcard-#{params['day']}", day: params['day'], card: 'standard', sent: @exp_1 + @exp_2)
 
       end #If 'data'
   end
@@ -240,6 +241,65 @@ class EmpireCustomersController < ApplicationController
       wa = EmpireCustomer.where(lic_state: 'WA').all #All NM Customers
       @wa_1 = wa.pluck(:license_num).uniq #Array of all unique license numbers
       @wa_2 = wa.where('p_date >= ?', Date.today - 18.months).pluck(:license_num).uniq #Array of unique license number who have purchases in the given time frame
+
+  end
+
+  def rc_marketing_deadline
+    # All who have not purchased in the last x time - match with board list ?
+    if params['state'] == 'PA'
+      pa_exp = '2020-05-31'.to_date
+      company = 'empire'
+      mail_date = params['day']
+      state = 'PA'
+      if params['type'] == 'email'
+        mail_id = "E-RC-Deadline-PA-Email-#{mail_date}"
+        group = 'rc email'
+        merge_1 = 'test 1 - email'
+        merge_2 = 'test 2 - email'
+        merge_3 = 'test 3 - email'
+      end
+      if params['type'] == 'postcard'
+        mail_id = "E-RC-Deadline-PA-Postcard-#{mail_date}"
+        group = 'rc postcard'
+        merge_1 = 'test 1 - postcard'
+        merge_2 = 'test 2 - postcard'
+        merge_3 = 'test 3 - postcard'
+      end
+      export = EmpireCustomer.where(lic_state: 'PA').where('p_date < ?', pa_exp - 18.months).all
+      @export_count = export.pluck(:uid).uniq
+    end
+
+  # ADD Record to Staging
+    if params['add'] == 'yes'
+      PostcardExport.delete_all
+      uid_array = []
+      export.each do |empire_customer|
+        if uid_array.exclude? empire_customer.uid
+          new = PostcardExport.create(
+            company: company,
+            group: group,
+            mail_id: mail_id,
+            mail_date: mail_date,
+            state: state,
+            license_number: empire_customer.license_num,
+            uid: empire_customer.uid,
+            merge_1: merge_1,
+            merge_2: merge_2,
+            merge_3: merge_3,
+            f_name: empire_customer.fname,
+            l_name: empire_customer.lname,
+            add_1: empire_customer.street_1,
+            add_2: empire_customer.street_2,
+            city: empire_customer.city,
+            st: empire_customer.state,
+            zip: empire_customer.zip,
+            email: empire_customer.email)
+          new.save
+          uid_array.push(empire_customer.uid) #Push new records lic number in to array to not allow duplicates in new table
+        end
+      end
+      redirect_to postcard_exports_path(co: company, group: group, mail_id: mail_id, day: mail_date, card: 'email', sent: @export_count.count)
+    end
 
   end
 

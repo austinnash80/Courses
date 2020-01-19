@@ -1,32 +1,42 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Postcard Records</h1>
+<div class="well text-center">
+  <h1><big>Postcard Records</big></h1>
+</div>
 
-<table class="table">
+<div class="container">
+
+<table class="table table-outline">
   <thead>
-    <tr>
+    <tr class="grey-b-200">
       <th>Company</th>
       <th>Group</th>
       <th>Mailing</th>
       <th>Mail date</th>
       <th>Card</th>
       <th>Sent</th>
-      <th colspan="3"></th>
+      <th>Postage</th>
+      <th>Print</th>
+      <th>Total(est)</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @postcard_records.each do |postcard_record| %>
-      <tr>
+      <tr class="grey-b-100">
         <td><%= postcard_record.company %></td>
         <td><%= postcard_record.group %></td>
         <td><%= postcard_record.mailing_id %></td>
-        <td><%= postcard_record.mail_date %></td>
+        <td><%= postcard_record.mail_date.strftime('%-m/%-d/%Y') %></td>
         <td><%= postcard_record.card %></td>
-        <td><%= postcard_record.sent %></td>
-        <td><%= link_to 'Show', postcard_record %></td>
+        <td><%= postcard_record.sent%></td>
+        <td><%= number_to_currency(postcard_record.sent * 50 / 100) %></td>
+        <td><%= number_to_currency(postcard_record.sent * 16 / 100) %></td>
+        <td><%= number_to_currency(postcard_record.sent * 66 / 100) %></td>
+        <!-- <td><%= link_to 'Show', postcard_record %></td> -->
         <td><%= link_to 'Edit', edit_postcard_record_path(postcard_record) %></td>
-        <td><%= link_to 'Destroy', postcard_record, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', postcard_record, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -35,3 +45,4 @@
 <br>
 
 <%= link_to 'New Postcard Record', new_postcard_record_path %>
+</div>

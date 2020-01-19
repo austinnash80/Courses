@@ -7,12 +7,12 @@
   <% if params['record'] == 'yes' %>
     <br>
     <div class="container">
-      <p class="alert alert-success text-center">Postcard mailing has been recorded. <%= link_to 'View postcard records', postcard_records_path %></p>
+      <p class="alert alert-success text-center">Export has been recorded. <%= link_to 'View records', postcard_records_path %></p>
     </div>
   <% end %>
   <h3>Mail Date: <strong><%= params['day'].to_date.strftime('%-m/%-d/%Y') %></strong></h3>
   <h3>Mail ID: <strong><%= params['mail_id'] %></strong></h3>
-  <h3>Records: <strong> <%= @postcard_exports.count %></strong></h3>
+  <h3>Records: <strong> <%= number_with_delimiter(@postcard_exports.count) %></strong></h3>
   <br>
   <%= link_to 'Export List', postcard_exports_path(mail_id: params['mail_id'], format: 'csv'), class: 'btn btn-primary btn-lg' %>
   <%= link_to 'Record', postcard_exports_path(record: 'yes', co: params['co'], group: params['group'], mail_id: params['mail_id'], day: params['day'], card: params['card'], sent: params['sent']), class: 'btn btn-success btn-lg' %>
@@ -24,7 +24,7 @@
 <p>Back to <%= link_to 'Empire RC Marketing', rc_marketing_empire_customers_path %></p>
 <table class="table table-outline">
   <thead>
-    <tr>
+    <tr class="grey-b-200">
       <th>Company</th>
       <th>Group</th>
       <th>Mail</th>
@@ -50,7 +50,7 @@
 
   <tbody>
     <% @postcard_exports.each do |postcard_export| %>
-      <tr>
+      <tr class="">
         <td><%= postcard_export.company %></td>
         <td><%= postcard_export.group %></td>
         <td><%= postcard_export.mail_id %></td>

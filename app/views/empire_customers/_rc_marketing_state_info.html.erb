@@ -1,0 +1,111 @@
+<div class="container">
+
+<table class="table table-outline">
+  <thead>
+    <tr>
+      <th>State</th>
+      <th>Deadline</th>
+      <th>Frequency</th>
+      <th>Customers</th>
+      <th>Notes</th>
+      <th></th>
+      <th>Link to new list</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CA</td>
+      <td>Rolling</td>
+      <td>4 Year</td>
+      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'CA').count) %></td>
+      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'rolling') %></td>
+      <td>Daily Exp</td>
+      <td>http://www.bre.ca.gov/Licensees/ExamineeLicenseeListDataFiles.html</td>
+    </tr>
+    <tr>
+      <td>NY</td>
+      <td>Rolling</td>
+      <td>1 Year</td>
+      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'NY').count) %></td>
+      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'Rolling') %></td>
+      <td>Daily Exp</td>
+      <td>https://data.ny.gov/Economic-Development/Active-Real-Estate-Salespersons-and-Brokers/yg7h-zjbf</td>
+    </tr>
+    <tr>
+      <td>NM</td>
+      <td>Rolling</td>
+      <td>3 Year</td>
+      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'NM').count) %></td>
+      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'rolling') %></td>
+      <td>End of Month Exp</td>
+    </tr>
+    <tr>
+      <td>WA</td>
+      <td>Rolling</td>
+      <td>3 Year</td>
+      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'WA').count) %></td>
+      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'rolling') %></td>
+      <td>Daily Exp</td>
+    </tr>
+    <tr>
+      <td>UT</td>
+      <td>Rolling</td>
+      <td>2 Year</td>
+      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'UT').count) %></td>
+      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'rolling') %></td>
+      <td>End of Month</td>
+      <td>https://secure.utah.gov/rer/relv/search.html</td>
+    </tr>
+    <tr>
+      <td>NC</td>
+      <td>6/10/20</td>
+      <td>1 Year</td>
+      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'NC').count) %></td>
+      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'nc') %></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>MO</td>
+      <td>6/30/20</td>
+      <td>2 Year</td>
+      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'MO').count) %></td>
+      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'mo') %></td>
+      <td>Brokers Only</td>
+    </tr>
+    <tr>
+      <td>MO</td>
+      <td>9/30/20</td>
+      <td>2 Year</td>
+      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'MO').count) %></td>
+      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'mo') %></td>
+      <td>Salesperson Only</td>
+    </tr>
+    <tr>
+      <td>NJ</td>
+      <td>4/30/20</td>
+      <td>2 Year</td>
+      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'NJ').count) %></td>
+      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'nj') %></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SC</td>
+      <td>6/30/20</td>
+      <td>2 Year</td>
+      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'SC').count) %></td>
+      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'sc') %></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>IN</td>
+      <td>4/30/21</td>
+      <td>2 Year</td>
+      <td><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'IND').count) %></td>
+      <td><%= link_to 'go', rc_marketing_empire_customers_path(st: 'in') %></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+
+</div>

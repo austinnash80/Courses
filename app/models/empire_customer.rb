@@ -13,7 +13,7 @@ class EmpireCustomer < ApplicationRecord
   end
 
   def self.to_csv # Export to csv function
-    attributes = %w{uid lic_state fname lname email}
+    attributes = %w{uid license_num fname lname email}
     CSV.generate(headers: true) do |csv|
       csv << attributes
 
