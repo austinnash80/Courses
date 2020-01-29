@@ -3,21 +3,21 @@
     <h4>States Included: CA, NY, WA, UT, NM</h4>
 
   </div>
-  <p><strong>1. Select mailing date</strong>  - <% if params['day'].present? %> <%= link_to 'Select new date', rc_marketing_empire_customers_path %> <% end %></p>
+  <!-- <p><strong>1. Select mailing date</strong>  - <%# if params['day'].present? %> <%#= link_to 'Select new date', rc_marketing_empire_customers_path %> <%# end %></p>
   <p><strong>2. Add records </strong> (take note of 'Mailing ID' and record count)</p>
-  <p><strong>3. Export List </strong>(check that 'Mailing ID' record count match)</p>
+  <p><strong>3. Export List </strong>(check that 'Mailing ID' record count match)</p> -->
 
 <% if params['day'].present? == false %>
 <br>
   <%= render(partial: 'rc_marketing_rolling_buttons') %>
 <% elsif %>
-<!-- <br> -->
+  <% if params['what'] == 'postcard' %>
   <div class="text-center">
     <h3>Mail Date: <strong><%= params['day'].present? ? params['day'].to_date.strftime('%-m/%-d/%Y') : ''%></strong> </h3>
     <h3>Mail ID: <strong><%= "E-RC-Rolling-#{params['day']}" %></strong></h3>
     <h3>Records: <strong> <%= @exp_1 + @exp_2 %></strong></h3>
     <br>
-    <%= link_to 'Add Records', rc_marketing_empire_customers_path(st: params['st'], day: params['day'], added: 'done'), class: 'btn btn-success btn-lg'  %>
+    <%= link_to 'Add Records', rc_marketing_empire_customers_path(st: params['st'], day: params['day'], added: 'done', what: 'postcard'), class: 'btn btn-success btn-lg'  %>
   </div>
 
 <br>
@@ -72,8 +72,62 @@
     </tbody>
   </table>
 
+  <% end %>
 
 <% end %>
+
+<% if params['what'] == 'email' %>
+  <div class="text-center">
+    <h3>Mail Date: <strong><%= params['day'].present? ? params['day'].to_date.strftime('%-m/%-d/%Y') : ''%></strong> </h3>
+    <h3>Mail ID: <strong><%= "E-RC-Rolling-Email-#{params['day']}" %></strong></h3>
+    <h3>Records: <strong> <%= @ca_count.sum + @ny_count.sum + @nm_count.sum %></strong></h3>
+    <br>
+    <%= link_to 'Add Records', rc_marketing_empire_customers_path(st: params['st'], day: params['day'], added: 'done', what: params['what'], page: params['page']), class: 'btn btn-success btn-lg'  %>
+  </div>
+<br>
+    <table class="table table-outline">
+      <thead>
+        <th>State</th>
+        <th>g1</th>
+        <th>g2</th>
+        <th>g3</th>
+        <th>g4</th>
+        <th>g5</th>
+        <th>g6</th>
+        <th>g7</th>
+        <th>g8</th>
+        <th>g9</th>
+        <th>g10</th>
+        <th>g11</th>
+        <th>Total</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CA</td>
+          <% @ca_count.each do |i| %>
+            <td><%= i %></td>
+          <% end %>
+          <td><strong><%= @ca_count.sum %></strong></td>
+        </tr>
+        <tr>
+          <td>NY</td>
+          <% @ny_count.each do |i| %>
+            <td><%= i %></td>
+          <% end %>
+          <td><strong><%= @ny_count.sum %></strong></td>
+        </tr>
+        <tr>
+          <td>NM</td>
+          <% @nm_count.each do |i| %>
+            <td><%= i %></td>
+          <% end %>
+          <td><strong><%= @nm_count.sum %></strong></td>
+        </tr>
+
+      </tbody>
+    </table>
+<% end %>
+
 <br>
 
 

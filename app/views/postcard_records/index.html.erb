@@ -13,7 +13,7 @@
       <th>Group</th>
       <th>Mailing</th>
       <th>Mail date</th>
-      <th>Card</th>
+      <th>What</th>
       <th>Sent</th>
       <th>Postage</th>
       <th>Print</th>
@@ -31,9 +31,9 @@
         <td><%= postcard_record.mail_date.strftime('%-m/%-d/%Y') %></td>
         <td><%= postcard_record.card %></td>
         <td><%= postcard_record.sent%></td>
-        <td><%= number_to_currency(postcard_record.sent * 50 / 100) %></td>
-        <td><%= number_to_currency(postcard_record.sent * 16 / 100) %></td>
-        <td><%= number_to_currency(postcard_record.sent * 66 / 100) %></td>
+        <td><%= postcard_record.card == 'postcard standard' ? number_to_currency(postcard_record.sent * 50 / 100) : 'n/a' %></td>
+        <td><%= postcard_record.card == 'postcard standard' ? number_to_currency(postcard_record.sent * 16 / 100) : 'n/a'%></td>
+        <td><%= postcard_record.card == 'postcard standard' ? number_to_currency(postcard_record.sent * 66 / 100) : number_to_currency(0)%></td>
         <!-- <td><%= link_to 'Show', postcard_record %></td> -->
         <td><%= link_to 'Edit', edit_postcard_record_path(postcard_record) %></td>
         <td><%= link_to 'Delete', postcard_record, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -32,7 +32,7 @@
       <tbody>
         <% days_1.each do |day| %>
         <% mail_id_postcard = "E-RC-Rolling-Postcard-#{day}" %>
-        <% mail_id_email = "E-RC-Rolling-email-#{day}" %>
+        <% mail_id_email = "E-RC-Rolling-Email-#{day}" %>
         <% records = PostcardRecord.all.pluck(:mailing_id) %>
           <tr class="">
             <td><%= day.strftime('%-m/%-d/%Y') %></td>

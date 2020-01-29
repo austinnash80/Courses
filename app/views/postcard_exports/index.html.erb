@@ -1,22 +1,26 @@
 <p id="notice"><%= notice %></p>
 
+<div class="display-none">
+
 <div class="text-center">
   <div class="well">
     <h1 class=""><big>Postcard Exports</big></h1>
   </div>
+
   <% if params['record'] == 'yes' %>
     <br>
     <div class="container">
       <p class="alert alert-success text-center">Export has been recorded. <%= link_to 'View records', postcard_records_path %></p>
     </div>
   <% end %>
+
   <h3>Mail Date: <strong><%= params['day'].to_date.strftime('%-m/%-d/%Y') %></strong></h3>
   <h3>Mail ID: <strong><%= params['mail_id'] %></strong></h3>
   <h3>Records: <strong> <%= number_with_delimiter(@postcard_exports.count) %></strong></h3>
   <br>
-  <%= link_to 'Export List', postcard_exports_path(mail_id: params['mail_id'], format: 'csv'), class: 'btn btn-primary btn-lg' %>
+  <%= link_to raw('<i class="glyphicon glyphicon-download-alt" ></i> Postcards'), postcard_exports_path(@postcard_export, co: params['co'], day: params['day'], group: params['group'], mail_id: params['mail_id'], sent: params['sent'], :format => 'pdf'), class: 'btn btn-lg btn-primary', target: '_blank'%>
+  <%= link_to raw('<i class="glyphicon glyphicon-download-alt" ></i> Email List'), postcard_exports_path(mail_id: params['mail_id'], format: 'csv'), class: 'btn btn-primary btn-lg' %>
   <%= link_to 'Record', postcard_exports_path(record: 'yes', co: params['co'], group: params['group'], mail_id: params['mail_id'], day: params['day'], card: params['card'], sent: params['sent']), class: 'btn btn-success btn-lg' %>
-
 </div>
 
 <br>
@@ -81,3 +85,21 @@
 <br>
 
 <%#= link_to 'New Postcard Export', new_postcard_export_path %>
+</div>
+
+<div class="print-only">
+  <% @postcard_exports.each do |postcard_export| %>
+  <div class="pdf-down-1">
+  </div>
+  <div class="text-right">
+    <p><%= postcard_export.f_name.present? ? postcard_export.f_name.upcase : '' %> <%= postcard_export.l_name.present? ? postcard_export.l_name.upcase : '' %>
+      <br>
+    <%= postcard_export.add_1.present? ? postcard_export.add_1.upcase : '' %> <%= postcard_export.add_2.present? ? postcard_export.add_2.upcase : '' %>
+      <br>
+    <%= postcard_export.city.present? ? postcard_export.city.upcase : '' %> <%= postcard_export.st.present? ? postcard_export.st.upcase : '' %> <%= postcard_export.zip.present? ? postcard_export.zip.upcase : '' %></p>
+  </div>
+  <div class="pdf-down-2">
+  </div>
+  <% end %>
+
+</div>
