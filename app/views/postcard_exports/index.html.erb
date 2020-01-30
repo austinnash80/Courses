@@ -25,7 +25,11 @@
 
 <br>
 <br>
-<p>Back to <%= link_to 'Empire RC Marketing', rc_marketing_empire_customers_path %></p>
+<% if params['co'] == 'sequoia' %>
+  <p>Back to <%= link_to 'Sequoia Postcard Marketing', rc_marketing_s_customers_path %></p>
+<% else %>
+  <p>Back to <%= link_to 'Empire RC Marketing', rc_marketing_empire_customers_path %></p>
+<% end %>
 <table class="table table-outline">
   <thead>
     <tr class="grey-b-200">
@@ -88,18 +92,21 @@
 </div>
 
 <div class="print-only">
+
   <% @postcard_exports.each do |postcard_export| %>
-  <div class="pdf-down-1">
-  </div>
-  <div class="text-right">
-    <p><%= postcard_export.f_name.present? ? postcard_export.f_name.upcase : '' %> <%= postcard_export.l_name.present? ? postcard_export.l_name.upcase : '' %>
-      <br>
-    <%= postcard_export.add_1.present? ? postcard_export.add_1.upcase : '' %> <%= postcard_export.add_2.present? ? postcard_export.add_2.upcase : '' %>
-      <br>
-    <%= postcard_export.city.present? ? postcard_export.city.upcase : '' %> <%= postcard_export.st.present? ? postcard_export.st.upcase : '' %> <%= postcard_export.zip.present? ? postcard_export.zip.upcase : '' %></p>
-  </div>
-  <div class="pdf-down-2">
-  </div>
+    <div class="pdf-down-1">
+    </div>
+    <div class="text-right">
+      <p>
+        <%= postcard_export.f_name.present? ? postcard_export.f_name.upcase : '' %> <%= postcard_export.l_name.present? ? postcard_export.l_name.upcase : '' %>
+          <br>
+        <%= postcard_export.add_1.present? ? postcard_export.add_1.upcase : '' %> <%= postcard_export.add_2.present? ? postcard_export.add_2.upcase : '' %>
+          <br>
+        <%= postcard_export.city.present? ? postcard_export.city.upcase : '' %> <%= postcard_export.st.present? ? postcard_export.st.upcase : '' %> <%= postcard_export.zip.present? ? postcard_export.zip.upcase : '' %>
+      </p>
+    </div>
+    <div class="pdf-down-2">
+    </div>
   <% end %>
 
 </div>

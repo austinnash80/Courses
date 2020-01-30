@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="text-center">
+    <h3>Mail Date: <strong><%= params['day'].to_date.strftime('%-m/%-d/%Y') %></strong></h3>
+    <!-- <h3>Mail ID:<strong> S-RC-NM-<%#= params['day'] %></strong></h3> -->
+    <!-- <h3>Records: <strong></strong></h3> -->
+    <%#= link_to 'Add Records', rc_marketing_s_customers_path(co: params['co'], st: 'na', day: params['day'], added: 'done', what: 'postcard'), class: 'btn btn-success btn-lg'  %>
+  </div>
+<br>
+  <table class="table table-outline">
+    <thead>
+      <tr class="grey-b-200">
+        <th></th>
+        <th class="text-center">CPA-NM</th>
+        <th class="text-center">CPA-RC</th>
+        <th class="text-center">EA-NM</th>
+        <th class="text-center">EA-RC</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td class="text-center"><strong>ID:</strong> S-CPA-NM-<%= params['day'] %></td>
+        <td class="text-center"><strong>ID:</strong> S-CPA-RC-<%= params['day'] %></td>
+        <td class="text-center"><strong>ID:</strong> S-EA-NM-<%= params['day'] %></td>
+        <td class="text-center"><strong>ID:</strong> S-EA-RC-<%= params['day'] %></td>
+      </tr>
+      <tr>
+        <td class="text-center"><strong>Date Range</strong></td>
+        <td class="text-center"><%= @cpa_nm_date_a.strftime('%-m/%-d/%y') %> - <%= @cpa_nm_date_b.strftime('%-m/%-d/%y') %></td>
+        <td class="text-center"><%= @cpa_rc_date_a.strftime('%-m/%-d/%y') %> - <%= @cpa_rc_date_b.strftime('%-m/%-d/%y') %></td>
+        <td class="text-center"><%= @ea_nm_date_a.strftime('%-m/%-d/%y') %> - <%= @ea_nm_date_b.strftime('%-m/%-d/%y') %></td>
+        <td class="text-center"><%= @ea_rc_date_a.strftime('%-m/%-d/%y') %> - <%= @ea_rc_date_b.strftime('%-m/%-d/%y') %></td>
+      </tr>
+      <tr>
+        <td class="text-center"><strong>Records</strong></td>
+        <td class="text-center"><%= @cpa_nm_records.count %></td>
+        <td class="text-center"><%= @cpa_rc_records.count %></td>
+        <td class="text-center"><%= @ea_nm_records.count %></td>
+        <td class="text-center"><%= @ea_rc_records.count %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="text-center"><%= link_to 'Add Records', rc_marketing_s_customers_path(co: params['co'], st: 'na', day: params['day'], added: 'done', what: 'postcard', group: 'CPA-NM'), class: 'btn btn-success btn-sm'  %></td>
+        <td class="text-center"><%= link_to 'Add Records', rc_marketing_s_customers_path(co: params['co'], st: 'na', day: params['day'], added: 'done', what: 'postcard', group: 'CPA-RC'), class: 'btn btn-success btn-sm'  %></td>
+        <td class="text-center"><%= link_to 'Add Records', rc_marketing_s_customers_path(co: params['co'], st: 'na', day: params['day'], added: 'done', what: 'postcard', group: 'EA-NM'), class: 'btn btn-success btn-sm'  %></td>
+        <td class="text-center"><%= link_to 'Add Records', rc_marketing_s_customers_path(co: params['co'], st: 'na', day: params['day'], added: 'done', what: 'postcard', group: 'EA-RC'), class: 'btn btn-success btn-sm'  %></td>
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>

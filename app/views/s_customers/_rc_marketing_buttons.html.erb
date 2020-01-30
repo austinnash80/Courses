@@ -1,0 +1,194 @@
+<% s_date = '2020-01-01'.to_date %>
+<% e_date = '2021-01-31'.to_date %>
+<% days_1 = [] %>
+<% days_2 = [] %>
+<% days_3 = [] %>
+<% days_4 = [] %>
+<% mail_dates = (s_date..e_date).to_a %>
+
+<% mail_dates.each do |date| %>
+  <% if date.strftime('%a') == 'Tue' || date.strftime('%a') == 'Fri' %>
+    <% if date >= '2020-01-01'.to_date && date <= '2020-03-31'.to_date %>
+      <% days_1.push(date) %>
+    <% end %>
+  <% end %>
+  <% if date.strftime('%a') == 'Tue' || date.strftime('%a') == 'Fri' %>
+    <% if date >= '2020-04-01'.to_date && date <= '2020-06-30'.to_date %>
+      <% days_2.push(date) %>
+    <% end %>
+  <% end %>
+  <% if date.strftime('%a') == 'Tue' || date.strftime('%a') == 'Fri' %>
+    <% if date >= '2020-07-01'.to_date && date <= '2020-09-30'.to_date %>
+      <% days_3.push(date) %>
+    <% end %>
+  <% end %>
+  <% if date.strftime('%a') == 'Tue' || date.strftime('%a') == 'Fri' %>
+    <% if date >= '2020-10-01'.to_date && date <= '2021-01-31'.to_date %>
+      <% days_4.push(date) %>
+    <% end %>
+  <% end %>
+<% end %>
+<div class="container">
+  <div class="row">
+
+  <div class="col-md-3">
+    <table class="table table-outline">
+      <thead>
+        <tr class="grey-b-200">
+          <th class="text-center" colspan="2">2020 Q1</th>
+          <th class="text-center">Done</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% days_1.each do |day| %>
+        <% mail_id_postcard = "S-CPA-NM-Postcard-#{day}" %>
+        <%# mail_id_email = "S-RC-Email-#{day}" %>
+        <tr>
+          <td><%= day.strftime('%-m/%-d/%Y') %></td>
+          <td><%= link_to 'Postcards', rc_marketing_s_customers_path(co: 'sequoia', day: day, what: 'postcard', add: 'yes'), class: '' %></td>
+            <% records = PostcardRecord.all.pluck(:mailing_id) %>
+            <% complete = [] %>
+            <% if records.include? "S-CPA-NM-Postcard-#{day}" %>
+              <% complete.push(1) %>
+            <% end %>
+            <% if records.include? "S-CPA-RC-Postcard-#{day}" %>
+              <% complete.push(1) %>
+            <% end %>
+            <% if records.include? "S-EA-NM-Postcard-#{day}" %>
+              <% complete.push(1) %>
+            <% end %>
+            <% if records.include? "S-EA-RC-Postcard-#{day}" %>
+              <% complete.push(1) %>
+            <% end %>
+          <% if complete.sum != 4 %>
+            <td class="text-center"><%= complete.sum == 1 ? '1' : complete.sum == 2 ? '2' : complete.sum == 3 ? '3' : complete.sum == 4 ? 'Done' : '' %></td>
+          <% else %>
+            <td class="text-center"><span class="glyphicon glyphicon-ok success"></span></td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+    <div class="col-md-3">
+    <table class="table table-outline">
+      <thead>
+        <tr class="grey-b-200">
+          <th class="text-center" colspan="2">2020 Q2</th>
+          <th class="text-center">Done</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% days_2.each do |day| %>
+        <% mail_id_postcard = "S-CPA-NM-Postcard-#{day}" %>
+        <%# mail_id_email = "S-RC-Email-#{day}" %>
+        <tr>
+          <td><%= day.strftime('%-m/%-d/%Y') %></td>
+          <td><%= link_to 'Postcards', rc_marketing_s_customers_path(co: 'sequoia', day: day, what: 'postcard', add: 'yes'), class: '' %></td>
+            <% records = PostcardRecord.all.pluck(:mailing_id) %>
+            <% complete = [] %>
+            <% if records.include? "S-CPA-NM-Postcard-#{day}" %>
+              <% complete.push(1) %>
+            <% end %>
+            <% if records.include? "S-CPA-RC-Postcard-#{day}" %>
+              <% complete.push(1) %>
+            <% end %>
+            <% if records.include? "S-EA-NM-Postcard-#{day}" %>
+              <% complete.push(1) %>
+            <% end %>
+            <% if records.include? "S-EA-RC-Postcard-#{day}" %>
+              <% complete.push(1) %>
+            <% end %>
+          <% if complete.sum != 4 %>
+            <td class="text-center"><%= complete.sum == 1 ? '1' : complete.sum == 2 ? '2' : complete.sum == 3 ? '3' : complete.sum == 4 ? 'Done' : '' %></td>
+          <% elsif complete.sum = 4 %>
+            <td class="text-center"><span class="glyphicon glyphicon-ok success"></span></td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+    <div class="col-md-3">
+    <table class="table table-outline">
+      <thead>
+        <tr class="grey-b-200">
+          <th class="text-center" colspan="2">2020 Q3</th>
+          <th class="text-center">Done</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% days_3.each do |day| %>
+        <% mail_id_postcard = "S-CPA-NM-Postcard-#{day}" %>
+        <%# mail_id_email = "S-RC-Email-#{day}" %>
+        <tr>
+          <td><%= day.strftime('%-m/%-d/%Y') %></td>
+          <td><%= link_to 'Postcards', rc_marketing_s_customers_path(co: 'sequoia', day: day, what: 'postcard', add: 'yes'), class: '' %></td>
+            <% records = PostcardRecord.all.pluck(:mailing_id) %>
+            <% complete = [] %>
+            <% if records.include? "S-CPA-NM-Postcard-#{day}" %>
+              <% complete.push(1) %>
+            <% end %>
+            <% if records.include? "S-CPA-RC-Postcard-#{day}" %>
+              <% complete.push(1) %>
+            <% end %>
+            <% if records.include? "S-EA-NM-Postcard-#{day}" %>
+              <% complete.push(1) %>
+            <% end %>
+            <% if records.include? "S-EA-RC-Postcard-#{day}" %>
+              <% complete.push(1) %>
+            <% end %>
+            <% if complete.sum != 4 %>
+              <td class="text-center"><%= complete.sum == 1 ? '1' : complete.sum == 2 ? '2' : complete.sum == 3 ? '3' : complete.sum == 4 ? 'Done' : '' %></td>
+            <% elsif complete.sum = 4 %>
+              <td class="text-center"><span class="glyphicon glyphicon-ok success"></span></td>
+            <% else %>
+              <td></td>
+            <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+    <div class="col-md-3">
+    <table class="table table-outline">
+      <thead>
+        <tr class="grey-b-200">
+          <th class="text-center" colspan="2">2020 Q4</th>
+          <th class="text-center">Done</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% days_4.each do |day| %>
+        <% mail_id_postcard = "S-CPA-NM-Postcard-#{day}" %>
+        <%# mail_id_email = "S-RC-Email-#{day}" %>
+        <tr>
+          <td><%= day.strftime('%-m/%-d/%Y') %></td>
+          <td><%= link_to 'Postcards', rc_marketing_s_customers_path(co: 'sequoia', day: day, what: 'postcard', add: 'yes'), class: '' %></td>
+            <% records = PostcardRecord.all.pluck(:mailing_id) %>
+            <% complete = [] %>
+            <% if records.include? "S-CPA-NM-Postcard-#{day}" %>
+              <% complete.push(1) %>
+            <% end %>
+            <% if records.include? "S-CPA-RC-Postcard-#{day}" %>
+              <% complete.push(1) %>
+            <% end %>
+            <% if records.include? "S-EA-NM-Postcard-#{day}" %>
+              <% complete.push(1) %>
+            <% end %>
+            <% if records.include? "S-EA-RC-Postcard-#{day}" %>
+              <% complete.push(1) %>
+            <% end %>
+          <% if complete.sum != 4 %>
+            <td class="text-center"><%= complete.sum == 1 ? '1' : complete.sum == 2 ? '2' : complete.sum == 3 ? '3' : complete.sum == 4 ? 'Done' : '' %></td>
+          <% else %>
+            <td class="text-center"><span class="glyphicon glyphicon-ok success"></span></td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+
+  </div>
+</div>

@@ -8,8 +8,10 @@ Rails.application.routes.draw do
   end
   resources :empire_state_lists
   resources :s_customers do
+    collection {post :import}
     collection do
       get 'data'
+      get 'rc_marketing'
     end
   end
   resources :empire_customers do
@@ -20,6 +22,7 @@ Rails.application.routes.draw do
       get 'rc_marketing'
     end
   end
+
   resources :master_lists do
     collection {post :import}
     collection do

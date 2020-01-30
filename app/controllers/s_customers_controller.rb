@@ -5,8 +5,10 @@ class SCustomersController < ApplicationController
   # GET /s_customers.json
   def index
     run_data
+
     @s_customers = SCustomer.all
-    @last_update = ['2019-01-01']
+    # @last_update = ['2019-01-01']
+    @last_update = SCustomer.last(1).pluck(:purchase)
     @total_purchases = SCustomer.all.count
     customers = SCustomer.all.pluck(:uid)
     @unique_customers = customers.uniq.count
@@ -44,8 +46,99 @@ class SCustomersController < ApplicationController
     end
   end
 
+  def rc_marketing
+
+  if params['day'].present?
+      mail_date = params['day'].to_date
+
+      if mail_date.strftime('%a') == 'Tue'
+        @cpa_nm_date_a = mail_date - 4.day
+        @cpa_nm_date_b = mail_date - 1.days
+        @ea_nm_date_a = mail_date - 4.day
+        @ea_nm_date_b = mail_date - 1.days
+        @cpa_rc_date_a = mail_date + 7.day - 1.year
+        @cpa_rc_date_b = mail_date + 9.days - 1.year
+        @ea_rc_date_a = mail_date + 7.day - 1.year
+        @ea_rc_date_b = mail_date + 9.days - 1.year
+      else mail_date.strftime('%a') == 'Fri'
+        @cpa_nm_date_a = mail_date - 3.day
+        @cpa_nm_date_b = mail_date - 1.days
+        @ea_nm_date_a = mail_date - 3.day
+        @ea_nm_date_b = mail_date - 1.days
+        @cpa_rc_date_a = mail_date + 7.day - 1.year
+        @cpa_rc_date_b = mail_date + 10.days - 1.year
+        @ea_rc_date_a = mail_date + 7.day - 1.year
+        @ea_rc_date_b = mail_date + 10.days - 1.year
+      end
+
+
+      all_ea_membership = ["Unlimited EA CPE Membership", "Unlimited EA CE Membership", "1-Year EA Membership Renewal",  "1-Year EA Membership Discounted Re-Activation", "Unlimited EA Membership (Auto-Renew)", "1-Year EA Membership Re-Activation", "1-Year EA Membership Renewal (Auto-Renew)"]
+      ea_membership = ["Unlimited EA CPE Membership", "Unlimited EA CE Membership", "1-Year EA Membership Renewal",  "1-Year EA Membership Discounted Re-Activation", "1-Year EA Membership Re-Activation"]
+
+      all_cpa_membership = ["1-Year CPA Membership Discounted Re-Activation", "1-Year CPA Membership Re-Activation", "1-Year CPA Membership Renewal", "1-Year CPA Membership Renewal (Auto-Renew)", "Unlimited CPA CPE Membership", "Unlimited CPA CPE Membership (Auto-Renew)", "Unlimited EA CE Membership", "Unlimited EA CPE Membership", "Unlimited EA Membership (Auto-Renew)"]
+      cpa_membership = ["1-Year CPA Membership Discounted Re-Activation", "1-Year CPA Membership Re-Activation", "1-Year CPA Membership Renewal", "Unlimited CPA CPE Membership", "Unlimited EA CE Membership", "Unlimited EA CPE Membership"]
+      # cpa_membership does not include auto-renew memberships
+      cpa_purchased_in_this_cycle = SCustomer.where('purchase >= ?', mail_date - 9.months).where(product_1: cpa_membership).pluck(:uid)
+      ea_purchased_in_this_cycle = SCustomer.where('purchase >= ?', mail_date - 9.months).where(product_1: ea_membership).pluck(:uid)
+
+      @cpa_nm_records = SCustomer.where('purchase >= ? AND purchase <= ?', @cpa_nm_date_a, @cpa_nm_date_b ).where(product_1: cpa_membership).all
+      @cpa_rc_records = SCustomer.where('purchase >= ? AND purchase <= ?', @cpa_rc_date_a, @cpa_rc_date_b ).where(product_1: cpa_membership).where.not(uid: cpa_purchased_in_this_cycle).all
+      @ea_nm_records = SCustomer.where('purchase >= ? AND purchase <= ?', @ea_nm_date_a, @ea_nm_date_b ).where(product_1: ea_membership).all
+      @ea_rc_records = SCustomer.where('purchase >= ? AND purchase <= ?', @ea_rc_date_a, @ea_rc_date_b ).where(product_1: ea_membership).where.not(uid: ea_purchased_in_this_cycle).all
+    end
+
+    if params['added'] == 'done'
+
+      PostcardExport.delete_all #Delete all the current records - fresh database each time.
+
+      if params['group'] == 'CPA-NM'
+        group = @cpa_nm_records
+      elsif params['group'] == 'CPA-RC'
+        group = @cpa_rc_records
+      elsif params['group'] == 'EA-NM'
+        group = @ea_nm_records
+      elsif params['group'] == 'EA-RC'
+        group = @ea_rc_records
+      end
+
+      uid = []
+
+      group.each do |s_customer|
+      if uid.exclude? s_customer.uid
+        new = PostcardExport.create(
+          company: params['co'],
+          group: params['group'],
+          mail_id: "S-#{params['group']}-Postcard-#{params['day']}",
+          mail_date: params['day'],
+          state: params['st'],
+          license_number: 'na',
+          uid: s_customer.uid,
+          merge_1: 'Merge Text 1',
+          merge_2: 'Merge Text 1',
+          merge_3: 'Merge Text 1',
+          f_name: s_customer.fname,
+          l_name: s_customer.lname,
+          add_1: s_customer.street_1,
+          add_2: s_customer.street_2,
+          city: s_customer.city,
+          st: s_customer.state,
+          zip: s_customer.zip,
+          email: s_customer.email)
+        new.save
+        uid.push(s_customer.uid) #Push new records lic number in to array to not allow duplicates in new table
+      end
+      end
+    redirect_to postcard_exports_path(co: params['co'], group: params['group'], mail_id: "S-#{params['group']}-Postcard-#{params['day']}", day: params['day'], card: 'postcard standard', sent: group.count)
+    end
+  end
+
   def data
     @id = SCustomer.pluck(:s_id).max
+  end
+
+  def import
+    SCustomer.my_import(params[:file])
+    redirect_to s_customers_path, notice: "upload Complete"
   end
 
   # GET /s_customers/1
@@ -110,6 +203,6 @@ class SCustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def s_customer_params
-      params.require(:s_customer).permit(:s_id, :order_id, :uid, :existing, :purchase_s, :purchase, :product_1, :product_2, :designation, :fname, :lname, :street_1, :street_2, :city, :state, :zip, :email, :price_s, :price, :lic_num, :lic_state)
+      params.require(:s_customer).permit(:s_id, :order_id, :uid, :existing, :purchase_s, :purchase, :product_1, :product_2, :designation, :fname, :lname, :street_1, :street_2, :city, :state, :zip, :email, :price_s, :price, :lic_num, :lic_state, :total)
     end
 end
