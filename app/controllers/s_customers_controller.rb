@@ -42,7 +42,7 @@ class SCustomersController < ApplicationController
 
         new.save
 
-      redirect_to sequoia_s_data_path
+      redirect_to data_s_customers_path
     end
   end
 
@@ -137,7 +137,7 @@ class SCustomersController < ApplicationController
   end
 
   def import
-    
+
     SCustomer.my_import(params[:file])
     redirect_to s_customers_path, notice: "upload Complete"
   end
