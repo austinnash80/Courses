@@ -137,6 +137,7 @@ class SCustomersController < ApplicationController
   end
 
   def import
+    
     SCustomer.my_import(params[:file])
     redirect_to s_customers_path, notice: "upload Complete"
   end
