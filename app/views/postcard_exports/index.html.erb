@@ -26,6 +26,7 @@
 <br>
 <br>
 <% if params['co'] == 'sequoia' %>
+  <p>Back to <%= link_to "Mailing for #{params['day'].to_date.strftime('%a, %-m/%-d')}", rc_marketing_s_customers_path(co: params['co'], add: params['add'], day: params['day'], what: params['what']) %></p>
   <p>Back to <%= link_to 'Sequoia Postcard Marketing', rc_marketing_s_customers_path %></p>
 <% else %>
   <p>Back to <%= link_to 'Empire RC Marketing', rc_marketing_empire_customers_path %></p>
