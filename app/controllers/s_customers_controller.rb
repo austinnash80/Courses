@@ -36,7 +36,7 @@ class SCustomersController < ApplicationController
           zip: params['zip'],
           email: params['email'],
           price_s: params['price'],
-          price: params['price'].present? ? params['price'].to_f : 0,
+          price: params['price'].present? ? ((params['price'].to_f) * 100) : 0,
           lic_num: params['lic_num'],
           lic_state: params['lic_state'])
 
