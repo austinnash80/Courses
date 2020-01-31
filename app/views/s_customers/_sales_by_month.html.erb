@@ -7,7 +7,7 @@
         <% year = '2018' %>
         <% total_1 = [] %>
         <thead>
-          <tr>
+          <tr class="grey-b-200">
             <th class="text-center" colspan="2"><%= year %></th>
           </tr>
           <tr>
@@ -20,7 +20,7 @@
           <% if k.strftime('%Y') == year %>
             <tr>
               <td><%= k.strftime('%B')%></td>
-              <td><%= number_to_currency(v) %></td>
+              <td><%= number_to_currency(v.to_f / 100) %></td>
             </tr>
                   <% total_1.push(v.to_f / 100) %>
           <% end %>
@@ -37,7 +37,7 @@
         <% year = '2019' %>
         <% total_1 = [] %>
         <thead>
-          <tr>
+          <tr class="grey-b-200">
             <th class="text-center" colspan="2"><%= year %></th>
           </tr>
           <tr>
@@ -67,7 +67,7 @@
         <% year = '2020' %>
         <% total_1 = [] %>
         <thead>
-          <tr>
+          <tr class="grey-b-200">
             <th class="text-center" colspan="2"><%= year %></th>
           </tr>
           <tr>
