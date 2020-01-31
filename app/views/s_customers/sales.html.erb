@@ -1,0 +1,15 @@
+<div class="jumbotron text-center">
+  <% if params['sales'].present? == false %>
+    <h1 class=""> Sequoia Sales By Week</h1>
+    <%= link_to 'By Month', sales_s_customers_path(sales: 'month'), class: 'btn btn-primary' %>
+  <% elsif params['sales'] == 'month' %>
+    <h1 class=""> Sequoia Sales By Month</h1>
+    <%= link_to 'By Week', sales_s_customers_path, class: 'btn btn-primary' %>
+  <% end %>
+</div>
+
+  <% if params['sales'].present? == false %>
+    <%= render(:partial => 'sales_by_week') %>
+  <% elsif params['sales'] == 'month' %>
+    <%= render(:partial => 'sales_by_month') %>
+  <% end %>

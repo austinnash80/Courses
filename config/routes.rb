@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     collection do
       get 'data'
       get 'rc_marketing'
+      get 'sales'
     end
   end
   resources :empire_customers do

@@ -1,4 +1,4 @@
-<h4><u><%= link_to 'Sequoia Sales', sales_empire_customers_path %></u></h4>
+<h4><u><%= link_to 'Sequoia Sales', sales_s_customers_path %></u></h4>
 <% SCustomer.where('purchase > ?',Date.today - 15.days).order('purchase DESC').group(:purchase).sum(:price).each do |k, v| %>
-<p><strong><%= k.strftime('%a') %></strong>, <%= k.strftime('%-b %-d') %>: <%= number_to_currency(v) %></p>
+<p><strong><%= k.strftime('%a') %></strong>, <%= k.strftime('%-m/%-d') %>: <%= number_to_currency(v.to_f/100) %></p>
 <% end %>
