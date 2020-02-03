@@ -73,10 +73,10 @@ class SCustomersController < ApplicationController
 
 
       all_ea_membership = ["Unlimited EA CPE Membership", "Unlimited EA CE Membership", "1-Year EA Membership Renewal",  "1-Year EA Membership Discounted Re-Activation", "Unlimited EA Membership (Auto-Renew)", "1-Year EA Membership Re-Activation", "1-Year EA Membership Renewal (Auto-Renew)"]
-      ea_membership = ["Unlimited EA CPE Membership", "Unlimited EA CE Membership", "1-Year EA Membership Renewal",  "1-Year EA Membership Discounted Re-Activation", "1-Year EA Membership Re-Activation"]
+      ea_membership = ["Unlimited EA CPE Membership","Unlimited EA CPE Membership (Auto-Renew)"]
 
       all_cpa_membership = ["1-Year CPA Membership Discounted Re-Activation", "1-Year CPA Membership Re-Activation", "1-Year CPA Membership Renewal", "1-Year CPA Membership Renewal (Auto-Renew)", "Unlimited CPA CPE Membership", "Unlimited CPA CPE Membership (Auto-Renew)", "Unlimited EA CE Membership", "Unlimited EA CPE Membership", "Unlimited EA Membership (Auto-Renew)"]
-      cpa_membership = ["1-Year CPA Membership Discounted Re-Activation", "1-Year CPA Membership Re-Activation", "1-Year CPA Membership Renewal", "Unlimited CPA CPE Membership", "Unlimited EA CE Membership", "Unlimited EA CPE Membership"]
+      cpa_membership = ["Unlimited CPA CPE Membership", "Unlimited CPA CPE Membership (Auto-Renew)"]
       # cpa_membership does not include auto-renew memberships
       cpa_purchased_in_this_cycle = SCustomer.where('purchase >= ?', mail_date - 9.months).where(product_1: cpa_membership).pluck(:uid)
       ea_purchased_in_this_cycle = SCustomer.where('purchase >= ?', mail_date - 9.months).where(product_1: ea_membership).pluck(:uid)
