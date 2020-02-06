@@ -592,7 +592,8 @@ end
         merge_2 = 'test 2 - postcard'
         merge_3 = 'test 3 - postcard'
       end
-      export = EmpireCustomer.where(lic_state: 'PA').where('p_date < ?', pa_exp - 18.months).all
+      current = EmpireCustomer.where(lic_state: 'PA').where('p_date >= ?', pa_exp - 18.months).pluck(:uid)
+      export = EmpireCustomer.where(lic_state: 'PA').where.not(uid: current).all
       @export_count = export.pluck(:uid).uniq
     end
 
