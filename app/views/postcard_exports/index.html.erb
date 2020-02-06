@@ -32,6 +32,7 @@
   <p>Back to <%= link_to 'Empire RC Marketing', rc_marketing_empire_customers_path %></p>
 <% end %>
 <table class="table table-outline">
+  <caption>Displaying 100 max</caption>
   <thead>
     <tr class="grey-b-200">
       <th>Company</th>
@@ -58,7 +59,7 @@
   </thead>
 
   <tbody>
-    <% @postcard_exports.each do |postcard_export| %>
+    <% @postcard_exports.first(100).each do |postcard_export| %>
       <tr class="">
         <td><%= postcard_export.company %></td>
         <td><%= postcard_export.group %></td>

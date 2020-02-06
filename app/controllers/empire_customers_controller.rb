@@ -581,9 +581,9 @@ end
       if params['type'] == 'email'
         mail_id = "E-RC-Deadline-PA-Email-#{mail_date}"
         group = 'rc email'
-        merge_1 = 'test 1 - email'
-        merge_2 = 'test 2 - email'
-        merge_3 = 'test 3 - email'
+        merge_1 = 'merge 1 - email'
+        merge_2 = 'merge 2 - email'
+        merge_3 = 'merge 3 - email'
       end
       if params['type'] == 'postcard'
         mail_id = "E-RC-Deadline-PA-Postcard-#{mail_date}"
