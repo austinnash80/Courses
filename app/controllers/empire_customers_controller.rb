@@ -212,7 +212,7 @@ class EmpireCustomersController < ApplicationController
           end
         end
 
-        redirect_to postcard_exports_path(co: 'empire', group: 'rc postcard', mail_id: "E-RC-Rolling-Postcard-#{params['day']}", day: params['day'], card: 'postcard standard', sent: @exp_1 + @exp_2)
+        redirect_to postcard_exports_path(co: 'empire', group: 'rc postcard', mail_id: "E-RC-Rolling-Postcard-#{params['day']}", day: params['day'], card: 'postcard standard', sent: @exp_1 + @exp_2, what: params['what'])
       end
       end #If 'data'
 
@@ -666,6 +666,8 @@ end
 
   end
 
+
+
   def run_data
     if params['e_id'].present?
       # if params['e_id'].to_i > EmpireCustomer.all.pluck(:e_id).max
@@ -683,13 +685,14 @@ end
             fname: params['fname'],
             lname: params['lname'],
             company: params['company'],
-            street_1: params['street_1'],
-            street_2: params['street_2'],
             city: params['city'],
             state: params['state'],
             zip: params['zip'],
             email: params['email'],
-            phone: params['phone'])
+            phone: params['phone'],
+            street_1: params['street_1'],
+            street_2: params['street_2']
+          )
 
           new.save
 

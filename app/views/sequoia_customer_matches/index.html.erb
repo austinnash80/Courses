@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+<h1 class="jumbotron text-center">Sequoia Customer Matches</h1>
+
+<div class="text-center">
+  <%= link_to 'Run Update', sequoia_customer_matches_path(update: 'yes'), class: 'btn btn-lg btn-success' %>
+  <br><br>
+</div>
+
+<p>Records: <%= number_with_delimiter(@sequoia_customer_matches.count) %></p>
+
+<table class="table table-outline">
+  <caption>Displaying last 100</caption>
+  <thead>
+    <tr>
+      <th>Mid</th>
+      <th>Uid</th>
+      <th>Match date</th>
+      <th>Extra s</th>
+      <th>Extra i</th>
+      <th>Extra b</th>
+      <th>Extra d</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sequoia_customer_matches.last(100).each do |sequoia_customer_match| %>
+      <tr>
+        <td><%= sequoia_customer_match.mid %></td>
+        <td><%= sequoia_customer_match.uid %></td>
+        <td><%= sequoia_customer_match.match_date %></td>
+        <td><%= sequoia_customer_match.extra_s %></td>
+        <td><%= sequoia_customer_match.extra_i %></td>
+        <td><%= sequoia_customer_match.extra_b %></td>
+        <td><%= sequoia_customer_match.extra_d %></td>
+        <td><%= link_to 'Show', sequoia_customer_match %></td>
+        <td><%= link_to 'Edit', edit_sequoia_customer_match_path(sequoia_customer_match) %></td>
+        <td><%= link_to 'Destroy', sequoia_customer_match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%#= link_to 'New Sequoia Customer Match', new_sequoia_customer_match_path %>

@@ -29,8 +29,7 @@ class SCustomersController < ApplicationController
           designation: params['designation'],
           fname: params['fname'],
           lname: params['lname'],
-          street_1: params['street_1'],
-          street_2: params['street_2'],
+          # simple fix -> move street_1 to end -> Still may lose unit number from address? okay to mail?
           city: params['city'],
           state: params['state'],
           zip: params['zip'],
@@ -38,7 +37,10 @@ class SCustomersController < ApplicationController
           price_s: params['price'],
           price: params['price'].present? ? ((params['price'].to_f) * 100) : 0,
           lic_num: params['lic_num'],
-          lic_state: params['lic_state'])
+          lic_state: params['lic_state'],
+          street_1: params['street_1'],
+          street_2: params['street_2']
+        )
 
         new.save
 
@@ -128,7 +130,7 @@ class SCustomersController < ApplicationController
         uid.push(s_customer.uid) #Push new records lic number in to array to not allow duplicates in new table
       end
       end
-    redirect_to postcard_exports_path(co: params['co'], group: params['group'], mail_id: "S-#{params['group']}-Postcard-#{params['day']}", day: params['day'], card: 'postcard standard', sent: group.count)
+    redirect_to postcard_exports_path(co: params['co'], group: params['group'], mail_id: "S-#{params['group']}-Postcard-#{params['day']}", day: params['day'], card: 'postcard standard', sent: group.count, what: params['what'])
     end
   end
 

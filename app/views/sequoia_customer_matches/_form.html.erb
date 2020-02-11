@@ -1,0 +1,18 @@
+
+<%= simple_form_for(@sequoia_customer_match) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :mid %>
+    <%= f.input :uid %>
+    <%= f.input :match_date %>
+    <%= f.input :extra_s %>
+    <%= f.input :extra_i %>
+    <%= f.input :extra_b %>
+    <%= f.input :extra_d %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

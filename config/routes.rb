@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :sequoia_customer_matches
   resources :postcard_records
   resources :postcard_exports
 

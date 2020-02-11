@@ -1,0 +1,2 @@
+class SequoiaCustomerMatch < ApplicationRecord
+end
