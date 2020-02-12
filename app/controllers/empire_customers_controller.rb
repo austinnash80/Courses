@@ -562,6 +562,7 @@ end
       end
     end
 
+
     redirect_to postcard_exports_path(co: 'empire', group: 'rc email', mail_id: "E-RC-Rolling-Email-#{params['day']}", day: params['day'], what: params['what'], card: 'email', sent: @ca_count.sum+@ny_count.sum+@nm_count.sum)
 
   end
@@ -573,6 +574,8 @@ end
 
   def rc_marketing_deadline
     # All who have not purchased in the last x time - match with board list ?
+      ## MO is matched with the brokers list to find if they are brokers. Others not currently matched with board list
+# PA
     if params['state'] == 'PA'
       pa_exp = '2020-05-31'.to_date
       company = 'empire'
@@ -594,6 +597,55 @@ end
       end
       current = EmpireCustomer.where(lic_state: 'PA').where('p_date >= ?', pa_exp - 18.months).pluck(:uid)
       export = EmpireCustomer.where(lic_state: 'PA').where.not(uid: current).all
+      @export_count = export.pluck(:uid).uniq
+    end
+# MO Brokers
+    if params['state'] == 'MO_B'
+      mo_b_exp = '2020-06-30'.to_date
+      company = 'empire'
+      mail_date = params['day']
+      state = 'MO_B'
+      mail_id = "E-RC-Deadline-#{state}-#{params['what']}-#{mail_date}"
+      if params['what'] == 'email'
+        group = 'rc email'
+        merge_1 = 'merge 1 - email'
+        merge_2 = 'merge 2 - email'
+        merge_3 = 'merge 3 - email'
+      end
+      if params['type'] == 'postcard'
+        # mail_id = "E-RC-Deadline-#{state}-Postcard-#{mail_date}"
+        group = 'rc postcard'
+        merge_1 = 'test 1 - postcard'
+        merge_2 = 'test 2 - postcard'
+        merge_3 = 'test 3 - postcard'
+      end
+      current = EmpireCustomer.where(lic_state: 'MO').where('p_date >= ?', mo_b_exp - 18.months).pluck(:uid)
+      sup_1 = EmpireCustomer.where(lic_state: 'MO').where.not(uid: current).all
+      broker = EmpireMasterList.where(source: 'MO_B').pluck(:license_number)
+      export = sup_1.where(license_num: broker).all
+      @export_count = export.pluck(:uid).uniq
+    end
+# MO Brokers
+    if params['state'] == 'IN'
+      in_exp = '2020-06-30'.to_date
+      company = 'empire'
+      mail_date = params['day']
+      mail_id = "E-RC-Deadline-#{params['state']}-#{params['what']}-#{mail_date}"
+      if params['what'] == 'email'
+        group = 'rc email'
+        merge_1 = 'merge 1 - email'
+        merge_2 = 'merge 2 - email'
+        merge_3 = 'merge 3 - email'
+      end
+      if params['type'] == 'postcard'
+        # mail_id = "E-RC-Deadline-#{state}-Postcard-#{mail_date}"
+        group = 'rc postcard'
+        merge_1 = 'test 1 - postcard'
+        merge_2 = 'test 2 - postcard'
+        merge_3 = 'test 3 - postcard'
+      end
+      current = EmpireCustomer.where(lic_state: 'IND').where('p_date >= ?', in_exp - 10.months).pluck(:uid)
+      export = EmpireCustomer.where(lic_state: 'IND').where.not(uid: current).all
       @export_count = export.pluck(:uid).uniq
     end
 
@@ -626,8 +678,10 @@ end
           uid_array.push(empire_customer.uid) #Push new records lic number in to array to not allow duplicates in new table
         end
       end
-      redirect_to postcard_exports_path(co: company, group: group, mail_id: mail_id, day: mail_date, card: 'email', sent: @export_count.count)
+      # mail_id = 'yes'
+      redirect_to postcard_exports_path(co: company, group: group, mail_id: mail_id, day: mail_date, card: 'email', sent: @export_count.count, what: params['what'])
     end
+
 
   end
 

@@ -80,6 +80,16 @@
             <td><%= link_to 'Delete', empire_master_lists_path(delete: 'WA') %></td>
           <% end %>
         </tr>
+        <tr>
+          <td>MO_B</td>
+          <td><%= @mo_b.uniq.join %></td>
+          <td><%= number_with_delimiter(@mo_b.count) %></td>
+          <% if params['delete'] == 'MO_B' %>
+            <td><%= link_to 'Confirm', empire_master_lists_path(delete: 'MO_B', confirm: 'yes') %></td>
+          <% elsif %>
+            <td><%= link_to 'Delete', empire_master_lists_path(delete: 'MO_B') %></td>
+          <% end %>
+        </tr>
 
         <%# @states.each do |k,v| %>
         <!-- <tr> -->
