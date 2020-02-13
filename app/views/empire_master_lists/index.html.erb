@@ -1,17 +1,11 @@
-<p id="notice"><%= notice %></p>
 
 <div class="well">
   <h1 class="text-center">Empire Master Lists</h1>
 </div>
+<p id="notice"><%= notice %></p>
 
 
-<h3>Upload CSV File</h3>
-  <%= form_tag import_empire_master_lists_path, multipart: true do %>
-  <%= file_field_tag :file %>
-<br>
-  <%= submit_tag 'Upload', class: 'btn btn-primary' %>
-<% end %>
-<br>
+
 
 <% if params['confirm'] == 'yes' %>
   <% EmpireMasterList.where(source: params['delete']).delete_all %>
@@ -24,43 +18,73 @@
       <thead>
         <tr>
           <th>State</th>
+          <!-- Give List Info HERE -> Types of Licenses - expand on date - Where to get the list any other info. Drop down or new page? -->
           <th>List</th>
-          <th>Count</th>
+          <th>Master</th>
+          <th>Empire Active</th>
+          <th>Share</th>
+          <th></th>
           <th></th>
         </tr>
       </thead>
       <tbody>
+        <% ca_match = EmpireCustomer.where(lic_state: 'CA').where(b_list: @ca.uniq.join).pluck(:uid) %>
         <tr>
           <td>CA</td>
           <td><%= @ca.uniq.join %></td>
           <td><%=  number_with_delimiter(@ca.count) %></td>
+          <td><%= number_with_delimiter(ca_match.uniq.count) %></td>
+          <td><%= number_to_percentage((ca_match.uniq.count.to_f / @ca.count.to_f)*100, precision: 1)%></td>
           <% if params['delete'] == 'CA' %>
             <td><%= link_to 'Confirm', empire_master_lists_path(delete: 'CA', confirm: 'yes') %></td>
           <% elsif %>
-            <td><%= link_to 'Delete', empire_master_lists_path(delete: 'CA') %></td>
+            <td><%= link_to 'Delete Master', empire_master_lists_path(delete: 'CA') %></td>
           <% end %>
+          <td> <%= link_to 'Update', b_exp_empire_customers_path(state: 'CA'), class: 'btn btn-sm btn-default' %></td>
         </tr>
         <tr>
+          <% ny_match = EmpireCustomer.where(lic_state: 'NY').where(b_list: @ny.uniq.join).pluck(:uid) %>
           <td>NY</td>
           <td><%= @ny.uniq.join %></td>
           <td><%=  number_with_delimiter(@ny.count) %></td>
+          <td><%= number_with_delimiter(ny_match.uniq.count) %></td>
+          <td><%= number_to_percentage((ny_match.uniq.count.to_f / @ny.count.to_f)*100, precision: 1)%></td>
           <% if params['delete'] == 'NY' %>
             <td><%= link_to 'Confirm', empire_master_lists_path(delete: 'NY', confirm: 'yes') %></td>
           <% elsif %>
-            <td><%= link_to 'Delete', empire_master_lists_path(delete: 'NY') %></td>
+            <td><%= link_to 'Delete Master', empire_master_lists_path(delete: 'NY') %></td>
           <% end %>
+          <td> <%= link_to 'Update', b_exp_empire_customers_path(state: 'NY'), class: 'btn btn-sm btn-default' %></td>
         </tr>
         <tr>
+          <% pa_match = EmpireCustomer.where(lic_state: 'PA').where(b_list: @pa.uniq.join).pluck(:uid) %>
+          <td>PA</td>
+          <td><%= @pa.uniq.join %></td>
+          <td><%=  number_with_delimiter(@pa.count) %></td>
+          <td><%= number_with_delimiter(pa_match.uniq.count) %></td>
+          <td><%= number_to_percentage((pa_match.uniq.count.to_f / @pa.count.to_f)*100, precision: 1)%></td>
+          <% if params['delete'] == 'PA' %>
+            <td><%= link_to 'Confirm', empire_master_lists_path(delete: 'PA', confirm: 'yes') %></td>
+          <% elsif %>
+            <td><%= link_to 'Delete Master', empire_master_lists_path(delete: 'PA') %></td>
+          <% end %>
+          <td> <%= link_to 'Update', b_exp_empire_customers_path(state: 'PA'), class: 'btn btn-sm btn-default' %></td>
+        </tr>
+        <tr>
+          <% nm_match = EmpireCustomer.where(lic_state: 'NM').where(b_list: @nm.uniq.join).pluck(:uid) %>
           <td>NM</td>
           <td><%= @nm.uniq.join %></td>
           <td><%=  number_with_delimiter(@nm.count) %></td>
+          <td><%= number_with_delimiter(nm_match.uniq.count) %></td>
+          <td><%= number_to_percentage((nm_match.uniq.count.to_f / @nm.count.to_f)*100, precision: 1)%></td>
           <% if params['delete'] == 'NM' %>
             <td><%= link_to 'Confirm', empire_master_lists_path(delete: 'NM', confirm: 'yes') %></td>
           <% elsif %>
-            <td><%= link_to 'Delete', empire_master_lists_path(delete: 'NM') %></td>
+            <td><%= link_to 'Delete Master', empire_master_lists_path(delete: 'NM') %></td>
           <% end %>
+          <td> <%= link_to 'Update', b_exp_empire_customers_path(state: 'NM'), class: 'btn btn-sm btn-default' %></td>
         </tr>
-        <tr>
+        <!-- <tr>
           <td>UT</td>
           <td><%= @ut.uniq.join %></td>
           <td><%= number_with_delimiter(@ut.count) %></td>
@@ -69,26 +93,35 @@
           <% elsif %>
             <td><%= link_to 'Delete', empire_master_lists_path(delete: 'UT') %></td>
           <% end %>
-        </tr>
+        </tr> -->
+
         <tr>
+          <% wa_match = EmpireCustomer.where(lic_state: 'WA').where(b_list: @wa.uniq.join).pluck(:uid) %>
           <td>WA</td>
           <td><%= @wa.uniq.join %></td>
           <td><%= number_with_delimiter(@wa.count) %></td>
+          <td><%= number_with_delimiter(wa_match.uniq.count) %></td>
+          <td><%= number_to_percentage((wa_match.uniq.count.to_f / @wa.count.to_f)*100, precision: 1)%></td>
           <% if params['delete'] == 'WA' %>
             <td><%= link_to 'Confirm', empire_master_lists_path(delete: 'WA', confirm: 'yes') %></td>
           <% elsif %>
-            <td><%= link_to 'Delete', empire_master_lists_path(delete: 'WA') %></td>
+            <td><%= link_to 'Delete Master', empire_master_lists_path(delete: 'WA') %></td>
           <% end %>
+          <td> <%= link_to 'Update', b_exp_empire_customers_path(state: 'WA'), class: 'btn btn-sm btn-default' %></td>
         </tr>
         <tr>
+          <% mo_b_match = EmpireCustomer.where(lic_state: 'MO').where(b_list: @mo_b.uniq.join).pluck(:uid) %>
           <td>MO_B</td>
           <td><%= @mo_b.uniq.join %></td>
           <td><%= number_with_delimiter(@mo_b.count) %></td>
+          <td><%= mo_b_match.uniq.count %></td>
+          <td><%= number_to_percentage((mo_b_match.uniq.count.to_f / @mo_b.count.to_f)*100, precision: 1)%></td>
           <% if params['delete'] == 'MO_B' %>
             <td><%= link_to 'Confirm', empire_master_lists_path(delete: 'MO_B', confirm: 'yes') %></td>
           <% elsif %>
-            <td><%= link_to 'Delete', empire_master_lists_path(delete: 'MO_B') %></td>
+            <td><%= link_to 'Delete Master', empire_master_lists_path(delete: 'MO_B') %></td>
           <% end %>
+          <td> <%= link_to 'Update', b_exp_empire_customers_path(state: 'MO_B'), class: 'btn btn-sm btn-default' %></td>
         </tr>
 
         <%# @states.each do |k,v| %>
@@ -101,3 +134,11 @@
     </table>
   </div>
 </div>
+
+<h3>Upload New Master File (CSV)</h3>
+  <%= form_tag import_empire_master_lists_path, multipart: true do %>
+  <%= file_field_tag :file %>
+<br>
+  <%= submit_tag 'Upload', class: 'btn btn-primary' %>
+<% end %>
+<br>

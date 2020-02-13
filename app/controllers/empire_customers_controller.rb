@@ -43,13 +43,11 @@ class EmpireCustomersController < ApplicationController
     @ny_master_2 = EmpireMasterList.where(source: 'NY').where(license_number: @ny_1).where.not(license_number: @ny_2).where('exp_date >= ? AND exp_date <= ?', @date_2a, @date_2b).pluck(:license_number)
     @nm_master_1 = EmpireMasterList.where(source: 'NM').where(license_number: @nm_1).where.not(license_number: @nm_2).where('exp_date >= ? AND exp_date <= ?', @date_1a, @date_1b).pluck(:license_number) #all NM That meet the date criteria, and match the first array but no the second
     @nm_master_2 = EmpireMasterList.where(source: 'NM').where(license_number: @nm_1).where.not(license_number: @nm_2).where('exp_date >= ? AND exp_date <= ?', @date_2a, @date_2b).pluck(:license_number) #all NM That meet the date criteria, and match the first array but no the second
-    @ut_master_1 = EmpireMasterList.where(source: 'UT').where(license_number: @ut_1).where.not(license_number: @ut_2).where('exp_date >= ? AND exp_date <= ?', @date_1a, @date_1b).pluck(:license_number) #all NM That meet the date criteria, and match the first array but no the second
-    @ut_master_2 = EmpireMasterList.where(source: 'UT').where(license_number: @ut_1).where.not(license_number: @ut_2).where('exp_date >= ? AND exp_date <= ?', @date_2a, @date_2b).pluck(:license_number) #all NM That meet the date criteria, and match the first array but no the second
     @wa_master_1 = EmpireMasterList.where(source: 'WA').where(license_number: @wa_1).where.not(license_number: @wa_2).where('exp_date >= ? AND exp_date <= ?', @date_1a, @date_1b).pluck(:license_number)#all NM That meet the date criteria, and match the first array but no the second
     @wa_master_2 = EmpireMasterList.where(source: 'WA').where(license_number: @wa_1).where.not(license_number: @wa_2).where('exp_date >= ? AND exp_date <= ?', @date_2a, @date_2b).pluck(:license_number) #all NM That meet the date criteria, and match the first array but no the second
 
-    @exp_1 = @ca_master_1.count + @ny_master_1.count + @nm_master_1.count + @ut_master_1.count + @wa_master_1.count
-    @exp_2 = @ca_master_2.count + @ny_master_2.count + @nm_master_2.count + @ut_master_2.count + @wa_master_2.count
+    @exp_1 = @ca_master_1.count + @ny_master_1.count + @nm_master_1.count + @wa_master_1.count
+    @exp_2 = @ca_master_2.count + @ny_master_2.count + @nm_master_2.count + @wa_master_2.count
     # @export_1 = @ca_master_1.union(@ca_master_2)
     # @export_1 = @ca_master_1.union(@ca_master_2).union(@ny_master_1).union(@ny_master_2).union(@nm_master_1).union(@nm_master_2).union(@ut_master_1).union(@ut_master_2).union(@wa_master_1).union(@wa_master_2)
     # @export_2 = EmpireCustomer.where(license_num: ca_export).where(lic_state: 'CA').all
@@ -136,9 +134,9 @@ class EmpireCustomersController < ApplicationController
               state: 'NM',
               license_number: empire_customer.license_num,
               uid: empire_customer.uid,
-              merge_1: 'Merge Text 1',
-              merge_2: 'Merge Text 1',
-              merge_3: 'Merge Text 1',
+              merge_1: '24-Hour New Mexico Package',
+              merge_2: 'Just $159.50',
+              merge_3: 'ReturningStudent20',
               f_name: empire_customer.fname,
               l_name: empire_customer.lname,
               add_1: empire_customer.street_1,
@@ -151,36 +149,7 @@ class EmpireCustomersController < ApplicationController
             nm_license_number.push(empire_customer.license_num) #Push new records lic number in to array to not allow duplicates in new table
           end
         end
-        ### UT
-        ut_export = @ut_master_1.union(@ut_master_2)
-        ut_empire = EmpireCustomer.where(lic_state: 'UT').where(license_num: ut_export).all
-        ut_license_number = []
 
-        ut_empire.each do |empire_customer|
-          if ut_license_number.exclude? empire_customer.license_num
-            new = PostcardExport.create(
-              company: 'Empire',
-              group: 'rc postcard',
-              mail_id: "E-RC-Rolling-Postcard-#{params['day']}",
-              mail_date: params['day'],
-              state: 'UT',
-              license_number: empire_customer.license_num,
-              uid: empire_customer.uid,
-              merge_1: 'Merge Text 1',
-              merge_2: 'Merge Text 1',
-              merge_3: 'Merge Text 1',
-              f_name: empire_customer.fname,
-              l_name: empire_customer.lname,
-              add_1: empire_customer.street_1,
-              add_2: empire_customer.street_2,
-              city: empire_customer.city,
-              st: empire_customer.state,
-              zip: empire_customer.zip,
-              email: empire_customer.email)
-            new.save
-            ut_license_number.push(empire_customer.license_num) #Push new records lic number in to array to not allow duplicates in new table
-          end
-        end
         ### WA
         wa_export = @wa_master_1.union(@wa_master_2)
         wa_empire = EmpireCustomer.where(lic_state: 'WA').where(license_num: wa_export).all
@@ -196,9 +165,9 @@ class EmpireCustomersController < ApplicationController
               state: 'WA',
               license_number: empire_customer.license_num,
               uid: empire_customer.uid,
-              merge_1: 'Merge Text 1',
-              merge_2: 'Merge Text 1',
-              merge_3: 'Merge Text 1',
+              merge_1: '30-Hour Washington Package',
+              merge_2: 'Just $89.50',
+              merge_3: 'ReturningStudent20',
               f_name: empire_customer.fname,
               l_name: empire_customer.lname,
               add_1: empire_customer.street_1,
@@ -240,13 +209,9 @@ class EmpireCustomersController < ApplicationController
       nm = EmpireCustomer.where(lic_state: 'NM').all #All NM Customers
       @nm_1 = nm.pluck(:license_num).uniq #Array of all unique license numbers
       @nm_2 = nm.where('p_date >= ?', Date.today - 18.months).pluck(:license_num).uniq #Array of unique license number who have purchases in the given time frame
-      ut = EmpireCustomer.where(lic_state: 'UT').all #All NM Customers
-      @ut_1 = ut.pluck(:license_num).uniq #Array of all unique license numbers
-      @ut_2 = ut.where('p_date >= ?', Date.today - 18.months).pluck(:license_num).uniq #Array of unique license number who have purchases in the given time frame
       wa = EmpireCustomer.where(lic_state: 'WA').all #All NM Customers
       @wa_1 = wa.pluck(:license_num).uniq #Array of all unique license numbers
       @wa_2 = wa.where('p_date >= ?', Date.today - 18.months).pluck(:license_num).uniq #Array of unique license number who have purchases in the given time frame
-
   end
 
   def re_marketing_rolling_email
@@ -311,15 +276,28 @@ class EmpireCustomersController < ApplicationController
       g9_nm = []
       g10_nm = []
       g11_nm = []
+      g1_wa = []
+      g2_wa = []
+      g3_wa = []
+      g4_wa = []
+      g5_wa = []
+      g6_wa = []
+      g7_wa = []
+      g8_wa = []
+      g9_wa = []
+      g10_wa = []
+      g11_wa = []
 ## GROUP ARRAYS END
 
 ## Master Vaiables
       ca_customer = EmpireCustomer.where(lic_state: 'CA').all
       ny_customer = EmpireCustomer.where(lic_state: 'NY').all
       nm_customer = EmpireCustomer.where(lic_state: 'NM').all
+      wa_customer = EmpireCustomer.where(lic_state: 'WA').all
       ca_master = EmpireMasterList.where(source: 'CA')
       ny_master = EmpireMasterList.where(source: 'NY')
       nm_master = EmpireMasterList.where(source: 'NM')
+      wa_master = EmpireMasterList.where(source: 'WA')
 ## Master Vaiables END
 
 ## GROUPS BY LICENSE NUMBER
@@ -356,12 +334,24 @@ class EmpireCustomersController < ApplicationController
     g9_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g9_day_a, g9_day_b).pluck(:license_number)
     g10_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g10_day_a, g10_day_b).pluck(:license_number)
     g11_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g11_day_a, g11_day_b).pluck(:license_number)
+    g1_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g1_day_a, g1_day_b).pluck(:license_number)
+    g2_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g2_day_a, g2_day_b).pluck(:license_number)
+    g3_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g3_day_a, g3_day_b).pluck(:license_number)
+    g4_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g4_day_a, g4_day_b).pluck(:license_number)
+    g5_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g5_day_a, g5_day_b).pluck(:license_number)
+    g6_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g6_day_a, g6_day_b).pluck(:license_number)
+    g7_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g7_day_a, g7_day_b).pluck(:license_number)
+    g8_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g8_day_a, g8_day_b).pluck(:license_number)
+    g9_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g9_day_a, g9_day_b).pluck(:license_number)
+    g10_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g10_day_a, g10_day_b).pluck(:license_number)
+    g11_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g11_day_a, g11_day_b).pluck(:license_number)
 ## GROUPS END
 
 ## EXCLUDES (custers who have already purchased for this renewal cycle)
     ca_exclude = ca_customer.where('p_date > ?', Date.today - 2.year).pluck(:uid)
     ny_exclude = ny_customer.where('p_date > ?', Date.today - 1.year).pluck(:uid)
     nm_exclude = nm_customer.where('p_date > ?', Date.today - 1.year).pluck(:uid)
+    wa_exclude = wa_customer.where('p_date > ?', Date.today - 1.year).pluck(:uid)
 ## EXCLUDES END
 
 ## ADDING TO GROUP ARRAY
@@ -443,18 +433,47 @@ class EmpireCustomersController < ApplicationController
        g11_nm.push(empire_customer.uid)
      end
    end
+## WA
+   wa_customer.each do |empire_customer|
+     if g1_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+       g1_wa.push(empire_customer.uid)
+     elsif g2_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+       g2_wa.push(empire_customer.uid)
+     elsif g3_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+       g3_wa.push(empire_customer.uid)
+     elsif g4_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+       g4_wa.push(empire_customer.uid)
+     elsif g5_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+       g5_wa.push(empire_customer.uid)
+     elsif g6_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+       g6_wa.push(empire_customer.uid)
+     elsif g7_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+       g7_wa.push(empire_customer.uid)
+     elsif g8_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+       g8_wa.push(empire_customer.uid)
+     elsif g9_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+       g9_wa.push(empire_customer.uid)
+     elsif g10_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+       g10_wa.push(empire_customer.uid)
+     elsif g11_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+       g11_wa.push(empire_customer.uid)
+     end
+   end
  ## ADDING END
 
 ## TOTALS
 groups_ca = [ g1_ca, g2_ca , g3_ca , g4_ca , g5_ca , g6_ca , g7_ca , g8_ca , g9_ca , g10_ca , g11_ca]
 groups_ny = [ g1_ny, g2_ny , g3_ny , g4_ny , g5_ny , g6_ny , g7_ny , g8_ny , g9_ny , g10_ny , g11_ny]
 groups_nm = [ g1_nm, g2_nm , g3_nm , g4_nm , g5_nm , g6_nm , g7_nm , g8_nm , g9_nm , g10_nm , g11_nm]
+groups_wa = [ g1_wa, g2_wa , g3_wa , g4_wa , g5_wa , g6_wa , g7_wa , g8_wa , g9_wa , g10_wa , g11_wa]
 @ca_count = []
 ca_uid = []
 @ny_count = []
 ny_uid = []
 @nm_count = []
 nm_uid = []
+@wa_count = []
+wa_uid = []
 groups_ca.each do |i| @ca_count.push(i.uniq.count)
   i.each do |uid|
     ca_uid.push(uid)
@@ -470,10 +489,16 @@ groups_nm.each do |i| @nm_count.push(i.uniq.count)
     nm_uid.push(uid)
   end
 end
+groups_wa.each do |i| @wa_count.push(i.uniq.count)
+  i.each do |uid|
+    wa_uid.push(uid)
+  end
+end
 
 
 # #ADD
   if params['added'] == 'done'
+    ## When add records is clicked - Adding the selected records from above to the Postcard Export Table
 
     PostcardExport.delete_all #Delete all the current records - fresh database each time.
 
@@ -489,9 +514,9 @@ end
             state: 'CA',
             license_number: empire_customer.license_num,
             uid: empire_customer.uid,
-            merge_1: 'Merge Text 1',
-            merge_2: 'Merge Text 1',
-            merge_3: 'Merge Text 1',
+            merge_1: 'CA Merge Text 1',
+            merge_2: 'CA Merge Text 1',
+            merge_3: 'CA Merge Text 1',
             f_name: empire_customer.fname,
             l_name: empire_customer.lname,
             add_1: empire_customer.street_1,
@@ -517,9 +542,9 @@ end
             state: 'NY',
             license_number: empire_customer.license_num,
             uid: empire_customer.uid,
-            merge_1: 'Merge Text 1',
-            merge_2: 'Merge Text 1',
-            merge_3: 'Merge Text 1',
+            merge_1: 'NY Merge Text 1',
+            merge_2: 'NY Merge Text 1',
+            merge_3: 'NY Merge Text 1',
             f_name: empire_customer.fname,
             l_name: empire_customer.lname,
             add_1: empire_customer.street_1,
@@ -545,9 +570,9 @@ end
             state: 'NM',
             license_number: empire_customer.license_num,
             uid: empire_customer.uid,
-            merge_1: 'Merge Text 1',
-            merge_2: 'Merge Text 1',
-            merge_3: 'Merge Text 1',
+            merge_1: 'NM Merge Text 1',
+            merge_2: 'NM Merge Text 1',
+            merge_3: 'NM Merge Text 1',
             f_name: empire_customer.fname,
             l_name: empire_customer.lname,
             add_1: empire_customer.street_1,
@@ -561,9 +586,36 @@ end
         end
       end
     end
+    added_wa_uid = []
+    wa_customer.each do |empire_customer|
+      if wa_uid.include? empire_customer.uid
+        unless added_wa_uid.include? empire_customer.uid
+          new = PostcardExport.create(
+            company: 'Empire',
+            group: 'rc email',
+            mail_id: "E-RC-Rolling-Email-#{params['day']}",
+            mail_date: params['day'],
+            state: 'WA',
+            license_number: empire_customer.license_num,
+            uid: empire_customer.uid,
+            merge_1: 'WA Merge Text 1',
+            merge_2: 'WA Merge Text 1',
+            merge_3: 'WA Merge Text 1',
+            f_name: empire_customer.fname,
+            l_name: empire_customer.lname,
+            add_1: empire_customer.street_1,
+            add_2: empire_customer.street_2,
+            city: empire_customer.city,
+            st: empire_customer.state,
+            zip: empire_customer.zip,
+            email: empire_customer.email)
+          new.save
+          added_wa_uid.push(empire_customer.uid) #Push new records lic number in to array to not allow duplicates in new table
+        end
+      end
+    end
 
-
-    redirect_to postcard_exports_path(co: 'empire', group: 'rc email', mail_id: "E-RC-Rolling-Email-#{params['day']}", day: params['day'], what: params['what'], card: 'email', sent: @ca_count.sum+@ny_count.sum+@nm_count.sum)
+    redirect_to postcard_exports_path(co: 'empire', group: 'rc email', mail_id: "E-RC-Rolling-Email-#{params['day']}", day: params['day'], what: params['what'], card: 'email', sent: @ca_count.sum+@ny_count.sum+@nm_count.sum+@wa_count.sum)
 
   end
 
@@ -756,6 +808,16 @@ end
     # redirect_to empire_customers_path(done: 'YES')
   end
 
+  def b_exp
+    if params['state'].present?
+      lic = EmpireCustomer.where(lic_state: params['state']).where(b_exp: nil).pluck(:license_num)
+      EmpireMasterList.where(source: params['state']).where(license_number: lic).each do |master|
+        EmpireCustomer.where(lic_state: params['state']).where(b_exp: nil).where(license_num: master.license_number).update_all b_exp: master.exp_date, b_list: master.list
+      end
+    end
+    redirect_to empire_master_lists_path, notice: "#{params['state']} Update Complete"
+  end
+
   # GET /empire_customers/1
   # GET /empire_customers/1.json
   def show
@@ -823,6 +885,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def empire_customer_params
-      params.require(:empire_customer).permit(:e_id, :uid, :license_num, :existing, :purchase_date, :lic_state, :products, :order_total, :fname, :lname, :company, :street_1, :street_2, :city, :state, :zip, :email, :phone, :p_date, :total)
+      params.require(:empire_customer).permit(:e_id, :uid, :license_num, :existing, :purchase_date, :lic_state, :products, :order_total, :fname, :lname, :company, :street_1, :street_2, :city, :state, :zip, :email, :phone, :p_date, :total, :b_exp, :b_list, :empire_master_list_id)
     end
 end

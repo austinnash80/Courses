@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200208002547) do
+ActiveRecord::Schema.define(version: 20200213213924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -271,6 +271,9 @@ ActiveRecord::Schema.define(version: 20200208002547) do
     t.integer "e_id"
     t.date "p_date"
     t.decimal "total"
+    t.date "b_exp"
+    t.string "b_list"
+    t.integer "empire_master_list_id"
   end
 
   create_table "empire_mailings", force: :cascade do |t|

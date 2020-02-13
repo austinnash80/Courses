@@ -1,6 +1,6 @@
 <div class="container">
   <div class="text-center">
-    <h4>States Included: CA, NY, WA, UT, NM</h4>
+    <h4>States Included: CA, NY, WA, NM</h4>
 
   </div>
   <!-- <p><strong>1. Select mailing date</strong>  - <%# if params['day'].present? %> <%#= link_to 'Select new date', rc_marketing_empire_customers_path %> <%# end %></p>
@@ -52,12 +52,6 @@
         <td><%= @nm_master_1.count + @nm_master_2.count %> </td>
       </tr>
       <tr class="grey-b-100 ">
-        <td>UT</td>
-        <td><%= @ut_master_1.count %></td>
-        <td><%= @ut_master_2.count %></td>
-        <td><%= @ut_master_1.count + @ut_master_2.count %> </td>
-      </tr>
-      <tr class="grey-b-100 ">
         <td>WA</td>
         <td><%= @wa_master_1.count %></td>
         <td><%= @wa_master_2.count %></td>
@@ -80,7 +74,7 @@
   <div class="text-center">
     <h3>Mail Date: <strong><%= params['day'].present? ? params['day'].to_date.strftime('%-m/%-d/%Y') : ''%></strong> </h3>
     <h3>Mail ID: <strong><%= "E-RC-Rolling-Email-#{params['day']}" %></strong></h3>
-    <h3>Records: <strong> <%= @ca_count.sum + @ny_count.sum + @nm_count.sum %></strong></h3>
+    <h3>Records: <strong> <%= @ca_count.sum + @ny_count.sum + @nm_count.sum + @wa_count.sum %></strong></h3>
     <br>
     <%= link_to 'Add Records', rc_marketing_empire_customers_path(st: params['st'], day: params['day'], added: 'done', what: params['what'], page: params['page']), class: 'btn btn-success btn-lg'  %>
   </div>
@@ -119,6 +113,13 @@
         <tr>
           <td>NM</td>
           <% @nm_count.each do |i| %>
+            <td><%= i %></td>
+          <% end %>
+          <td><strong><%= @nm_count.sum %></strong></td>
+        </tr>
+        <tr>
+          <td>WA</td>
+          <% @wa_count.each do |i| %>
             <td><%= i %></td>
           <% end %>
           <td><strong><%= @nm_count.sum %></strong></td>

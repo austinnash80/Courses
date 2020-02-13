@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       get 'exports'
       get 'sales'
       get 'rc_marketing'
+      get 'b_exp'
     end
   end
 

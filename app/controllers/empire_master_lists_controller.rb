@@ -13,6 +13,7 @@ class EmpireMasterListsController < ApplicationController
     @ut = EmpireMasterList.where(source: 'UT').pluck(:list)
     @wa = EmpireMasterList.where(source: 'WA').pluck(:list)
     @mo_b = EmpireMasterList.where(source: 'MO_B').pluck(:list)
+    @pa = EmpireMasterList.where(source: 'PA').pluck(:list)
 
 #Delete List
     if params['confirm'] == 'yes'
