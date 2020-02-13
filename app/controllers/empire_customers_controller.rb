@@ -581,19 +581,19 @@ end
       company = 'empire'
       mail_date = params['day']
       state = 'PA'
-      if params['type'] == 'email'
+      if params['what'] == 'email'
         mail_id = "E-RC-Deadline-PA-Email-#{mail_date}"
         group = 'rc email'
         merge_1 = 'merge 1 - email'
         merge_2 = 'merge 2 - email'
         merge_3 = 'merge 3 - email'
       end
-      if params['type'] == 'postcard'
+      if params['what'] == 'postcard'
         mail_id = "E-RC-Deadline-PA-Postcard-#{mail_date}"
         group = 'rc postcard'
-        merge_1 = 'test 1 - postcard'
-        merge_2 = 'test 2 - postcard'
-        merge_3 = 'test 3 - postcard'
+        merge_1 = '14-Hour Pennsylvania Package'
+        merge_2 = 'Just $64.50'
+        merge_3 = 'ReturningStudent20'
       end
       current = EmpireCustomer.where(lic_state: 'PA').where('p_date >= ?', pa_exp - 18.months).pluck(:uid)
       export = EmpireCustomer.where(lic_state: 'PA').where.not(uid: current).all
@@ -612,8 +612,7 @@ end
         merge_2 = 'merge 2 - email'
         merge_3 = 'merge 3 - email'
       end
-      if params['type'] == 'postcard'
-        # mail_id = "E-RC-Deadline-#{state}-Postcard-#{mail_date}"
+      if params['what'] == 'postcard'
         group = 'rc postcard'
         merge_1 = 'test 1 - postcard'
         merge_2 = 'test 2 - postcard'
@@ -637,8 +636,7 @@ end
         merge_2 = 'merge 2 - email'
         merge_3 = 'merge 3 - email'
       end
-      if params['type'] == 'postcard'
-        # mail_id = "E-RC-Deadline-#{state}-Postcard-#{mail_date}"
+      if params['what'] == 'postcard'
         group = 'rc postcard'
         merge_1 = 'test 1 - postcard'
         merge_2 = 'test 2 - postcard'
