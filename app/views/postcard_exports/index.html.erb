@@ -20,7 +20,7 @@
   <br>
   <% if params['what'] == 'postcard' %>
     <%= link_to raw('<i class="glyphicon glyphicon-download-alt" ></i> Postcards'), postcard_exports_path(@postcard_export, co: params['co'], day: params['day'], group: params['group'], mail_id: params['mail_id'], sent: params['sent'], :format => 'pdf'), class: 'btn btn-lg btn-primary', target: '_blank'%>
-  <% elsif params['what'] == 'email' %>
+  <% elsif params['what'] == 'Email' %>
     <%= link_to raw('<i class="glyphicon glyphicon-download-alt" ></i> Email List'), postcard_exports_path(mail_id: params['mail_id'], format: 'csv'), class: 'btn btn-primary btn-lg' %>
   <% end %>
   <%= link_to 'Record', postcard_exports_path(record: 'yes', co: params['co'], group: params['group'], mail_id: params['mail_id'], day: params['day'], card: params['card'], sent: params['sent']), class: 'btn btn-success btn-lg' %>
