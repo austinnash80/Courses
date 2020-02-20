@@ -47,7 +47,7 @@
         <% pa_email_dates.each do |email| %>
         <tr class="">
             <td><%= email.to_date.strftime('%-m/%-d/%Y') %></td>
-            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'yes', page: 'deadline', state: 'PA', day: email, what: 'email') %></td>
+            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'yes', page: 'deadline', state: 'PA', day: email, what: 'Email') %></td>
             <% mail_id = "E-RC-Deadline-PA-Email-#{email}" %>
             <% records = PostcardRecord.all.pluck(:mailing_id) %>
             <% if records.include? mail_id %>
@@ -115,7 +115,7 @@
         <% mo_b_email_dates.each do |email| %>
         <tr class="">
             <td><%= email.to_date.strftime('%-m/%-d/%Y') %></td>
-            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'yes', page: 'deadline', state: 'MO_B', day: email, what: 'email') %></td>
+            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'yes', page: 'deadline', state: 'MO_B', day: email, what: 'Email') %></td>
             <% mail_id = "E-RC-Deadline-MO_B-Email-#{email}" %>
             <% records = PostcardRecord.all.pluck(:mailing_id) %>
             <% if records.include? mail_id %>
@@ -164,6 +164,7 @@
 <% if params['state'] == 'IN' %>
 <% in_email_dates = ['2020-02-11', '2020-03-07', '2020-03-22', '2020-04-06', '2020-04-21', '2020-05-06', '2020-05-21', '2020-06-05', '2020-06-20', '2020-06-25'] %>
 <% in_postcard_dates = ['2020-05-01', '2020-05-31'] %>
+<% state = params['state'] %>
 
 <!-- EMAIL -->
 <div class="row">
@@ -181,8 +182,8 @@
         <% in_email_dates.each do |email| %>
         <tr class="">
             <td><%= email.to_date.strftime('%-m/%-d/%Y') %></td>
-            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'yes', page: 'deadline', state: 'IN', day: email, what: 'email') %></td>
-            <% mail_id = "E-RC-Deadline-IN-Email-#{email}" %>
+            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'yes', page: 'deadline', state: state, day: email, what: 'Email') %></td>
+            <% mail_id = "E-RC-Deadline-#{state}-Email-#{email}" %>
             <% records = PostcardRecord.all.pluck(:mailing_id) %>
             <% if records.include? mail_id %>
               <td><span class="glyphicon glyphicon-ok success"></span></td>
@@ -210,7 +211,7 @@
             <tr class="">
               <td><%= postcard.to_date.strftime('%-m/%-d/%Y') %></td>
               <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'yes', page: 'deadline', state: 'IN', day: postcard, what: 'postcard') %></td>
-              <% mail_id = "E-RC-Deadline-in-Postcard-#{postcard}" %>
+              <% mail_id = "E-RC-Deadline-#{state}-Postcard-#{postcard}" %>
               <% records = PostcardRecord.all.pluck(:mailing_id) %>
               <% if records.include? mail_id %>
                 <td><span class="glyphicon glyphicon-ok success"></span></td>
@@ -249,7 +250,7 @@
         <% nc_email_dates.each do |email| %>
         <tr class="">
             <td><%= email.to_date.strftime('%-m/%-d/%Y') %></td>
-            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'yes', page: 'deadline', state: state, day: email, what: 'email') %></td>
+            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'yes', page: 'deadline', state: state, day: email, what: 'Email') %></td>
             <% mail_id = "E-RC-Deadline-#{state}-Email-#{email}" %>
             <% records = PostcardRecord.all.pluck(:mailing_id) %>
             <% if records.include? mail_id %>
