@@ -638,7 +638,7 @@ end
       mail_date = params['day']
       state = 'PA'
       mail_id = "E-RC-Deadline-#{state}-#{params['what']}-#{mail_date}"
-      if params['what'] == 'email'
+      if params['what'] == 'Email'
         group = 'rc email'
         merge_1 = 'merge 1 - email'
         merge_2 = 'merge 2 - email'
@@ -661,7 +661,7 @@ end
       mail_date = params['day']
       state = params['state']
       mail_id = "E-RC-Deadline-#{state}-#{params['what']}-#{mail_date}"
-      if params['what'] == 'email'
+      if params['what'] == 'Email'
         group = 'rc email'
         merge_1 = 'merge 1 - email'
         merge_2 = 'merge 2 - email'
@@ -684,7 +684,7 @@ end
       mail_date = params['day']
       state = 'MO_B'
       mail_id = "E-RC-Deadline-#{state}-#{params['what']}-#{mail_date}"
-      if params['what'] == 'email'
+      if params['what'] == 'Email'
         group = 'rc email'
         merge_1 = 'merge 1 - email'
         merge_2 = 'merge 2 - email'
@@ -708,7 +708,7 @@ end
       company = 'empire'
       mail_date = params['day']
       mail_id = "E-RC-Deadline-#{params['state']}-#{params['what']}-#{mail_date}"
-      if params['what'] == 'email'
+      if params['what'] == 'Email'
         group = 'rc email'
         merge_1 = 'merge 1 - email'
         merge_2 = 'merge 2 - email'
