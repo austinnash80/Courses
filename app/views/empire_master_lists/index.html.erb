@@ -123,13 +123,31 @@
           <% end %>
           <td> <%= link_to 'Update', b_exp_empire_customers_path(state: 'MO_B'), class: 'btn btn-sm btn-default' %></td>
         </tr>
-
-        <%# @states.each do |k,v| %>
-        <!-- <tr> -->
-          <!-- <td><%#= k %></td> -->
-          <!-- <td><%#= number_with_delimiter(v.count) %></td> -->
-        <!-- </tr> -->
-        <%# end %>
+        <tr>
+          <% nc_match = EmpireCustomer.where(lic_state: 'NC').where(b_list: @nc.uniq.join).pluck(:uid) %>
+          <td>NC</td>
+          <td><%= @nc.uniq.join %></td>
+          <td><%= number_with_delimiter(@nc.count) %></td>
+          <td><%= nc_match.uniq.count %></td>
+          <td><%= number_to_percentage((nc_match.uniq.count.to_f / @nc.count.to_f)*100, precision: 1)%></td>
+          <% if params['delete'] == 'NC' %>
+            <td><%= link_to 'Confirm', empire_master_lists_path(delete: 'NC', confirm: 'yes') %></td>
+          <% elsif %>
+            <td><%= link_to 'Delete Master', empire_master_lists_path(delete: 'NC') %></td>
+          <% end %>
+          <td> <%= link_to 'Update', b_exp_empire_customers_path(state: 'NC'), class: 'btn btn-sm btn-default' %></td>
+        </tr>
+        <tr>
+          <% total_match = mo_b_match.uniq.count +  wa_match.uniq.count + ca_match.uniq.count + ny_match.uniq.count + nm_match.uniq.count + pa_match.uniq.count + nc_match.uniq.count %>
+          <% total_master = EmpireMasterList.count %>
+          <td><strong>Totals</strong></td>
+          <td class="text-center"><strong>6</strong></td>
+          <td><strong><%= number_with_delimiter(total_master) %></strong></td>
+          <td><strong><%= number_with_delimiter(total_match) %></strong></td>
+          <td><strong><%= number_to_percentage((total_match.to_f / total_master.to_f) * 100,  precision: 1) %></strong></td>
+          <td></td>
+          <td></td>
+        </tr>
       </tbody>
     </table>
   </div>

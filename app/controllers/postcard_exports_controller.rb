@@ -89,6 +89,6 @@ class PostcardExportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def postcard_export_params
-      params.require(:postcard_export).permit(:company, :group, :mail_id, :mail_date, :state, :list, :license_number, :uid, :merge_1, :merge_2, :merge_3, :f_name, :l_name, :add_1, :add_2, :city, :st, :zip, :email)
+      params.require(:postcard_export).permit(:company, :group, :mail_id, :mail_date, :state, :list, :license_number, :uid, :merge_1, :merge_2, :merge_3, :f_name, :l_name, :add_1, :add_2, :city, :st, :zip, :email, :subject, :exp, :merge_4, :merge_5)
     end
 end

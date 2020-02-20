@@ -70,12 +70,16 @@ class EmpireCustomersController < ApplicationController
               group: 'rc postcard',
               mail_id: "E-RC-Rolling-Postcard-#{params['day']}",
               mail_date: params['day'],
-              state: 'CA',
+              state: empire_customer.lic_state,
               license_number: empire_customer.license_num,
               uid: empire_customer.uid,
+              exp: empire_customer.b_exp,
+              subject: 'Subject',
               merge_1: '45-Hour California Full Renewal Package',
               merge_2: 'Just $49',
               merge_3: 'ReturningStudent20',
+              merge_4: 'Merge 4',
+              merge_5: 'Merge 5',
               f_name: empire_customer.fname,
               l_name: empire_customer.lname,
               add_1: empire_customer.street_1,
@@ -633,15 +637,14 @@ end
       company = 'empire'
       mail_date = params['day']
       state = 'PA'
+      mail_id = "E-RC-Deadline-#{state}-#{params['what']}-#{mail_date}"
       if params['what'] == 'email'
-        mail_id = "E-RC-Deadline-PA-Email-#{mail_date}"
         group = 'rc email'
         merge_1 = 'merge 1 - email'
         merge_2 = 'merge 2 - email'
         merge_3 = 'merge 3 - email'
       end
       if params['what'] == 'postcard'
-        mail_id = "E-RC-Deadline-PA-Postcard-#{mail_date}"
         group = 'rc postcard'
         merge_1 = '14-Hour Pennsylvania Package'
         merge_2 = 'Just $64.50'
@@ -649,6 +652,29 @@ end
       end
       current = EmpireCustomer.where(lic_state: 'PA').where('p_date >= ?', pa_exp - 18.months).pluck(:uid)
       export = EmpireCustomer.where(lic_state: 'PA').where.not(uid: current).all
+      @export_count = export.pluck(:uid).uniq
+    end
+# NC
+    if params['state'] == 'NC'
+      nc_exp = '2020-06-10'.to_date
+      company = 'empire'
+      mail_date = params['day']
+      state = params['state']
+      mail_id = "E-RC-Deadline-#{state}-#{params['what']}-#{mail_date}"
+      if params['what'] == 'email'
+        group = 'rc email'
+        merge_1 = 'merge 1 - email'
+        merge_2 = 'merge 2 - email'
+        merge_3 = 'merge 3 - email'
+      end
+      if params['what'] == 'postcard'
+        group = 'rc postcard'
+        merge_1 = '4-Hour Pennsylvania Package'
+        merge_2 = 'Just $39.50'
+        merge_3 = 'ReturningStudent20'
+      end
+      current = EmpireCustomer.where(lic_state: state).where('p_date >= ?', nc_exp - 10.months).pluck(:uid)
+      export = EmpireCustomer.where(lic_state: state).where.not(b_list: nil).where.not(uid: current).all
       @export_count = export.pluck(:uid).uniq
     end
 # MO Brokers
@@ -809,10 +835,15 @@ end
   end
 
   def b_exp
-    if params['state'].present?
+    if params['state'].present? && params['state'] != 'MO_B'
       lic = EmpireCustomer.where(lic_state: params['state']).where(b_exp: nil).pluck(:license_num)
       EmpireMasterList.where(source: params['state']).where(license_number: lic).each do |master|
-        EmpireCustomer.where(lic_state: params['state']).where(b_exp: nil).where(license_num: master.license_number).update_all b_exp: master.exp_date, b_list: master.list
+        EmpireCustomer.where(lic_state: params['state']).where(b_exp: nil).where(license_num: master.license_number).update_all b_exp: master.exp_date, b_list: master.list, empire_master_list_id: master.id
+      end
+    elsif params['state'] == 'MO_B'
+      lic = EmpireCustomer.where(lic_state: 'MO').where(b_exp: nil).pluck(:license_num)
+      EmpireMasterList.where(source: 'MO_B').where(license_number: lic).each do |master|
+        EmpireCustomer.where(lic_state: 'MO').where(b_exp: nil).where(license_num: master.license_number).update_all b_exp: master.exp_date, b_list: master.list, empire_master_list_id: master.id
       end
     end
     redirect_to empire_master_lists_path, notice: "#{params['state']} Update Complete"
