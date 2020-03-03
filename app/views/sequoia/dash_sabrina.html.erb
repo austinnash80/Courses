@@ -4,7 +4,7 @@
       <h1 class="text-center off-white">Sabrina Dashboard</h1>
       <h3 class="off-white text-center"><%= Date.today.strftime('%A %-b %-d, %Y') %></h3>
 
-</br>
+<br>
 <div class="row">
 <!-- *** START Left Pannel *** -->
   <div class="col-lg-4">
@@ -24,21 +24,6 @@
       <%= render(:partial => 'home_sabrina') %>
     </div>
 
-    <div class="well">
-      <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#home2">Exam Totals</a></li>
-        <li><a data-toggle="tab" href="#menu2">Exam Individuals</a></li>
-      </ul>
-      <div class="tab-content">
-        <div id="home2" class="tab-pane fade in active">
-  <%= render(:partial => 'sequoia_exams_30') %>
-        </div>
-
-        <div id="menu2" class="tab-pane fade">
-  <%= render(:partial => 'sequoia_exams_individual') %>
-        </div>
-      </div>
-    </div>
 
   </div>
 <!-- End Center Pannel -->
@@ -49,26 +34,6 @@
       <%= render(:partial => 'task') %>
     </div>
 
-    <div class="well">
-  <!-- Tabs Start -->
-      <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#postcard_mailings">Sequoia Postcards</a></li>
-        <li><a data-toggle="tab" href="#empire_email_campaign">Empire Campaign</a></li>
-      </ul>
-  <!-- Tab 1 Start -->
-      <div class="tab-content">
-        <div id="postcard_mailings" class="tab-pane fade in active">
-          <%= render(:partial => 'postcard_mailings') %>
-        </div>
-  <!-- Tab 1 end -->
-  <!-- Tab 2 start -->
-        <div id="empire_email_campaign" class="tab-pane fade">
-            <%= render(:partial => 'empire_email_campaign') %>
-        </div>
-  <!-- Tab 2 end -->
-      </div>
-  <!-- Tabs End -->
-    </div>
 
   </div>
 <!-- End Right Pannel -->
