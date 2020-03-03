@@ -1,0 +1,21 @@
+
+<%= simple_form_for(@quote) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :quote_code %>
+    <%= f.input :checkin %>
+    <%= f.input :nights %>
+    <%= f.input :guests %>
+    <%= f.input :price %>
+    <%= f.input :extra_s %>
+    <%= f.input :extra_b %>
+    <%= f.input :extra_i %>
+    <%= f.input :message_1 %>
+    <%= f.input :message_2 %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

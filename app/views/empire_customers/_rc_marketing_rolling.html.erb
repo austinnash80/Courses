@@ -96,6 +96,16 @@
         <th>Total</th>
       </thead>
       <tbody>
+
+        <tr>
+          <td>CA</td>
+          <% ca_groups = EmpireCustomer.where(extra_s1: 'ca').group(:extra_i).count %>
+          <% ca_groups.each do |k,v| %>
+            <td><%= v %></td>
+          <% end %>
+        </tr>
+
+
         <tr>
           <td>CA</td>
           <% @ca_count.each do |i| %>
@@ -122,7 +132,7 @@
           <% @wa_count.each do |i| %>
             <td><%= i %></td>
           <% end %>
-          <td><strong><%= @nm_count.sum %></strong></td>
+          <td><strong><%= @wa_count.sum %></strong></td>
         </tr>
 
       </tbody>

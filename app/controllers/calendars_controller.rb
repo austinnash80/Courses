@@ -42,8 +42,8 @@ class CalendarsController < ApplicationController
   end
 
   def form_collections
-    @people_1 = [['All',1], ['Kyle', 2], ['Austin',3], ['Michael',4], ['Ashley',5], ['Hamdo',6], ['John',7]]
-    @people = ['All', 'Kyle', 'Austin', 'Michael', 'Ashley', 'Hamdo', 'John']
+    @people_1 = [['All',1], ['Kyle', 2], ['Austin',3], ['Michael',4], ['Ashley',5], ['Sabrina',6], ['John',7]]
+    @people = ['All', 'Kyle', 'Austin', 'Michael', 'Ashley', 'Sabrina', 'John']
     @company = ['General', 'Sequoia', 'Empire', 'Taxpreparers']
     @reoccurring_rate = ['Daily', 'Weekly','Monthly']
   end
@@ -53,7 +53,7 @@ class CalendarsController < ApplicationController
     user_signed_in? && current_user.email == 'michael@sequoiacpe.com' ? @name = 'Michael' : ''
     user_signed_in? && current_user.email == 'kyle@sequoiacpe.com' ? @name = 'Kyle' : ''
     user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' ? @name = 'Ashley' : ''
-    user_signed_in? && current_user.email == 'hamdo@sequoiacpe.com' ? @name = 'Hamdo' : ''
+    user_signed_in? && current_user.email == 'sabrina@sequoiacpe.com' ? @name = 'Sabrina' : ''
   end
 
   # PATCH/PUT /calendars/1

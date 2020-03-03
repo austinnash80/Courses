@@ -71,7 +71,7 @@ class CourseCommentsController < ApplicationController
     user_signed_in? && current_user.email == 'michael@sequoiacpe.com' ? @name = 'Michael' : ''
     user_signed_in? && current_user.email == 'kyle@sequoiacpe.com' ? @name = 'Kyle' : ''
     user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' ? @name = 'Ashley' : ''
-    user_signed_in? && current_user.email == 'hamdo@sequoiacpe.com' ? @name = 'Hamdo' : ''
+    user_signed_in? && current_user.email == 'sabrina@sequoiacpe.com' ? @name = 'Sabrina' : ''
   end
 
   def form_collections

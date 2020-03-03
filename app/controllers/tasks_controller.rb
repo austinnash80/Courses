@@ -71,7 +71,7 @@ class TasksController < ApplicationController
   end
 
   def form_collection
-    @task_assign = ['Austin', 'Kyle', 'Michael', 'Ashley', 'Hamdo', 'John']
+    @task_assign = ['Austin', 'Kyle', 'Michael', 'Ashley', 'Sabrina', 'John']
     @task_status = [['Current', 'Current'], ['Future', 'Future'],['Complete', 'Complete']]
     @due_date = [['Due Date', true], ['No Due Date', false]]
   end

@@ -1,7 +1,7 @@
 <body class= 'body-home'>
 
-    <% if current_user.email == 'hamdo@sequoiacpe.com' || current_user.superadmin_role? || current_user.supervisor_role? %>
-      <h1 class="text-center off-white">Hamdo Dashboard</h1>
+    <% if current_user.email == 'sabrina@sequoiacpe.com' || current_user.superadmin_role? || current_user.supervisor_role? %>
+      <h1 class="text-center off-white">Sabrina Dashboard</h1>
       <h3 class="off-white text-center"><%= Date.today.strftime('%A %-b %-d, %Y') %></h3>
 
 </br>
@@ -21,7 +21,7 @@
 <!-- *** START Center Pannel *** -->
   <div class="col-lg-4">
     <div class="well">
-      <%= render(:partial => 'home_hamdo') %>
+      <%= render(:partial => 'home_sabrina') %>
     </div>
 
     <div class="well">

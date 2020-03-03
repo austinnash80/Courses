@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :quotes
   resources :sequoia_customer_matches
   resources :postcard_records
   resources :postcard_exports
@@ -92,7 +93,7 @@ Rails.application.routes.draw do
   get 'sequoia/dash'
   get 'sequoia/dash_ashley'
   get 'sequoia/dash_michael'
-  get 'sequoia/dash_hamdo'
+  get 'sequoia/dash_sabrina'
   get 'sequoia/dash_kyle'
   get 'sequoia/dash_john'
   get 'sequoia/s_data'

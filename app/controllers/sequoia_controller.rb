@@ -6,7 +6,7 @@ def s_data
   @id = SCustomer.pluck(:s_id).max
 end
 
-  def dash_hamdo
+  def dash_sabrina
     postcard_schedule
     postcard_inventory
     course_update_status
@@ -526,13 +526,13 @@ def postcard_schedule
     user_signed_in? && current_user.email == 'kyle@sequoiacpe.com' ? @name = 'Kyle' : ''
     user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' ? @name = 'Ashley' : ''
     user_signed_in? && current_user.email == 'john@empirelearning.com' ? @name = 'John' : ''
-    user_signed_in? && current_user.email == 'hamdo@sequoiacpe.com' ? @name = 'Hamdo' : ''
+    user_signed_in? && current_user.email == 'sabrina@sequoiacpe.com' ? @name = 'Sabrina' : ''
 
     @user_task = 'task.user_1'
 
     url = request.path_info
-    if url.include?('dash_hamdo')
-      @dash_name = 'Hamdo'
+    if url.include?('dash_sabrina')
+      @dash_name = 'Sabrina'
     elsif url.include?('dash_ashley')
       @dash_name = 'Ashley'
     elsif url.include?('dash_john')

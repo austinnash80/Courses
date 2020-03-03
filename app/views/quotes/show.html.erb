@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Quote code:</strong>
+  <%= @quote.quote_code %>
+</p>
+
+<p>
+  <strong>Checkin:</strong>
+  <%= @quote.checkin %>
+</p>
+
+<p>
+  <strong>Nights:</strong>
+  <%= @quote.nights %>
+</p>
+
+<p>
+  <strong>Guests:</strong>
+  <%= @quote.guests %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @quote.price %>
+</p>
+
+<p>
+  <strong>Extra s:</strong>
+  <%= @quote.extra_s %>
+</p>
+
+<p>
+  <strong>Extra b:</strong>
+  <%= @quote.extra_b %>
+</p>
+
+<p>
+  <strong>Extra i:</strong>
+  <%= @quote.extra_i %>
+</p>
+
+<p>
+  <strong>Message 1:</strong>
+  <%= @quote.message_1 %>
+</p>
+
+<p>
+  <strong>Message 2:</strong>
+  <%= @quote.message_2 %>
+</p>
+
+<%= link_to 'Edit', edit_quote_path(@quote) %> |
+<%= link_to 'Back', quotes_path %>

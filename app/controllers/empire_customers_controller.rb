@@ -360,107 +360,152 @@ class EmpireCustomersController < ApplicationController
 
 ## ADDING TO GROUP ARRAY
   #CA
+  EmpireCustomer.update_all extra_s1: nil, extra_i: nil
      ca_customer.each do |empire_customer|
        if g1_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
-         g1_ca.push(empire_customer.uid)
+         # g1_ca.push(empire_customer.uid)
+         EmpireCustomer.where(uid: g1_ca).update_all extra_s1: 'ca', extra_i: 1
        elsif g2_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
          g2_ca.push(empire_customer.uid)
+         EmpireCustomer.where(uid: g2_ca).update_all extra_s1: 'ca', extra_i: 2
        elsif g3_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
          g3_ca.push(empire_customer.uid)
+         EmpireCustomer.where(uid: g3_ca).update_all extra_s1: 'ca', extra_i: 3
        elsif g4_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
          g4_ca.push(empire_customer.uid)
+          EmpireCustomer.where(uid: g4_ca).update_all extra_s1: 'ca', extra_i: 4
        elsif g5_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
          g5_ca.push(empire_customer.uid)
+         EmpireCustomer.where(uid: g5_ca).update_all extra_s1: 'ca', extra_i: 5
        elsif g6_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
          g6_ca.push(empire_customer.uid)
+         EmpireCustomer.where(uid: g6_ca).update_all extra_s1: 'ca', extra_i: 6
        elsif g7_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
          g7_ca.push(empire_customer.uid)
+         EmpireCustomer.where(uid: g7_ca).update_all extra_s1: 'ca', extra_i: 7
        elsif g8_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
          g8_ca.push(empire_customer.uid)
+         EmpireCustomer.where(uid: g8_ca).update_all extra_s1: 'ca', extra_i: 8
        elsif g9_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
          g9_ca.push(empire_customer.uid)
+         EmpireCustomer.where(uid: g9_ca).update_all extra_s1: 'ca', extra_i: 9
        elsif g10_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
          g10_ca.push(empire_customer.uid)
-       elsif g11_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
+         EmpireCustomer.where(uid: g10_ca).update_all extra_s1: 'ca', extra_i: 10
+        elsif g11_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
          g11_ca.push(empire_customer.uid)
+         EmpireCustomer.where(uid: g11_ca).update_all extra_s1: 'ca', extra_i: 11
        end
      end
   #NY
    ny_customer.each do |empire_customer|
      if g1_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
        g1_ny.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g1_ny).update_all extra_s1: 'g1ny'
      elsif g2_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
        g2_ny.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g2_ny).update_all extra_s1: 'g2ny'
      elsif g3_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
        g3_ny.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g3_ny).update_all extra_s1: 'g3ny'
      elsif g4_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
        g4_ny.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g4_ny).update_all extra_s1: 'g4ny'
      elsif g5_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
        g5_ny.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g5_ny).update_all extra_s1: 'g5ny'
      elsif g6_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
        g6_ny.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g6_ny).update_all extra_s1: 'g6ny'
      elsif g7_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
        g7_ny.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g7_ny).update_all extra_s1: 'g7ny'
      elsif g8_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
        g8_ny.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g8_ny).update_all extra_s1: 'g8ny'
      elsif g9_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
        g9_ny.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g9_ny).update_all extra_s1: 'g9ny'
      elsif g10_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
        g10_ny.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g10_ny).update_all extra_s1: 'g10ny'
      elsif g11_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
        g11_ny.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g11_ny).update_all extra_s1: 'g11ny'
      end
    end
   #NM
    nm_customer.each do |empire_customer|
      if g1_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
        g1_nm.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g1_nm).update_all extra_s1: 'g1nm'
      elsif g2_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
        g2_nm.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g2_nm).update_all extra_s1: 'g2nm'
      elsif g3_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
        g3_nm.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g3_nm).update_all extra_s1: 'g3nm'
      elsif g4_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
        g4_nm.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g4_nm).update_all extra_s1: 'g4nm'
      elsif g5_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
        g5_nm.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g5_nm).update_all extra_s1: 'g5nm'
      elsif g6_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
        g6_nm.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g6_nm).update_all extra_s1: 'g6nm'
      elsif g7_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
        g7_nm.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g7_nm).update_all extra_s1: 'g7nm'
      elsif g8_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
        g8_nm.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g8_nm).update_all extra_s1: 'g8nm'
      elsif g9_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
        g9_nm.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g9_nm).update_all extra_s1: 'g9nm'
      elsif g10_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
        g10_nm.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g10_nm).update_all extra_s1: 'g10nm'
      elsif g11_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
        g11_nm.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g11_nm).update_all extra_s1: 'g11nm'
      end
    end
 ## WA
    wa_customer.each do |empire_customer|
      if g1_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
        g1_wa.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g1_wa).update_all extra_s1: 'g1wa'
      elsif g2_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
        g2_wa.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g2_wa).update_all extra_s1: 'g1wa'
      elsif g3_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
        g3_wa.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g3_wa).update_all extra_s1: 'g3wa'
      elsif g4_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
        g4_wa.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g4_wa).update_all extra_s1: 'g4wa'
      elsif g5_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
        g5_wa.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g5_wa).update_all extra_s1: 'g5wa'
      elsif g6_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
        g6_wa.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g6_wa).update_all extra_s1: 'g6wa'
      elsif g7_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
        g7_wa.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g7_wa).update_all extra_s1: 'g7wa'
      elsif g8_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
        g8_wa.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g8_wa).update_all extra_s1: 'g8wa'
      elsif g9_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
        g9_wa.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g9_wa).update_all extra_s1: 'g9wa'
      elsif g10_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
        g10_wa.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g10_wa).update_all extra_s1: 'g10wa'
      elsif g11_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
        g11_wa.push(empire_customer.uid)
+       EmpireCustomer.where(uid: g11_wa).update_all extra_s1: 'g11wa'
      end
    end
  ## ADDING END
@@ -506,21 +551,20 @@ end
 
     PostcardExport.delete_all #Delete all the current records - fresh database each time.
 
-    added_ca_uid = []
-    ca_customer.each do |empire_customer|
-      if ca_uid.include? empire_customer.uid
-        unless added_ca_uid.include? empire_customer.uid
+#ALL
+    added_uid = []
+    EmpireCustomer.where.not(g_id: nil).each do |empire_customer|
+        unless added_uid.include? empire_customer.uid
           new = PostcardExport.create(
             company: 'Empire',
             group: 'rc email',
             mail_id: "E-RC-Rolling-Email-#{params['day']}",
             mail_date: params['day'],
-            state: 'CA',
+            g_id: empire_customer.extra_s1,
             license_number: empire_customer.license_num,
             uid: empire_customer.uid,
-            merge_1: 'CA Merge Text 1',
-            merge_2: 'CA Merge Text 1',
-            merge_3: 'CA Merge Text 1',
+            exp: empire_customer.b_exp,
+            merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
             f_name: empire_customer.fname,
             l_name: empire_customer.lname,
             add_1: empire_customer.street_1,
@@ -530,102 +574,185 @@ end
             zip: empire_customer.zip,
             email: empire_customer.email)
           new.save
-          added_ca_uid.push(empire_customer.uid) #Push new records lic number in to array to not allow duplicates in new table
-        end
+          added_uid.push(empire_customer.uid) #Push new records lic number in to array to not allow duplicates in new table
       end
     end
-    added_ny_uid = []
-    ny_customer.each do |empire_customer|
-      if ny_uid.include? empire_customer.uid
-        unless added_ny_uid.include? empire_customer.uid
-          new = PostcardExport.create(
-            company: 'Empire',
-            group: 'rc email',
-            mail_id: "E-RC-Rolling-Email-#{params['day']}",
-            mail_date: params['day'],
-            state: 'NY',
-            license_number: empire_customer.license_num,
-            uid: empire_customer.uid,
-            merge_1: 'NY Merge Text 1',
-            merge_2: 'NY Merge Text 1',
-            merge_3: 'NY Merge Text 1',
-            f_name: empire_customer.fname,
-            l_name: empire_customer.lname,
-            add_1: empire_customer.street_1,
-            add_2: empire_customer.street_2,
-            city: empire_customer.city,
-            st: empire_customer.state,
-            zip: empire_customer.zip,
-            email: empire_customer.email)
-          new.save
-          added_ny_uid.push(empire_customer.uid) #Push new records lic number in to array to not allow duplicates in new table
-        end
-      end
-    end
-    added_nm_uid = []
-    nm_customer.each do |empire_customer|
-      if nm_uid.include? empire_customer.uid
-        unless added_nm_uid.include? empire_customer.uid
-          new = PostcardExport.create(
-            company: 'Empire',
-            group: 'rc email',
-            mail_id: "E-RC-Rolling-Email-#{params['day']}",
-            mail_date: params['day'],
-            state: 'NM',
-            license_number: empire_customer.license_num,
-            uid: empire_customer.uid,
-            merge_1: 'NM Merge Text 1',
-            merge_2: 'NM Merge Text 1',
-            merge_3: 'NM Merge Text 1',
-            f_name: empire_customer.fname,
-            l_name: empire_customer.lname,
-            add_1: empire_customer.street_1,
-            add_2: empire_customer.street_2,
-            city: empire_customer.city,
-            st: empire_customer.state,
-            zip: empire_customer.zip,
-            email: empire_customer.email)
-          new.save
-          added_nm_uid.push(empire_customer.uid) #Push new records lic number in to array to not allow duplicates in new table
-        end
-      end
-    end
-    added_wa_uid = []
-    wa_customer.each do |empire_customer|
-      if wa_uid.include? empire_customer.uid
-        unless added_wa_uid.include? empire_customer.uid
-          new = PostcardExport.create(
-            company: 'Empire',
-            group: 'rc email',
-            mail_id: "E-RC-Rolling-Email-#{params['day']}",
-            mail_date: params['day'],
-            state: 'WA',
-            license_number: empire_customer.license_num,
-            uid: empire_customer.uid,
-            merge_1: 'WA Merge Text 1',
-            merge_2: 'WA Merge Text 1',
-            merge_3: 'WA Merge Text 1',
-            f_name: empire_customer.fname,
-            l_name: empire_customer.lname,
-            add_1: empire_customer.street_1,
-            add_2: empire_customer.street_2,
-            city: empire_customer.city,
-            st: empire_customer.state,
-            zip: empire_customer.zip,
-            email: empire_customer.email)
-          new.save
-          added_wa_uid.push(empire_customer.uid) #Push new records lic number in to array to not allow duplicates in new table
-        end
-      end
-    end
+    #
+    # added_ca_uid = []
+    # ca_customer.each do |empire_customer|
+    #   if ca_uid.include? empire_customer.uid
+    #     unless added_ca_uid.include? empire_customer.uid
+    #       new = PostcardExport.create(
+    #         company: 'Empire',
+    #         group: 'rc email',
+    #         mail_id: "E-RC-Rolling-Email-#{params['day']}",
+    #         mail_date: params['day'],
+    #         state: 'CA',
+    #         g_id: empire_customer.extra_s1,
+    #         license_number: empire_customer.license_num,
+    #         uid: empire_customer.uid,
+    #         exp: empire_customer.b_exp,
+    #         merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+    #         f_name: empire_customer.fname,
+    #         l_name: empire_customer.lname,
+    #         add_1: empire_customer.street_1,
+    #         add_2: empire_customer.street_2,
+    #         city: empire_customer.city,
+    #         st: empire_customer.state,
+    #         zip: empire_customer.zip,
+    #         email: empire_customer.email)
+    #       new.save
+    #       added_ca_uid.push(empire_customer.uid) #Push new records lic number in to array to not allow duplicates in new table
+    #     end
+    #
+    #
+    #
+    #   end
+    # end
+    # added_ny_uid = []
+    # ny_customer.each do |empire_customer|
+    #   if ny_uid.include? empire_customer.uid
+    #     unless added_ny_uid.include? empire_customer.uid
+    #       new = PostcardExport.create(
+    #         company: 'Empire',
+    #         group: 'rc email',
+    #         mail_id: "E-RC-Rolling-Email-#{params['day']}",
+    #         mail_date: params['day'],
+    #         state: 'NY',
+    #         license_number: empire_customer.license_num,
+    #         uid: empire_customer.uid,
+    #         exp: empire_customer.b_exp,
+    #         merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+    #         g_id: empire_customer.extra_s1,
+    #         f_name: empire_customer.fname,
+    #         l_name: empire_customer.lname,
+    #         add_1: empire_customer.street_1,
+    #         add_2: empire_customer.street_2,
+    #         city: empire_customer.city,
+    #         st: empire_customer.state,
+    #         zip: empire_customer.zip,
+    #         email: empire_customer.email)
+    #       new.save
+    #       added_ny_uid.push(empire_customer.uid) #Push new records lic number in to array to not allow duplicates in new table
+    #     end
+    #   end
+    # end
+    # added_nm_uid = []
+    # nm_customer.each do |empire_customer|
+    #   if nm_uid.include? empire_customer.uid
+    #     unless added_nm_uid.include? empire_customer.uid
+    #       new = PostcardExport.create(
+    #         company: 'Empire',
+    #         group: 'rc email',
+    #         mail_id: "E-RC-Rolling-Email-#{params['day']}",
+    #         mail_date: params['day'],
+    #         state: 'NM',
+    #         license_number: empire_customer.license_num,
+    #         uid: empire_customer.uid,
+    #         merge_1: 'NM Merge Text 1',
+    #         merge_2: 'NM Merge Text 1',
+    #         merge_3: 'NM Merge Text 1',
+    #         f_name: empire_customer.fname,
+    #         l_name: empire_customer.lname,
+    #         add_1: empire_customer.street_1,
+    #         add_2: empire_customer.street_2,
+    #         city: empire_customer.city,
+    #         st: empire_customer.state,
+    #         zip: empire_customer.zip,
+    #         email: empire_customer.email)
+    #       new.save
+    #       added_nm_uid.push(empire_customer.uid) #Push new records lic number in to array to not allow duplicates in new table
+    #     end
+    #   end
+    # end
+    # added_wa_uid = []
+    # wa_customer.each do |empire_customer|
+    #   if wa_uid.include? empire_customer.uid
+    #     unless added_wa_uid.include? empire_customer.uid
+    #       new = PostcardExport.create(
+    #         company: 'Empire',
+    #         group: 'rc email',
+    #         mail_id: "E-RC-Rolling-Email-#{params['day']}",
+    #         mail_date: params['day'],
+    #         state: 'WA',
+    #         license_number: empire_customer.license_num,
+    #         uid: empire_customer.uid,
+    #         merge_1: 'WA Merge Text 1',
+    #         merge_2: 'WA Merge Text 1',
+    #         merge_3: 'WA Merge Text 1',
+    #         f_name: empire_customer.fname,
+    #         l_name: empire_customer.lname,
+    #         add_1: empire_customer.street_1,
+    #         add_2: empire_customer.street_2,
+    #         city: empire_customer.city,
+    #         st: empire_customer.state,
+    #         zip: empire_customer.zip,
+    #         email: empire_customer.email)
+    #       new.save
+    #       added_wa_uid.push(empire_customer.uid) #Push new records lic number in to array to not allow duplicates in new table
+    #     end
+    #   end
+    # end
+
+# ADD CA Text
+      PostcardExport.where(g_id: 'g1ca').update_all state: 'CA', subject: 'CA Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'CA'
+      PostcardExport.where(g_id: 'g2ca').update_all state: 'CA', subject: 'CA Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'CA'
+      PostcardExport.where(g_id: 'g3ca').update_all state: 'CA', subject: 'CA Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'CA'
+      PostcardExport.where(g_id: 'g4ca').update_all state: 'CA', subject: 'CA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'CA'
+      PostcardExport.where(g_id: 'g5ca').update_all state: 'CA', subject: 'CA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'CA'
+      PostcardExport.where(g_id: 'g6ca').update_all state: 'CA', subject: 'CA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'CA'
+      PostcardExport.where(g_id: 'g7ca').update_all state: 'CA', subject: 'CA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'CA'
+      PostcardExport.where(g_id: 'g8ca').update_all state: 'CA', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'CA'
+      PostcardExport.where(g_id: 'g9ca').update_all state: 'CA', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'CA'
+      PostcardExport.where(g_id: 'g10ca').update_all state: 'CA', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'CA'
+      PostcardExport.where(g_id: 'g11ca').update_all state: 'CA', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'CA'
+
+# ADD NY Text
+      PostcardExport.where(g_id: 'g1ny').update_all state: 'NY', subject: 'NY Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'NY'
+      PostcardExport.where(g_id: 'g2ny').update_all state: 'NY', subject: 'NY Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'NY'
+      PostcardExport.where(g_id: 'g3ny').update_all state: 'NY', subject: 'NY Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'NY'
+      PostcardExport.where(g_id: 'g4ny').update_all state: 'NY', subject: 'NY Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NY'
+      PostcardExport.where(g_id: 'g5ny').update_all state: 'NY', subject: 'NY Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NY'
+      PostcardExport.where(g_id: 'g6ny').update_all state: 'NY', subject: 'NY Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NY'
+      PostcardExport.where(g_id: 'g7ny').update_all state: 'NY', subject: 'NY Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NY'
+      PostcardExport.where(g_id: 'g8ny').update_all state: 'NY', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NY'
+      PostcardExport.where(g_id: 'g9ny').update_all state: 'NY', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NY'
+      PostcardExport.where(g_id: 'g10ny').update_all state: 'NY', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NY'
+      PostcardExport.where(g_id: 'g11ny').update_all state: 'NY', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NY'
+# ADD NM Text
+      PostcardExport.where(g_id: 'g1nm').update_all state: 'NM', subject: 'NM Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'NM'
+      PostcardExport.where(g_id: 'g2nm').update_all state: 'NM', subject: 'NM Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'NM'
+      PostcardExport.where(g_id: 'g3nm').update_all state: 'NM', subject: 'NM Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'NM'
+      PostcardExport.where(g_id: 'g4nm').update_all state: 'NM', subject: 'NM Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NM'
+      PostcardExport.where(g_id: 'g5nm').update_all state: 'NM', subject: 'NM Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NM'
+      PostcardExport.where(g_id: 'g6nm').update_all state: 'NM', subject: 'NM Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NM'
+      PostcardExport.where(g_id: 'g7nm').update_all state: 'NM', subject: 'NM Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NM'
+      PostcardExport.where(g_id: 'g8nm').update_all state: 'NM', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NM'
+      PostcardExport.where(g_id: 'g9nm').update_all state: 'NM', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NM'
+      PostcardExport.where(g_id: 'g10nm').update_all state: 'NM', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NM'
+      PostcardExport.where(g_id: 'g11nm').update_all state: 'NM', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NM'
+# ADD WA Text
+      PostcardExport.where(g_id: 'g1wa').update_all state: 'WA', subject: 'WA Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'WA'
+      PostcardExport.where(g_id: 'g2wa').update_all state: 'WA', subject: 'WA Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'WA'
+      PostcardExport.where(g_id: 'g3wa').update_all state: 'WA', subject: 'WA Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'WA'
+      PostcardExport.where(g_id: 'g4wa').update_all state: 'WA', subject: 'WA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'WA'
+      PostcardExport.where(g_id: 'g5wa').update_all state: 'WA', subject: 'WA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'WA'
+      PostcardExport.where(g_id: 'g6wa').update_all state: 'WA', subject: 'WA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'WA'
+      PostcardExport.where(g_id: 'g7wa').update_all state: 'WA', subject: 'WA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'WA'
+      PostcardExport.where(g_id: 'g8wa').update_all state: 'WA', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'WA'
+      PostcardExport.where(g_id: 'g9wa').update_all state: 'WA', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'WA'
+      PostcardExport.where(g_id: 'g10wa').update_all state: 'WA', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'WA'
+      PostcardExport.where(g_id: 'g11wa').update_all state: 'WA', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'WA'
 
     redirect_to postcard_exports_path(co: 'empire', group: 'rc email', mail_id: "E-RC-Rolling-Email-#{params['day']}", day: params['day'], what: params['what'], card: 'email', sent: @ca_count.sum+@ny_count.sum+@nm_count.sum+@wa_count.sum)
 
-  end
-
+  # end
+  #Remove the code now that they have been added to postcard exports using the code
+      EmpireCustomer.where.not(extra_s1: nil).update_all extra_s1: nil
 
 ## TOTALS END
 
+  end
   end
 
   def rc_marketing_deadline
@@ -640,6 +767,7 @@ end
       mail_id = "E-RC-Deadline-#{state}-#{params['what']}-#{mail_date}"
       if params['what'] == 'Email'
         group = 'rc email'
+        subject = 'subject'
         merge_1 = 'merge 1 - email'
         merge_2 = 'merge 2 - email'
         merge_3 = 'merge 3 - email'
@@ -663,6 +791,7 @@ end
       mail_id = "E-RC-Deadline-#{state}-#{params['what']}-#{mail_date}"
       if params['what'] == 'Email'
         group = 'rc email'
+        subject = 'subject'
         merge_1 = 'merge 1 - email'
         merge_2 = 'merge 2 - email'
         merge_3 = 'merge 3 - email'
@@ -686,6 +815,7 @@ end
       mail_id = "E-RC-Deadline-#{state}-#{params['what']}-#{mail_date}"
       if params['what'] == 'Email'
         group = 'rc email'
+        subject = 'subject'
         merge_1 = 'merge 1 - email'
         merge_2 = 'merge 2 - email'
         merge_3 = 'merge 3 - email'
@@ -710,6 +840,7 @@ end
       mail_id = "E-RC-Deadline-#{params['state']}-#{params['what']}-#{mail_date}"
       if params['what'] == 'Email'
         group = 'rc email'
+        subject = 'subject'
         merge_1 = 'merge 1 - email'
         merge_2 = 'merge 2 - email'
         merge_3 = 'merge 3 - email'
@@ -739,6 +870,8 @@ end
             state: state,
             license_number: empire_customer.license_num,
             uid: empire_customer.uid,
+            exp: empire_customer.exp_date,
+            subject: subject,
             merge_1: merge_1,
             merge_2: merge_2,
             merge_3: merge_3,
@@ -916,6 +1049,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def empire_customer_params
-      params.require(:empire_customer).permit(:e_id, :uid, :license_num, :existing, :purchase_date, :lic_state, :products, :order_total, :fname, :lname, :company, :street_1, :street_2, :city, :state, :zip, :email, :phone, :p_date, :total, :b_exp, :b_list, :empire_master_list_id)
+      params.require(:empire_customer).permit(:e_id, :uid, :license_num, :existing, :purchase_date, :lic_state, :products, :order_total, :fname, :lname, :company, :street_1, :street_2, :city, :state, :zip, :email, :phone, :p_date, :total, :b_exp, :b_list, :empire_master_list_id, :extra_s1, :extra_s2, :extra_i, :extra_b)
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200214175922) do
+ActiveRecord::Schema.define(version: 20200221004955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -274,6 +274,10 @@ ActiveRecord::Schema.define(version: 20200214175922) do
     t.date "b_exp"
     t.string "b_list"
     t.integer "empire_master_list_id"
+    t.string "extra_s1"
+    t.string "extra_s2"
+    t.integer "extra_i"
+    t.boolean "extra_b"
   end
 
   create_table "empire_mailings", force: :cascade do |t|
@@ -549,6 +553,10 @@ ActiveRecord::Schema.define(version: 20200214175922) do
     t.string "subject"
     t.string "merge_4"
     t.string "merge_5"
+    t.string "g_id"
+    t.string "extra_s"
+    t.integer "extra_i"
+    t.boolean "extra_b"
   end
 
   create_table "postcard_mailings", force: :cascade do |t|
