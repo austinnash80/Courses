@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200221004955) do
+ActiveRecord::Schema.define(version: 20200224084257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -590,6 +590,21 @@ ActiveRecord::Schema.define(version: 20200221004955) do
     t.string "postcard"
     t.integer "uid"
     t.string "reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "quotes", force: :cascade do |t|
+    t.string "quote_code"
+    t.date "checkin"
+    t.integer "nights"
+    t.integer "guests"
+    t.decimal "price"
+    t.string "extra_s"
+    t.boolean "extra_b"
+    t.integer "extra_i"
+    t.string "message_1"
+    t.string "message_2"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

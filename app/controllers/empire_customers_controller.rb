@@ -870,7 +870,7 @@ end
             state: state,
             license_number: empire_customer.license_num,
             uid: empire_customer.uid,
-            exp: empire_customer.exp_date,
+            # exp: empire_customer.exp_date,
             subject: subject,
             merge_1: merge_1,
             merge_2: merge_2,
