@@ -26,29 +26,28 @@
 <br>
 
 <!-- ### PA ###-->
-
 <% if params['state'] == 'PA' %>
+<% state = params['state'] %>
 <% pa_email_dates = ['2020-01-12', '2020-02-06', '2020-02-21', '2020-03-07', '2020-03-22', '2020-04-06', '2020-04-21', '2020-05-06', '2020-05-26'] %>
 <% pa_postcard_dates = ['2020-04-01', '2020-05-01'] %>
 
 <!-- EMAIL -->
+<div class="p20">
+  <h4 class="text-center alert alert-info">State Exp: <strong><%= @state_exp.strftime('%-m/%-d/%Y') %></strong></h4>
+</div>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-2">
     <table class="table table-outline">
       <thead>
         <tr class="grey-b-200">
-          <th class="text-center" colspan="3">2020 Email Marketing</th>
+          <th class="text-center" colspan="2">Email Dates</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="">
-          <td colspan="3" class="">Current List Count: <strong><%= number_with_delimiter(@export_count.count) %></strong></td>
-        </tr>
         <% pa_email_dates.each do |email| %>
         <tr class="">
             <td><%= email.to_date.strftime('%-m/%-d/%Y') %></td>
-            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'yes', page: 'deadline', state: 'PA', day: email, what: 'Email') %></td>
-            <% mail_id = "E-RC-Deadline-PA-Email-#{email}" %>
+            <% mail_id = "E-RC-Deadline-#{state}-Email-#{email}" %>
             <% records = PostcardRecord.all.pluck(:mailing_id) %>
             <% if records.include? mail_id %>
               <td><span class="glyphicon glyphicon-ok success"></span></td>
@@ -59,8 +58,38 @@
         <% end %>
       </tbody>
     </table>
+    </div>
+    <div class="col-md-4">
+
+
+    <table class="table table-outline">
+      <thead>
+        <tr class="grey-b-200">
+          <th class="text-center" colspan="3">Email Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="">
+          <td colspan="1" class="">Full List: <strong><%= number_with_delimiter(@full_list.count) %> </td>
+          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'full_list', page: 'deadline', state: state, day: 'Full', what: 'Email') %></td>
+          <td></td>
+        </tr>
+        <tr class="">
+          <td colspan="1" class="">Customer List: <strong><%= number_with_delimiter(@purchase_list.count) %> </td>
+          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'purchase_list', page: 'deadline', state: state, day: 'Full', what: 'Email') %></td>
+          <td></td>
+        </tr>
+        <tr class="">
+          <td colspan="3" class="">Full List = All unique returning customers who are expiring in this cycle</td>
+        </tr>
+        <tr class="">
+          <td colspan="3" class="">Customer List = All customers from the 'full list' who have purchased already for this cycle (remove from MKTG)</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-<!-- Postcard -->
+
+<!-- ## Postcard -->
   <div class="col-md-6">
     <table class="table table-outline">
       <thead>
@@ -68,55 +97,60 @@
           <th class="text-center" colspan="3">2020 Postcard Marketing</th>
         </tr>
         <tr class="">
-          <td colspan="3" class="">Current List Count: <strong><%= number_with_delimiter(@export_count.count) %></strong></td>
+          <td colspan="3" class="">Current List Count: <strong><%= number_with_delimiter(@postcard_list.count) %></strong></td>
         </tr>
       </thead>
       <tbody>
         <% pa_postcard_dates.each do |postcard| %>
         <tr class="">
             <td><%= postcard.to_date.strftime('%-m/%-d/%Y') %></td>
-            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'yes', page: 'deadline', state: 'PA', day: postcard, what: 'postcard') %></td>
+            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'postcard_list', page: 'deadline', state: state, day: postcard, what: 'postcard') %></td>
             <% mail_id = "E-RC-Deadline-PA-Postcard-#{postcard}" %>
             <% records = PostcardRecord.all.pluck(:mailing_id) %>
             <% if records.include? mail_id %>
               <td><span class="glyphicon glyphicon-ok success"></span></td>
             <% elsif %>
               <td></td>
-            <% end %>          </tr>
+            <% end %>
+           </tr>
         <% end %>
       </tbody>
     </table>
-  </div>
+  </div> <!-- END POSTCARD-->
 </div>
+<% end %> <!-- END PA-->
 
-<% end %>
+
+
+
+
+
 
 <!-- ### MO Brokers ###-->
 
   <!-- Matching all MO customers to the MO Brokers list - If they do not match the brokers list they are not being marketed to as a broker -->
 
 <% if params['state'] == 'MO_B' %>
+<% state = params['state'] %>
 <% mo_b_email_dates = ['2020-02-11', '2020-03-07', '2020-03-22', '2020-04-06', '2020-04-21', '2020-05-06', '2020-05-21', '2020-06-05', '2020-06-20', '2020-06-25'] %>
 <% mo_b_postcard_dates = ['2020-05-01', '2020-05-31'] %>
-
+<div class="p20">
+  <h4 class="text-center alert alert-info">State Exp: <strong><%= @state_exp.strftime('%-m/%-d/%Y') %></strong></h4>
+</div>
 <!-- EMAIL -->
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-2">
     <table class="table table-outline">
       <thead>
         <tr class="grey-b-200">
-          <th class="text-center" colspan="3">2020 Email Marketing</th>
+          <th class="text-center" colspan="2">Email Dates</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="">
-          <td colspan="3" class="">Current List Count: <strong><%= number_with_delimiter(@export_count.count) %></strong></td>
-        </tr>
         <% mo_b_email_dates.each do |email| %>
         <tr class="">
             <td><%= email.to_date.strftime('%-m/%-d/%Y') %></td>
-            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'yes', page: 'deadline', state: 'MO_B', day: email, what: 'Email') %></td>
-            <% mail_id = "E-RC-Deadline-MO_B-Email-#{email}" %>
+            <% mail_id = "E-RC-Deadline-#{state}-Email-#{email}" %>
             <% records = PostcardRecord.all.pluck(:mailing_id) %>
             <% if records.include? mail_id %>
               <td><span class="glyphicon glyphicon-ok success"></span></td>
@@ -127,34 +161,65 @@
         <% end %>
       </tbody>
     </table>
-  </div>
-  <!-- Postcard -->
-    <div class="col-md-6">
-      <table class="table table-outline">
-        <thead>
-          <tr class="grey-b-200">
-            <th class="text-center" colspan="3">2020 Postcard Marketing</th>
-          </tr>
-          <tr class="">
-            <td colspan="3" class="">Current List Count: <strong><%= number_with_delimiter(@export_count.count) %></strong></td>
-          </tr>
-        </thead>
-        <tbody>
-          <% mo_b_postcard_dates.each do |postcard| %>
-          <tr class="">
-              <td><%= postcard.to_date.strftime('%-m/%-d/%Y') %></td>
-              <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'yes', page: 'deadline', state: 'MO_B', day: postcard, what: 'postcard') %></td>
-              <% mail_id = "E-RC-Deadline-MO_B-Postcard-#{postcard}" %>
-              <% records = PostcardRecord.all.pluck(:mailing_id) %>
-              <% if records.include? mail_id %>
-                <td><span class="glyphicon glyphicon-ok success"></span></td>
-              <% elsif %>
-                <td></td>
-              <% end %>          </tr>
-          <% end %>
-        </tbody>
-      </table>
     </div>
+    <div class="col-md-4">
+
+
+    <table class="table table-outline">
+      <thead>
+        <tr class="grey-b-200">
+          <th class="text-center" colspan="3">Email Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="">
+          <td colspan="1" class="">Full List: <strong><%= number_with_delimiter(@full_list.count) %> </td>
+          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'full_list', page: 'deadline', state: state, day: 'Full', what: 'Email') %></td>
+          <td></td>
+        </tr>
+        <tr class="">
+          <td colspan="1" class="">Customer List: <strong><%= number_with_delimiter(@purchase_list.count) %> </td>
+          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'purchase_list', page: 'deadline', state: state, day: 'Full', what: 'Email') %></td>
+          <td></td>
+        </tr>
+        <tr class="">
+          <td colspan="3" class="">Full List = All unique returning customers who are expiring in this cycle</td>
+        </tr>
+        <tr class="">
+          <td colspan="3" class="">Customer List = All customers from the 'full list' who have purchased already for this cycle (remove from MKTG)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<!-- ## Postcard -->
+  <div class="col-md-6">
+    <table class="table table-outline">
+      <thead>
+        <tr class="grey-b-200">
+          <th class="text-center" colspan="3">2020 Postcard Marketing</th>
+        </tr>
+        <tr class="">
+          <td colspan="3" class="">Current List Count: <strong><%= number_with_delimiter(@postcard_list.count) %></strong></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% mo_b_postcard_dates.each do |postcard| %>
+        <tr class="">
+            <td><%= postcard.to_date.strftime('%-m/%-d/%Y') %></td>
+            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'postcard_list', page: 'deadline', state: state, day: postcard, what: 'postcard') %></td>
+            <% mail_id = "E-RC-Deadline-MO_B-Postcard-#{postcard}" %>
+            <% records = PostcardRecord.all.pluck(:mailing_id) %>
+            <% if records.include? mail_id %>
+              <td><span class="glyphicon glyphicon-ok success"></span></td>
+            <% elsif %>
+              <td></td>
+            <% end %>
+           </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div> <!-- END POSTCARD-->
 </div>
 
 <% end %>
@@ -167,22 +232,21 @@
 <% state = params['state'] %>
 
 <!-- EMAIL -->
+<div class="p20">
+  <h4 class="text-center alert alert-info">State Exp: <strong><%= @state_exp.strftime('%-m/%-d/%Y') %></strong></h4>
+</div>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-2">
     <table class="table table-outline">
       <thead>
         <tr class="grey-b-200">
-          <th class="text-center" colspan="3">2020 Email Marketing</th>
+          <th class="text-center" colspan="2">Email Dates</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="">
-          <td colspan="3" class="">Current List Count: <strong><%= number_with_delimiter(@export_count.count) %></strong></td>
-        </tr>
         <% in_email_dates.each do |email| %>
         <tr class="">
             <td><%= email.to_date.strftime('%-m/%-d/%Y') %></td>
-            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'yes', page: 'deadline', state: state, day: email, what: 'Email') %></td>
             <% mail_id = "E-RC-Deadline-#{state}-Email-#{email}" %>
             <% records = PostcardRecord.all.pluck(:mailing_id) %>
             <% if records.include? mail_id %>
@@ -194,38 +258,68 @@
         <% end %>
       </tbody>
     </table>
-  </div>
-  <!-- Postcard -->
-    <div class="col-md-6">
-      <table class="table table-outline">
-        <thead>
-          <tr class="grey-b-200">
-            <th class="text-center" colspan="3">2020 Postcard Marketing</th>
-          </tr>
-          <tr class="">
-            <td colspan="3" class="">Current List Count: <strong><%= number_with_delimiter(@export_count.count) %></strong></td>
-          </tr>
-        </thead>
-        <tbody>
-          <% in_postcard_dates.each do |postcard| %>
-            <tr class="">
-              <td><%= postcard.to_date.strftime('%-m/%-d/%Y') %></td>
-              <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'yes', page: 'deadline', state: 'IN', day: postcard, what: 'postcard') %></td>
-              <% mail_id = "E-RC-Deadline-#{state}-Postcard-#{postcard}" %>
-              <% records = PostcardRecord.all.pluck(:mailing_id) %>
-              <% if records.include? mail_id %>
-                <td><span class="glyphicon glyphicon-ok success"></span></td>
-              <% elsif %>
-                <td></td>
-              <% end %>
-             </tr>
-          <% end %>
-        </tbody>
-      </table>
     </div>
-</div>
+    <div class="col-md-4">
 
-<% end %>
+
+    <table class="table table-outline">
+      <thead>
+        <tr class="grey-b-200">
+          <th class="text-center" colspan="3">Email Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="">
+          <td colspan="1" class="">Full List: <strong><%= number_with_delimiter(@full_list.count) %> </td>
+          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'full_list', page: 'deadline', state: state, day: 'Full', what: 'Email') %></td>
+          <td></td>
+        </tr>
+        <tr class="">
+          <td colspan="1" class="">Customer List: <strong><%= number_with_delimiter(@purchase_list.count) %> </td>
+          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'purchase_list', page: 'deadline', state: state, day: 'Full', what: 'Email') %></td>
+          <td></td>
+        </tr>
+        <tr class="">
+          <td colspan="3" class="">Full List = All unique returning customers who are expiring in this cycle</td>
+        </tr>
+        <tr class="">
+          <td colspan="3" class="">Customer List = All customers from the 'full list' who have purchased already for this cycle (remove from MKTG)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<!-- ## Postcard -->
+  <div class="col-md-6">
+    <table class="table table-outline">
+      <thead>
+        <tr class="grey-b-200">
+          <th class="text-center" colspan="3">2020 Postcard Marketing</th>
+        </tr>
+        <tr class="">
+          <td colspan="3" class="">Current List Count: <strong><%= number_with_delimiter(@postcard_list.count) %></strong></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% in_postcard_dates.each do |postcard| %>
+        <tr class="">
+            <td><%= postcard.to_date.strftime('%-m/%-d/%Y') %></td>
+            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'postcard_list', page: 'deadline', state: state, day: postcard, what: 'postcard') %></td>
+            <% mail_id = "E-RC-Deadline-IN-Postcard-#{postcard}" %>
+            <% records = PostcardRecord.all.pluck(:mailing_id) %>
+            <% if records.include? mail_id %>
+              <td><span class="glyphicon glyphicon-ok success"></span></td>
+            <% elsif %>
+              <td></td>
+            <% end %>
+           </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div> <!-- END POSTCARD-->
+</div>
+<% end %> <!-- END IN-->
+
 
 <!-- ### NC ###-->
 
@@ -234,26 +328,23 @@
 <% nc_postcard_dates = ['2020-04-11', '2020-05-11'] %>
 <% state = params['state'] %>
 
+<div class="p20">
+  <h4 class="text-center alert alert-info">State Exp: <strong><%= @state_exp.strftime('%-m/%-d/%Y') %></strong></h4>
+</div>
+
 <!-- EMAIL -->
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-2">
     <table class="table table-outline">
       <thead>
         <tr class="grey-b-200">
-          <th class="text-center" colspan="3">2020 Email Marketing</th>
+          <th class="text-center" colspan="2">Email Dates</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="">
-          <td colspan="3" class="">Full List (all returning customers who are expiring in this cycle): <strong><%= number_with_delimiter(@full_list.count) %> <%= link_to 'Export', rc_marketing_empire_customers_path(add: 'full_list', page: 'deadline', state: 'NC', day: 'Full', what: 'Email') %></td>
-        </tr>
-        <tr class="">
-          <td colspan="3" class="">Current List Count: <strong><%= number_with_delimiter(@export_count.count) %></strong></td>
-        </tr>
         <% nc_email_dates.each do |email| %>
         <tr class="">
             <td><%= email.to_date.strftime('%-m/%-d/%Y') %></td>
-            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'yes', page: 'deadline', state: state, day: email, what: 'Email') %></td>
             <% mail_id = "E-RC-Deadline-#{state}-Email-#{email}" %>
             <% records = PostcardRecord.all.pluck(:mailing_id) %>
             <% if records.include? mail_id %>
@@ -265,8 +356,38 @@
         <% end %>
       </tbody>
     </table>
+    </div>
+    <div class="col-md-4">
+
+
+    <table class="table table-outline">
+      <thead>
+        <tr class="grey-b-200">
+          <th class="text-center" colspan="3">2020 Email Marketing Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="">
+          <td colspan="1" class="">Full List: <strong><%= number_with_delimiter(@full_list.count) %> </td>
+          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'full_list', page: 'deadline', state: 'NC', day: 'Full', what: 'Email') %></td>
+          <td></td>
+        </tr>
+        <tr class="">
+          <td colspan="1" class="">Customer List: <strong><%= number_with_delimiter(@purchase_list.count) %> </td>
+          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'purchase_list', page: 'deadline', state: 'NC', day: 'Full', what: 'Email') %></td>
+          <td></td>
+        </tr>
+        <tr class="">
+          <td colspan="3" class="">Full List = All unique returning customers who are expiring in this cycle</td>
+        </tr>
+        <tr class="">
+          <td colspan="3" class="">Customer List = All customers from the 'full list' who have purchased already for this cycle (remove from MKTG)</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-<!-- Postcard -->
+
+<!-- ## Postcard -->
   <div class="col-md-6">
     <table class="table table-outline">
       <thead>
@@ -274,27 +395,27 @@
           <th class="text-center" colspan="3">2020 Postcard Marketing</th>
         </tr>
         <tr class="">
-          <td colspan="3" class="">Current List Count: <strong><%= number_with_delimiter(@export_count.count) %></strong></td>
+          <td colspan="3" class="">Current List Count: <strong><%= number_with_delimiter(@postcard_list.count) %></strong></td>
         </tr>
       </thead>
       <tbody>
         <% nc_postcard_dates.each do |postcard| %>
         <tr class="">
             <td><%= postcard.to_date.strftime('%-m/%-d/%Y') %></td>
-            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'yes', page: 'deadline', state: 'PA', day: postcard, what: 'postcard') %></td>
-            <% mail_id = "E-RC-Deadline-PA-Postcard-#{postcard}" %>
+            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'postcard_list', page: 'deadline', state: 'NC', day: postcard, what: 'postcard') %></td>
+            <% mail_id = "E-RC-Deadline-NC-Postcard-#{postcard}" %>
             <% records = PostcardRecord.all.pluck(:mailing_id) %>
             <% if records.include? mail_id %>
               <td><span class="glyphicon glyphicon-ok success"></span></td>
             <% elsif %>
               <td></td>
-            <% end %>          </tr>
+            <% end %>
+           </tr>
         <% end %>
       </tbody>
     </table>
-  </div>
+  </div> <!-- END POSTCARD-->
 </div>
-
-<% end %>
+<% end %> <!-- END NC-->
 
 </div>

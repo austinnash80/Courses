@@ -28,56 +28,11 @@ class EmpireCustomersController < ApplicationController
   end
 
   def rc_marketing
-    state = params['state']
-    # NEW
-      # Find total list for each state
-      # B_list is board list -> This mean they were match with the board data (they are still active) -> needs to be updated for what the new list is -> for now there is only one list so nil works
-        if state == 'NC'
-          full_1 = EmpireCustomer.where(lic_state: state).where.not(b_list: nil).all
-          id = []
-          uid = []
-          full_1.each do |nc|
-            if uid.exclude?(nc.uid)
-              id.push(nc.id)
-              uid.push(nc.uid)
-            end
-          end
-          # Full_list = the ID of the unique records
-          @full_list = EmpireCustomer.where(id: id).all
+    # NEW DEADLINE EXPORTS
+    nc_exports
+    pa_exports
+    in_exports
 
-          # ADD RECORDS TO THE EXPORT TABLE
-          if params['add'] == 'full_list'
-            state = params['state']
-            PostcardExport.delete_all
-            @full_list.each do |empire_customer|
-              new = PostcardExport.create(
-                company: 'Empire',
-                group: 'rc_email_deadline',
-                # mail_id: "",
-                # mail_id: "E-RC-Deadline-Email-Full",
-                mail_date: Date.today,
-                g_id: empire_customer.extra_s1,
-                license_number: empire_customer.license_num,
-                uid: empire_customer.uid,
-                exp: empire_customer.b_exp,
-                merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
-                f_name: empire_customer.fname,
-                l_name: empire_customer.lname,
-                add_1: empire_customer.street_1,
-                add_2: empire_customer.street_2,
-                city: empire_customer.city,
-                st: empire_customer.state,
-                zip: empire_customer.zip,
-                email: empire_customer.email
-              )
-              new.save
-            end
-            redirect_to postcard_exports_path(what:'email', record: 'no')
-            return
-          end
-        end
-
-    # END NEW
     if params['page'] == 'deadline'
       rc_marketing_deadline
     end
@@ -979,6 +934,493 @@ end
   def sales
 
   end
+
+#NEW EXPORTS
+  def nc_exports
+    state = params['state']
+      # Find total list for each state
+      # B_list is board list -> This mean they were match with the board data (they are still active) -> needs to be updated for what the new list is -> for now there is only one list so nil works
+        if state == 'NC'
+          @state_exp = '2020-06-10'.to_date
+          # EMAIL
+            full_1 = EmpireCustomer.where(lic_state: state).where.not(b_list: nil).all
+            id = []
+            uid = []
+            full_1.each do |nc|
+              if uid.exclude?(nc.uid)
+                id.push(nc.id)
+                uid.push(nc.uid)
+              end
+            end
+            @full_list = EmpireCustomer.where(id: id).all
+
+            purchase_1 = EmpireCustomer.where(lic_state: state).where('p_date > ?', @state_exp - 11.months).where(uid: uid).all
+            id_purchase = []
+            uid_purchase = []
+            purchase_1.each do |nc|
+              if uid_purchase.exclude?(nc.uid)
+                id_purchase.push(nc.id)
+                uid_purchase.push(nc.uid)
+              end
+            end
+            @purchase_list = EmpireCustomer.where(id: id_purchase).all
+
+            # ADD RECORDS TO THE EXPORT TABLE
+            if params['add'] == 'full_list'
+              state = params['state']
+              PostcardExport.delete_all
+              @full_list.each do |empire_customer|
+                new = PostcardExport.create(
+                  company: 'Empire',
+                  group: 'rc_email_deadline',
+                  # mail_id: "",
+                  # mail_id: "E-RC-Deadline-Email-Full",
+                  mail_date: Date.today,
+                  g_id: empire_customer.extra_s1,
+                  license_number: empire_customer.license_num,
+                  uid: empire_customer.uid,
+                  exp: empire_customer.b_exp,
+                  merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                  f_name: empire_customer.fname,
+                  l_name: empire_customer.lname,
+                  add_1: empire_customer.street_1,
+                  add_2: empire_customer.street_2,
+                  city: empire_customer.city,
+                  st: empire_customer.state,
+                  zip: empire_customer.zip,
+                  email: empire_customer.email)
+                new.save
+              end
+                redirect_to postcard_exports_path(what:'email', record: 'no', state: 'NC', List: 'Full')
+            end
+
+            if params['add'] == 'purchase_list'
+              state = params['state']
+              PostcardExport.delete_all
+              @purchase_list.each do |empire_customer|
+                new = PostcardExport.create(
+                  company: 'Empire',
+                  group: 'rc_email_deadline',
+                  # mail_id: "",
+                  # mail_id: "E-RC-Deadline-Email-Full",
+                  mail_date: Date.today,
+                  g_id: empire_customer.extra_s1,
+                  license_number: empire_customer.license_num,
+                  uid: empire_customer.uid,
+                  exp: empire_customer.b_exp,
+                  merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                  f_name: empire_customer.fname,
+                  l_name: empire_customer.lname,
+                  add_1: empire_customer.street_1,
+                  add_2: empire_customer.street_2,
+                  city: empire_customer.city,
+                  st: empire_customer.state,
+                  zip: empire_customer.zip,
+                  email: empire_customer.email)
+                new.save
+              end
+                redirect_to postcard_exports_path(what:'email', record: 'no', state: 'NC', List: 'Purchase')
+            end
+
+            # POSTCARD
+            @postcard_list = @full_list.where.not(uid: uid_purchase).all
+
+            if params['add'] == 'postcard_list'
+              state = params['state']
+              PostcardExport.delete_all
+              @postcard_list.each do |empire_customer|
+                new = PostcardExport.create(
+                  company: 'Empire',
+                  group: 'rc_postcard_deadline',
+                  # mail_id: "",
+                  # mail_id: "E-RC-Deadline-Email-Full",
+                  mail_date: Date.today,
+                  g_id: empire_customer.extra_s1,
+                  license_number: empire_customer.license_num,
+                  uid: empire_customer.uid,
+                  exp: empire_customer.b_exp,
+                  merge_1: '4-Hour North Carolina Package',
+                  merge_2: 'Just $39.50',
+                  merge_3: 'ReturningStudent20',
+                  merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                  f_name: empire_customer.fname,
+                  l_name: empire_customer.lname,
+                  add_1: empire_customer.street_1,
+                  add_2: empire_customer.street_2,
+                  city: empire_customer.city,
+                  st: empire_customer.state,
+                  zip: empire_customer.zip,
+                  email: empire_customer.email)
+                new.save
+              end
+                redirect_to postcard_exports_path(what:'postcard', record: 'no', state: 'NC', List: 'Postcards', co: 'empire')
+            end
+        end
+  end
+  def pa_exports
+    state = params['state']
+      # Find total list for each state
+      # B_list is board list -> This mean they were match with the board data (they are still active) -> needs to be updated for what the new list is -> for now there is only one list so nil works
+        if state == 'PA'
+          @state_exp = '2020-05-31'.to_date
+          # EMAIL
+            full_1 = EmpireCustomer.where(lic_state: state).where.not(b_list: nil).all
+            id = []
+            uid = []
+            full_1.each do |nc|
+              if uid.exclude?(nc.uid)
+                id.push(nc.id)
+                uid.push(nc.uid)
+              end
+            end
+            @full_list = EmpireCustomer.where(id: id).all
+
+            purchase_1 = EmpireCustomer.where(lic_state: state).where('p_date > ?', @state_exp - 22.months).where(uid: uid).all
+            id_purchase = []
+            uid_purchase = []
+            purchase_1.each do |pa|
+              if uid_purchase.exclude?(pa.uid)
+                id_purchase.push(pa.id)
+                uid_purchase.push(pa.uid)
+              end
+            end
+            @purchase_list = EmpireCustomer.where(id: id_purchase).all
+
+            # ADD RECORDS TO THE EXPORT TABLE
+            if params['add'] == 'full_list'
+              state = params['state']
+              PostcardExport.delete_all
+              @full_list.each do |empire_customer|
+                new = PostcardExport.create(
+                  company: 'Empire',
+                  group: 'rc_email_deadline',
+                  # mail_id: "",
+                  # mail_id: "E-RC-Deadline-Email-Full",
+                  mail_date: Date.today,
+                  g_id: empire_customer.extra_s1,
+                  license_number: empire_customer.license_num,
+                  uid: empire_customer.uid,
+                  exp: empire_customer.b_exp,
+                  merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                  f_name: empire_customer.fname,
+                  l_name: empire_customer.lname,
+                  add_1: empire_customer.street_1,
+                  add_2: empire_customer.street_2,
+                  city: empire_customer.city,
+                  st: empire_customer.state,
+                  zip: empire_customer.zip,
+                  email: empire_customer.email)
+                new.save
+              end
+                redirect_to postcard_exports_path(what:'email', record: 'no', state: state, List: 'Full')
+            end
+
+            if params['add'] == 'purchase_list'
+              state = params['state']
+              PostcardExport.delete_all
+              @purchase_list.each do |empire_customer|
+                new = PostcardExport.create(
+                  company: 'Empire',
+                  group: 'rc_email_deadline',
+                  # mail_id: "",
+                  # mail_id: "E-RC-Deadline-Email-Full",
+                  mail_date: Date.today,
+                  g_id: empire_customer.extra_s1,
+                  license_number: empire_customer.license_num,
+                  uid: empire_customer.uid,
+                  exp: empire_customer.b_exp,
+                  merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                  f_name: empire_customer.fname,
+                  l_name: empire_customer.lname,
+                  add_1: empire_customer.street_1,
+                  add_2: empire_customer.street_2,
+                  city: empire_customer.city,
+                  st: empire_customer.state,
+                  zip: empire_customer.zip,
+                  email: empire_customer.email)
+                new.save
+              end
+                redirect_to postcard_exports_path(what:'email', record: 'no', state: state, List: 'Purchase')
+            end
+
+            # POSTCARD
+            @postcard_list = @full_list.where.not(uid: uid_purchase).all
+
+            if params['add'] == 'postcard_list'
+              state = params['state']
+              PostcardExport.delete_all
+              @postcard_list.each do |empire_customer|
+                new = PostcardExport.create(
+                  company: 'Empire',
+                  group: 'rc_postcard_deadline',
+                  # mail_id: "",
+                  # mail_id: "E-RC-Deadline-Email-Full",
+                  mail_date: Date.today,
+                  g_id: empire_customer.extra_s1,
+                  license_number: empire_customer.license_num,
+                  uid: empire_customer.uid,
+                  exp: empire_customer.b_exp,
+                  merge_1: '16-Hour Pennsylvania Package',
+                  merge_2: 'Just $64.50',
+                  merge_3: 'ReturningStudent20',
+                  merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                  f_name: empire_customer.fname,
+                  l_name: empire_customer.lname,
+                  add_1: empire_customer.street_1,
+                  add_2: empire_customer.street_2,
+                  city: empire_customer.city,
+                  st: empire_customer.state,
+                  zip: empire_customer.zip,
+                  email: empire_customer.email)
+                new.save
+              end
+                redirect_to postcard_exports_path(what:'postcard', record: 'no', state: state, List: 'Postcards', co: 'empire')
+            end
+        end
+  end
+  def in_exports
+    state = params['state']
+      # Find total list for each state
+      # B_list is board list -> This mean they were match with the board data (they are still active) -> needs to be updated for what the new list is -> for now there is only one list so nil works
+        if state == 'IN'
+          @state_exp = '2020-06-30'.to_date
+          # EMAIL
+            full_1 = EmpireCustomer.where(lic_state: 'IND').where.not(b_list: nil).all
+            id = []
+            uid = []
+            full_1.each do |ind|
+              if uid.exclude?(ind.uid)
+                id.push(ind.id)
+                uid.push(ind.uid)
+              end
+            end
+            @full_list = EmpireCustomer.where(id: id).all
+
+            purchase_1 = EmpireCustomer.where(lic_state: 'IND').where('p_date > ?', @state_exp - 11.months).where(uid: uid).all
+            id_purchase = []
+            uid_purchase = []
+            purchase_1.each do |ind|
+              if uid_purchase.exclude?(ind.uid)
+                id_purchase.push(ind.id)
+                uid_purchase.push(ind.uid)
+              end
+            end
+            @purchase_list = EmpireCustomer.where(id: id_purchase).all
+
+            # ADD RECORDS TO THE EXPORT TABLE
+            if params['add'] == 'full_list'
+              state = params['state']
+              PostcardExport.delete_all
+              @full_list.each do |empire_customer|
+                new = PostcardExport.create(
+                  company: 'Empire',
+                  group: 'rc_email_deadline',
+                  # mail_id: "",
+                  # mail_id: "E-RC-Deadline-Email-Full",
+                  mail_date: Date.today,
+                  g_id: empire_customer.extra_s1,
+                  license_number: empire_customer.license_num,
+                  uid: empire_customer.uid,
+                  exp: empire_customer.b_exp,
+                  merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                  f_name: empire_customer.fname,
+                  l_name: empire_customer.lname,
+                  add_1: empire_customer.street_1,
+                  add_2: empire_customer.street_2,
+                  city: empire_customer.city,
+                  st: empire_customer.state,
+                  zip: empire_customer.zip,
+                  email: empire_customer.email)
+                new.save
+              end
+                redirect_to postcard_exports_path(what:'email', record: 'no', state: state, List: 'Full')
+            end
+
+            if params['add'] == 'purchase_list'
+              state = params['state']
+              PostcardExport.delete_all
+              @purchase_list.each do |empire_customer|
+                new = PostcardExport.create(
+                  company: 'Empire',
+                  group: 'rc_email_deadline',
+                  # mail_id: "",
+                  # mail_id: "E-RC-Deadline-Email-Full",
+                  mail_date: Date.today,
+                  g_id: empire_customer.extra_s1,
+                  license_number: empire_customer.license_num,
+                  uid: empire_customer.uid,
+                  exp: empire_customer.b_exp,
+                  merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                  f_name: empire_customer.fname,
+                  l_name: empire_customer.lname,
+                  add_1: empire_customer.street_1,
+                  add_2: empire_customer.street_2,
+                  city: empire_customer.city,
+                  st: empire_customer.state,
+                  zip: empire_customer.zip,
+                  email: empire_customer.email)
+                new.save
+              end
+                redirect_to postcard_exports_path(what:'email', record: 'no', state: state, List: 'Purchase')
+            end
+
+            # POSTCARD
+            @postcard_list = @full_list.where.not(uid: uid_purchase).all
+
+            if params['add'] == 'postcard_list'
+              state = params['state']
+              PostcardExport.delete_all
+              @postcard_list.each do |empire_customer|
+                new = PostcardExport.create(
+                  company: 'Empire',
+                  group: 'rc_postcard_deadline',
+                  # mail_id: "",
+                  # mail_id: "E-RC-Deadline-Email-Full",
+                  mail_date: Date.today,
+                  g_id: empire_customer.extra_s1,
+                  license_number: empire_customer.license_num,
+                  uid: empire_customer.uid,
+                  exp: empire_customer.b_exp,
+                  merge_1: '12-Hour Indiana Package',
+                  merge_2: 'Just $49.50',
+                  merge_3: 'ReturningStudent20',
+                  merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                  f_name: empire_customer.fname,
+                  l_name: empire_customer.lname,
+                  add_1: empire_customer.street_1,
+                  add_2: empire_customer.street_2,
+                  city: empire_customer.city,
+                  st: empire_customer.state,
+                  zip: empire_customer.zip,
+                  email: empire_customer.email)
+                new.save
+              end
+                redirect_to postcard_exports_path(what:'postcard', record: 'no', state: state, List: 'Postcards', co: 'empire')
+            end
+        end
+  end
+  def in_exports
+    state = params['state']
+      # Find total list for each state
+      # B_list is board list -> This mean they were match with the board data (they are still active) -> needs to be updated for what the new list is -> for now there is only one list so nil works
+        if state == 'MO_B'
+          @state_exp = '2020-06-30'.to_date
+          # EMAIL
+            full_1 = EmpireCustomer.where(lic_state: 'MO').where.not(b_list: nil).all
+            id = []
+            uid = []
+            full_1.each do |mo_b|
+              if uid.exclude?(mo_b.uid)
+                id.push(mo_b.id)
+                uid.push(mo_b.uid)
+              end
+            end
+            @full_list = EmpireCustomer.where(id: id).all
+
+            purchase_1 = EmpireCustomer.where(lic_state: 'MO').where('p_date > ?', @state_exp - 22.months).where(uid: uid).all
+            id_purchase = []
+            uid_purchase = []
+            purchase_1.each do |mo_b|
+              if uid_purchase.exclude?(mo_b.uid)
+                id_purchase.push(mo_b.id)
+                uid_purchase.push(mo_b.uid)
+              end
+            end
+            @purchase_list = EmpireCustomer.where(id: id_purchase).all
+
+            # ADD RECORDS TO THE EXPORT TABLE
+            if params['add'] == 'full_list'
+              state = params['state']
+              PostcardExport.delete_all
+              @full_list.each do |empire_customer|
+                new = PostcardExport.create(
+                  company: 'Empire',
+                  group: 'rc_email_deadline',
+                  # mail_id: "",
+                  # mail_id: "E-RC-Deadline-Email-Full",
+                  mail_date: Date.today,
+                  g_id: empire_customer.extra_s1,
+                  license_number: empire_customer.license_num,
+                  uid: empire_customer.uid,
+                  exp: empire_customer.b_exp,
+                  merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                  f_name: empire_customer.fname,
+                  l_name: empire_customer.lname,
+                  add_1: empire_customer.street_1,
+                  add_2: empire_customer.street_2,
+                  city: empire_customer.city,
+                  st: empire_customer.state,
+                  zip: empire_customer.zip,
+                  email: empire_customer.email)
+                new.save
+              end
+                redirect_to postcard_exports_path(what:'email', record: 'no', state: state, List: 'Full')
+            end
+
+            if params['add'] == 'purchase_list'
+              state = params['state']
+              PostcardExport.delete_all
+              @purchase_list.each do |empire_customer|
+                new = PostcardExport.create(
+                  company: 'Empire',
+                  group: 'rc_email_deadline',
+                  # mail_id: "",
+                  # mail_id: "E-RC-Deadline-Email-Full",
+                  mail_date: Date.today,
+                  g_id: empire_customer.extra_s1,
+                  license_number: empire_customer.license_num,
+                  uid: empire_customer.uid,
+                  exp: empire_customer.b_exp,
+                  merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                  f_name: empire_customer.fname,
+                  l_name: empire_customer.lname,
+                  add_1: empire_customer.street_1,
+                  add_2: empire_customer.street_2,
+                  city: empire_customer.city,
+                  st: empire_customer.state,
+                  zip: empire_customer.zip,
+                  email: empire_customer.email)
+                new.save
+              end
+                redirect_to postcard_exports_path(what:'email', record: 'no', state: state, List: 'Purchase')
+            end
+
+            # POSTCARD
+            @postcard_list = @full_list.where.not(uid: uid_purchase).all
+
+            if params['add'] == 'postcard_list'
+              state = params['state']
+              PostcardExport.delete_all
+              @postcard_list.each do |empire_customer|
+                new = PostcardExport.create(
+                  company: 'Empire',
+                  group: 'rc_postcard_deadline',
+                  # mail_id: "",
+                  # mail_id: "E-RC-Deadline-Email-Full",
+                  mail_date: Date.today,
+                  g_id: empire_customer.extra_s1,
+                  license_number: empire_customer.license_num,
+                  uid: empire_customer.uid,
+                  exp: empire_customer.b_exp,
+                  merge_1: '12-Hour Missouri Package',
+                  merge_2: 'Just $59.50',
+                  merge_3: 'ReturningStudent20',
+                  merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                  f_name: empire_customer.fname,
+                  l_name: empire_customer.lname,
+                  add_1: empire_customer.street_1,
+                  add_2: empire_customer.street_2,
+                  city: empire_customer.city,
+                  st: empire_customer.state,
+                  zip: empire_customer.zip,
+                  email: empire_customer.email)
+                new.save
+              end
+                redirect_to postcard_exports_path(what:'postcard', record: 'no', state: state, List: 'Postcards', co: 'empire')
+            end
+        end
+  end
+
 
 
 

@@ -5,13 +5,14 @@ class PostcardExportsController < ApplicationController
   # GET /postcard_exports.json
   def index
     # @postcard_exports = PostcardExport.all
-    @mail_id = params['mail_id']
+    @mail_id = "#{params['state']}-#{params['what']}-#{params['list']}"
+    # @mail_id = params['mail_id']
 
-    @postcard_exports = PostcardExport.where(mail_id: @mail_id).all
+    @postcard_exports = PostcardExport.all
 
     respond_to do |format|
       format.html
-      format.csv { send_data @postcard_exports.to_csv, filename: "#{@mail_id}.csv" }
+      format.csv { send_data @postcard_exports.to_csv, filename: "#{Date.today}.csv" }
     end
 
     if params['record'] == 'yes'
