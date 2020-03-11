@@ -32,6 +32,7 @@ class EmpireCustomersController < ApplicationController
     nc_exports
     pa_exports
     in_exports
+    mo_b_exports
 
     if params['page'] == 'deadline'
       rc_marketing_deadline
@@ -1299,7 +1300,7 @@ end
             end
         end
   end
-  def in_exports
+  def mo_b_exports
     state = params['state']
       # Find total list for each state
       # B_list is board list -> This mean they were match with the board data (they are still active) -> needs to be updated for what the new list is -> for now there is only one list so nil works
