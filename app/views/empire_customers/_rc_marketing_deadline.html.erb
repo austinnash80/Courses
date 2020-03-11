@@ -245,6 +245,9 @@
       </thead>
       <tbody>
         <tr class="">
+          <td colspan="3" class="">Full List (all returning customers who are expiring in this cycle): <strong><%= number_with_delimiter(@full_list.count) %> <%= link_to 'Export', rc_marketing_empire_customers_path(add: 'full_list', page: 'deadline', state: 'NC', day: 'Full', what: 'Email') %></td>
+        </tr>
+        <tr class="">
           <td colspan="3" class="">Current List Count: <strong><%= number_with_delimiter(@export_count.count) %></strong></td>
         </tr>
         <% nc_email_dates.each do |email| %>

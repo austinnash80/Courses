@@ -28,13 +28,63 @@ class EmpireCustomersController < ApplicationController
   end
 
   def rc_marketing
+    state = params['state']
+    # NEW
+      # Find total list for each state
+      # B_list is board list -> This mean they were match with the board data (they are still active) -> needs to be updated for what the new list is -> for now there is only one list so nil works
+        if state == 'NC'
+          full_1 = EmpireCustomer.where(lic_state: state).where.not(b_list: nil).all
+          id = []
+          uid = []
+          full_1.each do |nc|
+            if uid.exclude?(nc.uid)
+              id.push(nc.id)
+              uid.push(nc.uid)
+            end
+          end
+          # Full_list = the ID of the unique records
+          @full_list = EmpireCustomer.where(id: id).all
+
+          # ADD RECORDS TO THE EXPORT TABLE
+          if params['add'] == 'full_list'
+            state = params['state']
+            PostcardExport.delete_all
+            @full_list.each do |empire_customer|
+              new = PostcardExport.create(
+                company: 'Empire',
+                group: 'rc_email_deadline',
+                # mail_id: "",
+                # mail_id: "E-RC-Deadline-Email-Full",
+                mail_date: Date.today,
+                g_id: empire_customer.extra_s1,
+                license_number: empire_customer.license_num,
+                uid: empire_customer.uid,
+                exp: empire_customer.b_exp,
+                merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                f_name: empire_customer.fname,
+                l_name: empire_customer.lname,
+                add_1: empire_customer.street_1,
+                add_2: empire_customer.street_2,
+                city: empire_customer.city,
+                st: empire_customer.state,
+                zip: empire_customer.zip,
+                email: empire_customer.email
+              )
+              new.save
+            end
+            redirect_to postcard_exports_path(what:'email', record: 'no')
+            return
+          end
+        end
+
+    # END NEW
     if params['page'] == 'deadline'
       rc_marketing_deadline
     end
     if params['page'] == 'rolling' && params['what'] == 'email'
       re_marketing_rolling_email
     end
-    rc_marketing_date
+    # rc_marketing_date
     rc_marketing_states
     if params['what'] == 'postcard'
     @ca_master_1 = EmpireMasterList.where(source: 'CA').where(license_number: @ca_1).where.not(license_number: @ca_2).where('exp_date >= ? AND exp_date <= ?', @date_1a, @date_1b).pluck(:license_number)
