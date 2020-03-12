@@ -12,7 +12,7 @@ class PostcardExportsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { send_data @postcard_exports.to_csv, filename: "#{Date.today}.csv" }
+      format.csv { send_data @postcard_exports.to_csv, filename: "empire_weekly_rolling_state_email_#{Date.today}.csv" }
     end
 
     if params['record'] == 'yes'
@@ -90,6 +90,6 @@ class PostcardExportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def postcard_export_params
-      params.require(:postcard_export).permit(:company, :group, :mail_id, :mail_date, :state, :list, :license_number, :uid, :merge_1, :merge_2, :merge_3, :f_name, :l_name, :add_1, :add_2, :city, :st, :zip, :email, :subject, :exp, :merge_4, :merge_5, :g_id, :extra_b, :extra_s, :extra_i)
+      params.require(:postcard_export).permit(:company, :group, :mail_id, :mail_date, :state, :list, :license_number, :uid, :merge_1, :merge_2, :merge_3, :f_name, :l_name, :add_1, :add_2, :city, :st, :zip, :email, :subject, :exp, :merge_4, :merge_5, :g_id, :extra_b, :extra_s, :extra_i, :send_email, :exp_s, :send_date_s)
     end
 end

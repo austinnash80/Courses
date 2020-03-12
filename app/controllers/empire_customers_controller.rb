@@ -27,19 +27,29 @@ class EmpireCustomersController < ApplicationController
     end
   end
 
+
+
   def rc_marketing
     # NEW DEADLINE EXPORTS
     nc_exports
     pa_exports
     in_exports
     mo_b_exports
+    if params['page'] == 'rolling' && params['what'] == 'email_new'
+      rolling_emails
+    end
+
+    # NEW ROLLING
+    # rc_marketing_states
 
     if params['page'] == 'deadline'
       rc_marketing_deadline
     end
-    if params['page'] == 'rolling' && params['what'] == 'email'
-      re_marketing_rolling_email
-    end
+
+#if params['test'] == 'no'
+    # if params['page'] == 'rolling' && params['what'] == 'email'
+    #   re_marketing_rolling_email
+    # end
     # rc_marketing_date
     rc_marketing_states
     if params['what'] == 'postcard'
@@ -195,6 +205,8 @@ class EmpireCustomersController < ApplicationController
       end
       end #If 'data'
 
+  #end #test
+
   end
 
   def rc_marketing_date
@@ -224,365 +236,365 @@ class EmpireCustomersController < ApplicationController
       @wa_2 = wa.where('p_date >= ?', Date.today - 18.months).pluck(:license_num).uniq #Array of unique license number who have purchases in the given time frame
   end
 
-  def re_marketing_rolling_email
-
-## DAYS
-     day = params['day'].to_date
-      g1_day_a = ((day + 180.days).to_date).at_beginning_of_week
-      g1_day_b = ((day + 180.days).to_date).at_end_of_week
-      g2_day_a = ((day + 150.days).to_date).at_beginning_of_week
-      g2_day_b = ((day + 150.days).to_date).at_end_of_week
-      g3_day_a = ((day + 120.days).to_date).at_beginning_of_week
-      g3_day_b = ((day + 120.days).to_date).at_end_of_week
-      g4_day_a = ((day + 90.days).to_date).at_beginning_of_week
-      g4_day_b = ((day + 90.days).to_date).at_end_of_week
-      g5_day_a = ((day + 60.days).to_date).at_beginning_of_week
-      g5_day_b = ((day + 60.days).to_date).at_end_of_week
-      g6_day_a = ((day + 45.days).to_date).at_beginning_of_week
-      g6_day_b = ((day + 45.days).to_date).at_end_of_week
-      g7_day_a = ((day + 30.days).to_date).at_beginning_of_week
-      g7_day_b = ((day + 30.days).to_date).at_end_of_week
-      g8_day_a = ((day + 15.days).to_date).at_beginning_of_week
-      g8_day_b = ((day + 15.days).to_date).at_end_of_week
-      g9_day_a = ((day + 10.days).to_date).at_beginning_of_week
-      g9_day_b = ((day + 10.days).to_date).at_end_of_week
-      g10_day_a = ((day + 5.days).to_date).at_beginning_of_week
-      g10_day_b = ((day + 5.days).to_date).at_end_of_week
-      g11_day_a = ((day + 2.days).to_date).at_beginning_of_week
-      g11_day_b = ((day + 2.days).to_date).at_end_of_week
-## DAYS END
-
-## GROUP ARRAYS
-      g1_ca = []
-      g2_ca = []
-      g3_ca = []
-      g4_ca = []
-      g5_ca = []
-      g6_ca = []
-      g7_ca = []
-      g8_ca = []
-      g9_ca = []
-      g10_ca = []
-      g11_ca = []
-      g1_ny = []
-      g2_ny = []
-      g3_ny = []
-      g4_ny = []
-      g5_ny = []
-      g6_ny = []
-      g7_ny = []
-      g8_ny = []
-      g9_ny = []
-      g10_ny = []
-      g11_ny = []
-      g1_nm = []
-      g2_nm = []
-      g3_nm = []
-      g4_nm = []
-      g5_nm = []
-      g6_nm = []
-      g7_nm = []
-      g8_nm = []
-      g9_nm = []
-      g10_nm = []
-      g11_nm = []
-      g1_wa = []
-      g2_wa = []
-      g3_wa = []
-      g4_wa = []
-      g5_wa = []
-      g6_wa = []
-      g7_wa = []
-      g8_wa = []
-      g9_wa = []
-      g10_wa = []
-      g11_wa = []
-## GROUP ARRAYS END
-
-## Master Vaiables
-      ca_customer = EmpireCustomer.where(lic_state: 'CA').all
-      ny_customer = EmpireCustomer.where(lic_state: 'NY').all
-      nm_customer = EmpireCustomer.where(lic_state: 'NM').all
-      wa_customer = EmpireCustomer.where(lic_state: 'WA').all
-      ca_master = EmpireMasterList.where(source: 'CA')
-      ny_master = EmpireMasterList.where(source: 'NY')
-      nm_master = EmpireMasterList.where(source: 'NM')
-      wa_master = EmpireMasterList.where(source: 'WA')
-## Master Vaiables END
-
-## GROUPS BY LICENSE NUMBER
-    g1_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g1_day_a, g1_day_b).pluck(:license_number)
-    g2_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g2_day_a, g2_day_b).pluck(:license_number)
-    g3_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g3_day_a, g3_day_b).pluck(:license_number)
-    g4_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g4_day_a, g4_day_b).pluck(:license_number)
-    g5_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g5_day_a, g5_day_b).pluck(:license_number)
-    g6_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g6_day_a, g6_day_b).pluck(:license_number)
-    g7_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g7_day_a, g7_day_b).pluck(:license_number)
-    g8_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g8_day_a, g8_day_b).pluck(:license_number)
-    g9_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g9_day_a, g9_day_b).pluck(:license_number)
-    g10_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g10_day_a, g10_day_b).pluck(:license_number)
-    g11_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g11_day_a, g11_day_b).pluck(:license_number)
-    g1_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g1_day_a, g1_day_b).pluck(:license_number)
-    g2_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g2_day_a, g2_day_b).pluck(:license_number)
-    g3_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g3_day_a, g3_day_b).pluck(:license_number)
-    g4_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g4_day_a, g4_day_b).pluck(:license_number)
-    g5_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g5_day_a, g5_day_b).pluck(:license_number)
-    g6_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g6_day_a, g6_day_b).pluck(:license_number)
-    g7_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g7_day_a, g7_day_b).pluck(:license_number)
-    g8_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g8_day_a, g8_day_b).pluck(:license_number)
-    g9_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g9_day_a, g9_day_b).pluck(:license_number)
-    g10_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g10_day_a, g10_day_b).pluck(:license_number)
-    g11_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g11_day_a, g11_day_b).pluck(:license_number)
-    g1_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g1_day_a, g1_day_b).pluck(:license_number)
-    g2_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g2_day_a, g2_day_b).pluck(:license_number)
-    g3_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g3_day_a, g3_day_b).pluck(:license_number)
-    g4_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g4_day_a, g4_day_b).pluck(:license_number)
-    g5_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g5_day_a, g5_day_b).pluck(:license_number)
-    g6_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g6_day_a, g6_day_b).pluck(:license_number)
-    g7_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g7_day_a, g7_day_b).pluck(:license_number)
-    g8_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g8_day_a, g8_day_b).pluck(:license_number)
-    g9_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g9_day_a, g9_day_b).pluck(:license_number)
-    g10_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g10_day_a, g10_day_b).pluck(:license_number)
-    g11_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g11_day_a, g11_day_b).pluck(:license_number)
-    g1_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g1_day_a, g1_day_b).pluck(:license_number)
-    g2_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g2_day_a, g2_day_b).pluck(:license_number)
-    g3_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g3_day_a, g3_day_b).pluck(:license_number)
-    g4_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g4_day_a, g4_day_b).pluck(:license_number)
-    g5_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g5_day_a, g5_day_b).pluck(:license_number)
-    g6_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g6_day_a, g6_day_b).pluck(:license_number)
-    g7_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g7_day_a, g7_day_b).pluck(:license_number)
-    g8_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g8_day_a, g8_day_b).pluck(:license_number)
-    g9_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g9_day_a, g9_day_b).pluck(:license_number)
-    g10_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g10_day_a, g10_day_b).pluck(:license_number)
-    g11_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g11_day_a, g11_day_b).pluck(:license_number)
-## GROUPS END
-
-## EXCLUDES (custers who have already purchased for this renewal cycle)
-    ca_exclude = ca_customer.where('p_date > ?', Date.today - 2.year).pluck(:uid)
-    ny_exclude = ny_customer.where('p_date > ?', Date.today - 1.year).pluck(:uid)
-    nm_exclude = nm_customer.where('p_date > ?', Date.today - 1.year).pluck(:uid)
-    wa_exclude = wa_customer.where('p_date > ?', Date.today - 1.year).pluck(:uid)
-## EXCLUDES END
-
-## ADDING TO GROUP ARRAY
-  #CA
-  EmpireCustomer.update_all extra_s1: nil, extra_i: nil
-     ca_customer.each do |empire_customer|
-       if g1_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
-         # g1_ca.push(empire_customer.uid)
-         EmpireCustomer.where(uid: g1_ca).update_all extra_s1: 'ca', extra_i: 1
-       elsif g2_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
-         g2_ca.push(empire_customer.uid)
-         EmpireCustomer.where(uid: g2_ca).update_all extra_s1: 'ca', extra_i: 2
-       elsif g3_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
-         g3_ca.push(empire_customer.uid)
-         EmpireCustomer.where(uid: g3_ca).update_all extra_s1: 'ca', extra_i: 3
-       elsif g4_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
-         g4_ca.push(empire_customer.uid)
-          EmpireCustomer.where(uid: g4_ca).update_all extra_s1: 'ca', extra_i: 4
-       elsif g5_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
-         g5_ca.push(empire_customer.uid)
-         EmpireCustomer.where(uid: g5_ca).update_all extra_s1: 'ca', extra_i: 5
-       elsif g6_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
-         g6_ca.push(empire_customer.uid)
-         EmpireCustomer.where(uid: g6_ca).update_all extra_s1: 'ca', extra_i: 6
-       elsif g7_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
-         g7_ca.push(empire_customer.uid)
-         EmpireCustomer.where(uid: g7_ca).update_all extra_s1: 'ca', extra_i: 7
-       elsif g8_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
-         g8_ca.push(empire_customer.uid)
-         EmpireCustomer.where(uid: g8_ca).update_all extra_s1: 'ca', extra_i: 8
-       elsif g9_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
-         g9_ca.push(empire_customer.uid)
-         EmpireCustomer.where(uid: g9_ca).update_all extra_s1: 'ca', extra_i: 9
-       elsif g10_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
-         g10_ca.push(empire_customer.uid)
-         EmpireCustomer.where(uid: g10_ca).update_all extra_s1: 'ca', extra_i: 10
-        elsif g11_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
-         g11_ca.push(empire_customer.uid)
-         EmpireCustomer.where(uid: g11_ca).update_all extra_s1: 'ca', extra_i: 11
-       end
-     end
-  #NY
-   ny_customer.each do |empire_customer|
-     if g1_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
-       g1_ny.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g1_ny).update_all extra_s1: 'g1ny'
-     elsif g2_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
-       g2_ny.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g2_ny).update_all extra_s1: 'g2ny'
-     elsif g3_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
-       g3_ny.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g3_ny).update_all extra_s1: 'g3ny'
-     elsif g4_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
-       g4_ny.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g4_ny).update_all extra_s1: 'g4ny'
-     elsif g5_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
-       g5_ny.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g5_ny).update_all extra_s1: 'g5ny'
-     elsif g6_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
-       g6_ny.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g6_ny).update_all extra_s1: 'g6ny'
-     elsif g7_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
-       g7_ny.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g7_ny).update_all extra_s1: 'g7ny'
-     elsif g8_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
-       g8_ny.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g8_ny).update_all extra_s1: 'g8ny'
-     elsif g9_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
-       g9_ny.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g9_ny).update_all extra_s1: 'g9ny'
-     elsif g10_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
-       g10_ny.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g10_ny).update_all extra_s1: 'g10ny'
-     elsif g11_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
-       g11_ny.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g11_ny).update_all extra_s1: 'g11ny'
-     end
-   end
-  #NM
-   nm_customer.each do |empire_customer|
-     if g1_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
-       g1_nm.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g1_nm).update_all extra_s1: 'g1nm'
-     elsif g2_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
-       g2_nm.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g2_nm).update_all extra_s1: 'g2nm'
-     elsif g3_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
-       g3_nm.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g3_nm).update_all extra_s1: 'g3nm'
-     elsif g4_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
-       g4_nm.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g4_nm).update_all extra_s1: 'g4nm'
-     elsif g5_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
-       g5_nm.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g5_nm).update_all extra_s1: 'g5nm'
-     elsif g6_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
-       g6_nm.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g6_nm).update_all extra_s1: 'g6nm'
-     elsif g7_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
-       g7_nm.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g7_nm).update_all extra_s1: 'g7nm'
-     elsif g8_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
-       g8_nm.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g8_nm).update_all extra_s1: 'g8nm'
-     elsif g9_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
-       g9_nm.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g9_nm).update_all extra_s1: 'g9nm'
-     elsif g10_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
-       g10_nm.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g10_nm).update_all extra_s1: 'g10nm'
-     elsif g11_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
-       g11_nm.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g11_nm).update_all extra_s1: 'g11nm'
-     end
-   end
-## WA
-   wa_customer.each do |empire_customer|
-     if g1_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
-       g1_wa.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g1_wa).update_all extra_s1: 'g1wa'
-     elsif g2_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
-       g2_wa.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g2_wa).update_all extra_s1: 'g1wa'
-     elsif g3_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
-       g3_wa.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g3_wa).update_all extra_s1: 'g3wa'
-     elsif g4_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
-       g4_wa.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g4_wa).update_all extra_s1: 'g4wa'
-     elsif g5_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
-       g5_wa.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g5_wa).update_all extra_s1: 'g5wa'
-     elsif g6_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
-       g6_wa.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g6_wa).update_all extra_s1: 'g6wa'
-     elsif g7_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
-       g7_wa.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g7_wa).update_all extra_s1: 'g7wa'
-     elsif g8_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
-       g8_wa.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g8_wa).update_all extra_s1: 'g8wa'
-     elsif g9_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
-       g9_wa.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g9_wa).update_all extra_s1: 'g9wa'
-     elsif g10_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
-       g10_wa.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g10_wa).update_all extra_s1: 'g10wa'
-     elsif g11_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
-       g11_wa.push(empire_customer.uid)
-       EmpireCustomer.where(uid: g11_wa).update_all extra_s1: 'g11wa'
-     end
-   end
- ## ADDING END
-
-## TOTALS
-groups_ca = [ g1_ca, g2_ca , g3_ca , g4_ca , g5_ca , g6_ca , g7_ca , g8_ca , g9_ca , g10_ca , g11_ca]
-groups_ny = [ g1_ny, g2_ny , g3_ny , g4_ny , g5_ny , g6_ny , g7_ny , g8_ny , g9_ny , g10_ny , g11_ny]
-groups_nm = [ g1_nm, g2_nm , g3_nm , g4_nm , g5_nm , g6_nm , g7_nm , g8_nm , g9_nm , g10_nm , g11_nm]
-groups_wa = [ g1_wa, g2_wa , g3_wa , g4_wa , g5_wa , g6_wa , g7_wa , g8_wa , g9_wa , g10_wa , g11_wa]
-@ca_count = []
-ca_uid = []
-@ny_count = []
-ny_uid = []
-@nm_count = []
-nm_uid = []
-@wa_count = []
-wa_uid = []
-groups_ca.each do |i| @ca_count.push(i.uniq.count)
-  i.each do |uid|
-    ca_uid.push(uid)
-  end
-end
-groups_ny.each do |i| @ny_count.push(i.uniq.count)
-  i.each do |uid|
-    ny_uid.push(uid)
-  end
-end
-groups_nm.each do |i| @nm_count.push(i.uniq.count)
-  i.each do |uid|
-    nm_uid.push(uid)
-  end
-end
-groups_wa.each do |i| @wa_count.push(i.uniq.count)
-  i.each do |uid|
-    wa_uid.push(uid)
-  end
-end
-
-
-# #ADD
-  if params['added'] == 'done'
-    ## When add records is clicked - Adding the selected records from above to the Postcard Export Table
-
-    PostcardExport.delete_all #Delete all the current records - fresh database each time.
-
-#ALL
-    added_uid = []
-    EmpireCustomer.where.not(g_id: nil).each do |empire_customer|
-        unless added_uid.include? empire_customer.uid
-          new = PostcardExport.create(
-            company: 'Empire',
-            group: 'rc email',
-            mail_id: "E-RC-Rolling-Email-#{params['day']}",
-            mail_date: params['day'],
-            g_id: empire_customer.extra_s1,
-            license_number: empire_customer.license_num,
-            uid: empire_customer.uid,
-            exp: empire_customer.b_exp,
-            merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
-            f_name: empire_customer.fname,
-            l_name: empire_customer.lname,
-            add_1: empire_customer.street_1,
-            add_2: empire_customer.street_2,
-            city: empire_customer.city,
-            st: empire_customer.state,
-            zip: empire_customer.zip,
-            email: empire_customer.email)
-          new.save
-          added_uid.push(empire_customer.uid) #Push new records lic number in to array to not allow duplicates in new table
-      end
-    end
+#   def re_marketing_rolling_email
+#
+# ## DAYS
+#      day = params['day'].to_date
+#       g1_day_a = ((day + 180.days).to_date).at_beginning_of_week
+#       g1_day_b = ((day + 180.days).to_date).at_end_of_week
+#       g2_day_a = ((day + 150.days).to_date).at_beginning_of_week
+#       g2_day_b = ((day + 150.days).to_date).at_end_of_week
+#       g3_day_a = ((day + 120.days).to_date).at_beginning_of_week
+#       g3_day_b = ((day + 120.days).to_date).at_end_of_week
+#       g4_day_a = ((day + 90.days).to_date).at_beginning_of_week
+#       g4_day_b = ((day + 90.days).to_date).at_end_of_week
+#       g5_day_a = ((day + 60.days).to_date).at_beginning_of_week
+#       g5_day_b = ((day + 60.days).to_date).at_end_of_week
+#       g6_day_a = ((day + 45.days).to_date).at_beginning_of_week
+#       g6_day_b = ((day + 45.days).to_date).at_end_of_week
+#       g7_day_a = ((day + 30.days).to_date).at_beginning_of_week
+#       g7_day_b = ((day + 30.days).to_date).at_end_of_week
+#       g8_day_a = ((day + 15.days).to_date).at_beginning_of_week
+#       g8_day_b = ((day + 15.days).to_date).at_end_of_week
+#       g9_day_a = ((day + 10.days).to_date).at_beginning_of_week
+#       g9_day_b = ((day + 10.days).to_date).at_end_of_week
+#       g10_day_a = ((day + 5.days).to_date).at_beginning_of_week
+#       g10_day_b = ((day + 5.days).to_date).at_end_of_week
+#       g11_day_a = ((day + 2.days).to_date).at_beginning_of_week
+#       g11_day_b = ((day + 2.days).to_date).at_end_of_week
+# ## DAYS END
+#
+# ## GROUP ARRAYS
+#       g1_ca = []
+#       g2_ca = []
+#       g3_ca = []
+#       g4_ca = []
+#       g5_ca = []
+#       g6_ca = []
+#       g7_ca = []
+#       g8_ca = []
+#       g9_ca = []
+#       g10_ca = []
+#       g11_ca = []
+#       g1_ny = []
+#       g2_ny = []
+#       g3_ny = []
+#       g4_ny = []
+#       g5_ny = []
+#       g6_ny = []
+#       g7_ny = []
+#       g8_ny = []
+#       g9_ny = []
+#       g10_ny = []
+#       g11_ny = []
+#       g1_nm = []
+#       g2_nm = []
+#       g3_nm = []
+#       g4_nm = []
+#       g5_nm = []
+#       g6_nm = []
+#       g7_nm = []
+#       g8_nm = []
+#       g9_nm = []
+#       g10_nm = []
+#       g11_nm = []
+#       g1_wa = []
+#       g2_wa = []
+#       g3_wa = []
+#       g4_wa = []
+#       g5_wa = []
+#       g6_wa = []
+#       g7_wa = []
+#       g8_wa = []
+#       g9_wa = []
+#       g10_wa = []
+#       g11_wa = []
+# ## GROUP ARRAYS END
+#
+# ## Master Vaiables
+#       ca_customer = EmpireCustomer.where(lic_state: 'CA').all
+#       ny_customer = EmpireCustomer.where(lic_state: 'NY').all
+#       nm_customer = EmpireCustomer.where(lic_state: 'NM').all
+#       wa_customer = EmpireCustomer.where(lic_state: 'WA').all
+#       ca_master = EmpireMasterList.where(source: 'CA')
+#       ny_master = EmpireMasterList.where(source: 'NY')
+#       nm_master = EmpireMasterList.where(source: 'NM')
+#       wa_master = EmpireMasterList.where(source: 'WA')
+# ## Master Vaiables END
+#
+# ## GROUPS BY LICENSE NUMBER
+#     g1_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g1_day_a, g1_day_b).pluck(:license_number)
+#     g2_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g2_day_a, g2_day_b).pluck(:license_number)
+#     g3_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g3_day_a, g3_day_b).pluck(:license_number)
+#     g4_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g4_day_a, g4_day_b).pluck(:license_number)
+#     g5_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g5_day_a, g5_day_b).pluck(:license_number)
+#     g6_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g6_day_a, g6_day_b).pluck(:license_number)
+#     g7_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g7_day_a, g7_day_b).pluck(:license_number)
+#     g8_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g8_day_a, g8_day_b).pluck(:license_number)
+#     g9_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g9_day_a, g9_day_b).pluck(:license_number)
+#     g10_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g10_day_a, g10_day_b).pluck(:license_number)
+#     g11_ca_master = ca_master.where('exp_date > ? AND exp_date <= ?', g11_day_a, g11_day_b).pluck(:license_number)
+#     g1_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g1_day_a, g1_day_b).pluck(:license_number)
+#     g2_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g2_day_a, g2_day_b).pluck(:license_number)
+#     g3_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g3_day_a, g3_day_b).pluck(:license_number)
+#     g4_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g4_day_a, g4_day_b).pluck(:license_number)
+#     g5_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g5_day_a, g5_day_b).pluck(:license_number)
+#     g6_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g6_day_a, g6_day_b).pluck(:license_number)
+#     g7_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g7_day_a, g7_day_b).pluck(:license_number)
+#     g8_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g8_day_a, g8_day_b).pluck(:license_number)
+#     g9_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g9_day_a, g9_day_b).pluck(:license_number)
+#     g10_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g10_day_a, g10_day_b).pluck(:license_number)
+#     g11_ny_master = ny_master.where('exp_date > ? AND exp_date <= ?', g11_day_a, g11_day_b).pluck(:license_number)
+#     g1_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g1_day_a, g1_day_b).pluck(:license_number)
+#     g2_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g2_day_a, g2_day_b).pluck(:license_number)
+#     g3_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g3_day_a, g3_day_b).pluck(:license_number)
+#     g4_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g4_day_a, g4_day_b).pluck(:license_number)
+#     g5_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g5_day_a, g5_day_b).pluck(:license_number)
+#     g6_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g6_day_a, g6_day_b).pluck(:license_number)
+#     g7_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g7_day_a, g7_day_b).pluck(:license_number)
+#     g8_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g8_day_a, g8_day_b).pluck(:license_number)
+#     g9_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g9_day_a, g9_day_b).pluck(:license_number)
+#     g10_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g10_day_a, g10_day_b).pluck(:license_number)
+#     g11_nm_master = nm_master.where('exp_date > ? AND exp_date <= ?', g11_day_a, g11_day_b).pluck(:license_number)
+#     g1_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g1_day_a, g1_day_b).pluck(:license_number)
+#     g2_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g2_day_a, g2_day_b).pluck(:license_number)
+#     g3_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g3_day_a, g3_day_b).pluck(:license_number)
+#     g4_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g4_day_a, g4_day_b).pluck(:license_number)
+#     g5_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g5_day_a, g5_day_b).pluck(:license_number)
+#     g6_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g6_day_a, g6_day_b).pluck(:license_number)
+#     g7_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g7_day_a, g7_day_b).pluck(:license_number)
+#     g8_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g8_day_a, g8_day_b).pluck(:license_number)
+#     g9_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g9_day_a, g9_day_b).pluck(:license_number)
+#     g10_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g10_day_a, g10_day_b).pluck(:license_number)
+#     g11_wa_master = wa_master.where('exp_date > ? AND exp_date <= ?', g11_day_a, g11_day_b).pluck(:license_number)
+# ## GROUPS END
+#
+# ## EXCLUDES (custers who have already purchased for this renewal cycle)
+#     ca_exclude = ca_customer.where('p_date > ?', Date.today - 2.year).pluck(:uid)
+#     ny_exclude = ny_customer.where('p_date > ?', Date.today - 1.year).pluck(:uid)
+#     nm_exclude = nm_customer.where('p_date > ?', Date.today - 1.year).pluck(:uid)
+#     wa_exclude = wa_customer.where('p_date > ?', Date.today - 1.year).pluck(:uid)
+# ## EXCLUDES END
+#
+# ## ADDING TO GROUP ARRAY
+#   #CA
+#   EmpireCustomer.update_all extra_s1: nil, extra_i: nil
+#      ca_customer.each do |empire_customer|
+#        if g1_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
+#          # g1_ca.push(empire_customer.uid)
+#          EmpireCustomer.where(uid: g1_ca).update_all extra_s1: 'ca', extra_i: 1
+#        elsif g2_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
+#          g2_ca.push(empire_customer.uid)
+#          EmpireCustomer.where(uid: g2_ca).update_all extra_s1: 'ca', extra_i: 2
+#        elsif g3_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
+#          g3_ca.push(empire_customer.uid)
+#          EmpireCustomer.where(uid: g3_ca).update_all extra_s1: 'ca', extra_i: 3
+#        elsif g4_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
+#          g4_ca.push(empire_customer.uid)
+#           EmpireCustomer.where(uid: g4_ca).update_all extra_s1: 'ca', extra_i: 4
+#        elsif g5_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
+#          g5_ca.push(empire_customer.uid)
+#          EmpireCustomer.where(uid: g5_ca).update_all extra_s1: 'ca', extra_i: 5
+#        elsif g6_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
+#          g6_ca.push(empire_customer.uid)
+#          EmpireCustomer.where(uid: g6_ca).update_all extra_s1: 'ca', extra_i: 6
+#        elsif g7_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
+#          g7_ca.push(empire_customer.uid)
+#          EmpireCustomer.where(uid: g7_ca).update_all extra_s1: 'ca', extra_i: 7
+#        elsif g8_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
+#          g8_ca.push(empire_customer.uid)
+#          EmpireCustomer.where(uid: g8_ca).update_all extra_s1: 'ca', extra_i: 8
+#        elsif g9_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
+#          g9_ca.push(empire_customer.uid)
+#          EmpireCustomer.where(uid: g9_ca).update_all extra_s1: 'ca', extra_i: 9
+#        elsif g10_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
+#          g10_ca.push(empire_customer.uid)
+#          EmpireCustomer.where(uid: g10_ca).update_all extra_s1: 'ca', extra_i: 10
+#         elsif g11_ca_master.include?(empire_customer.license_num) && ca_exclude.exclude?(empire_customer.uid)
+#          g11_ca.push(empire_customer.uid)
+#          EmpireCustomer.where(uid: g11_ca).update_all extra_s1: 'ca', extra_i: 11
+#        end
+#      end
+#   #NY
+#    ny_customer.each do |empire_customer|
+#      if g1_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
+#        g1_ny.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g1_ny).update_all extra_s1: 'g1ny'
+#      elsif g2_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
+#        g2_ny.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g2_ny).update_all extra_s1: 'g2ny'
+#      elsif g3_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
+#        g3_ny.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g3_ny).update_all extra_s1: 'g3ny'
+#      elsif g4_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
+#        g4_ny.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g4_ny).update_all extra_s1: 'g4ny'
+#      elsif g5_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
+#        g5_ny.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g5_ny).update_all extra_s1: 'g5ny'
+#      elsif g6_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
+#        g6_ny.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g6_ny).update_all extra_s1: 'g6ny'
+#      elsif g7_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
+#        g7_ny.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g7_ny).update_all extra_s1: 'g7ny'
+#      elsif g8_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
+#        g8_ny.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g8_ny).update_all extra_s1: 'g8ny'
+#      elsif g9_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
+#        g9_ny.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g9_ny).update_all extra_s1: 'g9ny'
+#      elsif g10_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
+#        g10_ny.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g10_ny).update_all extra_s1: 'g10ny'
+#      elsif g11_ny_master.include?(empire_customer.license_num) && ny_exclude.exclude?(empire_customer.uid)
+#        g11_ny.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g11_ny).update_all extra_s1: 'g11ny'
+#      end
+#    end
+#   #NM
+#    nm_customer.each do |empire_customer|
+#      if g1_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
+#        g1_nm.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g1_nm).update_all extra_s1: 'g1nm'
+#      elsif g2_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
+#        g2_nm.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g2_nm).update_all extra_s1: 'g2nm'
+#      elsif g3_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
+#        g3_nm.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g3_nm).update_all extra_s1: 'g3nm'
+#      elsif g4_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
+#        g4_nm.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g4_nm).update_all extra_s1: 'g4nm'
+#      elsif g5_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
+#        g5_nm.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g5_nm).update_all extra_s1: 'g5nm'
+#      elsif g6_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
+#        g6_nm.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g6_nm).update_all extra_s1: 'g6nm'
+#      elsif g7_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
+#        g7_nm.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g7_nm).update_all extra_s1: 'g7nm'
+#      elsif g8_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
+#        g8_nm.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g8_nm).update_all extra_s1: 'g8nm'
+#      elsif g9_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
+#        g9_nm.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g9_nm).update_all extra_s1: 'g9nm'
+#      elsif g10_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
+#        g10_nm.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g10_nm).update_all extra_s1: 'g10nm'
+#      elsif g11_nm_master.include?(empire_customer.license_num) && nm_exclude.exclude?(empire_customer.uid)
+#        g11_nm.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g11_nm).update_all extra_s1: 'g11nm'
+#      end
+#    end
+# ## WA
+#    wa_customer.each do |empire_customer|
+#      if g1_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+#        g1_wa.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g1_wa).update_all extra_s1: 'g1wa'
+#      elsif g2_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+#        g2_wa.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g2_wa).update_all extra_s1: 'g1wa'
+#      elsif g3_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+#        g3_wa.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g3_wa).update_all extra_s1: 'g3wa'
+#      elsif g4_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+#        g4_wa.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g4_wa).update_all extra_s1: 'g4wa'
+#      elsif g5_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+#        g5_wa.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g5_wa).update_all extra_s1: 'g5wa'
+#      elsif g6_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+#        g6_wa.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g6_wa).update_all extra_s1: 'g6wa'
+#      elsif g7_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+#        g7_wa.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g7_wa).update_all extra_s1: 'g7wa'
+#      elsif g8_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+#        g8_wa.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g8_wa).update_all extra_s1: 'g8wa'
+#      elsif g9_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+#        g9_wa.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g9_wa).update_all extra_s1: 'g9wa'
+#      elsif g10_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+#        g10_wa.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g10_wa).update_all extra_s1: 'g10wa'
+#      elsif g11_wa_master.include?(empire_customer.license_num) && wa_exclude.exclude?(empire_customer.uid)
+#        g11_wa.push(empire_customer.uid)
+#        EmpireCustomer.where(uid: g11_wa).update_all extra_s1: 'g11wa'
+#      end
+#    end
+#  ## ADDING END
+#
+# ## TOTALS
+# groups_ca = [ g1_ca, g2_ca , g3_ca , g4_ca , g5_ca , g6_ca , g7_ca , g8_ca , g9_ca , g10_ca , g11_ca]
+# groups_ny = [ g1_ny, g2_ny , g3_ny , g4_ny , g5_ny , g6_ny , g7_ny , g8_ny , g9_ny , g10_ny , g11_ny]
+# groups_nm = [ g1_nm, g2_nm , g3_nm , g4_nm , g5_nm , g6_nm , g7_nm , g8_nm , g9_nm , g10_nm , g11_nm]
+# groups_wa = [ g1_wa, g2_wa , g3_wa , g4_wa , g5_wa , g6_wa , g7_wa , g8_wa , g9_wa , g10_wa , g11_wa]
+# @ca_count = []
+# ca_uid = []
+# @ny_count = []
+# ny_uid = []
+# @nm_count = []
+# nm_uid = []
+# @wa_count = []
+# wa_uid = []
+# groups_ca.each do |i| @ca_count.push(i.uniq.count)
+#   i.each do |uid|
+#     ca_uid.push(uid)
+#   end
+# end
+# groups_ny.each do |i| @ny_count.push(i.uniq.count)
+#   i.each do |uid|
+#     ny_uid.push(uid)
+#   end
+# end
+# groups_nm.each do |i| @nm_count.push(i.uniq.count)
+#   i.each do |uid|
+#     nm_uid.push(uid)
+#   end
+# end
+# groups_wa.each do |i| @wa_count.push(i.uniq.count)
+#   i.each do |uid|
+#     wa_uid.push(uid)
+#   end
+# end
+#
+#
+# # #ADD
+#   if params['added'] == 'done'
+#     ## When add records is clicked - Adding the selected records from above to the Postcard Export Table
+#
+#     PostcardExport.delete_all #Delete all the current records - fresh database each time.
+#
+# #ALL
+#     added_uid = []
+#     EmpireCustomer.where.not(g_id: nil).each do |empire_customer|
+#         unless added_uid.include? empire_customer.uid
+#           new = PostcardExport.create(
+#             company: 'Empire',
+#             group: 'rc email',
+#             mail_id: "E-RC-Rolling-Email-#{params['day']}",
+#             mail_date: params['day'],
+#             g_id: empire_customer.extra_s1,
+#             license_number: empire_customer.license_num,
+#             uid: empire_customer.uid,
+#             exp: empire_customer.b_exp,
+#             merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+#             f_name: empire_customer.fname,
+#             l_name: empire_customer.lname,
+#             add_1: empire_customer.street_1,
+#             add_2: empire_customer.street_2,
+#             city: empire_customer.city,
+#             st: empire_customer.state,
+#             zip: empire_customer.zip,
+#             email: empire_customer.email)
+#           new.save
+#           added_uid.push(empire_customer.uid) #Push new records lic number in to array to not allow duplicates in new table
+#       end
+#     end
     #
     # added_ca_uid = []
     # ca_customer.each do |empire_customer|
@@ -700,66 +712,66 @@ end
     #   end
     # end
 
-# ADD CA Text
-      PostcardExport.where(g_id: 'g1ca').update_all state: 'CA', subject: 'CA Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'CA'
-      PostcardExport.where(g_id: 'g2ca').update_all state: 'CA', subject: 'CA Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'CA'
-      PostcardExport.where(g_id: 'g3ca').update_all state: 'CA', subject: 'CA Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'CA'
-      PostcardExport.where(g_id: 'g4ca').update_all state: 'CA', subject: 'CA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'CA'
-      PostcardExport.where(g_id: 'g5ca').update_all state: 'CA', subject: 'CA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'CA'
-      PostcardExport.where(g_id: 'g6ca').update_all state: 'CA', subject: 'CA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'CA'
-      PostcardExport.where(g_id: 'g7ca').update_all state: 'CA', subject: 'CA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'CA'
-      PostcardExport.where(g_id: 'g8ca').update_all state: 'CA', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'CA'
-      PostcardExport.where(g_id: 'g9ca').update_all state: 'CA', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'CA'
-      PostcardExport.where(g_id: 'g10ca').update_all state: 'CA', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'CA'
-      PostcardExport.where(g_id: 'g11ca').update_all state: 'CA', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'CA'
-
-# ADD NY Text
-      PostcardExport.where(g_id: 'g1ny').update_all state: 'NY', subject: 'NY Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'NY'
-      PostcardExport.where(g_id: 'g2ny').update_all state: 'NY', subject: 'NY Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'NY'
-      PostcardExport.where(g_id: 'g3ny').update_all state: 'NY', subject: 'NY Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'NY'
-      PostcardExport.where(g_id: 'g4ny').update_all state: 'NY', subject: 'NY Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NY'
-      PostcardExport.where(g_id: 'g5ny').update_all state: 'NY', subject: 'NY Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NY'
-      PostcardExport.where(g_id: 'g6ny').update_all state: 'NY', subject: 'NY Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NY'
-      PostcardExport.where(g_id: 'g7ny').update_all state: 'NY', subject: 'NY Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NY'
-      PostcardExport.where(g_id: 'g8ny').update_all state: 'NY', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NY'
-      PostcardExport.where(g_id: 'g9ny').update_all state: 'NY', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NY'
-      PostcardExport.where(g_id: 'g10ny').update_all state: 'NY', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NY'
-      PostcardExport.where(g_id: 'g11ny').update_all state: 'NY', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NY'
-# ADD NM Text
-      PostcardExport.where(g_id: 'g1nm').update_all state: 'NM', subject: 'NM Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'NM'
-      PostcardExport.where(g_id: 'g2nm').update_all state: 'NM', subject: 'NM Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'NM'
-      PostcardExport.where(g_id: 'g3nm').update_all state: 'NM', subject: 'NM Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'NM'
-      PostcardExport.where(g_id: 'g4nm').update_all state: 'NM', subject: 'NM Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NM'
-      PostcardExport.where(g_id: 'g5nm').update_all state: 'NM', subject: 'NM Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NM'
-      PostcardExport.where(g_id: 'g6nm').update_all state: 'NM', subject: 'NM Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NM'
-      PostcardExport.where(g_id: 'g7nm').update_all state: 'NM', subject: 'NM Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NM'
-      PostcardExport.where(g_id: 'g8nm').update_all state: 'NM', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NM'
-      PostcardExport.where(g_id: 'g9nm').update_all state: 'NM', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NM'
-      PostcardExport.where(g_id: 'g10nm').update_all state: 'NM', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NM'
-      PostcardExport.where(g_id: 'g11nm').update_all state: 'NM', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NM'
-# ADD WA Text
-      PostcardExport.where(g_id: 'g1wa').update_all state: 'WA', subject: 'WA Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'WA'
-      PostcardExport.where(g_id: 'g2wa').update_all state: 'WA', subject: 'WA Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'WA'
-      PostcardExport.where(g_id: 'g3wa').update_all state: 'WA', subject: 'WA Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'WA'
-      PostcardExport.where(g_id: 'g4wa').update_all state: 'WA', subject: 'WA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'WA'
-      PostcardExport.where(g_id: 'g5wa').update_all state: 'WA', subject: 'WA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'WA'
-      PostcardExport.where(g_id: 'g6wa').update_all state: 'WA', subject: 'WA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'WA'
-      PostcardExport.where(g_id: 'g7wa').update_all state: 'WA', subject: 'WA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'WA'
-      PostcardExport.where(g_id: 'g8wa').update_all state: 'WA', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'WA'
-      PostcardExport.where(g_id: 'g9wa').update_all state: 'WA', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'WA'
-      PostcardExport.where(g_id: 'g10wa').update_all state: 'WA', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'WA'
-      PostcardExport.where(g_id: 'g11wa').update_all state: 'WA', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'WA'
-
-    redirect_to postcard_exports_path(co: 'empire', group: 'rc email', mail_id: "E-RC-Rolling-Email-#{params['day']}", day: params['day'], what: params['what'], card: 'email', sent: @ca_count.sum+@ny_count.sum+@nm_count.sum+@wa_count.sum)
-
+# # ADD CA Text
+#       PostcardExport.where(g_id: 'g1ca').update_all state: 'CA', subject: 'CA Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'CA'
+#       PostcardExport.where(g_id: 'g2ca').update_all state: 'CA', subject: 'CA Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'CA'
+#       PostcardExport.where(g_id: 'g3ca').update_all state: 'CA', subject: 'CA Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'CA'
+#       PostcardExport.where(g_id: 'g4ca').update_all state: 'CA', subject: 'CA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'CA'
+#       PostcardExport.where(g_id: 'g5ca').update_all state: 'CA', subject: 'CA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'CA'
+#       PostcardExport.where(g_id: 'g6ca').update_all state: 'CA', subject: 'CA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'CA'
+#       PostcardExport.where(g_id: 'g7ca').update_all state: 'CA', subject: 'CA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'CA'
+#       PostcardExport.where(g_id: 'g8ca').update_all state: 'CA', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'CA'
+#       PostcardExport.where(g_id: 'g9ca').update_all state: 'CA', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'CA'
+#       PostcardExport.where(g_id: 'g10ca').update_all state: 'CA', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'CA'
+#       PostcardExport.where(g_id: 'g11ca').update_all state: 'CA', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'CA'
+#
+# # ADD NY Text
+#       PostcardExport.where(g_id: 'g1ny').update_all state: 'NY', subject: 'NY Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'NY'
+#       PostcardExport.where(g_id: 'g2ny').update_all state: 'NY', subject: 'NY Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'NY'
+#       PostcardExport.where(g_id: 'g3ny').update_all state: 'NY', subject: 'NY Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'NY'
+#       PostcardExport.where(g_id: 'g4ny').update_all state: 'NY', subject: 'NY Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NY'
+#       PostcardExport.where(g_id: 'g5ny').update_all state: 'NY', subject: 'NY Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NY'
+#       PostcardExport.where(g_id: 'g6ny').update_all state: 'NY', subject: 'NY Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NY'
+#       PostcardExport.where(g_id: 'g7ny').update_all state: 'NY', subject: 'NY Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NY'
+#       PostcardExport.where(g_id: 'g8ny').update_all state: 'NY', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NY'
+#       PostcardExport.where(g_id: 'g9ny').update_all state: 'NY', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NY'
+#       PostcardExport.where(g_id: 'g10ny').update_all state: 'NY', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NY'
+#       PostcardExport.where(g_id: 'g11ny').update_all state: 'NY', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NY'
+# # ADD NM Text
+#       PostcardExport.where(g_id: 'g1nm').update_all state: 'NM', subject: 'NM Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'NM'
+#       PostcardExport.where(g_id: 'g2nm').update_all state: 'NM', subject: 'NM Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'NM'
+#       PostcardExport.where(g_id: 'g3nm').update_all state: 'NM', subject: 'NM Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'NM'
+#       PostcardExport.where(g_id: 'g4nm').update_all state: 'NM', subject: 'NM Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NM'
+#       PostcardExport.where(g_id: 'g5nm').update_all state: 'NM', subject: 'NM Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NM'
+#       PostcardExport.where(g_id: 'g6nm').update_all state: 'NM', subject: 'NM Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NM'
+#       PostcardExport.where(g_id: 'g7nm').update_all state: 'NM', subject: 'NM Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'NM'
+#       PostcardExport.where(g_id: 'g8nm').update_all state: 'NM', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NM'
+#       PostcardExport.where(g_id: 'g9nm').update_all state: 'NM', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NM'
+#       PostcardExport.where(g_id: 'g10nm').update_all state: 'NM', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NM'
+#       PostcardExport.where(g_id: 'g11nm').update_all state: 'NM', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'NM'
+# # ADD WA Text
+#       PostcardExport.where(g_id: 'g1wa').update_all state: 'WA', subject: 'WA Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'WA'
+#       PostcardExport.where(g_id: 'g2wa').update_all state: 'WA', subject: 'WA Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'WA'
+#       PostcardExport.where(g_id: 'g3wa').update_all state: 'WA', subject: 'WA Early Bird Discount 15% Off', merge_1: 'Get a head start on your CE requirements!', merge_2: 'Please enjoy 15% off with discount code: Returning1520.', merge_3: 'WA'
+#       PostcardExport.where(g_id: 'g4wa').update_all state: 'WA', subject: 'WA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'WA'
+#       PostcardExport.where(g_id: 'g5wa').update_all state: 'WA', subject: 'WA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'WA'
+#       PostcardExport.where(g_id: 'g6wa').update_all state: 'WA', subject: 'WA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'WA'
+#       PostcardExport.where(g_id: 'g7wa').update_all state: 'WA', subject: 'WA Early Bird Discount 10% Off', merge_1: 'You still have time to take advantage of your early bird discount!', merge_2: 'Please enjoy 10% off with discount code: Returning1020.', merge_3: 'WA'
+#       PostcardExport.where(g_id: 'g8wa').update_all state: 'WA', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'WA'
+#       PostcardExport.where(g_id: 'g9wa').update_all state: 'WA', subject: 'Friendly reminder your CE credits are  almost due.', merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'WA'
+#       PostcardExport.where(g_id: 'g10wa').update_all state: 'WA', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'WA'
+#       PostcardExport.where(g_id: 'g11wa').update_all state: 'WA', subject: "Don't miss your CE deadline.", merge_1: 'The deadline to renew your CE requirments is approaching!', merge_3: 'WA'
+#
+#     redirect_to postcard_exports_path(co: 'empire', group: 'rc email', mail_id: "E-RC-Rolling-Email-#{params['day']}", day: params['day'], what: params['what'], card: 'email', sent: @ca_count.sum+@ny_count.sum+@nm_count.sum+@wa_count.sum)
+#
+#   # end
+#   #Remove the code now that they have been added to postcard exports using the code
+#       EmpireCustomer.where.not(extra_s1: nil).update_all extra_s1: nil
+#
+# ## TOTALS END
+#
+#   end
   # end
-  #Remove the code now that they have been added to postcard exports using the code
-      EmpireCustomer.where.not(extra_s1: nil).update_all extra_s1: nil
-
-## TOTALS END
-
-  end
-  end
 
   def rc_marketing_deadline
     # All who have not purchased in the last x time - match with board list ?
@@ -1459,6 +1471,301 @@ end
       # end
     end
     # redirect_to empire_customers_path(done: 'YES')
+  end
+
+  # def rolling_emails_dates
+  #   ## DAYS
+  #        day = params['day'].to_date
+  #         g1_day_a = ((day + 180.days).to_date).at_beginning_of_week
+  #         g1_day_b = ((day + 180.days).to_date).at_end_of_week
+  #         g2_day_a = ((day + 150.days).to_date).at_beginning_of_week
+  #         g2_day_b = ((day + 150.days).to_date).at_end_of_week
+  #         g3_day_a = ((day + 120.days).to_date).at_beginning_of_week
+  #         g3_day_b = ((day + 120.days).to_date).at_end_of_week
+  #         g4_day_a = ((day + 90.days).to_date).at_beginning_of_week
+  #         g4_day_b = ((day + 90.days).to_date).at_end_of_week
+  #         g5_day_a = ((day + 60.days).to_date).at_beginning_of_week
+  #         g5_day_b = ((day + 60.days).to_date).at_end_of_week
+  #         g6_day_a = ((day + 45.days).to_date).at_beginning_of_week
+  #         g6_day_b = ((day + 45.days).to_date).at_end_of_week
+  #         g7_day_a = ((day + 30.days).to_date).at_beginning_of_week
+  #         g7_day_b = ((day + 30.days).to_date).at_end_of_week
+  #         g8_day_a = ((day + 15.days).to_date).at_beginning_of_week
+  #         g8_day_b = ((day + 15.days).to_date).at_end_of_week
+  #         g9_day_a = ((day + 10.days).to_date).at_beginning_of_week
+  #         g9_day_b = ((day + 10.days).to_date).at_end_of_week
+  #         g10_day_a = ((day + 5.days).to_date).at_beginning_of_week
+  #         g10_day_b = ((day + 5.days).to_date).at_end_of_week
+  #         g11_day_a = ((day + 2.days).to_date).at_beginning_of_week
+  #         g11_day_b = ((day + 2.days).to_date).at_end_of_week
+  #   ## DAYS END
+  #
+  #   ## GROUP ARRAYS
+  #         g1_ca = []
+  #         g2_ca = []
+  #         g3_ca = []
+  #         g4_ca = []
+  #         g5_ca = []
+  #         g6_ca = []
+  #         g7_ca = []
+  #         g8_ca = []
+  #         g9_ca = []
+  #         g10_ca = []
+  #         g11_ca = []
+  #         g1_ny = []
+  #         g2_ny = []
+  #         g3_ny = []
+  #         g4_ny = []
+  #         g5_ny = []
+  #         g6_ny = []
+  #         g7_ny = []
+  #         g8_ny = []
+  #         g9_ny = []
+  #         g10_ny = []
+  #         g11_ny = []
+  #         g1_nm = []
+  #         g2_nm = []
+  #         g3_nm = []
+  #         g4_nm = []
+  #         g5_nm = []
+  #         g6_nm = []
+  #         g7_nm = []
+  #         g8_nm = []
+  #         g9_nm = []
+  #         g10_nm = []
+  #         g11_nm = []
+  #         g1_wa = []
+  #         g2_wa = []
+  #         g3_wa = []
+  #         g4_wa = []
+  #         g5_wa = []
+  #         g6_wa = []
+  #         g7_wa = []
+  #         g8_wa = []
+  #         g9_wa = []
+  #         g10_wa = []
+  #         g11_wa = []
+  #   ## GROUP ARRAYS END
+  # end
+
+
+
+  def rolling_emails
+      rolling_states = ['CA', 'NY', 'NM']
+    # FIND UNIQUE PEOPLE FROM CORRECT STATES
+      full_list = EmpireCustomer.where(lic_state: rolling_states).all
+      id = []
+      uid = []
+      full_list.each do |empire_custer|
+        if uid.exclude?(empire_custer.uid)
+          id.push(empire_custer.id)
+          uid.push(empire_custer.uid)
+        end
+      end
+
+      @full_list = EmpireCustomer.where(id: id).all
+
+      rolling_emails_dates_supplement #Function below that puts Lic Numbers into correct arrays
+
+      #ADD THE CORRECT RECORDS TO THE POSTCARD EXPORT TABLE
+      if params['add'] == 'yes'
+
+        PostcardExport.delete_all
+        @full_list.each do |empire_customer|
+          new = PostcardExport.create(
+            send_email: 'no',
+            company: 'Empire',
+            group: 'rc_rolling_email',
+            list: empire_customer.b_list,
+            mail_date: Date.today,
+            send_date_s: Date.today.strftime('%-m/%-d/%Y'),
+            license_number: empire_customer.license_num,
+            uid: empire_customer.uid,
+            exp: empire_customer.b_exp,
+            exp_s: empire_customer.b_exp.blank? ? '' : empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+            merge_4: empire_customer.b_exp.blank? ? '' : "#{empire_customer.b_exp.strftime("%b")} #{empire_customer.b_exp.day.ordinalize}",
+            f_name: empire_customer.fname,
+            l_name: empire_customer.lname,
+            email: empire_customer.email)
+          new.save
+        end
+        # PostcardExport.where.not(exp: nil).update_all exp_s: exp.strftime('%-m/%-d/%Y')
+          # merge fields update
+          rolling_emails_merge
+        # PostcardExport.where(license_number: @ca_email_1).update_all merge_1: 'CA', merge_2: 'CA-1'
+
+        redirect_to postcard_exports_path(what:'email', record: 'no', co: 'empire', list: 'rolling')
+      end
+
+  end
+
+  def rolling_emails_merge
+
+# NOTE ## merge_4 = Above on the PostcardExport Create function
+  ## g1 = ca_email_1, ca_email_2, ca_email_3
+    ca_g1_subject = 'CA Early Bird Discount 15% Off'
+    ca_g1_merge_1 = 'Get a head start on your CE requirements!'
+    ca_g1_merge_2 = 'Please enjoy 15% off with discount code: Returning1520.'
+  ## g2 = ca_email_4, ca_email_5, ca_email_6, ca_email_7
+    ca_g2_subject = 'CA Early Bird Discount 10% Off'
+    ca_g2_merge_1 = 'You still have time to take advantage of your early bird discount!'
+    ca_g2_merge_2 = 'Please enjoy 10% off with discount code: Returning1020.'
+  ## g3 = ca_email_8, ca_email_9
+    ca_g3_subject = 'Friendly reminder your CE credits are  almost due.'
+    ca_g3_merge_1 = 'The deadline to renew your CE requirments is approaching!'
+    ca_g3_merge_2 =
+  ## g4 = ca_email_10, ca_email_10
+    ca_g4_subject = 'CA Early Bird Discount 10% Off'
+    ca_g4_merge_1 = "Don't miss your CE deadline."
+    ca_g4_merge_2 =
+  ## Relevent for all CA
+    ca_merge_3 = 'CA'
+    ca_merge_5 = "California 45-Hour Full Renewal Package - $49"
+  ## g1 = ny_email_1, ny_email_2, ny_email_3
+    ny_g1_subject = 'NY Early Bird Discount 15% Off'
+    ny_g1_merge_1 = 'Get a head start on your CE requirements!'
+    ny_g1_merge_2 = 'Please enjoy 15% off with discount code: Returning1520.'
+  ## g2 = ny_email_4, ny_email_5, ny_email_6, ny_email_7
+    ny_g2_subject = 'NY Early Bird Discount 10% Off'
+    ny_g2_merge_1 = 'You still have time to take advantage of your early bird discount!'
+    ny_g2_merge_2 = 'Please enjoy 10% off with discount code: Returning1020.'
+  ## g3 = ny_email_8, ny_email_9
+    ny_g3_subject = 'Friendly reminder your CE credits are  almost due.'
+    ny_g3_merge_1 = 'The deadline to renew your CE requirments is approaching!'
+    ny_g3_merge_2 =
+  ## g4 = ny_email_10, ny_email_10
+    ny_g4_subject = 'NY Early Bird Discount 10% Off'
+    ny_g4_merge_1 = "Don't miss your CE deadline."
+    ny_g4_merge_2 =
+  ## Relevent for all CA
+    ny_merge_3 = 'NY'
+    ny_merge_5 = "New York 22.5-Hour Full Renewal Package - $59.50"
+  ## g1 = nm_email_1, nm_email_2, nm_email_3
+    nm_g1_subject = 'NM Early Bird Discount 15% Off'
+    nm_g1_merge_1 = 'Get a head start on your CE requirements!'
+    nm_g1_merge_2 = 'Please enjoy 15% off with discount code: Returning1520.'
+  ## g2 = nm_email_4, nm_email_5, nm_email_6, nm_email_7
+    nm_g2_subject = 'NM Early Bird Discount 10% Off'
+    nm_g2_merge_1 = 'You still have time to take advantage of your early bird discount!'
+    nm_g2_merge_2 = 'Please enjoy 10% off with discount code: Returning1020.'
+  ## g3 = nm_email_8, nm_email_9
+    nm_g3_subject = 'Friendly reminder your CE credits are  almost due.'
+    nm_g3_merge_1 = 'The deadline to renew your CE requirments is approaching!'
+    nm_g3_merge_2 =
+  ## g4 = nm_email_10, nm_email_10
+    nm_g4_subject = 'NM Early Bird Discount 10% Off'
+    nm_g4_merge_1 = "Don't miss your CE deadline."
+    nm_g4_merge_2 =
+  ## Relevent for all CA
+    nm_merge_3 = 'NM'
+    nm_merge_5 = "New Mexico 24-Hour Full Renewal Package - $159.50"
+
+    PostcardExport.where(license_number: (@ca_email_1 +  @ca_email_2 + @ca_email_3)).update_all send_email: 'yes', subject: ca_g1_subject, merge_1: ca_g1_merge_1, merge_2: ca_g1_merge_2, merge_3: ca_merge_3, merge_5: ca_merge_5
+    PostcardExport.where(license_number: (@ca_email_4 +  @ca_email_5 + @ca_email_6 + @ca_email_7)).update_all send_email: 'yes', subject: ca_g2_subject, merge_1: ca_g2_merge_1, merge_2: ca_g2_merge_2, merge_3: ca_merge_3, merge_5: ca_merge_5
+    PostcardExport.where(license_number: (@ca_email_8 +  @ca_email_9)).update_all send_email: 'yes', subject: ca_g3_subject, merge_1: ca_g3_merge_1, merge_3: ca_merge_3, merge_5: ca_merge_5
+    PostcardExport.where(license_number: (@ca_email_10 +  @ca_email_11)).update_all send_email: 'yes', subject: ca_g4_subject, merge_1: ca_g4_merge_1, merge_3: ca_merge_3, merge_5: ca_merge_5
+
+    PostcardExport.where(license_number: (@ny_email_1 +  @ny_email_2 + @ny_email_3)).update_all send_email: 'yes', subject: ny_g1_subject, merge_1: ny_g1_merge_1, merge_2: ny_g1_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
+    PostcardExport.where(license_number: (@ny_email_4 +  @ny_email_5 + @ny_email_6 + @ny_email_7)).update_all send_email: 'yes', subject: ny_g2_subject, merge_1: ny_g2_merge_1, merge_2: ny_g2_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
+    PostcardExport.where(license_number: (@ny_email_8 +  @ny_email_9)).update_all send_email: 'yes', subject: ny_g3_subject, merge_1: ny_g3_merge_1, merge_2: ny_g3_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
+    PostcardExport.where(license_number: (@ny_email_10 +  @ny_email_11)).update_all send_email: 'yes', subject: ny_g4_subject, merge_1: ny_g4_merge_1, merge_2: ny_g3_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
+
+    PostcardExport.where(license_number: (@nm_email_1 +  @nm_email_2 +  @nm_email_3)).update_all send_email: 'yes', subject: nm_g1_subject, merge_1: nm_g1_merge_1, merge_2: nm_g1_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
+    PostcardExport.where(license_number: (@nm_email_4 +  @nm_email_5 +  @nm_email_6 +  @nm_email_7)).update_all send_email: 'yes', subject: nm_g2_subject, merge_1: nm_g2_merge_1, merge_2: nm_g2_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
+    PostcardExport.where(license_number: (@nm_email_8 +  @nm_email_9)).update_all send_email: 'yes', subject: nm_g3_subject, merge_1: nm_g3_merge_1, merge_2: nm_g3_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
+    PostcardExport.where(license_number: (@nm_email_10 +  @nm_email_11)).update_all send_email: 'yes', subject: nm_g4_subject, merge_1: nm_g4_merge_1, merge_2: nm_g3_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
+  end
+
+  def rolling_emails_dates_supplement
+    @ca_email_1 = []
+    @ca_email_2 = []
+    @ca_email_3 = []
+    @ca_email_4 = []
+    @ca_email_5 = []
+    @ca_email_6 = []
+    @ca_email_7 = []
+    @ca_email_8 = []
+    @ca_email_9 = []
+    @ca_email_10 = []
+    @ca_email_11 = []
+    @ny_email_1 = []
+    @ny_email_2 = []
+    @ny_email_3 = []
+    @ny_email_4 = []
+    @ny_email_5 = []
+    @ny_email_6 = []
+    @ny_email_7 = []
+    @ny_email_8 = []
+    @ny_email_9 = []
+    @ny_email_10 = []
+    @ny_email_11 = []
+    @nm_email_1 = []
+    @nm_email_2 = []
+    @nm_email_3 = []
+    @nm_email_4 = []
+    @nm_email_5 = []
+    @nm_email_6 = []
+    @nm_email_7 = []
+    @nm_email_8 = []
+    @nm_email_9 = []
+    @nm_email_10 = []
+    @nm_email_11 = []
+
+    email_no = []
+          @full_list.where(lic_state: 'CA').each do |empire_customer|
+            if empire_customer.b_exp.present?
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 180.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_1.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 150.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_2.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 120.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_3.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 90.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_4.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 60.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_5.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 45.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_6.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 30.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_6.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 15.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_6.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 10.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_6.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 5.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_6.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 2.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_6.push(empire_customer.license_num) :
+              email_no.push(empire_customer.license_num)
+            end
+          end
+          @full_list.where(lic_state: 'NY').each do |empire_customer|
+            if empire_customer.b_exp.present?
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 180.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_1.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 150.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_2.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 120.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_3.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 90.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_4.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 60.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_5.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 45.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_6.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 30.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_6.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 15.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_6.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 10.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_6.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 5.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_6.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 2.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_6.push(empire_customer.license_num) :
+              email_no.push(empire_customer.license_num)
+            end
+          end
+          @full_list.where(lic_state: 'NM').each do |empire_customer|
+            if empire_customer.b_exp.present?
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 180.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_1.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 150.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_2.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 120.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_3.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 90.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_4.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 60.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_5.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 45.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_6.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 30.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_6.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 15.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_6.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 10.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_6.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 5.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_6.push(empire_customer.license_num) :
+              Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 2.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_6.push(empire_customer.license_num) :
+              email_no.push(empire_customer.license_num)
+            end
+          end
+
+          @ca = @ca_email_1 + @ca_email_2 + @ca_email_3 + @ca_email_4 + @ca_email_5 + @ca_email_6 + @ca_email_7 + @ca_email_8 + @ca_email_9 + @ca_email_10 + @ca_email_11
+          @ny = @ny_email_1 + @ny_email_2 + @ny_email_3 + @ny_email_4 + @ny_email_5 + @ny_email_6 + @ny_email_7 + @ny_email_8 + @ny_email_9 + @ny_email_10 + @ny_email_11
+          @nm = @nm_email_1 + @nm_email_2 + @nm_email_3 + @nm_email_4 + @nm_email_5 + @nm_email_6 + @nm_email_7 + @nm_email_8 + @nm_email_9 + @nm_email_10 + @nm_email_11
+          @no = email_no
+
   end
 
   def b_exp

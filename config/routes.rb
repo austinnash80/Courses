@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       get 'sales'
       get 'rc_marketing'
       get 'b_exp'
+      get 'rolling_email_export'
     end
   end
 

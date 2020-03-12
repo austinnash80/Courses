@@ -40,15 +40,14 @@
   <caption>Displaying 100 max</caption>
   <thead>
     <tr class="grey-b-200">
+      <th>Send</th>
       <th>Company</th>
       <th>Group</th>
-      <th>Mail</th>
       <th>Mail date</th>
-      <th>State</th>
-      <th>List</th>
+      <th>B List</th>
       <th>License number</th>
       <th>Uid</th>
-      <th>extra_s1</th>
+      <!-- <th>extra_s1</th> -->
       <th>EXP</th>
       <th>Subject</th>
       <th>Merge 1</th>
@@ -69,17 +68,16 @@
   </thead>
 
   <tbody>
-    <% @postcard_exports.first(100).each do |postcard_export| %>
+    <% @postcard_exports.order(send_email: :desc).first(100).each do |postcard_export| %>
       <tr class="">
+        <td><%= postcard_export.send_email %></td>
         <td><%= postcard_export.company %></td>
         <td><%= postcard_export.group %></td>
-        <td><%#= postcard_export.mail_id %></td>
-        <td><%= postcard_export.mail_date %></td>
-        <td><%= postcard_export.state %></td>
+        <td><%= postcard_export.send_date_s %></td>
         <td><%= postcard_export.list %></td>
         <td><%= postcard_export.license_number %></td>
         <td><%= postcard_export.uid %></td>
-        <td><%= postcard_export.exp %></td>
+        <td><%= postcard_export.exp_s %></td>
         <td><%= postcard_export.subject %></td>
         <td><%= postcard_export.merge_1 %></td>
         <td><%= postcard_export.merge_2 %></td>

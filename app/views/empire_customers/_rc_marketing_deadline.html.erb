@@ -71,12 +71,12 @@
       <tbody>
         <tr class="">
           <td colspan="1" class="">Full List: <strong><%= number_with_delimiter(@full_list.count) %> </td>
-          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'full_list', page: 'deadline', state: state, day: 'Full', what: 'Email') %></td>
+          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'full_list', page: 'deadline', state: state, day: 'Full', what: 'Email'), class: 'btn btn-sm btn-primary', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin'></i> loading"} %></td>
           <td></td>
         </tr>
         <tr class="">
           <td colspan="1" class="">Customer List: <strong><%= number_with_delimiter(@purchase_list.count) %> </td>
-          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'purchase_list', page: 'deadline', state: state, day: 'Full', what: 'Email') %></td>
+          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'purchase_list', page: 'deadline', state: state, day: 'Full', what: 'Email'), class: 'btn btn-sm btn-primary', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin'></i> loading"} %></td>
           <td></td>
         </tr>
         <tr class="">
@@ -104,7 +104,7 @@
         <% pa_postcard_dates.each do |postcard| %>
         <tr class="">
             <td><%= postcard.to_date.strftime('%-m/%-d/%Y') %></td>
-            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'postcard_list', page: 'deadline', state: state, day: postcard, what: 'postcard') %></td>
+            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'postcard_list', page: 'deadline', state: state, day: postcard, what: 'postcard'), class: 'btn btn-sm btn-primary', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin'></i> loading"} %></td>
             <% mail_id = "E-RC-Deadline-PA-Postcard-#{postcard}" %>
             <% records = PostcardRecord.all.pluck(:mailing_id) %>
             <% if records.include? mail_id %>
@@ -174,12 +174,12 @@
       <tbody>
         <tr class="">
           <td colspan="1" class="">Full List: <strong><%= number_with_delimiter(@full_list.count) %> </td>
-          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'full_list', page: 'deadline', state: state, day: 'Full', what: 'Email') %></td>
+          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'full_list', page: 'deadline', state: state, day: 'Full', what: 'Email'), class: 'btn btn-sm btn-primary', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin'></i> loading"} %></td>
           <td></td>
         </tr>
         <tr class="">
           <td colspan="1" class="">Customer List: <strong><%= number_with_delimiter(@purchase_list.count) %> </td>
-          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'purchase_list', page: 'deadline', state: state, day: 'Full', what: 'Email') %></td>
+          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'purchase_list', page: 'deadline', state: state, day: 'Full', what: 'Email'), class: 'btn btn-sm btn-primary', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin'></i> loading"} %></td>
           <td></td>
         </tr>
         <tr class="">
@@ -207,7 +207,7 @@
         <% mo_b_postcard_dates.each do |postcard| %>
         <tr class="">
             <td><%= postcard.to_date.strftime('%-m/%-d/%Y') %></td>
-            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'postcard_list', page: 'deadline', state: state, day: postcard, what: 'postcard') %></td>
+            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'postcard_list', page: 'deadline', state: state, day: postcard, what: 'postcard'), class: 'btn btn-sm btn-primary', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin'></i> loading"} %></td>
             <% mail_id = "E-RC-Deadline-MO_B-Postcard-#{postcard}" %>
             <% records = PostcardRecord.all.pluck(:mailing_id) %>
             <% if records.include? mail_id %>
@@ -271,12 +271,12 @@
       <tbody>
         <tr class="">
           <td colspan="1" class="">Full List: <strong><%= number_with_delimiter(@full_list.count) %> </td>
-          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'full_list', page: 'deadline', state: state, day: 'Full', what: 'Email') %></td>
+          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'full_list', page: 'deadline', state: state, day: 'Full', what: 'Email'), class: 'btn btn-sm btn-primary', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin'></i> loading"} %></td>
           <td></td>
         </tr>
         <tr class="">
           <td colspan="1" class="">Customer List: <strong><%= number_with_delimiter(@purchase_list.count) %> </td>
-          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'purchase_list', page: 'deadline', state: state, day: 'Full', what: 'Email') %></td>
+          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'purchase_list', page: 'deadline', state: state, day: 'Full', what: 'Email'), class: 'btn btn-sm btn-primary', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin'></i> loading"} %></td>
           <td></td>
         </tr>
         <tr class="">
@@ -304,7 +304,7 @@
         <% in_postcard_dates.each do |postcard| %>
         <tr class="">
             <td><%= postcard.to_date.strftime('%-m/%-d/%Y') %></td>
-            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'postcard_list', page: 'deadline', state: state, day: postcard, what: 'postcard') %></td>
+            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'postcard_list', page: 'deadline', state: state, day: postcard, what: 'postcard'), class: 'btn btn-sm btn-primary', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin'></i> loading"} %></td>
             <% mail_id = "E-RC-Deadline-IN-Postcard-#{postcard}" %>
             <% records = PostcardRecord.all.pluck(:mailing_id) %>
             <% if records.include? mail_id %>
@@ -369,12 +369,12 @@
       <tbody>
         <tr class="">
           <td colspan="1" class="">Full List: <strong><%= number_with_delimiter(@full_list.count) %> </td>
-          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'full_list', page: 'deadline', state: 'NC', day: 'Full', what: 'Email') %></td>
+          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'full_list', page: 'deadline', state: 'NC', day: 'Full', what: 'Email'), class: 'btn btn-sm btn-primary', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin'></i> loading"} %></td>
           <td></td>
         </tr>
         <tr class="">
           <td colspan="1" class="">Customer List: <strong><%= number_with_delimiter(@purchase_list.count) %> </td>
-          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'purchase_list', page: 'deadline', state: 'NC', day: 'Full', what: 'Email') %></td>
+          <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'purchase_list', page: 'deadline', state: 'NC', day: 'Full', what: 'Email'), class: 'btn btn-sm btn-primary', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin'></i> loading"} %></td>
           <td></td>
         </tr>
         <tr class="">
@@ -402,7 +402,7 @@
         <% nc_postcard_dates.each do |postcard| %>
         <tr class="">
             <td><%= postcard.to_date.strftime('%-m/%-d/%Y') %></td>
-            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'postcard_list', page: 'deadline', state: 'NC', day: postcard, what: 'postcard') %></td>
+            <td><%= link_to 'Export', rc_marketing_empire_customers_path(add: 'postcard_list', page: 'deadline', state: 'NC', day: postcard, what: 'postcard'), class: 'btn btn-sm btn-primary', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin'></i> loading"} %></td>
             <% mail_id = "E-RC-Deadline-NC-Postcard-#{postcard}" %>
             <% records = PostcardRecord.all.pluck(:mailing_id) %>
             <% if records.include? mail_id %>

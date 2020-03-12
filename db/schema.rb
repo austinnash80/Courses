@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200224084257) do
+ActiveRecord::Schema.define(version: 20200312004307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -557,6 +557,9 @@ ActiveRecord::Schema.define(version: 20200224084257) do
     t.string "extra_s"
     t.integer "extra_i"
     t.boolean "extra_b"
+    t.string "send_email"
+    t.string "exp_s"
+    t.string "send_date_s"
   end
 
   create_table "postcard_mailings", force: :cascade do |t|

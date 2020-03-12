@@ -1,12 +1,67 @@
 <div class="container">
-  <div class="text-center">
-    <h4>States Included: CA, NY, WA, NM</h4>
 
+    <div class="text-center">
+      <h4>States Included: CA, NY, NM</h4>
+      <% if params['what'] == 'email_new' %>
+        <%= link_to 'Email', rc_marketing_empire_customers_path(what: 'email_new', page: 'rolling'), class: 'btn btn-primary btn-lg', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin'></i> loading"} %>
+      <% else %>
+        <%= link_to 'Email', rc_marketing_empire_customers_path(what: 'email_new', page: 'rolling'), class: 'btn btn-default btn-lg', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin primary'></i> loading"} %>
+      <% end %>
+      <% if params['what'] == 'postcard_new' %>
+        <%= link_to 'Postcard', rc_marketing_empire_customers_path(what: 'postcard_new', page: 'rolling'), class: 'btn btn-primary btn-lg' %>
+      <% else %>
+        <%= link_to 'Postcard', rc_marketing_empire_customers_path(what: 'postcard_new', page: 'rolling'), class: 'btn btn-default btn-lg' %>
+      <% end %>
+    </div>
+
+<% if params['what'] == 'email_new' %>
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6 down20">
+    <table class="table table-outline">
+      <thead>
+        <tr class="grey-b-200">
+          <td colspan="2" class="text-center bold">Empire Rolling States Email</td>
+        </tr>
+        <tr>
+          <th colspan="1">Total List Size: <%= number_with_delimiter(@full_list.count) %> </th>
+          <th><%= link_to 'Add to Export', rc_marketing_empire_customers_path(page: 'rolling', add: 'yes', what: 'email_new'), class: 'btn btn-primary', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin white'></i> Loading Export"} %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="">
+          <td colspan="2" class="text-center">Emailing This Week (Every Wednesday)</td>
+        </tr>
+        <tr>
+          <td>CA</td>
+          <td><%= @ca.count %></td>
+        </tr>
+        <tr>
+          <td>NY</td>
+          <td><%= @ny.count %></td>
+        </tr>
+        <tr>
+          <td>NM</td>
+          <td><%= @nm.count %></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>
+<% end %> <!-- END OF EMAIL -->
+
+
+
+
+
+
+<!-- OLD -->
+
   <!-- <p><strong>1. Select mailing date</strong>  - <%# if params['day'].present? %> <%#= link_to 'Select new date', rc_marketing_empire_customers_path %> <%# end %></p>
   <p><strong>2. Add records </strong> (take note of 'Mailing ID' and record count)</p>
   <p><strong>3. Export List </strong>(check that 'Mailing ID' record count match)</p> -->
-
+<!--
 <% if params['day'].present? == false %>
 <br>
   <%= render(partial: 'rc_marketing_rolling_buttons') %>
@@ -22,7 +77,6 @@
 
 <br>
   <p class="">EXP 1 (33 days): <%= params['day'].present? ? @date_1a.to_date.strftime('%-m/%-d/%y') : ''%> - <%= params['day'].present? ? @date_1b.to_date.strftime('%-m/%-d/%y') : ''%> | EXP 2 (63 days): <%= params['day'].present? ? @date_2a.to_date.strftime('%-m/%-d/%y') : ''%> - <%= params['day'].present? ? @date_2b.to_date.strftime('%-m/%-d/%y') : ''%></p>
-  <!-- <p class="">EXP 2 (63 days): <%= params['day'].present? ? @date_2a.to_date.strftime('%-m/%-d/%y') : ''%> - <%= params['day'].present? ? @date_2b.to_date.strftime('%-m/%-d/%y') : ''%></p> -->
   <table class="table table-outline">
     <thead>
       <tr class="grey-b-200 ">
@@ -140,6 +194,6 @@
 <% end %>
 
 <br>
-
+-->
 
 </div>
