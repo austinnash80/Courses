@@ -735,8 +735,9 @@ end #def
 
   def rolling_emails # In USE
     if params['full_update'] == 'yes' ##ONLY when we need to add new customers to the list -> people are not mailed to till next cycle after purchase
-      rolling_states = ['NY']
-      EmpireCustomer.where(lic_state: rolling_states).where.not(b_exp: nil).each do |empire_customer|  #ADD all RECORDS TO THE POSTCARD EXPORT TABLE
+      rolling_states = ['CA','NY','NM']
+      in_data_set = EmailExport.pluck(:empire_customer_id)
+      EmpireCustomer.where(lic_state: rolling_states).where.not(id: in_data_set).where.not(b_exp: nil).each do |empire_customer|  #ADD all RECORDS TO THE POSTCARD EXPORT TABLE
         new = EmailExport.create(
           empire_customer_id: empire_customer.id,
           uid: empire_customer.uid,
