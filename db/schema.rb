@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200312004307) do
+ActiveRecord::Schema.define(version: 20200312231944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -560,6 +560,7 @@ ActiveRecord::Schema.define(version: 20200312004307) do
     t.string "send_email"
     t.string "exp_s"
     t.string "send_date_s"
+    t.integer "empire_customer_id"
   end
 
   create_table "postcard_mailings", force: :cascade do |t|
