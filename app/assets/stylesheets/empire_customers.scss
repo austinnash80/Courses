@@ -1,3 +1,44 @@
 // Place all the styles related to the EmpireCustomers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+@keyframes rotation {
+			0% {
+				transform: rotate(0);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+		@-webkit-keyframes rotation {
+			0% {
+				-webkit-transform: rotate(0);
+			}
+			100% {
+				-webkit-transform: rotate(360deg);
+			}
+		}
+
+		@-moz-keyframes rotation {
+			0% {
+				-moz-transform: rotate(0);
+			}
+			100% {
+				-moz-transform: rotate(360deg);
+			}
+		}
+
+.spinner{
+	position:fixed;
+	left:calc(50% - 15px);
+	top:63px;
+}
+
+.fa-spinner{
+			font-size: 5em;
+			animation: rotation 2s infinite steps(8);
+			-webkit-animation: rotation 2s infinite steps(8);
+			-moz-animation: rotation 2s infinite steps(8);
+		}
