@@ -1,4 +1,4 @@
-<!-- <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/> -->
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 <div class="container">
 
     <div class="text-center">
@@ -36,15 +36,16 @@
         </tr>
         <tr>
           <td>CA</td>
-          <td><%= @ca.count %></td>
+          <!-- <td><%#= @ca.count %></td> -->
+          <td><i class="fa fa-check primary"></i></td>
         </tr>
         <tr>
           <td>NY</td>
-          <td><%= @ny.count %></td>
+          <!-- <td><%#= @ny.count %></td> -->
         </tr>
         <tr>
           <td>NM</td>
-          <td><%= @nm.count %></td>
+          <!-- <td><%#= @nm.count %></td> -->
         </tr>
       </tbody>
     </table>
@@ -60,29 +61,42 @@
     <table class="table table-outline">
       <thead>
         <tr class="grey-b-200">
-          <td colspan="2" class="text-center bold">Empire Rolling States Email</td>
+          <td colspan="1" class="text-center bold">Empire Rolling States Email</td>
         </tr>
         <tr>
-          <th colspan="1">Total List Size: <%= number_with_delimiter((@ca_postcard + @ny_postcard + @nm_postcard).count) %> </th>
-          <th><%= link_to 'Add to Export', rc_marketing_empire_customers_path(page: 'rolling', add: 'yes', what: 'postcard_new'), class: 'btn btn-primary', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin white'></i> Loading Export"} %></th>
+          <th colspan="1" class="text-center"><%= link_to 'Start Export', rc_marketing_empire_customers_path(page: 'rolling', add: 'yes', what: 'postcard_new', ca: 'yes'), class: 'btn btn-primary', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin white'></i> Loading Export"} %></th>
         </tr>
       </thead>
       <tbody>
-        <tr class="">
-          <td colspan="2" class="text-center">Postcards For This Week (Every Wednesday)</td>
+        <tr>
+          <% if params['ca'] == 'done' %>
+            <% ca_sent = PostcardRecord.where(group: 'ca').where(mailing_id: "rolling_postcard-#{Date.today}").pluck(:sent) %>
+              <td class="text-center"><big>CA: <%= ca_sent[0] %></big> <i class="fa fa-check fa-2x green"></i></td>
+          <% else %>
+            <td class="text-center">CA:</td>
+          <% end %>
         </tr>
         <tr>
-          <td>CA</td>
-          <td><%= @ca_postcard.count %></td>
+          <% if params['ny'] == 'done' %>
+            <% ny_sent = PostcardRecord.where(group: 'ny').where(mailing_id: "rolling_postcard-#{Date.today}").pluck(:sent) %>
+              <td class="text-center"><big>NY: <%= ny_sent[0] %></big> <i class="fa fa-check fa-2x green"></i></td>
+          <% else %>
+            <td class="text-center">NY:</td>
+          <% end %>
         </tr>
         <tr>
-          <td>NY</td>
-          <td><%= @ny_postcard.count %></td>
+          <% if params['nm'] == 'done' %>
+            <% nm_sent = PostcardRecord.where(group: 'nm').where(mailing_id: "rolling_postcard-#{Date.today}").pluck(:sent) %>
+              <td class="text-center">NM: <big><%= nm_sent[0] %></big> <i class="fa fa-check fa-2x green"></i></td>
+          <% else %>
+            <td class="text-center">NM:</td>
+          <% end %>
         </tr>
-        <tr>
-          <td>NM</td>
-          <td><%= @nm_postcard.count %></td>
-        </tr>
+        <% if params['nm'] == 'done' && params['ny'] == 'done' && params['ca'] == 'done' %>
+          <tr>
+            <td colspan="" class="text-center"><%= link_to 'Go To Export Table', postcard_exports_path(record: 'no', what: 'postcard', co: 'empire'), class: 'btn btn-success' %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>

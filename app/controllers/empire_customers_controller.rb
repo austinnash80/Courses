@@ -531,7 +531,8 @@ end
 
   def rolling_postcards #In Use
     if params['page'] == 'rolling' && params['what'] == 'postcard_new'
-      rolling_states = ['CA', 'NY', 'NM']
+      if params['ca'] == 'yes'
+      rolling_states = ['CA']
       full_list = EmpireCustomer.where(lic_state: rolling_states).all
       id = []
       uid = []
@@ -541,19 +542,24 @@ end
           uid.push(empire_customer.uid)
         end
       end
-
       @full_list_postcard = EmpireCustomer.where(id: id).all
-      rolling_postcard_dates_supplement #put id #s into proper array
+      @ca_postcard_1 = []
+      @ca_postcard_2 = []
+      postcard_no = []
+      @full_list_postcard.each do |empire_customer|
+        if empire_customer.b_exp.present?
+          if empire_customer.lic_state == 'CA'
+            Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 60.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_postcard_1.push(empire_customer.id) :
+            Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 30.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_postcard_2.push(empire_customer.id) :
+            postcard_no.push(empire_customer.id)
+          end
+        end
+      end
 
       @ca_postcard = @ca_postcard_1 + @ca_postcard_2
-      @ny_postcard = @ny_postcard_1 + @ny_postcard_2
-      @nm_postcard = @nm_postcard_1 + @nm_postcard_2
 
-      if params['add'] == 'yes'
-
-        PostcardExport.delete_all
-        # @full_list_postcard.each do |empire_customer|
-        @full_list_postcard.where(id: @ca_postcard + @ny_postcard + @nm_postcard).each do |empire_customer|
+        PostcardExport.delete_all ## ONLY delete for CA(first) -> others are adding to the table
+        @full_list_postcard.where(id: @ca_postcard).each do |empire_customer|
           new = PostcardExport.create(
             empire_customer_id: empire_customer.id,
             company: 'Empire',
@@ -581,20 +587,159 @@ end
         ca_g1_merge_2 = '$49.00'
         ca_g1_merge_3 = 'ReturningStudent20'
         PostcardExport.where(empire_customer_id: (@ca_postcard_1 +  @ca_postcard_2)).update_all merge_1: ca_g1_merge_1, merge_2: ca_g1_merge_2, merge_3: ca_g1_merge_3
-        ny_g1_merge_1 = '22.5-Hour New York CE Package'
-        ny_g1_merge_2 = '$59.50'
-        ny_g1_merge_3 = 'ReturningStudent20'
-        PostcardExport.where(empire_customer_id: (@ny_postcard_1 +  @ny_postcard_2)).update_all merge_1: ny_g1_merge_1, merge_2: ny_g1_merge_2, merge_3: ny_g1_merge_3
-        nm_g1_merge_1 = '24-Hour New Mexico CE Package'
-        nm_g1_merge_2 = '$159.50'
-        nm_g1_merge_3 = 'ReturningStudent20'
-        PostcardExport.where(empire_customer_id: (@nm_postcard_1 +  @nm_postcard_2)).update_all merge_1: nm_g1_merge_1, merge_2: nm_g1_merge_2, merge_3: nm_g1_merge_3
 
-        redirect_to postcard_exports_path(what:'postcard', record: 'no', co: 'empire', list: 'rolling')
+        ## Add Numbers to records
+        new_record = PostcardRecord.create(
+          company: 'empire',
+          group: 'ca',
+          mailing_id: "rolling_postcard-#{Date.today}",
+          sent: (@ca_postcard_1 +  @ca_postcard_2).count)
+          new_record.save
 
-      end #postcard create
+        redirect_to rc_marketing_empire_customers_path(page: 'rolling', what:'postcard_new', ca: 'done', ny: 'yes')
+
+    end #params CA
+
+    if params['ny'] == 'yes' #START NY
+    rolling_states = ['NY']
+    full_list = EmpireCustomer.where(lic_state: rolling_states).all
+    id = []
+    uid = []
+    full_list.each do |empire_customer|
+      if uid.exclude?(empire_customer.uid)
+        id.push(empire_customer.id)
+        uid.push(empire_customer.uid)
+      end
     end
-  end #rolling_postcards def
+    @full_list_postcard = EmpireCustomer.where(id: id).all
+    @ny_postcard_1 = []
+    @ny_postcard_2 = []
+    postcard_no = []
+    @full_list_postcard.each do |empire_customer|
+      if empire_customer.b_exp.present?
+        if empire_customer.lic_state == 'NY'
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 60.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_postcard_1.push(empire_customer.id) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 30.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_postcard_2.push(empire_customer.id) :
+          postcard_no.push(empire_customer.id)
+        end
+      end
+    end
+
+      @ny_postcard = @ny_postcard_1 + @ny_postcard_2
+
+      @full_list_postcard.where(id: @ny_postcard).each do |empire_customer|
+        new = PostcardExport.create(
+          empire_customer_id: empire_customer.id,
+          company: 'Empire',
+          group: 'rc_rolling_postcard',
+          list: empire_customer.b_list,
+          mail_date: Date.today,
+          send_date_s: Date.today.strftime('%-m/%-d/%Y'),
+          license_number: empire_customer.license_num,
+          uid: empire_customer.uid,
+          exp: empire_customer.b_exp,
+          exp_s: empire_customer.b_exp.blank? ? '' : empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+          merge_4: empire_customer.b_exp.blank? ? '' : "#{empire_customer.b_exp.strftime("%b")} #{empire_customer.b_exp.day.ordinalize}",
+          f_name: empire_customer.fname,
+          l_name: empire_customer.lname,
+          add_1: empire_customer.street_1,
+          add_2: empire_customer.street_2,
+          city: empire_customer.city,
+          st: empire_customer.state,
+          zip: empire_customer.zip,
+          email: empire_customer.email)
+        new.save
+      end
+
+      ny_g1_merge_1 = '22.5-Hour California CE Package'
+      ny_g1_merge_2 = '$59.50'
+      ny_g1_merge_3 = 'ReturningStudent20'
+      PostcardExport.where(empire_customer_id: (@ny_postcard_1 +  @ny_postcard_2)).update_all merge_1: ny_g1_merge_1, merge_2: ny_g1_merge_2, merge_3: ny_g1_merge_3
+
+      ## Add Numbers to records
+      new_record = PostcardRecord.create(
+        company: 'empire',
+        group: 'ny',
+        mailing_id: "rolling_postcard-#{Date.today}",
+        sent: (@ny_postcard_1 +  @ny_postcard_2).count)
+        new_record.save
+
+      redirect_to rc_marketing_empire_customers_path(page: 'rolling', what:'postcard_new', ca: 'done', ny: 'done', nm: 'yes')
+
+  end #params NM
+    if params['nm'] == 'yes' #START NY
+    rolling_states = ['NM']
+    full_list = EmpireCustomer.where(lic_state: rolling_states).all
+    id = []
+    uid = []
+    full_list.each do |empire_customer|
+      if uid.exclude?(empire_customer.uid)
+        id.push(empire_customer.id)
+        uid.push(empire_customer.uid)
+      end
+    end
+    @full_list_postcard = EmpireCustomer.where(id: id).all
+    @nm_postcard_1 = []
+    @nm_postcard_2 = []
+    postcard_no = []
+    @full_list_postcard.each do |empire_customer|
+      if empire_customer.b_exp.present?
+        if empire_customer.lic_state == 'NM'
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 60.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_postcard_1.push(empire_customer.id) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 30.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_postcard_2.push(empire_customer.id) :
+          postcard_no.push(empire_customer.id)
+        end
+      end
+    end
+
+    @nm_postcard = @nm_postcard_1 + @nm_postcard_2
+      @full_list_postcard.where(id: @nm_postcard).each do |empire_customer|
+        new = PostcardExport.create(
+          empire_customer_id: empire_customer.id,
+          company: 'Empire',
+          group: 'rc_rolling_postcard',
+          list: empire_customer.b_list,
+          mail_date: Date.today,
+          send_date_s: Date.today.strftime('%-m/%-d/%Y'),
+          license_number: empire_customer.license_num,
+          uid: empire_customer.uid,
+          exp: empire_customer.b_exp,
+          exp_s: empire_customer.b_exp.blank? ? '' : empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+          merge_4: empire_customer.b_exp.blank? ? '' : "#{empire_customer.b_exp.strftime("%b")} #{empire_customer.b_exp.day.ordinalize}",
+          f_name: empire_customer.fname,
+          l_name: empire_customer.lname,
+          add_1: empire_customer.street_1,
+          add_2: empire_customer.street_2,
+          city: empire_customer.city,
+          st: empire_customer.state,
+          zip: empire_customer.zip,
+          email: empire_customer.email)
+        new.save
+      end
+
+      nm_g1_merge_1 = '24-Hour New Mexico CE Package'
+      nm_g1_merge_2 = '$155.50'
+      nm_g1_merge_3 = 'ReturningStudent20'
+      PostcardExport.where(empire_customer_id: (@nm_postcard_1 +  @nm_postcard_2)).update_all merge_1: nm_g1_merge_1, merge_2: nm_g1_merge_2, merge_3: nm_g1_merge_3
+
+      ## Add Numbers to records
+      new_record = PostcardRecord.create(
+        company: 'empire',
+        group: 'nm',
+        mailing_id: "rolling_postcard-#{Date.today}",
+        sent: (@nm_postcard_1 +  @nm_postcard_2).count)
+        new_record.save
+
+      redirect_to rc_marketing_empire_customers_path(page: 'rolling', what:'postcard_new', ca: 'done', ny: 'done', nm: 'done')
+
+  end #params NY
+
+
+
+  end #params 1
+end #def
+
+
 
   def rolling_postcard_dates_supplement
 
