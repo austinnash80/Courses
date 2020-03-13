@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200312231944) do
+ActiveRecord::Schema.define(version: 20200313032418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -231,6 +231,40 @@ ActiveRecord::Schema.define(version: 20200312231944) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "update_stats"
+  end
+
+  create_table "email_exports", force: :cascade do |t|
+    t.integer "empire_customer_id"
+    t.integer "uid"
+    t.string "list"
+    t.string "license_number"
+    t.string "send_email"
+    t.string "company"
+    t.string "group"
+    t.date "send_date"
+    t.date "exp_b"
+    t.string "subject"
+    t.string "merge_1"
+    t.string "merge_2"
+    t.string "merge_3"
+    t.string "merge_4"
+    t.string "merge_5"
+    t.string "merge_6"
+    t.string "f_name"
+    t.string "l_name"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "email_records", force: :cascade do |t|
+    t.string "company"
+    t.string "group"
+    t.string "mailing_id"
+    t.date "mail_date"
+    t.integer "sent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "empire_courses", force: :cascade do |t|

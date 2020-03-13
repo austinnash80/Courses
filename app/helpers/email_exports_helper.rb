@@ -1,0 +1,2 @@
+module EmailExportsHelper
+end

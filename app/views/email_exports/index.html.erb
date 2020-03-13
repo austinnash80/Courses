@@ -1,0 +1,66 @@
+<p id="notice"><%= notice %></p>
+
+<div class="">
+  <h1 class="text-center">Email Export Table</h1>
+  <div class="text-center down20">
+    <%= link_to raw('<i class="glyphicon glyphicon-download-alt" ></i> Email List'), email_exports_path(format: 'csv'), class: 'btn btn-primary btn-lg' %>
+    <h2 class="down 20"><strong>Export:</strong> <%= @send_email.count %></h2>
+  </div>
+<div class="down20">
+
+  <table class="table table-outline">
+    <thead>
+      <tr>
+        <th>C_ID</th>
+        <th>Uid</th>
+        <th>List</th>
+        <th>Lic</th>
+        <th>Send email</th>
+        <th>Company</th>
+        <th>Group</th>
+        <th>Send date</th>
+        <th>Exp b</th>
+        <th>Subject</th>
+        <th>Merge 1</th>
+        <th>Merge 2</th>
+        <th>Merge 3</th>
+        <th>Merge 4</th>
+        <th>Merge 5</th>
+        <th>Merge 6</th>
+        <th>F name</th>
+        <th>L name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @send_email.each do |email_export| %>
+        <tr>
+          <td><%= email_export.empire_customer_id %></td>
+          <td><%= email_export.uid %></td>
+          <td><%= email_export.list %></td>
+          <td><%= email_export.license_number %></td>
+          <td><%= email_export.send_email %></td>
+          <td><%= email_export.company %></td>
+          <td><%= email_export.group %></td>
+          <td><%= email_export.send_date %></td>
+          <td><%= email_export.exp_b %></td>
+          <td><%= email_export.subject %></td>
+          <td><%= email_export.merge_1 %></td>
+          <td><%= email_export.merge_2 %></td>
+          <td><%= email_export.merge_3 %></td>
+          <td><%= email_export.merge_4 %></td>
+          <td><%= email_export.merge_5 %></td>
+          <td><%= email_export.merge_6 %></td>
+          <td><%= email_export.f_name %></td>
+          <td><%= email_export.l_name %></td>
+          <td><%= email_export.email %></td>
+          <!-- <td><%#= link_to 'Show', email_export %></td> -->
+          <!-- <td><%#= link_to 'Edit', edit_email_export_path(email_export) %></td> -->
+          <!-- <td><%#= link_to 'Destroy', email_export, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+</div>

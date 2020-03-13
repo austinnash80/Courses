@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @email_record.company %>
+</p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @email_record.group %>
+</p>
+
+<p>
+  <strong>Mailing:</strong>
+  <%= @email_record.mailing_id %>
+</p>
+
+<p>
+  <strong>Mail date:</strong>
+  <%= @email_record.mail_date %>
+</p>
+
+<p>
+  <strong>Sent:</strong>
+  <%= @email_record.sent %>
+</p>
+
+<%= link_to 'Edit', edit_email_record_path(@email_record) %> |
+<%= link_to 'Back', email_records_path %>

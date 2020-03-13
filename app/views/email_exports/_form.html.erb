@@ -1,0 +1,30 @@
+
+<%= simple_form_for(@email_export) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :empire_customer_id %>
+    <%= f.input :uid %>
+    <%= f.input :list %>
+    <%= f.input :license_number %>
+    <%= f.input :send_email %>
+    <%= f.input :company %>
+    <%= f.input :group %>
+    <%= f.input :send_date %>
+    <%= f.input :exp_b %>
+    <%= f.input :subject %>
+    <%= f.input :merge_1 %>
+    <%= f.input :merge_2 %>
+    <%= f.input :merge_3 %>
+    <%= f.input :merge_4 %>
+    <%= f.input :merge_5 %>
+    <%= f.input :merge_6 %>
+    <%= f.input :f_name %>
+    <%= f.input :l_name %>
+    <%= f.input :email %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
