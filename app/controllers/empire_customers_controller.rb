@@ -736,8 +736,19 @@ end #def
   def rolling_emails # In USE
     if params['full_update'] == 'yes' ##ONLY when we need to add new customers to the list -> people are not mailed to till next cycle after purchase
       rolling_states = ['CA','NY','NM']
+
+      full_list = EmpireCustomer.where(lic_state: rolling_states).where.not(b_exp: nil).all # FIND UNIQUE PEOPLE FROM CORRECT STATES
+      # id = [] ## REMOVING DUPLICATED BY UID
+      # uid = []
+      # full_list.order(p_date: :desc).each do |empire_custer|
+      #   if uid.exclude?(empire_custer.uid)
+      #     id.push(empire_custer.id)
+      #     uid.push(empire_custer.uid)
+      #   end
+      # end
+
       in_data_set = EmailExport.pluck(:empire_customer_id)
-      EmpireCustomer.where(lic_state: rolling_states).where.not(id: in_data_set).where.not(b_exp: nil).each do |empire_customer|  #ADD all RECORDS TO THE POSTCARD EXPORT TABLE
+      full_list.where.not(id: in_data_set).each do |empire_customer|  #ADD all RECORDS TO THE POSTCARD EXPORT TABLE
         new = EmailExport.create(
           empire_customer_id: empire_customer.id,
           uid: empire_customer.uid,
@@ -759,6 +770,7 @@ end #def
     if params['ca'] == 'yes' ## ADD NY RECORDS -> UPDATE WITH SEND_MAIL
       EmailExport.update_all send_email: 'no' #RESET ALL RECORDS -> ONLY FOR California (first one)
       rolling_states = ['CA']
+  #THIS IS DONE ABOVE WHEN ADDING RECORDS TO THE EMAIL EXPORT -> ADDDING ONLY UNIQUE PEOPLE (UID)
       full_list = EmpireCustomer.where(lic_state: rolling_states).all # FIND UNIQUE PEOPLE FROM CORRECT STATES
       id = []
       uid = []
@@ -805,7 +817,7 @@ end #def
             mailing_id: "rolling_email-#{Date.today}",
             sent: (@ny).count)
             new_record.save
-        redirect_to rc_marketing_empire_customers_path(page: 'rolling', what:'email_new', ca: 'done', ny: 'done')
+        redirect_to rc_marketing_empire_customers_path(page: 'rolling', what:'email_new', ny: 'done')
       end
     if params['nm'] == 'yes'
       rolling_states = ['NM']
@@ -830,7 +842,7 @@ end #def
             mailing_id: "rolling_email-#{Date.today}",
             sent: (@nm).count)
             new_record.save
-        redirect_to rc_marketing_empire_customers_path(page: 'rolling', what:'email_new', ca: 'done', ny: 'done', nm: 'done')
+        redirect_to rc_marketing_empire_customers_path(page: 'rolling', what:'email_new', nm: 'done')
       end
 
   end
