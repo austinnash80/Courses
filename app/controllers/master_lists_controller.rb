@@ -24,9 +24,12 @@ class MasterListsController < ApplicationController
     @no_mails = MasterList.where(no_mail: 'yes').order(:lname).all
     @no_mails_count = MasterList.where(no_mail: 'yes').count
 
+     @no_mail_export = MasterList.where(no_mail: 'yes').all
+
+
     respond_to do |format|
       format.html
-      format.csv { send_data MasterList.where(no_mail: 'yes').where(list: '10/19').all.to_csv, filename: "No_mail-EA-#{Date.today}.csv" }
+      format.csv { send_data @no_mail_export.to_csv, filename: "No_mail-EA-#{Date.today}.csv" }
     end
 
   end

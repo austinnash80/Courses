@@ -13,7 +13,7 @@ class MasterList < ApplicationRecord
   end
 
   def self.to_csv # Export to csv function
-    attributes = %w{lid list lname no_mail}
+    attributes = %w{lid who list lname no_mail}
     CSV.generate(headers: true) do |csv|
       csv << attributes
 

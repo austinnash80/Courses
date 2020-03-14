@@ -771,7 +771,7 @@ end #def
       EmailExport.update_all send_email: 'no' #RESET ALL RECORDS -> ONLY FOR California (first one)
       rolling_states = ['CA']
   #THIS IS DONE ABOVE WHEN ADDING RECORDS TO THE EMAIL EXPORT -> ADDDING ONLY UNIQUE PEOPLE (UID)
-      full_list = EmpireCustomer.where(lic_state: rolling_states).all # FIND UNIQUE PEOPLE FROM CORRECT STATES
+      full_list = EmpireCustomer.where(lic_state: rolling_states).where.not(b_exp: nil).all # FIND UNIQUE PEOPLE FROM CORRECT STATES
       id = []
       uid = []
       full_list.order(p_date: :desc).each do |empire_custer|
@@ -796,7 +796,7 @@ end #def
       end
     if params['ny'] == 'yes' ## ADD NY RECORDS -> UPDATE WITH SEND_MAIL
       rolling_states = ['NY']
-      full_list = EmpireCustomer.where(lic_state: rolling_states).all # FIND UNIQUE PEOPLE FROM CORRECT STATES
+      full_list = EmpireCustomer.where(lic_state: rolling_states).where.not(b_exp: nil).all # FIND UNIQUE PEOPLE FROM CORRECT STATES
       id = []
       uid = []
       full_list.order(p_date: :desc).each do |empire_custer|
@@ -830,7 +830,7 @@ end #def
           uid.push(empire_custer.uid)
         end
       end
-      @full_list = EmpireCustomer.where(id: id).all
+      @full_list = EmpireCustomer.where(id: id).where.not(b_exp: nil).all
       rolling_emails_dates_supplement #Function below that puts Lic Numbers into correct arrays
 
           rolling_emails_merge # merge fields update
@@ -863,10 +863,10 @@ end #def
       ca_g4_merge_2 =
       ca_merge_3 = 'CA' ## Relevent for all CA
       ca_merge_5 = "California 45-Hour Full Renewal Package - $49"
-      EmailExport.where(empire_customer_id: (@ca_email_1 +  @ca_email_2 + @ca_email_3)).update_all send_email: 'yes', subject: ca_g1_subject, merge_1: ca_g1_merge_1, merge_2: ca_g1_merge_2, merge_3: ca_merge_3, merge_5: ca_merge_5
-      EmailExport.where(empire_customer_id: (@ca_email_4 +  @ca_email_5 + @ca_email_6 + @ca_email_7)).update_all send_email: 'yes', subject: ca_g2_subject, merge_1: ca_g2_merge_1, merge_2: ca_g2_merge_2, merge_3: ca_merge_3, merge_5: ca_merge_5
-      EmailExport.where(empire_customer_id: (@ca_email_8 +  @ca_email_9)).update_all send_email: 'yes', subject: ca_g3_subject, merge_1: ca_g3_merge_1, merge_3: ca_merge_3, merge_5: ca_merge_5
-      EmailExport.where(empire_customer_id: (@ca_email_10 +  @ca_email_11)).update_all send_email: 'yes', subject: ca_g4_subject, merge_1: ca_g4_merge_1, merge_3: ca_merge_3, merge_5: ca_merge_5
+      EmailExport.where(uid: (@ca_email_1 +  @ca_email_2 + @ca_email_3)).update_all send_email: 'yes', subject: ca_g1_subject, merge_1: ca_g1_merge_1, merge_2: ca_g1_merge_2, merge_3: ca_merge_3, merge_5: ca_merge_5
+      EmailExport.where(uid: (@ca_email_4 +  @ca_email_5 + @ca_email_6 + @ca_email_7)).update_all send_email: 'yes', subject: ca_g2_subject, merge_1: ca_g2_merge_1, merge_2: ca_g2_merge_2, merge_3: ca_merge_3, merge_5: ca_merge_5
+      EmailExport.where(uid: (@ca_email_8 +  @ca_email_9)).update_all send_email: 'yes', subject: ca_g3_subject, merge_1: ca_g3_merge_1, merge_3: ca_merge_3, merge_5: ca_merge_5
+      EmailExport.where(uid: (@ca_email_10 +  @ca_email_11)).update_all send_email: 'yes', subject: ca_g4_subject, merge_1: ca_g4_merge_1, merge_3: ca_merge_3, merge_5: ca_merge_5
     end
     if params['ny'] == 'yes'
       ny_g1_subject = 'NY Early Bird Discount 15% Off' ## g1 = ny_email_1, ny_email_2, ny_email_3
@@ -883,10 +883,10 @@ end #def
       ny_g4_merge_2 =
       ny_merge_3 = 'NY' ## Relevent for all NY
       ny_merge_5 = "New York 22.5-Hour Full Renewal Package - $59.50"
-      EmailExport.where(empire_customer_id: (@ny_email_1 +  @ny_email_2 + @ny_email_3)).update_all send_email: 'yes', subject: ny_g1_subject, merge_1: ny_g1_merge_1, merge_2: ny_g1_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
-      EmailExport.where(empire_customer_id: (@ny_email_4 +  @ny_email_5 + @ny_email_6 + @ny_email_7)).update_all send_email: 'yes', subject: ny_g2_subject, merge_1: ny_g2_merge_1, merge_2: ny_g2_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
-      EmailExport.where(empire_customer_id: (@ny_email_8 +  @ny_email_9)).update_all send_email: 'yes', subject: ny_g3_subject, merge_1: ny_g3_merge_1, merge_2: ny_g3_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
-      EmailExport.where(empire_customer_id: (@ny_email_10 +  @ny_email_11)).update_all send_email: 'yes', subject: ny_g4_subject, merge_1: ny_g4_merge_1, merge_2: ny_g3_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
+      EmailExport.where(uid: (@ny_email_1 +  @ny_email_2 + @ny_email_3)).update_all send_email: 'yes', subject: ny_g1_subject, merge_1: ny_g1_merge_1, merge_2: ny_g1_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
+      EmailExport.where(uid: (@ny_email_4 +  @ny_email_5 + @ny_email_6 + @ny_email_7)).update_all send_email: 'yes', subject: ny_g2_subject, merge_1: ny_g2_merge_1, merge_2: ny_g2_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
+      EmailExport.where(uid: (@ny_email_8 +  @ny_email_9)).update_all send_email: 'yes', subject: ny_g3_subject, merge_1: ny_g3_merge_1, merge_2: ny_g3_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
+      EmailExport.where(uid: (@ny_email_10 +  @ny_email_11)).update_all send_email: 'yes', subject: ny_g4_subject, merge_1: ny_g4_merge_1, merge_2: ny_g3_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
     end
     if params['nm'] == 'yes'
       nm_g1_subject = 'NM Early Bird Discount 15% Off' ## g1 = nm_email_1, nm_email_2, nm_email_3
@@ -903,10 +903,10 @@ end #def
       nm_g4_merge_2 =
       nm_merge_3 = 'NM' ## Relevent for all NM
       nm_merge_5 = "New Mexico 24-Hour Full Renewal Package - $159.50"
-      EmailExport.where(empire_customer_id: (@nm_email_1 +  @nm_email_2 +  @nm_email_3)).update_all send_email: 'yes', subject: nm_g1_subject, merge_1: nm_g1_merge_1, merge_2: nm_g1_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
-      EmailExport.where(empire_customer_id: (@nm_email_4 +  @nm_email_5 +  @nm_email_6 +  @nm_email_7)).update_all send_email: 'yes', subject: nm_g2_subject, merge_1: nm_g2_merge_1, merge_2: nm_g2_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
-      EmailExport.where(empire_customer_id: (@nm_email_8 +  @nm_email_9)).update_all send_email: 'yes', subject: nm_g3_subject, merge_1: nm_g3_merge_1, merge_2: nm_g3_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
-      EmailExport.where(empire_customer_id: (@nm_email_10 +  @nm_email_11)).update_all send_email: 'yes', subject: nm_g4_subject, merge_1: nm_g4_merge_1, merge_2: nm_g3_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
+      EmailExport.where(uid: (@nm_email_1 +  @nm_email_2 +  @nm_email_3)).update_all send_email: 'yes', subject: nm_g1_subject, merge_1: nm_g1_merge_1, merge_2: nm_g1_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
+      EmailExport.where(uid: (@nm_email_4 +  @nm_email_5 +  @nm_email_6 +  @nm_email_7)).update_all send_email: 'yes', subject: nm_g2_subject, merge_1: nm_g2_merge_1, merge_2: nm_g2_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
+      EmailExport.where(uid: (@nm_email_8 +  @nm_email_9)).update_all send_email: 'yes', subject: nm_g3_subject, merge_1: nm_g3_merge_1, merge_2: nm_g3_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
+      EmailExport.where(uid: (@nm_email_10 +  @nm_email_11)).update_all send_email: 'yes', subject: nm_g4_subject, merge_1: nm_g4_merge_1, merge_2: nm_g3_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
     end
   end
 
@@ -926,17 +926,17 @@ end #def
       email_no = []
       @full_list.where(lic_state: 'CA').each do |empire_customer|
         if empire_customer.b_exp.present?
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 180.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_1.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 150.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_2.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 120.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_3.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 90.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_4.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 60.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_5.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 45.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_6.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 30.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_6.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 15.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_6.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 10.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_6.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 5.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_6.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 2.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_6.push(empire_customer.id) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 180.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_1.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 150.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_2.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 120.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_3.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 90.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_4.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 60.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_5.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 45.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_6.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 30.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_6.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 15.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_6.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 10.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_6.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 5.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_6.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 2.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_6.push(empire_customer.uid) :
           email_no.push(empire_customer.id)
         end
       end
@@ -958,17 +958,17 @@ end #def
       email_no = []
       @full_list.where(lic_state: 'NY').each do |empire_customer|
         if empire_customer.b_exp.present?
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 180.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_1.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 150.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_2.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 120.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_3.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 90.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_4.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 60.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_5.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 45.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_6.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 30.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_6.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 15.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_6.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 10.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_6.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 5.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_6.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 2.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_6.push(empire_customer.id) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 180.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_1.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 150.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_2.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 120.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_3.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 90.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_4.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 60.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_5.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 45.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_6.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 30.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_6.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 15.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_6.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 10.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_6.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 5.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_6.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 2.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_6.push(empire_customer.uid) :
           email_no.push(empire_customer.id)
         end
       end
@@ -990,17 +990,17 @@ end #def
       email_no = []
       @full_list.where(lic_state: 'NM').each do |empire_customer|
         if empire_customer.b_exp.present?
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 180.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_1.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 150.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_2.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 120.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_3.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 90.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_4.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 60.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_5.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 45.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_6.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 30.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_6.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 15.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_6.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 10.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_6.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 5.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_6.push(empire_customer.id) :
-          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 2.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_6.push(empire_customer.id) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 180.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_1.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 150.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_2.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 120.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_3.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 90.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_4.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 60.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_5.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 45.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_6.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 30.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_6.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 15.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_6.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 10.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_6.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 5.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_6.push(empire_customer.uid) :
+          Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 2.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_6.push(empire_customer.uid) :
           email_no.push(empire_customer.id)
         end
       end
