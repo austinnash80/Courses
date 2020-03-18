@@ -64,7 +64,8 @@ end
             end
             @full_list = EmpireCustomer.where(id: id).all
 
-            purchase_1 = EmpireCustomer.where(lic_state: state).where('p_date > ?', @state_exp - 11.months).where(uid: uid).all
+            purchase_1 = EmpireCustomer.where(lic_state: state).where('p_date > ?', @state_exp - 11.months).where(id: id).all
+            # purchase_1 = EmpireCustomer.where(lic_state: state).where('p_date > ?', @state_exp - 11.months).where(uid: uid).all
             id_purchase = []
             uid_purchase = []
             purchase_1.each do |nc|
@@ -107,7 +108,8 @@ end
             if params['add'] == 'purchase_list'
               state = params['state']
               PostcardExport.delete_all
-              @purchase_list.each do |empire_customer|
+              purchase_1.each do |empire_customer|
+              # @purchase_list.each do |empire_customer|
                 new = PostcardExport.create(
                   company: 'Empire',
                   group: 'rc_email_deadline',
