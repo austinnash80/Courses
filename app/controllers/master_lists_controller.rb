@@ -29,7 +29,7 @@ class MasterListsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { send_data @no_mail_export.to_csv, filename: "No_mail-EA-#{Date.today}.csv" }
+      format.csv { send_data @no_mail_export.to_csv, filename: "No_mail-#{Date.today}.csv" }
     end
 
   end
