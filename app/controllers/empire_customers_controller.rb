@@ -91,7 +91,7 @@ end
                   license_number: empire_customer.license_num,
                   uid: empire_customer.uid,
                   exp: empire_customer.b_exp,
-                  merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                  merge_5: empire_customer.b_exp,
                   f_name: empire_customer.fname,
                   l_name: empire_customer.lname,
                   add_1: empire_customer.street_1,
