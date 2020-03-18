@@ -64,7 +64,7 @@ end
             end
             @full_list = EmpireCustomer.where(id: id).all
 
-            purchase_1 = EmpireCustomer.where(lic_state: state).where('p_date > ?', @state_exp - 11.months).where(id: id).all
+            purchase_1 = EmpireCustomer.where(lic_state: state).where('p_date > ?', @state_exp - 11.months).all
             # purchase_1 = EmpireCustomer.where(lic_state: state).where('p_date > ?', @state_exp - 11.months).where(uid: uid).all
             id_purchase = []
             uid_purchase = []
