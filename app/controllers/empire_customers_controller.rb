@@ -418,7 +418,7 @@ end
         if state == 'MO_B'
           @state_exp = '2020-06-30'.to_date
           # EMAIL
-            full_1 = EmpireCustomer.where(lic_state: 'MO').where.not(b_list: nil).all
+            full_1 = EmpireCustomer.where(lic_state: 'MO').all
             id = []
             uid = []
             full_1.each do |mo_b|
@@ -429,7 +429,7 @@ end
             end
             @full_list = EmpireCustomer.where(id: id).all
 
-            purchase_1 = EmpireCustomer.where(lic_state: 'MO').where('p_date > ?', @state_exp - 22.months).where(uid: uid).all
+            purchase_1 = EmpireCustomer.where(lic_state: 'MO').where('p_date > ?', @state_exp - 22.months).all
             id_purchase = []
             uid_purchase = []
             purchase_1.each do |mo_b|
@@ -455,7 +455,7 @@ end
                   license_number: empire_customer.license_num,
                   uid: empire_customer.uid,
                   exp: empire_customer.b_exp,
-                  merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                  merge_5: empire_customer.b_exp,
                   f_name: empire_customer.fname,
                   l_name: empire_customer.lname,
                   add_1: empire_customer.street_1,
@@ -483,7 +483,7 @@ end
                   license_number: empire_customer.license_num,
                   uid: empire_customer.uid,
                   exp: empire_customer.b_exp,
-                  merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                  merge_5: empire_customer.b_exp,
                   f_name: empire_customer.fname,
                   l_name: empire_customer.lname,
                   add_1: empire_customer.street_1,
@@ -517,7 +517,7 @@ end
                   merge_1: '12-Hour Missouri Package',
                   merge_2: 'Just $59.50',
                   merge_3: 'ReturningStudent20',
-                  merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                  merge_5: empire_customer.b_exp,
                   f_name: empire_customer.fname,
                   l_name: empire_customer.lname,
                   add_1: empire_customer.street_1,
