@@ -107,7 +107,6 @@ end
               state = params['state']
               PostcardExport.delete_all
               @purchase_list.each do |empire_customer|
-                if empire_customer.b_exp.present?
                 new = PostcardExport.create(
                   company: 'Empire',
                   group: 'rc_email_deadline',
@@ -118,7 +117,7 @@ end
                   license_number: empire_customer.license_num,
                   uid: empire_customer.uid,
                   exp: empire_customer.b_exp,
-                  merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                  merge_5: empire_customer.b_exp,
                   f_name: empire_customer.fname,
                   l_name: empire_customer.lname,
                   add_1: empire_customer.street_1,
@@ -128,7 +127,6 @@ end
                   zip: empire_customer.zip,
                   email: empire_customer.email)
                 new.save
-              end
               end
                 redirect_to postcard_exports_path(what:'email', record: 'no', state: 'NC', List: 'Purchase')
             end
