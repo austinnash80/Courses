@@ -52,7 +52,8 @@ end
         if state == 'NC'
           @state_exp = '2020-06-10'.to_date
           # EMAIL
-            full_1 = EmpireCustomer.where(lic_state: state).where.not(b_list: nil).all
+            full_1 = EmpireCustomer.where(lic_state: state).all
+            # full_1 = EmpireCustomer.where(lic_state: state).where.not(b_list: nil).all
             id = []
             uid = []
             full_1.each do |nc|
