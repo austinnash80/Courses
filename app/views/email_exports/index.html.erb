@@ -4,7 +4,8 @@
   <h1 class="text-center">Email Export Table</h1>
   <div class="text-center down20">
     <%= link_to raw('<i class="glyphicon glyphicon-download-alt" ></i> Email List'), email_exports_path(format: 'csv'), class: 'btn btn-primary btn-lg' %>
-    <h2 class="down 20"><strong>Export:</strong> <%= @send_email.count %></h2>
+    <h2 class="down 20"><strong>Send Email:</strong> <%= @send_email.count %></h2>
+    <h2 class="down 20"><strong>Total:</strong> <%= number_with_delimiter(@email_exports.count) %></h2>
   </div>
 <div class="down20">
 

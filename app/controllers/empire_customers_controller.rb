@@ -741,17 +741,17 @@ end #def
       rolling_states = ['CA','NY','NM']
 
       full_list = EmpireCustomer.where(lic_state: rolling_states).where.not(b_exp: nil).all # FIND UNIQUE PEOPLE FROM CORRECT STATES
-      # id = [] ## REMOVING DUPLICATED BY UID
-      # uid = []
-      # full_list.order(p_date: :desc).each do |empire_custer|
-      #   if uid.exclude?(empire_custer.uid)
-      #     id.push(empire_custer.id)
-      #     uid.push(empire_custer.uid)
-      #   end
-      # end
+      id = [] ## REMOVING DUPLICATED BY UID
+      uid = []
+      full_list.order(p_date: :desc).each do |empire_customer|
+        if uid.exclude?(empire_customer.uid)
+          id.push(empire_customer.id)
+          uid.push(empire_customer.uid)
+        end
+      end
 
       in_data_set = EmailExport.pluck(:empire_customer_id)
-      full_list.where.not(id: in_data_set).each do |empire_customer|  #ADD all RECORDS TO THE POSTCARD EXPORT TABLE
+      full_list.where(id: id).where.not(id: in_data_set).each do |empire_customer|  #ADD all RECORDS TO THE POSTCARD EXPORT TABLE
         new = EmailExport.create(
           empire_customer_id: empire_customer.id,
           uid: empire_customer.uid,
@@ -762,7 +762,7 @@ end #def
           group: 'rc_rolling_email',
           send_date: Date.today,
           exp_b: empire_customer.b_exp.blank? ? '' : empire_customer.b_exp,
-          # merge_4: empire_customer.b_exp.blank? ? '' : "#{empire_customer.b_exp.strftime("%b")} #{empire_customer.b_exp.day.ordinalize}",
+          merge_4: empire_customer.b_exp.blank? ? '' : "#{empire_customer.b_exp.strftime("%B")} #{empire_customer.b_exp.day.ordinalize}",
           f_name: empire_customer.fname,
           l_name: empire_customer.lname,
           email: empire_customer.email)
@@ -866,10 +866,10 @@ end #def
       ca_g4_merge_2 =
       ca_merge_3 = 'CA' ## Relevent for all CA
       ca_merge_5 = "California 45-Hour Full Renewal Package - $49"
-      EmailExport.where(uid: (@ca_email_1 +  @ca_email_2 + @ca_email_3)).update_all send_email: 'yes', subject: ca_g1_subject, merge_1: ca_g1_merge_1, merge_2: ca_g1_merge_2, merge_3: ca_merge_3, merge_5: ca_merge_5
-      EmailExport.where(uid: (@ca_email_4 +  @ca_email_5 + @ca_email_6 + @ca_email_7)).update_all send_email: 'yes', subject: ca_g2_subject, merge_1: ca_g2_merge_1, merge_2: ca_g2_merge_2, merge_3: ca_merge_3, merge_5: ca_merge_5
-      EmailExport.where(uid: (@ca_email_8 +  @ca_email_9)).update_all send_email: 'yes', subject: ca_g3_subject, merge_1: ca_g3_merge_1, merge_3: ca_merge_3, merge_5: ca_merge_5
-      EmailExport.where(uid: (@ca_email_10 +  @ca_email_11)).update_all send_email: 'yes', subject: ca_g4_subject, merge_1: ca_g4_merge_1, merge_3: ca_merge_3, merge_5: ca_merge_5
+      EmailExport.where.not(merge_4: nil).where(uid: (@ca_email_1 +  @ca_email_2 + @ca_email_3)).update_all send_email: 'yes', subject: ca_g1_subject, merge_1: ca_g1_merge_1, merge_2: ca_g1_merge_2, merge_3: ca_merge_3, merge_5: ca_merge_5
+      EmailExport.where.not(merge_4: nil).where(uid: (@ca_email_4 +  @ca_email_5 + @ca_email_6 + @ca_email_7)).update_all send_email: 'yes', subject: ca_g2_subject, merge_1: ca_g2_merge_1, merge_2: ca_g2_merge_2, merge_3: ca_merge_3, merge_5: ca_merge_5
+      EmailExport.where.not(merge_4: nil).where(uid: (@ca_email_8 +  @ca_email_9)).update_all send_email: 'yes', subject: ca_g3_subject, merge_1: ca_g3_merge_1, merge_3: ca_merge_3, merge_5: ca_merge_5
+      EmailExport.where.not(merge_4: nil).where(uid: (@ca_email_10 +  @ca_email_11)).update_all send_email: 'yes', subject: ca_g4_subject, merge_1: ca_g4_merge_1, merge_3: ca_merge_3, merge_5: ca_merge_5
     end
     if params['ny'] == 'yes'
       ny_g1_subject = 'NY Early Bird Discount 15% Off' ## g1 = ny_email_1, ny_email_2, ny_email_3
@@ -886,10 +886,10 @@ end #def
       ny_g4_merge_2 =
       ny_merge_3 = 'NY' ## Relevent for all NY
       ny_merge_5 = "New York 22.5-Hour Full Renewal Package - $59.50"
-      EmailExport.where(uid: (@ny_email_1 +  @ny_email_2 + @ny_email_3)).update_all send_email: 'yes', subject: ny_g1_subject, merge_1: ny_g1_merge_1, merge_2: ny_g1_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
-      EmailExport.where(uid: (@ny_email_4 +  @ny_email_5 + @ny_email_6 + @ny_email_7)).update_all send_email: 'yes', subject: ny_g2_subject, merge_1: ny_g2_merge_1, merge_2: ny_g2_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
-      EmailExport.where(uid: (@ny_email_8 +  @ny_email_9)).update_all send_email: 'yes', subject: ny_g3_subject, merge_1: ny_g3_merge_1, merge_2: ny_g3_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
-      EmailExport.where(uid: (@ny_email_10 +  @ny_email_11)).update_all send_email: 'yes', subject: ny_g4_subject, merge_1: ny_g4_merge_1, merge_2: ny_g3_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
+      EmailExport.where.not(merge_4: nil).where(uid: (@ny_email_1 +  @ny_email_2 + @ny_email_3)).update_all send_email: 'yes', subject: ny_g1_subject, merge_1: ny_g1_merge_1, merge_2: ny_g1_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
+      EmailExport.where.not(merge_4: nil).where(uid: (@ny_email_4 +  @ny_email_5 + @ny_email_6 + @ny_email_7)).update_all send_email: 'yes', subject: ny_g2_subject, merge_1: ny_g2_merge_1, merge_2: ny_g2_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
+      EmailExport.where.not(merge_4: nil).where(uid: (@ny_email_8 +  @ny_email_9)).update_all send_email: 'yes', subject: ny_g3_subject, merge_1: ny_g3_merge_1, merge_2: ny_g3_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
+      EmailExport.where.not(merge_4: nil).where(uid: (@ny_email_10 +  @ny_email_11)).update_all send_email: 'yes', subject: ny_g4_subject, merge_1: ny_g4_merge_1, merge_2: ny_g3_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
     end
     if params['nm'] == 'yes'
       nm_g1_subject = 'NM Early Bird Discount 15% Off' ## g1 = nm_email_1, nm_email_2, nm_email_3
@@ -906,10 +906,10 @@ end #def
       nm_g4_merge_2 =
       nm_merge_3 = 'NM' ## Relevent for all NM
       nm_merge_5 = "New Mexico 24-Hour Full Renewal Package - $159.50"
-      EmailExport.where(uid: (@nm_email_1 +  @nm_email_2 +  @nm_email_3)).update_all send_email: 'yes', subject: nm_g1_subject, merge_1: nm_g1_merge_1, merge_2: nm_g1_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
-      EmailExport.where(uid: (@nm_email_4 +  @nm_email_5 +  @nm_email_6 +  @nm_email_7)).update_all send_email: 'yes', subject: nm_g2_subject, merge_1: nm_g2_merge_1, merge_2: nm_g2_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
-      EmailExport.where(uid: (@nm_email_8 +  @nm_email_9)).update_all send_email: 'yes', subject: nm_g3_subject, merge_1: nm_g3_merge_1, merge_2: nm_g3_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
-      EmailExport.where(uid: (@nm_email_10 +  @nm_email_11)).update_all send_email: 'yes', subject: nm_g4_subject, merge_1: nm_g4_merge_1, merge_2: nm_g3_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
+      EmailExport.where.not(merge_4: nil).where(uid: (@nm_email_1 +  @nm_email_2 +  @nm_email_3)).update_all send_email: 'yes', subject: nm_g1_subject, merge_1: nm_g1_merge_1, merge_2: nm_g1_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
+      EmailExport.where.not(merge_4: nil).where(uid: (@nm_email_4 +  @nm_email_5 +  @nm_email_6 +  @nm_email_7)).update_all send_email: 'yes', subject: nm_g2_subject, merge_1: nm_g2_merge_1, merge_2: nm_g2_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
+      EmailExport.where.not(merge_4: nil).where(uid: (@nm_email_8 +  @nm_email_9)).update_all send_email: 'yes', subject: nm_g3_subject, merge_1: nm_g3_merge_1, merge_2: nm_g3_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
+      EmailExport.where.not(merge_4: nil).where(uid: (@nm_email_10 +  @nm_email_11)).update_all send_email: 'yes', subject: nm_g4_subject, merge_1: nm_g4_merge_1, merge_2: nm_g3_merge_2, merge_3: nm_merge_3, merge_5: nm_merge_5
     end
   end
 

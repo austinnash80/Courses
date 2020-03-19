@@ -9,7 +9,7 @@ class EmailExportsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { send_data @send_email.to_csv, filename: "empire_weekly_rolling_state_email_#{Date.today}.csv" }
+      format.csv { send_data @email_exports.to_csv, filename: "empire_weekly_rolling_state_email_#{Date.today}.csv" }
       # format.csv { send_data @email_exports.to_csv, filename: "empire_weekly_rolling_state_email_#{Date.today}.csv" }
     end
 
