@@ -866,6 +866,8 @@ end #def
       ca_g4_merge_2 =
       ca_merge_3 = 'CA' ## Relevent for all CA
       ca_merge_5 = "California 45-Hour Full Renewal Package - $49"
+      #Purchased in the this cycle -> CA 4 year renewal.
+
       EmailExport.where.not(merge_4: nil).where(uid: (@ca_email_1 +  @ca_email_2 + @ca_email_3)).update_all send_email: 'yes', subject: ca_g1_subject, merge_1: ca_g1_merge_1, merge_2: ca_g1_merge_2, merge_3: ca_merge_3, merge_5: ca_merge_5
       EmailExport.where.not(merge_4: nil).where(uid: (@ca_email_4 +  @ca_email_5 + @ca_email_6 + @ca_email_7)).update_all send_email: 'yes', subject: ca_g2_subject, merge_1: ca_g2_merge_1, merge_2: ca_g2_merge_2, merge_3: ca_merge_3, merge_5: ca_merge_5
       EmailExport.where.not(merge_4: nil).where(uid: (@ca_email_8 +  @ca_email_9)).update_all send_email: 'yes', subject: ca_g3_subject, merge_1: ca_g3_merge_1, merge_3: ca_merge_3, merge_5: ca_merge_5
@@ -927,7 +929,9 @@ end #def
       @ca_email_10 = []
       @ca_email_11 = []
       email_no = []
-      @full_list.where(lic_state: 'CA').each do |empire_customer|
+      # REMOVE THE PEOPLE WHO ALREADY PURCHASED WITH IN THIS CYCLE -> CA 4 year cycle
+      ca_uid_purchase = EmpireCustomer.where('p_date > ?', Date.today - 3.years).pluck(:uid)
+      @full_list.where(lic_state: 'CA').where.not(uid: ca_uid_purchase).each do |empire_customer|
         if empire_customer.b_exp.present?
           Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 180.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_1.push(empire_customer.uid) :
           Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 150.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ca_email_2.push(empire_customer.uid) :
@@ -959,7 +963,9 @@ end #def
       @ny_email_10 = []
       @ny_email_11 = []
       email_no = []
-      @full_list.where(lic_state: 'NY').each do |empire_customer|
+      # REMOVE THE PEOPLE WHO ALREADY PURCHASED WITH IN THIS CYCLE -> CA 2 year cycle
+      ny_uid_purchase = EmpireCustomer.where('p_date > ?', Date.today - 17.months).pluck(:uid)
+      @full_list.where(lic_state: 'NY').where.not(uid: ny_uid_purchase).each do |empire_customer|
         if empire_customer.b_exp.present?
           Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 180.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_1.push(empire_customer.uid) :
           Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 150.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @ny_email_2.push(empire_customer.uid) :
@@ -991,7 +997,9 @@ end #def
       @nm_email_10 = []
       @nm_email_11 = []
       email_no = []
-      @full_list.where(lic_state: 'NM').each do |empire_customer|
+      # REMOVE THE PEOPLE WHO ALREADY PURCHASED WITH IN THIS CYCLE -> NM 3 year cycle
+      nm_uid_purchase = EmpireCustomer.where('p_date > ?', Date.today - 2.years).pluck(:uid)
+      @full_list.where(lic_state: 'NM').where(uid: nm_uid_purchase).each do |empire_customer|
         if empire_customer.b_exp.present?
           Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 180.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_1.push(empire_customer.uid) :
           Date.today.at_beginning_of_week.strftime('%Y-%m-%d') == (empire_customer.b_exp.to_date - 150.days).at_beginning_of_week.strftime('%Y-%m-%d') ? @nm_email_2.push(empire_customer.uid) :
