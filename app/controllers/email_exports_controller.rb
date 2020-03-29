@@ -4,8 +4,8 @@ class EmailExportsController < ApplicationController
   # GET /email_exports
   # GET /email_exports.json
   def index
-    @email_exports = EmailExport.where.not(email: nil).all
-    @send_email = @email_exports.where(send_email: 'yes').all
+    @email_exports = EmailExport.all
+    @send_email = EmailExport.where(send_email: 'yes').all
 
     respond_to do |format|
       format.html
