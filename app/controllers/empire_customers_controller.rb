@@ -272,7 +272,7 @@ end
                   license_number: empire_customer.license_num,
                   uid: empire_customer.uid,
                   exp: empire_customer.b_exp,
-                  merge_1: '16-Hour Pennsylvania Package',
+                  merge_1: '14-Hour Pennsylvania Package',
                   merge_2: 'Just $64.50',
                   merge_3: 'ReturningStudent20',
                   merge_5: empire_customer.b_exp,
