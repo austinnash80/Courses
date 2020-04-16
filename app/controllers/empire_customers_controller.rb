@@ -721,7 +721,7 @@ end
       end
 
       nm_g1_merge_1 = '24-Hour New Mexico CE Package' ##UPDATING the records that were just added with the correct 'MERGE' text
-      nm_g1_merge_2 = '$155.50'
+      nm_g1_merge_2 = '$149.50'
       nm_g1_merge_3 = 'ReturningStudent20'
       PostcardExport.where(empire_customer_id: (@nm_postcard_1 +  @nm_postcard_2)).update_all merge_1: nm_g1_merge_1, merge_2: nm_g1_merge_2, merge_3: nm_g1_merge_3
 

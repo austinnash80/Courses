@@ -1,5 +1,5 @@
 <%= simple_form_for(@pes_course) do |f| %>
-</br>
+<br>
   <%= f.error_notification %>
   <div class="row">
     <div class="col-lg-offset-3">
@@ -7,7 +7,7 @@
     </div>
   </div>
   <div class="col-lg-offset-3 col-lg-6 well well-white">
-  </br>
+  <br>
     <div class="row">
       <div class="col-lg-3">
         <%= f.input :pes_number, label: 'PES Number'%>
@@ -29,10 +29,10 @@
         <%= f.input :tag, label: 'Course Tag', collection: @course_tags , as: :select %>
       </div>
     </div>
-<%#= f.input :active, label: 'Is Course Currently Active?', as: :radio_buttons, :checked => ['Yes', true] %>
-<%#= f.input :date_added, label: 'Course first seen on PES' %>
-<%#= f.input :date_removed, label: 'Course no longer active' %>
-</br>
+<%= f.input :active, as: :hidden, label: 'Is Course Currently Active?', as: :radio_buttons, :checked => ['Yes', true] %>
+<%= f.input :date_added, as: :hidden, label: 'Course first seen on PES' %>
+<%= f.input :date_removed, as: :hidden, label: 'Course no longer active' %>
+<br>
 <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
 </div>
 
