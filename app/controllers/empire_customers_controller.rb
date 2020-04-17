@@ -154,7 +154,7 @@ end
                   merge_1: '4-Hour North Carolina Package',
                   merge_2: 'Just $39.50',
                   merge_3: 'ReturningStudent20',
-                  merge_5: empire_customer.b_exp.strftime('%-m/%-d/%Y'),
+                  merge_5: empire_customer.b_exp,
                   f_name: empire_customer.fname,
                   l_name: empire_customer.lname,
                   add_1: empire_customer.street_1,
