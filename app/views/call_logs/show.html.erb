@@ -133,9 +133,9 @@
       <%= @call_log.question_answer %>
     </p>
 
-  </br>
+  <br>
 
-<% if @call_log.question_2_topic.empty? == false && @call_log.question_2_topic_other.empty? == false %>
+<% if @call_log.question_2_topic.blank? == false && @call_log.question_2_topic_other.blank? == false %>
 
 <h3 class=""><strong>Question 2</strong></h3>
 <!-- </br> -->

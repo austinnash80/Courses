@@ -31,7 +31,7 @@ class CallLogsController < ApplicationController
 
     respond_to do |format|
       if @call_log.save
-        format.html { redirect_to @call_log, notice: 'Call log was successfully created.' }
+        format.html { redirect_to call_logs_path, notice: 'Call log was successfully created.' }
         format.json { render :show, status: :created, location: @call_log }
       else
         format.html { render :new }
