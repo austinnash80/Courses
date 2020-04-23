@@ -27,7 +27,7 @@
   </thead>
 
   <tbody>
-    <% @call_logs.each do |call_log| %>
+    <% @call_logs.last(100).each do |call_log| %>
       <tr>
         <td><%= call_log.taken %></td>
         <td><%= call_log.call_date %></td>
