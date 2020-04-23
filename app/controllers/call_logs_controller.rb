@@ -75,7 +75,7 @@ class CallLogsController < ApplicationController
   def form_collections
     @companies = ['Sequoia', 'Empire', 'Pacific', 'Tax Preparers']
     @rating = 1..3
-    @q_topic = ['1','2','3','other']
+    @q_topic = ['Pre-Licensing Question','other']
     @des = ['CPA','EA', 'Tax Preparer', 'Empire', 'Unknown']
     @questions = ['Q1', 'Q2', 'Q3', 'Other']
     @answered = ['Answered', 'Not Answered']

@@ -37,53 +37,49 @@
 
   <%= f.input :customer, label: 'Was the caller a customer?', as: :radio_buttons %>
 <div class="row">
-  <div class="col-lg-3">
+  <div class="col-lg-2">
     <%= f.input :UID, label: false, placeholder: 'UID' %>
+  </div>
+  <div class="col-lg-5">
+    <%= f.input :caller_fname, label: false, placeholder: 'First Name' %>
+  </div>
+  <div class="col-lg-5">
+    <%= f.input :caller_lname, label: false, placeholder: 'Last Name' %>
   </div>
 </div>
 </br>
 
-  <div class="row">
-    <div class="col-lg-4">
-      <%= f.input :caller_fname, label: false, placeholder: 'First Name' %>
-    </div>
-    <div class="col-lg-4">
-      <%= f.input :caller_lname, label: false, placeholder: 'Last Name' %>
-    </div>
-  </div>
-</br>
-
 <div class="well">
-  <ul class="nav nav-tabs">
+  <!-- <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#q1">Question 1</a></li>
     <li><a data-toggle="tab" href="#q2">Question 2</a></li>
     <li><a data-toggle="tab" href="#q3">Addtional</a></li>
-  </ul>
+  </ul> -->
 <!-- Tab 1 Start -->
   <div class="tab-content">
     <div id="q1" class="tab-pane fade in active">
-      <h2>Question 1</h2>
-      </br>
+      <h2>Question</h2>
+      <br>
         <%= f.input :question_topic, label: 'Select Topic', collection: @q_topic, as: :select %>
         <%= f.input :question_1_topic_other, label: false, placeholder: 'If Other' %>
-        <%= f.input :question_1, label: 'Select Question',  as: :select, collection: @questions %>
-        <%= f.input :question_1_other, label: false, placeholder: 'If Other' %>
-        <%= f.input :answered, label: 'Were you able to answer this question?', as: :radio_buttons %>
-        <%= f.input :question_answer, label: false, placeholder: 'Enter Answer'  %>
+        <%#= f.input :question_1, label: 'Select Question',  as: :select, collection: @questions %>
+        <%#= f.input :question_1_other, label: false, placeholder: 'If Other' %>
+        <%= f.input :question_answer, label: false, placeholder: 'Answer Given'  %>
+        <%= f.input :answered, label: 'Was the caller happy with the answer?', as: :radio_buttons %>
     </div>
-    <div id="q2" class="tab-pane fade">
+    <!-- <div id="q2" class="tab-pane fade">
       <h2>Question 2</h2>
-      </br>
-        <%= f.input :question_2_topic, label: 'Select Topic', collection: @q_topic, as: :select %>
-        <%= f.input :question_2_topic_other, label: false, placeholder: 'If Other Topics' %>
-        <%= f.input :question_2, label: 'Select Question', collection: @questions , as: :select %>
-        <%= f.input :question_2_other, label: false, placeholder: 'If Other Question' %>
-        <%= f.input :question_2_answered, label: 'Were you able to answer this question?', as: :radio_buttons %>
-        <%= f.input :question_2_answer, label: false, placeholder: 'Enter Answer' %>
-    </div>
+      <br>
+        <%#= f.input :question_2_topic, label: 'Select Topic', collection: @q_topic, as: :select %>
+        <%#= f.input :question_2_topic_other, label: false, placeholder: 'If Other Topics' %>
+        <%#= f.input :question_2, label: 'Select Question', collection: @questions , as: :select %>
+        <%#= f.input :question_2_other, label: false, placeholder: 'If Other Question' %>
+        <%#= f.input :question_2_answered, label: 'Were you able to answer this question?', as: :radio_buttons %>
+        <%#= f.input :question_2_answer, label: false, placeholder: 'Answer Given' %>
+    </div> -->
     <div id="q3" class="tab-pane fade">
       <h2> All Addtional Questions</h2>
-      </br>
+      <br>
         <%= f.input :question_additional, label: false, placeholder: 'Addtional Questions' %>
         <%= f.input :question_additional_answer, label: false, placeholder: 'Enter Answer'  %>
     </div>
@@ -92,7 +88,7 @@
 </br>
 </br>
 
-<div class="well well-white">
+<!-- <div class="well well-white">
   <div class="row">
     <div class="col-lg-3">
       <%= f.input :question_difficulty, label: 'Question Difficulty', as: :radio_buttons, collection: @rating %>
@@ -107,7 +103,7 @@
       <%= f.input :caller_satisfaction, label: 'Call Satisfaction', as: :radio_buttons, collection: @rating %>
     </div>
   </div>
-  </div>
+  </div> -->
 <!-- </br> -->
 </br>
   <%= f.input :note, label: false, placeholder: 'Additional Notes From This Call' %>
