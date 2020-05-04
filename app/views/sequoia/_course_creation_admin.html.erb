@@ -23,7 +23,7 @@
   </thead>
   <tbody>
     <% @empire_courses.each do |empire_course| %>
-      <tr>
+      <tr class="white_b">
         <td><%= link_to empire_course.title, empire_course %></td>
         <td><%= empire_course.extra_s %></td>
         <td><%= CourseCreationTask.where(:empire_course_id => empire_course.id).count %> / <%= CourseCreationTemplete.where(:extra_s => empire_course.extra_s ).count %></td>
