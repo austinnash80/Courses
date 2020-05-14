@@ -21,7 +21,7 @@ class MasterListsController < ApplicationController
   end
 
   def no_mail
-    @no_mails = MasterList.where(no_mail: 'yes').order(:lname).all
+    @no_mails = MasterList.where(no_mail: 'yes').order(updated_at: :DESC).all
     @no_mails_count = MasterList.where(no_mail: 'yes').count
 
      @no_mail_export = MasterList.where(no_mail: 'yes').all

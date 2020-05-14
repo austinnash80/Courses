@@ -30,6 +30,7 @@
       <th>State</th>
       <th>Zip</th>
       <th>No mail</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -51,6 +52,7 @@
         <td><%= no_mail.city %></td>
         <td><%= no_mail.state %></td>
         <td><%= no_mail.zip %></td>
+        <td><%= no_mail.updated_at %></td>
         <td class="red"><strong><%= no_mail.no_mail %></strong></td>
       </tr>
     <% end %>
