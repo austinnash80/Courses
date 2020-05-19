@@ -1,0 +1,32 @@
+<div class="well text-center">
+  <h1><big>Empire RC States</big></h1>
+  <p id="notice"><%= notice %></p>
+</div>
+
+
+
+<h2 class="down20">Current List</h2>
+
+<p><strong>State:</strong> <%= params['st'] %></p>
+<p><strong>Current List:</strong> <%= @name[0] %></p>
+<p><strong>Current List Quantity:</strong> <%= number_with_delimiter(@count) %></p>
+<div class="">
+  <% if params['delete'] == 'confirm' %>
+    <%= link_to 'Confirm', upload_list_empire_rc_states_path(st: params['st'], delete_confirm: 'yes'), class: 'btn btn-danger', data: {disable_with: "Loading..."} %>
+  <% elsif %>
+    <%= link_to 'Delete', upload_list_empire_rc_states_path(st: params['st'], delete: 'confirm'), class: 'btn btn-danger' %>
+  <% end %>
+</div>
+
+<% unless @count > 0 %>
+  <div class="down20">
+    <h2>New List</h2>
+    <%= form_tag import_empire_master_lists_path, multipart: true do %>
+    <%= file_field_tag :file, label: 'File', class: 'btn btn-default' %>
+    <%= hidden_field_tag(:st, params['st']) %>
+  <br>
+    <%= submit_tag 'Upload', class: 'btn btn-primary', data: {disable_with: "Loading..."} %>
+  <% end %>
+
+  </div>
+<% end %>

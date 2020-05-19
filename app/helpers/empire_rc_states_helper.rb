@@ -1,0 +1,2 @@
+module EmpireRcStatesHelper
+end

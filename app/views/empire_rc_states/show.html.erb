@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>State:</strong>
+  <%= @empire_rc_state.state %>
+</p>
+
+<p>
+  <strong>Exp type:</strong>
+  <%= @empire_rc_state.exp_type %>
+</p>
+
+<p>
+  <strong>Master list name:</strong>
+  <%= @empire_rc_state.master_list_name %>
+</p>
+
+<p>
+  <strong>Master list quantity:</strong>
+  <%= @empire_rc_state.master_list_quantity %>
+</p>
+
+<p>
+  <strong>Master list update date:</strong>
+  <%= @empire_rc_state.master_list_update_date %>
+</p>
+
+<p>
+  <strong>Master list update next:</strong>
+  <%= @empire_rc_state.master_list_update_next %>
+</p>
+
+<p>
+  <strong>List notes:</strong>
+  <%= @empire_rc_state.list_notes %>
+</p>
+
+<%= link_to 'Edit', edit_empire_rc_state_path(@empire_rc_state) %> |
+<%= link_to 'Back', empire_rc_states_path %>

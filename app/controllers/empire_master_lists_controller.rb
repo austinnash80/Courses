@@ -81,7 +81,8 @@ class EmpireMasterListsController < ApplicationController
 
   def import #Uploading CSV function
     EmpireMasterList.my_import(params[:file])
-    redirect_to empire_master_lists_path, notice: "Upload Complete"
+    redirect_to upload_list_empire_rc_states_path(st: params['st'], upload: 'complete'), notice: "Upload Complete"
+    # redirect_to empire_master_lists_path, notice: "Upload Complete"
   end
 
   private

@@ -1,0 +1,14 @@
+
+<%= simple_form_for(@empire_rc_state) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :master_list_update_date, label: 'Update Date' %>
+    <%= f.input :master_list_update_next, label: 'Next Update' %>
+    <%= f.input :list_notes %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
+  </div>
+<% end %>

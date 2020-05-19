@@ -1,0 +1,2 @@
+class EmpireRcState < ApplicationRecord
+end

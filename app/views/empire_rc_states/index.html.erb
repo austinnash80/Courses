@@ -1,0 +1,60 @@
+<div class="well text-center">
+  <h1><big>Empire States</big></h1>
+  <p id="notice"><%= notice %></p>
+</div>
+
+<table class="table table-outline">
+  <thead>
+    <tr class="grey-b-200">
+      <th>State</th>
+      <th>Exp Type</th>
+      <th>List</th>
+      <th>Count</th>
+      <th>Customers</th>
+      <th>Active</th>
+      <th>Market Share</th>
+      <!-- <th>List otes</th> -->
+      <th colspan="1"></th>
+      <th width='8%'>Last Update (List)</th>
+      <th width='8%'>Next Update (List)</th>
+      <th width='5%'></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @empire_rc_states.each do |empire_rc_state| %>
+      <% if params['st'].present? && empire_rc_state.state == params['st'] %>
+        <tr class="alert alert-success">
+      <% else %>
+        <tr class="">
+      <% end %>
+        <td><%= empire_rc_state.state %></td>
+        <td><%= empire_rc_state.exp_type %></td>
+        <td><%= empire_rc_state.master_list_name %></td>
+        <td><%= empire_rc_state.master_list_quantity.present? ? number_with_delimiter(empire_rc_state.master_list_quantity) : '' %></td>
+
+        <td><%= empire_rc_state.customers.present? ? number_with_delimiter(empire_rc_state.customers) : ''%></td>
+        <td><%= empire_rc_state.matched_customers.present? ? number_with_delimiter(empire_rc_state.matched_customers) : ''%></td>
+        <td><%= empire_rc_state.master_list_quantity.present? && empire_rc_state.matched_customers? ? number_to_percentage((empire_rc_state.matched_customers.to_f / empire_rc_state.master_list_quantity.to_f) * 100, precision:1) : '' %></td>
+        <td class="text-center">
+          <div class="btn-group">
+          <%= link_to 'Upload New List', upload_list_empire_rc_states_path(st: empire_rc_state.state), class: 'btn btn-sm btn-primary btn-150' %>
+          <%= link_to 'Update Customers', empire_rc_states_path(update_customers: empire_rc_state.state), class: 'btn btn-sm btn-primary btn-150', data: {disable_with: "Loading..."} %>
+          <%#= link_to 'View', empire_rc_state, class: 'btn btn-sm btn-primary btn-75' %>
+          </div>
+        </td>
+        <td><%= empire_rc_state.master_list_update_date.strftime('%-m/%-d/%Y') %></td>
+        <td><%= empire_rc_state.master_list_update_next.strftime('%-m/%-d/%Y') %></td>
+        <td><%= link_to 'Edit', edit_empire_rc_state_path(empire_rc_state), class: '' %></td>
+
+
+        <!-- <td><%#= empire_rc_state.list_notes %></td> -->
+        <!-- <td><%#= link_to 'Destroy', empire_rc_state, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Add New State', new_empire_rc_state_path %>

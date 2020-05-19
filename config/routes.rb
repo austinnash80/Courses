@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  resources :empire_rc_states do
+    collection {
+      get 'upload_list'
+    }
+  end
   resources :email_records
   resources :email_exports
   resources :quotes
