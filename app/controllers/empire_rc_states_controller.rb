@@ -114,6 +114,6 @@ class EmpireRcStatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def empire_rc_state_params
-      params.require(:empire_rc_state).permit(:state, :exp_type, :master_list_name, :master_list_quantity, :master_list_update_date, :master_list_update_next, :list_notes, :customers, :matched_customers)
+      params.require(:empire_rc_state).permit(:state, :exp_type, :master_list_name, :master_list_quantity, :master_list_update_date, :master_list_update_next, :list_notes, :customers, :matched_customers, :exp_date)
     end
 end
