@@ -14,7 +14,9 @@ class EmpireRcStatesController < ApplicationController
       else
         st = params['update_customers']
       end
+
       rc_state = EmpireRcState.where(state: params['update_customers']).all
+      
       master_list_name = rc_state.pluck(:master_list_name)
 
       ## FIND THE UNIQUE CUSTOMERS FROM THE GIVEN STATE. ADD TO ARRAY AND UPDATE THE RC STATE TABLE
