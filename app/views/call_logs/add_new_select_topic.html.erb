@@ -1,5 +1,7 @@
 <div class="text-center">
   <h1>Add New 'Select Topic'</h1>
+  <%= link_to 'View/Edit All Topics', call_logs_path(path: 'new_topic') %>
+  <br><br>
 </div>
 <div class="well well-white col-md-6 col-md-offset-3 ">
   <%= simple_form_for(@call_log) do |f| %>
