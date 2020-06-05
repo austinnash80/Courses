@@ -1,0 +1,14 @@
+<table class="table table-outline table-hover">
+  <thead>
+    <th>Topics</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @call_logs.each do |call_log| %>
+      <tr>
+        <td><%= call_log.new_topic %></td>
+        <td><%= link_to 'Edit', edit_call_log_path(call_log, path: 'edit_topic') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

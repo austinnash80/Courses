@@ -3,11 +3,17 @@
   <h1>Call Logs</h1>
 </div>
 
-<br>
-  <%= link_to 'Add New Call Log', new_call_log_path, class: 'btn btn-primary' %>
-<br>
-<h3><%#= link_to 'Stats', sales_report_call_log_stats_path %></h3>
 
+<h3><%#= link_to 'Stats', sales_report_call_log_stats_path %></h3>
+<% if params['path'] == 'new_topic' %>
+  <br>
+    <%= link_to 'Add New Topic', add_new_select_topic_call_logs_path, class: 'btn btn-primary' %>
+  <br><br>
+  <%= render(:partial => 'topics') %>
+<% else %>
+  <br>
+    <%= link_to 'Add New Call Log', new_call_log_path, class: 'btn btn-primary' %>
+  <br><br>
 <table class="table table-hover table-outline">
   <thead>
     <tr>
@@ -47,3 +53,4 @@
     <% end %>
   </tbody>
 </table>
+<% end %>

@@ -4,7 +4,11 @@ class CallLogsController < ApplicationController
   # GET /call_logs
   # GET /call_logs.json
   def index
-    @call_logs = CallLog.order(:call_date => 'desc').all
+    if params['path'] == 'new_topic'
+      @call_logs = CallLog.where(select_topic: true).order(created_at: 'desc').all
+    else
+      @call_logs = CallLog.where(select_topic: nil).order(:call_date => 'desc').all
+    end
   end
 
   # GET /call_logs/1
@@ -16,7 +20,11 @@ class CallLogsController < ApplicationController
   def new
     @call_log = CallLog.new
     name
+    @select_topics = CallLog.where(select_topic: true).order(created_at: 'desc').pluck(:new_topic)
     form_collections
+  end
+  def add_new_select_topic
+    @call_log = CallLog.new
   end
 
   # GET /call_logs/1/edit
@@ -31,7 +39,11 @@ class CallLogsController < ApplicationController
 
     respond_to do |format|
       if @call_log.save
-        format.html { redirect_to call_logs_path, notice: 'Call log was successfully created.' }
+        if params['path'] == 'new_topic'
+          format.html { redirect_to call_logs_path(path: 'new_topic'), notice: 'Call log was successfully created.' }
+        else
+          format.html { redirect_to call_logs_path, notice: 'Call log was successfully created.' }
+        end
         format.json { render :show, status: :created, location: @call_log }
       else
         format.html { render :new }
@@ -45,7 +57,11 @@ class CallLogsController < ApplicationController
   def update
     respond_to do |format|
       if @call_log.update(call_log_params)
-        format.html { redirect_to @call_log, notice: 'Call log was successfully updated.' }
+        if params['path'] == 'new_topic'
+          format.html { redirect_to call_logs_path(path: 'new_topic'), notice: 'Call log was successfully created.' }
+        else
+          format.html { redirect_to @call_log, notice: 'Call log was successfully updated.' }
+        end
         format.json { render :show, status: :ok, location: @call_log }
       else
         format.html { render :edit }
@@ -75,7 +91,7 @@ class CallLogsController < ApplicationController
   def form_collections
     @companies = ['Sequoia', 'Empire', 'Pacific', 'Tax Preparers']
     @rating = 1..3
-    @q_topic = ['Pre-Licensing Question','other']
+    @q_topic = ['Pre-Licensing Question','Print Full Course','other']
     @des = ['CPA','EA', 'Tax Preparer', 'Empire', 'Unknown']
     @questions = ['Q1', 'Q2', 'Q3', 'Other']
     @answered = ['Answered', 'Not Answered']
@@ -89,6 +105,6 @@ class CallLogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def call_log_params
-      params.require(:call_log).permit(:company, :caller_des, :caller_state, :customer, :caller_fname, :caller_lname, :UID, :call_length, :question_topic, :question_1, :question_2, :answered, :question_answer, :question_difficulty, :caller_satisfaction, :extra_b, :extra_i, :extra_s, :taken, :call_date, :note, :question_1_topic_other, :question_2_topic, :question_2_topic_other, :question_1_other, :question_2_other, :question_2_answered, :question_2_answer, :question_additional, :question_additional_answer, :question_satisfaction, :call_difficulty, :call_time)
+      params.require(:call_log).permit(:company, :caller_des, :caller_state, :customer, :caller_fname, :caller_lname, :UID, :call_length, :question_topic, :question_1, :question_2, :answered, :question_answer, :question_difficulty, :caller_satisfaction, :extra_b, :extra_i, :extra_s, :taken, :call_date, :note, :question_1_topic_other, :question_2_topic, :question_2_topic_other, :question_1_other, :question_2_other, :question_2_answered, :question_2_answer, :question_additional, :question_additional_answer, :question_satisfaction, :call_difficulty, :call_time, :select_topic, :new_topic)
     end
 end

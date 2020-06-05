@@ -11,10 +11,10 @@
         <%= f.input :exp_type, label: 'Exp Type', as: :select, collection: ['Deadline', 'Rolling'] %>
       </div>
     </div>
-        <%= f.input :master_list_name, as: :hidden %>
-        <%= f.input :master_list_quantity, as: :hidden %>
-    <%= f.input :master_list_update_date, as: :hidden %>
-    <%= f.input :master_list_update_next, as: :hidden %>
+    <%= f.input :master_list_name, as: :hidden %>
+    <%= f.input :master_list_quantity, as: :hidden %>
+    <%= f.input :master_list_update_date, label: 'Last List Upload' %>
+    <%= f.input :master_list_update_next, label: 'Date For Next List Upload' %>
     <%= f.input :list_notes %>
   </div>
 

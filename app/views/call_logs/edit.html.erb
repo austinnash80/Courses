@@ -5,7 +5,23 @@
 
 </br>
 <div class="well well-white col-md-6 col-md-offset-3">
-<%= render 'form_edit', call_log: @call_log %>
+  <% if params['path'] == 'edit_topic' %>
+    <%= simple_form_for(@call_log) do |f| %>
+      <div class="row">
+        <div class="col-lg-6">
+          <%= f.input :new_topic, label: 'New Topic', placeholder: 'ex: Print Course' %>
+        </div>
+      </div>
+      <%= f.input :select_topic, label: 'Add Topic', :input_html => { :checked => true } %>
+
+      <%= hidden_field_tag(:path, 'new_topic') %>
+
+      <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
+
+      <% end %>
+  <% else %>
+    <%= render 'form_edit', call_log: @call_log %>
+  <% end %>
 </div>
 
 <!-- <%= link_to 'Back', call_logs_path %> -->

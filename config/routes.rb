@@ -68,7 +68,11 @@ Rails.application.routes.draw do
     end
 
   resources :course_comments
-  resources :call_logs
+  resources :call_logs do
+    collection do
+      get 'add_new_select_topic'
+    end
+  end
   resources :seq_no_mails do
     collection {post :import}
     collection do

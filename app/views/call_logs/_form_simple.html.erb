@@ -60,7 +60,7 @@
     <div id="q1" class="tab-pane fade in active">
       <h2>Question</h2>
       <br>
-        <%= f.input :question_topic, label: 'Select Topic', collection: @q_topic, as: :select %>
+        <%= f.input :question_topic, label: 'Select Topic', collection: @select_topics, as: :select %>
         <%= f.input :question_1_topic_other, label: false, placeholder: 'If Other' %>
         <%#= f.input :question_1, label: 'Select Question',  as: :select, collection: @questions %>
         <%#= f.input :question_1_other, label: false, placeholder: 'If Other' %>
