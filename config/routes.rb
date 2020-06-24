@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :master_cpas do
+    collection {post :import}
+  end
   resources :empire_rc_states do
     collection {
       get 'upload_list'

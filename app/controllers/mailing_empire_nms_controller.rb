@@ -69,6 +69,8 @@ class MailingEmpireNmsController < ApplicationController
       @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-11-30','2020-12-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).where(customer: nil).where(no_mail: nil).order(:id).all
     elsif params['filter'] == 'nov_20'
       @mailing_empire_nms = MailingEmpireNm.where(expires: ['2020-12-31','2021-01-31']).where(licese_status: 'Active').where(dup_number: [1,nil]).where(customer: nil).where(no_mail: nil).order(:id).all
+    elsif params['filter'] == 'dec_20'
+      @mailing_empire_nms = MailingEmpireNm.where(expires: ['2021-01-31','2021-02-28']).where(licese_status: 'Active').where(dup_number: [1,nil]).where(customer: nil).where(no_mail: nil).order(:id).all
     end
 # end Button Filters
 

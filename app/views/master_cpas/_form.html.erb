@@ -1,0 +1,28 @@
+
+<%= simple_form_for(@master_cpa) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :list %>
+    <%= f.input :string %>
+    <%= f.input :lid %>
+    <%= f.input :lic %>
+    <%= f.input :lic_st %>
+    <%= f.input :fname %>
+    <%= f.input :mi %>
+    <%= f.input :lname %>
+    <%= f.input :suf %>
+    <%= f.input :co %>
+    <%= f.input :add2 %>
+    <%= f.input :add %>
+    <%= f.input :city %>
+    <%= f.input :st %>
+    <%= f.input :zip %>
+    <%= f.input :membership %>
+    <%= f.input :ethics %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
