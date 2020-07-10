@@ -18,8 +18,9 @@ class MasterCpaNoMatchesController < ApplicationController
       search_date: Date.today,
       )
       new.save
+      redirect_to master_cpas_path(), notice: "UID #{uid} was added to 'No Match' table"
     end
-    
+
   end
 
   # GET /master_cpa_no_matches/1
