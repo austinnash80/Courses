@@ -12,7 +12,6 @@
       <th>purchase_date</th>
       <th>product</th>
       <th>First</th>
-      <th>MI</th>
       <th>Last</th>
       <th>Address</th>
       <th>Address 2</th>
@@ -60,10 +59,10 @@
       <%= text_field_tag "id", '', placeholder: 'Search by Last Name', class: "lname_field form-control", value: params['lname'] %>
     </div>
     <div class="col-md-2">
-      <%= text_field_tag "id", '', placeholder: 'Search by Zip', class: "zip_field form-control", value: params['zip'] %>
+      <%= text_field_tag "id", '', placeholder: 'Search by State', class: "state_field form-control", value: params['state'] %>
     </div>
     <div class="col-md-2">
-      <%= text_field_tag "id", '', placeholder: 'Search by State', class: "state_field form-control", value: params['state'] %>
+      <%= text_field_tag "id", '', placeholder: 'Search by Zip', class: "zip_field form-control", value: params['zip'] %>
     </div>
   </div>
   <div class="down20">
@@ -71,6 +70,12 @@
   </div>
 </div>
 <br><br>
+<div class="row">
+  <div class="col-md-2">
+    <input class="form-control" id="myInput" type="text" placeholder="filter..">
+  </div>
+</div>
+<br>
 <table class="table table-outline table-striped">
   <caption>CPA Master List</caption>
   <thead>
@@ -89,7 +94,7 @@
       <th>Action</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="myTable">
     <% @search_results.each do |results| %>
     <tr>
       <td><%= results.lid %></td>
@@ -117,6 +122,15 @@
 $(".search_link").click(function() {
   $(this).attr("href", function() {
     return this.href + "?zip=" + $('.zip_field').val() + "&lname=" + $('.lname_field').val().toUpperCase() + "&state=" + $('.state_field').val().toUpperCase() + "&uid=" + $('.uid_field').val();
+  });
+});
+
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
   });
 });
 </script>
