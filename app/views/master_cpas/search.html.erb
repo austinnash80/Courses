@@ -5,6 +5,8 @@
   <thead>
     <tr>
       <th>uid</th>
+      <th>Lic</th>
+      <th>Lic St.</th>
       <th>purchase_date</th>
       <th>product</th>
       <th>First</th>
@@ -22,8 +24,10 @@
     <%# @sequoia_customer.limit(1).each do |customer| %>
     <tr>
       <td><%= customer.uid %></td>
+      <td><%= customer.lic_num %></td>
+      <td><%= customer.lic_state %></td>
       <td><%= customer.purchase %></td>
-      <td><%= customer.product_1 %></td>
+      <td><%= customer.product_2.present? ? "#{customer.product_1 }, #{customer.product_2}" : customer.product_1 %></td>
       <td><%= customer.fname %></td>
       <td><%= customer.lname %></td>
       <td><%= customer.street_1 %></td>
@@ -61,7 +65,7 @@
   </div>
 </div>
 
-<table class="table table-outline">
+<table class="table table-outline table-striped">
   <caption>CPA Master List</caption>
   <thead>
     <tr>
