@@ -4,24 +4,56 @@ class MasterCpasController < ApplicationController
   # GET /master_cpas
   # GET /master_cpas.json
   def index
-    @master_cpas = MasterCpa.all
     new_cpa_membership = ["Unlimited CPA CPE Membership", "Unlimited CPA CPE Membership (Auto-Renew)"]
-    @cpa_memerships = SCustomer.where(product_1: new_cpa_membership).count
-    @cpa_memerships_new = SCustomer.where(product_1: new_cpa_membership).where(purchase: '2020-06-23').all
-    @cpa_memerships_match = MasterCpa.where(membership: true).count
+    uid_master_cpa = MasterCpa.where.not(uid: nil).pluck(:uid)
+    @cpa_new = SCustomer.where.not(uid: uid_master_cpa).where(match: nil).where(product_1: new_cpa_membership).all
 
-    if params['run'] == 'cpa_new'
-      customer = SCustomer.select(:product_1, :lic_state, :lic_num)
-      master = MasterCpa.select(:lic_st, :lic)
-      SCustomer.where(product_1: new_cpa_membership).limit(50).each do |customer|
-        MasterCpa.where(lic_st: customer.lic_state).where(lic: customer.lic_num).update_all membership: true, uid: customer.uid
-      end
-      redirect_to master_cpas_path(done: 'cpa_new')
+  end
+
+  def search
+    if params['match'].present?
+      lid = params['lid'].to_i
+      uid = params['uid'].to_i
+      MasterCpa.where(lid: lid).update_all uid: uid, membership: true
+      redirect_to master_cpas_path, notice: "Match successfull for uid: #{uid} and lid: #{lid}"
+    end
+
+    zip = params['zip']
+    lname = params['lname']
+    state = params['state']
+    uid = params['uid'].to_i
+
+    if zip.present? && lname.blank? && state.blank?
+      @search_results = MasterCpa.where(zip: zip).all
+    elsif zip.blank? && lname.present? && state.blank?
+      @search_results = MasterCpa.where(lname: lname).all
+    elsif zip.blank? && lname.blank? && state.present?
+      @search_results = MasterCpa.where(st: state).all
+    elsif zip.present? && lname.present? && state.blank?
+      @search_results = MasterCpa.where(zip: zip).where(lname: lname).all
+    elsif zip.blank? && lname.present? && state.present?
+      @search_results = MasterCpa.where(lname: lname).where(st: state).all
+    elsif zip.present? && lname.blank? && state.present?
+      @search_results = MasterCpa.where(zip: zip).where(st: state).all
+    elsif zip.present? && lname.present? && state.present?
+      @search_results = MasterCpa.where(zip: zip).where(lname: lname).where(st: state).all
+    elsif zip.blank? && lname.blank? && state.blank?
+      @search_results = MasterCpa.first(10)
+    end
+    @sequoia_customer = SCustomer.where(uid: uid).all
+    if params['no_match'].present?
+      uid = params['uid'].to_i
+      SCustomer.where(uid: uid).update_all match: 'no'
+      redirect_to master_cpas_path, notice: "No match for UID: #{uid}"
+    end
+    if params['no_mail'] == 'match'
+      lid = params['lid'].to_i
+      lname = params['lname']
+      MasterCpa.where(lid: lid).update_all no_mail: true, no_mail_date: Date.today
+      redirect_to root_url, notice: "No mail updated for #{lname}"
     end
   end
 
-  # GET /master_cpas/1
-  # GET /master_cpas/1.json
   def show
   end
 

@@ -1,0 +1,112 @@
+<%= link_to 'Back', master_cpas_path, class: 'btn btn-primary' %>
+
+<table class="table table-outline">
+  <caption>Sequoia Customer List</caption>
+  <thead>
+    <tr>
+      <th>uid</th>
+      <th>purchase_date</th>
+      <th>product</th>
+      <th>First</th>
+      <th>Last</th>
+      <th>Address</th>
+      <th>Address 2</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sequoia_customer.each do |customer| %>
+    <%# @sequoia_customer.limit(1).each do |customer| %>
+    <tr>
+      <td><%= customer.uid %></td>
+      <td><%= customer.purchase %></td>
+      <td><%= customer.product_1 %></td>
+      <td><%= customer.fname %></td>
+      <td><%= customer.lname %></td>
+      <td><%= customer.street_1 %></td>
+      <td><%= customer.street_2 %></td>
+      <td><%= customer.city %></td>
+      <td><%= customer.state %></td>
+      <td><%= customer.zip %></td>
+      <td><%= customer.email %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p class="bold">Searching By</p>
+<p>ZIP: <%= params['zip'] %><br>Last: <%= params['lname'] %><br>State: <%= params['state'] %></p>
+<button class="btn" data-toggle="collapse" data-target="#edit">Edit Search</button>
+
+<div id="edit" class="collapse">
+  <div class="display-none-search">
+    <%= text_field_tag "id", '', placeholder: 'UID', class: "uid_field form-control", value: params['uid'] %>
+  </div>
+  <div class="row down20">
+    <div class="col-md-2">
+      <%= text_field_tag "id", '', placeholder: 'Search by Last Name', class: "lname_field form-control", value: params['lname'] %>
+    </div>
+    <div class="col-md-2">
+      <%= text_field_tag "id", '', placeholder: 'Search by Zip', class: "zip_field form-control", value: params['zip'] %>
+    </div>
+    <div class="col-md-2">
+      <%= text_field_tag "id", '', placeholder: 'Search by State', class: "state_field form-control", value: params['state'] %>
+    </div>
+  </div>
+  <div class="down20">
+    <%= link_to 'Search', search_master_cpas_path, class: 'search_link btn btn-primary' %>
+  </div>
+</div>
+
+<table class="table table-outline">
+  <caption>CPA Master List</caption>
+  <thead>
+    <tr>
+      <th>LID</th>
+      <th>List</th>
+      <th>Lic State</th>
+      <th>Lic Number</th>
+      <th>First</th>
+      <th>Last</th>
+      <th>Address</th>
+      <th>Address 2</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @search_results.each do |results| %>
+    <tr>
+      <td><%= results.lid %></td>
+      <td><%= results.list %></td>
+      <td><%= results.lic_st %></td>
+      <td><%= results.lic %></td>
+      <td><%= results.fname %></td>
+      <td><%= results.lname %></td>
+      <td><%= results.add %></td>
+      <td><%= results.add2 %></td>
+      <td><%= results.city %></td>
+      <td><%= results.st %></td>
+      <td><%= results.zip %></td>
+      <% if params['no_mail'] == 'find' %>
+        <td><%= link_to 'No Mail', search_master_cpas_path(no_mail: 'match', lid: results.lid, lname: results.lname) %></td>
+      <% else %>
+        <td><%= link_to 'Match', search_master_cpas_path(match: 'yes', uid: params['uid'].to_i, lid: results.lid) %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+$(".search_link").click(function() {
+  $(this).attr("href", function() {
+    return this.href + "?zip=" + $('.zip_field').val() + "&lname=" + $('.lname_field').val().toUpperCase() + "&state=" + $('.state_field').val().toUpperCase() + "&uid=" + $('.uid_field').val();
+  });
+});
+</script>

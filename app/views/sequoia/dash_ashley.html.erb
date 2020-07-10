@@ -4,7 +4,7 @@
       <h1 class="text-center off-white">Ashley Dashboard</h1>
       <h3 class="off-white text-center"><%= Date.today.strftime('%A %-b %-d, %Y') %></h3>
 
-</br>
+<br>
 <div class="row">
 <!-- *** START Left Pannel *** -->
   <div class="col-lg-4">
@@ -35,6 +35,9 @@
 
 <!-- *** START Right Pannel *** -->
   <div class="col-lg-4">
+    <div class="well">
+        <%= render(:partial => 'no_mail') %>
+    </div>
     <div class="well">
         <%= render(:partial => 'update_data') %>
     </div>

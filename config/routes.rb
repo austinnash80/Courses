@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   resources :master_cpas do
     collection {post :import}
+    collection do
+      get 'search'
+    end
   end
   resources :empire_rc_states do
     collection {
