@@ -7,8 +7,9 @@ class MasterCpasController < ApplicationController
     new_cpa_membership = ["Unlimited CPA CPE Membership", "Unlimited CPA CPE Membership (Auto-Renew)"]
     uid_master_cpa = MasterCpa.pluck(:uid)
     unmatched = SCustomer.where.not(uid: uid_master_cpa).where(match: nil).where(product_1: new_cpa_membership)
-    no_match = MasterCpaNoMatch.pluck(:uid)
-    @cpa_new = unmatched.where.not(uid: no_match).order(purchase: :DESC).first(10)
+    # no_match = MasterCpaNoMatch.pluck(:uid)
+    @cpa_new = unmatched.order(purchase: :DESC).first(10)
+    # @cpa_new = unmatched.where.not(uid: no_match).order(purchase: :DESC).first(10)
     @cpa_new_count = unmatched.count
 
   end
