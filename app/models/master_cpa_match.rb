@@ -1,0 +1,2 @@
+class MasterCpaMatch < ApplicationRecord
+end

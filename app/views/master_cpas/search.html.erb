@@ -106,7 +106,7 @@
       <% if params['no_mail'] == 'find' %>
         <td><%= link_to 'No Mail', search_master_cpas_path(no_mail: 'match', lid: results.lid, lname: results.lname) %></td>
       <% else %>
-        <td><%= link_to 'Match', search_master_cpas_path(match: 'yes', uid: params['uid'].to_i, lid: results.lid) %></td>
+        <td><%= link_to 'Match', search_master_cpas_path(match: 'yes', uid: params['uid'].to_i, lid: results.lid, list: results.list, lname: results.lname) %></td>
       <% end %>
     </tr>
     <% end %>
