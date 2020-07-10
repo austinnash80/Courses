@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :master_cpa_no_matches
   resources :master_cpas do
     collection {post :import}
     collection do

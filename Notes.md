@@ -5,6 +5,9 @@ EmpireMasterList.where.not(id: ids).delete_all
 ids = SCustomer.group('s_id).pluck('MIN(id)')
 SCustomer.where.not(id: ids).delete_all
 
+ids = MasterCpa.group('lid').pluck('MIN(id)')
+MasterCpa.where.not(id: ids).delete_all
+
 
 When killing server and can restart:
 -> lsof -i tcp:3000

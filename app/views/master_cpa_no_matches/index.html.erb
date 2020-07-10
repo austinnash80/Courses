@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Master CPA No Matches</h1>
+
+<table class="table table-outline">
+  <thead>
+    <tr>
+      <th>Uid</th>
+      <th>Lname</th>
+      <th>List</th>
+      <th>Search date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @master_cpa_no_matches.each do |master_cpa_no_match| %>
+      <tr>
+        <td><%= master_cpa_no_match.uid %></td>
+        <td><%= master_cpa_no_match.lname %></td>
+        <td><%= master_cpa_no_match.list %></td>
+        <td><%= master_cpa_no_match.search_date %></td>
+        <td><%= link_to 'Show', master_cpa_no_match %></td>
+        <td><%= link_to 'Edit', edit_master_cpa_no_match_path(master_cpa_no_match) %></td>
+        <td><%= link_to 'Destroy', master_cpa_no_match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%#= link_to 'New Master Cpa No Match', new_master_cpa_no_match_path %>

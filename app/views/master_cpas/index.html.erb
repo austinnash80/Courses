@@ -9,10 +9,10 @@
     <%= text_field_tag "id", '', placeholder: 'Search by Last Name', class: "lname_field form-control" %>
   </div>
   <div class="col-md-2">
-    <%= text_field_tag "id", '', placeholder: 'Search by Zip', class: "zip_field form-control" %>
+    <%= text_field_tag "id", '', placeholder: 'Search by State', class: "state_field form-control" %>
   </div>
   <div class="col-md-2">
-    <%= text_field_tag "id", '', placeholder: 'Search by State', class: "state_field form-control" %>
+    <%= text_field_tag "id", '', placeholder: 'Search by Zip', class: "zip_field form-control" %>
   </div>
 </div>
 <div class="down20">
@@ -20,7 +20,7 @@
 </div>
 <p id="notice" class="down20"><%= notice %></p>
 <table class="table table-outline">
-  <caption>Unmatched Sequoia Customers (CPA Membership Only) - Total size <%= number_with_delimiter(@cpa_new.count) %></caption>
+  <caption>Unmatched Sequoia Customers (CPA Membership Only) - Total size <%= number_with_delimiter(@cpa_new_count) %></caption>
   <thead>
     <tr>
       <th>uid</th>
@@ -37,7 +37,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @cpa_new.limit(15).each do |customer| %>
+    <% @cpa_new.each do |customer| %>
     <tr>
       <td><%= customer.uid %></td>
       <td><%= customer.purchase %></td>
