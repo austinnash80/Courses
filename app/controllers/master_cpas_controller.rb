@@ -43,7 +43,7 @@ class MasterCpasController < ApplicationController
     elsif zip.blank? && lname.blank? && state.blank?
       @search_results = MasterCpa.first(10)
     end
-    @sequoia_customer = SCustomer.where(uid: uid).all
+    @sequoia_customer = SCustomer.where(uid: uid).order(purchase: :DESC).all
     if params['no_match'].present?
       uid = params['uid'].to_i
       SCustomer.where(uid: uid).update_all match: 'no'

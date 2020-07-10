@@ -24,6 +24,8 @@
   <thead>
     <tr>
       <th>uid</th>
+      <th>lic</th>
+      <th>lic_state</th>
       <th>purchase_date</th>
       <th>product</th>
       <th>First</th>
@@ -40,6 +42,8 @@
     <% @cpa_new.each do |customer| %>
     <tr>
       <td><%= customer.uid %></td>
+      <td><%= customer.lic_num %></td>
+      <td><%= customer.lic_state %></td>
       <td><%= customer.purchase %></td>
       <td><%= customer.product_1 %></td>
       <td><%= customer.fname %></td>

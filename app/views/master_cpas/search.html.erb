@@ -1,6 +1,8 @@
-<%= link_to 'Back', master_cpas_path, class: 'btn btn-primary' %>
-
-<table class="table table-outline">
+<div class="">
+  <%= link_to 'Back to search', master_cpas_path, class: 'btn btn-default' %>
+</div>
+<br>
+<table class="table table-outline ">
   <caption>Sequoia Customer List</caption>
   <thead>
     <tr>
@@ -10,6 +12,7 @@
       <th>purchase_date</th>
       <th>product</th>
       <th>First</th>
+      <th>MI</th>
       <th>Last</th>
       <th>Address</th>
       <th>Address 2</th>
@@ -27,7 +30,7 @@
       <td><%= customer.lic_num %></td>
       <td><%= customer.lic_state %></td>
       <td><%= customer.purchase %></td>
-      <td><%= customer.product_2.present? ? "#{customer.product_1 }, #{customer.product_2}" : customer.product_1 %></td>
+      <td><%= customer.product_2.blank? == false ? "#{customer.product_1 }, #{customer.product_2}" : customer.product_1 %></td>
       <td><%= customer.fname %></td>
       <td><%= customer.lname %></td>
       <td><%= customer.street_1 %></td>
@@ -67,7 +70,7 @@
     <%= link_to 'Search', search_master_cpas_path, class: 'search_link btn btn-primary' %>
   </div>
 </div>
-
+<br><br>
 <table class="table table-outline table-striped">
   <caption>CPA Master List</caption>
   <thead>
