@@ -5,6 +5,12 @@ class MasterCpaMatchesController < ApplicationController
   # GET /master_cpa_matches.json
   def index
     @master_cpa_matches = MasterCpaMatch.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @master_cpa_matches.to_csv, filename: "Sequoia-matched-customers-cpa-#{Date.today}.csv" }
+    end
+
   end
 
   # GET /master_cpa_matches/1

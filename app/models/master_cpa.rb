@@ -11,4 +11,6 @@ class MasterCpa < ApplicationRecord
     MasterCpa.import batch
   end
 
+
+
 end

@@ -10,6 +10,11 @@ class MasterCpasController < ApplicationController
     no_match = MasterCpaNoMatch.pluck(:uid)
     @cpa_new = SCustomer.where.not(uid: uid_master_cpa).where(match: nil).where(product_1: new_cpa_membership).where.not(uid: no_match).order(purchase: :DESC).first(10)
     # @cpa_new_count = unmatched.count
+    @cpa_export = MasterCpa.where.not(uid: nil)
+    # @cpa_export = 1,2,3
+
+
+
   end
 
   def search
