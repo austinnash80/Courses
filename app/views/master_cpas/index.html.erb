@@ -8,15 +8,9 @@
   <div class="col-md-2">
     <%= text_field_tag "id", '', placeholder: 'Search by Last Name', class: "lname_field form-control" %>
   </div>
-  <!-- <div class="col-md-2">
-    <%#= text_field_tag "id", '', placeholder: 'Search by State', class: "state_field form-control" %>
-  </div>
-  <div class="col-md-2">
-    <%#= text_field_tag "id", '', placeholder: 'Search by Zip (5 digit)', class: "zip_field form-control" %>
-  </div> -->
 </div>
 <div class="down20">
-  <%= link_to 'Search CPA List', search_master_cpas_path, class: 'search_link_cpa btn btn-primary' %>
+  <%= link_to 'Search CPA List', search_master_cpas_path, class: 'search_link btn btn-primary' %>
 </div>
 <p id="notice" class="down20"><%= notice %></p>
 <h1>Master CPA Matches</h1>
@@ -31,7 +25,6 @@
       <th>purchase_date</th>
       <th>product</th>
       <th>First</th>
-      <th>MI</th>
       <th>Last</th>
       <th>Address</th>
       <th>Address 2</th>
@@ -50,7 +43,6 @@
       <td><%= customer.purchase %></td>
       <td><%= customer.product_1 %></td>
       <td><%= customer.fname %></td>
-      <td><%= customer.mi %></td>
       <td><%= customer.lname %></td>
       <td><%= customer.street_1 %></td>
       <td><%= customer.street_2 %></td>
@@ -65,9 +57,9 @@
 
 
 <script>
-$(".search_link_cpa").click(function() {
+$(".search_link").click(function() {
   $(this).attr("href", function() {
-    return this.href + "?zip=" + $('.zip_field').val() + "&lname=" + $('.lname_field').val().toUpperCase() + "&state=" + $('.state_field').val().toUpperCase() + "&uid=" + $('.uid_field').val();
+    return this.href + "?lname=" + $('.lname_field').val().toUpperCase() + "&uid=" + $('.uid_field').val();
   });
 });
 </script>
