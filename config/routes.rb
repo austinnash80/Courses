@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  resources :master_ea_no_matches
+  resources :master_ea_matches
+  resources :master_eas do
+    collection {post :import}
+    collection do
+      get 'search'
+    end
+  end
   resources :master_cpa_matches
   resources :master_cpa_no_matches
   resources :master_cpas do

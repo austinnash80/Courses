@@ -1,0 +1,2 @@
+class MasterEaMatch < ApplicationRecord
+end

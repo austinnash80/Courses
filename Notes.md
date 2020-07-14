@@ -8,6 +8,15 @@ SCustomer.where.not(id: ids).delete_all
 ids = MasterCpa.group('lid').pluck('MIN(id)')
 MasterCpa.where.not(id: ids).delete_all
 
+ids = MasterEa.group('lid').pluck('MIN(id)')
+MasterEa.where.not(id: ids).delete_all
+
+ea = MasterEa.where.not(uid: nil).all
+ea.each do |i|
+new = MasterEaMatch.create(uid: i.uid, lid:i.lid, list:i.list, search_date:Date.today, lname:i.lname)
+new.save
+end
+
 
 When killing server and can restart:
 -> lsof -i tcp:3000

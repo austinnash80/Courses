@@ -1,0 +1,2 @@
+class MasterEaNoMatch < ApplicationRecord
+end

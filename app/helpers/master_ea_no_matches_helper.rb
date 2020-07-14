@@ -1,0 +1,2 @@
+module MasterEaNoMatchesHelper
+end
