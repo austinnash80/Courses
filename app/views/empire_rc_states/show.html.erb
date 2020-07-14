@@ -1,12 +1,65 @@
 
+
+
+
+
 <div class="well text-center">
   <h1><big>Empire States</big></h1>
-  <p id="notice"><%= notice %></p>
 </div>
 <div class="container">
-  <div class="text-center">
+  <p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-md-6">
+    <h2 class="text-center">State List</h2>
+    <div class="down20">
+    <table class="table table-outline table-bordered">
+      <thead>
+        <tr><th>State:</th><td><%= @empire_rc_state.state %></td></tr>
+        <tr><th>Exp Type:</th><td><%= @empire_rc_state.exp_type %></td></tr>
+        <% if @empire_rc_state.exp_type == 'Dealine' %>
+          <tr><th>Exp Date:</th><td><%= @empire_rc_state.exp_date %></td></tr>
+        <% end %>
+        <tr><th>List Name:</th><td><%= @empire_rc_state.master_list_name %></td></tr>
+        <tr><th>List Quantity:</th><td><%= number_with_delimiter(@empire_rc_state.master_list_quantity) %></td></tr>
+        <tr><th>List Date:</th><td><%= number_with_delimiter(@empire_rc_state.master_list_update_date) %></td></tr>
+        <tr><th>Next List Due:</th><td><%= number_with_delimiter(@empire_rc_state.master_list_update_next) %></td></tr>
+        <!-- <tr><th><%#= link_to 'Edit State Info', empire_rc_state_path(@empire_rc_state), input_html: {data-toggle="modal" data-target="#myModal"}, class: '' %></th> -->
+        <tr><th>  <a type="link" class="" data-toggle="modal" data-target="#myModal">Edit State</a></th>
+          <td class="bold"><% if params['delete'] == 'confirm' %>
+            <%= link_to 'Confirm Delete', empire_rc_state_url(id: @empire_rc_state.id, delete_confirm: 'yes', st: @empire_rc_state.state), class: 'red', data: {disable_with: "Loading..."} %>
+          <% else %>
+            <%= link_to 'Delete List', empire_rc_state_url(id: @empire_rc_state.id, delete: 'confirm'), class:'red' %>
+          <% end %></td>
+        </tr>
+      </thead>
+    </table>
+    <a class="bold" data-toggle="collapse" data-target="#demo">View List Notes</a>
+      <div id="demo" class="collapse">
+      <%= @empire_rc_state.list_notes.blank? ? 'n/a' : @empire_rc_state.list_notes  %>
+      </div>
+      <p class="down20">List Quantity: <%= link_to 'calculate', empire_rc_state_url(id: @empire_rc_state.id, st: @empire_rc_state.state, run: 'quantity'), data: {disable_with: "Loading..."} %></p>
+      <% if params['quantity'].present? %> <p class="bold"><%= number_with_delimiter(params['quantity'].to_i) %></p><% end %>
+
+    <div class="down20">
+      <p>Upload New List (delete old list before upload)</p>
+      <%= form_tag import_empire_master_lists_path, multipart: true do %>
+        <%= file_field_tag :file, label: 'File', class: '' %>
+        <%= hidden_field_tag(:st, @empire_rc_state.state) %>
+        <%= hidden_field_tag(:id, @empire_rc_state.id) %>
+        <br>
+        <%= submit_tag 'Upload', class: 'btn btn-primary btn-100', data: {disable_with: "Loading..."} %>
+      <% end %>
+    </div>
+  </div>
+  </div>
+  <div class="col-md-6">
+    <h2 class="text-center">Customers</h2>
+
+  </div>
+</div>
+  <!-- <div class="text-center">
     <div class="btn-group">
-      <%= link_to 'Edit State', edit_empire_rc_state_path(@empire_rc_state), class: 'btn btn-default btn-lg' %>
       <%= link_to 'Back to Index', empire_rc_states_path, class: 'btn btn-default btn-lg' %>
     </div>
   </div>
@@ -28,7 +81,6 @@
             <%= link_to 'Confirm', empire_rc_state_url(id: @empire_rc_state.id, delete_confirm: 'yes'), class: 'btn btn-danger btn-100', data: {disable_with: "Loading..."} %>
           <% elsif %>
             <%= link_to 'Delete', empire_rc_state_url(id: @empire_rc_state.id, delete: 'confirm'), class: 'btn btn-danger btn-100' %>
-            <%#= link_to 'Delete', upload_list_empire_rc_states_path(st: params['st'], delete: 'confirm'), class: 'btn btn-danger' %>
           <% end %>
   </div>
 
@@ -42,6 +94,63 @@
     <%= submit_tag 'Upload', class: 'btn btn-primary btn-100', data: {disable_with: "Loading..."} %>
     <% end %>
   </div>
-</div>
+</div> -->
 
 </div>
+
+
+
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title text-center">Update State</h3>
+        </div>
+        <div class="modal-body">
+          <%= simple_form_for(@empire_rc_state) do |f| %>
+            <%= f.error_notification %>
+
+            <div class="form-inputs">
+              <div class="row">
+                <div class="col-md-6">
+                  <%= f.input :exp_type, label: 'EXP Type' %>
+                </div>
+                <div class="col-md-6">
+                  <%= f.input :exp_date, label: 'Exp Date' %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <%= f.input :master_list_name, label: 'List Name' %>
+                </div>
+                <div class="col-md-6">
+                  <%= f.input :master_list_quantity, label: 'List Quantity' %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <%= f.input :master_list_update_date, label: 'Update Date' %>
+                </div>
+                <div class="col-md-6">
+                  <%= f.input :master_list_update_next, label: 'Next Update' %>
+                </div>
+              </div>
+              <%= f.input :list_notes %>
+            </div>
+
+            <div class="form-actions">
+              <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
+            </div>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>

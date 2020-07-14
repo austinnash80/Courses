@@ -6,6 +6,10 @@ class EmpireRcStatesController < ApplicationController
   def index
     @empire_rc_states = EmpireRcState.order(state: :ASC).all
 
+    if params['upload'] == 'done'
+      redirect_to empire_rc_state_path(params['id']), notice: 'List upload complete'
+    end
+
 
     # UPDATE & MATCH STATE - ONLY WHEN CLICKED
     if params['update_customers'].present?
@@ -16,7 +20,7 @@ class EmpireRcStatesController < ApplicationController
       end
 
       rc_state = EmpireRcState.where(state: params['update_customers']).all
-      
+
       master_list_name = rc_state.pluck(:master_list_name)
 
       ## FIND THE UNIQUE CUSTOMERS FROM THE GIVEN STATE. ADD TO ARRAY AND UPDATE THE RC STATE TABLE
@@ -50,13 +54,24 @@ class EmpireRcStatesController < ApplicationController
     end
     if params['upload'] == 'complete'
       EmpireRcState.where(state: params['st']).update_all master_list_name: @name[0], master_list_quantity: @count
-      redirect_to empire_rc_states_path(st: params['st']), notice: "#{params['st']} master list was uploaded"
+      redirect_to empire_rc_states_url(id: params['id'], st: params['st']), notice: "#{params['st']} master list was uploaded"
     end
   end
 
   # GET /empire_rc_states/1
   # GET /empire_rc_states/1.json
   def show
+    if params['delete_confirm'] == 'yes'
+      st = params['st']
+      EmpireMasterList.where(source: st).delete_all
+      EmpireRcState.where(state: st).update_all master_list_name: '', master_list_quantity: 0
+      redirect_to empire_rc_state_url(id: @empire_rc_state.id), notice: "#{st} list deleted"
+    end
+
+    if params['run'] == 'quantity'
+      quantity = EmpireMasterList.where(source: params['st']).count
+      redirect_to empire_rc_state_url(id: @empire_rc_state.id, quantity: quantity)
+    end
   end
 
   # GET /empire_rc_states/new
@@ -89,7 +104,7 @@ class EmpireRcStatesController < ApplicationController
   def update
     respond_to do |format|
       if @empire_rc_state.update(empire_rc_state_params)
-        format.html { redirect_to empire_rc_states_path, notice: 'Empire rc state was successfully updated.' }
+        format.html { redirect_to @empire_rc_state, notice: 'Empire rc state was successfully updated.' }
         format.json { render :show, status: :ok, location: @empire_rc_state }
       else
         format.html { render :edit }
