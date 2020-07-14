@@ -5,6 +5,12 @@ class MasterEaMatchesController < ApplicationController
   # GET /master_ea_matches.json
   def index
     @master_ea_matches = MasterEaMatch.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @master_ea_matches.to_csv, filename: "Sequoia-matched-customers-ea-#{Date.today}.csv" }
+    end
+
   end
 
   # GET /master_ea_matches/1
