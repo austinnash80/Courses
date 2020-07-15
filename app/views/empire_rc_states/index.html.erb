@@ -12,8 +12,8 @@
       <th>List Name</th>
       <th>List Quantity</th>
       <th>Matched Customers</th>
-      <th>Matched Customers</th>
       <th>Market Share</th>
+      <th>List Upload Date</th>
       <th>Next List Due</th>
       <!-- <th colspan="1"></th> -->
     </tr>
@@ -29,19 +29,18 @@
         <td><%= empire_rc_state.master_list_quantity.present? ? number_with_delimiter(empire_rc_state.master_list_quantity) : '' %></td>
         <td><%= empire_rc_state.matched_customers.present? ? number_with_delimiter(empire_rc_state.matched_customers) : '' %></td>
         <td><%= empire_rc_state.matched_customers.present? ? number_to_percentage((empire_rc_state.matched_customers.to_f / empire_rc_state.master_list_quantity.to_f) * 100, precision: 1) : '' %></td>
-        <!-- <td><%#= empire_rc_state.customers.present? ? number_with_delimiter(empire_rc_state.customers) : ''%></td> -->
-        <!-- <td><%#= empire_rc_state.matched_customers.present? ? number_with_delimiter(empire_rc_state.matched_customers) : ''%></td> -->
-        <!-- <td><%#= empire_rc_state.master_list_quantity.present? && empire_rc_state.matched_customers? ? number_to_percentage((empire_rc_state.matched_customers.to_f / empire_rc_state.master_list_quantity.to_f) * 100, precision:1) : '' %></td> -->
-          <%#= link_to 'Upload New List', upload_list_empire_rc_states_path(st: empire_rc_state.state), class: 'btn btn-sm btn-primary btn-150' %>
-          <%#= link_to 'Update Customers', empire_rc_states_path(update_customers: empire_rc_state.state), class: 'btn btn-sm btn-primary btn-150', data: {disable_with: "Loading..."} %>
-          <%#= link_to 'View', empire_rc_state, class: 'btn btn-sm btn-primary btn-75' %>
         <td><%= empire_rc_state.master_list_update_date.present? ? empire_rc_state.master_list_update_date.strftime('%-m/%-d/%Y') : '' %></td>
         <td><%= empire_rc_state.master_list_update_date.present? ? empire_rc_state.master_list_update_next.strftime('%-m/%-d/%Y') : '' %></td>
-        <!-- <td><%= link_to 'Edit', edit_empire_rc_state_path(empire_rc_state), class: '' %></td> -->
-        <!-- <td><%#= empire_rc_state.list_notes %></td> -->
-        <!-- <td><%#= link_to 'Destroy', empire_rc_state, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
       </tr>
     <% end %>
+    <tr class="bold">
+      <td>Totals</td>
+      <td colspan="3"></td>
+      <td><%= number_with_delimiter(@empire_rc_states.sum(:master_list_quantity)) %></td>
+      <td><%= number_with_delimiter(@empire_rc_states.sum(:matched_customers)) %></td>
+      <td><%= number_to_percentage(@empire_rc_states.sum(:matched_customers).to_f / @empire_rc_states.sum(:master_list_quantity).to_f * 100, precision: 1)%></td>
+      <td colspan="2"></td>
+    </tr>
   </tbody>
 </table>
 
