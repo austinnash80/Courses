@@ -12,7 +12,8 @@
       <th>List Name</th>
       <th>List Quantity</th>
       <th>Matched Customers</th>
-      <th>List Upload</th>
+      <th>Matched Customers</th>
+      <th>Market Share</th>
       <th>Next List Due</th>
       <!-- <th colspan="1"></th> -->
     </tr>
@@ -27,6 +28,7 @@
         <td><%= empire_rc_state.master_list_name %></td>
         <td><%= empire_rc_state.master_list_quantity.present? ? number_with_delimiter(empire_rc_state.master_list_quantity) : '' %></td>
         <td><%= empire_rc_state.matched_customers.present? ? number_with_delimiter(empire_rc_state.matched_customers) : '' %></td>
+        <td><%= empire_rc_state.matched_customers.present? ? number_to_percentage((empire_rc_state.matched_customers.to_f / empire_rc_state.master_list_quantity.to_f) * 100, precision: 1) : '' %></td>
         <!-- <td><%#= empire_rc_state.customers.present? ? number_with_delimiter(empire_rc_state.customers) : ''%></td> -->
         <!-- <td><%#= empire_rc_state.matched_customers.present? ? number_with_delimiter(empire_rc_state.matched_customers) : ''%></td> -->
         <!-- <td><%#= empire_rc_state.master_list_quantity.present? && empire_rc_state.matched_customers? ? number_to_percentage((empire_rc_state.matched_customers.to_f / empire_rc_state.master_list_quantity.to_f) * 100, precision:1) : '' %></td> -->
