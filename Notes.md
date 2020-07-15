@@ -22,6 +22,11 @@ new = MasterEaMatch.create(uid: i.uid, lid:i.lid, list:i.list, search_date:Date.
 new.save
 end
 
+Match EMpire Master:
+EmpireCustomer.where(lic_state: 'CA').each do |i|
+  EmpireMasterList.where(source: 'CA').where(license_number: i.license_num).update_all uid: i.uid
+end
+
 
 When killing server and can restart:
 -> lsof -i tcp:3000

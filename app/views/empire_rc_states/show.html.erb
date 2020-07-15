@@ -58,17 +58,17 @@
       <% end %>
       <thead>
         <tr>
-          <th>All Customers</th>
-          <td><%= @empire_rc_state.customers %></td>
+          <th>Total Purchases</th>
+          <td><%= @empire_rc_state.customers.present? ? number_with_delimiter(@empire_rc_state.customers) : '' %></td>
         </tr>
         <tr>
-          <th>Active/Matched</th>
-          <td><%= @empire_rc_state.matched_customers %></td>
+          <th>Customers Active/Matched</th>
+          <td><%= @empire_rc_state.matched_customers.present? ? number_with_delimiter(@empire_rc_state.matched_customers) : ''%></td>
         </tr>
-        <tr>
+        <!-- <tr>
           <th>Percent Active</th>
           <td><%= number_to_percentage((@empire_rc_state.matched_customers.to_f / @empire_rc_state.customers.to_f) * 100, precision: 1) %></td>
-        </tr>
+        </tr> -->
         <tr>
           <th>Market Share</th>
           <td><%= number_to_percentage((@empire_rc_state.matched_customers.to_f  / @empire_rc_state.master_list_quantity.to_f) * 100, precision: 1) %></td>
@@ -76,9 +76,9 @@
       </thead>
     </table>
   </div>
-    
 
-    <p class="">Customer Update: <%= link_to 'Go', empire_rc_state_url(id: @empire_rc_state.id, st: @empire_rc_state.state, run: 'customer_update'), data: {disable_with: "Loading..."} %></p>
+
+    <p class="">Customer Check: <%= link_to 'Go', empire_rc_state_url(id: @empire_rc_state.id, st: @empire_rc_state.state, run: 'customer_update'), data: {disable_with: "Loading..."} %></p>
     <% if params['customers'].present? %> <p class="bold"><%= number_with_delimiter(params['customers'].to_i) %> | <%= number_with_delimiter(params['customers_match'].to_i) %></p><% end %>    <div class="">
 
       <%= link_to "Export #{@empire_rc_state.state} Customer List", empire_rc_state_path(@empire_rc_state, format: 'csv', export: 'customer'), class: 'btn btn-primary' %>

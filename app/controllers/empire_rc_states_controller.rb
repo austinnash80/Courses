@@ -77,6 +77,8 @@ class EmpireRcStatesController < ApplicationController
       customers_match = EmpireMasterList.where(source: st).where.not(uid: nil).count
       if st == 'MO_B' || st == 'MO_S'
         st = 'MO'
+      elsif st == 'IN'
+        st = 'IND'
       end
       customers = EmpireCustomer.where(lic_state: st).count
       EmpireRcState.where(state: params['st']).update_all customers: customers, matched_customers: customers_match
