@@ -1,5 +1,6 @@
 <div class="well text-center">
   <h1><big>Empire States</big></h1>
+  <%= link_to 'Back to Index', empire_rc_states_path, class: 'btn btn-default' %>
 </div>
 <div class="container">
   <p id="notice"><%= notice %></p>
@@ -12,7 +13,7 @@
       <thead>
         <tr><th>State:</th><td><%= @empire_rc_state.state %></td></tr>
         <tr><th>Exp Type:</th><td><%= @empire_rc_state.exp_type %></td></tr>
-        <% if @empire_rc_state.exp_type == 'Dealine' %>
+        <% if @empire_rc_state.exp_type == 'Deadline' %>
           <tr><th>Exp Date:</th><td><%= @empire_rc_state.exp_date %></td></tr>
         <% end %>
         <tr><th>List Name:</th><td><%= @empire_rc_state.master_list_name %></td></tr>
@@ -50,8 +51,39 @@
   </div>
   <div class="col-md-6">
     <h2 class="text-center">Customers</h2>
-    <%= link_to "Export Full #{@empire_rc_state.state} List", empire_rc_state_path(@empire_rc_state, format: 'csv', export: 'full'), class: 'btn btn-default' %><br><br>
-    <%= link_to "Export #{@empire_rc_state.state} Customer List", empire_rc_state_path(@empire_rc_state, format: 'csv', export: 'customer'), class: 'btn btn-default' %>
+    <div class="down20">
+    <table class="table table-outline table-bordered">
+      <% if @empire_rc_state.state == 'MO_B' || @empire_rc_state.state == 'MO_S' %>
+        <caption>MO Customers include both salesperson and brokers - matched is specific</caption>
+      <% end %>
+      <thead>
+        <tr>
+          <th>All Customers</th>
+          <td><%= @empire_rc_state.customers %></td>
+        </tr>
+        <tr>
+          <th>Active/Matched</th>
+          <td><%= @empire_rc_state.matched_customers %></td>
+        </tr>
+        <tr>
+          <th>Percent Active</th>
+          <td><%= number_to_percentage((@empire_rc_state.matched_customers.to_f / @empire_rc_state.customers.to_f) * 100, precision: 1) %></td>
+        </tr>
+        <tr>
+          <th>Market Share</th>
+          <td><%= number_to_percentage((@empire_rc_state.matched_customers.to_f  / @empire_rc_state.master_list_quantity.to_f) * 100, precision: 1) %></td>
+        </tr>
+      </thead>
+    </table>
+  </div>
+    
+
+    <p class="">Customer Update: <%= link_to 'Go', empire_rc_state_url(id: @empire_rc_state.id, st: @empire_rc_state.state, run: 'customer_update'), data: {disable_with: "Loading..."} %></p>
+    <% if params['customers'].present? %> <p class="bold"><%= number_with_delimiter(params['customers'].to_i) %> | <%= number_with_delimiter(params['customers_match'].to_i) %></p><% end %>    <div class="">
+
+      <%= link_to "Export #{@empire_rc_state.state} Customer List", empire_rc_state_path(@empire_rc_state, format: 'csv', export: 'customer'), class: 'btn btn-primary' %>
+
+    </div>
   </div>
 </div>
   <!-- <div class="text-center">

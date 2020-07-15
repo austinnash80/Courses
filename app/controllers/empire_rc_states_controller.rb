@@ -72,6 +72,16 @@ class EmpireRcStatesController < ApplicationController
       quantity = EmpireMasterList.where(source: params['st']).count
       redirect_to empire_rc_state_url(id: @empire_rc_state.id, quantity: quantity)
     end
+    if params['run'] == 'customer_update'
+      st = params['st']
+      customers_match = EmpireMasterList.where(source: st).where.not(uid: nil).count
+      if st == 'MO_B' || st == 'MO_S'
+        st = 'MO'
+      end
+      customers = EmpireCustomer.where(lic_state: st).count
+      EmpireRcState.where(state: params['st']).update_all customers: customers, matched_customers: customers_match
+      redirect_to empire_rc_state_url(id: @empire_rc_state.id, customers_match: customers_match, customers: customers)
+    end
 
     if params['export'] == 'full'
       @export = EmpireMasterList.where(source: @empire_rc_state.state)
