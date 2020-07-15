@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200714032049) do
+ActiveRecord::Schema.define(version: 20200714234729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -371,6 +371,7 @@ ActiveRecord::Schema.define(version: 20200714032049) do
     t.date "exp_date"
     t.string "emailL"
     t.string "email"
+    t.integer "uid"
     t.index ["lid", "list"], name: "index_empire_master_lists_on_lid_and_list", unique: true
   end
 

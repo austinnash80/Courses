@@ -1,8 +1,3 @@
-
-
-
-
-
 <div class="well text-center">
   <h1><big>Empire States</big></h1>
 </div>
@@ -55,7 +50,8 @@
   </div>
   <div class="col-md-6">
     <h2 class="text-center">Customers</h2>
-
+    <%= link_to "Export Full #{@empire_rc_state.state} List", empire_rc_state_path(@empire_rc_state, format: 'csv', export: 'full'), class: 'btn btn-default' %><br><br>
+    <%= link_to "Export #{@empire_rc_state.state} Customer List", empire_rc_state_path(@empire_rc_state, format: 'csv', export: 'customer'), class: 'btn btn-default' %>
   </div>
 </div>
   <!-- <div class="text-center">

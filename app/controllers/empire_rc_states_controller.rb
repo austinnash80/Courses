@@ -72,6 +72,17 @@ class EmpireRcStatesController < ApplicationController
       quantity = EmpireMasterList.where(source: params['st']).count
       redirect_to empire_rc_state_url(id: @empire_rc_state.id, quantity: quantity)
     end
+
+    if params['export'] == 'full'
+      @export = EmpireMasterList.where(source: @empire_rc_state.state)
+    elsif params['export'] == 'customer'
+      @export = EmpireMasterList.where(source: @empire_rc_state.state).where.not(uid: nil)
+    end
+    respond_to do |format|
+      format.html
+      format.csv { send_data @export.to_csv, filename: "Empire-#{@empire_rc_state.state}-#{params['export']}-#{Date.today}.csv" }
+    end
+
   end
 
   # GET /empire_rc_states/new
