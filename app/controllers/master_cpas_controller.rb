@@ -46,15 +46,15 @@ class MasterCpasController < ApplicationController
     elsif zip.blank? && lname.present? && state.blank?
       @search_results = MasterCpa.where(lname: lname).all
     elsif zip.blank? && lname.blank? && state.present?
-      @search_results = MasterCpa.where(st: state).all
+      @search_results = MasterCpa.where(lic_st: state).all
     elsif zip.present? && lname.present? && state.blank?
       @search_results = MasterCpa.where(zip: zip).where(lname: lname).all
     elsif zip.blank? && lname.present? && state.present?
-      @search_results = MasterCpa.where(lname: lname).where(st: state).all
+      @search_results = MasterCpa.where(lname: lname).where(lic_st: state).all
     elsif zip.present? && lname.blank? && state.present?
-      @search_results = MasterCpa.where(zip: zip).where(st: state).all
+      @search_results = MasterCpa.where(zip: zip).where(lic_st: state).all
     elsif zip.present? && lname.present? && state.present?
-      @search_results = MasterCpa.where(zip: zip).where(lname: lname).where(st: state).all
+      @search_results = MasterCpa.where(zip: zip).where(lname: lname).where(lic_st: state).all
     elsif zip.blank? && lname.blank? && state.blank?
       @search_results = MasterCpa.first(10)
     end
