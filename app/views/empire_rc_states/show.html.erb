@@ -78,7 +78,7 @@
   </div>
 
 
-    <p class="">Customer Check: <%= link_to 'Go', empire_rc_state_url(id: @empire_rc_state.id, st: @empire_rc_state.state, run: 'customer_update'), data: {disable_with: "Loading..."} %></p>
+    <p class="">Customer Update: <%= link_to 'Go', empire_rc_state_url(id: @empire_rc_state.id, st: @empire_rc_state.state, run: 'customer_update'), data: {disable_with: "Loading..."} %></p>
     <% if params['customers'].present? %> <p class="bold"><%= number_with_delimiter(params['customers'].to_i) %> | <%= number_with_delimiter(params['customers_match'].to_i) %></p><% end %>    <div class="">
 
       <%= link_to "Export #{@empire_rc_state.state} Customer List", empire_rc_state_path(@empire_rc_state, format: 'csv', export: 'customer'), class: 'btn btn-primary' %>
