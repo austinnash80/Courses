@@ -90,7 +90,8 @@
       <th>City</th>
       <th>State</th>
       <th>Zip</th>
-      <th>Action</th>
+      <th>Customer</th>
+      <th>No Mail</th>
     </tr>
   </thead>
   <tbody id="myTable">
@@ -107,11 +108,8 @@
       <td><%= results.city %></td>
       <td><%= results.st %></td>
       <td><%= results.zip %></td>
-      <% if params['no_mail'] == 'find' %>
-        <td><%= link_to 'No Mail', search_master_eas_path(no_mail: 'match', lid: results.lid, lname: results.lname) %></td>
-      <% else %>
-        <td><%= link_to 'Match', search_master_eas_path(match: 'yes', uid: params['uid'].to_i, lid: results.lid, list: results.list, lname: results.lname) %></td>
-      <% end %>
+      <td><%= link_to 'Customer', search_master_eas_path(match: 'yes', uid: params['uid'].to_i, lid: results.lid, list: results.list, lname: results.lname) %></td>
+      <td><%= link_to 'No Mail', search_master_eas_path(no_mail: 'match', lid: results.lid, lname: results.lname) %></td>
     </tr>
     <% end %>
   </tbody>

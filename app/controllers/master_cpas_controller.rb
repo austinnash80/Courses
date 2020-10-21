@@ -3,6 +3,10 @@ class MasterCpasController < ApplicationController
 
   # GET /master_cpas
   # GET /master_cpas.json
+def no_mail_cpa
+  @no_mail_cpa = MasterCpa.where(no_mail: true).all
+end
+
   def index
     new_cpa_membership = ["Unlimited CPA CPE Membership", "Unlimited CPA CPE Membership (Auto-Renew)"]
     uid_master_cpa = MasterCpaMatch.pluck(:uid)
