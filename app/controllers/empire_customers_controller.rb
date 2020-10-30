@@ -654,7 +654,7 @@ end
         new.save
       end
 
-      ny_g1_merge_1 = '22.5-Hour California CE Package'
+      ny_g1_merge_1 = '22.5-Hour New York CE Package'
       ny_g1_merge_2 = '$59.50'
       ny_g1_merge_3 = 'ReturningStudent20'
       PostcardExport.where(empire_customer_id: (@ny_postcard_1 +  @ny_postcard_2)).update_all merge_1: ny_g1_merge_1, merge_2: ny_g1_merge_2, merge_3: ny_g1_merge_3
