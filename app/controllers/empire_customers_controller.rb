@@ -865,7 +865,7 @@ end #def
       ca_g4_merge_1 = "Don't miss your CE deadline."
       ca_g4_merge_2 =
       ca_merge_3 = 'CA' ## Relevent for all CA
-      ca_merge_5 = "California 45-Hour Full Renewal Package - $49"
+      ca_merge_5 = "California 45-Hour Full Renewal Package - $47.99"
       #Purchased in the this cycle -> CA 4 year renewal.
 
       EmailExport.where.not(merge_4: nil).where(uid: (@ca_email_1 +  @ca_email_2 + @ca_email_3)).update_all send_email: 'yes', subject: ca_g1_subject, merge_1: ca_g1_merge_1, merge_2: ca_g1_merge_2, merge_3: ca_merge_3, merge_5: ca_merge_5
@@ -887,7 +887,7 @@ end #def
       ny_g4_merge_1 = "Don't miss your CE deadline."
       ny_g4_merge_2 =
       ny_merge_3 = 'NY' ## Relevent for all NY
-      ny_merge_5 = "New York 22.5-Hour Full Renewal Package - $59.50"
+      ny_merge_5 = "New York 22.5-Hour Full Renewal Package - $59.99"
       EmailExport.where.not(merge_4: nil).where(uid: (@ny_email_1 +  @ny_email_2 + @ny_email_3)).update_all send_email: 'yes', subject: ny_g1_subject, merge_1: ny_g1_merge_1, merge_2: ny_g1_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
       EmailExport.where.not(merge_4: nil).where(uid: (@ny_email_4 +  @ny_email_5 + @ny_email_6 + @ny_email_7)).update_all send_email: 'yes', subject: ny_g2_subject, merge_1: ny_g2_merge_1, merge_2: ny_g2_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
       EmailExport.where.not(merge_4: nil).where(uid: (@ny_email_8 +  @ny_email_9)).update_all send_email: 'yes', subject: ny_g3_subject, merge_1: ny_g3_merge_1, merge_2: ny_g3_merge_2, merge_3: ny_merge_3, merge_5: ny_merge_5
