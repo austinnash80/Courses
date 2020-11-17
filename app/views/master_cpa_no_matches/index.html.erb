@@ -3,7 +3,7 @@
 <h1>Master CPA No Matches</h1>
 
 <table class="table table-outline">
-  <caption>Displaying most recent 25 of <%= number_with_delimiter(@master_cpa_no_matches.count) %></caption>
+  <caption>Displaying 250 of <%= number_with_delimiter(@master_cpa_no_matches.count) %></caption>
   <thead>
     <tr>
       <th>Uid</th>
@@ -15,7 +15,7 @@
   </thead>
 
   <tbody>
-    <% @master_cpa_no_matches.order(search_date: :DESC).first(25).each do |master_cpa_no_match| %>
+    <% @master_cpa_no_matches.order(search_date: :DESC).first(250).each do |master_cpa_no_match| %>
       <tr>
         <td><%= master_cpa_no_match.uid %></td>
         <td><%= master_cpa_no_match.lname %></td>

@@ -4,7 +4,12 @@ class MasterCpasController < ApplicationController
   # GET /master_cpas
   # GET /master_cpas.json
 def no_mail_cpa
-  @no_mail_cpa = MasterCpa.where(no_mail: true).all
+  @no_mail_cpa = MasterCpa.where(no_mail: true).order(no_mail_date: :DESC).all
+
+  respond_to do |format|
+    format.html
+    format.csv { send_data @no_mail_cpa.to_csv, filename: "Sequoia-No-Mail-cpa-#{Date.today}.csv" }
+  end
 end
 
   def index
@@ -16,6 +21,11 @@ end
     # @cpa_new_count = unmatched.count
     @cpa_export = MasterCpa.where.not(uid: nil)
     # @cpa_export = 1,2,3
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @no_mail_cpa.to_csv, filename: "Sequoia-No-Mail-cpa-#{Date.today}.csv" }
+    end
 
 
 

@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Master Cpa Matches</h1>
+<h1 class="text-center">Master Cpa Matches</h1>
 
 <table class="table table-outline">
+  <caption>Displaying 250 of <%= number_with_delimiter(@master_cpa_matches.count) %></caption>
   <thead>
     <tr>
       <th>Uid</th>
@@ -15,7 +16,7 @@
   </thead>
 
   <tbody>
-    <% @master_cpa_matches.each do |master_cpa_match| %>
+    <% MasterCpaMatch.order(search_date: :desc).first(250).each do |master_cpa_match| %>
       <tr>
         <td><%= master_cpa_match.uid %></td>
         <td><%= master_cpa_match.lname %></td>

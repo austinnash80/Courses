@@ -1,10 +1,41 @@
-<h1>Sequoia No Mail CPA Master List</h1>
-<table>
+<h1 class="text-center">Sequoia No Mail CPA</h1>
+<table class="table table-outline">
   <thead>
     <tr>
-      <th></th>
+      <th>LID</th>
+      <th>List</th>
+      <th>Lic</th>
+      <th>Lic St.</th>
+      <th>Fname</th>
+      <th>mi</th>
+      <th>Lname</th>
+      <th>Company</th>
+      <th>Address</th>
+      <th>Address 2</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+      <th>No Mail Date</th>
     </tr>
   </thead>
-  <th></th>
-
+  <tbody>
+    <% MasterCpa.where(no_mail: true).order(no_mail_date: :DESC).all.each do |no_mail| %>
+      <tr>
+        <td><%= no_mail.lid %></td>
+        <td><%= no_mail.list %></td>
+        <td><%= no_mail.lic %></td>
+        <td><%= no_mail.lic_st %></td>
+        <td><%= no_mail.fname %></td>
+        <td><%= no_mail.mi %></td>
+        <td><%= no_mail.lname %></td>
+        <td><%= no_mail.co %></td>
+        <td><%= no_mail.add %></td>
+        <td><%= no_mail.add2 %></td>
+        <td><%= no_mail.city %></td>
+        <td><%= no_mail.st %></td>
+        <td><%= no_mail.zip %></td>
+        <td><%= no_mail.no_mail_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
