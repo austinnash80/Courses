@@ -59,17 +59,17 @@
         <!-- FORM -->
         <div class="row down20">
           <div class="col-md-4">
-            <%= text_field_tag "id", '', placeholder: 'Search Last Name', class: "lname_field form-control" %>
+            <%= text_field_tag "id", '', placeholder: 'Search Last Name', class: "lname_field_ea form-control" %>
           </div>
           <div class="col-md-4">
-            <%= text_field_tag "id", '', placeholder: 'Search State', class: "state_field form-control" %>
+            <%= text_field_tag "id", '', placeholder: 'Search State', class: "state_field_ea form-control" %>
           </div>
           <div class="col-md-4">
-            <%= text_field_tag "id", '', placeholder: 'Search Zip (5 digit)', class: "zip_field form-control" %>
+            <%= text_field_tag "id", '', placeholder: 'Search Zip (5 digit)', class: "zip_field_ea form-control" %>
           </div>
         </div>
         <div class="down20">
-          <%= link_to 'Search EA List', search_master_eas_path(), class: 'search_link btn btn-primary' %>
+          <%= link_to 'Search EA List', search_master_eas_path(), class: 'search_link_ea btn btn-primary' %>
         </div>
       </div>
       <div class="modal-footer">
@@ -84,6 +84,11 @@
   $(".search_link").click(function() {
     $(this).attr("href", function() {
       return this.href + "?zip=" + $('.zip_field').val() + "&lname=" + $('.lname_field').val().toUpperCase() + "&state=" + $('.state_field').val().toUpperCase() + "&no_mail=find";
+    });
+  });
+  $(".search_link_ea").click(function() {
+    $(this).attr("href", function() {
+      return this.href + "?zip=" + $('.zip_field_ea').val() + "&lname=" + $('.lname_field_ea').val().toUpperCase() + "&state=" + $('.state_field_ea').val().toUpperCase() + "&no_mail=find";
     });
   });
   </script>
