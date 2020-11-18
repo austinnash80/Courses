@@ -1,5 +1,5 @@
 <h1 class="text-center">Sequoia No Mail</h1>
-<h2 class="text-center"><u>CPA Only</u></h2>
+<h2 class="text-center"><u>EA Only</u></h2>
 <div class="down20 row">
   <div class="col-md-3">
     <input class="form-control" id="myInput" type="text" placeholder="Filter Table..">
@@ -12,7 +12,7 @@
       <th>LID</th>
       <th>List</th>
       <th>Lic</th>
-      <th>Lic St.</th>
+      <!-- <th>Lic St.</th> -->
       <th>Fname</th>
       <th>mi</th>
       <th>Lname</th>
@@ -26,12 +26,12 @@
     </tr>
   </thead>
   <tbody id="myTable">
-    <% MasterCpa.where(no_mail: true).order(no_mail_date: :DESC).all.each do |no_mail| %>
+    <% MasterEa.where(no_mail: true).order(no_mail_date: :DESC).all.each do |no_mail| %>
       <tr>
         <td><%= no_mail.lid %></td>
         <td><%= no_mail.list %></td>
         <td><%= no_mail.lic %></td>
-        <td><%= no_mail.lic_st %></td>
+        <!-- <td><%#= no_mail.lic_st %></td> -->
         <td><%= no_mail.fname %></td>
         <td><%= no_mail.mi %></td>
         <td><%= no_mail.lname %></td>

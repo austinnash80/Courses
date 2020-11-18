@@ -1,7 +1,10 @@
-<div class="">
-  <%= link_to 'Back to search', master_eas_path, class: 'btn btn-default' %>
-</div>
+<h1 class="text-center">Search EA List</h1>
+<%= link_to 'Back to search', master_eas_path, class: 'btn btn-default' %>
 <br>
+<% if params['no_mail'] == 'find' %>
+  <p class="down20"><%= link_to "Add To Can't Find List", new_seq_no_mail_path %></p>
+<% end %>
+<% unless params['no_mail'] = 'find' %>
 <table class="table table-outline ">
   <caption>Sequoia Customer</caption>
   <thead>
@@ -44,6 +47,7 @@
     </tr>
   </tbody>
 </table>
+<% end %>
 
 <p class="bold">Searching By</p>
 <p>ZIP: <%= params['zip'] %><br>Last: <%= params['lname'] %><br>State: <%= params['state'] %></p>
@@ -81,7 +85,7 @@
     <tr>
       <th>LID</th>
       <th>List</th>
-      <th>Lic Number</th>
+      <!-- <th>Lic Number</th> -->
       <th>First</th>
       <th>mi</th>
       <th>Last</th>
@@ -90,7 +94,7 @@
       <th>City</th>
       <th>State</th>
       <th>Zip</th>
-      <th>Customer</th>
+      <% unless params['no_mail'] == 'find' %><th>Customer</th><% end %>
       <th>No Mail</th>
     </tr>
   </thead>
@@ -99,7 +103,7 @@
     <tr>
       <td><%= results.lid %></td>
       <td><%= results.list %></td>
-      <!-- <td><%#= results.lic %></td> -->
+      <!-- <td><%= results.lic %></td> -->
       <td><%= results.fname %></td>
       <td><%= results.mi %></td>
       <td><%= results.lname %></td>
@@ -108,7 +112,7 @@
       <td><%= results.city %></td>
       <td><%= results.st %></td>
       <td><%= results.zip %></td>
-      <td><%= link_to 'Customer', search_master_eas_path(match: 'yes', uid: params['uid'].to_i, lid: results.lid, list: results.list, lname: results.lname) %></td>
+      <% unless params['no_mail'] == 'find' %><td><%= link_to 'Customer', search_master_eas_path(match: 'yes', uid: params['uid'].to_i, lid: results.lid, list: results.list, lname: results.lname) %> <% end %></td>
       <td><%= link_to 'No Mail', search_master_eas_path(no_mail: 'match', lid: results.lid, lname: results.lname) %></td>
     </tr>
     <% end %>

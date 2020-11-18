@@ -1,50 +1,54 @@
-<div class="">
-  <%= link_to 'Back to search', master_cpas_path, class: 'btn btn-default' %>
-</div>
+<h1 class="text-center">Search CPA List</h1>
+<%= link_to 'Back to search', master_cpas_path, class: 'btn btn-default' %>
 <br>
-<table class="table table-outline ">
-  <caption>Sequoia Customer List</caption>
-  <thead>
-    <tr>
-      <th>uid</th>
-      <th>Lic</th>
-      <th>Lic St.</th>
-      <th>purchase_date</th>
-      <th>product</th>
-      <th>First</th>
-      <th>Last</th>
-      <th>Address</th>
-      <th>Address 2</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Zip</th>
-      <th>Email</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @sequoia_customer.each do |customer| %>
-    <%# @sequoia_customer.limit(1).each do |customer| %>
-    <tr>
-      <td><%= customer.uid %></td>
-      <td><%= customer.lic_num %></td>
-      <td><%= customer.lic_state %></td>
-      <td><%= customer.purchase %></td>
-      <td><%= customer.product_2.blank? == false ? "#{customer.product_1 }, #{customer.product_2}" : customer.product_1 %></td>
-      <td><%= customer.fname %></td>
-      <td><%= customer.lname %></td>
-      <td><%= customer.street_1 %></td>
-      <td><%= customer.street_2 %></td>
-      <td><%= customer.city %></td>
-      <td><%= customer.state %></td>
-      <td><%= customer.zip %></td>
-      <td><%= customer.email %></td>
-    </tr>
-    <% end %>
-    <tr>
-      <td colspan="13"><%= link_to "No Match", master_cpa_no_matches_path(no_match: 'yes', uid: params['uid']) %></td>
-    </tr>
-  </tbody>
-</table>
+<% if params['no_mail'] = 'find' %>
+  <p class="down20"><%= link_to "Add To Can't Find List", new_seq_no_mail_path %></p>
+<% end %>
+<% unless params['no_mail'] = 'find' %>
+  <table class="table table-outline ">
+    <caption>Sequoia Customer List</caption>
+    <thead>
+      <tr>
+        <th>uid</th>
+        <th>Lic</th>
+        <th>Lic St.</th>
+        <th>purchase_date</th>
+        <th>product</th>
+        <th>First</th>
+        <th>Last</th>
+        <th>Address</th>
+        <th>Address 2</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zip</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sequoia_customer.each do |customer| %>
+      <%# @sequoia_customer.limit(1).each do |customer| %>
+      <tr>
+        <td><%= customer.uid %></td>
+        <td><%= customer.lic_num %></td>
+        <td><%= customer.lic_state %></td>
+        <td><%= customer.purchase %></td>
+        <td><%= customer.product_2.blank? == false ? "#{customer.product_1 }, #{customer.product_2}" : customer.product_1 %></td>
+        <td><%= customer.fname %></td>
+        <td><%= customer.lname %></td>
+        <td><%= customer.street_1 %></td>
+        <td><%= customer.street_2 %></td>
+        <td><%= customer.city %></td>
+        <td><%= customer.state %></td>
+        <td><%= customer.zip %></td>
+        <td><%= customer.email %></td>
+      </tr>
+      <% end %>
+      <tr>
+        <td colspan="13"><%= link_to "No Match", master_cpa_no_matches_path(no_match: 'yes', uid: params['uid']) %></td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
 
 <p class="bold">Searching By</p>
 <p>ZIP: <%= params['zip'] %><br>Last: <%= params['lname'] %><br>State: <%= params['state'] %></p>

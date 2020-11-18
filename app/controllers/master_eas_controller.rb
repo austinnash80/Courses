@@ -3,6 +3,15 @@ class MasterEasController < ApplicationController
 
   # GET /master_eas
   # GET /master_eas.json
+  def no_mail_ea
+    @no_mail_ea = MasterEa.where(no_mail: true).order(no_mail_date: :DESC).all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @no_mail_ea.to_csv, filename: "Sequoia-No-Mail-EA-#{Date.today}.csv" }
+    end
+  end
+
   def index
     @master_eas = MasterEa.all
     new_ea_membership = ["Unlimited EA CPE Membership", "Unlimited EA Membership (Auto-Renew)"]

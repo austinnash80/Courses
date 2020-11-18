@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     collection {post :import}
     collection do
       get 'search'
+      get 'no_mail_ea'
     end
   end
   resources :master_cpa_matches

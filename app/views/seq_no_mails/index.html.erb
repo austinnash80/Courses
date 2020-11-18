@@ -1,8 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<div class="jumbotron well text-center">
-<h1>No Mail - Can't Find/Change List</h1>
-</div>
+<h1 class="text-center">Sequoia No Mails - Can't Find</h1>
+<h2 class="text-center"><u>CPA and EA</u></h2>
 
 <!-- <h3>Upload CSV File</h3>
   <%= form_tag import_seq_no_mails_path, multipart: true do %>
@@ -24,10 +23,10 @@
 <table class="table table-hover">  <thead>
     <tr>
       <th>Action</th>
-      <th>LID</th>
-      <th>First name</th>
+      <th>CPA/EA</th>
+      <th>First</th>
       <th>Mi</th>
-      <th>Last name</th>
+      <th>Last</th>
       <th>Suf</th>
       <th>Co</th>
       <th>Address</th>
@@ -37,8 +36,7 @@
       <th>Zip</th>
       <th>Date added</th>
       <th>Reason</th>
-
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -46,7 +44,7 @@
     <% @seq_no_mails.each do |seq_no_mail| %>
       <tr>
         <td><strong><%= seq_no_mail.change == true ? 'Change' : "Can't Find" %></strong></td>
-        <td><%= seq_no_mail.lid %></td>
+        <td><%= seq_no_mail.who %></td>
         <td><%= seq_no_mail.first_name %></td>
         <td><%= seq_no_mail.mi %></td>
         <td><%= seq_no_mail.last_name %></td>
