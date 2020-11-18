@@ -1,10 +1,10 @@
 <h1 class="text-center">Search EA List</h1>
-<%= link_to 'Back to search', master_eas_path, class: 'btn btn-default' %>
 <br>
 <% if params['no_mail'] == 'find' %>
   <p class="down20"><%= link_to "Add To Can't Find List", new_seq_no_mail_path %></p>
 <% end %>
 <% unless params['no_mail'] = 'find' %>
+<%= link_to 'Back to search', master_eas_path, class: 'btn btn-default' %>
 <table class="table table-outline ">
   <caption>Sequoia Customer</caption>
   <thead>
