@@ -96,7 +96,7 @@
       <th>City</th>
       <th>State</th>
       <th>ZIP</th>
-      <th>Customer</th>
+      <% unless params['no_mail'].present? %><th>Customer</th><% end %>
       <th>No Mail</th>
       <!-- <th colspan="2"></th> -->
     </tr>
@@ -115,7 +115,7 @@
       <td><%= results.city %></td>
       <td><%= results.st %></td>
       <td><%= results.zip %></td>
-      <% if results.uid.present? %><td>True</td><% else %><td><%= link_to 'Customer', search_master_cpas_path(match: 'yes', uid: params['uid'].to_i, lid: results.lid, list: results.list, lname: results.lname) %></td><% end %>
+      <% unless params['no_mail'].present? %><% if results.uid.present? %><td>True</td><% else %><td><%= link_to 'Customer', search_master_cpas_path(match: 'yes', uid: params['uid'].to_i, lid: results.lid, list: results.list, lname: results.lname) %></td><% end %><% end %>
       <% if results.no_mail? %><td>True</td><% else %><td><%= link_to 'No Mail', search_master_cpas_path(no_mail: 'match', lid: results.lid, lname: results.lname) %></td><% end %>
       <%# end %>
     </tr>
