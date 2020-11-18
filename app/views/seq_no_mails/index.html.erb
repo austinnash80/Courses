@@ -12,17 +12,18 @@
 </br>
 <div class="row">
 <div class="col-md-3">
+  <%= link_to "Add New Can't Find", new_seq_no_mail_path, class: 'btn btn-primary' %>
+  <%#= link_to "Add Change", master_lists_path, class: '' %>
+  <br><br>
   <input class="form-control" id="myInput" type="text" placeholder="Filter Table ...">
-<br>
-  <%= link_to "Add Can't Find", new_seq_no_mail_path, class: '' %> |
-  <%= link_to "Add Change", master_lists_path, class: '' %>
+
 </div>
 </div>
 <br>
 
 <table class="table table-hover">  <thead>
     <tr>
-      <th>Action</th>
+      <!-- <th>Action</th> -->
       <th>CPA/EA</th>
       <th>First</th>
       <th>Mi</th>
@@ -43,7 +44,7 @@
   <tbody id="myTable">
     <% @seq_no_mails.each do |seq_no_mail| %>
       <tr>
-        <td><strong><%= seq_no_mail.change == true ? 'Change' : "Can't Find" %></strong></td>
+        <!-- <td><strong><%= seq_no_mail.change == true ? 'Change' : "Can't Find" %></strong></td> -->
         <td><%= seq_no_mail.who %></td>
         <td><%= seq_no_mail.first_name %></td>
         <td><%= seq_no_mail.mi %></td>
