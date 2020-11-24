@@ -9,13 +9,13 @@
       <h3 class="text-center"> Sequoia Course: <%= params[:seq_title] %></h3>
     </div>
   </div>
-</br>
+<br>
   <%= f.input :date_received, label: false, hint: 'When update was recieved from PES' %>
   <div class="alert alert-warning">
     <p><strong>New Version Pub Date</strong></p>
     <%= f.input :pub_date, label: false %>
   </div>
-</br>
+<br>
   <div class="row">
   <div class="col-lg-3">
     <% if params[:pes_number] != 0 %>
@@ -37,9 +37,10 @@
 <div class="col-lg-3">
   <%= f.input :seq_number, label: 'Sequoia Number', input_html: { value: params[:seq_number] } %>
   <%= f.input :seq_version, label: 'Sequoia Version', input_html: { value: params[:seq_version].next, }, hint: 'Double Check Verion' %>
+  <%= f.input :seq_title, label: 'Sequoia Title', input_html: { value: params[:seq_title] } %>
 </div>
 </div>
-</br>
+<br>
 <div class="row">
   <div class="col-lg-3">
   <%= f.input :update_course, label: 'Is this an update to an existing Sequoia course?', as: :radio_buttons, :checked => ['Yes', true] %>
