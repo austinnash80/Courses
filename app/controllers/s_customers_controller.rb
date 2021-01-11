@@ -23,7 +23,7 @@ class SCustomersController < ApplicationController
           uid: params['uid'],
           existing: params['existing'],
           purchase_s: params['purchase'],
-          purchase: params['purchase'].present? ? Date::strptime(params['purchase'],"%m/%d/%y") : '',
+          purchase: params['purchase'].present? ? Date::strptime(params['purchase'],"%m/%d/%Y") : '',
           product_1: params['product_1'],
           product_2: params['product_2'],
           designation: params['designation'],
