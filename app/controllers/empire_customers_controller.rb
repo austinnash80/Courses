@@ -1044,7 +1044,7 @@ end #def
             uid: params['uid'],
             license_num: params['license_num'],
             existing: params['existing'],
-            p_date: params['purchase_date'].present? ? Date::strptime(params['purchase_date'],"%m/%d/%Y") : '',
+            p_date: params['purchase_date'].present? ? Date::strptime(params['purchase_date'],"%m/%d/%y") : '',
             purchase_date: params['purchase_date'],
             lic_state: params['lic_state'],
             products: params['products'],
