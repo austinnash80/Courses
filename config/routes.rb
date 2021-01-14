@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     collection do
       get 'search'
       get 'no_mail_cpa'
+      get 'cpa_customers'
     end
   end
   resources :empire_rc_states do

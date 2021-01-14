@@ -1,0 +1,110 @@
+<h1 class="text-center down30">CPA Customer Match</h1>
+<% list_name = MasterCpa.first(1).pluck(:list) %>
+<ul>
+  <li><strong>List Name:</strong> <%= list_name[0] %></li>
+  <li><strong>List Size:</strong> <%= number_with_delimiter(MasterCpa.count) %></li>
+  <li><strong>Matched:</strong> <%= MasterCpaMatch.count %></li>
+  <li><strong>No Match:</strong> <%= MasterCpaNoMatch.count %></li>
+</ul>
+
+<% master_cpa_no_matches = MasterCpaNoMatch.where(list:list_name[0]).all.pluck(:uid) %>
+<% master_cpa_matches = MasterCpaMatch.where(list:list_name[0]).all.pluck(:uid) %>
+<table class="table table-outline">
+  <thead>
+    <tr class="grey-b-200">
+      <th>UID</th>
+      <th>Lic#</th>
+      <th>Lic State</th>
+      <th>Date</th>
+      <th>First</th>
+      <th>Last</th>
+      <th>Address</th>
+      <th>Address_2</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% SCustomer.where(designation: 'cpa').where.not(uid: master_cpa_no_matches).where.not(uid: master_cpa_matches).order(purchase: :DESC).all.limit(1).each do |s_customer| %>
+    <tr class="grey-b-100">
+      <td><%= s_customer.uid %></td>
+      <td><%= s_customer.lic_num %></td>
+      <td><%= s_customer.lic_state %></td>
+      <td><%= s_customer.purchase %></td>
+      <td><%= s_customer.fname %></td>
+      <td><%= s_customer.lname %></td>
+      <td><%= s_customer.street_1 %></td>
+      <td><%= s_customer.street_2 %></td>
+      <td><%= s_customer.city %></td>
+      <td><%= s_customer.state %></td>
+      <td><%= s_customer.zip %></td>
+      <% if params['path'] == 'search' %>
+        <td><%= link_to 'No Match', cpa_customers_master_cpas_path(path: 'no_match', id: s_customer.id), class: 'btn btn-danger btn-sm' %></td>
+      <% else %>
+        <td><%= link_to 'Search', cpa_customers_master_cpas_path(path: 'search', id: s_customer.id, lname: s_customer.lname), class: 'btn btn-primary btn-sm' %></td>
+      <% end %>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
+
+<% if params['path'] == 'search' %>
+  <% customer = SCustomer.find(params['id'].to_i) %>
+
+  <div class="row">
+    <div class="col-md-2">
+      <input class="form-control" id="myInput" type="text" placeholder="filter..">
+    </div>
+  </div>
+
+  <table class="table table-outline">
+    <caption>Master List: <%= list_name[0] %></caption>
+    <thead>
+      <tr class="grey-b-200">
+        <th>Lid</th>
+        <th>lic#</th>
+        <th>lic State</th>
+        <th>First</th>
+        <th>Last</th>
+        <th>Address</th>
+        <th>Address_2</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zip</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="myTable">
+      <% MasterCpa.where(lname: params['lname'].upcase).all.each do |master_cpa| %>
+      <tr class="">
+        <td><%= master_cpa.lid %></td>
+        <td><%= master_cpa.lic %></td>
+        <td><%= master_cpa.lic_st %></td>
+        <td><%= master_cpa.fname %></td>
+        <td><%= master_cpa.lname %></td>
+        <td><%= master_cpa.add %></td>
+        <td><%= master_cpa.add2 %></td>
+        <td><%= master_cpa.city %></td>
+        <td><%= master_cpa.st %></td>
+        <td><%= master_cpa.zip %></td>
+        <td><%= link_to 'Match',  cpa_customers_master_cpas_path(path: 'match', lid: master_cpa.lid, id: params['id']), class: 'btn btn-primary btn-sm' %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+<% end %>
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>

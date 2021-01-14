@@ -3,6 +3,37 @@ class MasterCpasController < ApplicationController
 
   # GET /master_cpas
   # GET /master_cpas.json
+  def cpa_customers
+
+    ## IF NO MATCH FOUND
+    if params['path'] == 'no_match'
+      customer = SCustomer.find(params['id'])
+      master_cpa_list = MasterCpa.all.limit(1).pluck(:list)
+      new = MasterCpaNoMatch.create(
+        uid: customer.uid,
+        lname: customer.lname,
+        list: master_cpa_list[0],
+        search_date: Time.current
+      )
+       new.save
+       redirect_to cpa_customers_master_cpas_path
+    end
+    ## IF MATCH FOUND
+    if params['path'] == 'match'
+      customer = SCustomer.find(params['id'])
+      master_cpa_list = MasterCpa.all.limit(1).pluck(:list)
+      new = MasterCpaMatch.create(
+        lid: params['lid'],
+        uid: customer.uid,
+        lname: customer.lname,
+        list: master_cpa_list[0],
+        search_date: Time.current
+      )
+       new.save
+       redirect_to cpa_customers_master_cpas_path
+    end
+
+  end
 def no_mail_cpa
   @no_mail_cpa = MasterCpa.where(no_mail: true).order(no_mail_date: :DESC).all
 
