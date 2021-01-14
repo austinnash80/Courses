@@ -27,27 +27,42 @@
     </tr>
   </thead>
   <tbody>
-  <% SCustomer.where(designation: 'cpa').where.not(uid: master_cpa_no_matches).where.not(uid: master_cpa_matches).order(purchase: :DESC).all.limit(1).each do |s_customer| %>
-    <tr class="grey-b-100">
-      <td><%= s_customer.uid %></td>
-      <td><%= s_customer.lic_num %></td>
-      <td><%= s_customer.lic_state %></td>
-      <td><%= s_customer.purchase %></td>
-      <td><%= s_customer.fname %></td>
-      <td><%= s_customer.lname %></td>
-      <td><%= s_customer.street_1 %></td>
-      <td><%= s_customer.street_2 %></td>
-      <td><%= s_customer.city %></td>
-      <td><%= s_customer.state %></td>
-      <td><%= s_customer.zip %></td>
-      <% if params['path'] == 'search' %>
-        <td><%= link_to 'No Match', cpa_customers_master_cpas_path(path: 'no_match', id: s_customer.id), class: 'btn btn-danger btn-sm' %></td>
-      <% else %>
-        <td><%= link_to 'Search', cpa_customers_master_cpas_path(path: 'search', id: s_customer.id, lname: s_customer.lname), class: 'btn btn-primary btn-sm' %></td>
+    <% if params['path'] == 'search' %>
+      <% SCustomer.where(id: params['id']).each do |s_customer| %>
+        <tr class="grey-b-100">
+          <td><%= s_customer.uid %></td>
+          <td><%= s_customer.lic_num %></td>
+          <td><%= s_customer.lic_state %></td>
+          <td><%= s_customer.purchase %></td>
+          <td><%= s_customer.fname %></td>
+          <td><%= s_customer.lname %></td>
+          <td><%= s_customer.street_1 %></td>
+          <td><%= s_customer.street_2 %></td>
+          <td><%= s_customer.city %></td>
+          <td><%= s_customer.state %></td>
+          <td><%= s_customer.zip %></td>
+          <td><%= link_to 'No Match', cpa_customers_master_cpas_path(path: 'no_match', id: s_customer.id), class: 'btn btn-danger btn-sm' %></td>
+        </tr>
       <% end %>
-    </tr>
+    <% else %>
+      <% SCustomer.where(designation: 'cpa').where.not(uid: master_cpa_no_matches).where.not(uid: master_cpa_matches).order(purchase: :DESC).limit(1).each do |s_customer| %>
+        <tr class="grey-b-100">
+          <td><%= s_customer.uid %></td>
+          <td><%= s_customer.lic_num %></td>
+          <td><%= s_customer.lic_state %></td>
+          <td><%= s_customer.purchase %></td>
+          <td><%= s_customer.fname %></td>
+          <td><%= s_customer.lname %></td>
+          <td><%= s_customer.street_1 %></td>
+          <td><%= s_customer.street_2 %></td>
+          <td><%= s_customer.city %></td>
+          <td><%= s_customer.state %></td>
+          <td><%= s_customer.zip %></td>
+          <td><%= link_to 'Search', cpa_customers_master_cpas_path(path: 'search', id: s_customer.id, lname: s_customer.lname), class: 'btn btn-primary btn-sm' %></td>
+        </tr>
+      <% end %>
+    <% end %>
   </tbody>
-  <% end %>
 </table>
 
 <% if params['path'] == 'search' %>
@@ -77,21 +92,41 @@
       </tr>
     </thead>
     <tbody id="myTable">
-      <% MasterCpa.where(lname: params['lname'].upcase).all.each do |master_cpa| %>
-      <tr class="">
-        <td><%= master_cpa.lid %></td>
-        <td><%= master_cpa.lic %></td>
-        <td><%= master_cpa.lic_st %></td>
-        <td><%= master_cpa.fname %></td>
-        <td><%= master_cpa.lname %></td>
-        <td><%= master_cpa.add %></td>
-        <td><%= master_cpa.add2 %></td>
-        <td><%= master_cpa.city %></td>
-        <td><%= master_cpa.st %></td>
-        <td><%= master_cpa.zip %></td>
-        <td><%= link_to 'Match',  cpa_customers_master_cpas_path(path: 'match', lid: master_cpa.lid, id: params['id']), class: 'btn btn-primary btn-sm' %></td>
-      </tr>
+      <% if customer.lic_state.present? %>
+        <% MasterCpa.where(lname: customer.lname.upcase).where(lic_st: customer.lic_state).all.each do |master_cpa| %>
+        <tr class="">
+          <td><%= master_cpa.lid %></td>
+          <td><%= master_cpa.lic %></td>
+          <td><%= master_cpa.lic_st %></td>
+          <td><%= master_cpa.fname %></td>
+          <td><%= master_cpa.lname %></td>
+          <td><%= master_cpa.add %></td>
+          <td><%= master_cpa.add2 %></td>
+          <td><%= master_cpa.city %></td>
+          <td><%= master_cpa.st %></td>
+          <td><%= master_cpa.zip %></td>
+          <td><%= link_to 'Match',  cpa_customers_master_cpas_path(path: 'match', lid: master_cpa.lid, id: params['id']), class: 'btn btn-primary btn-sm' %></td>
+        </tr>
+        <% end %>
+      <% else %>
+        <% MasterCpa.where(lname: customer.lname.upcase).all.each do |master_cpa| %>
+        <tr class="">
+          <td><%= master_cpa.lid %></td>
+          <td><%= master_cpa.lic %></td>
+          <td><%= master_cpa.lic_st %></td>
+          <td><%= master_cpa.fname %></td>
+          <td><%= master_cpa.lname %></td>
+          <td><%= master_cpa.add %></td>
+          <td><%= master_cpa.add2 %></td>
+          <td><%= master_cpa.city %></td>
+          <td><%= master_cpa.st %></td>
+          <td><%= master_cpa.zip %></td>
+          <td><%= link_to 'Match',  cpa_customers_master_cpas_path(path: 'match', lid: master_cpa.lid, id: params['id']), class: 'btn btn-primary btn-sm' %></td>
+        </tr>
+        <% end %>
       <% end %>
+
+
     </tbody>
   </table>
 
