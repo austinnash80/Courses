@@ -6,6 +6,17 @@ class MasterCpaNoMatchesController < ApplicationController
   def index
     @master_cpa_no_matches = MasterCpaNoMatch.all
 
+    # Remove All
+    if params['remove_all'] == 'yes' && params['confirm'] == 'yes'
+      MasterCpaNoMatch.delete_all
+      redirect_to master_cpa_no_matches_path(), note: 'Records Deleted'
+    end
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @master_cpa_no_matches.to_csv, filename: "Sequoia-no-match-customers-cpa-#{Date.today}.csv" }
+    end
+
     if params['no_match'] == 'yes'
       uid = params['uid'].to_i
       lname = SCustomer.where(uid: uid).pluck(:lname)
@@ -75,6 +86,11 @@ class MasterCpaNoMatchesController < ApplicationController
       format.html { redirect_to master_cpa_no_matches_url, notice: 'Master cpa no match was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def import #Uploading CSV function
+    MasterCpaNoMatch.my_import(params[:file])
+    redirect_to master_cpa_no_matches_path, notice: "Upload Complete"
   end
 
   private

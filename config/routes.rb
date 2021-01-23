@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   resources :master_cpa_matches do
     collection {post :import}
   end
-  resources :master_cpa_no_matches
+  resources :master_cpa_no_matches do
+    collection {post :import}
+  end
   resources :master_cpas do
     collection {post :import}
     collection do
