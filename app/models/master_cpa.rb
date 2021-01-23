@@ -1,5 +1,5 @@
 class MasterCpa < ApplicationRecord
-  validates :lid, :presence => true, :uniqueness => true
+  validates :lid, presence: true, uniqueness: true
 
   def self.my_import(file)
     batch,batch_size = [], 2_000

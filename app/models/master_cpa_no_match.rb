@@ -1,6 +1,6 @@
 class MasterCpaNoMatch < ApplicationRecord
 
-  validates :lid, :presence => true, :uniqueness => true
+  validates :uid, :presence => true, :uniqueness => true
 
   def self.my_import(file)
     batch,batch_size = [], 2_000
@@ -15,7 +15,7 @@ class MasterCpaNoMatch < ApplicationRecord
   end
 
   def self.to_csv # Export to csv function
-    attributes = %w{list uid lname search_date}
+    attributes = %w{uid list lname search_date}
     CSV.generate(headers: true) do |csv|
       csv << attributes
 
