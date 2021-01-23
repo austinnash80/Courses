@@ -9,7 +9,9 @@ Rails.application.routes.draw do
       get 'no_mail_ea'
     end
   end
-  resources :master_cpa_matches
+  resources :master_cpa_matches do
+    collection {post :import}
+  end
   resources :master_cpa_no_matches
   resources :master_cpas do
     collection {post :import}

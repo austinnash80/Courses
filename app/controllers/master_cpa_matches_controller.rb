@@ -6,6 +6,12 @@ class MasterCpaMatchesController < ApplicationController
   def index
     @master_cpa_matches = MasterCpaMatch.all
 
+    # Remove All
+    if params['remove_all'] == 'yes' && params['confirm'] == 'yes'
+      MasterCpaMatch.delete_all
+      redirect_to master_cpa_matches_path(), note: 'Records Deleted'
+    end
+
     respond_to do |format|
       format.html
       format.csv { send_data @master_cpa_matches.to_csv, filename: "Sequoia-matched-customers-cpa-#{Date.today}.csv" }
@@ -65,6 +71,11 @@ class MasterCpaMatchesController < ApplicationController
       format.html { redirect_to master_cpa_matches_url, notice: 'Master cpa match was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def import #Uploading CSV function
+    MasterCpaMatch.my_import(params[:file])
+    redirect_to master_cpa_matches_path, notice: "Upload Complete"
   end
 
   private
