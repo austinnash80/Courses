@@ -1,4 +1,62 @@
 
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="well col-md-3">
+    <p>Upload New List (CSV)</p>
+      <%= form_tag import_master_cpas_path, multipart: true do %>
+      <%= file_field_tag :file %>
+    <br>
+      <%= submit_tag 'Upload', class: 'btn btn-default' %>
+    <% end %>
+  <br>
+    <% if params['remove_all'] == 'yes' %>
+      <p><%= link_to "Confirm Delete", master_cpas_path(remove_all: 'yes', confirm: 'yes') %></p>
+    <% else %>
+      <p><%= link_to "Remove All Records", master_cpas_path(remove_all: 'yes') %></p>
+    <% end %>
+  </div>
+</div>
+
+<h1 class="text-center">Master CPA List</h1>
+
+<table class="table table-outline">
+  <caption>Displaying 250 of <%= number_with_delimiter(@master_cpa.count) %></caption>
+  <thead>
+    <tr>
+      <th>Lid</th>
+      <th>List</th>
+      <th>Lic St</th>
+      <th>Lic Num</th>
+      <th>Fname</th>
+      <th>MI</th>
+      <th>Lname</th>
+      <th>Customer</th>
+      <th>No Mail</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% MasterCpa.first(250).each do |master_cpa| %>
+      <tr>
+        <td><%= master_cpa.lid %></td>
+        <td><%= master_cpa.list %></td>
+        <td><%= master_cpa.lic_st %></td>
+        <td><%= master_cpa.lic %></td>
+        <td><%= master_cpa.fname %></td>
+        <td><%= master_cpa.mi %></td>
+        <td><%= master_cpa.lname %></td>
+        <td><%= master_cpa.uid %></td>
+        <td><%= master_cpa.no_mail %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<!-- OLD PRE 1/22/21 -->
+
+<!--
 <div class="row">
   <div class="col-md-2">
     <%= text_field_tag "id", '', placeholder: 'UID', class: "uid_field form-control" %>
@@ -35,23 +93,23 @@
     </tr>
   </thead>
   <tbody>
-    <% @cpa_new.each do |customer| %>
+    <%# @cpa_new.each do |customer| %>
     <tr>
-      <td><%= customer.uid %></td>
-      <td><%= customer.lic_num %></td>
-      <td><%= customer.lic_state %></td>
-      <td><%= customer.purchase %></td>
-      <td><%= customer.product_1 %></td>
-      <td><%= customer.fname %></td>
-      <td><%= customer.lname %></td>
-      <td><%= customer.street_1 %></td>
-      <td><%= customer.street_2 %></td>
-      <td><%= customer.city %></td>
-      <td><%= customer.state %></td>
-      <td><%= customer.zip %></td>
-      <td><%= customer.email %></td>
+      <td><%#= customer.uid %></td>
+      <td><%#= customer.lic_num %></td>
+      <td><%#= customer.lic_state %></td>
+      <td><%#= customer.purchase %></td>
+      <td><%#= customer.product_1 %></td>
+      <td><%#= customer.fname %></td>
+      <td><%#= customer.lname %></td>
+      <td><%#= customer.street_1 %></td>
+      <td><%#= customer.street_2 %></td>
+      <td><%#= customer.city %></td>
+      <td><%#= customer.state %></td>
+      <td><%#= customer.zip %></td>
+      <td><%#= customer.email %></td>
     </tr>
-    <% end %>
+    <%# end %>
   </tbody>
 </table>
 
@@ -63,3 +121,5 @@ $(".search_link").click(function() {
   });
 });
 </script>
+
+-->

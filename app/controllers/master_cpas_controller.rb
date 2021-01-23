@@ -44,19 +44,30 @@ def no_mail_cpa
 end
 
   def index
-    new_cpa_membership = ["Unlimited CPA CPE Membership", "Unlimited CPA CPE Membership (Auto-Renew)"]
-    uid_master_cpa = MasterCpaMatch.pluck(:uid)
+
+    @master_cpa = MasterCpa.all
+
+    # Remove All
+    if params['remove_all'] == 'yes' && params['confirm'] == 'yes'
+      MasterCpa.delete_all
+      redirect_to master_cpas_path(), note: 'Records Deleted'
+    end
+
+
+    # OLD
+    # new_cpa_membership = ["Unlimited CPA CPE Membership", "Unlimited CPA CPE Membership (Auto-Renew)"]
+    # uid_master_cpa = MasterCpaMatch.pluck(:uid)
     # unmatched = SCustomer.where.not(uid: uid_master_cpa).where(match: nil).where(product_1: new_cpa_membership)
-    no_match = MasterCpaNoMatch.pluck(:uid)
-    @cpa_new = SCustomer.where.not(uid: uid_master_cpa).where(match: nil).where(product_1: new_cpa_membership).where.not(uid: no_match).order(purchase: :DESC).first(10)
+    # no_match = MasterCpaNoMatch.pluck(:uid)
+    # @cpa_new = SCustomer.where.not(uid: uid_master_cpa).where(match: nil).where(product_1: new_cpa_membership).where.not(uid: no_match).order(purchase: :DESC).first(10)
     # @cpa_new_count = unmatched.count
-    @cpa_export = MasterCpa.where.not(uid: nil)
+    # @cpa_export = MasterCpa.where.not(uid: nil)
     # @cpa_export = 1,2,3
 
-    respond_to do |format|
-      format.html
-      format.csv { send_data @no_mail_cpa.to_csv, filename: "Sequoia-No-Mail-cpa-#{Date.today}.csv" }
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.csv { send_data @no_mail_cpa.to_csv, filename: "Sequoia-No-Mail-cpa-#{Date.today}.csv" }
+    # end
 
 
 
