@@ -14,6 +14,7 @@
 <% matches = MasterCpaMatch.pluck(:lid) %>
 <% des = ['cpa', 'cpa '] %>
 <table class="table table-outline">
+  <caption>Remaining: <%= number_with_delimiter(SCustomer.where(designation: des).where.not(uid: master_cpa_no_matches).where.not(uid: master_cpa_matches).where.not(uid: master_cpa_double_account).count) %></caption>
   <thead>
     <tr class="grey-b-200">
       <th>UID</th>
