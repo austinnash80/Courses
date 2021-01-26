@@ -109,7 +109,7 @@
           <td><%= master_cpa.city %></td>
           <td><%= master_cpa.st %></td>
           <td><%= master_cpa.zip %></td>
-          <% if master_cpa.lid == matches %>
+          <% if matches.include? master_cpa.lid %>
             <td><%= link_to 'Double', cpa_customers_master_cpas_path(path: 'match', lid: master_cpa.lid, id: params['id']), class: 'btn btn-primary btn-sm', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin'></i> loading..."} %></td>
           <% else %>
             <td><%= link_to 'Match',  cpa_customers_master_cpas_path(path: 'match', lid: master_cpa.lid, id: params['id']), class: 'btn btn-primary btn-sm', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin'></i> loading..."} %></td>
@@ -130,7 +130,7 @@
           <td><%= master_cpa.city %></td>
           <td><%= master_cpa.st %></td>
           <td><%= master_cpa.zip %></td>
-          <% if master_cpa.lid == matches %>
+          <% if matches.include? master_cpa.lid %>
             <td><%= link_to 'Double', cpa_customers_master_cpas_path(path: 'match', lid: master_cpa.lid, id: params['id']), class: 'btn btn-primary btn-sm', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin'></i> loading..."} %></td>
           <% else %>
             <td><%= link_to 'Match',  cpa_customers_master_cpas_path(path: 'match', lid: master_cpa.lid, id: params['id']), class: 'btn btn-primary btn-sm', data: {disable_with: "<i class = 'fa fa-circle-o-notch fa-spin'></i> loading..."} %></td>
