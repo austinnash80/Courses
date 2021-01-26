@@ -3,8 +3,8 @@
 <ul>
   <li><strong>List Name:</strong> <%= list_name[0] %></li>
   <li><strong>List Size:</strong> <%= number_with_delimiter(MasterCpa.count) %></li>
-  <li><strong>Matched:</strong> <%= MasterCpaMatch.count %></li>
-  <li><strong>No Match:</strong> <%= MasterCpaNoMatch.count %></li>
+  <li><strong>Matched:</strong> <%= number_with_delimiter(MasterCpaMatch.count) %></li>
+  <li><strong>No Match:</strong> <%= number_with_delimiter(MasterCpaNoMatch.count) %></li>
 </ul>
 
 <% master_cpa_no_matches = MasterCpaNoMatch.where(list:list_name[0]).all.pluck(:uid) %>
@@ -45,7 +45,7 @@
         </tr>
       <% end %>
     <% else %>
-      <% SCustomer.where(designation: 'cpa').where.not(uid: master_cpa_no_matches).where.not(uid: master_cpa_matches).last(1).each do |s_customer| %>
+      <% SCustomer.where(designation: 'cpa').where.not(uid: master_cpa_no_matches).where.not(uid: master_cpa_matches).order(purchase: :DESC).limit(1).each do |s_customer| %>
         <tr class="grey-b-100">
           <td><%= s_customer.uid %></td>
           <td><%= s_customer.lic_num %></td>
@@ -79,6 +79,7 @@
     <thead>
       <tr class="grey-b-200">
         <th>Lid</th>
+        <th>List</th>
         <th>lic#</th>
         <th>lic State</th>
         <th>First</th>
@@ -96,6 +97,7 @@
         <% MasterCpa.where(lname: customer.lname.upcase).where(lic_st: customer.lic_state).all.each do |master_cpa| %>
         <tr class="">
           <td><%= master_cpa.lid %></td>
+          <td><%= master_cpa.list %></td>
           <td><%= master_cpa.lic %></td>
           <td><%= master_cpa.lic_st %></td>
           <td><%= master_cpa.fname %></td>
@@ -112,6 +114,7 @@
         <% MasterCpa.where(lname: customer.lname.upcase).all.each do |master_cpa| %>
         <tr class="">
           <td><%= master_cpa.lid %></td>
+          <td><%= master_cpa.list %></td>
           <td><%= master_cpa.lic %></td>
           <td><%= master_cpa.lic_st %></td>
           <td><%= master_cpa.fname %></td>
