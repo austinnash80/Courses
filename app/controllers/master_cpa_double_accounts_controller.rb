@@ -69,6 +69,6 @@ class MasterCpaDoubleAccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def master_cpa_double_account_params
-      params.require(:master_cpa_double_account).permit(:uid, :lname, :string, :uid, :search_date)
+      params.require(:master_cpa_double_account).permit(:uid, :lname, :string, :uid, :search_date, :lid, :list)
     end
 end
