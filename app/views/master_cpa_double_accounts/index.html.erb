@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-center">CPA Double Accounts</h1>
+
+<table class="table table-outline">
+  <thead>
+    <tr>
+      <th>Uid</th>
+      <th>Lname</th>
+      <th>String</th>
+      <th>Uid</th>
+      <th>Search date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @master_cpa_double_accounts.each do |master_cpa_double_account| %>
+      <tr>
+        <td><%= master_cpa_double_account.uid %></td>
+        <td><%= master_cpa_double_account.lname %></td>
+        <td><%= master_cpa_double_account.string %></td>
+        <td><%= master_cpa_double_account.uid %></td>
+        <td><%= master_cpa_double_account.search_date %></td>
+        <td><%= link_to 'Show', master_cpa_double_account %></td>
+        <td><%= link_to 'Edit', edit_master_cpa_double_account_path(master_cpa_double_account) %></td>
+        <td><%= link_to 'Destroy', master_cpa_double_account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%#= link_to 'New Master Cpa Double Account', new_master_cpa_double_account_path %>

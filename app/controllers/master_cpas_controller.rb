@@ -32,6 +32,20 @@ class MasterCpasController < ApplicationController
        new.save
        redirect_to cpa_customers_master_cpas_path
     end
+    ## IF Double FOUND
+    if params['path'] == 'double'
+      customer = SCustomer.find(params['id'])
+      master_cpa_list = MasterCpa.all.limit(1).pluck(:list)
+      new = MasterCpaDoubleAccount.create(
+        lid: params['lid'],
+        uid: customer.uid,
+        lname: customer.lname,
+        list: master_cpa_list[0],
+        search_date: Time.current
+      )
+       new.save
+       redirect_to cpa_customers_master_cpas_path
+    end
 
   end
 def no_mail_cpa

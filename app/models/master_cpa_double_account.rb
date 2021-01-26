@@ -1,0 +1,2 @@
+class MasterCpaDoubleAccount < ApplicationRecord
+end

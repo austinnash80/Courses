@@ -1,0 +1,16 @@
+
+<%= simple_form_for(@master_cpa_double_account) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :uid %>
+    <%= f.input :lname %>
+    <%= f.input :string %>
+    <%= f.input :uid %>
+    <%= f.input :search_date %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

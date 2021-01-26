@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :master_cpa_double_accounts
   resources :master_ea_no_matches
   resources :master_ea_matches
   resources :master_eas do

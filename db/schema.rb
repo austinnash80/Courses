@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200714234729) do
+ActiveRecord::Schema.define(version: 20210126094506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -540,6 +540,15 @@ ActiveRecord::Schema.define(version: 20200714234729) do
     t.datetime "people_report_updated_at"
     t.integer "estimate_quanity"
     t.decimal "estimate_cost"
+  end
+
+  create_table "master_cpa_double_accounts", force: :cascade do |t|
+    t.integer "uid"
+    t.string "lname"
+    t.string "string"
+    t.date "search_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "master_cpa_matches", force: :cascade do |t|
