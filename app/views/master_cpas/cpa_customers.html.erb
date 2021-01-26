@@ -13,8 +13,13 @@
 <% master_cpa_double_account = MasterCpaDoubleAccount.where(list:list_name[0]).all.pluck(:uid) %>
 <% matches = MasterCpaMatch.pluck(:lid) %>
 <% des = ['cpa', 'cpa '] %>
+<p><%= link_to 'Check remaining', cpa_customers_master_cpas_path(path: 'check_remaining') %></p>
+  <% if params['path'] == 'check_remaining' %>
+    <p><%= SCustomer.where(designation: des).where.not(uid: master_cpa_no_matches).where.not(uid: master_cpa_matches).where.not(uid: master_cpa_double_account).count %></p>
+  <% end %>
+
 <table class="table table-outline">
-  <caption>Remaining: <%= number_with_delimiter(SCustomer.where(designation: des).where.not(uid: master_cpa_no_matches).where.not(uid: master_cpa_matches).where.not(uid: master_cpa_double_account).count) %></caption>
+  <caption></caption>
   <thead>
     <tr class="grey-b-200">
       <th>UID</th>
