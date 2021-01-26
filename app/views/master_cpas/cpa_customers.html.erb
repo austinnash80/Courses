@@ -5,11 +5,12 @@
   <li><strong>List Size:</strong> <%= number_with_delimiter(MasterCpa.count) %></li>
   <li><strong><%= link_to 'Matched:', master_cpa_matches_path() %></strong> <%= number_with_delimiter(MasterCpaMatch.count) %></li>
   <li><strong><%= link_to 'No Match:', master_cpa_no_matches_path() %></strong> <%= number_with_delimiter(MasterCpaNoMatch.count) %></li>
-  <li><strong><%= link_to 'Double:', master_cpa_double_accounts_path() %></strong> <%= number_with_delimiter(MasterCpaNoMatch.count) %></li>
+  <li><strong><%= link_to 'Double:', master_cpa_double_accounts_path() %></strong> <%= number_with_delimiter(MasterCpaDoubleAccount.count) %></li>
 </ul>
 
 <% master_cpa_no_matches = MasterCpaNoMatch.where(list:list_name[0]).all.pluck(:uid) %>
 <% master_cpa_matches = MasterCpaMatch.where(list:list_name[0]).all.pluck(:uid) %>
+<% master_cpa_double_account = MasterCpaDoubleAccount.where(list:list_name[0]).all.pluck(:uid) %>
 <% matches = MasterCpaMatch.pluck(:lid) %>
 <% des = ['cpa', 'cpa '] %>
 <table class="table table-outline">
@@ -48,7 +49,7 @@
         </tr>
       <% end %>
     <% else %>
-      <% SCustomer.where(designation: des).where.not(uid: master_cpa_no_matches).where.not(uid: master_cpa_matches).last(1).each do |s_customer| %>
+      <% SCustomer.where(designation: des).where.not(uid: master_cpa_no_matches).where.not(uid: master_cpa_matches).where.not(uid: master_cpa_double_account).last(1).each do |s_customer| %>
         <tr class="grey-b-100">
           <td><%= s_customer.uid %></td>
           <td><%= s_customer.lic_num %></td>
