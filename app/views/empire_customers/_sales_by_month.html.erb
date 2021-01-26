@@ -4,36 +4,6 @@
   <div class="row">
     <div class="col-md-4">
       <table class="table table-outline">
-        <% year = '2018' %>
-        <% total_1 = [] %>
-        <thead>
-          <tr class="grey-b-200">
-            <th class="text-center" colspan="2"><%= year %></th>
-          </tr>
-          <tr>
-            <th>Month</th>
-            <th>Sales</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% data.each do |k, v| %>
-          <% if k.strftime('%Y') == year %>
-            <tr>
-              <td><%= k.strftime('%B')%></td>
-              <td><%= number_to_currency(v) %></td>
-            </tr>
-                  <% total_1.push(v) %>
-          <% end %>
-          <% end %>
-          <tr>
-            <td><strong>Total</strong></td>
-            <td><strong><%= number_to_currency(total_1.sum) %></strong></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-md-4">
-      <table class="table table-outline">
         <% year = '2019' %>
         <% total_1 = [] %>
         <thead>
@@ -65,6 +35,36 @@
     <div class="col-md-4">
       <table class="table table-outline">
         <% year = '2020' %>
+        <% total_1 = [] %>
+        <thead>
+          <tr class="grey-b-200">
+            <th class="text-center" colspan="2"><%= year %></th>
+          </tr>
+          <tr>
+            <th>Month</th>
+            <th>Sales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% data.each do |k, v| %>
+          <% if k.strftime('%Y') == year %>
+            <tr>
+              <td><%= k.strftime('%B')%></td>
+              <td><%= number_to_currency(v) %></td>
+            </tr>
+                  <% total_1.push(v) %>
+          <% end %>
+          <% end %>
+          <tr>
+            <td><strong>Total</strong></td>
+            <td><strong><%= number_to_currency(total_1.sum) %></strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <table class="table table-outline">
+        <% year = '2021' %>
         <% total_1 = [] %>
         <thead>
           <tr class="grey-b-200">
