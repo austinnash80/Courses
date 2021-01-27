@@ -82,7 +82,19 @@
   <% if params['path'] == 'search' %>
     <% customer = SCustomer.find(params['id'].to_i) %>
 
-    <div class="row">
+    <a class="" data-toggle="collapse" data-target="#edit">Edit Last Name</a>
+    <div id="edit" class="collapse">
+      <div class="row down20">
+        <div class="col-lg-2">
+          <%= text_field_tag "id", '', class: "last_name_field form-control", value: params['lname'] %>
+          <div class="down10"><%= link_to 'Search', ea_customers_master_eas_path(path: 'search', edit: 'lname', id: params['id']), class: 'search_link' %></div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row down20">
       <div class="col-md-2">
         <input class="form-control" id="myInput" type="text" placeholder="filter..">
       </div>
@@ -106,7 +118,13 @@
         </tr>
       </thead>
       <tbody id="myTable">
-          <% MasterEa.where(lname: customer.lname.upcase).all.each do |master_ea| %>
+        <% if params['edit'] == 'lname' %>
+          <% lname = params['lname'] %>
+        <% else %>
+          <% lname = customer.lname.upcase %>
+        <% end %>
+
+          <% MasterEa.where(lname: lname).all.each do |master_ea| %>
           <tr class="">
             <td><%= master_ea.lid %></td>
             <td><%= master_ea.list %></td>
@@ -128,3 +146,11 @@
       </tbody>
     </table>
   <% end %>
+
+  <script type="text/javascript">
+    $(".search_link").click(function() {
+      $(this).attr("href", function() {
+        return this.href + "&lname=" + $('.last_name_field').val().toUpperCase();
+      });
+    });
+  </script>
