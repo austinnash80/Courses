@@ -46,6 +46,13 @@ class MasterEasController < ApplicationController
        redirect_to ea_customers_master_eas_path
     end
 
+    # Remove All
+    if params['remove_all'] == 'yes' && params['confirm'] == 'yes'
+      MasterEa.delete_all
+      redirect_to master_eas_path(), note: 'Records Deleted'
+    end
+
+
   end
 
   def no_mail_ea
