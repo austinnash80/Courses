@@ -5,6 +5,10 @@ class MasterEaDoubleAccountsController < ApplicationController
   # GET /master_ea_double_accounts.json
   def index
     @master_ea_double_accounts = MasterEaDoubleAccount.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data @master_ea_double_accounts.to_csv, filename: "Sequoia-double-accounts-ea-#{Date.today}.csv" }
+    end
   end
 
   # GET /master_ea_double_accounts/1

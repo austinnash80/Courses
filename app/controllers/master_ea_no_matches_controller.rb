@@ -6,6 +6,17 @@ class MasterEaNoMatchesController < ApplicationController
   def index
     @master_ea_no_matches = MasterEaNoMatch.all
 
+    # Remove All
+    if params['remove_all'] == 'yes' && params['confirm'] == 'yes'
+      MasterEaNoMatch.delete_all
+      redirect_to master_ea_no_matches_path(), note: 'Records Deleted'
+    end
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @master_ea_no_matches.to_csv, filename: "Sequoia-no-matched-customers-ea-#{Date.today}.csv" }
+    end
+
     if params['no_match'] == 'yes'
       uid = params['uid'].to_i
       lname = SCustomer.where(uid: uid).pluck(:lname)
@@ -75,6 +86,11 @@ class MasterEaNoMatchesController < ApplicationController
       format.html { redirect_to master_ea_no_matches_url, notice: 'Master ea no match was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def import #Uploading CSV function
+    MasterEaNoMatch.my_import(params[:file])
+    redirect_to master_ea_no_matches_path, notice: "Upload Complete"
   end
 
   private

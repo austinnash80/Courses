@@ -11,6 +11,12 @@ class MasterEaMatchesController < ApplicationController
       format.csv { send_data @master_ea_matches.to_csv, filename: "Sequoia-matched-customers-ea-#{Date.today}.csv" }
     end
 
+    # Remove all records before new list import
+    if params['remove_all'] == 'yes' && params['confirm'] == 'yes'
+      MasterEaMatch.delete_all
+      redirect_to master_ea_matches_path(), note: 'Records Deleted'
+    end
+
   end
 
   # GET /master_ea_matches/1
@@ -65,6 +71,11 @@ class MasterEaMatchesController < ApplicationController
       format.html { redirect_to master_ea_matches_url, notice: 'Master ea match was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def import #Uploading CSV function
+    MasterEaMatch.my_import(params[:file])
+    redirect_to master_ea_matches_path, notice: "Upload Complete"
   end
 
   private
