@@ -46,11 +46,7 @@ class MasterEasController < ApplicationController
        redirect_to ea_customers_master_eas_path
     end
 
-    # Remove All
-    if params['remove_all'] == 'yes' && params['confirm'] == 'yes'
-      MasterEa.delete_all
-      redirect_to master_eas_path(), note: 'Records Deleted'
-    end
+
 
 
   end
@@ -70,6 +66,12 @@ class MasterEasController < ApplicationController
     uid_master_ea = MasterEaMatch.pluck(:uid)
     no_match_ea = MasterEaNoMatch.pluck(:uid)
     @ea_new = SCustomer.where.not(uid: uid_master_ea).where(match: nil).where(product_1: new_ea_membership).where.not(uid: no_match_ea).order(purchase: :DESC).first(10)
+
+    # Remove All
+    if params['remove_all'] == 'yes' && params['confirm'] == 'yes'
+      MasterEa.delete_all
+      redirect_to master_eas_path(), note: 'Records Deleted'
+    end
   end
 
   def search
