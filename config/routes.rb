@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :master_ea_double_accounts
   resources :master_cpa_double_accounts
   resources :master_ea_no_matches
   resources :master_ea_matches
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
     collection do
       get 'search'
       get 'no_mail_ea'
+      get 'ea_customers'
     end
   end
   resources :master_cpa_matches do

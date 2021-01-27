@@ -1,0 +1,1 @@
+json.partial! "master_ea_double_accounts/master_ea_double_account", master_ea_double_account: @master_ea_double_account

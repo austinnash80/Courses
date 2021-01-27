@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210126095952) do
+ActiveRecord::Schema.define(version: 20210126235620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -595,6 +595,16 @@ ActiveRecord::Schema.define(version: 20210126095952) do
     t.integer "uid"
     t.boolean "no_mail"
     t.date "no_mail_date"
+  end
+
+  create_table "master_ea_double_accounts", force: :cascade do |t|
+    t.integer "uid"
+    t.string "lname"
+    t.integer "lid"
+    t.string "list"
+    t.date "search_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "master_ea_matches", force: :cascade do |t|

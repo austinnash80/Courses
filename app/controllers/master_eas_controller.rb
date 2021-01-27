@@ -3,6 +3,51 @@ class MasterEasController < ApplicationController
 
   # GET /master_eas
   # GET /master_eas.json
+  def ea_customers
+    ## IF NO MATCH FOUND
+    if params['path'] == 'no_match'
+      customer = SCustomer.find(params['id'])
+      master_ea_list = MasterEa.all.limit(1).pluck(:list)
+      new = MasterEaNoMatch.create(
+        uid: customer.uid,
+        lname: customer.lname,
+        list: master_ea_list[0],
+        search_date: Time.current
+      )
+       new.save
+       redirect_to ea_customers_master_eas_path
+    end
+    ## IF MATCH FOUND
+    if params['path'] == 'match'
+      customer = SCustomer.find(params['id'])
+      master_ea_list = MasterEa.all.limit(1).pluck(:list)
+      new = MasterEaMatch.create(
+        lid: params['lid'],
+        uid: customer.uid,
+        lname: customer.lname,
+        list: master_ea_list[0],
+        search_date: Time.current
+      )
+       new.save
+       redirect_to ea_customers_master_eas_path
+    end
+    ## IF Double FOUND
+    if params['path'] == 'double'
+      customer = SCustomer.find(params['id'])
+      master_ea_list = MasterEa.all.limit(1).pluck(:list)
+      new = MasterEaDoubleAccount.create(
+        lid: params['lid'],
+        uid: customer.uid,
+        lname: customer.lname,
+        list: master_ea_list[0],
+        search_date: Time.current
+      )
+       new.save
+       redirect_to ea_customers_master_eas_path
+    end
+
+  end
+
   def no_mail_ea
     @no_mail_ea = MasterEa.where(no_mail: true).order(no_mail_date: :DESC).all
 

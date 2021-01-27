@@ -1,0 +1,2 @@
+class MasterEaDoubleAccount < ApplicationRecord
+end

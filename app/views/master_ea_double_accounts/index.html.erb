@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-center p20">Master EA Double Accounts</h1>
+<p><%= link_to 'Back to EA Customer Match', ea_customers_master_eas_path %></p>
+
+<table class="table table-outline">
+  <thead>
+    <tr>
+      <th>Uid</th>
+      <th>Lname</th>
+      <th>Lid</th>
+      <th>List</th>
+      <th>Search date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @master_ea_double_accounts.each do |master_ea_double_account| %>
+      <tr>
+        <td><%= master_ea_double_account.uid %></td>
+        <td><%= master_ea_double_account.lname %></td>
+        <td><%= master_ea_double_account.lid %></td>
+        <td><%= master_ea_double_account.list %></td>
+        <td><%= master_ea_double_account.search_date %></td>
+        <td><%= link_to 'Show', master_ea_double_account %></td>
+        <td><%= link_to 'Edit', edit_master_ea_double_account_path(master_ea_double_account) %></td>
+        <td><%= link_to 'Destroy', master_ea_double_account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%#= link_to 'New Master Ea Double Account', new_master_ea_double_account_path %>
