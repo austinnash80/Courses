@@ -35,7 +35,7 @@
   </thead>
 
   <tbody>
-    <% @master_ea_matches.each do |master_ea_match| %>
+    <% @master_ea_matches.order(search_date: :DESC).each do |master_ea_match| %>
       <tr>
         <td><%= master_ea_match.uid %></td>
         <td><%= master_ea_match.lname %></td>

@@ -46,6 +46,30 @@ class MasterEasController < ApplicationController
        redirect_to ea_customers_master_eas_path
     end
 
+    ## Run Auto Match
+    if params['path'] == 'run_match'
+      list_name = MasterEa.first(1).pluck(:list)
+      master_ea_no_matches = MasterEaNoMatch.where(list:list_name[0]).all.pluck(:uid)
+      master_ea_matches = MasterEaMatch.where(list:list_name[0]).all.pluck(:uid)
+      master_ea_double_account = MasterEaDoubleAccount.where(list:list_name[0]).all.pluck(:uid)
+      matches = MasterEaMatch.pluck(:lid)
+      des = ['ea', 'ea ']
+
+        SCustomer.where(designation: des).where.not(zip: nil).where.not(uid: master_ea_no_matches).where.not(uid: master_ea_matches).where.not(uid: master_ea_double_account).all.each do |s_customer|
+          lid = MasterEa.where(fname: s_customer.fname).where(lname: s_customer.lname).where("zip like ?", "#{s_customer.zip}%").pluck(:lid)
+            if lid.present?
+              new = MasterEaMatch.create(
+                lid: lid[0],
+                uid: s_customer.uid,
+                lname: s_customer.lname,
+                list: list_name[0],
+                search_date: Time.current)
+              new.save
+          end
+        end
+      redirect_to ea_customers_master_eas_path()
+    end
+
 
 
 

@@ -1,8 +1,7 @@
 <h1 class="text-center down30">EA Customer Match</h1>
 <% list_name = MasterEa.first(1).pluck(:list) %>
 <ul>
-  <li><strong>List Name:</strong> <%= list_name[0] %></li>
-  <li><strong>List Size:</strong> <%= number_with_delimiter(MasterEa.count) %></li>
+  <li><strong>List:</strong> <%= list_name[0] %> (<%= number_with_delimiter(MasterEa.count) %>)</li>
   <li><strong><%= link_to 'Matched:', master_ea_matches_path() %></strong> <%= number_with_delimiter(MasterEaMatch.count) %></li>
   <li><strong><%= link_to 'No Match:', master_ea_no_matches_path() %></strong> <%= number_with_delimiter(MasterEaNoMatch.count) %></li>
   <li><strong><%= link_to 'Double:', master_ea_double_accounts_path() %></strong> <%= number_with_delimiter(MasterEaDoubleAccount.count) %></li>
@@ -13,7 +12,9 @@
 <% master_ea_double_account = MasterEaDoubleAccount.where(list:list_name[0]).all.pluck(:uid) %>
 <% matches = MasterEaMatch.pluck(:lid) %>
 <% des = ['ea', 'ea '] %>
-<p><%= link_to 'Check remaining', ea_customers_master_eas_path(path: 'check_remaining') %></p>
+<p><%= link_to 'Run Match', ea_customers_master_eas_path(path: 'run_match') %><br><%= link_to 'Check remaining', ea_customers_master_eas_path(path: 'check_remaining') %></p>
+  
+
   <% if params['path'] == 'check_remaining' %>
     <p><%= SCustomer.where(designation: des).where.not(uid: master_ea_no_matches).where.not(uid: master_ea_matches).where.not(uid: master_ea_double_account).count %></p>
   <% end %>
@@ -21,7 +22,6 @@
   <!-- Customer Search Table -->
 
   <table class="table table-outline">
-    <caption></caption>
     <thead>
       <tr class="grey-b-200">
         <th>UID</th>
