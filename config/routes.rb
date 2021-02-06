@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :empire_master_no_matches
+  resources :empire_master_matches
   resources :master_ea_double_accounts do
     collection {post :import}
   end
@@ -48,6 +50,9 @@ Rails.application.routes.draw do
 
   resources :empire_master_lists do
     collection {post :import}
+    collection do
+      get 'ny'
+    end
   end
   resources :empire_state_lists
   resources :s_customers do

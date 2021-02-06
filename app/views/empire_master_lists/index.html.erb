@@ -54,7 +54,8 @@
           <% elsif %>
             <td><%= link_to 'Delete Master', empire_master_lists_path(delete: 'NY') %></td>
           <% end %>
-          <td> <%= link_to 'Update', b_exp_empire_customers_path(state: 'NY'), class: 'btn btn-sm btn-default' %></td>
+          <td> <%= link_to 'Match Customers', ny_empire_master_lists_path(), class: 'btn btn-sm btn-default' %></td>
+          <!-- <td> <%#= link_to 'Update', b_exp_empire_customers_path(state: 'NY'), class: 'btn btn-sm btn-default' %></td> -->
         </tr>
         <tr>
           <% pa_match = EmpireCustomer.where(lic_state: 'PA').where(b_list: @pa.uniq.join).pluck(:uid) %>

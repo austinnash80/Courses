@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-center">Empire Master No Matches</h1>
+
+<% if params['path'] == 'no_matches' %>
+  <% display = @empire_master_no_matches.where(double: false).all %>
+<% elsif params['path'] == 'doubles' %>
+  <% display = @empire_master_no_matches.where(double: true).all %>
+<% else %>
+  <% display = @empire_master_no_matches.all %>
+<% end %>
+
+
+
+
+<table class="table table-outline">
+  <thead>
+    <tr>
+      <th>Uid</th>
+      <th>Last name</th>
+      <th>List</th>
+      <th>Source</th>
+      <th>Search date</th>
+      <th>Double</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% display.order(created_at: :DESC).each do |empire_master_no_match| %>
+      <tr>
+        <td><%= empire_master_no_match.uid %></td>
+        <td><%= empire_master_no_match.last_name %></td>
+        <td><%= empire_master_no_match.list %></td>
+        <td><%= empire_master_no_match.source %></td>
+        <td><%= empire_master_no_match.search_date %></td>
+        <td><%= empire_master_no_match.double %></td>
+        <td><%= link_to 'Destroy', empire_master_no_match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Empire Master No Match', new_empire_master_no_match_path %>

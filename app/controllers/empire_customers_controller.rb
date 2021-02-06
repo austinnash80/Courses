@@ -25,6 +25,13 @@ class EmpireCustomersController < ApplicationController
     if params['search'].present?
       @empire_customers_search = EmpireCustomer.where('lower(lname) = ?', params['search'].downcase).or(EmpireCustomer.where(uid: params['search']))
     end
+    # EXPORT FOR NY PAGE
+      if params['path'] = 'ny_export_empire_customers'
+        respond_to do |format|
+          format.html
+          format.csv { send_data EmpireCustomer.where(lic_state: 'NY').to_csv, filename: "ny-empire-customers-#{Date.today}.csv" }
+        end
+      end
   end
 
   def rc_marketing

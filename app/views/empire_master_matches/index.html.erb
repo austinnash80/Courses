@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-center">Empire Master Matches</h1>
+
+<table class="table table-outline">
+  <thead>
+    <tr>
+      <th>Uid</th>
+      <th>Last name</th>
+      <th>List</th>
+      <th>Lid</th>
+      <th>Search date</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @empire_master_matches.order(created_at: :DESC).each do |empire_master_match| %>
+      <tr>
+        <td><%= empire_master_match.uid %></td>
+        <td><%= empire_master_match.last_name %></td>
+        <td><%= empire_master_match.list %></td>
+        <td><%= empire_master_match.lid %></td>
+        <td><%= empire_master_match.search_date %></td>
+        <td><%= link_to 'Destroy', empire_master_match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Empire Master Match', new_empire_master_match_path %>

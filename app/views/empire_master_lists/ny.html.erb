@@ -1,0 +1,143 @@
+<h1 class="text-center">New York</h1>
+<p class="text-center" id="notice"><%= notice %></p>
+<p>NY Records: <strong><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'NY').count) %></strong> | <%= link_to 'Export', empire_customers_path('csv', path: 'ny_export_empire_customers') %></p>
+<p>Unique UID: <strong><%= number_with_delimiter(@uid.uniq.count) %></strong></p>
+<p>Current Master List: <strong><%= @list[0] %></strong></p>
+<p>List Quantity: <strong><%= number_with_delimiter(EmpireMasterList.where(source: 'NY').count) %></strong> | <%= link_to 'Export', empire_master_lists_path('csv', path: 'ny_export_empire_master_list') %></p>
+<p><%= link_to 'Matches', empire_master_matches_path() %>: <strong><%= @matches.count %></strong> | <%= link_to 'Export', empire_master_matches_path('csv', path: 'ny_export_empire_master_matches') %></p>
+<p><%= link_to 'No Matches', empire_master_no_matches_path(path: 'no_matches') %>: <strong><%= @no_match.count %></strong> | <%= link_to 'Export', empire_master_no_matches_path('csv', path: 'ny_export_empire_master_no_matches') %></p>
+<p><%= link_to 'Doubles', empire_master_no_matches_path(path: 'doubles') %>: <strong><%= @double.count %></strong> | <%= link_to 'Export', empire_master_no_matches_path('csv', path: 'ny_export_empire_master_doubles') %></p>
+<hr>
+<!-- <p><%#= link_to 'Run License Number Match', ny_empire_master_lists_path(path: 'auto_match'), data: {disable_with: "loading..."} %> </p> -->
+<!-- Customer Search Table -->
+<table class="table table-outline">
+  <thead>
+    <tr class="grey-b-200">
+      <th>UID</th>
+      <th>Lic#</th>
+      <th>Lic State</th>
+      <th>Date</th>
+      <th>First</th>
+      <th>Last</th>
+      <th>Address</th>
+      <th>Address_2</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if params['path'] == 'search' %>
+      <% EmpireCustomer.where(id: params['id']).each do |customer| %>
+        <tr class="grey-b-100">
+          <td><%= customer.uid %></td>
+          <td><%= customer.license_num %></td>
+          <td><%= customer.lic_state %></td>
+          <td><%= customer.p_date %></td>
+          <td><%= customer.fname %></td>
+          <td><%= customer.lname %></td>
+          <td><%= customer.street_1 %></td>
+          <td><%= customer.street_2 %></td>
+          <td><%= customer.city %></td>
+          <td><%= customer.state %></td>
+          <td><%= customer.zip %></td>
+          <td><%= link_to 'No Match', ny_empire_master_lists_path(path: 'no_match', id: customer.id), class: 'btn btn-danger btn-sm', data: {disable_with: "loading..."} %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <% EmpireCustomer.where(lic_state: 'NY').where.not(uid: @no_match).where.not(uid: @matches).where.not(uid: @double).last(1).each do |customer| %>
+        <tr class="grey-b-100">
+          <td><%= customer.uid %></td>
+          <td><%= customer.license_num %></td>
+          <td><%= customer.lic_state %></td>
+          <td><%= customer.p_date %></td>
+          <td><%= customer.fname %></td>
+          <td><%= customer.lname %></td>
+          <td><%= customer.street_1 %></td>
+          <td><%= customer.street_2 %></td>
+          <td><%= customer.city %></td>
+          <td><%= customer.state %></td>
+          <td><%= customer.zip %></td>
+          <td><%= link_to 'Search', ny_empire_master_lists_path(path: 'search', id: customer.id, lname: customer.lname), class: 'btn btn-primary btn-sm', data: {disable_with: "loading..."} %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- SEARCH RESULTS -->
+<% if params['path'] == 'search' %>
+  <% customer = EmpireCustomer.find(params['id'].to_i) %>
+
+  <!-- EDIT LAST NAME -->
+    <a class="" data-toggle="collapse" data-target="#edit">Edit Last Name</a>
+    <div id="edit" class="collapse">
+      <div class="row down20">
+        <div class="col-lg-2">
+          <%= text_field_tag "id", '', class: "last_name_field form-control", value: params['lname'] %>
+          <div class="down10"><%= link_to 'Search', ny_empire_master_lists_path(path: 'search', edit: 'lname', id: params['id']), class: 'search_link' %></div>
+        </div>
+      </div>
+    </div>
+  <!-- END EDIT LAST NAME -->
+
+  <div class="row down20">
+    <div class="col-md-2">
+      <input class="form-control" id="myInput" type="text" placeholder="filter..">
+    </div>
+  </div>
+
+  <table class="table table-outline">
+    <thead>
+      <tr class="grey-b-200">
+        <th>Lid</th>
+        <th>List</th>
+        <th>lic#</th>
+        <th>First</th>
+        <th>Last</th>
+        <th>Address</th>
+        <th>Address_2</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zip</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="myTable">
+      <% if params['edit'] == 'lname' %>
+        <% lname = params['lname'] %>
+      <% else %>
+        <% lname = customer.lname.upcase %>
+      <% end %>
+
+        <% EmpireMasterList.where(source: 'NY').where(last_name: lname).all.each do |empire_master| %>
+        <tr class="">
+          <td><%= empire_master.lid %></td>
+          <td><%= empire_master.list %></td>
+          <td><%= empire_master.license_number %></td>
+          <td><%= empire_master.first_name %></td>
+          <td><%= empire_master.last_name %></td>
+          <td><%= empire_master.address_1 %></td>
+          <td><%= empire_master.address_2 %></td>
+          <td><%= empire_master.city %></td>
+          <td><%= empire_master.state %></td>
+          <td><%= empire_master.zip %></td>
+          <% if @matches.include? empire_master.lid %>
+            <td><%= link_to 'Double', ny_empire_master_lists_path(path: 'double', lid: empire_master.lid, id: params['id']), class: 'btn btn-primary btn-sm', data: {disable_with: "loading..."} %></td>
+          <% else %>
+            <td><%= link_to 'Match',  ny_empire_master_lists_path(path: 'match', lid: empire_master.lid, id: params['id']), class: 'btn btn-primary btn-sm', data: {disable_with: "loading..."} %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<script type="text/javascript">
+  $(".search_link").click(function() {
+    $(this).attr("href", function() {
+      return this.href + "&lname=" + $('.last_name_field').val().toUpperCase();
+    });
+  });
+</script>

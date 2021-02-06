@@ -3,6 +3,8 @@ class MasterListsController < ApplicationController
 
   # GET /master_lists
   # GET /master_lists.json
+
+
   def index
     # @master_lists = MasterList.all.first(10)
     @master_lists_count = MasterList.all.count

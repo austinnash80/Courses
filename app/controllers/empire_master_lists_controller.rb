@@ -3,6 +3,89 @@ class EmpireMasterListsController < ApplicationController
 
   # GET /empire_master_lists
   # GET /empire_master_lists.json
+  def ny
+    @uid = EmpireCustomer.where(lic_state: 'NY').pluck(:uid)
+    @list = EmpireMasterList.where(source: 'NY').first(1).pluck(:list)
+    @matches = EmpireMasterMatch.where(list: @list).pluck(:uid)
+    @no_match = EmpireMasterNoMatch.where(list: @list).where(double: false).pluck(:uid)
+    @double = EmpireMasterNoMatch.where(list: @list).where(double: true).pluck(:uid)
+    @yes = []
+
+# AUTO MATCH
+    if params['path'] == 'search'
+      customer = EmpireCustomer.find(params['id'])
+      lid = EmpireMasterList.where(source: 'NY').where(license_number: customer.license_num).pluck(:lid)
+      if lid.present?
+        new = EmpireMasterMatch.create(
+          uid: customer.uid,
+          last_name: customer.lname,
+          list: @list[0],
+          source: 'NY',
+          lid: lid[0],
+          search_date: Time.current
+        )
+         new.save
+        redirect_to ny_empire_master_lists_path()
+       end
+    end
+  ## SEARCH - IF NO MATCH FOUND
+    if params['path'] == 'no_match'
+      customer = EmpireCustomer.find(params['id'])
+      new = EmpireMasterNoMatch.create(
+        uid: customer.uid,
+        last_name: customer.lname,
+        list: @list[0],
+        source: 'NY',
+        search_date: Time.current,
+        double: false
+      )
+       new.save
+       redirect_to ny_empire_master_lists_path()
+    end
+  ## SEARCH - IF Double FOUND
+    if params['path'] == 'double'
+      customer = EmpireCustomer.find(params['id'])
+      new = EmpireMasterNoMatch.create(
+        uid: customer.uid,
+        last_name: customer.lname,
+        list: @list[0],
+        source: 'NY',
+        search_date: Time.current,
+        double: true
+      )
+       new.save
+       redirect_to ny_empire_master_lists_path()
+    end
+  ## SEARCH - IF MATCH FOUND
+    if params['path'] == 'match'
+      customer = EmpireCustomer.find(params['id'])
+      new = EmpireMasterMatch.create(
+        uid: customer.uid,
+        last_name: customer.lname,
+        list: @list[0],
+        source: 'NY',
+        lid: params['lid'],
+        search_date: Time.current
+      )
+       new.save
+       redirect_to ny_empire_master_lists_path()
+    end
+
+    # if params['path'] == 'auto_match'
+    #   EmpireCustomer.where(lic_state: 'NY').where.not(uid: @no_match).where.not(uid: @matches).where.not(uid: @double).each do |customer|
+    #     lid = EmpireMasterList.where(source: 'NY').where(list: @list).where(license_number: customer.license_num).where(last_name: customer.lname).pluck(:lid)
+    #     if lid.present?
+    #       @yes.push(1)
+    #     end
+    #   end
+    #
+    #   redirect_to ny_empire_master_lists_path(), notice: 'Auto-match complete'
+    # end
+
+
+
+  end
+
   def index
     @empire_master_lists = EmpireMasterList.all
 
@@ -22,6 +105,14 @@ class EmpireMasterListsController < ApplicationController
       EmpireMasterList.where(source: params['delete']).delete_all
       redirect_to empire_master_lists_path
     end
+
+    # EXPORT FOR NY PAGE
+      if params['path'] = 'ny_export_empire_master_list'
+        respond_to do |format|
+          format.html
+          format.csv { send_data EmpireMasterList.where(source: 'NY').to_csv, filename: "ny-empire_master_list-#{Date.today}.csv" }
+        end
+      end
 
    end
 
