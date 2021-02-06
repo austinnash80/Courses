@@ -10,6 +10,12 @@ class EmpireMasterMatchesController < ApplicationController
       format.html
       format.csv { send_data @empire_master_matches.where(source: 'NY').to_csv, filename: "ny-empire-master-matches-#{Date.today}.csv" }
     end
+
+    # Remove all records before new list import
+    if params['remove_all'] == 'yes' && params['confirm'] == 'yes'
+      EmpireMasterMatch.delete_all
+      redirect_to empire_master_matches_path(), note: 'Records Deleted'
+    end
   end
 
   # GET /empire_master_matches/1
@@ -64,6 +70,11 @@ class EmpireMasterMatchesController < ApplicationController
       format.html { redirect_to empire_master_matches_url, notice: 'Empire master match was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def import #Uploading CSV function
+    EmpireMasterMatch.my_import(params[:file])
+    redirect_to empire_master_matches_path(), notice: "Upload Complete"
   end
 
   private

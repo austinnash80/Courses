@@ -2,6 +2,21 @@
 
 <h1 class="text-center">Empire Master No Matches</h1>
 
+<h3>Upload CSV File</h3>
+  <%= form_tag import_empire_master_no_matches_path(), multipart: true do %>
+  <%= file_field_tag :file %>
+<br>
+  <%= submit_tag 'Upload', class: 'btn btn-primary' %>
+<% end %>
+<br>
+<%= link_to 'Export', empire_master_no_matches_path('csv', path: 'ny_export_empire_master_no_matches') %>
+<br>
+<% if params['remove_all'] == 'yes' %>
+  <p><%= link_to "Confirm Delete", empire_master_no_matches_path(remove_all: 'yes', confirm: 'yes') %></p>
+<% else %>
+  <p><%= link_to "Remove All Records", empire_master_no_matches_path(remove_all: 'yes') %></p>
+<% end %>
+
 <% if params['path'] == 'no_matches' %>
   <% display = @empire_master_no_matches.where(double: false).all %>
 <% elsif params['path'] == 'doubles' %>
@@ -14,6 +29,8 @@
 
 
 <table class="table table-outline">
+  <caption>Displaying <%= number_with_delimiter(@empire_master_no_matches.limit(250).count) %> of <%= number_with_delimiter(@empire_master_no_matches.count) %></caption>
+
   <thead>
     <tr>
       <th>Uid</th>

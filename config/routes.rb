@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :empire_master_no_matches
-  resources :empire_master_matches
+  resources :empire_master_no_matches do
+    collection {post :import}
+  end
+  resources :empire_master_matches do
+    collection {post :import}
+  end
   resources :master_ea_double_accounts do
     collection {post :import}
   end

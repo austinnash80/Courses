@@ -18,6 +18,13 @@ class EmpireMasterNoMatchesController < ApplicationController
         format.csv { send_data @empire_master_no_matches.where(source: 'NY').where(double: true).to_csv, filename: "ny-empire-master-doubles-#{Date.today}.csv" }
       end
     end
+
+    # Remove all records before new list import
+    if params['remove_all'] == 'yes' && params['confirm'] == 'yes'
+      EmpireMasterNoMatch.delete_all
+      redirect_to empire_master_no_matches_path(), note: 'Records Deleted'
+    end
+
   end
 
   # GET /empire_master_no_matches/1
@@ -72,6 +79,11 @@ class EmpireMasterNoMatchesController < ApplicationController
       format.html { redirect_to empire_master_no_matches_url, notice: 'Empire master no match was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def import #Uploading CSV function
+    EmpireMasterNoMatch.my_import(params[:file])
+    redirect_to empire_master_no_matches_path(), notice: "Upload Complete"
   end
 
   private
