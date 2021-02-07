@@ -34,7 +34,7 @@
   </thead>
 
   <tbody>
-    <% @master_ea_no_matches.each do |master_ea_no_match| %>
+    <% @master_ea_no_matches.order(created_at: :DESC).each do |master_ea_no_match| %>
       <tr>
         <td><%= master_ea_no_match.uid %></td>
         <td><%= master_ea_no_match.lname %></td>
