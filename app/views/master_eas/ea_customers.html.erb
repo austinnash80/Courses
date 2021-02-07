@@ -1,18 +1,25 @@
-<h1 class="text-center down30">EA Customer Match</h1>
-<% list_name = MasterEa.first(1).pluck(:list) %>
-<ul>
-  <li><strong>List:</strong> <%= list_name[0] %> (<%= number_with_delimiter(MasterEa.count) %>)</li>
-  <li><strong><%= link_to 'Matched:', master_ea_matches_path() %></strong> <%= number_with_delimiter(MasterEaMatch.count) %></li>
-  <li><strong><%= link_to 'No Match:', master_ea_no_matches_path() %></strong> <%= number_with_delimiter(MasterEaNoMatch.count) %></li>
-  <li><strong><%= link_to 'Double:', master_ea_double_accounts_path() %></strong> <%= number_with_delimiter(MasterEaDoubleAccount.count) %></li>
-</ul>
+<div class="row">
+<div class="col-md-2 down20">
+  <% list_name = MasterEa.first(1).pluck(:list) %>
+  <ul>
+    <li><strong>List:</strong> <%= list_name[0] %> (<%= number_with_delimiter(MasterEa.count) %>)</li>
+    <li><strong><%= link_to 'Matched:', master_ea_matches_path() %></strong> <%= number_with_delimiter(MasterEaMatch.count) %></li>
+    <li><strong><%= link_to 'No Match:', master_ea_no_matches_path() %></strong> <%= number_with_delimiter(MasterEaNoMatch.count) %></li>
+    <li><strong><%= link_to 'Double:', master_ea_double_accounts_path() %></strong> <%= number_with_delimiter(MasterEaDoubleAccount.count) %></li>
+  </ul>
+</div>
+<div class="col-md-8">
+  <h1 class="text-center down20">EA Customer Match</h1>
+</div>
+</div>
+
 
 <% master_ea_no_matches = MasterEaNoMatch.where(list:list_name[0]).all.pluck(:uid) %>
 <% master_ea_matches = MasterEaMatch.where(list:list_name[0]).all.pluck(:uid) %>
 <% master_ea_double_account = MasterEaDoubleAccount.where(list:list_name[0]).all.pluck(:uid) %>
 <% matches = MasterEaMatch.pluck(:lid) %>
 <% des = ['ea', 'ea '] %>
-<p><%= link_to 'Run Match', ea_customers_master_eas_path(path: 'run_match'), data: {disable_with: "loading..."} %><br><%= link_to 'Check remaining', ea_customers_master_eas_path(path: 'check_remaining'), data: {disable_with: "loading..."} %></p>
+<p><%#= link_to 'Run Match', ea_customers_master_eas_path(path: 'run_match'), data: {disable_with: "loading..."} %><%= link_to 'Check remaining', ea_customers_master_eas_path(path: 'check_remaining'), data: {disable_with: "loading..."} %></p>
 
 
   <% if params['path'] == 'check_remaining' %>
@@ -99,9 +106,9 @@
         <input class="form-control" id="myInput" type="text" placeholder="filter..">
       </div>
     </div>
-
+<br>
     <table class="table table-outline">
-      <caption>Master List: <%= list_name[0] %></caption>
+      <!-- <caption>Master List: <%= list_name[0] %></caption> -->
       <thead>
         <tr class="grey-b-200">
           <th>Lid</th>
