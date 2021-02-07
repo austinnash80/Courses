@@ -22,7 +22,7 @@
 <p><%= link_to 'Export', master_ea_matches_path('csv'), class: 'btn btn-primary' %></p>
 
 <table class="table table-outline">
-  <caption>Records: <%= number_with_delimiter(MasterEaMatch.count) %></caption>
+  <caption>Displaying <%= number_with_delimiter(MasterEaMatch.limit(500).count) %> of <%= number_with_delimiter(MasterEaMatch.count) %></caption>
   <thead>
     <tr>
       <th>Uid</th>
@@ -35,7 +35,7 @@
   </thead>
 
   <tbody>
-    <% @master_ea_matches.order(created_at: :DESC).each do |master_ea_match| %>
+    <% @master_ea_matches.order(created_at: :DESC).limit(500).each do |master_ea_match| %>
       <tr>
         <td><%= master_ea_match.uid %></td>
         <td><%= master_ea_match.lname %></td>
