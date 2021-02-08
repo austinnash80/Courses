@@ -30,7 +30,7 @@
       <td><%= original_purchase.last %></td>
       <td><%= original_purchase.first %></td>
       <td><%= original_purchase.count %></td>
-      <td><%= original_purchase[0].blank? ? '' : original_purchase[0].to_date > Time.now - 20.months ? "YES"  : 'NO' %></td>
+      <td><%= original_purchase[0].blank? ? '' : original_purchase[0].to_date > empire_master_list.exp_date - 20.months ? "YES"  : 'NO' %></td>
     </tr>
     <% end %>
   </tbody>
