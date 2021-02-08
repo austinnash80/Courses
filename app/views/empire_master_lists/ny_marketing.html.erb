@@ -1,0 +1,41 @@
+<% matched = EmpireMasterMatch.where(source: 'NY').pluck(:lid) %>
+<p>Total NY Matches: <%= EmpireMasterList.where(source: 'NY').where(lid: matched).count %></p>
+
+<p>Begining of this week: <%= Time.now.beginning_of_week.strftime('%-m/%-d') %></p>
+
+<% week = EmpireMasterList.where(source: 'NY').where(lid: matched).order(exp_date: :ASC).all.group_by{ |u| u.exp_date.beginning_of_week } %>
+<% month = EmpireMasterList.where(source: 'NY').where(lid: matched).order(exp_date: :ASC).all.group_by{ |u| u.exp_date.beginning_of_month } %>
+
+<div class="row">
+  <div class="col-md-6">
+    <table class="table table-outline">
+      <thead>
+        <tr><th colspan="3" class="text-center">Empire New York Customers EXP Per Week</th></tr>
+        <tr><th>Week</th><th>Number</th><th>Renews</th></tr>
+      </thead>
+      <tbody>
+        <% week.each do |k,v| %>
+        <tr><td><%= k.strftime('%-m/%-d/%Y') %></td><td><%= v.count %></td>
+          <% lid = [] %>
+          <% v.each do |i| %><% lid.push i.lid %><% end %>
+          <% uid = EmpireMasterMatch.where(lid: lid).pluck(:uid) %>
+          <% purchases = EmpireCustomer.where('purchase_date > ?', Time.now - 12.months).where(uid: uid).pluck(:uid) %>
+        <td><%= purchases %></td></tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-6">
+    <table class="table table-outline">
+      <thead>
+        <tr><th colspan="2" class="text-center">Empire New York Customers EXP Per Month</th></tr>
+        <tr><th>Week</th><th>Number</th></tr>
+      </thead>
+      <tbody>
+        <% month.each do |k,v| %>
+        <tr><td><%= k.strftime('%B %Y') %></td><td><%= v.count %></td></tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

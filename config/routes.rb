@@ -56,6 +56,7 @@ Rails.application.routes.draw do
     collection {post :import}
     collection do
       get 'ny'
+      get 'ny_marketing'
     end
   end
   resources :empire_state_lists

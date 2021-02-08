@@ -3,6 +3,11 @@ class EmpireMasterListsController < ApplicationController
 
   # GET /empire_master_lists
   # GET /empire_master_lists.json
+# NEW YORK
+  def ny_marketing
+    
+  end
+
   def ny
     @uid = EmpireCustomer.where(lic_state: 'NY').pluck(:uid)
     @list = EmpireMasterList.where(source: 'NY').first(1).pluck(:list)

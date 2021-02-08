@@ -1,12 +1,21 @@
-<h1 class="text-center">New York</h1>
 <p class="text-center" id="notice"><%= notice %></p>
-<p>NY Records: <strong><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'NY').count) %></strong> | <%= link_to 'Export', empire_customers_path('csv', path: 'ny_export_empire_customers') %></p>
-<p>Unique UID: <strong><%= number_with_delimiter(@uid.uniq.count) %></strong></p>
-<p>Current Master List: <strong><%= @list[0] %></strong></p>
-<p>List Quantity: <strong><%= number_with_delimiter(EmpireMasterList.where(source: 'NY').count) %></strong> | <%= link_to 'Export', empire_master_lists_path('csv', path: 'ny_export_empire_master_list') %></p>
-<p><%= link_to 'Matches', empire_master_matches_path() %>: <strong><%= @matches.count %></strong> | <%= link_to 'Export', empire_master_matches_path('csv', path: 'ny_export_empire_master_matches') %></p>
-<p><%= link_to 'No Matches', empire_master_no_matches_path(path: 'no_matches') %>: <strong><%= @no_match.count %></strong> | <%= link_to 'Export', empire_master_no_matches_path('csv', path: 'ny_export_empire_master_no_matches') %></p>
-<p><%= link_to 'Doubles', empire_master_no_matches_path(path: 'doubles') %>: <strong><%= @double.count %></strong> | <%= link_to 'Export', empire_master_no_matches_path('csv', path: 'ny_export_empire_master_doubles') %></p>
+<div class="row">
+  <div class="col-md-2">
+    <p>NY Records: <strong><%= number_with_delimiter(EmpireCustomer.where(lic_state: 'NY').count) %></strong> | <%= link_to 'Export', empire_customers_path('csv', path: 'ny_export_empire_customers') %></p>
+    <p>Unique UID: <strong><%= number_with_delimiter(@uid.uniq.count) %></strong></p>
+    <p>Current Master List: <strong><%= @list[0] %></strong></p>
+    <p>List Quantity: <strong><%= number_with_delimiter(EmpireMasterList.where(source: 'NY').count) %></strong> | <%= link_to 'Export', empire_master_lists_path('csv', path: 'ny_export_empire_master_list') %></p>
+    <p><%= link_to 'Matches', empire_master_matches_path() %>: <strong><%= number_with_delimiter(@matches.count) %></strong> | <%= link_to 'Export', empire_master_matches_path('csv', path: 'ny_export_empire_master_matches') %></p>
+    <p><%= link_to 'No Matches', empire_master_no_matches_path(path: 'no_matches') %>: <strong><%= number_with_delimiter(@no_match.count) %></strong> | <%= link_to 'Export', empire_master_no_matches_path('csv', path: 'ny_export_empire_master_no_matches') %></p>
+    <p><%= link_to 'Doubles', empire_master_no_matches_path(path: 'doubles') %>: <strong><%= number_with_delimiter(@double.count) %></strong> | <%= link_to 'Export', empire_master_no_matches_path('csv', path: 'ny_export_empire_master_doubles') %></p>
+  </div>
+  <div class="col-md-8">
+    <h1 class="text-center">New York</h1>
+    <p class="text-center"><%= link_to 'NY Marketing Page', ny_marketing_empire_master_lists_path() %></p>
+  </div>
+</div>
+
+
 <hr>
 <!-- <p><%#= link_to 'Run License Number Match', ny_empire_master_lists_path(path: 'auto_match'), data: {disable_with: "loading..."} %> </p> -->
 <!-- Customer Search Table -->
