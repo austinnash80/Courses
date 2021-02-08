@@ -20,16 +20,16 @@
   <tbody>
     <% EmpireMasterList.where(source: 'NY').where(lid: matched).where(exp_date: week_s..week_e).each do |empire_master_list| %>
     <% match = EmpireMasterMatch.find_by(lid: empire_master_list.lid) %>
-    <% original_purchase = EmpireCustomer.where(uid: match.uid).order(purchase_date: :asc).pluck(:purchase_date) %>
+    <% original_purchase = EmpireCustomer.where(uid: match.uid).order(p_date: :DESC).pluck(:p_date) %>
     <tr>
       <td><%= match.uid %></td>
       <td><%= empire_master_list.lid %></td>
       <td><%= empire_master_list.list %></td>
       <td><%= empire_master_list.exp_date %></td>
-      <td><%= original_purchase.first %></td>
-      <td><%= original_purchase.count %></td>
       <td><%= original_purchase.last %></td>
-      <td><%#= original_purchase[0].present? ? original_purchase[0].to_date > Time.now - 20.months ? "YES (#{original_purchase.last})"  : 'NO' %></td>
+      <td><%= original_purchase.count %></td>
+      <td><%= original_purchase.first %></td>
+      <td><%= original_purchase[0].blank? ? '' : original_purchase[0].to_date > Time.now - 20.months ? "YES (#{original_purchase.last})"  : 'NO' %></td>
     </tr>
     <% end %>
   </tbody>
