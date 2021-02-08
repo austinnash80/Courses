@@ -73,6 +73,6 @@ class MasterEaDoubleAccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def master_ea_double_account_params
-      params.require(:master_ea_double_account).permit(:uid, :lname, :lid, :list, :search_date)
+      params.require(:master_ea_double_account).permit(:uid, :lname, :lid, :list, :search_date, :uid2)
     end
 end
