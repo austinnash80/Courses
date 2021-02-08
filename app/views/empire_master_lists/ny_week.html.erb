@@ -25,7 +25,7 @@
       <td><%= match.uid %></td>
       <td><%= empire_master_list.lid %></td>
       <td><%= empire_master_list.list %></td>
-      <td><%= empire_master_list.exp_date %></td>
+      <td><%#= empire_master_list.exp_date %></td>
       <td><%= original_purchase[0] %></td>
       <td><%= original_purchase.count %></td>
       <td><%= original_purchase[0].blank? ? 'NO' : original_purchase[0].to_date > Time.now - 20.months ? "YES (#{original_purchase.last})"  : 'NO' %></td>
