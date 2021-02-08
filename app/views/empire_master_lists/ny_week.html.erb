@@ -1,0 +1,35 @@
+<h1 class="text-center">NY Marketing Week</h1>
+<% week_s = Date.strptime(params['week'], "%m/%d/%Y") %>
+<% week_e = week_s + 6.days %>
+<p class="text-center">Expirations Between <%= week_s.strftime('%-m/%-d/%Y') %> and <%= week_e.strftime('%-m/%-d/%Y') %></p>
+
+<% matched = EmpireMasterMatch.where(source: 'NY').pluck(:lid) %>
+
+<table class="table table-outline">
+  <thead>
+    <tr>
+      <th>UID</th>
+      <th>LID</th>
+      <th>List</th>
+      <th>EXP Date</th>
+      <th>Orginal Order</th>
+      <th>Total Orders</th>
+      <th>This Cycle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% EmpireMasterList.where(source: 'NY').where(lid: matched).where(exp_date: week_s..week_e).each do |empire_master_list| %>
+    <% match = EmpireMasterMatch.find_by(lid: empire_master_list.lid) %>
+    <% original_purchase = EmpireCustomer.where(uid: match.uid).order(purchase_date: :asc).pluck(:purchase_date) %>
+    <tr>
+      <td><%= match.uid %></td>
+      <td><%= empire_master_list.lid %></td>
+      <td><%= empire_master_list.list %></td>
+      <td><%= empire_master_list.exp_date %></td>
+      <td><%= original_purchase[0] %></td>
+      <td><%= original_purchase.count %></td>
+      <td><%= original_purchase[0].blank? ? 'NO' : original_purchase[0].to_date > Time.now - 20.months ? "YES (#{original_purchase.last})"  : 'NO' %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

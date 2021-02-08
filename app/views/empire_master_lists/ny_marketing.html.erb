@@ -16,11 +16,11 @@
       <tbody>
         <% week.each do |k,v| %>
         <tr><td><%= k.strftime('%-m/%-d/%Y') %></td><td><%= v.count %></td>
-          <% lid = [] %>
-          <% v.each do |i| %><% lid.push i.lid %><% end %>
-          <% uid = EmpireMasterMatch.where(lid: lid).pluck(:uid) %>
-          <% purchases = EmpireCustomer.where('purchase_date > ?', Time.now - 12.months).where(uid: uid).pluck(:uid) %>
-        <td><%= purchases %></td></tr>
+          <%# lid = [] %>
+          <%# v.each do |i| %><%# lid.push i.lid %><%# end %>
+          <%# uid = EmpireMasterMatch.where(lid: lid).pluck(:uid) %>
+          <%# purchases = EmpireCustomer.where('purchase_date > ?', Time.now - 12.months).where(uid: uid).pluck(:uid) %>
+        <td><%= link_to 'View', ny_week_empire_master_lists_path(week: k.strftime('%-m/%-d/%Y')) %></td></tr>
         <% end %>
       </tbody>
     </table>

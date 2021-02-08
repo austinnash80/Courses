@@ -57,6 +57,7 @@ Rails.application.routes.draw do
     collection do
       get 'ny'
       get 'ny_marketing'
+      get 'ny_week'
     end
   end
   resources :empire_state_lists
