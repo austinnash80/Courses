@@ -17,7 +17,7 @@ class MasterEaDoubleAccountsController < ApplicationController
        end
        redirect_to master_ea_double_accounts_path(), notice: 'Update done'
     end
-    
+
   end
 
   # GET /master_ea_double_accounts/1

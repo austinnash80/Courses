@@ -6,14 +6,6 @@ class MasterCpaDoubleAccountsController < ApplicationController
   def index
     @master_cpa_double_accounts = MasterCpaDoubleAccount.all
 
-    if params['path'] == 'uid_update'
-       MasterEaDoubleAccount.all.each do |i|
-         uid = MasterEaMatch.where(lid: i.lid).pluck(:uid)
-         MasterEaDoubleAccount.where(id: i.id).update_all uid2: uid[0]
-       end
-       redirect_to master_ea_double_accounts_path(), notice: 'Update done'
-    end
-
   end
 
   # GET /master_cpa_double_accounts/1

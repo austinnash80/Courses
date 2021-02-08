@@ -1,7 +1,7 @@
 class MasterEaDoubleAccount < ApplicationRecord
 
   def self.to_csv # Export to csv function
-    attributes = %w{lid list uid lname search_date}
+    attributes = %w{uid uid2 lname lid list search_date}
     CSV.generate(headers: true) do |csv|
       csv << attributes
 
