@@ -78,6 +78,16 @@
 <% if params['path'] == 'search' %>
   <% customer = SCustomer.find(params['id'].to_i) %>
 
+  <a class="" data-toggle="collapse" data-target="#edit">Edit Last Name</a>
+  <div id="edit" class="collapse">
+    <div class="row down20">
+      <div class="col-lg-2">
+        <%= text_field_tag "id", '', class: "last_name_field form-control", value: params['lname'] %>
+        <div class="down10"><%= link_to 'Search', cpa_customers_master_cpas_path(path: 'search', edit: 'lname', id: params['id']), class: 'search_link' %></div>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-md-2">
       <input class="form-control" id="myInput" type="text" placeholder="filter..">
@@ -103,8 +113,15 @@
       </tr>
     </thead>
     <tbody id="myTable">
+
+      <% if params['edit'] == 'lname' %>
+        <% lname = params['lname'] %>
+      <% else %>
+        <% lname = customer.lname.upcase %>
+      <% end %>
+
       <% if customer.lic_state.present? %>
-        <% MasterCpa.where(lname: customer.lname.upcase).where(lic_st: customer.lic_state).all.each do |master_cpa| %>
+        <% MasterCpa.where(lname: lname).where(lic_st: customer.lic_state).all.each do |master_cpa| %>
         <tr class="">
           <td><%= master_cpa.lid %></td>
           <td><%= master_cpa.list %></td>
@@ -163,4 +180,12 @@ $(document).ready(function(){
     });
   });
 });
+</script>
+
+<script type="text/javascript">
+  $(".search_link").click(function() {
+    $(this).attr("href", function() {
+      return this.href + "&lname=" + $('.last_name_field').val().toUpperCase();
+    });
+  });
 </script>
