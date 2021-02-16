@@ -15,4 +15,15 @@ class SCustomer < ApplicationRecord
 
 end
 
+def self.to_csv # Export to csv function
+  attributes = %w{s_id order_id uid existing purchase_s purchase product_1 product_2 designation fname lname street_1 street_2 city state zip email price_s price lic_num lic_state total}
+  CSV.generate(headers: true) do |csv|
+    csv << attributes
+
+      all.each do |s_customer|
+        csv << attributes.map{ |attr| s_customer.send(attr) }
+      end
+  end
+end
+
 end

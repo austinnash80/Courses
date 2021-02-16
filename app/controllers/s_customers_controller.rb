@@ -6,6 +6,12 @@ class SCustomersController < ApplicationController
   def index
     run_data
 
+    # Remove All
+    if params['remove_all'] == 'yes' && params['confirm'] == 'yes'
+      SCustomer.delete_all
+      redirect_to s_customers_path(), note: 'Records Deleted'
+    end
+
     @s_customers = SCustomer.all
     # @last_update = ['2019-01-01']
     @last_update = SCustomer.last(1).pluck(:purchase)
@@ -13,6 +19,12 @@ class SCustomersController < ApplicationController
     customers = SCustomer.all.pluck(:uid)
     @unique_customers = customers.uniq.count
     @unique_states = 0
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @s_customers.to_csv, filename: "S-Customers-#{Date.today}.csv" }
+    end
+
   end
 
   def run_data
