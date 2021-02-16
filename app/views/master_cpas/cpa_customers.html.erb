@@ -55,7 +55,7 @@
         </tr>
       <% end %>
     <% else %>
-      <% SCustomer.where(designation: des).where.not(uid: master_cpa_no_matches).where.not(uid: master_cpa_matches).where.not(uid: master_cpa_double_account).last(1).each do |s_customer| %>
+      <% SCustomer.where(designation: des).where.not(uid: master_cpa_no_matches).where.not(uid: master_cpa_matches).where.not(uid: master_cpa_double_account).last(1).order(purchase: :DESC).each do |s_customer| %>
         <tr class="grey-b-100">
           <td><%= s_customer.uid %></td>
           <td><%= s_customer.lic_num %></td>

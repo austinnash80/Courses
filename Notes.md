@@ -7,7 +7,7 @@ State
 ids = EmpireMasterList.where(source: 'CA').group('lid, list').pluck('MIN(id)')
 EmpireMasterList.where(source: 'CA').where.not(id: ids).delete_all
 
-ids = SCustomer.group('s_id).pluck('MIN(id)')
+ids = SCustomer.group('s_id').pluck('MIN(id)')
 SCustomer.where.not(id: ids).delete_all
 
 ids = MasterCpa.group('lid').pluck('MIN(id)')
