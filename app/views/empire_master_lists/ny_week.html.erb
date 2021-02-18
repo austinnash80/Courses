@@ -1,36 +1,77 @@
 <h1 class="text-center">NY Marketing Week</h1>
 <% week_s = Date.strptime(params['week'], "%m/%d/%Y") %>
 <% week_e = week_s + 6.days %>
-<p class="text-center">Expirations Between <%= week_s.strftime('%-m/%-d/%Y') %> and <%= week_e.strftime('%-m/%-d/%Y') %></p>
-
 <% matched = EmpireMasterMatch.where(source: 'NY').pluck(:lid) %>
+<p class="text-center bold">Expirations Between <%= week_s.strftime('%-m/%-d/%Y') %> and <%= week_e.strftime('%-m/%-d/%Y') %></p>
 
-<table class="table table-outline">
+<% total_users = [].uniq %>
+<% renewed_this_cycle = [] %>
+<% EmpireMasterList.where(source: 'NY').where(lid: matched).where(exp_date: week_s..week_e).each do |empire_master_list| %>
+  <% EmpireMasterMatch.where(lid: empire_master_list.lid).each do |master_matches| %>
+    <% total_users.push(master_matches.uid) %>
+  <% end %>
+<% end %>
+
+<% EmpireCustomer.where(uid: total_users).each do |empire_customer| %>
+  <% master = EmpireMasterMatch.find_by(uid: empire_customer.uid) %>
+  <% exp_date = EmpireMasterList.where(lid: master.lid).pluck(:exp_date) %>
+  <% empire_customer.p_date > exp_date[0] - 20.months ? renewed_this_cycle.push(empire_customer.uid) : '' %>
+<% end %>
+
+
+<p>Total Customers: <%= total_users.count %></p>
+<p>This Cycle: <%= renewed_this_cycle.count %></p>
+<p>Postcards</p>
+<p>Emails</p>
+
+
+
+<table class="table table-outline table-hover">
   <thead>
-    <tr>
+    <tr class="grey-b-200">
       <th>UID</th>
-      <th>LID</th>
-      <th>List</th>
+      <th>Master LID</th>
       <th>EXP Date</th>
-      <th>Orginal Order</th>
-      <th>Most Recent Order</th>
-      <th>Total Orders</th>
-      <th>This Cycle</th>
+      <th>Renewed</th>
+      <th>Orders</th>
+      <th>Purchase Dates</th>
+      <th>email</th>
+      <th>phone</th>
+      <th>Postcards</th>
+      <th>Emails</th>
+      <th>Calls</th>
     </tr>
   </thead>
   <tbody>
     <% EmpireMasterList.where(source: 'NY').where(lid: matched).where(exp_date: week_s..week_e).each do |empire_master_list| %>
+      <% total_users.push(empire_master_list.uid) %>
     <% match = EmpireMasterMatch.find_by(lid: empire_master_list.lid) %>
-    <% original_purchase = EmpireCustomer.where(uid: match.uid).order(p_date: :DESC).pluck(:p_date) %>
-    <tr>
+    <%# original_purchase = EmpireCustomer.where(uid: match.uid).order(p_date: :DESC).pluck(:p_date) %>
+    <% customer = EmpireCustomer.where(uid: match.uid) %>
+    <% purchases = [] %>
+    <% email = [] %>
+    <% phone = [] %>
+    <% customer.order(p_date: :desc).each do |customer| %>
+      <% purchases.push(customer.p_date.strftime('%Y-%m-%d')) %>
+      <% email.push(customer.email) %>
+      <% phone.push(customer.phone) %>
+    <% end %>
+    <% renew = purchases.last.blank? ? '' : purchases.last.to_date > empire_master_list.exp_date - 20.months ? "YES"  : 'NO' %>
+      <% renewed_this_cycle.push(renew) %>
+    <% color = renew == 'YES' ? 'green': 'red' %>
+
+    <tr class="grey-b-100">
       <td><%= match.uid %></td>
-      <td><%= empire_master_list.lid %></td>
-      <td><%= empire_master_list.list %></td>
+      <td><%= empire_master_list.lid %>-<%= empire_master_list.list %></td>
       <td><%= empire_master_list.exp_date %></td>
-      <td><%= original_purchase.last %></td>
-      <td><%= original_purchase.first %></td>
-      <td><%= original_purchase.count %></td>
-      <td><%= original_purchase[0].blank? ? '' : original_purchase[0].to_date > empire_master_list.exp_date - 20.months ? "YES"  : 'NO' %></td>
+      <td class="bold <%= color %>"><%= renew %></td>
+      <td><strong><%= purchases.count %></strong></td>
+      <td><%= purchases.join(', ') %></td>
+      <td><%= email.first %></td>
+      <td><%= phone.first %></td>
+      <td class="grey-b-300"></td>
+      <td class="grey-b-300"></td>
+      <td class="grey-b-300"></td>
     </tr>
     <% end %>
   </tbody>

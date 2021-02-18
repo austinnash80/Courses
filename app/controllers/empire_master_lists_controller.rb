@@ -5,7 +5,7 @@ class EmpireMasterListsController < ApplicationController
   # GET /empire_master_lists.json
 # NEW YORK
   def ny_marketing
-    
+
   end
 
   def ny
