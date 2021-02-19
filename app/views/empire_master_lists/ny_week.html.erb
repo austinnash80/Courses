@@ -35,7 +35,7 @@
   </thead>
   <tbody>
     <% dup_not_renewed_this_cycle = [] %> <!-- PREVENT DUPS IN THE TABLE -->
-    <% EmpireCustomer.where(uid: @not_renewed_this_cycle).order(uid: :desc).each do |empire_customer| %>
+    <% EmpireCustomer.where.not(uid: @renewed_this_cycle).where(uid: @not_renewed_this_cycle).order(uid: :desc).each do |empire_customer| %>
       <% unless dup_not_renewed_this_cycle.include? empire_customer.uid %>
         <% dup_not_renewed_this_cycle.push(empire_customer.uid) %>
         <% match_list = EmpireMasterMatch.find_by(uid: empire_customer.uid) %>
