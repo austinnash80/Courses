@@ -15,6 +15,10 @@ class EmpireMasterListsController < ApplicationController
     @new_this_cycle = [].uniq
     @not_renewed_this_cycle = [].uniq
 
+    @dup_not_renewed_this_cycle = []
+    @dup_new_this_cycle = []
+    @dup_renewed_this_cycle = []
+
     EmpireMasterList.where(source: 'NY').where(lid: @matched).where(exp_date: @week_s..@week_e).each do |empire_master_list|
         empire_master_match = EmpireMasterMatch.find_by(lid: empire_master_list.lid)
         @total_users.push(empire_master_match.uid)

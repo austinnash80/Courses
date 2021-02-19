@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col-md-3">
     <p>Total Customers: <%= @total_users.count %></p>
-    <p>New Purchases: <%= @new_this_cycle.count %></p>
-    <p>Renewed: <%= @renewed_this_cycle.count %></p>
     <p>Not Renewed: <%= @not_renewed_this_cycle.count %></p>
+    <p>Renewed: <%= @renewed_this_cycle.count %></p>
+    <p>New Purchases: <%= @new_this_cycle.count %></p>
     <!-- <p>Postcards</p> -->
     <!-- <p>Emails</p> -->
   </div>
@@ -34,9 +34,8 @@
     </tr>
   </thead>
   <tbody>
-    <% dup = [] %>
-    <% EmpireCustomer.where(uid: @not_renewed_this_cycle).where.not(uid: dup).order(p_date: :desc).each do |empire_customer| %>
-      <% dup.push(empire_customer.uid) %>
+    <% EmpireCustomer.where(uid: @not_renewed_this_cycle).where.not(uid: @dup_not_renewed_this_cycle).order(p_date: :desc).each do |empire_customer| %>
+      <% @dup_not_renewed_this_cycle.push(empire_customer.uid) %>
       <% match_list = EmpireMasterMatch.find_by(uid: empire_customer.uid) %>
       <% master_list = EmpireMasterList.find_by(lid: match_list.lid) %>
       <% purchases = EmpireCustomer.where(uid: empire_customer.uid).order(p_date: :desc).pluck(:p_date) %>
@@ -78,9 +77,8 @@
     </tr>
   </thead>
   <tbody>
-    <% dup_1 = [] %>
-    <% EmpireCustomer.where(uid: @renewed_this_cycle).where.not(uid: dup_1).order(p_date: :desc).each do |empire_customer| %>
-      <% dup_1.push(empire_customer.uid) %>
+    <% EmpireCustomer.where(uid: @renewed_this_cycle).where.not(uid: @dup_renewed_this_cycle).order(p_date: :desc).each do |empire_customer| %>
+      <% @dup_renewed_this_cycle.push(empire_customer.uid) %>
       <% match_list = EmpireMasterMatch.find_by(uid: empire_customer.uid) %>
       <% master_list = EmpireMasterList.find_by(lid: match_list.lid) %>
       <% purchases = EmpireCustomer.where(uid: empire_customer.uid).order(p_date: :desc).pluck(:p_date) %>
@@ -122,9 +120,8 @@
     </tr>
   </thead>
   <tbody>
-    <% dup_2 = [] %>
-    <% EmpireCustomer.where(uid: @new_this_cycle).where.not(uid: dup_2).order(p_date: :desc).each do |empire_customer| %>
-      <% dup_2.push(empire_customer.uid) %>
+    <% EmpireCustomer.where(uid: @new_this_cycle).where.not(uid: @dup_new_this_cycle).order(p_date: :desc).each do |empire_customer| %>
+      <% @dup_new_this_cycle.push(empire_customer.uid) %>
       <% match_list = EmpireMasterMatch.find_by(uid: empire_customer.uid) %>
       <% master_list = EmpireMasterList.find_by(lid: match_list.lid) %>
       <% purchases = EmpireCustomer.where(uid: empire_customer.uid).order(p_date: :desc).pluck(:p_date) %>
