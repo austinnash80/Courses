@@ -9,7 +9,7 @@
   </div>
   <div class="col-md-6 text-center">
     <h1 class="text-center">NY Marketing Week</h1>
-    <p class="text-center bold">Expirations Between <%= @week_s.strftime('%-m/%-d/%Y') %> and <%= @week_e.strftime('%-m/%-d/%Y') %></p>
+    <p class="text-center"><strong>Expirations Between <%= @week_s.strftime('%-m/%-d/%Y') %> and <%= @week_e.strftime('%-m/%-d/%Y') %></strong><br>Cycle is 20 Months</p>
   </div>
 </div>
 
@@ -25,7 +25,7 @@
       <th>Master LID</th>
       <th>EXP Date</th>
       <th>Purchases</th>
-      <!-- <th>Purchase Dates</th> -->
+      <!-- <th>Days from EXP</th> -->
       <th>email</th>
       <th>phone</th>
       <th>Postcards</th>
@@ -34,7 +34,9 @@
     </tr>
   </thead>
   <tbody>
-    <% EmpireCustomer.where(uid: @not_renewed_this_cycle).each do |empire_customer| %>
+    <% dup = [] %>
+    <% EmpireCustomer.where(uid: @not_renewed_this_cycle).where.not(uid: dup).order(p_date: :desc).each do |empire_customer| %>
+      <% dup.push(empire_customer.uid) %>
       <% match_list = EmpireMasterMatch.find_by(uid: empire_customer.uid) %>
       <% master_list = EmpireMasterList.find_by(lid: match_list.lid) %>
       <% purchases = EmpireCustomer.where(uid: empire_customer.uid).order(p_date: :desc).pluck(:p_date) %>
@@ -44,6 +46,7 @@
         <td><%= master_list.exp_date %></td>
         <!-- <td><strong><%= purchases.count %></strong></td> -->
         <td><%= purchases.join(', ') %></td>
+        <!-- <td><%= master_list.exp_date - purchases.first %></td> -->
         <td><%= empire_customer.email %></td>
         <td><%= empire_customer.phone %></td>
         <td class="grey-b-300"></td>
@@ -66,7 +69,7 @@
       <th>Master LID</th>
       <th>EXP Date</th>
       <th>Purchases</th>
-      <!-- <th>Purchase Dates</th> -->
+      <th>Days From EXP</th>
       <th>email</th>
       <th>phone</th>
       <th>Postcards</th>
@@ -75,7 +78,9 @@
     </tr>
   </thead>
   <tbody>
-    <% EmpireCustomer.where(uid: @renewed_this_cycle).each do |empire_customer| %>
+    <% dup_1 = [] %>
+    <% EmpireCustomer.where(uid: @renewed_this_cycle).where.not(uid: dup_1).order(p_date: :desc).each do |empire_customer| %>
+    <% dup_1.push(empire_customer.uid) %>
       <% match_list = EmpireMasterMatch.find_by(uid: empire_customer.uid) %>
       <% master_list = EmpireMasterList.find_by(lid: match_list.lid) %>
       <% purchases = EmpireCustomer.where(uid: empire_customer.uid).order(p_date: :desc).pluck(:p_date) %>
@@ -85,6 +90,7 @@
         <td><%= master_list.exp_date %></td>
         <!-- <td><strong><%= purchases.count %></strong></td> -->
         <td><%= purchases.join(', ') %></td>
+        <td><%= (master_list.exp_date - purchases.first).to_i %></td>
         <td><%= empire_customer.email %></td>
         <td><%= empire_customer.phone %></td>
         <td class="grey-b-300"></td>
@@ -107,7 +113,7 @@
       <th>Master LID</th>
       <th>EXP Date</th>
       <th>Purchases</th>
-      <!-- <th>Purchase Dates</th> -->
+      <th>Days From EXP</th>
       <th>email</th>
       <th>phone</th>
       <th>Postcards</th>
@@ -116,7 +122,9 @@
     </tr>
   </thead>
   <tbody>
-    <% EmpireCustomer.where(uid: @new_this_cycle).each do |empire_customer| %>
+    <% dup_2 = [] %>
+    <% EmpireCustomer.where(uid: @new_this_cycle).where.not(uid: dup_2).order(p_date: :desc).each do |empire_customer| %>
+      <% dup_2.push(empire_customer.uid) %>
       <% match_list = EmpireMasterMatch.find_by(uid: empire_customer.uid) %>
       <% master_list = EmpireMasterList.find_by(lid: match_list.lid) %>
       <% purchases = EmpireCustomer.where(uid: empire_customer.uid).order(p_date: :desc).pluck(:p_date) %>
@@ -126,6 +134,7 @@
         <td><%= master_list.exp_date %></td>
         <!-- <td><strong><%= purchases.count %></strong></td> -->
         <td><%= purchases.join(', ') %></td>
+        <td><%= (master_list.exp_date - purchases.first).to_i %></td>
         <td><%= empire_customer.email %></td>
         <td><%= empire_customer.phone %></td>
         <td class="grey-b-300"></td>

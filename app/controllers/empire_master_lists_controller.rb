@@ -16,9 +16,8 @@ class EmpireMasterListsController < ApplicationController
     @not_renewed_this_cycle = [].uniq
 
     EmpireMasterList.where(source: 'NY').where(lid: @matched).where(exp_date: @week_s..@week_e).each do |empire_master_list|
-      EmpireMasterMatch.where(lid: empire_master_list.lid).each do |master_matches|
-        @total_users.push(master_matches.uid)
-      end
+        empire_master_match = EmpireMasterMatch.find_by(lid: empire_master_list.lid)
+        @total_users.push(empire_master_match.uid)
     end
 
     EmpireCustomer.where(uid: @total_users).each do |empire_customer|
