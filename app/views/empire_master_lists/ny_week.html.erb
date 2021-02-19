@@ -56,7 +56,7 @@
       <% email.push(customer.email) %>
       <% phone.push(customer.phone) %>
     <% end %>
-    <% renew = purchases.last.blank? ? '' : purchases.last.to_date > empire_master_list.exp_date - 20.months ? "YES"  : 'NO' %>
+    <% renew = purchases.first.blank? ? '' : purchases.first.to_date > empire_master_list.exp_date - 20.months ? "YES"  : 'NO' %>
       <% renewed_this_cycle.push(renew) %>
     <% color = renew == 'YES' ? 'green': 'red' %>
 
