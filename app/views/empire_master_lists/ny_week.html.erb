@@ -56,12 +56,12 @@
       <% email.push(customer.email) %>
       <% phone.push(customer.phone) %>
     <% end %>
-    <% renew = purchases.first.blank? ? '' : purchases.first.to_date > empire_master_list.exp_date - 20.months ? "YES"  : 'NO' %>
+    <% renew = purchases.first.blank? ? '' : purchases.first.to_date > empire_master_list.exp_date - 20.months && purchases.length > 1 ? "Renewed"  : purchases.first.to_date > empire_master_list.exp_date - 20.months ? 'First Purchase' : 'Not Renwed' %>
       <% renewed_this_cycle.push(renew) %>
-    <% color = renew == 'YES' ? 'green': 'red' %>
+    <% color = renew == 'Renewed' ? 'green': renew == 'First Purchase' ? 'black' : 'red'%>
 
     <tr class="grey-b-100">
-      <td><%= match.uid %></td>
+      <td><%= link_to match.uid, "https://www.empirelearning.com/admin/user-profile?u=#{match.uid}", target: 'blank' %></td>
       <td><%= empire_master_list.lid %>-<%= empire_master_list.list %></td>
       <td><%= empire_master_list.exp_date %></td>
       <td class="bold <%= color %>"><%= renew %></td>
