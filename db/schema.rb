@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210208050308) do
+ActiveRecord::Schema.define(version: 20210219174713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -819,6 +819,7 @@ ActiveRecord::Schema.define(version: 20210208050308) do
     t.datetime "updated_at", null: false
     t.decimal "total"
     t.string "match"
+    t.index ["order_id"], name: "index_s_customers_on_order_id", unique: true
   end
 
   create_table "sales", force: :cascade do |t|
