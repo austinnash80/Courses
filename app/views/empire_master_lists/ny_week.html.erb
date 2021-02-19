@@ -80,7 +80,7 @@
   <tbody>
     <% dup_1 = [] %>
     <% EmpireCustomer.where(uid: @renewed_this_cycle).where.not(uid: dup_1).order(p_date: :desc).each do |empire_customer| %>
-    <% dup_1.push(empire_customer.uid) %>
+      <% dup_1.push(empire_customer.uid) %>
       <% match_list = EmpireMasterMatch.find_by(uid: empire_customer.uid) %>
       <% master_list = EmpireMasterList.find_by(lid: match_list.lid) %>
       <% purchases = EmpireCustomer.where(uid: empire_customer.uid).order(p_date: :desc).pluck(:p_date) %>

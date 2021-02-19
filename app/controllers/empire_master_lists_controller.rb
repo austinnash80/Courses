@@ -20,7 +20,9 @@ class EmpireMasterListsController < ApplicationController
         @total_users.push(empire_master_match.uid)
     end
 
-    EmpireCustomer.where(uid: @total_users).each do |empire_customer|
+    uid_dup = []
+    EmpireCustomer.where(uid: @total_users).where.not(uid: uid_dup).order(p_date: :desc).each do |empire_customer|
+      uid_dup.push(empire_customer.uid)
       purchases = EmpireCustomer.where(uid: empire_customer.uid).pluck(:p_date)
       master = EmpireMasterMatch.find_by(uid: empire_customer.uid)
       exp_date = EmpireMasterList.where(lid: master.lid).pluck(:exp_date)
