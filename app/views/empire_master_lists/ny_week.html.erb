@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col-md-3">
     <p>Total Customers: <%= @total_users.count %></p>
-    <p>Not Renewed: <%= @not_renewed_this_cycle.count %></p>
-    <p>Renewed: <%= @renewed_this_cycle.count %></p>
-    <p>New Purchases: <%= @new_this_cycle.count %></p>
+    <p>Not Renewed: <%= @not_renewed_this_cycle.uniq.count %></p>
+    <p>Renewed: <%= @renewed_this_cycle.uniq.count %></p>
+    <p>New Purchases: <%= @new_this_cycle.uniq.count %></p>
     <!-- <p>Postcards</p> -->
     <!-- <p>Emails</p> -->
   </div>
@@ -34,24 +34,27 @@
     </tr>
   </thead>
   <tbody>
-    <% EmpireCustomer.where(uid: @not_renewed_this_cycle).where.not(uid: @dup_not_renewed_this_cycle).order(p_date: :desc).each do |empire_customer| %>
-      <% @dup_not_renewed_this_cycle.push(empire_customer.uid) %>
-      <% match_list = EmpireMasterMatch.find_by(uid: empire_customer.uid) %>
-      <% master_list = EmpireMasterList.find_by(lid: match_list.lid) %>
-      <% purchases = EmpireCustomer.where(uid: empire_customer.uid).order(p_date: :desc).pluck(:p_date) %>
-      <tr class="grey-b-100">
-        <td><%= link_to empire_customer.uid, "https://www.empirelearning.com/admin/user-profile?u=#{empire_customer.uid}", target: 'blank' %></td>
-        <td><%= master_list.lid %>-<%= master_list.list %></td>
-        <td><%= master_list.exp_date %></td>
-        <!-- <td><strong><%= purchases.count %></strong></td> -->
-        <td><%= purchases.join(', ') %></td>
-        <!-- <td><%= master_list.exp_date - purchases.first %></td> -->
-        <td><%= empire_customer.email %></td>
-        <td><%= empire_customer.phone %></td>
-        <td class="grey-b-300"></td>
-        <td class="grey-b-300"></td>
-        <td class="grey-b-300"></td>
-      </tr>
+    <% dup_not_renewed_this_cycle = [] %> <!-- PREVENT DUPS IN THE TABLE -->
+    <% EmpireCustomer.where(uid: @not_renewed_this_cycle).order(uid: :desc).each do |empire_customer| %>
+      <% unless dup_not_renewed_this_cycle.include? empire_customer.uid %>
+        <% dup_not_renewed_this_cycle.push(empire_customer.uid) %>
+        <% match_list = EmpireMasterMatch.find_by(uid: empire_customer.uid) %>
+        <% master_list = EmpireMasterList.find_by(lid: match_list.lid) %>
+        <% purchases = EmpireCustomer.where(uid: empire_customer.uid).order(p_date: :desc).pluck(:p_date) %>
+        <tr class="grey-b-100">
+          <td><%= link_to empire_customer.uid, "https://www.empirelearning.com/admin/user-profile?u=#{empire_customer.uid}", target: 'blank' %></td>
+          <td><%= master_list.lid %>-<%= master_list.list %></td>
+          <td><%= master_list.exp_date %></td>
+          <!-- <td><strong><%= purchases.count %></strong></td> -->
+          <td><%= purchases.join(', ') %></td>
+          <!-- <td><%= master_list.exp_date - purchases.first %></td> -->
+          <td><%= empire_customer.email %></td>
+          <td><%= empire_customer.phone %></td>
+          <td class="grey-b-300"></td>
+          <td class="grey-b-300"></td>
+          <td class="grey-b-300"></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
@@ -77,8 +80,10 @@
     </tr>
   </thead>
   <tbody>
+    <% dup_renewed_this_cycle = [] %> <!-- PREVENT DUPS IN THE TABLE -->
     <% EmpireCustomer.where(uid: @renewed_this_cycle).where.not(uid: @dup_renewed_this_cycle).order(p_date: :desc).each do |empire_customer| %>
-      <% @dup_renewed_this_cycle.push(empire_customer.uid) %>
+      <% unless dup_renewed_this_cycle.include? empire_customer.uid %>
+      <% dup_renewed_this_cycle.push(empire_customer.uid) %>
       <% match_list = EmpireMasterMatch.find_by(uid: empire_customer.uid) %>
       <% master_list = EmpireMasterList.find_by(lid: match_list.lid) %>
       <% purchases = EmpireCustomer.where(uid: empire_customer.uid).order(p_date: :desc).pluck(:p_date) %>
@@ -95,6 +100,7 @@
         <td class="grey-b-300"></td>
         <td class="grey-b-300"></td>
       </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>
@@ -120,8 +126,10 @@
     </tr>
   </thead>
   <tbody>
+    <% dup_new_this_cycle = [] %> <!-- PREVENT DUPS IN THE TABLE -->
     <% EmpireCustomer.where(uid: @new_this_cycle).where.not(uid: @dup_new_this_cycle).order(p_date: :desc).each do |empire_customer| %>
-      <% @dup_new_this_cycle.push(empire_customer.uid) %>
+      <% unless dup_new_this_cycle.include? empire_customer.uid %>
+      <% dup_new_this_cycle.push(empire_customer.uid) %>
       <% match_list = EmpireMasterMatch.find_by(uid: empire_customer.uid) %>
       <% master_list = EmpireMasterList.find_by(lid: match_list.lid) %>
       <% purchases = EmpireCustomer.where(uid: empire_customer.uid).order(p_date: :desc).pluck(:p_date) %>
@@ -138,6 +146,7 @@
         <td class="grey-b-300"></td>
         <td class="grey-b-300"></td>
       </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>

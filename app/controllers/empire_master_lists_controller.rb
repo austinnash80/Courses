@@ -13,7 +13,7 @@ class EmpireMasterListsController < ApplicationController
     @total_users = [].uniq
     @renewed_this_cycle = [].uniq
     @new_this_cycle = [].uniq
-    @not_renewed_this_cycle = [].uniq
+    @not_renewed_this_cycle = [].uniq - @renewed_this_cycle
 
     @dup_not_renewed_this_cycle = []
     @dup_new_this_cycle = []
