@@ -4,7 +4,29 @@ class EmpireMasterListsController < ApplicationController
   # GET /empire_master_lists
   # GET /empire_master_lists.json
 # NEW YORK
-  def ny_marketing
+  def ny_week
+
+    @week_s = Date.strptime(params['week'], "%m/%d/%Y")
+    @week_e = @week_s + 6.days
+    @matched = EmpireMasterMatch.where(source: 'NY').pluck(:lid)
+
+    @total_users = [].uniq
+    @renewed_this_cycle = [].uniq
+    @new_this_cycle = [].uniq
+    @not_renewed_this_cycle = [].uniq
+
+    EmpireMasterList.where(source: 'NY').where(lid: @matched).where(exp_date: @week_s..@week_e).each do |empire_master_list|
+      EmpireMasterMatch.where(lid: empire_master_list.lid).each do |master_matches|
+        @total_users.push(master_matches.uid)
+      end
+    end
+
+    EmpireCustomer.where(uid: @total_users).each do |empire_customer|
+      purchases = EmpireCustomer.where(uid: empire_customer.uid).pluck(:p_date)
+      master = EmpireMasterMatch.find_by(uid: empire_customer.uid)
+      exp_date = EmpireMasterList.where(lid: master.lid).pluck(:exp_date)
+      empire_customer.p_date > exp_date[0] - 20.months && purchases.length > 1 ? @renewed_this_cycle.push(empire_customer.uid) : empire_customer.p_date > exp_date[0] - 20.months ? @new_this_cycle.push(empire_customer.uid) : @not_renewed_this_cycle.push(empire_customer.uid)
+    end
 
   end
 
