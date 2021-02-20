@@ -81,7 +81,7 @@
   </thead>
   <tbody>
     <% dup_renewed_this_cycle = [] %> <!-- PREVENT DUPS IN THE TABLE -->
-    <% EmpireCustomer.where(uid: @renewed_this_cycle).where.not(uid: @dup_renewed_this_cycle).order(p_date: :desc).each do |empire_customer| %>
+    <% EmpireCustomer.where(uid: @renewed_this_cycle).where.not(uid: dup_renewed_this_cycle).order(p_date: :desc).each do |empire_customer| %>
       <% unless dup_renewed_this_cycle.include? empire_customer.uid %>
       <% dup_renewed_this_cycle.push(empire_customer.uid) %>
       <% match_list = EmpireMasterMatch.find_by(uid: empire_customer.uid) %>
@@ -127,7 +127,7 @@
   </thead>
   <tbody>
     <% dup_new_this_cycle = [] %> <!-- PREVENT DUPS IN THE TABLE -->
-    <% EmpireCustomer.where(uid: @new_this_cycle).where.not(uid: @dup_new_this_cycle).order(p_date: :desc).each do |empire_customer| %>
+    <% EmpireCustomer.where(uid: @new_this_cycle).where.not(uid: dup_new_this_cycle).order(p_date: :desc).each do |empire_customer| %>
       <% unless dup_new_this_cycle.include? empire_customer.uid %>
       <% dup_new_this_cycle.push(empire_customer.uid) %>
       <% match_list = EmpireMasterMatch.find_by(uid: empire_customer.uid) %>
