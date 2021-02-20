@@ -29,7 +29,7 @@ class EmpireMasterListsController < ApplicationController
       empire_customer.p_date > exp_date[0] - 20.months && purchases.length > 1 ? @renewed_this_cycle.push(empire_customer.uid) : empire_customer.p_date > exp_date[0] - 20.months ? @new_this_cycle.push(empire_customer.uid) : not_renewed_this_cycle.push(empire_customer.uid)
     end
 
-    @not_renewed_this_cycle = not_renewed_this_cycle - @renewed_this_cycle
+    @not_renewed_this_cycle = not_renewed_this_cycle.uniq - @renewed_this_cycle.uniq
 
 
   end
