@@ -17,8 +17,12 @@
 <!-- NOT RENEWED TABLE -->
 <table class="table table-outline table-hover">
   <thead>
+
     <tr class="grey-b-200">
       <th colspan="9" class="text-center"><big>Not Renewed For This cycle</big></th>
+    </tr>
+    <tr class="grey-b-200 text-center">
+      <th colspan="9" class="text-center"><span class="btn btn-primary btn-sm">Send Email 1</span> <span class="btn btn-primary btn-sm">Send Email 2</span> <span class="btn btn-primary btn-sm">Send Email 3</span> <span class="btn btn-primary btn-sm">Send Email 4</span> <span class="btn btn-primary btn-sm">Send Email 5</span> <span class="btn btn-primary btn-sm">Send Email 6</span> <span class="btn btn-primary btn-sm">Send Email 7</span> <span class="btn btn-success btn-sm">Postcard PDF Download</span> </th>
     </tr>
     <tr class="grey-b-200">
       <th>UID</th>
@@ -58,7 +62,6 @@
     <% end %>
   </tbody>
 </table>
-<p><%= @not_renewed_this_cycle %></p>
 <br>
 
 <!-- RENEWED TABLE -->

@@ -1,5 +1,5 @@
 <% s_date = '2020-01-01'.to_date %>
-<% e_date = '2021-02-28'.to_date %>
+<% e_date = '2021-03-31'.to_date %>
 <% days_1 = [] %>
 <% days_2 = [] %>
 <% days_3 = [] %>
@@ -23,7 +23,7 @@
     <% end %>
   <% end %>
   <% if date.strftime('%a') == 'Tue' || date.strftime('%a') == 'Fri' %>
-    <% if date >= '2020-10-01'.to_date && date <= '2021-02-28'.to_date %>
+    <% if date >= '2020-10-01'.to_date && date <= '2021-03-31'.to_date %>
       <% days_4.push(date) %>
     <% end %>
   <% end %>
