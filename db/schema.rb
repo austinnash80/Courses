@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210219174713) do
+ActiveRecord::Schema.define(version: 20210317025606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -617,6 +617,7 @@ ActiveRecord::Schema.define(version: 20210219174713) do
     t.integer "uid"
     t.boolean "no_mail"
     t.date "no_mail_date"
+    t.index ["lid"], name: "index_master_cpas_on_lid", unique: true
   end
 
   create_table "master_ea_double_accounts", force: :cascade do |t|
