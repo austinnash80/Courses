@@ -55,6 +55,8 @@ def no_mail_cpa
     format.html
     format.csv { send_data @no_mail_cpa.to_csv, filename: "Sequoia-No-Mail-cpa-#{Date.today}.csv" }
   end
+
+
 end
 
   def index

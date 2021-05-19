@@ -21,6 +21,7 @@
     <% user_signed_in? && current_user.email == 'ashley@sequoiacpe.com' ? @name = 'Ashley' : '' %>
     <% user_signed_in? && current_user.email == 'sabrina@sequoiacpe.com' ? @name = 'Sabrina' : '' %>
     <% user_signed_in? && current_user.email == 'john@empirelearning.com' ? @name = 'John' : '' %>
+    <% user_signed_in? && current_user.email == 'christian@empirelearning.com' ? @name = 'Christian' : '' %>
 
 <% unless controller_name == "test_pages" %> <!-- No Menus at all for test page -->
 
@@ -41,6 +42,8 @@
         <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_sabrina_path, class: 'button-none'%></strong>
       <% elsif user_signed_in? && @name == 'John'%>
         <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_john_path, class: 'button-none'%></strong>
+      <% elsif user_signed_in? && @name == 'Christian'%>
+        <h1 class="off-white"><strong><%= link_to "Dashboard", sequoia_dash_christian_path, class: 'button-none'%></strong>
       <% elsif %>
       <h1> Dashboard </h1>
       <% end %>
@@ -77,6 +80,8 @@
           <li><%= link_to 'My Dashboard', sequoia_dash_ashley_path %></li>
         <% elsif user_signed_in? && current_user.email == 'sabrina@sequoiacpe.com' %>
           <li><strong><%= link_to 'My Dashboard', sequoia_dash_sabrina_path %></strong></li>
+        <% elsif user_signed_in? && current_user.email == 'christian@sequoiacpe.com' %>
+          <li><strong><%= link_to 'My Dashboard', sequoia_dash_christian_path %></strong></li>
         <% end %>
 <!-- End Dashboards -->
         <li class="dropdown-header">Courses</li>
@@ -92,7 +97,7 @@
           <li><%= link_to 'Seq Exams', sequoia_exams_path %></li>
         <li class="divider"></li>
         <li class="dropdown-header">Marketing</li>
-            <li><%= link_to 'No Mail', master_lists_path %></li>
+            <!-- <li><%#= link_to 'No Mail', master_lists_path %></li> -->
             <li><%= link_to 'Postcards Returns', postcard_returns_path %></li>
             <li><%= link_to 'Postcard Mailings', postcard_mailings_path %></li>
             <li><%= link_to 'Postcard Inventory', inventories_path %></li>

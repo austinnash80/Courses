@@ -99,6 +99,15 @@ end
     empire_course_creation
     task_deadline
   end
+  def dash_christian
+    task
+    name
+    live_chat_answer
+    calendar
+    empire_email_stats
+    empire_course_creation
+    task_deadline
+  end
 
 private
 
