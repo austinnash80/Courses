@@ -36,6 +36,34 @@ end
     empire_email_stats
     empire_course_creation
   end
+  def dash_james
+    postcard_schedule
+    postcard_inventory
+    course_update_status
+    name
+    task
+    email_campaign
+    sequoia_exams_total
+    sequoia_exams_individual
+    live_chat_answer
+    calendar
+    empire_email_stats
+    empire_course_creation
+  end
+  def dash_extra
+    postcard_schedule
+    postcard_inventory
+    course_update_status
+    name
+    task
+    email_campaign
+    sequoia_exams_total
+    sequoia_exams_individual
+    live_chat_answer
+    calendar
+    empire_email_stats
+    empire_course_creation
+  end
 
   def dash_michael
     postcard_schedule

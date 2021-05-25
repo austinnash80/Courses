@@ -154,6 +154,8 @@ Rails.application.routes.draw do
   get 'sequoia/dash_kyle'
   get 'sequoia/dash_john'
   get 'sequoia/dash_christian'
+  get 'sequoia/dash_james'
+  get 'sequoia/dash_extra'
   get 'sequoia/s_data'
 
   resources :date_fields

@@ -1,0 +1,83 @@
+<body class= 'body-home'>
+
+    <% if current_user.email == 'user@sequoiacpe.com' || current_user.superadmin_role? || current_user.supervisor_role? %>
+      <h1 class="text-center off-white">Dashboard</h1>
+      <h3 class="off-white text-center"><%= Date.today.strftime('%A %-b %-d, %Y') %></h3>
+
+<br>
+<div class="row">
+<!-- *** START Left Pannel *** -->
+  <div class="col-lg-4">
+    <div class="well">
+      <%= render(:partial => 'course_creation') %>
+    </div>
+    <div class="well">
+      <%= render(:partial => 'postcard_mailings') %>
+    </div>
+
+    <div class="well">
+      <%= render(:partial => 'empire_email_campaign') %>
+    </div>
+  </div>
+<!-- End Left Pannel -->
+
+<!-- *** START Center Pannel *** -->
+  <div class="col-lg-4">
+    <div class="well">
+      <%= render(:partial => 'home_ashley') %>
+    </div>
+
+    <div class="well">
+      <%= render(:partial => 'sequoia_customer_marketing') %>
+    </div>
+  </div>
+<!-- End Center Pannel -->
+
+<!-- *** START Right Pannel *** -->
+  <div class="col-lg-4">
+    <div class="well">
+        <%= render(:partial => 'no_mail') %>
+    </div>
+    <div class="well">
+        <%= render(:partial => 'update_data') %>
+    </div>
+    <div class="well">
+        <%= render(:partial => 'match_sequoia') %>
+    </div>
+
+    <div class="well">
+      <%= render(:partial => 'live_chat_answers') %>
+    </div>
+    <div class="well">
+      <%= render(:partial => 'task') %>
+    </div>
+
+    <div class="well">
+  <!-- Tabs Start -->
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home3">Home</a></li>
+        <li><a data-toggle="tab" href="#menu3">Menu 1</a></li>
+      </ul>
+  <!-- Tab 1 Start -->
+      <div class="tab-content">
+        <div id="home3" class="tab-pane fade in active">
+          <h3>HOME</h3>
+          <p>Some content.</p>
+        </div>
+  <!-- Tab 1 end -->
+  <!-- Tab 2 start -->
+        <div id="menu3" class="tab-pane fade">
+          <h3>Menu 1</h3>
+          <p>Some content in menu 1.</p>
+        </div>
+  <!-- Tab 2 end -->
+      </div>
+  <!-- Tabs End -->
+    </div>
+
+  </div>
+<!-- End Right Pannel -->
+
+  </div>
+  <% end %>
+</body>
