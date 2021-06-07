@@ -54,9 +54,6 @@ table_2
     @sales_seq_year.each do |i|
       @weeks.push(i.sequoia)
     end
-
-
-
   end
 
   def table_2

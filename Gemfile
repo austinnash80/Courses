@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.6.2'
+ruby '2.7.1'
+# ruby '2.6.2'
+# ruby '3.0.1'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -100,4 +102,6 @@ gem 'json'
 
 gem 'derailed', group: :development
 
-gem 'rearmed' #not using 
+gem 'rearmed' #not using
+
+gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '3543363026121ee28d98dfce4cb6366980c055ee'
